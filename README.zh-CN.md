@@ -1,5 +1,5 @@
 <div align="center"> 
-<img src="https://s1.imagehub.cc/images/2022/08/12/logo_bg_2.png" width="300px" height="300px"/>
+<img src="https://s1.imagehub.cc/images/2022/08/12/logo_512.png" width="300px" height="300px"/>
 <h1>Simple Admin UI</h1>
 </div>
 
