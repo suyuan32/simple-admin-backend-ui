@@ -14,15 +14,15 @@ import { ErrorMessageMode } from '/#/axios';
 import { BaseDataResp, BaseIdReq, BaseResp } from '../model/baseModel';
 
 enum Api {
-  Login = '/user/login',
-  Register = '/user/register',
-  Logout = '/logout',
-  GetUserInfo = '/user/info',
-  GetPermCode = '/user/perm',
-  GetCaptcha = '/captcha',
-  GetUserList = '/user/list',
-  CreateOrUpdateOrDeleteUser = '/user',
-  SetUserStatus = '/user/status',
+  Login = '/sys-api/user/login',
+  Register = '/sys-api/user/register',
+  Logout = '/sys-api/logout',
+  GetUserInfo = '/sys-api/user/info',
+  GetPermCode = '/sys-api/user/perm',
+  GetCaptcha = '/sys-api/captcha',
+  GetUserList = '/sys-api/user/list',
+  CreateOrUpdateOrDeleteUser = '/sys-api/user',
+  SetUserStatus = '/sys-api/user/status',
 }
 
 /**

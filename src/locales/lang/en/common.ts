@@ -39,11 +39,14 @@ export default {
   // notification
   deleteConfirm: 'Confirm the deletion?',
   updateSuccess: 'Update successfully',
-  updateFailure: 'Update failed',
+  updateFailed: 'Update failed',
   createSuccess: 'Create successfully',
-  createFailure: 'Create failed',
+  createFailed: 'Create failed',
   deleteSuccess: 'Delete successfully',
-  deleteFailure: 'Delete failed',
+  deleteFailed: 'Delete failed',
+  getInfoSuccess: 'Get information Successfully',
+  getInfoFailed: 'Get information Failed',
   changeStatusSuccess: 'Change status successfully',
-  changeStatusFailure: 'Change status failed',
+  changeStatusFailed: 'Change status failed',
+  targetNotExist: 'Target does not exist',
 };

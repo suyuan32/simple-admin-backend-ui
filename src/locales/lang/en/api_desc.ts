@@ -36,4 +36,9 @@ export default {
 
   // captcha
   captcha: 'Get captcha information (Required)',
+
+  // uploader
+  uploadFile: 'Upload',
+  fileList: 'File List',
+  deleteFile: 'Delete File',
 };

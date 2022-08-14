@@ -4,9 +4,9 @@ import { RoleMenuResp, MenuListResp, MenuParams, CreateOrUpdateMenuReq } from '.
 import { BaseIdReq, BaseResp } from '/@/api/model/baseModel';
 
 enum Api {
-  GetMenuListByRole = '/menu/role',
-  GetAllMenu = '/menu/list',
-  CreateOrUpdateOrDeleteMenu = '/menu',
+  GetMenuListByRole = '/sys-api/menu/role',
+  GetAllMenu = '/sys-api/menu/list',
+  CreateOrUpdateOrDeleteMenu = '/sys-api/menu',
 }
 
 /**

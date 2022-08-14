@@ -1,9 +1,10 @@
 import { UploadApiResult } from '../sys/model/uploadModel';
 import { defHttp } from '/@/utils/http/axios';
 import { UploadFileParams } from '/#/axios';
-import { useGlobSetting } from '/@/hooks/setting';
 
-const { uploadUrl = '' } = useGlobSetting();
+enum Api {
+  uploadFile = '/uploader/upload',
+}
 
 /**
  * @description: Upload interface
@@ -14,7 +15,7 @@ export function uploadApi(
 ) {
   return defHttp.uploadFile<UploadApiResult>(
     {
-      url: uploadUrl,
+      url: Api.uploadFile,
       onUploadProgress,
     },
     params,

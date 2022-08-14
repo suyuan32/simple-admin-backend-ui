@@ -141,6 +141,7 @@ export default {
     deleteChildrenDesc: "Please delete menu's children first",
     menuNotExists: 'Menu does not exist',
     menuAlreadyExists: 'Menu already exists',
+    parentNotExist: 'The parent does not exist',
   },
   role: {
     // noun
@@ -158,7 +159,7 @@ export default {
     editRole: 'Edit Role',
     // notification
     changeStatusSuccess: 'Change role status successfully',
-    changeStatusFailure: 'Change role status failed',
+    changeStatusFailed: 'Change role status failed',
     duplicateRoleValue: 'Duplicate role value',
     userExists: 'Please delete users who belong to this role',
     roleForbidden: 'Your role is forbidden',

@@ -135,6 +135,7 @@ export default {
     deleteChildrenDesc: '请先删除子菜单',
     menuNotExists: '菜单不存在',
     menuAlreadyExists: '菜单已存在',
+    parentNotExist: '父级不存在',
   },
   role: {
     // noun
@@ -152,7 +153,7 @@ export default {
     editRole: '编辑角色',
     // notification
     changeStatusSuccess: '已成功修改角色状态',
-    changeStatusFailure: '修改角色状态失败',
+    changeStatusFailed: '修改角色状态失败',
     duplicateRoleValue: '角色值重复',
     userExists: '请先删除该角色下的用户',
     roleForbidden: '您的角色已停用',

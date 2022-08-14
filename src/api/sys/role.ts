@@ -4,9 +4,9 @@ import { BaseIdReq, BasePageReq, BaseResp } from '/@/api/model/baseModel';
 import { RoleInfo, RoleListResp } from './model/roleModel';
 
 enum Api {
-  GetRoleList = '/role/list',
-  CreateOrUpdateOrDeleteRole = '/role',
-  SetRoleStatus = '/role/status',
+  GetRoleList = '/sys-api/role/list',
+  CreateOrUpdateOrDeleteRole = '/sys-api/role',
+  SetRoleStatus = '/sys-api/role/status',
 }
 
 /**

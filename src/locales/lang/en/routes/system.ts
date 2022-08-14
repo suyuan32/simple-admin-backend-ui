@@ -4,4 +4,5 @@ export default {
   roleManagementTitle: 'Role Management',
   apiManagementTitle: 'API Management',
   userManagementTitle: 'User Management',
+  fileManagementTitle: 'File Management',
 };

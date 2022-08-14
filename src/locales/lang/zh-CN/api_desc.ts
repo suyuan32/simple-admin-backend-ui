@@ -36,4 +36,9 @@ export default {
 
   // captcha
   captcha: '获取验证码（必须）',
+
+  // uploader
+  uploadFile: '上传文件',
+  fileList: '文件列表',
+  deleteFile: '删除文件',
 };

@@ -55,7 +55,7 @@ export const columns: BasicColumn[] = [
               createMessage.success(t('sys.role.changeStatusSuccess'));
             })
             .catch(() => {
-              createMessage.error(t('sys.role.changeStatusFailure'));
+              createMessage.error(t('sys.role.changeStatusFailed'));
             })
             .finally(() => {
               record.pendingStatus = false;

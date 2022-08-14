@@ -74,7 +74,7 @@ export const columns: BasicColumn[] = [
               createMessage.success(t('common.changeStatusSuccess'));
             })
             .catch(() => {
-              createMessage.error(t('common.changeStatusFailure'));
+              createMessage.error(t('common.changeStatusFailed'));
             })
             .finally(() => {
               record.pendingStatus = false;

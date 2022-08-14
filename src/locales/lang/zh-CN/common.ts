@@ -39,11 +39,14 @@ export default {
   // notification
   deleteConfirm: '是否确认删除？',
   updateSuccess: '更新成功',
-  updateFailure: '更新失败',
+  updateFailed: '更新失败',
   createSuccess: '新建成功',
-  createFailure: '新建失败',
+  createFailed: '新建失败',
   deleteSuccess: '删除成功',
-  deleteFailure: '删除失败',
+  deleteFailed: '删除失败',
+  getInfoSuccess: '获取信息成功',
+  getInfoFailed: '获取信息失败',
   changeStatusSuccess: '状态修改成功',
-  changeStatusFailure: '状态修改失败',
+  changeStatusFailed: '状态修改失败',
+  targetNotExist: '目标不存在',
 };

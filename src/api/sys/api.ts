@@ -4,8 +4,8 @@ import { BaseIdReq, BasePageReq, BaseResp } from '/@/api/model/baseModel';
 import { ApiInfo, ApiListResp } from './model/apiModel';
 
 enum Api {
-  GetApiList = '/api/list',
-  CreateOrUpdateOrDeleteApi = '/api',
+  GetApiList = '/sys-api/api/list',
+  CreateOrUpdateOrDeleteApi = '/sys-api/api',
 }
 
 /**

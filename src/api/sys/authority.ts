@@ -10,11 +10,11 @@ import {
 } from './model/authorityModel';
 
 enum Api {
-  CreateOrUpdateOrDeleteApiAuthority = '/authority/api',
-  CreateOrUpdateOrDeleteMenuAuthority = '/authority/menu',
-  GetRoleMenuList = '/authority/menu/role',
-  GetRoleApiList = '/authority/api/role',
-  GetApiList = '/api/list',
+  CreateOrUpdateOrDeleteApiAuthority = '/sys-api/authority/api',
+  CreateOrUpdateOrDeleteMenuAuthority = '/sys-api/authority/menu',
+  GetRoleMenuList = '/sys-api/authority/menu/role',
+  GetRoleApiList = '/sys-api/authority/api/role',
+  GetApiList = '/sys-api/api/list',
 }
 
 /**
