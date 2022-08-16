@@ -183,4 +183,13 @@ export default {
     addUser: '新增用户',
     editUser: '编辑用户',
   },
+  init: {
+    // noun
+    initTitle: '数据库初始化',
+    initProgressTitle: '处理进度',
+
+    // notification
+    initializeIsRunning: '正在初始化...',
+    alreadyInit: '数据库已被初始化。',
+  },
 };

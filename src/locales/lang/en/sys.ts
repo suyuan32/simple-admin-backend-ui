@@ -189,4 +189,13 @@ export default {
     addUser: 'Add User',
     editUser: 'Edit User',
   },
+  init: {
+    // noun
+    initTitle: 'Initialize database',
+    initProgressTitle: 'Progress',
+
+    // notification
+    alreadyInit: 'The database had been initialized.',
+    initializeIsRunning: 'The initialization is running...',
+  },
 };
