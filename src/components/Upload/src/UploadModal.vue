@@ -44,7 +44,7 @@
 </template>
 <script lang="ts">
   import { defineComponent, reactive, ref, toRefs, unref, computed, PropType } from 'vue';
-  import { Upload, Alert } from 'ant-design-vue';
+  import { Upload, Alert, message } from 'ant-design-vue';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   //   import { BasicTable, useTable } from '/@/components/Table';
   // hooks
@@ -61,6 +61,7 @@
   import { warn } from '/@/utils/log';
   import FileList from './FileList.vue';
   import { useI18n } from '/@/hooks/web/useI18n';
+  import file2md5 from 'file2md5';
 
   export default defineComponent({
     components: { BasicModal, Upload, Alert, FileList },
@@ -81,6 +82,7 @@
       const isUploadingRef = ref(false);
       const fileListRef = ref<FileItem[]>([]);
       const { accept, helpText, maxNumber, maxSize } = toRefs(props);
+      let tempFileMd5 = {};
 
       const { t } = useI18n();
       const [register, { closeModal }] = useModalInner();
@@ -122,7 +124,7 @@
       });
 
       // 上传前校验
-      function beforeUpload(file: File) {
+      async function beforeUpload(file: File) {
         const { size, name } = file;
         const { maxSize } = props;
         // 设置最大值，则判断
@@ -139,6 +141,18 @@
           percent: 0,
           type: name.split('.').pop(),
         };
+
+        // 计算md5
+        message.loading(t('file_manager.preprocessing'));
+        file2md5(file, { chunkSize: 3 * 1024 * 1024 })
+          .then((data) => {
+            message.success(t('common.successful'));
+            tempFileMd5[file.name] = data;
+          })
+          .catch(() => {
+            // message.error(t('common.failed'));
+          });
+
         // 生成图片缩略图
         if (checkImgType(file)) {
           // beforeUpload，如果异步会调用自带上传方法
@@ -180,10 +194,12 @@
         }
         try {
           item.status = UploadResultStatus.UPLOADING;
+          let params = props.uploadParams;
+          params['md5'] = item.md5;
           const { data } = await props.api?.(
             {
               data: {
-                ...(props.uploadParams || {}),
+                ...(params || {}),
               },
               file: item.file,
               name: props.name,
@@ -221,6 +237,12 @@
           // 只上传不是成功状态的
           const uploadFileList =
             fileListRef.value.filter((item) => item.status !== UploadResultStatus.SUCCESS) || [];
+          // 添加md5
+          for (let i = 0; i < uploadFileList.length; i++) {
+            uploadFileList[i].md5 = tempFileMd5[uploadFileList[i].name];
+          }
+          console.log(tempFileMd5);
+          console.log('uploadFileList:', uploadFileList);
           const data = await Promise.all(
             uploadFileList.map((item) => {
               return uploadApiByItem(item);

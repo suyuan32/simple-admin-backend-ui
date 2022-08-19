@@ -24,17 +24,16 @@
 <script lang="ts">
   import { defineComponent, ref, computed, unref } from 'vue';
   import { BasicForm, useForm } from '/@/components/Form/index';
-  import { formSchema } from './uploader.data';
+  import { formSchema } from './file.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { BasicTree, TreeItem } from '/@/components/Tree';
   import { useI18n } from 'vue-i18n';
   import { useMessage } from '/@/hooks/web/useMessage';
-
-  import { ApiInfo } from '/@/api/sys/model/apiModel';
-  import { createOrUpdateApi } from '/@/api/sys/api';
+  import { updateFileInfoReq } from '/@/api/file/model/fileModel';
+  import { UpdateFileInfo } from '/@/api/file/upload';
 
   export default defineComponent({
-    name: 'ApiDrawer',
+    name: 'FileDrawer',
     components: { BasicDrawer, BasicForm, BasicTree },
     emits: ['success', 'register'],
     setup(_, { emit }) {
@@ -71,22 +70,11 @@
         try {
           const values = await validate();
           setDrawerProps({ confirmLoading: true });
-          // defined api id
-          let apiId: number;
-          if (unref(isUpdate)) {
-            apiId = Number(values['id']);
-          } else {
-            apiId = 0;
-          }
-          let params: ApiInfo = {
-            id: apiId,
-            path: values['path'],
-            description: values['description'],
-            group: values['group'],
-            method: values['method'],
-            createAt: 0, // do not need to set
+          let params: updateFileInfoReq = {
+            id: Number(values['id']),
+            name: values['name'],
           };
-          let result = await createOrUpdateApi(params);
+          let result = await UpdateFileInfo(params);
           notification.success({
             message: t('common.successful'),
             description: t(result.msg),

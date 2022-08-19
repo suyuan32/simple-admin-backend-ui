@@ -56,7 +56,7 @@
       roleStoreData.getRoleInfoFromServer();
 
       const [registerTable, { reload }] = useTable({
-        title: t('sys.apis.apiList'),
+        title: t('sys.user.userList'),
         api: getUserList,
         columns,
         formConfig: {
@@ -68,7 +68,7 @@
         bordered: true,
         showIndexColumn: false,
         actionColumn: {
-          width: 80,
+          width: 30,
           title: t('common.action'),
           dataIndex: 'action',
           fixed: undefined,

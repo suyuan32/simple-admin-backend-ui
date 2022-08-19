@@ -1,48 +1,53 @@
 <template>
   <PageWrapper :title="t('sys.init.initTitle')">
-    <ACard :title="t('sys.init.initProgressTitle')" :bordered="false" style="width: 100%">
-      <ASpin v-if="showSpin" :indicator="indicator" />
-      <p v-if="showResult">
-        {{ resultMsg }}
-      </p>
+    <ACard :title="t('sys.init.initCoreDatabase')" :bordered="false" style="width: 50%">
+      <!-- <ASpin v-if="showSpin" :indicator="indicator" /> -->
+      <a-button type="primary" :loading="coreInitButtonLoading" @click="initCoreDatabase">
+        {{ t('common.start') }}
+      </a-button>
+    </ACard>
+    <ACard :title="t('sys.init.initFileDatabase')" :bordered="false" style="width: 50%">
+      <a-button type="primary" :loading="fileInitButtonLoading" @click="initFileDatabase">
+        {{ t('common.start') }}
+      </a-button>
     </ACard>
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-  import { Card, Spin } from 'ant-design-vue';
-  import { LoadingOutlined } from '@ant-design/icons-vue';
-  import { initialzeDatabase } from '/@/api/sys/initialize';
+  import { Card, message } from 'ant-design-vue';
   import { PageWrapper } from '/@/components/Page';
   import { useI18n } from 'vue-i18n';
-  import { h, ref } from 'vue';
+  import { ref } from 'vue';
+  // api
+  import { initialzeCoreDatabase } from '/@/api/sys/initialize';
+  import { initializeFileDatabase } from '/@/api/file/initialize';
 
   const { t } = useI18n();
   const ACard = Card;
-  const ASpin = Spin;
-  const showSpin = ref<boolean>(true);
-  const showResult = ref<boolean>(false);
-  const resultMsg = ref<string>('');
+  const coreInitButtonLoading = ref<boolean>(false);
+  const fileInitButtonLoading = ref<boolean>(false);
 
-  const indicator = h(LoadingOutlined, {
-    style: {
-      fontSize: '24px',
-    },
-    spin: true,
-  });
-
-  async function initDatabase() {
+  async function initCoreDatabase() {
     try {
-      let result = await initialzeDatabase();
-      console.log(result);
-      resultMsg.value = t(result.msg);
-      showSpin.value = false;
-      showResult.value = true;
+      coreInitButtonLoading.value = true;
+      let result = await initialzeCoreDatabase();
+      message.success(t(result.msg), 2);
+      coreInitButtonLoading.value = false;
     } catch (e) {
-      resultMsg.value = t('sys.api.apiRequestFailed');
-      showSpin.value = false;
-      showResult.value = true;
+      message.error(t('sys.api.apiRequestFailed'), 2);
+      coreInitButtonLoading.value = false;
     }
   }
 
-  initDatabase();
+  async function initFileDatabase() {
+    try {
+      fileInitButtonLoading.value = true;
+      let result = await initializeFileDatabase();
+      message.success(t(result.msg), 2);
+      fileInitButtonLoading.value = false;
+    } catch (e) {
+      message.error(t('sys.api.apiRequestFailed'), 2);
+      fileInitButtonLoading.value = false;
+    }
+  }
 </script>

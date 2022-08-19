@@ -33,7 +33,7 @@
         </template>
       </template>
     </BasicTable>
-    <ApiDrawer @register="registerDrawer" @success="handleSuccess" />
+    <FileDrawer @register="registerDrawer" @success="handleSuccess" />
   </div>
 </template>
 <script lang="ts">
@@ -43,24 +43,23 @@
   import { BasicUpload } from '/@/components/Upload';
 
   import { useDrawer } from '/@/components/Drawer';
-  import ApiDrawer from './UploadDrawer.vue';
+  import FileDrawer from './FileDrawer.vue';
   import { useI18n } from 'vue-i18n';
   import { useMessage } from '/@/hooks/web/useMessage';
 
-  import { columns, searchFormSchema } from './uploader.data';
-  import { getApiList, deleteApi } from '/@/api/sys/api';
-  import { uploadApi } from '../../api/uploader/upload';
+  import { columns, searchFormSchema } from './file.data';
+  import { deleteFile, getFileList, uploadApi } from '/@/api/file/upload';
 
   export default defineComponent({
-    name: 'ApiManagement',
-    components: { BasicTable, ApiDrawer, TableAction, BasicUpload },
+    name: 'FileManagement',
+    components: { BasicTable, FileDrawer, TableAction, BasicUpload },
     setup() {
       const { t } = useI18n();
       const [registerDrawer, { openDrawer }] = useDrawer();
       const { notification } = useMessage();
       const [registerTable, { reload }] = useTable({
         title: t('api_desc.fileList'),
-        api: getApiList,
+        api: getFileList,
         columns,
         formConfig: {
           labelWidth: 120,
@@ -71,7 +70,7 @@
         bordered: true,
         showIndexColumn: false,
         actionColumn: {
-          width: 80,
+          width: 30,
           title: t('common.action'),
           dataIndex: 'action',
           fixed: undefined,
@@ -92,7 +91,7 @@
       }
 
       async function handleDelete(record: Recordable) {
-        const result = await deleteApi({ id: record.id }, 'modal');
+        const result = await deleteFile({ id: record.id }, 'modal');
         notification.success({
           message: t('common.successful'),
           description: t(result.msg),

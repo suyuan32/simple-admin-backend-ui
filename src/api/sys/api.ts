@@ -9,7 +9,7 @@ enum Api {
 }
 
 /**
- * @description: Get user menu based on api id
+ * @description: Get api list
  */
 
 export const getApiList = (params: BasePageReq) => {

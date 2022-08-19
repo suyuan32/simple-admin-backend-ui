@@ -11,6 +11,7 @@ export interface FileItem {
   name: string;
   size: string | number;
   type?: string;
+  md5?: string;
   percent: number;
   file: File;
   status?: UploadResultStatus;

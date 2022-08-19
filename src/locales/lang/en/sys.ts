@@ -193,6 +193,8 @@ export default {
     // noun
     initTitle: 'Initialize database',
     initProgressTitle: 'Progress',
+    initCoreDatabase: 'Initialize core database',
+    initFileDatabase: 'Initialize file manager database',
 
     // notification
     alreadyInit: 'The database had been initialized.',
