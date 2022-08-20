@@ -11,6 +11,7 @@ interface NavItem {
   title: string;
   icon: string;
   color: string;
+  redirect: string;
 }
 
 interface DynamicInfoItem {
@@ -22,34 +23,34 @@ interface DynamicInfoItem {
 
 export const navItems: NavItem[] = [
   {
-    title: '首页',
-    icon: 'ion:home-outline',
-    color: '#1fdaca',
-  },
-  {
-    title: '仪表盘',
-    icon: 'ion:grid-outline',
+    title: 'routes.system.userManagementTitle',
+    icon: 'ant-design:user-outlined',
     color: '#bf0c2c',
+    redirect: '/user_management',
   },
   {
-    title: '组件',
-    icon: 'ion:layers-outline',
+    title: 'routes.system.roleManagementTitle',
+    icon: 'eos-icons:role-binding-outlined',
     color: '#e18525',
+    redirect: '/role_management',
   },
   {
-    title: '系统管理',
-    icon: 'ion:settings-outline',
+    title: 'routes.system.menuManagementTitle',
+    icon: 'ep:menu',
     color: '#3fb27f',
+    redirect: '/menu_management',
   },
   {
-    title: '权限管理',
+    title: 'routes.system.apiManagementTitle',
     icon: 'ion:key-outline',
     color: '#4daf1bc9',
+    redirect: '/api_management',
   },
   {
-    title: '图表',
+    title: 'routes.system.fileManagementTitle',
     icon: 'ion:bar-chart-outline',
     color: '#00d8ff',
+    redirect: '/file_management',
   },
 ];
 

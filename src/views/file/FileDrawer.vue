@@ -30,7 +30,7 @@
   import { useI18n } from 'vue-i18n';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { updateFileInfoReq } from '/@/api/file/model/fileModel';
-  import { UpdateFileInfo } from '/@/api/file/upload';
+  import { UpdateFileInfo } from '../../api/file/file';
 
   export default defineComponent({
     name: 'FileDrawer',

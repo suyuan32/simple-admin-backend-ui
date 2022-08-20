@@ -9,6 +9,7 @@ enum Api {
   GetFileList = '/file-manager/file/list',
   UpdateFileInfo = '/file-manager/file',
   SetFileStatus = '/file-manager/file/status',
+  DownloadFile = '/file-manager/file/download',
 }
 
 /**
@@ -67,3 +68,14 @@ export const deleteFile = (params: BaseIdReq, mode: ErrorMessageMode = 'modal') 
  */
 export const setFileStatus = (id: number, status: boolean) =>
   defHttp.post({ url: Api.SetFileStatus, params: { id, status } });
+
+/**
+ *  author: Ryan Su
+ *  @description: download file
+ */
+
+export const downloadFile = (id: number) =>
+  defHttp.get({
+    url: Api.DownloadFile + '/' + id,
+    responseType: 'blob',
+  });

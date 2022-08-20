@@ -16,6 +16,10 @@
           <TableAction
             :actions="[
               {
+                icon: 'ant-design:cloud-download-outlined',
+                onClick: handleDownload.bind(null, record),
+              },
+              {
                 icon: 'clarity:note-edit-line',
                 onClick: handleEdit.bind(null, record),
               },
@@ -34,10 +38,47 @@
       </template>
     </BasicTable>
     <FileDrawer @register="registerDrawer" @success="handleSuccess" />
+    <Modal
+      v-model:visible="videoVisible"
+      :title="videoTitle"
+      width="80%"
+      wrap-class-name="full-modal"
+      @ok="handleDownloadVideo"
+    >
+      <template #footer>
+        <a-button key="back" @click="handleCloseVideo">Close</a-button>
+        <a-button key="download" type="primary" @click="handleDownloadVideo">Download</a-button>
+      </template>
+      <video width="1280" height="720" controls>
+        <source :src="videoPath" type="video/mp4" />
+      </video>
+    </Modal>
+    <Modal
+      v-model:visible="imageVisible"
+      :title="imageTitle"
+      width="80%"
+      wrap-class-name="full-modal"
+      @ok="handleDownloadImage"
+    >
+      <template #footer>
+        <a-button key="back" @click="handleCloseImage">Close</a-button>
+        <a-button key="download" type="primary" @click="handleDownloadImage">Download</a-button>
+      </template>
+      <Image
+        :width="720"
+        style=""
+        :preview="{
+          visible,
+          onVisibleChange: setVisible,
+        }"
+        :src="imagePath"
+      />
+    </Modal>
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, ref } from 'vue';
+  import { Image, Modal } from 'ant-design-vue';
 
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
   import { BasicUpload } from '/@/components/Upload';
@@ -48,11 +89,11 @@
   import { useMessage } from '/@/hooks/web/useMessage';
 
   import { columns, searchFormSchema } from './file.data';
-  import { deleteFile, getFileList, uploadApi } from '/@/api/file/upload';
+  import { deleteFile, downloadFile, getFileList, uploadApi } from '../../api/file/file';
 
   export default defineComponent({
     name: 'FileManagement',
-    components: { BasicTable, FileDrawer, TableAction, BasicUpload },
+    components: { BasicTable, FileDrawer, TableAction, BasicUpload, Image, Modal },
     setup() {
       const { t } = useI18n();
       const [registerDrawer, { openDrawer }] = useDrawer();
@@ -70,17 +111,73 @@
         bordered: true,
         showIndexColumn: false,
         actionColumn: {
-          width: 30,
+          width: 50,
           title: t('common.action'),
           dataIndex: 'action',
           fixed: undefined,
         },
       });
+      // image and video control
+      const visible = ref<boolean>(false);
+      const videoVisible = ref<boolean>(false);
+      const imageVisible = ref<boolean>(false);
+      const setVisible = (value): void => {
+        visible.value = value;
+      };
+      const imagePath = ref<string>('');
+      const videoPath = ref<string>('');
+      const videoTitle = ref<string>('');
+      const imageTitle = ref<string>('');
+      const currentFileName = ref<string>('');
 
       function handleCreate() {
         openDrawer(true, {
           isUpdate: false,
         });
+      }
+
+      async function handleDownload(record: Recordable) {
+        let file = await downloadFile(record.id);
+        let fileType = file.type.split('/')[0];
+        if (fileType === 'image') {
+          imageVisible.value = true;
+          // setVisible(true);
+          imagePath.value = URL.createObjectURL(file);
+          console.log(imagePath.value);
+        } else if (fileType === 'video') {
+          videoVisible.value = true;
+          videoPath.value = URL.createObjectURL(file);
+          videoTitle.value = record.name;
+        }
+        currentFileName.value = record.name + '.' + record.path.split('.')[1];
+      }
+
+      function handleDownloadVideo() {
+        const link = document.createElement('a');
+        link.href = videoPath.value;
+        link.download = currentFileName.value;
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(link.href);
+        handleCloseVideo();
+      }
+
+      function handleDownloadImage() {
+        const link = document.createElement('a');
+        link.href = imagePath.value;
+        link.download = currentFileName.value;
+        link.click();
+        link.remove();
+        URL.revokeObjectURL(link.href);
+        handleCloseImage();
+      }
+
+      function handleCloseVideo() {
+        videoVisible.value = false;
+      }
+
+      function handleCloseImage() {
+        imageVisible.value = false;
       }
 
       function handleEdit(record: Recordable) {
@@ -112,11 +209,24 @@
         handleEdit,
         handleDelete,
         handleSuccess,
+        handleDownload,
         handleChange: (list: string[]) => {
           // createMessage.info(`已上传文件${JSON.stringify(list)}`);
           console.log(list);
         },
         uploadApi,
+        visible,
+        videoVisible,
+        imageVisible,
+        setVisible,
+        imagePath,
+        videoPath,
+        videoTitle,
+        imageTitle,
+        handleDownloadVideo,
+        handleDownloadImage,
+        handleCloseVideo,
+        handleCloseImage,
       };
     },
   });
