@@ -42,13 +42,13 @@ export const navItems: NavItem[] = [
   },
   {
     title: 'routes.system.apiManagementTitle',
-    icon: 'ion:key-outline',
+    icon: 'ant-design:api-outlined',
     color: '#4daf1bc9',
     redirect: '/api_management',
   },
   {
     title: 'routes.system.fileManagementTitle',
-    icon: 'ion:bar-chart-outline',
+    icon: 'akar-icons:folder',
     color: '#00d8ff',
     redirect: '/file_management',
   },

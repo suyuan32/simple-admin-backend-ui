@@ -2,7 +2,7 @@ import { defHttp } from '/@/utils/http/axios';
 import { BaseResp } from '/@/api/model/baseModel';
 
 enum Api {
-  InitializeDatabase = '/sys-api/core/init_database',
+  InitializeDatabase = '/sys-api/core/init/database',
 }
 
 /**
