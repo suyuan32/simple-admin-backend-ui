@@ -200,4 +200,8 @@ export default {
     alreadyInit: 'The database had been initialized.',
     initializeIsRunning: 'The initialization is running...',
   },
+  sys: {
+    version: 'Version',
+    Name: 'System Name',
+  },
 };

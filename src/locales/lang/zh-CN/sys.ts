@@ -194,4 +194,8 @@ export default {
     initializeIsRunning: '正在初始化...',
     alreadyInit: '数据库已被初始化。',
   },
+  sys: {
+    version: '系统版本',
+    Name: '系统名称',
+  },
 };
