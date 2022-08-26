@@ -11,7 +11,7 @@ import {
 } from './model/userModel';
 
 import { ErrorMessageMode } from '/#/axios';
-import { BaseDataResp, BaseIdReq, BaseResp } from '../model/baseModel';
+import { BaseIdReq, BaseResp } from '../model/baseModel';
 
 enum Api {
   Login = '/sys-api/user/login',
