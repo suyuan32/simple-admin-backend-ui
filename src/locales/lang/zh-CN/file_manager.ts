@@ -10,6 +10,7 @@ export default {
   other: '其他',
   public: '公开',
   private: '私密',
+  download: '下载',
   // notification
   overSizeError: '文件大小超过规定值',
   wrongTypeError: '文件类型不合法',

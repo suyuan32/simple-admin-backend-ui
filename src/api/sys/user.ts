@@ -8,6 +8,8 @@ import {
   UserListReq,
   UserListResp,
   UserInfo,
+  UserProfile,
+  ChangePasswordReq,
 } from './model/userModel';
 
 import { ErrorMessageMode } from '/#/axios';
@@ -23,6 +25,8 @@ enum Api {
   GetUserList = '/sys-api/user/list',
   CreateOrUpdateOrDeleteUser = '/sys-api/user',
   SetUserStatus = '/sys-api/user/status',
+  GetProfile = '/sys-api/user/profile',
+  ChangePassword = '/sys-api/user/change-password',
 }
 
 /**
@@ -126,3 +130,30 @@ export const deleteUser = (params: BaseIdReq, mode: ErrorMessageMode = 'modal') 
  */
 export const setUserStatus = (id: number, status: number) =>
   defHttp.post({ url: Api.SetUserStatus, params: { id, status } });
+
+/**
+ *  author: Ryan Su
+ *  @description: Get user profile
+ */
+export function getUserProfile() {
+  return defHttp.get<UserProfile>({ url: Api.GetProfile }, { errorMessageMode: 'message' });
+}
+
+/**
+ *  author: Ryan Su
+ *  @description: update user profile
+ */
+export function updateProfile(params: UserProfile) {
+  return defHttp.post<BaseResp>({ url: Api.GetProfile, params }, { errorMessageMode: 'message' });
+}
+
+/**
+ *  author: Ryan Su
+ *  @description: change user password
+ */
+export function changePassword(params: ChangePasswordReq) {
+  return defHttp.post<BaseResp>(
+    { url: Api.ChangePassword, params },
+    { errorMessageMode: 'message' },
+  );
+}

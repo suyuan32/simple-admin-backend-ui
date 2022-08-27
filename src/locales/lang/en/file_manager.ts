@@ -10,6 +10,7 @@ export default {
   other: 'Other',
   public: 'Public',
   private: 'Private',
+  download: 'Download',
   // notification
   overSizeError: 'The file is over size',
   wrongTypeError: 'The file is a illegal type',

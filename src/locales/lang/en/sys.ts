@@ -185,9 +185,14 @@ export default {
     userList: 'User List',
     nickname: 'Nickname',
     avatar: 'Avatar',
+    oldPassword: 'Old Password',
+    newPassword: 'New Password',
     // action
     addUser: 'Add User',
     editUser: 'Edit User',
+    changePassword: 'Change Password',
+    // notification
+    wrongPassword: 'Wrong Password',
   },
   init: {
     // noun

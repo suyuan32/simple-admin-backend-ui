@@ -41,13 +41,15 @@
     <Modal
       v-model:visible="videoVisible"
       :title="videoTitle"
-      width="80%"
+      width="720"
       wrap-class-name="full-modal"
       @ok="handleDownloadVideo"
     >
       <template #footer>
-        <a-button key="back" @click="handleCloseVideo">Close</a-button>
-        <a-button key="download" type="primary" @click="handleDownloadVideo">Download</a-button>
+        <a-button key="back" @click="handleCloseVideo"> {{ t('common.closeText') }} </a-button>
+        <a-button key="download" type="primary" @click="handleDownloadVideo">{{
+          t('file_manager.download')
+        }}</a-button>
       </template>
       <video width="1280" height="720" controls>
         <source :src="videoPath" type="video/mp4" />
@@ -56,13 +58,15 @@
     <Modal
       v-model:visible="imageVisible"
       :title="imageTitle"
-      width="80%"
+      width="720"
       wrap-class-name="full-modal"
       @ok="handleDownloadImage"
     >
       <template #footer>
-        <a-button key="back" @click="handleCloseImage">Close</a-button>
-        <a-button key="download" type="primary" @click="handleDownloadImage">Download</a-button>
+        <a-button key="back" @click="handleCloseImage"> {{ t('common.closeText') }} </a-button>
+        <a-button key="download" type="primary" @click="handleDownloadImage">{{
+          t('file_manager.download')
+        }}</a-button>
       </template>
       <Image
         :width="720"

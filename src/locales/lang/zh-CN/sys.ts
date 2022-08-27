@@ -179,9 +179,14 @@ export default {
     userList: '用户列表',
     nickname: '昵称',
     avatar: '头像',
+    oldPassword: '旧密码',
+    newPassword: '新密码',
     // action
     addUser: '新增用户',
     editUser: '编辑用户',
+    changePassword: '修改密码',
+    // notification
+    wrongPassword: '密码错误',
   },
   init: {
     // noun
