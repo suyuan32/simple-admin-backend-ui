@@ -9,6 +9,10 @@
         autocomplete="off"
         @submit="handleSubmit()"
       >
+        <AFormItem :label="t('sys.user.avatar')" name="avatar">
+          <a-input v-model:value="formdata.avatar"
+        /></AFormItem>
+
         <AFormItem :label="t('sys.user.nickname')" name="nickname" :rules="[{ required: true }]">
           <a-input v-model:value="formdata.nickname"
         /></AFormItem>
