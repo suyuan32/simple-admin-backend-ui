@@ -5,4 +5,5 @@ export default {
   apiManagementTitle: 'API管理',
   userManagementTitle: '用户管理',
   fileManagementTitle: '文件管理',
+  userProfileTitle: '用户个人信息',
 };

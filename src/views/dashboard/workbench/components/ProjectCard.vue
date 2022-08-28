@@ -1,5 +1,5 @@
 <template>
-  <Card title="系统介绍" v-bind="$attrs">
+  <Card :title="t('sys.sys.info')" v-bind="$attrs">
     <List bordered :data-source="systemInfoData">
       <template #renderItem="{ item }">
         <ListItem>{{ t(item[0]) }} : {{ item[1] }}</ListItem>

@@ -208,5 +208,10 @@ export default {
   sys: {
     version: 'Version',
     Name: 'System Name',
+    navigation: 'Navigation',
+    info: 'System Information',
+    // notification
+    morning: 'Good morning',
+    niceDay: 'have a nice Day!',
   },
 };

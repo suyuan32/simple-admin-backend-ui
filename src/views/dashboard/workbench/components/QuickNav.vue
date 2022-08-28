@@ -1,5 +1,5 @@
 <template>
-  <Card title="快捷导航" v-bind="$attrs">
+  <Card :title="t('sys.sys.navigation')" v-bind="$attrs">
     <CardGrid v-for="item in navItems" :key="item">
       <span class="flex flex-col items-center" @click="go(item.redirect)">
         <Icon :icon="item.icon" :color="item.color" size="20" />

@@ -202,5 +202,10 @@ export default {
   sys: {
     version: '系统版本',
     Name: '系统名称',
+    navigation: '快捷导航',
+    info: '系统信息',
+    // notification
+    morning: '早安',
+    niceDay: '开始您一天的工作吧！',
   },
 };
