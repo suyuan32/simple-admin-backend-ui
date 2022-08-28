@@ -41,7 +41,7 @@
     <Modal
       v-model:visible="videoVisible"
       :title="videoTitle"
-      width="720"
+      width="80%"
       wrap-class-name="full-modal"
       @ok="handleDownloadVideo"
     >
@@ -58,7 +58,7 @@
     <Modal
       v-model:visible="imageVisible"
       :title="imageTitle"
-      width="720"
+      width="50%"
       wrap-class-name="full-modal"
       @ok="handleDownloadImage"
     >
@@ -69,7 +69,7 @@
         }}</a-button>
       </template>
       <Image
-        :width="720"
+        width="100%"
         style=""
         :preview="{
           visible,
