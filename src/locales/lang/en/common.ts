@@ -36,6 +36,11 @@ export default {
   remark: 'Remark',
   nonSelected: 'Please select',
   all: 'All',
+  beginDate: 'Begin',
+  endDate: 'End',
+  // action
+  start: 'Start',
+  stop: 'Stop',
   // notification
   deleteConfirm: 'Confirm the deletion?',
   updateSuccess: 'Update successfully',

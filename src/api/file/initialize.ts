@@ -2,13 +2,13 @@ import { defHttp } from '/@/utils/http/axios';
 import { BaseResp } from '/@/api/model/baseModel';
 
 enum Api {
-  InitializeDatabase = '/sys-api/core/init/database',
+  InitializeDatabase = '/file/init/database',
 }
 
 /**
  * @description: initialize the core database
  */
 
-export const initialzeCoreDatabase = () => {
+export const initializeFileDatabase = () => {
   return defHttp.get<BaseResp>({ url: Api.InitializeDatabase });
 };

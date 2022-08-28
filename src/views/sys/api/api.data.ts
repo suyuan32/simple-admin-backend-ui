@@ -32,7 +32,7 @@ export const columns: BasicColumn[] = [
   {
     title: t('common.createTime'),
     dataIndex: 'createAt',
-    width: 150,
+    width: 70,
     customRender: ({ record }) => {
       return formatToDateTime(record.createAt);
     },

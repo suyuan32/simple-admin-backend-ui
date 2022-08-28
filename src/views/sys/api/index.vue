@@ -62,7 +62,7 @@
         bordered: true,
         showIndexColumn: false,
         actionColumn: {
-          width: 80,
+          width: 30,
           title: t('common.action'),
           dataIndex: 'action',
           fixed: undefined,

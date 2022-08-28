@@ -36,6 +36,11 @@ export default {
   remark: '备注',
   nonSelected: '未选择',
   all: '全部',
+  beginDate: '开始日期',
+  endDate: '结束日期',
+  // action
+  start: '开始',
+  stop: '停止',
   // notification
   deleteConfirm: '是否确认删除？',
   updateSuccess: '更新成功',

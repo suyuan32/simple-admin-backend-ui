@@ -218,6 +218,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
             count: 5,
             waitTime: 100,
           },
+          decompress: false,
         },
       },
       opt || {},

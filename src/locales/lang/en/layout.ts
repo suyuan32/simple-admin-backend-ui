@@ -4,6 +4,7 @@ export default {
     // user dropdown
     dropdownItemDoc: 'Document',
     dropdownItemLoginOut: 'Login Out',
+    profile: 'Profile',
 
     tooltipErrorLog: 'Error log',
     tooltipLock: 'Lock screen',

@@ -173,8 +173,8 @@
   // get captcha
   async function getCaptchaData() {
     const captcha = await getCaptcha('none').then();
-    formData.captchaId = captcha.data.captchaId;
-    formData.imgPath = captcha.data.imgPath;
+    formData.captchaId = captcha.captchaId;
+    formData.imgPath = captcha.imgPath;
   }
 
   getCaptchaData();

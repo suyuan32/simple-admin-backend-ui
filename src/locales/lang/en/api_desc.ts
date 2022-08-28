@@ -7,6 +7,8 @@ export default {
   userList: 'Get user list',
   userModify: 'Modify user information',
   userPermissions: 'Get user permission code (Required)',
+  userProfile: 'Get user profile (Required)',
+  updateProfile: 'Modify user profile (Required)',
 
   // role
   createOrUpdateRole: 'Create or update role information',

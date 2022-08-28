@@ -1,8 +1,9 @@
 export default {
-  systemManagementTitle: 'System Management',
-  menuManagementTitle: 'Menu Management',
-  roleManagementTitle: 'Role Management',
-  apiManagementTitle: 'API Management',
-  userManagementTitle: 'User Management',
-  fileManagementTitle: 'File Management',
+  systemManagementTitle: 'System',
+  menuManagementTitle: 'Menu',
+  roleManagementTitle: 'Role',
+  apiManagementTitle: 'API',
+  userManagementTitle: 'User',
+  fileManagementTitle: 'File',
+  userProfileTitle: 'Profile',
 };

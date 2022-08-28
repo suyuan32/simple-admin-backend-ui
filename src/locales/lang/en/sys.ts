@@ -185,17 +185,33 @@ export default {
     userList: 'User List',
     nickname: 'Nickname',
     avatar: 'Avatar',
+    oldPassword: 'Old Password',
+    newPassword: 'New Password',
     // action
     addUser: 'Add User',
     editUser: 'Edit User',
+    changePassword: 'Change Password',
+    // notification
+    wrongPassword: 'Wrong Password',
   },
   init: {
     // noun
     initTitle: 'Initialize database',
     initProgressTitle: 'Progress',
+    initCoreDatabase: 'Initialize core database',
+    initFileDatabase: 'Initialize file manager database',
 
     // notification
     alreadyInit: 'The database had been initialized.',
     initializeIsRunning: 'The initialization is running...',
+  },
+  sys: {
+    version: 'Version',
+    Name: 'System Name',
+    navigation: 'Navigation',
+    info: 'System Information',
+    // notification
+    morning: 'Good morning',
+    niceDay: 'have a nice Day!',
   },
 };

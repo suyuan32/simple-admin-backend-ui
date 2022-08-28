@@ -179,17 +179,33 @@ export default {
     userList: '用户列表',
     nickname: '昵称',
     avatar: '头像',
+    oldPassword: '旧密码',
+    newPassword: '新密码',
     // action
     addUser: '新增用户',
     editUser: '编辑用户',
+    changePassword: '修改密码',
+    // notification
+    wrongPassword: '密码错误',
   },
   init: {
     // noun
     initTitle: '数据库初始化',
     initProgressTitle: '处理进度',
+    initCoreDatabase: '核心数据库初始化',
+    initFileDatabase: '文件管理数据库初始化',
 
     // notification
     initializeIsRunning: '正在初始化...',
     alreadyInit: '数据库已被初始化。',
+  },
+  sys: {
+    version: '系统版本',
+    Name: '系统名称',
+    navigation: '快捷导航',
+    info: '系统信息',
+    // notification
+    morning: '早安',
+    niceDay: '开始您一天的工作吧！',
   },
 };

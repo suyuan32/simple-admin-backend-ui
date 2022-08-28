@@ -7,6 +7,8 @@ export default {
   userList: '获取用户列表',
   userModify: '修改用户信息',
   userPermissions: '获取用户授权码（必须）',
+  userProfile: '获取用户个人信息（必须）',
+  updateProfile: '修改用户个人信息（必须）',
 
   // role
   createOrUpdateRole: '新建或更新角色信息',
