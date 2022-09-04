@@ -31,9 +31,13 @@ Simple Admin UI is a modern UI for Simple Admin. It is based on vue-vben-admin a
 | User Management    | finised    |
 | Operation log   | in progress     |
 
+## Preview
+
+[Preview](https://suyuan32.github.io/simple-admin-core/#/simple-admin/en/docs/screenshoot)
+
 ## Documentation
- 
-Native document will come soon.
+
+[文档](https://suyuan32.github.io/simple-admin-core/)
 
 - vben admin document 
 [Document](https://vvbin.cn/doc-next/)
