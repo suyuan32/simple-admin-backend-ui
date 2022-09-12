@@ -128,9 +128,16 @@ export default {
     currentActiveMenu: '激活窗口',
     isAutoCloseTab: '自动关闭窗口',
     redirectPath: '跳转路径',
+    menuParamManagement: '额外参数',
+    paramKey: '参数名',
+    paramType: '参数类型',
+    paramValue: '参数值',
+    paramList: '参数列表',
     // action
     addMenu: '新增菜单',
     editMenu: '编辑菜单',
+    addMenuParam: '新增参数',
+    editMenuParam: '编辑参数',
     // notification
     deleteChildrenDesc: '请先删除子菜单',
     menuNotExists: '菜单不存在',

@@ -8,6 +8,47 @@ import { formatToDateTime } from '/@/utils/dateUtil';
 
 const { t } = useI18n();
 
+export const extraParamColumns = [
+  {
+    title: 'ID',
+    dataIndex: 'id',
+    width: 200,
+    align: 'left',
+  },
+  {
+    title: t('sys.menu.paramType'),
+    dataIndex: 'dataType',
+    width: 200,
+    align: 'left',
+  },
+  {
+    title: t('sys.menu.paramKey'),
+    dataIndex: 'key',
+    width: 200,
+    align: 'left',
+  },
+  {
+    title: t('sys.menu.paramValue'),
+    dataIndex: 'value',
+    width: 200,
+    align: 'left',
+  },
+  {
+    title: t('common.action'),
+    dataIndex: 'action',
+    width: 200,
+    align: 'left',
+  },
+];
+
+export interface paramFormData {
+  id: number;
+  menuId: number;
+  dataType: string;
+  key: string;
+  value: string;
+}
+
 export const columns: BasicColumn[] = [
   {
     title: t('sys.menu.menuName'),
@@ -53,7 +94,7 @@ export const columns: BasicColumn[] = [
     dataIndex: 'createAt',
     width: 180,
     customRender: ({ record }) => {
-      return formatToDateTime(record.createAt);
+      return formatToDateTime(record.createdAt);
     },
   },
 ];
@@ -172,7 +213,7 @@ export const formSchema: FormSchema[] = [
   },
   {
     field: 'keepAlive',
-    label: '是否缓存',
+    label: t('sys.menu.isKeepAlive'),
     component: 'RadioButtonGroup',
     defaultValue: false,
     componentProps: {

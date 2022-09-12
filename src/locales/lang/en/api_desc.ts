@@ -24,6 +24,9 @@ export default {
   menuList: 'Get menu list',
   deleteMenu: 'Delete menu information',
   roleMenu: "Get role's Menu List (Required)",
+  createOrUpdateMenuParam: 'Create or update menu parameters',
+  deleteMenuParam: 'Delete menu extra parameters',
+  menuParamListByMenuId: 'Get menu extra parameters by menu ID',
 
   // API
   createOrUpdateApi: 'Create or update API information',

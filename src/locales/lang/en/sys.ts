@@ -134,9 +134,16 @@ export default {
     currentActiveMenu: 'Active Tab',
     isAutoCloseTab: 'Auto Close Tab?',
     redirectPath: 'Redirect Path',
+    menuParamManagement: 'Extra Parameters',
+    paramKey: 'Key',
+    paramType: 'Type',
+    paramValue: 'Value',
+    paramList: 'Parameter List',
     // action
     addMenu: 'Add Menu',
     editMenu: 'Eidt Menu',
+    addMenuParam: 'Add Parameter',
+    editMenuParam: 'Edit Parameter',
     // notification
     deleteChildrenDesc: "Please delete menu's children first",
     menuNotExists: 'Menu does not exist',
@@ -212,6 +219,6 @@ export default {
     info: 'System Information',
     // notification
     morning: 'Good morning',
-    niceDay: 'have a nice Day!',
+    niceDay: 'have a nice day!',
   },
 };

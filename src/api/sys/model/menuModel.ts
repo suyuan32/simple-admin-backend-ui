@@ -87,3 +87,33 @@ export interface CreateOrUpdateMenuReq {
  * @description: Get menu return value
  */
 export type RoleMenuResp = RouteItem[];
+
+/**
+ *  author: Ryan Su
+ *  @description: Create or update a extra menu parameter request
+ */
+export interface CreateOrUpdateMenuParamReq {
+  id: number;
+  dataType: string;
+  menuId: number;
+  value: string;
+  key: string;
+}
+
+/**
+ *  author: Ryan Su
+ *  @description: Menu extra parameter information
+ */
+export interface MenuParamInfo extends CreateOrUpdateMenuParamReq {
+  createAt: number;
+  updateAt: number;
+}
+
+/**
+ *  author: Ryan Su
+ *  @description: Menu parameters list
+ */
+export interface MenuParamList {
+  total: number;
+  data: MenuParamInfo[];
+}

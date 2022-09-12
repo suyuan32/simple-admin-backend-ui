@@ -24,6 +24,9 @@ export default {
   menuList: '获取菜单列表',
   deleteMenu: '删除菜单',
   roleMenu: '获取角色菜单（必须）',
+  createOrUpdateMenuParam: '创建或更新菜单参数',
+  deleteMenuParam: '删除菜单额外参数',
+  menuParamListByMenuId: '获取某个菜单的额外参数列表',
 
   // API
   createOrUpdateApi: '创建或修改API信息',
