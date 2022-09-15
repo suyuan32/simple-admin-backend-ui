@@ -33,7 +33,11 @@ Simple Admin UI 是基于vue-vben-admin二次开发的为Simple Admin专门开�
 
 ## 预览
 
-[预览](https://suyuan32.github.io/simple-admin-core/#/simple-admin/zh-cn/docs/screenshoot)
+![pic](https://s1.imagehub.cc/images/2022/09/15/-2022-09-05-21-49-00.png)
+![pic](https://s1.imagehub.cc/images/2022/09/15/register_zh_cn.png)
+![pic](https://s1.imagehub.cc/images/2022/09/15/add_example_api_authority.png)
+
+[更多预览](https://suyuan32.github.io/simple-admin-core/#/simple-admin/zh-cn/docs/screenshot)
 
 
 
