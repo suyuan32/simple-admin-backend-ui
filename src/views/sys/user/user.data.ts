@@ -145,7 +145,6 @@ export const formSchema: FormSchema[] = [
   {
     field: 'avatar',
     label: t('sys.user.avatar'),
-    required: true,
     defaultValue: '',
     component: 'Input',
     show: false,
@@ -171,7 +170,6 @@ export const formSchema: FormSchema[] = [
   {
     field: 'mobile',
     label: t('sys.login.mobile'),
-    required: true,
     component: 'Input',
   },
   {
@@ -183,7 +181,6 @@ export const formSchema: FormSchema[] = [
   {
     field: 'password',
     label: t('sys.login.password'),
-    required: true,
     component: 'Input',
   },
   {

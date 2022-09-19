@@ -7,18 +7,7 @@
     width="500px"
     @ok="handleSubmit"
   >
-    <BasicForm @register="registerForm">
-      <template #menu="{ model, field }">
-        <BasicTree
-          v-model:value="model[field]"
-          :treeData="treeData"
-          :fieldNames="{ title: 'menuName', key: 'id' }"
-          checkable
-          toolbar
-          title="菜单分配"
-        />
-      </template>
-    </BasicForm>
+    <BasicForm @register="registerForm" />
   </BasicDrawer>
 </template>
 <script lang="ts">
@@ -26,7 +15,6 @@
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { formSchema, roleOptionData } from './user.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
-  import { BasicTree, TreeItem } from '/@/components/Tree';
   import { useI18n } from 'vue-i18n';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { UserInfo } from '/@/api/sys/model/userModel';
@@ -34,12 +22,11 @@
   import { getRoleList } from '/@/api/sys/role';
 
   export default defineComponent({
-    name: 'ApiDrawer',
-    components: { BasicDrawer, BasicForm, BasicTree },
+    name: 'UserDrawer',
+    components: { BasicDrawer, BasicForm },
     emits: ['success', 'register'],
     setup(_, { emit }) {
       const isUpdate = ref(true);
-      const treeData = ref<TreeItem[]>([]);
       const { t } = useI18n();
       const { createMessage } = useMessage();
 
@@ -86,12 +73,16 @@
         try {
           const values = await validate();
           setDrawerProps({ confirmLoading: true });
-          // defined api id
+          // defined user id
           let userId: number;
           let password: string;
           if (unref(isUpdate)) {
             userId = Number(values['id']);
-            password = values['password'];
+            if (values['password'] == undefined) {
+              password = '';
+            } else {
+              password = values['password'];
+            }
           } else {
             userId = 0;
             password = '';
@@ -113,6 +104,8 @@
           createMessage.success(t('common.successful'));
           closeDrawer();
           emit('success');
+        } catch (e) {
+          createMessage.error(t('common.failed'));
         } finally {
           setDrawerProps({ confirmLoading: false });
         }
@@ -123,7 +116,6 @@
         registerForm,
         handleSubmit,
         getTitle,
-        treeData,
       };
     },
   });

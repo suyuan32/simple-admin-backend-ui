@@ -17,6 +17,7 @@ import { useErrorLogStoreWithOut } from '/@/store/modules/errorLog';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { joinTimestamp, formatRequestDate } from './helper';
 import { AxiosRetry } from '/@/utils/http/axios/axiosRetry';
+import { useLocaleStore } from '/@/store/modules/locale';
 
 const globSetting = useGlobSetting();
 const urlPrefix = globSetting.urlPrefix;
@@ -115,6 +116,17 @@ const transform: AxiosTransform = {
         ? `${options.authenticationScheme} ${token}`
         : token;
     }
+
+    // 设置 accept language
+    const locale = useLocaleStore();
+    if (config.headers != null) {
+      if (locale.getLocale === 'zh_CN') {
+        config.headers['Accept-Language'] = 'zh';
+      } else {
+        config.headers['Accept-Language'] = locale.getLocale;
+      }
+    }
+
     return config;
   },
 

@@ -7,18 +7,7 @@
     width="500px"
     @ok="handleSubmit"
   >
-    <BasicForm @register="registerForm">
-      <template #menu="{ model, field }">
-        <BasicTree
-          v-model:value="model[field]"
-          :treeData="treeData"
-          :fieldNames="{ title: 'menuName', key: 'id' }"
-          checkable
-          toolbar
-          title="菜单分配"
-        />
-      </template>
-    </BasicForm>
+    <BasicForm @register="registerForm" />
   </BasicDrawer>
 </template>
 <script lang="ts">
@@ -26,7 +15,6 @@
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { formSchema } from './file.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
-  import { BasicTree, TreeItem } from '/@/components/Tree';
   import { useI18n } from 'vue-i18n';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { updateFileInfoReq } from '/@/api/file/model/fileModel';
@@ -34,11 +22,10 @@
 
   export default defineComponent({
     name: 'FileDrawer',
-    components: { BasicDrawer, BasicForm, BasicTree },
+    components: { BasicDrawer, BasicForm },
     emits: ['success', 'register'],
     setup(_, { emit }) {
       const isUpdate = ref(true);
-      const treeData = ref<TreeItem[]>([]);
       const { t } = useI18n();
       const { notification } = useMessage();
 
@@ -92,7 +79,6 @@
         registerForm,
         getTitle,
         handleSubmit,
-        treeData,
       };
     },
   });

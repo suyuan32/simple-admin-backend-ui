@@ -99,7 +99,7 @@ export const getUserList = (params: UserListReq) => {
 };
 
 /**
- *  author: ryan
+ *  author: Ryan Su
  *  @description: create a new user
  */
 export const createOrUpdateUser = (params: UserInfo, mode: ErrorMessageMode = 'modal') => {
