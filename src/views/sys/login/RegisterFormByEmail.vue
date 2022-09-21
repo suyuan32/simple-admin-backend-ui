@@ -2,7 +2,7 @@
   <template v-if="getShow">
     <LoginFormTitle class="enter-x" />
     <Form class="p-4 enter-x" :model="formData" :rules="getFormRules" ref="formRef">
-      <FormItem name="account" class="enter-x">
+      <FormItem name="account" class="enter-x" :rules="[{ required: true, max: 30 }]">
         <Input
           class="fix-auto-fill"
           size="large"
@@ -15,10 +15,11 @@
           size="large"
           v-model:value="formData.email"
           :placeholder="t('sys.login.email')"
+          :rules="[{ required: true, type: 'email' }]"
           class="fix-auto-fill"
         />
       </FormItem>
-      <FormItem name="password" class="enter-x">
+      <FormItem name="password" class="enter-x" :rules="[{ required: true, min: 6, max: 30 }]">
         <StrengthMeter
           size="large"
           v-model:value="formData.password"
@@ -35,7 +36,7 @@
       </FormItem>
 
       <ARow class="enter-x">
-        <FormItem name="captcha" class="enter-x">
+        <FormItem name="captcha" class="enter-x" :rules="[{ required: true, len: 5 }]">
           <Input
             size="large"
             v-model:value="formData.captcha"

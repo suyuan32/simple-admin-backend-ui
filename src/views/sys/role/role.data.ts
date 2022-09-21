@@ -90,6 +90,7 @@ export const formSchema: FormSchema[] = [
     label: t('sys.role.roleName'),
     required: true,
     component: 'Input',
+    rules: [{ max: 20 }],
   },
   {
     field: 'orderNo',
@@ -97,18 +98,21 @@ export const formSchema: FormSchema[] = [
     defaultValue: 0,
     component: 'InputNumber',
     required: true,
+    rules: [{ type: 'number', max: 1000 }],
   },
   {
     field: 'value',
     label: t('sys.role.roleValue'),
     required: true,
     component: 'Input',
+    rules: [{ min: 1, max: 10 }],
   },
   {
     field: 'defaultRouter',
     label: t('sys.role.defaultRouter'),
     required: true,
     component: 'Input',
+    rules: [{ max: 50 }],
   },
   {
     field: 'status',
@@ -126,6 +130,7 @@ export const formSchema: FormSchema[] = [
     label: t('common.remark'),
     field: 'remark',
     component: 'InputTextArea',
+    rules: [{ max: 200 }],
   },
 ];
 

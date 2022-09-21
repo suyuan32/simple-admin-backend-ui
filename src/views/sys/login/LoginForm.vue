@@ -8,7 +8,7 @@
     v-show="getShow"
     @keypress.enter="handleLogin"
   >
-    <FormItem name="account" class="enter-x">
+    <FormItem name="account" class="enter-x" :rules="[{ required: true, max: 30 }]">
       <Input
         size="large"
         v-model:value="formData.account"
@@ -16,7 +16,7 @@
         class="fix-auto-fill"
       />
     </FormItem>
-    <FormItem name="password" class="enter-x">
+    <FormItem name="password" class="enter-x" :rules="[{ required: true, min: 6, max: 30 }]">
       <InputPassword
         size="large"
         visibilityToggle
@@ -26,7 +26,7 @@
     </FormItem>
 
     <ARow class="enter-x">
-      <FormItem name="captcha" class="enter-x">
+      <FormItem name="captcha" class="enter-x" :rules="[{ required: true, len: 5 }]">
         <Input size="large" v-model:value="formData.captcha" :placeholder="t('sys.login.captcha')">
           <template #suffix>
             <img :src="formData.imgPath" class="absolute right-0 h-full cursor-pointer" />

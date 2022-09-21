@@ -100,6 +100,7 @@ export const searchFormSchema: FormSchema[] = [
     defaultValue: '',
     component: 'Input',
     colProps: { span: 8 },
+    rules: [{ max: 30 }],
   },
   {
     field: 'nickname',
@@ -107,6 +108,7 @@ export const searchFormSchema: FormSchema[] = [
     defaultValue: '',
     component: 'Input',
     colProps: { span: 8 },
+    rules: [{ max: 10 }],
   },
   {
     field: 'roleId',
@@ -131,6 +133,7 @@ export const searchFormSchema: FormSchema[] = [
     defaultValue: '',
     component: 'Input',
     colProps: { span: 8 },
+    rules: [{ max: 18 }],
   },
   {
     field: 'email',
@@ -138,6 +141,7 @@ export const searchFormSchema: FormSchema[] = [
     defaultValue: '',
     component: 'Input',
     colProps: { span: 8 },
+    rules: [{ type: 'email' }],
   },
 ];
 
@@ -160,28 +164,33 @@ export const formSchema: FormSchema[] = [
     label: t('sys.login.username'),
     required: true,
     component: 'Input',
+    rules: [{ max: 30 }],
   },
   {
     field: 'nickname',
     label: t('sys.user.nickname'),
     required: true,
     component: 'Input',
+    rules: [{ max: 10 }],
   },
   {
     field: 'mobile',
     label: t('sys.login.mobile'),
     component: 'Input',
+    rules: [{ max: 18 }],
   },
   {
     field: 'email',
     label: t('sys.login.email'),
     required: true,
     component: 'Input',
+    rules: [{ type: 'email' }],
   },
   {
     field: 'password',
     label: t('sys.login.password'),
     component: 'Input',
+    rules: [{ min: 6, max: 30 }],
   },
   {
     field: 'roleId',

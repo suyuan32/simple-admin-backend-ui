@@ -126,6 +126,7 @@ export const formSchema: FormSchema[] = [
     label: t('sys.menu.menuName'),
     component: 'Input',
     required: true,
+    rules: [{ max: 20 }],
   },
   {
     field: 'parentId',
@@ -147,6 +148,7 @@ export const formSchema: FormSchema[] = [
     label: t('sys.menu.menuTitle'),
     component: 'Input',
     required: true,
+    rules: [{ max: 50 }],
   },
   {
     field: 'orderNo',
@@ -154,6 +156,7 @@ export const formSchema: FormSchema[] = [
     defaultValue: 0,
     component: 'InputNumber',
     required: true,
+    rules: [{ type: 'number', max: 1000 }],
   },
   {
     field: 'icon',
@@ -166,12 +169,14 @@ export const formSchema: FormSchema[] = [
     label: t('sys.menu.routePath'),
     component: 'Input',
     ifShow: ({ values }) => isMenu(values.type),
+    rules: [{ max: 200 }],
   },
   {
     field: 'component',
     label: t('sys.menu.componentPath'),
     component: 'Input',
     required: true,
+    rules: [{ max: 100 }],
   },
   {
     field: 'redirect',
@@ -179,6 +184,7 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
     defaultValue: '',
     ifShow: ({ values }) => isMenu(values.type),
+    rules: [{ max: 100 }],
   },
   {
     field: 'frameSrc',
@@ -186,6 +192,7 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
     defaultValue: '',
     ifShow: ({ values }) => isMenu(values.type),
+    rules: [{ max: 100 }],
   },
   {
     field: 'dynamicLevel',
@@ -193,6 +200,7 @@ export const formSchema: FormSchema[] = [
     defaultValue: 0,
     component: 'InputNumber',
     required: true,
+    rules: [{ type: 'number', max: 30 }],
   },
   {
     field: 'realPath',
@@ -200,6 +208,7 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
     defaultValue: '',
     ifShow: ({ values }) => isMenu(values.type),
+    rules: [{ max: 200 }],
   },
   {
     field: 'currentActiveMenu',
@@ -207,6 +216,7 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
     defaultValue: '',
     ifShow: ({ values }) => isMenu(values.type),
+    rules: [{ max: 50 }],
   },
   {
     field: 'disabled',
