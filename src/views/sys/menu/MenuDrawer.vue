@@ -259,30 +259,29 @@
           let parentId: number = values['parentId'] ? Number(values['parentId']) : 0;
           // defined menu id
           let menuId: number = unref(isUpdate) ? Number(values['id']) : 0;
-          let pathData = values['path'] ? values['path'] : '';
-          let redirectData = values['redirect'] ? values['redirect'] : '';
-          let keepAlive = values['keepAlive'] ? values['keepAlive'] : true;
-          let hideBreadcrumb = values['hideBreadcrumb'] ? values['hideBreadcrumb'] : true;
-          let currentActiveMenu = values['currentActiveMenu'] ? values['currentActiveMenu'] : '';
-          let closeTab = values['closeTab'] ? values['closeTab'] : true;
-
           let params: CreateOrUpdateMenuReq = {
             id: menuId,
             type: values['type'],
             parentId: parentId,
-            path: pathData,
+            path: values['path'],
             name: values['name'],
             component: componentValue,
-            redirect: redirectData,
+            redirect: values['redirect'],
             orderNo: values['orderNo'],
             disabled: values['disabled'],
-            keepAlive: keepAlive,
-            hideMenu: values['hideMenu'],
-            hideBreadcrumb: hideBreadcrumb,
-            currentActiveMenu: currentActiveMenu,
             title: values['title'],
             icon: values['icon'],
-            closeTab: closeTab,
+            currentActiveMenu: values['currentActiveMenu'],
+            hideMenu: values['hideMenu'],
+            hideBreadcrumb: values['hideBreadcrumb'],
+            ignoreKeepAlive: values['ignoreKeepAlive'],
+            hideTab: values['hideTab'],
+            frameSrc: values['frameSrc'],
+            carryParam: values['carryParam'],
+            hideChildrenInMenu: values['hideChildrenInMenu'],
+            affix: values['affix'],
+            dynamicLevel: values['dynamicLevel'],
+            realPath: values['realPath'],
           };
           let result = await createOrUpdateMenu(params, 'modal');
           notification.success({

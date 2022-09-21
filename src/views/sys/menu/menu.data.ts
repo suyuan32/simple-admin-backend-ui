@@ -181,6 +181,27 @@ export const formSchema: FormSchema[] = [
     ifShow: ({ values }) => isMenu(values.type),
   },
   {
+    field: 'frameSrc',
+    label: t('sys.menu.frameSrc'),
+    component: 'Input',
+    defaultValue: '',
+    ifShow: ({ values }) => isMenu(values.type),
+  },
+  {
+    field: 'dynamicLevel',
+    label: t('sys.menu.dynamicLevel'),
+    defaultValue: 0,
+    component: 'InputNumber',
+    required: true,
+  },
+  {
+    field: 'realPath',
+    label: t('sys.menu.realPath'),
+    component: 'Input',
+    defaultValue: '',
+    ifShow: ({ values }) => isMenu(values.type),
+  },
+  {
     field: 'currentActiveMenu',
     label: t('sys.menu.currentActiveMenu'),
     component: 'Input',
@@ -212,14 +233,14 @@ export const formSchema: FormSchema[] = [
     },
   },
   {
-    field: 'keepAlive',
+    field: 'ignoreKeepAlive',
     label: t('sys.menu.isKeepAlive'),
     component: 'RadioButtonGroup',
     defaultValue: false,
     componentProps: {
       options: [
-        { label: t('common.yes'), value: true },
-        { label: t('common.no'), value: false },
+        { label: t('common.yes'), value: false },
+        { label: t('common.no'), value: true },
       ],
     },
     ifShow: ({ values }) => isMenu(values.type),
@@ -243,6 +264,19 @@ export const formSchema: FormSchema[] = [
     defaultValue: false,
     componentProps: {
       options: [
+        { label: t('common.yes'), value: false },
+        { label: t('common.no'), value: true },
+      ],
+    },
+    ifShow: ({ values }) => isMenu(values.type),
+  },
+  {
+    field: 'hideTab',
+    label: t('sys.menu.hideTab'),
+    component: 'RadioButtonGroup',
+    defaultValue: false,
+    componentProps: {
+      options: [
         { label: t('common.yes'), value: true },
         { label: t('common.no'), value: false },
       ],
@@ -250,10 +284,48 @@ export const formSchema: FormSchema[] = [
     ifShow: ({ values }) => isMenu(values.type),
   },
   {
-    field: 'closeTab',
-    label: t('sys.menu.isAutoCloseTab'),
+    field: 'carryParam',
+    label: t('sys.menu.carryParam'),
     component: 'RadioButtonGroup',
-    defaultValue: true,
+    defaultValue: false,
+    componentProps: {
+      options: [
+        { label: t('common.yes'), value: true },
+        { label: t('common.no'), value: false },
+      ],
+    },
+    ifShow: ({ values }) => isMenu(values.type),
+  },
+  {
+    field: 'hideChildrenInMenu',
+    label: t('sys.menu.hideChildrenInMenu'),
+    component: 'RadioButtonGroup',
+    defaultValue: false,
+    componentProps: {
+      options: [
+        { label: t('common.yes'), value: true },
+        { label: t('common.no'), value: false },
+      ],
+    },
+  },
+  {
+    field: 'affix',
+    label: t('sys.menu.affix'),
+    component: 'RadioButtonGroup',
+    defaultValue: false,
+    componentProps: {
+      options: [
+        { label: t('common.yes'), value: true },
+        { label: t('common.no'), value: false },
+      ],
+    },
+    ifShow: ({ values }) => isMenu(values.type),
+  },
+  {
+    field: 'hideTab',
+    label: t('sys.menu.hideTab'),
+    component: 'RadioButtonGroup',
+    defaultValue: false,
     componentProps: {
       options: [
         { label: t('common.yes'), value: true },
