@@ -2,7 +2,7 @@ interface NavItem {
   title: string;
   icon: string;
   color: string;
-  redirect: string;
+  redirect?: string;
 }
 
 export const navItems: NavItem[] = [
@@ -40,5 +40,5 @@ export const navItems: NavItem[] = [
 
 export const systemInfoData = [
   ['sys.sys.Name', 'Simple Admin'],
-  ['sys.sys.version', 'V 0.0.1'],
+  ['sys.sys.version', 'V 0.0.3'],
 ];
