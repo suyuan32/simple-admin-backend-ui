@@ -1,0 +1,1 @@
+window.__PRODUCTION__SIMPLE_ADMIN__CONF__={"VITE_GLOB_APP_TITLE":"Simple Admin","VITE_GLOB_APP_SHORT_NAME":"Simple_Admin","VITE_GLOB_API_URL":"","VITE_GLOB_UPLOAD_URL":"/upload","VITE_GLOB_API_URL_PREFIX":""};Object.freeze(window.__PRODUCTION__SIMPLE_ADMIN__CONF__);Object.defineProperty(window,"__PRODUCTION__SIMPLE_ADMIN__CONF__",{configurable:false,writable:false,});

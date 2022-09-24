@@ -1,0 +1,1 @@
+import{b1 as r}from"./index.ab249d65.js";const o=e=>r.post({url:"/sys-api/role/list",params:e}),a=(e,s="modal")=>r.post({url:"/sys-api/role",params:e},{errorMessageMode:s}),l=(e,s="modal")=>r.delete({url:"/sys-api/role",params:e},{errorMessageMode:s}),p=(e,s)=>r.post({url:"/sys-api/role/status",params:{id:e,status:s}});export{a as c,l as d,o as g,p as s};
