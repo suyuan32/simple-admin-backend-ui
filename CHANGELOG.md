@@ -1,3 +1,25 @@
+# 0.0.6 (2022/09/25)
+
+### Features
+
+- feat: readme add images
+- feat: menu parameter management
+
+### Bug Fixes
+
+- fix: bug in tree select
+- fix: menu rules
+- fix: restore old dependencies
+- fix: update version
+- fix: yarn build for production bugs upgrade dependencies
+- fix: validator rules
+- fix: menu meta setting
+- fix: update user bug
+- fix: api bug
+- fix: logout
+- fix: readme
+- fix: image and translate
+
 # 0.0.1 (2022/08/28)
 
 ### Features
