@@ -140,6 +140,7 @@ export default {
     paramType: '参数类型',
     paramValue: '参数值',
     paramList: '参数列表',
+    rootMenu: '根菜单',
     // action
     addMenu: '新增菜单',
     editMenu: '编辑菜单',

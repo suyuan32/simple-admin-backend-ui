@@ -146,6 +146,7 @@ export default {
     paramType: 'Type',
     paramValue: 'Value',
     paramList: 'Parameter List',
+    rootMenu: 'Root Menu',
     // action
     addMenu: 'Add Menu',
     editMenu: 'Eidt Menu',

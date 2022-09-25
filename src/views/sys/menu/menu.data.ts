@@ -132,11 +132,16 @@ export const formSchema: FormSchema[] = [
     field: 'parentId',
     label: t('sys.menu.menuParent'),
     component: 'TreeSelect',
+    defaultValue: {
+      label: t('sys.menu.rootMenu'),
+      key: 'root',
+      value: 1,
+    },
     componentProps: {
       // set the field name of the data from the server, the below show that
       // the label show the field of data.name
       fieldNames: {
-        label: 'name',
+        label: 'title',
         key: 'id',
         value: 'id',
       },

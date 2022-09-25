@@ -44,13 +44,19 @@ export interface MenuListItem {
   component: string;
   orderNo: number;
   disabled: boolean;
-  keepAlive: boolean;
+  title: string;
+  icon: string;
   hideMenu: boolean;
   hideBreadcrumb: boolean;
   currentActiveMenu: string;
-  title: string;
-  icon: string;
-  closeTab: boolean;
+  ignoreKeepAlive: boolean;
+  hideTab: boolean;
+  frameSrc: string;
+  carryParam: boolean;
+  hideChildrenInMenu: boolean;
+  affix: boolean;
+  dynamicLevel: number;
+  realPath: string;
   children?: MenuListItem[] | undefined;
 }
 

@@ -226,12 +226,44 @@
           });
         }
 
-        menuId.value = data.record.id;
+        if ('record' in data) {
+          menuId.value = data.record.id;
+        }
 
         // get tree data from data.data
         const treeData = await getAllMenu().then((data) => {
           return data.data;
         });
+
+        treeData.push({
+          name: 'root',
+          id: 1,
+          type: 0,
+          parentId: 0,
+          path: '',
+          redirect: '',
+          component: '',
+          orderNo: 0,
+          disabled: false,
+          title: 'sys.menu.rootMenu',
+          icon: '',
+          hideMenu: false,
+          hideBreadcrumb: false,
+          currentActiveMenu: '',
+          ignoreKeepAlive: false,
+          hideTab: false,
+          frameSrc: '',
+          carryParam: false,
+          hideChildrenInMenu: false,
+          affix: false,
+          dynamicLevel: 0,
+          realPath: '',
+        });
+
+        for (let i = 0; i < treeData.length; i++) {
+          treeData[i].title = t(treeData[i].title);
+        }
+
         updateSchema({
           field: 'parentId',
           componentProps: { treeData },
