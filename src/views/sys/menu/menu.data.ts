@@ -126,7 +126,7 @@ export const formSchema: FormSchema[] = [
     label: t('sys.menu.menuName'),
     component: 'Input',
     required: true,
-    rules: [{ max: 20 }],
+    rules: [{ max: 50 }],
   },
   {
     field: 'parentId',
@@ -197,7 +197,7 @@ export const formSchema: FormSchema[] = [
   {
     field: 'dynamicLevel',
     label: t('sys.menu.dynamicLevel'),
-    defaultValue: 0,
+    defaultValue: 20,
     component: 'InputNumber',
     required: true,
     rules: [{ type: 'number', max: 30 }],
