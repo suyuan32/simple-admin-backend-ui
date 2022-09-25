@@ -48,4 +48,7 @@ export default {
   uploadFile: 'Upload',
   fileList: 'File List',
   deleteFile: 'Delete File',
+
+  // example
+  hello: 'Hello',
 };

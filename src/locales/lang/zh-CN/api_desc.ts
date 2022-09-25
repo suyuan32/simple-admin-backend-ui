@@ -48,4 +48,7 @@ export default {
   uploadFile: '上传文件',
   fileList: '文件列表',
   deleteFile: '删除文件',
+
+  // example
+  hello: '你好',
 };

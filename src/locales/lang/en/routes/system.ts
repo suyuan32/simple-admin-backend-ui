@@ -6,4 +6,5 @@ export default {
   userManagementTitle: 'User',
   fileManagementTitle: 'File',
   userProfileTitle: 'Profile',
+  exampleTitle: 'Example',
 };
