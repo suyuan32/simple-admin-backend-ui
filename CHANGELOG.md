@@ -1,3 +1,12 @@
+# 0.0.7 (2022/09/30)
+
+### Features
+
+- feat: dictionary management
+- feat: online preview
+- feat: docker deploy code
+- refactor: changelog
+
 # 0.0.6 (2022/09/25)
 
 ### Features
