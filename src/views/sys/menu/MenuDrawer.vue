@@ -111,7 +111,7 @@
     getMenuParamListByMenuId,
     createOrUpdateMenuParam,
   } from '/@/api/sys/menu';
-  import { CreateOrUpdateMenuReq, MenuParamInfo } from '/@/api/sys/model/menuModel';
+  import { CreateOrUpdateMenuReq, MenuListItem, MenuParamInfo } from '/@/api/sys/model/menuModel';
 
   export default defineComponent({
     name: 'MenuDrawer',
@@ -231,7 +231,7 @@
         }
 
         // get tree data from data.data
-        const treeData = await getAllMenu().then((data) => {
+        let treeData = await getAllMenu().then((data) => {
           return data.data;
         });
 
@@ -239,7 +239,7 @@
           name: 'root',
           id: 1,
           type: 0,
-          parentId: 0,
+          parentId: 1,
           path: '',
           redirect: '',
           component: '',
@@ -258,11 +258,23 @@
           affix: false,
           dynamicLevel: 0,
           realPath: '',
+          children: [],
         });
 
-        for (let i = 0; i < treeData.length; i++) {
-          treeData[i].title = t(treeData[i].title);
-        }
+        const travel = function (data: MenuListItem[]): MenuListItem[] {
+          if (data.length === 0) {
+            return data;
+          }
+          for (let i = 0; i < data.length; i++) {
+            data[i].title = t(data[i].title);
+            if (data[i].children !== null) {
+              data[i].children = travel(data[i].children);
+            }
+          }
+          return data;
+        };
+
+        treeData = travel(treeData);
 
         updateSchema({
           field: 'parentId',
@@ -282,7 +294,7 @@
           let componentValue: string;
           if (values.isExt === '1') {
             componentValue = 'IFrame';
-          } else if (values.type === '0') {
+          } else if (values.type === 0) {
             componentValue = 'LAYOUT';
           } else {
             componentValue = values['component'];
@@ -295,25 +307,27 @@
             id: menuId,
             type: values['type'],
             parentId: parentId,
-            path: values['path'],
+            path: values['path'] == undefined ? '' : values['path'],
             name: values['name'],
             component: componentValue,
-            redirect: values['redirect'],
+            redirect: values['redirect'] == undefined ? '' : values['redirect'],
             orderNo: values['orderNo'],
             disabled: values['disabled'],
             title: values['title'],
             icon: values['icon'],
-            currentActiveMenu: values['currentActiveMenu'],
+            currentActiveMenu:
+              values['currentActiveMenu'] == undefined ? '' : values['currentActiveMenu'],
             hideMenu: values['hideMenu'],
-            hideBreadcrumb: values['hideBreadcrumb'],
-            ignoreKeepAlive: values['ignoreKeepAlive'],
-            hideTab: values['hideTab'],
-            frameSrc: values['frameSrc'],
-            carryParam: values['carryParam'],
+            hideBreadcrumb: values['hideBreadcrumb'] == undefined ? true : values['hideBreadcrumb'],
+            ignoreKeepAlive:
+              values['ignoreKeepAlive'] == undefined ? false : values['ignoreKeepAlive'],
+            hideTab: values['hideTab'] == undefined ? false : values['hideTab'],
+            frameSrc: values['frameSrc'] == undefined ? '' : values['frameSrc'],
+            carryParam: values['carryParam'] == undefined ? false : values['carryParam'],
             hideChildrenInMenu: values['hideChildrenInMenu'],
-            affix: values['affix'],
+            affix: values['affix'] == undefined ? false : values['affix'],
             dynamicLevel: values['dynamicLevel'],
-            realPath: values['realPath'],
+            realPath: values['realPath'] == undefined ? '' : values['realPath'],
           };
           let result = await createOrUpdateMenu(params, 'modal');
           notification.success({

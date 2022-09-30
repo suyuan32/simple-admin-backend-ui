@@ -150,6 +150,7 @@ export function convertMenuTreeData(params: MenuListItem[] | undefined): DataNod
       key: params[key].id,
       children: [],
     };
+    // console.log(tmp.key);
     if (params[key].children !== undefined) {
       tmp.children = convertMenuTreeData(params[key].children);
     }
@@ -242,6 +243,5 @@ export function convertApiToCheckedKeys(checked: ApiAuthorityInfo[], data: ApiIn
   for (let i = 0; i < checked.length; i++) {
     result.push(dataMap.get(checked[i].path + checked[i].method));
   }
-  // console.log(result);
   return result;
 }

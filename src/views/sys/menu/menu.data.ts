@@ -90,6 +90,18 @@ export const columns: BasicColumn[] = [
     },
   },
   {
+    title: t('sys.menu.isHidden'),
+    dataIndex: 'hideMenu',
+    width: 80,
+    customRender: ({ record }) => {
+      const status = record.hideMenu;
+      const enable = ~~status === 1;
+      const color = enable ? 'green' : 'red';
+      const text = enable ? t('common.yes') : t('common.no');
+      return h(Tag, { color: color }, () => text);
+    },
+  },
+  {
     title: t('common.createTime'),
     dataIndex: 'createAt',
     width: 180,
@@ -132,11 +144,7 @@ export const formSchema: FormSchema[] = [
     field: 'parentId',
     label: t('sys.menu.menuParent'),
     component: 'TreeSelect',
-    defaultValue: {
-      label: t('sys.menu.rootMenu'),
-      key: 'root',
-      value: 1,
-    },
+    required: true,
     componentProps: {
       // set the field name of the data from the server, the below show that
       // the label show the field of data.name
@@ -182,6 +190,7 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
     required: true,
     rules: [{ max: 100 }],
+    ifShow: ({ values }) => isMenu(values.type),
   },
   {
     field: 'redirect',

@@ -101,6 +101,7 @@
           const roleId = await validate();
           const checkedData = await getMenuAuthority({ id: Number(roleId['id']) });
           checkedMenuKeys.value = checkedData.menuIds;
+          console.log(checkedMenuKeys.value);
         } catch (error) {
           console.log(error);
         }

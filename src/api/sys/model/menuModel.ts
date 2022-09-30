@@ -57,7 +57,7 @@ export interface MenuListItem {
   affix: boolean;
   dynamicLevel: number;
   realPath: string;
-  children?: MenuListItem[] | undefined;
+  children: MenuListItem[];
 }
 
 /**

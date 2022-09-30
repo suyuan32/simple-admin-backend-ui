@@ -223,4 +223,15 @@ export default {
     morning: '早安',
     niceDay: '开始您一天的工作吧！',
   },
+  dictionary: {
+    // noun
+    name: '字典名称',
+    dictionaryList: '字典列表',
+    dictionaryDetailList: '键值列表',
+    // action
+    addDictionary: '添加字典',
+    addDictionaryDetail: '添加键值',
+    editDictionary: '编辑字典',
+    editDictionaryDetail: '编辑键值',
+  },
 };

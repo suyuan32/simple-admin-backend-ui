@@ -48,4 +48,12 @@ export default {
   uploadFile: '上传文件',
   fileList: '文件列表',
   deleteFile: '删除文件',
+
+  // dictionary
+  createOrUpdateDictionary: '创建或更新字典信息',
+  deleteDictionary: '删除字典信息',
+  getDictionaryList: '获取字典列表',
+  createOrUpdateDictionaryDetail: '创建或更新字典键值信息',
+  deleteDictionaryDetail: '删除字典键值信息',
+  getDictionaryListDetail: '获取字典键值列表',
 };

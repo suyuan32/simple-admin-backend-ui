@@ -6,4 +6,7 @@ export default {
   userManagementTitle: 'User',
   fileManagementTitle: 'File',
   userProfileTitle: 'Profile',
+  dictionaryManagementTitle: 'Dictionary',
+  dictionaryDetailManagementTitle: 'Key/Value Management',
+  otherPages: 'Other pages',
 };

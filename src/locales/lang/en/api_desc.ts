@@ -48,4 +48,12 @@ export default {
   uploadFile: 'Upload',
   fileList: 'File List',
   deleteFile: 'Delete File',
+
+  // dictionary
+  createOrUpdateDictionary: 'Create or update dictionary information',
+  deleteDictionary: 'Delete dictionary information',
+  getDictionaryList: 'Get dictionary list',
+  createOrUpdateDictionaryDetail: 'Create or update dictionary KV information',
+  deleteDictionaryDetail: 'Delete dictionary KV information',
+  getDictionaryListDetail: 'Get dictionary detail list by dictionary name',
 };

@@ -229,4 +229,15 @@ export default {
     morning: 'Good morning',
     niceDay: 'have a nice day!',
   },
+  dictionary: {
+    // noun
+    name: 'Dictionary Name',
+    dictionaryList: 'Dictionary List',
+    dictionaryDetailList: 'Key/Value List',
+    // action
+    addDictionary: 'Add Dictionary',
+    addDictionaryDetail: 'Add Key/Value',
+    editDictionary: 'Edit Dictionary',
+    editDictionaryDetail: 'Edit Key/Value',
+  },
 };
