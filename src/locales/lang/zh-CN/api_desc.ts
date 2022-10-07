@@ -56,4 +56,10 @@ export default {
   createOrUpdateDictionaryDetail: '创建或更新字典键值信息',
   deleteDictionaryDetail: '删除字典键值信息',
   getDictionaryListDetail: '获取字典键值列表',
+
+  // oauth
+  createOrUpdateProvider: '创建或更新登录提供商',
+  deleteProvider: '删除登录提供商',
+  geProviderList: '获取提供商列表',
+  oauthLogin: '第三方登录',
 };

@@ -8,5 +8,6 @@ export default {
   userProfileTitle: '用户个人信息',
   dictionaryManagementTitle: '字典管理',
   dictionaryDetailManagementTitle: '键值管理',
+  oauthManagement: 'Oauth管理',
   otherPages: '其他页面',
 };

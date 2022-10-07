@@ -234,4 +234,21 @@ export default {
     editDictionary: '编辑字典',
     editDictionaryDetail: '编辑键值',
   },
+  oauth: {
+    // noun
+    providerList: '第三方列表',
+    clientID: '客户端ID',
+    clientSecret: '客户端密码',
+    redirectURL: '重定向地址',
+    scope: '权限范围',
+    authURL: '鉴权地址',
+    tokenURL: '获取Token的地址',
+    authStyle: '鉴权方式',
+    infoURL: '获取个人信息地址',
+    autoDetect: '自动检测',
+    params: '参数模式',
+    header: 'header模式',
+    // action
+    addProvider: '添加第三方',
+  },
 };

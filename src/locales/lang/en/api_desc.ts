@@ -56,4 +56,10 @@ export default {
   createOrUpdateDictionaryDetail: 'Create or update dictionary KV information',
   deleteDictionaryDetail: 'Delete dictionary KV information',
   getDictionaryListDetail: 'Get dictionary detail list by dictionary name',
+
+  // oauth
+  createOrUpdateProvider: 'Create or update provider information',
+  deleteProvider: 'Delete provider information',
+  geProviderList: 'Get provider list',
+  oauthLogin: 'Third-party log in',
 };

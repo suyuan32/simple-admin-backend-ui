@@ -2,9 +2,7 @@
   <div>
     <BasicTable @register="registerTable">
       <template #toolbar>
-        <a-button type="primary" @click="handleCreate">
-          {{ t('sys.dictionary.addDictionary') }}
-        </a-button>
+        <a-button type="primary" @click="handleCreate"> {{ t('sys.oauth.addProvider') }} </a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -28,35 +26,34 @@
         </template>
       </template>
     </BasicTable>
-    <DictionaryDrawer @register="registerDrawer" @success="handleSuccess" />
+    <OauthDrawer @register="registerDrawer" @success="handleSuccess" />
   </div>
 </template>
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
-  import { useDrawer } from '/@/components/Drawer';
-  import DictionaryDrawer from './dictionaryDrawer.vue';
-  import { useI18n } from 'vue-i18n';
 
-  import { columns, searchFormSchema } from './dictionary.data';
-  import { getDictionaryList, deleteDictionary } from '/@/api/sys/dictionary';
-  import { message } from 'ant-design-vue';
+  import { BasicTable, useTable, TableAction } from '/@/components/Table';
+
+  import { useDrawer } from '/@/components/Drawer';
+  import OauthDrawer from './OauthDrawer.vue';
+  import { useI18n } from 'vue-i18n';
+  import { useMessage } from '/@/hooks/web/useMessage';
+
+  import { columns } from './oauth.data';
+  import { getProviderList, deleteProvider } from '/@/api/sys/oauth';
 
   export default defineComponent({
-    name: 'DictionaryManagement',
-    components: { BasicTable, DictionaryDrawer, TableAction },
+    name: 'OauthManagement',
+    components: { BasicTable, OauthDrawer, TableAction },
     setup() {
       const { t } = useI18n();
       const [registerDrawer, { openDrawer }] = useDrawer();
+      const { notification } = useMessage();
       const [registerTable, { reload }] = useTable({
-        title: t('sys.dictionary.dictionaryList'),
-        api: getDictionaryList,
+        title: t('sys.oauth.providerList'),
+        api: getProviderList,
         columns,
-        formConfig: {
-          labelWidth: 120,
-          schemas: searchFormSchema,
-        },
-        useSearchForm: true,
+        useSearchForm: false,
         showTableSetting: true,
         bordered: true,
         showIndexColumn: false,
@@ -82,8 +79,12 @@
       }
 
       async function handleDelete(record: Recordable) {
-        const result = await deleteDictionary({ id: record.id }, 'modal');
-        message.success(t(result.msg), 2);
+        const result = await deleteProvider({ id: record.id }, 'modal');
+        notification.success({
+          message: t('common.successful'),
+          description: t(result.msg),
+          duration: 3,
+        });
         reload();
       }
 

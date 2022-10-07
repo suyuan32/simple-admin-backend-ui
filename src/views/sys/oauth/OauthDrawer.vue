@@ -13,16 +13,16 @@
 <script lang="ts">
   import { defineComponent, ref, computed, unref } from 'vue';
   import { BasicForm, useForm } from '/@/components/Form/index';
-  import { formSchema } from './api.data';
+  import { formSchema } from './oauth.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
 
-  import { ApiInfo } from '/@/api/sys/model/apiModel';
-  import { createOrUpdateApi } from '/@/api/sys/api';
+  import { ProviderInfo } from '/@/api/sys/model/oauthModel';
+  import { createOrUpdateProvider } from '/@/api/sys/oauth';
   import { message } from 'ant-design-vue';
 
   export default defineComponent({
-    name: 'ApiDrawer',
+    name: 'OauthDrawer',
     components: { BasicDrawer, BasicForm },
     emits: ['success', 'register'],
     setup(_, { emit }) {
@@ -57,22 +57,27 @@
         try {
           const values = await validate();
           setDrawerProps({ confirmLoading: true });
-          // defined api id
-          let apiId: number;
+          // defined provider id
+          let providerId: number;
           if (unref(isUpdate)) {
-            apiId = Number(values['id']);
+            providerId = Number(values['id']);
           } else {
-            apiId = 0;
+            providerId = 0;
           }
-          let params: ApiInfo = {
-            id: apiId,
-            path: values['path'],
-            description: values['description'],
-            group: values['group'],
-            method: values['method'],
+          let params: ProviderInfo = {
+            id: providerId,
+            name: values['name'],
+            clientID: values['clientID'],
+            clientSecret: values['clientSecret'],
+            redirectURL: values['redirectURL'],
+            scopes: values['scopes'],
+            authURL: values['authURL'],
+            tokenURL: values['tokenURL'],
+            infoURL: values['infoURL'],
+            authStyle: values['authStyle'],
             createAt: 0, // do not need to set
           };
-          let result = await createOrUpdateApi(params);
+          let result = await createOrUpdateProvider(params, 'message');
           message.success(t(result.msg), 2);
           closeDrawer();
           emit('success');
