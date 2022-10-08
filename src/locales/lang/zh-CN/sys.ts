@@ -251,5 +251,7 @@ export default {
     callback: '回调接口',
     // action
     addProvider: '添加第三方',
+    // notification
+    createAccount: '请创建一个该邮箱的账号或绑定该邮箱到一个账号',
   },
 };

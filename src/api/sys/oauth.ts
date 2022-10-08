@@ -64,9 +64,12 @@ export const oauthLogin = (params: OauthLoginReq, mode: ErrorMessageMode = 'moda
  */
 export const oauthLoginCallback = (URL: string, mode: ErrorMessageMode = 'modal') => {
   return defHttp.get<LoginResp>(
-    { url: Api.OauthLoginCallback + URL },
+    {
+      url: Api.OauthLoginCallback + URL,
+    },
     {
       errorMessageMode: mode,
+      retryRequest: { isOpenRetry: false, count: 1, waitTime: 1000 },
     },
   );
 };
