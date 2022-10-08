@@ -33,3 +33,11 @@ export interface OauthLoginReq {
   state: string;
   provider: string;
 }
+
+/**
+ *  author: Ryan Su
+ *  @description: redirect response
+ */
+export interface RedirectResp {
+  URL: string;
+}

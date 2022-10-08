@@ -248,6 +248,7 @@ export default {
     autoDetect: '自动检测',
     params: '参数模式',
     header: 'header模式',
+    callback: '回调接口',
     // action
     addProvider: '添加第三方',
   },

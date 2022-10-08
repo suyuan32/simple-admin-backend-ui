@@ -23,7 +23,7 @@ export const roleOptionData = (roleInfoInStore: RoleInfo[], type: number): compO
   }
   for (let i = 0; i < roleInfoInStore.length; i++) {
     result.push({
-      label: roleInfoInStore[i].name,
+      label: t(roleInfoInStore[i].name),
       value: roleInfoInStore[i].id,
     });
   }

@@ -1,12 +1,12 @@
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode } from '/#/axios';
 import { BaseIdReq, BasePageReq, BaseResp } from '/@/api/model/baseModel';
-import { OauthLoginReq, ProviderInfo, ProviderListResp } from './model/oauthModel';
+import { OauthLoginReq, ProviderInfo, ProviderListResp, RedirectResp } from './model/oauthModel';
 import { LoginResp } from './model/userModel';
 
 enum Api {
   OauthLogin = '/sys-api/oauth/login',
-  OauthLoginCallback = '/sys-api//oauth/login/callback',
+  OauthLoginCallback = '/sys-api/oauth/login/callback',
   GetProviderList = '/sys-api/oauth/provider/list',
   CreateOrUpdateOrDeleteProvider = '/sys-api/oauth/provider',
 }
@@ -50,7 +50,7 @@ export const deleteProvider = (params: BaseIdReq, mode: ErrorMessageMode = 'moda
  *  @description: oauth log in
  */
 export const oauthLogin = (params: OauthLoginReq, mode: ErrorMessageMode = 'modal') => {
-  return defHttp.post<BaseResp>(
+  return defHttp.post<RedirectResp>(
     { url: Api.OauthLogin, params: params },
     {
       errorMessageMode: mode,
@@ -64,7 +64,7 @@ export const oauthLogin = (params: OauthLoginReq, mode: ErrorMessageMode = 'moda
  */
 export const oauthLoginCallback = (URL: string, mode: ErrorMessageMode = 'modal') => {
   return defHttp.get<LoginResp>(
-    { url: URL },
+    { url: Api.OauthLoginCallback + URL },
     {
       errorMessageMode: mode,
     },

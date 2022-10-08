@@ -86,7 +86,7 @@
       <GithubFilled />
       <WechatFilled />
       <AlipayCircleFilled />
-      <GoogleCircleFilled />
+      <GoogleCircleFilled @click="oauthLoginHandler('google')" />
       <TwitterCircleFilled />
     </div>
   </Form>
@@ -113,6 +113,7 @@
   import { getCaptcha } from '/@/api/sys/user';
   import { useGo } from '/@/hooks/web/usePage';
   import { PageEnum } from '/@/enums/pageEnum';
+  import { oauthLogin } from '/@/api/sys/oauth';
 
   const ACol = Col;
   const ARow = Row;
@@ -178,6 +179,14 @@
   }
 
   getCaptchaData();
+
+  async function oauthLoginHandler(provider: string) {
+    const result = await oauthLogin({
+      state: new Date().getMilliseconds() + '-' + provider,
+      provider: provider,
+    });
+    window.open(result.URL);
+  }
 </script>
 
 <style scoped>
