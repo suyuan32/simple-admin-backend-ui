@@ -240,4 +240,24 @@ export default {
     editDictionary: 'Edit Dictionary',
     editDictionaryDetail: 'Edit Key/Value',
   },
+  oauth: {
+    // noun
+    providerList: 'Provider List',
+    clientID: 'Client ID',
+    clientSecret: 'Client Secret',
+    redirectURL: 'Redirect URL',
+    scope: 'Scope',
+    authURL: 'Authorization URL',
+    tokenURL: 'Token URL',
+    authStyle: 'Authorization Style',
+    infoURL: 'User Info Path',
+    autoDetect: 'Auto detect',
+    params: 'Parameters Mode',
+    header: 'Header Mode',
+    callback: 'Callback interface',
+    // action
+    addProvider: 'Add Provider',
+    // notification
+    createAccount: 'Please register an account with this email or bind the email to an account',
+  },
 };
