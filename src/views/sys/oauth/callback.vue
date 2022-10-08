@@ -2,10 +2,12 @@
   <div></div>
 </template>
 <script lang="ts">
+  import { message } from 'ant-design-vue';
   import { defineComponent, ref } from 'vue';
   import { useRouter } from 'vue-router';
   import { oauthLoginCallback } from '/@/api/sys/oauth';
   import { PageEnum } from '/@/enums/pageEnum';
+  import { useI18n } from '/@/hooks/web/useI18n';
   import { useGo } from '/@/hooks/web/usePage';
   import { useUserStore } from '/@/store/modules/user';
 
@@ -15,6 +17,7 @@
     setup() {
       const { currentRoute } = useRouter();
       const go = useGo();
+      const { t } = useI18n();
       const query = ref<string>('');
       query.value += '?state=' + currentRoute.value.query.state;
       query.value += '&code=' + currentRoute.value.query.code;
@@ -29,6 +32,7 @@
           userStore.afterLoginAction(false);
           go(PageEnum.BASE_HOME);
         } catch (e) {
+          message.error(t('sys.oauth.createAccount'), 5);
           go(PageEnum.BASE_LOGIN);
         }
       }

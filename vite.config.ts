@@ -53,7 +53,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
       ],
     },
     server: {
-      https: false,
+      https: true,
       // Listening on all local IPs
       host: true,
       port: VITE_PORT,

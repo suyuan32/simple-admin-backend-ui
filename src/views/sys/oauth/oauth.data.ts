@@ -96,7 +96,6 @@ export const formSchema: FormSchema[] = [
     component: 'Select',
     componentProps: {
       options: [
-        { label: t('sys.oauth.autoDetect'), value: 0 },
         { label: t('sys.oauth.params'), value: 1 },
         { label: t('sys.oauth.header'), value: 2 },
       ],
