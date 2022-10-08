@@ -8,5 +8,6 @@ export default {
   userProfileTitle: 'Profile',
   dictionaryManagementTitle: 'Dictionary',
   dictionaryDetailManagementTitle: 'Key/Value Management',
+  oauthManagement: 'Oauth',
   otherPages: 'Other pages',
 };

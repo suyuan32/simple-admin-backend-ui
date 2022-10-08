@@ -1,3 +1,17 @@
+# 0.0.8 (2022/10/08)
+
+### Features
+
+- feat: log in with google account
+- wip: oauth support
+- wip: oauth management
+- docs: update changelog
+
+### Bug Fixes
+
+- fix: bugs when log in with github
+- fix: add English translations in oauth
+
 # 0.0.7 (2022/09/30)
 
 ### Features
