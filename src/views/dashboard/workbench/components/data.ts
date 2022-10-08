@@ -30,6 +30,18 @@ export const navItems: NavItem[] = [
     color: '#4daf1bc9',
     redirect: '/api',
   },
+  {
+    title: 'routes.system.dictionaryManagementTitle',
+    icon: 'ant-design:book-outlined',
+    color: '#cc00ff',
+    redirect: '/dictionary',
+  },
+  {
+    title: 'routes.system.oauthManagement',
+    icon: 'ant-design:unlock-filled',
+    color: '#0099ff',
+    redirect: '/oauth',
+  },
   // {
   //   title: 'routes.system.fileManagementTitle',
   //   icon: 'akar-icons:folder',
