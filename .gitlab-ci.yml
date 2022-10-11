@@ -1,12 +1,11 @@
 variables:
-  VERSION: 0.0.15
+  VERSION: 0.0.19
   REPO: docker.io
 
 stages:
   - info
   - build
   - publish
-  - clean
 
 info-job:
   stage: info
@@ -31,10 +30,3 @@ deploy-job:
     - echo "Publish docker images..."
     - make publish-docker
     - echo "Docker images successfully published."
-
-clean-job:
-  stage: clean
-  script:
-    # 删除所有 none 镜像 | delete all none images
-    - docker images |grep none|awk '{print $3}'|xargs docker rmi
-    - echo "Delete all none images successfully."
