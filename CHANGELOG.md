@@ -1,3 +1,21 @@
+# 0.0.9 (2022/10/11)
+
+### Features
+
+- Update Makefile
+
+### Bug Fixes
+
+- fix: add nginx config
+- fix: add publish config
+
+# 0.0.8.1 (2022/10/08)
+
+### Bug Fixes
+
+- fix: oauth navigarion
+- fix: quick navigation
+
 # 0.0.8 (2022/10/08)
 
 ### Features
