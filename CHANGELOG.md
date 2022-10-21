@@ -1,3 +1,17 @@
+# 0.1.1 (2022/10/21)
+
+### Features
+
+- Update readme
+- feat: force log out
+- Update gitlab ci
+- Update default.conf
+- Update default.conf
+
+### Bug Fixes
+
+- fix: update change log
+
 # 0.0.9 (2022/10/11)
 
 ### Features
