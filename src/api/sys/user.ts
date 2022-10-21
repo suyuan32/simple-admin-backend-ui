@@ -18,7 +18,7 @@ import { BaseIdReq, BaseResp } from '../model/baseModel';
 enum Api {
   Login = '/sys-api/user/login',
   Register = '/sys-api/user/register',
-  Logout = '/sys-api/logout',
+  Logout = '/sys-api/user/logout',
   GetUserInfo = '/sys-api/user/info',
   GetPermCode = '/sys-api/user/perm',
   GetCaptcha = '/sys-api/captcha',

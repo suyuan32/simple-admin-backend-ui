@@ -206,6 +206,7 @@ export default {
     addUser: 'Add User',
     editUser: 'Edit User',
     changePassword: 'Change Password',
+    forceLoggingOut: 'Force logging out',
     // notification
     wrongPassword: 'Wrong Password',
   },
@@ -259,5 +260,9 @@ export default {
     addProvider: 'Add Provider',
     // notification
     createAccount: 'Please register an account with this email or bind the email to an account',
+  },
+  token: {
+    // noun
+    tokenList: 'Token List',
   },
 };

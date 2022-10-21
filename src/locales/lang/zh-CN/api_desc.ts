@@ -11,6 +11,7 @@ export default {
   updateProfile: '修改用户个人信息（必须）',
   createOrUpdateUser: '新增或修改用户',
   deleteUser: '删除用户',
+  logout: '退出登陆',
 
   // role
   createOrUpdateRole: '新建或更新角色信息',
@@ -62,4 +63,10 @@ export default {
   deleteProvider: '删除登录提供商',
   geProviderList: '获取提供商列表',
   oauthLogin: '第三方登录',
+
+  // token
+  createOrUpdateToken: '创建或更新Token',
+  deleteToken: '删除Token',
+  getTokenList: '获取Token列表',
+  setTokenStatus: '设置Token状态',
 };

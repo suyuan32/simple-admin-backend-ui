@@ -32,29 +32,24 @@ export const roleOptionData = (roleInfoInStore: RoleInfo[], type: number): compO
 
 export const columns: BasicColumn[] = [
   {
-    title: 'ID',
-    dataIndex: 'id',
-    width: 50,
-  },
-  {
     title: t('sys.login.username'),
     dataIndex: 'username',
-    width: 50,
+    width: 30,
   },
   {
     title: t('sys.user.nickname'),
     dataIndex: 'nickname',
-    width: 80,
+    width: 30,
   },
   {
     title: t('sys.login.email'),
     dataIndex: 'email',
-    width: 100,
+    width: 80,
   },
   {
     title: t('common.statusName'),
     dataIndex: 'status',
-    width: 50,
+    width: 20,
     customRender: ({ record }) => {
       if (!Reflect.has(record, 'pendingStatus')) {
         record.pendingStatus = false;
@@ -86,7 +81,7 @@ export const columns: BasicColumn[] = [
   {
     title: t('common.createTime'),
     dataIndex: 'createAt',
-    width: 70,
+    width: 50,
     customRender: ({ record }) => {
       return formatToDateTime(record.createAt);
     },

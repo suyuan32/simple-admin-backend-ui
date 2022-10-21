@@ -200,6 +200,7 @@ export default {
     addUser: '新增用户',
     editUser: '编辑用户',
     changePassword: '修改密码',
+    forceLoggingOut: '强制登出',
     // notification
     wrongPassword: '密码错误',
   },
@@ -253,5 +254,9 @@ export default {
     addProvider: '添加第三方',
     // notification
     createAccount: '请创建一个该邮箱的账号或绑定该邮箱到一个账号',
+  },
+  token: {
+    // noun
+    tokenList: 'Token列表',
   },
 };

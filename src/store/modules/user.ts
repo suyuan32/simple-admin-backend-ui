@@ -7,7 +7,7 @@ import { PageEnum } from '/@/enums/pageEnum';
 import { ROLES_KEY, TOKEN_KEY, USER_INFO_KEY } from '/@/enums/cacheEnum';
 import { getAuthCache, setAuthCache } from '/@/utils/auth';
 import { GetUserInfoModel, LoginReq } from '/@/api/sys/model/userModel';
-import { getUserInfo, login } from '/@/api/sys/user';
+import { doLogout, getUserInfo, login } from '/@/api/sys/user';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { router } from '/@/router';
@@ -143,7 +143,7 @@ export const useUserStore = defineStore({
       if (this.getToken) {
         try {
           // in the future the server may need to log out, and we can uncomment this
-          // await doLogout();
+          await doLogout();
           console.log('logout successful');
         } catch {
           console.log('注销Token失败');

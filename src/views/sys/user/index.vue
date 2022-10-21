@@ -13,6 +13,15 @@
                 onClick: handleEdit.bind(null, record),
               },
               {
+                icon: 'bx:log-out-circle',
+                color: 'error',
+                popConfirm: {
+                  title: t('sys.user.forceLoggingOut') + '?',
+                  placement: 'left',
+                  confirm: handleLogout.bind(null, record),
+                },
+              },
+              {
                 icon: 'ant-design:delete-outlined',
                 color: 'error',
                 popConfirm: {
@@ -42,6 +51,7 @@
   import { columns, searchFormSchema } from './user.data';
   import { getUserList, deleteUser } from '/@/api/sys/user';
   import { useRoleStore } from '/@/store/modules/role';
+  import { logout } from '/@/api/sys/token';
 
   export default defineComponent({
     name: 'UserManagement',
@@ -98,6 +108,16 @@
         reload();
       }
 
+      async function handleLogout(record: Recordable) {
+        const result = await logout(record.UUID);
+        notification.success({
+          message: t('common.successful'),
+          description: t(result.msg),
+          duration: 3,
+        });
+        reload();
+      }
+
       function handleSuccess() {
         reload();
       }
@@ -108,6 +128,7 @@
         registerDrawer,
         handleCreate,
         handleEdit,
+        handleLogout,
         handleDelete,
         handleSuccess,
       };

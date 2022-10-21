@@ -11,6 +11,7 @@ export default {
   updateProfile: 'Modify user profile (Required)',
   createOrUpdateUser: 'Create or update user (Required)',
   deleteUser: 'Delete user (Required)',
+  logout: 'Log out (Required)',
 
   // role
   createOrUpdateRole: 'Create or update role information',
@@ -62,4 +63,10 @@ export default {
   deleteProvider: 'Delete provider information',
   geProviderList: 'Get provider list',
   oauthLogin: 'Third-party log in',
+
+  // token
+  createOrUpdateToken: 'Create or update token',
+  deleteToken: 'Delete token',
+  getTokenList: 'Get token list',
+  setTokenStatus: 'Set token status',
 };

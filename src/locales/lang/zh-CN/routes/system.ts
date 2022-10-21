@@ -9,5 +9,6 @@ export default {
   dictionaryManagementTitle: '字典管理',
   dictionaryDetailManagementTitle: '键值管理',
   oauthManagement: 'Oauth管理',
+  tokenManagement: 'Token管理',
   otherPages: '其他页面',
 };

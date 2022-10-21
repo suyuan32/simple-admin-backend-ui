@@ -43,6 +43,8 @@ export default {
   endDate: 'End',
   key: 'Key',
   value: 'Value',
+  source: 'Source',
+  expireAt: 'Expired Time',
   // action
   start: 'Start',
   stop: 'Stop',

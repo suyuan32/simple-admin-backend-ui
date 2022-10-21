@@ -9,5 +9,6 @@ export default {
   dictionaryManagementTitle: 'Dictionary',
   dictionaryDetailManagementTitle: 'Key/Value Management',
   oauthManagement: 'Oauth',
+  tokenManagement: 'Token',
   otherPages: 'Other pages',
 };
