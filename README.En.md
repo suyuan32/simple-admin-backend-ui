@@ -22,14 +22,25 @@ Simple Admin UI is a modern UI for Simple Admin. It is based on vue-vben-admin a
 ## Current Progress
 
 
-| Module             | Status      |
-|--------------------|-------------|
-| Login and Register | finished    |
-| Menu Management    | finished    |
-| Role Management    | finished    |
-| Role Authority     | finished    |
-| User Management    | finised    |
-| Operation log   | in progress     |
+
+| Module                | Status   |
+|-----------------------|----------|
+| Login and Register    | Finished |
+| Menu Management       | Finished |
+| Role Management       | Finished |
+| Role Authority        | Finished |
+| User Management       | Finished |
+| Operation log         | Finished |
+| Service discovery     | Finished |
+| Configuration center  | Finished |
+| Dictionary management | Finished |    
+| Oauth management      | Finished |
+| Fully support K8s     | Finished | 
+| Service Monitor       | Finished |
+| Log collecting        | Finished | 
+| JWT blacklist | Finished |
+| Job Schedule | In progress | 
+
 
 ## Preview
 

@@ -11,7 +11,7 @@ export default {
   updateProfile: '修改用户个人信息（必须）',
   createOrUpdateUser: '新增或修改用户',
   deleteUser: '删除用户',
-  logout: '退出登陆',
+  logout: '退出登陆（必须）',
 
   // role
   createOrUpdateRole: '新建或更新角色信息',
