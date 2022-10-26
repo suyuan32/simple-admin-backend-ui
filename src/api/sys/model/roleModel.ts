@@ -6,7 +6,7 @@ import { BaseListResp } from '../../model/baseModel';
  */
 export interface RoleInfo {
   id: number;
-  createAt?: number;
+  createdAt?: number;
   name: string;
   value: string;
   defaultRouter: string;

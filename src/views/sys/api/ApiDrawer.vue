@@ -70,7 +70,7 @@
             description: values['description'],
             group: values['group'],
             method: values['method'],
-            createAt: 0, // do not need to set
+            createdAt: 0, // do not need to set
           };
           let result = await createOrUpdateApi(params);
           message.success(t(result.msg), 2);

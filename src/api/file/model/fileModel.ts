@@ -6,7 +6,7 @@ import { BaseListResp } from '../../model/baseModel';
  */
 export interface fileInfo {
   id: number;
-  createAt?: number;
+  createdAt?: number;
   name: string;
   fileType: string;
   size: number;

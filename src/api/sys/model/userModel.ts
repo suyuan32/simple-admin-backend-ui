@@ -75,7 +75,7 @@ export interface UserInfo {
   avatar: string;
   status: number;
   password?: string;
-  createAt?: number;
+  createdAt?: number;
   updateAt?: number;
 }
 

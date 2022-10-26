@@ -6,7 +6,7 @@ import { BaseListResp } from '../../model/baseModel';
  */
 export interface ProviderInfo {
   id: number;
-  createAt?: number;
+  createdAt?: number;
   name: string;
   clientID: string;
   clientSecret: string;

@@ -6,7 +6,7 @@ import { BaseListResp } from '../../model/baseModel';
  */
 export interface TokenInfo {
   id: number;
-  createAt?: number;
+  createdAt?: number;
   UUID: string;
   token: string;
   source: string;

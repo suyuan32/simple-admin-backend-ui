@@ -6,7 +6,7 @@ import { BaseListResp } from '../../model/baseModel';
  */
 export interface ApiInfo {
   id: number;
-  createAt?: number;
+  createdAt?: number;
   path: string;
   description: string;
   group: string;

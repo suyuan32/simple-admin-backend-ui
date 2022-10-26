@@ -117,7 +117,7 @@ export interface CreateOrUpdateMenuParamReq {
  *  @description: Menu extra parameter information
  */
 export interface MenuParamInfo extends CreateOrUpdateMenuParamReq {
-  createAt: number;
+  createdAt: number;
   updateAt: number;
 }
 

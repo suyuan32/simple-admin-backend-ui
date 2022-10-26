@@ -66,10 +66,10 @@ export const columns: BasicColumn[] = [
   },
   {
     title: t('common.createTime'),
-    dataIndex: 'createAt',
+    dataIndex: 'createdAt',
     width: 180,
     customRender: ({ record }) => {
-      return formatToDateTime(record.createAt);
+      return formatToDateTime(record.createdAt);
     },
   },
   {

@@ -75,7 +75,7 @@
             tokenURL: values['tokenURL'],
             infoURL: values['infoURL'],
             authStyle: values['authStyle'],
-            createAt: 0, // do not need to set
+            createdAt: 0, // do not need to set
           };
           let result = await createOrUpdateProvider(params, 'message');
           message.success(t(result.msg), 2);

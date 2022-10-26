@@ -97,7 +97,7 @@
             roleId: values['roleId'],
             avatar: values['avatar'],
             password: password,
-            createAt: 0, // do not need to set
+            createdAt: 0, // do not need to set
             updateAt: 0, // do not need to set
           };
           await createOrUpdateUser(params, 'message');

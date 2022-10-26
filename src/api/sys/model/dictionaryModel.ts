@@ -6,7 +6,7 @@ import { BaseListResp } from '../../model/baseModel';
  */
 export interface DictionaryInfo {
   id: number;
-  createAt?: number;
+  createdAt?: number;
   name: string;
   title: string;
   description: string;
@@ -26,7 +26,7 @@ export type DictionaryListResp = BaseListResp<DictionaryInfo>;
  */
 export interface DictionaryDetailInfo {
   id: number;
-  createAt?: number;
+  createdAt?: number;
   title: string;
   key: string;
   value: string;
