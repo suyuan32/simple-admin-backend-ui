@@ -76,7 +76,7 @@ export interface UserInfo {
   status: number;
   password?: string;
   createdAt?: number;
-  updateAt?: number;
+  updatedAt?: number;
 }
 
 export interface UserListResp {

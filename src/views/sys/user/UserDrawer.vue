@@ -98,7 +98,7 @@
             avatar: values['avatar'],
             password: password,
             createdAt: 0, // do not need to set
-            updateAt: 0, // do not need to set
+            updatedAt: 0, // do not need to set
           };
           await createOrUpdateUser(params, 'message');
           createMessage.success(t('common.successful'));
