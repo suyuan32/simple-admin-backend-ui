@@ -43,7 +43,6 @@ export const searchFormSchema: FormSchema[] = [
   {
     field: 'path',
     label: t('sys.apis.path'),
-    defaultValue: '',
     component: 'Input',
     colProps: { span: 8 },
     rules: [{ max: 100 }],
@@ -51,7 +50,6 @@ export const searchFormSchema: FormSchema[] = [
   {
     field: 'group',
     label: t('sys.apis.group'),
-    defaultValue: '',
     component: 'Input',
     colProps: { span: 8 },
     rules: [{ max: 10 }],
@@ -59,7 +57,6 @@ export const searchFormSchema: FormSchema[] = [
   {
     field: 'description',
     label: t('sys.apis.description'),
-    defaultValue: '',
     component: 'Input',
     colProps: { span: 8 },
     rules: [{ max: 50 }],
@@ -67,7 +64,6 @@ export const searchFormSchema: FormSchema[] = [
   {
     field: 'method',
     label: t('sys.apis.method'),
-    defaultValue: '',
     component: 'Input',
     colProps: { span: 8 },
   },

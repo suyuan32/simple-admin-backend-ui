@@ -92,7 +92,6 @@ export const searchFormSchema: FormSchema[] = [
   {
     field: 'username',
     label: t('sys.login.username'),
-    defaultValue: '',
     component: 'Input',
     colProps: { span: 8 },
     rules: [{ max: 30 }],
@@ -100,7 +99,6 @@ export const searchFormSchema: FormSchema[] = [
   {
     field: 'nickname',
     label: t('sys.user.nickname'),
-    defaultValue: '',
     component: 'Input',
     colProps: { span: 8 },
     rules: [{ max: 10 }],
@@ -109,7 +107,6 @@ export const searchFormSchema: FormSchema[] = [
     field: 'roleId',
     label: t('sys.role.roleTitle'),
     component: 'Select',
-    defaultValue: 0,
     colProps: { span: 8 },
     componentProps: {
       // search form does not support updateSchema function yet
@@ -125,7 +122,6 @@ export const searchFormSchema: FormSchema[] = [
   {
     field: 'mobile',
     label: t('sys.login.mobile'),
-    defaultValue: '',
     component: 'Input',
     colProps: { span: 8 },
     rules: [{ max: 18 }],
@@ -133,7 +129,6 @@ export const searchFormSchema: FormSchema[] = [
   {
     field: 'email',
     label: t('sys.login.email'),
-    defaultValue: '',
     component: 'Input',
     colProps: { span: 8 },
     rules: [{ type: 'email' }],

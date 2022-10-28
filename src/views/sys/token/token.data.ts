@@ -66,11 +66,11 @@ export const columns: BasicColumn[] = [
     },
   },
   {
-    title: t('common.expireAt'),
-    dataIndex: 'expireAt',
+    title: t('common.expiredAt'),
+    dataIndex: 'expiredAt',
     width: 70,
     customRender: ({ record }) => {
-      return formatToDateTime(record.expireAt);
+      return formatToDateTime(record.expiredAt);
     },
   },
 ];
@@ -79,7 +79,6 @@ export const searchFormSchema: FormSchema[] = [
   {
     field: 'UUID',
     label: 'UUID',
-    defaultValue: '',
     component: 'Input',
     colProps: { span: 8 },
     rules: [{ max: 30 }],
@@ -87,7 +86,6 @@ export const searchFormSchema: FormSchema[] = [
   {
     field: 'username',
     label: t('sys.login.username'),
-    defaultValue: '',
     component: 'Input',
     colProps: { span: 8 },
     rules: [{ max: 30 }],
@@ -95,7 +93,6 @@ export const searchFormSchema: FormSchema[] = [
   {
     field: 'email',
     label: t('sys.login.email'),
-    defaultValue: '',
     component: 'Input',
     colProps: { span: 8 },
     rules: [{ max: 50 }],
@@ -103,7 +100,6 @@ export const searchFormSchema: FormSchema[] = [
   {
     field: 'nickname',
     label: t('sys.user.nickname'),
-    defaultValue: '',
     component: 'Input',
     colProps: { span: 8 },
     rules: [{ max: 20 }],

@@ -44,7 +44,7 @@ export default {
   key: 'Key',
   value: 'Value',
   source: 'Source',
-  expireAt: 'Expired Time',
+  expiredAt: 'Expired Time',
   // action
   start: 'Start',
   stop: 'Stop',

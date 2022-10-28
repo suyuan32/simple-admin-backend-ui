@@ -11,7 +11,7 @@ export interface TokenInfo {
   token: string;
   source: string;
   status: string;
-  expireAt: number;
+  expiredAt: number;
 }
 
 /**

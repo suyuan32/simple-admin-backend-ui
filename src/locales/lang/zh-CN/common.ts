@@ -44,7 +44,7 @@ export default {
   key: '键',
   value: '值',
   source: '来源',
-  expireAt: '过期时间',
+  expiredAt: '过期时间',
   // action
   start: '开始',
   stop: '停止',
