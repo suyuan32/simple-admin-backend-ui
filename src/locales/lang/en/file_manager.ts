@@ -13,6 +13,6 @@ export default {
   download: 'Download',
   // notification
   overSizeError: 'The file is over size',
-  wrongTypeError: 'The file is a illegal type',
+  wrongTypeError: 'The file type is illegal',
   preprocessing: 'File is preprocessing ...',
 };

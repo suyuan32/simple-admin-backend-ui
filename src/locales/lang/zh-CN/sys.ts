@@ -209,7 +209,7 @@ export default {
     initTitle: '数据库初始化',
     initProgressTitle: '处理进度',
     initCoreDatabase: '核心数据库初始化',
-    initFileDatabase: '文件管理数据库初始化',
+    initFileDatabase: '文件管理数据库初始化（可选）',
 
     // notification
     initializeIsRunning: '正在初始化...',

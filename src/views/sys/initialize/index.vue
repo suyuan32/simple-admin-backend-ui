@@ -7,6 +7,7 @@
       </a-button>
     </ACard>
     <ACard :title="t('sys.init.initFileDatabase')" :bordered="false" style="width: 50%">
+      <p><a href="https://github.com/suyuan32/simple-admin-file">File Manager Github</a></p>
       <a-button type="primary" :loading="fileInitButtonLoading" @click="initFileDatabase">
         {{ t('common.start') }}
       </a-button>

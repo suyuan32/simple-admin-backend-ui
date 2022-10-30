@@ -215,7 +215,7 @@ export default {
     initTitle: 'Initialize database',
     initProgressTitle: 'Progress',
     initCoreDatabase: 'Initialize core database',
-    initFileDatabase: 'Initialize file manager database',
+    initFileDatabase: 'Initialize file manager database (optional)',
 
     // notification
     alreadyInit: 'The database had been initialized.',

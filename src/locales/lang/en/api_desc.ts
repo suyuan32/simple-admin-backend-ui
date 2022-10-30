@@ -49,6 +49,9 @@ export default {
   uploadFile: 'Upload',
   fileList: 'File List',
   deleteFile: 'Delete File',
+  updateFileInfo: 'Update file information',
+  setPublicStatus: 'Change file public status',
+  downloadFile: 'Download file',
 
   // dictionary
   createOrUpdateDictionary: 'Create or update dictionary information',

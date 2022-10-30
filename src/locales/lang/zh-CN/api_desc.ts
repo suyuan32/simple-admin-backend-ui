@@ -49,6 +49,9 @@ export default {
   uploadFile: '上传文件',
   fileList: '文件列表',
   deleteFile: '删除文件',
+  updateFileInfo: '更新文件信息',
+  setPublicStatus: '改变文件公开状态',
+  downloadFile: '下载文件',
 
   // dictionary
   createOrUpdateDictionary: '创建或更新字典信息',
