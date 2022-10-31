@@ -48,7 +48,7 @@
       <template #footer>
         <a-button key="back" @click="handleCloseVideo"> {{ t('common.closeText') }} </a-button>
         <a-button key="download" type="primary" @click="handleDownloadVideo">{{
-          t('file_manager.download')
+          t('fileManager.download')
         }}</a-button>
       </template>
       <video width="1280" height="720" controls>
@@ -65,7 +65,7 @@
       <template #footer>
         <a-button key="back" @click="handleCloseImage"> {{ t('common.closeText') }} </a-button>
         <a-button key="download" type="primary" @click="handleDownloadImage">{{
-          t('file_manager.download')
+          t('fileManager.download')
         }}</a-button>
       </template>
       <Image
@@ -103,7 +103,7 @@
       const [registerDrawer, { openDrawer }] = useDrawer();
       const { notification } = useMessage();
       const [registerTable, { reload }] = useTable({
-        title: t('api_desc.fileList'),
+        title: t('apiDesc.fileList'),
         api: getFileList,
         columns,
         formConfig: {

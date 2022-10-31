@@ -11,23 +11,23 @@ const { t } = useI18n();
 
 export const columns: BasicColumn[] = [
   {
-    title: t('file_manager.fileName'),
+    title: t('fileManager.fileName'),
     dataIndex: 'name',
     width: 100,
   },
   {
-    title: t('file_manager.fileType'),
+    title: t('fileManager.fileType'),
     dataIndex: 'fileType',
     width: 30,
     customRender: ({ record }) => {
       if (record.fileType === 'video') {
-        return t('file_manager.video');
+        return t('fileManager.video');
       } else if (record.fileType === 'audio') {
-        return t('file_manager.audio');
+        return t('fileManager.audio');
       } else if (record.fileType === 'image') {
-        return t('file_manager.image');
+        return t('fileManager.image');
       } else {
-        return t('file_manager.other');
+        return t('fileManager.other');
       }
     },
   },
@@ -41,8 +41,8 @@ export const columns: BasicColumn[] = [
       }
       return h(Switch, {
         checked: record.status === true,
-        checkedChildren: t('file_manager.public'),
-        unCheckedChildren: t('file_manager.private'),
+        checkedChildren: t('fileManager.public'),
+        unCheckedChildren: t('fileManager.private'),
         loading: record.pendingStatus,
         onChange(checked: boolean) {
           record.pendingStatus = true;
@@ -64,12 +64,12 @@ export const columns: BasicColumn[] = [
     },
   },
   {
-    title: t('file_manager.filePath'),
+    title: t('fileManager.filePath'),
     dataIndex: 'path',
     width: 200,
   },
   {
-    title: t('file_manager.fileSize'),
+    title: t('fileManager.fileSize'),
     dataIndex: 'size',
     width: 50,
     customRender: ({ record }) => {
@@ -102,7 +102,7 @@ export const searchFormSchema: FormSchema[] = [
   },
   {
     field: 'fileName',
-    label: t('file_manager.fileName'),
+    label: t('fileManager.fileName'),
     defaultValue: '',
     component: 'Input',
     colProps: { span: 8 },
@@ -125,7 +125,7 @@ export const formSchema: FormSchema[] = [
   },
   {
     field: 'name',
-    label: t('file_manager.fileName'),
+    label: t('fileManager.fileName'),
     required: true,
     component: 'Input',
   },

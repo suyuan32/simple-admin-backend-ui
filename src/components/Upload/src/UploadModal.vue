@@ -143,7 +143,7 @@
         };
 
         // 计算md5
-        message.loading(t('file_manager.preprocessing'));
+        message.loading(t('fileManager.preprocessing'));
         file2md5(file, { chunkSize: 3 * 1024 * 1024 })
           .then((data) => {
             message.success(t('common.successful'));
