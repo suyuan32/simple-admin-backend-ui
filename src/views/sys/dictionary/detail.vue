@@ -41,7 +41,7 @@
   import { useI18n } from 'vue-i18n';
   import { useMessage } from '/@/hooks/web/useMessage';
 
-  import { columns } from './dictionary.data';
+  import { detailColumns } from './dictionary.data';
   import { deleteDictionary, getDictionaryDetailList } from '/@/api/sys/dictionary';
 
   export default defineComponent({
@@ -56,7 +56,7 @@
       const [registerTable, { reload }] = useTable({
         title: t('sys.dictionary.dictionaryDetailList'),
         api: getDictionaryDetailList,
-        columns,
+        columns: detailColumns,
         formConfig: {
           labelWidth: 120,
           schemas: [

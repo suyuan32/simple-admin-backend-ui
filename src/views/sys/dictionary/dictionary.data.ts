@@ -60,9 +60,6 @@ export const detailColumns: BasicColumn[] = [
     title: t('common.value'),
     dataIndex: 'value',
     width: 200,
-    customRender: ({ record }) => {
-      return t(record.description);
-    },
   },
   {
     title: t('common.statusName'),
