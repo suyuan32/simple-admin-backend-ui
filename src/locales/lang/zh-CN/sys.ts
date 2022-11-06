@@ -234,6 +234,8 @@ export default {
     addDictionaryDetail: '添加键值',
     editDictionary: '编辑字典',
     editDictionaryDetail: '编辑键值',
+    // notification
+    createDetailFailed: '创建字典键值失败, key已被使用',
   },
   oauth: {
     // noun

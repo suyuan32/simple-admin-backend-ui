@@ -240,6 +240,8 @@ export default {
     addDictionaryDetail: 'Add Key/Value',
     editDictionary: 'Edit Dictionary',
     editDictionaryDetail: 'Edit Key/Value',
+    // notification
+    createDetailFailed: 'Create Key/Value failed, key had been used',
   },
   oauth: {
     // noun
