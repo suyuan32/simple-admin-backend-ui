@@ -12,8 +12,8 @@ export const columns: BasicColumn[] = [
     width: 50,
   },
   {
-    title: t('sys.oauth.clientID'),
-    dataIndex: 'clientID',
+    title: t('sys.oauth.clientId'),
+    dataIndex: 'clientId',
     width: 50,
   },
   {
@@ -41,8 +41,8 @@ export const formSchema: FormSchema[] = [
     rules: [{ max: 50 }],
   },
   {
-    field: 'clientID',
-    label: t('sys.oauth.clientID'),
+    field: 'clientId',
+    label: t('sys.oauth.clientId'),
     required: true,
     component: 'Input',
     rules: [{ max: 100 }],

@@ -30,7 +30,7 @@ export interface DictionaryDetailInfo {
   title: string;
   key: string;
   value: string;
-  status: boolean;
+  status: number;
   parentId: number;
 }
 
