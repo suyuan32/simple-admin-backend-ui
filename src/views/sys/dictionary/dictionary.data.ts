@@ -134,11 +134,11 @@ export const formSchema: FormSchema[] = [
     label: t('common.statusName'),
     required: true,
     component: 'RadioButtonGroup',
-    defaultValue: true,
+    defaultValue: 1,
     componentProps: {
       options: [
-        { label: t('common.on'), value: true },
-        { label: t('common.off'), value: false },
+        { label: t('common.on'), value: 1 },
+        { label: t('common.off'), value: 0 },
       ],
     },
   },
@@ -176,11 +176,11 @@ export const detailSchema: FormSchema[] = [
     label: t('common.statusName'),
     required: true,
     component: 'RadioButtonGroup',
-    defaultValue: true,
+    defaultValue: 1,
     componentProps: {
       options: [
-        { label: t('common.on'), value: true },
-        { label: t('common.off'), value: false },
+        { label: t('common.on'), value: 1 },
+        { label: t('common.off'), value: 0 },
       ],
     },
   },

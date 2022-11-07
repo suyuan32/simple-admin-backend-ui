@@ -246,7 +246,7 @@ export default {
   oauth: {
     // noun
     providerList: 'Provider List',
-    clientID: 'Client ID',
+    clientId: 'Client ID',
     clientSecret: 'Client Secret',
     redirectURL: 'Redirect URL',
     scope: 'Scope',

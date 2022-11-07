@@ -8,7 +8,7 @@ export interface ProviderInfo {
   id: number;
   createdAt?: number;
   name: string;
-  clientID: string;
+  clientId: string;
   clientSecret: string;
   redirectURL: string;
   scopes: string;

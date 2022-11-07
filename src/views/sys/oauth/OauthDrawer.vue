@@ -67,7 +67,7 @@
           let params: ProviderInfo = {
             id: providerId,
             name: values['name'],
-            clientID: values['clientID'],
+            clientId: values['clientId'],
             clientSecret: values['clientSecret'],
             redirectURL: values['redirectURL'],
             scopes: values['scopes'],

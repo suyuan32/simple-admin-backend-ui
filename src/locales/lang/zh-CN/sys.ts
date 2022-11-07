@@ -240,7 +240,7 @@ export default {
   oauth: {
     // noun
     providerList: '第三方列表',
-    clientID: '客户端ID',
+    clientId: '客户端ID',
     clientSecret: '客户端密码',
     redirectURL: '重定向地址',
     scope: '权限范围',
