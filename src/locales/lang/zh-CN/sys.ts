@@ -77,17 +77,6 @@ export default {
     forgetPassword: '忘记密码?',
     otherSignIn: '其他登录方式',
 
-    // notify
-    loginSuccessTitle: '登录成功',
-    loginSuccessDesc: '欢迎回来',
-    signupSuccessTitle: '注册成功',
-    signupSuccessDesc: '欢迎您的加入',
-    signupUserExist: '用户名或者邮箱已被注册',
-    userNotExist: '用户不存在',
-    wrongCaptcha: '验证码错误',
-    wrongUsernameOrPassword: '用户名或密码错误',
-    requireLogin: '请重新登录',
-
     // placeholder
     accountPlaceholder: '请输入账号',
     passwordPlaceholder: '请输入密码',
@@ -146,11 +135,6 @@ export default {
     editMenu: '编辑菜单',
     addMenuParam: '新增参数',
     editMenuParam: '编辑参数',
-    // notification
-    deleteChildrenDesc: '请先删除子菜单',
-    menuNotExists: '菜单不存在',
-    menuAlreadyExists: '菜单已存在',
-    parentNotExist: '父级不存在',
   },
   role: {
     // noun
@@ -166,12 +150,6 @@ export default {
     // action
     addRole: '新增角色',
     editRole: '编辑角色',
-    // notification
-    changeStatusSuccess: '已成功修改角色状态',
-    changeStatusFailed: '修改角色状态失败',
-    duplicateRoleValue: '角色值重复',
-    userExists: '请先删除该角色下的用户',
-    roleForbidden: '您的角色已停用',
   },
   apis: {
     // noun
@@ -201,8 +179,6 @@ export default {
     editUser: '编辑用户',
     changePassword: '修改密码',
     forceLoggingOut: '强制登出',
-    // notification
-    wrongPassword: '密码错误',
   },
   init: {
     // noun
@@ -210,10 +186,6 @@ export default {
     initProgressTitle: '处理进度',
     initCoreDatabase: '核心数据库初始化',
     initFileDatabase: '文件管理数据库初始化（可选）',
-
-    // notification
-    initializeIsRunning: '正在初始化...',
-    alreadyInit: '数据库已被初始化。',
   },
   sys: {
     version: '系统版本',
@@ -234,8 +206,6 @@ export default {
     addDictionaryDetail: '添加键值',
     editDictionary: '编辑字典',
     editDictionaryDetail: '编辑键值',
-    // notification
-    createDetailFailed: '创建字典键值失败, key已被使用',
   },
   oauth: {
     // noun
@@ -254,8 +224,6 @@ export default {
     callback: '回调接口',
     // action
     addProvider: '添加第三方',
-    // notification
-    createAccount: '请创建一个该邮箱的账号或绑定该邮箱到一个账号',
   },
   token: {
     // noun

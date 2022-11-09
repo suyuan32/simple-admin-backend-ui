@@ -83,17 +83,6 @@ export default {
     forgetPassword: 'Forget Password?',
     otherSignIn: 'Sign in with',
 
-    // notify
-    loginSuccessTitle: 'Login successful',
-    loginSuccessDesc: 'Welcome back',
-    signupSuccessTitle: 'Sign up successful',
-    signupSuccessDesc: 'Welcome',
-    signupUserExist: 'Username or email address had been registered',
-    userNotExist: 'User is not registered',
-    wrongCaptcha: 'Wrong captcha',
-    wrongUsernameOrPassword: 'Wrong username or password',
-    requireLogin: 'Please log in again',
-
     // placeholder
     accountPlaceholder: 'Please input username',
     passwordPlaceholder: 'Please input password',
@@ -152,11 +141,6 @@ export default {
     editMenu: 'Eidt Menu',
     addMenuParam: 'Add Parameter',
     editMenuParam: 'Edit Parameter',
-    // notification
-    deleteChildrenDesc: "Please delete menu's children first",
-    menuNotExists: 'Menu does not exist',
-    menuAlreadyExists: 'Menu already exists',
-    parentNotExist: 'The parent does not exist',
   },
   role: {
     // noun
@@ -172,12 +156,6 @@ export default {
     // action
     addRole: 'Add Role',
     editRole: 'Edit Role',
-    // notification
-    changeStatusSuccess: 'Change role status successfully',
-    changeStatusFailed: 'Change role status failed',
-    duplicateRoleValue: 'Duplicate role value',
-    userExists: 'Please delete users who belong to this role',
-    roleForbidden: 'Your role is forbidden',
   },
   apis: {
     // noun
@@ -207,8 +185,6 @@ export default {
     editUser: 'Edit User',
     changePassword: 'Change Password',
     forceLoggingOut: 'Force logging out',
-    // notification
-    wrongPassword: 'Wrong Password',
   },
   init: {
     // noun
@@ -216,10 +192,6 @@ export default {
     initProgressTitle: 'Progress',
     initCoreDatabase: 'Initialize core database',
     initFileDatabase: 'Initialize file manager database (optional)',
-
-    // notification
-    alreadyInit: 'The database had been initialized.',
-    initializeIsRunning: 'The initialization is running...',
   },
   sys: {
     version: 'Version',
@@ -240,8 +212,6 @@ export default {
     addDictionaryDetail: 'Add Key/Value',
     editDictionary: 'Edit Dictionary',
     editDictionaryDetail: 'Edit Key/Value',
-    // notification
-    createDetailFailed: 'Create Key/Value failed, key had been used',
   },
   oauth: {
     // noun
@@ -260,8 +230,6 @@ export default {
     callback: 'Callback interface',
     // action
     addProvider: 'Add Provider',
-    // notification
-    createAccount: 'Please register an account with this email or bind the email to an account',
   },
   token: {
     // noun

@@ -12,7 +12,7 @@ export default {
   createOrUpdateUser: 'Create or update user (Required)',
   deleteUser: 'Delete user (Required)',
   logout: 'Log out (Required)',
-  updateUserStatus: 'Update UserStatus',
+  updateUserStatus: 'Update user status',
 
   // role
   createOrUpdateRole: 'Create or update role information',
