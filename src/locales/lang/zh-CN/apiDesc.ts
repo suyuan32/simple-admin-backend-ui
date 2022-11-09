@@ -12,6 +12,7 @@ export default {
   createOrUpdateUser: '新增或修改用户',
   deleteUser: '删除用户',
   logout: '退出登陆（必须）',
+  updateUserStatus: '更新用户状态',
 
   // role
   createOrUpdateRole: '新建或更新角色信息',

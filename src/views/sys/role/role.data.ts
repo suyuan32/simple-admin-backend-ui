@@ -169,27 +169,28 @@ export function convertApiTreeData(params: ApiInfo[]): DataNode[] {
   if (params.length === 0) {
     return apiData;
   }
-  let currentGroup: string = params[0].group;
-  for (let i = 0; i < params.length; ) {
+
+  const apiMap = new Map<string, boolean>();
+  for (let i = 0; i < params.length; i++) {
+    apiMap.set(params[i].group, true);
+  }
+
+  for (const k of apiMap.keys()) {
     const apiTmp: DataNode = {
-      title: currentGroup,
-      key: params[i].group,
+      title: k,
+      key: k,
       children: [],
     };
-    for (let j = i; j < params.length; j++) {
-      if (params[i].group === currentGroup) {
-        if (apiTmp.children !== undefined) {
-          apiTmp.children.push({
-            title: t(params[i].description),
-            key: params[i].id,
-          });
-          i++;
-        }
-      } else {
-        currentGroup = params[i].group;
-        break;
+
+    for (let i = 0; i < params.length; i++) {
+      if (params[i].group == k) {
+        apiTmp.children?.push({
+          title: t(params[i].description),
+          key: params[i].id,
+        });
       }
     }
+
     apiData.push(apiTmp);
   }
   return apiData;
