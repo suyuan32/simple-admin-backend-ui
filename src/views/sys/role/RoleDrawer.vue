@@ -6,6 +6,7 @@
     :title="getTitle"
     width="500px"
     @ok="handleSubmit"
+    @close="handleCancel"
   >
     <template v-if="isUpdate" #extra>
       <a-button type="primary" style="margin-right: 8px" @click="showChildrenDrawer">
@@ -18,8 +19,9 @@
       :title="t('sys.authority.authorityManagement')"
       width="320"
       showFooter
-      :closable="false"
+      :closable="true"
       @ok="handleAuthorizationSubmit"
+      @close="handleCancel"
     >
       <ATabs v-model:activeKey="activeKey" centered>
         <ATabPane key="1" :tab="t('sys.authority.menuAuthority')">
@@ -101,7 +103,6 @@
           const roleId = await validate();
           const checkedData = await getMenuAuthority({ id: Number(roleId['id']) });
           checkedMenuKeys.value = checkedData.menuIds;
-          console.log(checkedMenuKeys.value);
         } catch (error) {
           console.log(error);
         }
@@ -165,6 +166,12 @@
         !unref(isUpdate) ? t('sys.role.addRole') : t('sys.role.editRole'),
       );
 
+      // handler cancel
+      function handleCancel() {
+        childrenDrawer.value = false;
+        closeDrawer();
+      }
+
       // handler submit action
       async function handleSubmit() {
         try {
@@ -193,6 +200,7 @@
             description: t(result.msg),
             duration: 3,
           });
+          childrenDrawer.value = false;
           closeDrawer();
           emit('success');
         } finally {
@@ -237,6 +245,7 @@
         registerForm,
         getTitle,
         handleSubmit,
+        handleCancel,
         handleAuthorizationSubmit,
         checkedMenuKeys,
         treeMenuData,
