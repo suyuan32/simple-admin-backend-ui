@@ -77,6 +77,12 @@ export default {
     forgetPassword: '忘记密码?',
     otherSignIn: '其他登录方式',
 
+    // notify
+    loginSuccessTitle: '登录成功',
+    loginSuccessDesc: '欢迎回来',
+    signupSuccessTitle: '注册成功',
+    signupSuccessDesc: '欢迎您的加入',
+
     // placeholder
     accountPlaceholder: '请输入账号',
     passwordPlaceholder: '请输入密码',

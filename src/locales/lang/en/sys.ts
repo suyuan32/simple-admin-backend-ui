@@ -83,6 +83,12 @@ export default {
     forgetPassword: 'Forget Password?',
     otherSignIn: 'Sign in with',
 
+    // notify
+    loginSuccessTitle: 'Login successful',
+    loginSuccessDesc: 'Welcome back',
+    signupSuccessTitle: 'Sign up successful',
+    signupSuccessDesc: 'Welcome',
+
     // placeholder
     accountPlaceholder: 'Please input username',
     passwordPlaceholder: 'Please input password',
