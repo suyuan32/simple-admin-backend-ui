@@ -18,11 +18,8 @@ export const columns: BasicColumn[] = [
   },
   {
     title: t('sys.apis.description'),
-    dataIndex: 'description',
+    dataIndex: 'title',
     width: 200,
-    customRender: ({ record }) => {
-      return t(record.description);
-    },
   },
   {
     title: t('sys.apis.method'),
