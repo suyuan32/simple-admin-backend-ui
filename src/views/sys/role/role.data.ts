@@ -143,7 +143,7 @@ export function convertMenuTreeData(params: MenuListItem[] | undefined): DataNod
   const data: DataNode[] = [];
   for (const key in params) {
     const tmp: DataNode = {
-      title: t(params[key].title),
+      title: t(params[key].trans),
       key: params[key].id,
       children: [],
     };
@@ -182,7 +182,7 @@ export function convertApiTreeData(params: ApiInfo[]): DataNode[] {
     for (let i = 0; i < params.length; i++) {
       if (params[i].group == k) {
         apiTmp.children?.push({
-          title: t(params[i].description),
+          title: t(params[i].title),
           key: params[i].id,
         });
       }
