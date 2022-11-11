@@ -23,7 +23,7 @@ export const roleOptionData = (roleInfoInStore: RoleInfo[], type: number): compO
   }
   for (let i = 0; i < roleInfoInStore.length; i++) {
     result.push({
-      label: t(roleInfoInStore[i].name),
+      label: t(roleInfoInStore[i].title),
       value: roleInfoInStore[i].id,
     });
   }
@@ -101,7 +101,7 @@ export const searchFormSchema: FormSchema[] = [
     label: t('sys.user.nickname'),
     component: 'Input',
     colProps: { span: 8 },
-    rules: [{ max: 10 }],
+    rules: [{ max: 30 }],
   },
   {
     field: 'roleId',
@@ -161,7 +161,7 @@ export const formSchema: FormSchema[] = [
     label: t('sys.user.nickname'),
     required: true,
     component: 'Input',
-    rules: [{ max: 10 }],
+    rules: [{ max: 30 }],
   },
   {
     field: 'mobile',
