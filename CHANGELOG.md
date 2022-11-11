@@ -1,3 +1,33 @@
+# 0.1.4 (2022/11/10)
+
+### Features
+
+- Add detail lang
+- refactor: api_desc and file_manager file name
+
+### Bug Fixes
+
+- fix: use server translate api desc
+- fix: move error msg to backend
+- fix: move error msg to backend
+- fix: bugs in api authority list generating
+- fix: bugs in close children drawer
+- fix: update status type
+- fix: wrong column in dictionary detail list
+- fix: file manager config
+
+# 0.1.2 (2022/10/28)
+
+### Features
+
+- update changelog
+
+### Bug Fixes
+
+- fix: optional parameter
+- fix:  wrong update variable
+- fix:   wrong name at createAt
+
 # 0.1.1 (2022/10/21)
 
 ### Features
