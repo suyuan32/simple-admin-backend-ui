@@ -246,6 +246,7 @@
           orderNo: 0,
           disabled: false,
           title: 'sys.menu.rootMenu',
+          trans: t('sys.menu.rootMenu'),
           icon: '',
           hideMenu: false,
           hideBreadcrumb: false,

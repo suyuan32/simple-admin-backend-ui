@@ -16,11 +16,8 @@ const { t } = useI18n();
 export const columns: BasicColumn[] = [
   {
     title: t('sys.role.roleName'),
-    dataIndex: 'name',
+    dataIndex: 'title',
     width: 200,
-    customRender: ({ record }) => {
-      return t(record.name);
-    },
   },
   {
     title: t('sys.role.roleValue'),
@@ -52,10 +49,10 @@ export const columns: BasicColumn[] = [
           setRoleStatus(record.id, newStatus)
             .then(() => {
               record.status = newStatus;
-              createMessage.success(t('sys.role.changeStatusSuccess'));
+              createMessage.success(t('common.updateSuccess'));
             })
             .catch(() => {
-              createMessage.error(t('sys.role.changeStatusFailed'));
+              createMessage.error(t('common.updateFailed'));
             })
             .finally(() => {
               record.pendingStatus = false;

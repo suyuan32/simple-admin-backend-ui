@@ -52,12 +52,9 @@ export interface paramFormData {
 export const columns: BasicColumn[] = [
   {
     title: t('sys.menu.menuName'),
-    dataIndex: 'name',
+    dataIndex: 'trans',
     width: 200,
     align: 'left',
-    customRender: ({ record }) => {
-      return t(record.title);
-    },
   },
   {
     title: t('sys.menu.icon'),
@@ -149,7 +146,7 @@ export const formSchema: FormSchema[] = [
       // set the field name of the data from the server, the below show that
       // the label show the field of data.name
       fieldNames: {
-        label: 'title',
+        label: 'trans',
         key: 'id',
         value: 'id',
       },

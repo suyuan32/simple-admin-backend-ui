@@ -37,6 +37,7 @@ export type MenuParams = {
 export interface MenuListItem {
   id: number;
   type: number;
+  trans?: string;
   parentId: number;
   path: string;
   name: string;

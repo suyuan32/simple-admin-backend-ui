@@ -50,7 +50,7 @@
       const { notification } = useMessage();
       const [registerDrawer, { openDrawer }] = useDrawer();
       const [registerTable, { reload }] = useTable({
-        title: t('routes.system.menuManagementTitle'),
+        title: t('sys.menu.menuList'),
         api: getAllMenu,
         columns,
         formConfig: {
