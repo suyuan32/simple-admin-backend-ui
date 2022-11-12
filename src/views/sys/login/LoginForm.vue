@@ -185,7 +185,7 @@
       state: new Date().getMilliseconds() + '-' + provider,
       provider: provider,
     });
-    window.open(result.URL);
+    window.open(result.data.URL);
   }
 </script>
 

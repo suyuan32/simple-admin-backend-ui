@@ -1,4 +1,4 @@
-import { BaseListResp } from '../../model/baseModel';
+import { BaseDataResp, BaseListResp } from '../../model/baseModel';
 
 /**
  *  author: Ryan Su
@@ -38,6 +38,12 @@ export interface OauthLoginReq {
  *  author: Ryan Su
  *  @description: redirect response
  */
-export interface RedirectResp {
+export type RedirectResp = BaseDataResp<RedirectInfo>;
+
+/**
+ *  author: Ryan Su
+ *  @description: redirect information
+ */
+export interface RedirectInfo {
   URL: string;
 }
