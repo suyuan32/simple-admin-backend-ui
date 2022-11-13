@@ -139,7 +139,10 @@ export const setUserStatus = (id: number, status: number) =>
  *  @description: Get user profile
  */
 export function getUserProfile() {
-  return defHttp.get<UserProfile>({ url: Api.GetProfile }, { errorMessageMode: 'message' });
+  return defHttp.get<BaseDataResp<UserProfile>>(
+    { url: Api.GetProfile },
+    { errorMessageMode: 'message' },
+  );
 }
 
 /**

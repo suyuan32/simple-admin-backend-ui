@@ -87,37 +87,31 @@
 
   async function getProfile() {
     const result = await getUserProfile();
-    formdata.nickname = result.nickname;
-    formdata.email = result.email;
-    formdata.mobile = result.mobile;
-    formdata.avatar = result.avatar;
+    if (result.code === 0) {
+      formdata.nickname = result.data.nickname;
+      formdata.email = result.data.email;
+      formdata.mobile = result.data.mobile;
+      formdata.avatar = result.data.avatar;
+    }
   }
 
   getProfile();
 
   async function handleSubmit() {
-    try {
-      const result = await updateProfile({
-        avatar: formdata.avatar,
-        nickname: formdata.nickname,
-        email: formdata.email,
-        mobile: formdata.mobile,
-      });
-      message.success(t(result.msg));
-    } catch (e) {
-      console.log(e);
-    }
+    const result = await updateProfile({
+      avatar: formdata.avatar,
+      nickname: formdata.nickname,
+      email: formdata.email,
+      mobile: formdata.mobile,
+    });
+    if (result.code === 0) message.success(result.msg, 3);
   }
 
   async function handleChangePasswordSubmit() {
-    try {
-      const result = await changePassword({
-        oldPassword: changePasswordReq.oldPassword,
-        newPassword: changePasswordReq.newPassword,
-      });
-      message.success(t(result.msg));
-    } catch (e) {
-      console.log(e);
-    }
+    const result = await changePassword({
+      oldPassword: changePasswordReq.oldPassword,
+      newPassword: changePasswordReq.newPassword,
+    });
+    if (result.code === 0) message.success(result.msg, 3);
   }
 </script>

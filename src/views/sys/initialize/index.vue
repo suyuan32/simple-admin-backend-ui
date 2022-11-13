@@ -29,26 +29,20 @@
   const fileInitButtonLoading = ref<boolean>(false);
 
   async function initCoreDatabase() {
-    try {
-      coreInitButtonLoading.value = true;
-      let result = await initialzeCoreDatabase();
-      message.success(t(result.msg), 2);
-      coreInitButtonLoading.value = false;
-    } catch (e) {
-      message.error(t('sys.api.apiRequestFailed'), 2);
-      coreInitButtonLoading.value = false;
+    coreInitButtonLoading.value = true;
+    const result = await initialzeCoreDatabase();
+    if (result.code === 0) {
+      message.success(result.msg, 3);
     }
+    coreInitButtonLoading.value = false;
   }
 
   async function initFileDatabase() {
-    try {
-      fileInitButtonLoading.value = true;
-      let result = await initializeFileDatabase();
-      message.success(t(result.msg), 2);
-      fileInitButtonLoading.value = false;
-    } catch (e) {
-      message.error(t('sys.api.apiRequestFailed'), 2);
-      fileInitButtonLoading.value = false;
+    fileInitButtonLoading.value = true;
+    const result = await initializeFileDatabase();
+    if (result.code === 0) {
+      message.success(result.msg, 3);
     }
+    fileInitButtonLoading.value = false;
   }
 </script>
