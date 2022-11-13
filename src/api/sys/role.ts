@@ -1,6 +1,6 @@
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode } from '/#/axios';
-import { BaseIdReq, BasePageReq, BaseResp } from '/@/api/model/baseModel';
+import { BaseDataResp, BaseIdReq, BasePageReq, BaseResp } from '/@/api/model/baseModel';
 import { RoleInfo, RoleListResp } from './model/roleModel';
 
 enum Api {
@@ -14,14 +14,14 @@ enum Api {
  */
 
 export const getRoleList = (params: BasePageReq) => {
-  return defHttp.post<RoleListResp>({ url: Api.GetRoleList, params });
+  return defHttp.post<BaseDataResp<RoleListResp>>({ url: Api.GetRoleList, params });
 };
 
 /**
  *  author: ryan
  *  @description: create a new menu
  */
-export const createOrUpdateRole = (params: RoleInfo, mode: ErrorMessageMode = 'modal') => {
+export const createOrUpdateRole = (params: RoleInfo, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
     { url: Api.CreateOrUpdateOrDeleteRole, params: params },
     {
@@ -34,7 +34,7 @@ export const createOrUpdateRole = (params: RoleInfo, mode: ErrorMessageMode = 'm
  *  author: Ryan Su
  *  @description: delete menu
  */
-export const deleteRole = (params: BaseIdReq, mode: ErrorMessageMode = 'modal') => {
+export const deleteRole = (params: BaseIdReq, mode: ErrorMessageMode = 'message') => {
   return defHttp.delete<BaseResp>(
     { url: Api.CreateOrUpdateOrDeleteRole, params: params },
     {

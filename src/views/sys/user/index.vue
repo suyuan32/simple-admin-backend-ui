@@ -46,7 +46,6 @@
   import { useDrawer } from '/@/components/Drawer';
   import UserDrawer from './UserDrawer.vue';
   import { useI18n } from 'vue-i18n';
-  import { useMessage } from '/@/hooks/web/useMessage';
 
   import { columns, searchFormSchema } from './user.data';
   import { getUserList, deleteUser } from '/@/api/sys/user';
@@ -59,7 +58,6 @@
     setup() {
       const { t } = useI18n();
       const [registerDrawer, { openDrawer }] = useDrawer();
-      const { notification } = useMessage();
       const roleStoreData = useRoleStore();
 
       // get role data
@@ -100,22 +98,13 @@
 
       async function handleDelete(record: Recordable) {
         const result = await deleteUser({ id: record.id }, 'modal');
-        notification.success({
-          message: t('common.successful'),
-          description: t(result.msg),
-          duration: 3,
-        });
-        reload();
+        if (result.code == 0) reload();
       }
 
       async function handleLogout(record: Recordable) {
         const result = await logout(record.UUID);
-        notification.success({
-          message: t('common.successful'),
-          description: t(result.msg),
-          duration: 3,
-        });
-        reload();
+
+        if (result.code == 0) reload();
       }
 
       function handleSuccess() {

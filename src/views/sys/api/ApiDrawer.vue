@@ -19,7 +19,6 @@
 
   import { ApiInfo } from '/@/api/sys/model/apiModel';
   import { createOrUpdateApi } from '/@/api/sys/api';
-  import { message } from 'ant-design-vue';
 
   export default defineComponent({
     name: 'ApiDrawer',
@@ -54,29 +53,29 @@
       );
 
       async function handleSubmit() {
-        try {
-          const values = await validate();
-          setDrawerProps({ confirmLoading: true });
-          // defined api id
-          let apiId: number;
-          if (unref(isUpdate)) {
-            apiId = Number(values['id']);
-          } else {
-            apiId = 0;
-          }
-          let params: ApiInfo = {
-            id: apiId,
-            path: values['path'],
-            description: values['description'],
-            group: values['group'],
-            method: values['method'],
-            createdAt: 0, // do not need to set
-          };
-          let result = await createOrUpdateApi(params);
-          message.success(t(result.msg), 2);
+        const values = await validate();
+        setDrawerProps({ confirmLoading: true });
+        // defined api id
+        let apiId: number;
+        if (unref(isUpdate)) {
+          apiId = Number(values['id']);
+        } else {
+          apiId = 0;
+        }
+        let params: ApiInfo = {
+          id: apiId,
+          title: '',
+          path: values['path'],
+          description: values['description'],
+          group: values['group'],
+          method: values['method'],
+          createdAt: 0, // do not need to set
+        };
+        let result = await createOrUpdateApi(params);
+        if (result.code === 0) {
           closeDrawer();
           emit('success');
-        } finally {
+        } else {
           setDrawerProps({ confirmLoading: false });
         }
       }

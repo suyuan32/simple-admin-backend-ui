@@ -21,7 +21,6 @@
   import { formSchema } from './dictionary.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
-  import { useMessage } from '/@/hooks/web/useMessage';
 
   import { DictionaryInfo } from '/@/api/sys/model/dictionaryModel';
   import { createOrUpdateDictionary } from '/@/api/sys/dictionary';
@@ -35,7 +34,6 @@
     setup(_, { emit }) {
       const isUpdate = ref(true);
       const { t } = useI18n();
-      const { notification } = useMessage();
       const go = useGo();
       const dictionaryName = ref<string>('');
       const dictionaryId = ref<number>(0);
@@ -71,32 +69,27 @@
       }
 
       async function handleSubmit() {
-        try {
-          const values = await validate();
-          setDrawerProps({ confirmLoading: true });
-          // defined dict id
-          let dictId: number;
-          if (unref(isUpdate)) {
-            dictId = Number(values['id']);
-          } else {
-            dictId = 0;
-          }
-          let params: DictionaryInfo = {
-            id: dictId,
-            title: values['title'],
-            name: values['name'],
-            description: values['description'],
-            status: values['status'],
-          };
-          let result = await createOrUpdateDictionary(params);
-          notification.success({
-            message: t('common.successful'),
-            description: t(result.msg),
-            duration: 3,
-          });
+        const values = await validate();
+        setDrawerProps({ confirmLoading: true });
+        // defined dict id
+        let dictId: number;
+        if (unref(isUpdate)) {
+          dictId = Number(values['id']);
+        } else {
+          dictId = 0;
+        }
+        let params: DictionaryInfo = {
+          id: dictId,
+          title: values['title'],
+          name: values['name'],
+          description: values['description'],
+          status: values['status'],
+        };
+        let result = await createOrUpdateDictionary(params);
+        if (result.code === 0) {
           closeDrawer();
           emit('success');
-        } finally {
+        } else {
           setDrawerProps({ confirmLoading: false });
         }
       }

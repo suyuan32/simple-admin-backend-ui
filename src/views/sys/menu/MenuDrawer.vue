@@ -102,8 +102,6 @@
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { TableAction } from '/@/components/Table';
   import { useI18n } from 'vue-i18n';
-  import { useMessage } from '/@/hooks/web/useMessage';
-
   import {
     getAllMenu,
     createOrUpdateMenu,
@@ -131,7 +129,6 @@
     setup(_, { emit }) {
       const isUpdate = ref(true);
       const { t } = useI18n();
-      const { notification } = useMessage();
       const menuId = ref<number>(0);
       const dataSource = ref<MenuParamInfo[]>([]);
       const modalVisible = ref<boolean>(false);
@@ -157,7 +154,7 @@
 
       async function handleOpenModal() {
         const result = await getMenuParamListByMenuId({ id: menuId.value });
-        dataSource.value = result.data;
+        dataSource.value = result.data.data;
         paramFormTitle.value = t('sys.menu.addMenuParam');
         formdata.menuId = menuId.value;
         modalVisible.value = true;
@@ -174,37 +171,21 @@
       }
 
       async function handleDelete(record: Recordable) {
-        try {
-          const result = await deleteMenuParam({ id: record.id }, 'modal');
-          notification.success({
-            message: t('common.successful'),
-            description: t(result.msg),
-            duration: 3,
-          });
-          handleOpenModal();
-        } catch (e) {
-          console.log(e);
-        }
+        const result = await deleteMenuParam({ id: record.id }, 'modal');
+        if (result.code === 0) handleOpenModal();
       }
 
       async function handleParamSubmit() {
-        try {
-          const result = await createOrUpdateMenuParam({
-            id: formdata.id,
-            menuId: formdata.menuId,
-            dataType: formdata.dataType,
-            value: formdata.value,
-            key: formdata.key,
-          });
-          notification.success({
-            message: t('common.successful'),
-            description: t(result.msg),
-            duration: 3,
-          });
+        const result = await createOrUpdateMenuParam({
+          id: formdata.id,
+          menuId: formdata.menuId,
+          dataType: formdata.dataType,
+          value: formdata.value,
+          key: formdata.key,
+        });
+        if (result.code === 0) {
           paramFormVisible.value = false;
           handleOpenModal();
-        } catch (e) {
-          console.log(e);
         }
       }
 
@@ -232,7 +213,7 @@
 
         // get tree data from data.data
         let treeData = await getAllMenu().then((data) => {
-          return data.data;
+          return data.data.data;
         });
 
         treeData.push({
@@ -288,57 +269,52 @@
       );
 
       async function handleSubmit() {
-        try {
-          const values = await validate();
-          setDrawerProps({ confirmLoading: true });
-          // defined the component
-          let componentValue: string;
-          if (values.isExt === '1') {
-            componentValue = 'IFrame';
-          } else if (values.type === 0) {
-            componentValue = 'LAYOUT';
-          } else {
-            componentValue = values['component'];
-          }
-          // defined the parent id
-          let parentId: number = values['parentId'] ? Number(values['parentId']) : 0;
-          // defined menu id
-          let menuId: number = unref(isUpdate) ? Number(values['id']) : 0;
-          let params: CreateOrUpdateMenuReq = {
-            id: menuId,
-            type: values['type'],
-            parentId: parentId,
-            path: values['path'] == undefined ? '' : values['path'],
-            name: values['name'],
-            component: componentValue,
-            redirect: values['redirect'] == undefined ? '' : values['redirect'],
-            orderNo: values['orderNo'],
-            disabled: values['disabled'],
-            title: values['title'],
-            icon: values['icon'],
-            currentActiveMenu:
-              values['currentActiveMenu'] == undefined ? '' : values['currentActiveMenu'],
-            hideMenu: values['hideMenu'],
-            hideBreadcrumb: values['hideBreadcrumb'] == undefined ? true : values['hideBreadcrumb'],
-            ignoreKeepAlive:
-              values['ignoreKeepAlive'] == undefined ? false : values['ignoreKeepAlive'],
-            hideTab: values['hideTab'] == undefined ? false : values['hideTab'],
-            frameSrc: values['frameSrc'] == undefined ? '' : values['frameSrc'],
-            carryParam: values['carryParam'] == undefined ? false : values['carryParam'],
-            hideChildrenInMenu: values['hideChildrenInMenu'],
-            affix: values['affix'] == undefined ? false : values['affix'],
-            dynamicLevel: values['dynamicLevel'],
-            realPath: values['realPath'] == undefined ? '' : values['realPath'],
-          };
-          let result = await createOrUpdateMenu(params, 'modal');
-          notification.success({
-            message: t('common.successful'),
-            description: t(result.msg),
-            duration: 3,
-          });
+        const values = await validate();
+        setDrawerProps({ confirmLoading: true });
+        // defined the component
+        let componentValue: string;
+        if (values.isExt === '1') {
+          componentValue = 'IFrame';
+        } else if (values.type === 0) {
+          componentValue = 'LAYOUT';
+        } else {
+          componentValue = values['component'];
+        }
+        // defined the parent id
+        let parentId: number = values['parentId'] ? Number(values['parentId']) : 0;
+        // defined menu id
+        let menuId: number = unref(isUpdate) ? Number(values['id']) : 0;
+        let params: CreateOrUpdateMenuReq = {
+          id: menuId,
+          type: values['type'],
+          parentId: parentId,
+          path: values['path'] == undefined ? '' : values['path'],
+          name: values['name'],
+          component: componentValue,
+          redirect: values['redirect'] == undefined ? '' : values['redirect'],
+          orderNo: values['orderNo'],
+          disabled: values['disabled'],
+          title: values['title'],
+          icon: values['icon'],
+          currentActiveMenu:
+            values['currentActiveMenu'] == undefined ? '' : values['currentActiveMenu'],
+          hideMenu: values['hideMenu'],
+          hideBreadcrumb: values['hideBreadcrumb'] == undefined ? true : values['hideBreadcrumb'],
+          ignoreKeepAlive:
+            values['ignoreKeepAlive'] == undefined ? false : values['ignoreKeepAlive'],
+          hideTab: values['hideTab'] == undefined ? false : values['hideTab'],
+          frameSrc: values['frameSrc'] == undefined ? '' : values['frameSrc'],
+          carryParam: values['carryParam'] == undefined ? false : values['carryParam'],
+          hideChildrenInMenu: values['hideChildrenInMenu'],
+          affix: values['affix'] == undefined ? false : values['affix'],
+          dynamicLevel: values['dynamicLevel'],
+          realPath: values['realPath'] == undefined ? '' : values['realPath'],
+        };
+        const result = await createOrUpdateMenu(params);
+        if (result.code === 0) {
           closeDrawer();
           emit('success');
-        } finally {
+        } else {
           setDrawerProps({ confirmLoading: false });
         }
       }

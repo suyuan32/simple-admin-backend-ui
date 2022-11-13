@@ -1,6 +1,6 @@
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode } from '/#/axios';
-import { BaseIdReq, BaseResp } from '/@/api/model/baseModel';
+import { BaseDataResp, BaseIdReq, BaseResp } from '/@/api/model/baseModel';
 import { ApiListResp } from './model/apiModel';
 import {
   ApiAuthorityReq,
@@ -23,7 +23,7 @@ enum Api {
  */
 
 export const getApiList = (params: ApiListReq) => {
-  return defHttp.post<ApiListResp>({ url: Api.GetApiList, params });
+  return defHttp.post<BaseDataResp<ApiListResp>>({ url: Api.GetApiList, params });
 };
 
 /**
@@ -31,7 +31,7 @@ export const getApiList = (params: ApiListReq) => {
  */
 
 export const getApiAuthority = (params: BaseIdReq) => {
-  return defHttp.post<ApiAuthorityResp>({ url: Api.GetRoleApiList, params });
+  return defHttp.post<BaseDataResp<ApiAuthorityResp>>({ url: Api.GetRoleApiList, params });
 };
 
 /**
@@ -40,7 +40,7 @@ export const getApiAuthority = (params: BaseIdReq) => {
  */
 export const createOrUpdateApiAuthority = (
   params: ApiAuthorityReq,
-  mode: ErrorMessageMode = 'modal',
+  mode: ErrorMessageMode = 'message',
 ) => {
   return defHttp.post<BaseResp>(
     { url: Api.CreateOrUpdateOrDeleteApiAuthority, params: params },
@@ -54,7 +54,7 @@ export const createOrUpdateApiAuthority = (
  *  author: Ryan Su
  *  @description: delete menu
  */
-export const deleteApiAuthority = (params: BaseIdReq, mode: ErrorMessageMode = 'modal') => {
+export const deleteApiAuthority = (params: BaseIdReq, mode: ErrorMessageMode = 'message') => {
   return defHttp.delete<BaseResp>(
     { url: Api.GetRoleMenuList, params: params },
     {
@@ -70,7 +70,7 @@ export const deleteApiAuthority = (params: BaseIdReq, mode: ErrorMessageMode = '
 
 export const createOrUpdateMenuAuthority = (
   params: MenuAuthorityInfo,
-  mode: ErrorMessageMode = 'modal',
+  mode: ErrorMessageMode = 'message',
 ) => {
   return defHttp.post<BaseResp>(
     { url: Api.CreateOrUpdateOrDeleteMenuAuthority, params: params },
@@ -86,7 +86,7 @@ export const createOrUpdateMenuAuthority = (
  */
 
 export const getMenuAuthority = (params: BaseIdReq) => {
-  return defHttp.post<MenuAuthorityInfo>({
+  return defHttp.post<BaseDataResp<MenuAuthorityInfo>>({
     url: Api.GetRoleMenuList,
     params,
   });

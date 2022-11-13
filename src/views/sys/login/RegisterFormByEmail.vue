@@ -79,18 +79,14 @@
   import { reactive, ref, unref, computed } from 'vue';
   import LoginFormTitle from './LoginFormTitle.vue';
   import { Form, Input, Button, Checkbox, Row } from 'ant-design-vue';
-  import { useMessage } from '/@/hooks/web/useMessage';
   import { StrengthMeter } from '/@/components/StrengthMeter';
   import { useI18n } from '/@/hooks/web/useI18n';
   import { useLoginState, useFormRules, useFormValid, LoginStateEnum } from './useLogin';
   import { getCaptcha, register } from '/@/api/sys/user';
-  import { useDesign } from '/@/hooks/web/useDesign';
 
   const ARow = Row;
-  const { prefixCls } = useDesign('register');
   const FormItem = Form.Item;
   const InputPassword = Input.Password;
-  const { notification, createErrorModal } = useMessage();
   const { t } = useI18n();
   const { handleBackLogin, getLoginState } = useLoginState();
 
@@ -116,46 +112,34 @@
   async function handleRegister() {
     const data = await validForm();
     if (!data) return;
-    try {
-      loading.value = true;
-      register(
-        {
-          password: data.password,
-          username: data.account,
-          captcha: data.captcha,
-          captchaId: data.captchaId,
-          email: data.email,
-        },
-        'modal',
-      )
-        .then(() => {
-          notification.success({
-            message: t('sys.login.signupSuccessTitle'),
-            description: `${t('sys.login.signupSuccessDesc')}`,
-            duration: 3,
-          });
-          setTimeout(() => {
-            handleBackLogin();
-          }, 2000);
-        })
-        .catch(() => {
-          getCaptchaData();
-        });
-    } catch (error) {
-      createErrorModal({
-        title: t('sys.api.errorTip'),
-        content: (error as unknown as Error).message || t('sys.api.networkExceptionMsg'),
-        getContainer: () => document.body.querySelector(`.${prefixCls}`) || document.body,
+    loading.value = true;
+    register(
+      {
+        password: data.password,
+        username: data.account,
+        captcha: data.captcha,
+        captchaId: data.captchaId,
+        email: data.email,
+      },
+      'message',
+    )
+      .then(() => {
+        setTimeout(() => {
+          handleBackLogin();
+        }, 2000);
+      })
+      .catch(() => {
+        getCaptchaData();
+        loading.value = false;
       });
-    } finally {
-      loading.value = false;
-    }
   }
 
   async function getCaptchaData() {
     const captcha = await getCaptcha('none').then();
-    formData.captchaId = captcha.captchaId;
-    formData.imgPath = captcha.imgPath;
+    if (captcha.code === 0) {
+      formData.captchaId = captcha.data.captchaId;
+      formData.imgPath = captcha.data.imgPath;
+    }
   }
 
   getCaptchaData();

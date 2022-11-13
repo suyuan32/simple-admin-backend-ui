@@ -37,7 +37,6 @@
   import { useDrawer } from '/@/components/Drawer';
   import RoleDrawer from './RoleDrawer.vue';
   import { useI18n } from 'vue-i18n';
-  import { useMessage } from '/@/hooks/web/useMessage';
 
   import { columns } from './role.data';
   import { getRoleList, deleteRole } from '/@/api/sys/role';
@@ -48,7 +47,6 @@
     setup() {
       const { t } = useI18n();
       const [registerDrawer, { openDrawer }] = useDrawer();
-      const { notification } = useMessage();
       const [registerTable, { reload }] = useTable({
         title: t('sys.role.roleList'),
         api: getRoleList,
@@ -83,12 +81,7 @@
 
       async function handleDelete(record: Recordable) {
         const result = await deleteRole({ id: record.id }, 'modal');
-        notification.success({
-          message: t('common.successful'),
-          description: t(result.msg),
-          duration: 3,
-        });
-        reload();
+        if (result.code === 0) reload();
       }
 
       function handleSuccess() {

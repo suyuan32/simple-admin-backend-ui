@@ -27,7 +27,6 @@
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
 
   import { useI18n } from 'vue-i18n';
-  import { useMessage } from '/@/hooks/web/useMessage';
 
   import { columns, searchFormSchema } from './token.data';
   import { deleteToken, getTokenList } from '/@/api/sys/token';
@@ -37,7 +36,6 @@
     components: { BasicTable, TableAction },
     setup() {
       const { t } = useI18n();
-      const { notification } = useMessage();
       const [registerTable, { reload }] = useTable({
         title: t('sys.token.tokenList'),
         api: getTokenList,
@@ -60,12 +58,7 @@
 
       async function handleDelete(record: Recordable) {
         const result = await deleteToken({ id: record.id }, 'modal');
-        notification.success({
-          message: t('common.successful'),
-          description: t(result.msg),
-          duration: 3,
-        });
-        reload();
+        if (result.code === 0) reload();
       }
 
       function handleSuccess() {

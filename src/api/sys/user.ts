@@ -13,7 +13,7 @@ import {
 } from './model/userModel';
 
 import { ErrorMessageMode } from '/#/axios';
-import { BaseIdReq, BaseResp } from '../model/baseModel';
+import { BaseDataResp, BaseIdReq, BaseResp } from '../model/baseModel';
 
 enum Api {
   Login = '/sys-api/user/login',
@@ -32,8 +32,8 @@ enum Api {
 /**
  * @description: user login api
  */
-export function login(params: LoginReq, mode: ErrorMessageMode = 'modal') {
-  return defHttp.post<LoginResp>(
+export function login(params: LoginReq, mode: ErrorMessageMode = 'message') {
+  return defHttp.post<BaseDataResp<LoginResp>>(
     {
       url: Api.Login,
       params,
@@ -47,7 +47,7 @@ export function login(params: LoginReq, mode: ErrorMessageMode = 'modal') {
 /**
  * @description: user register api
  */
-export function register(params: RegisterReq, mode: ErrorMessageMode = 'modal') {
+export function register(params: RegisterReq, mode: ErrorMessageMode = 'message') {
   return defHttp.post<BaseResp>(
     {
       url: Api.Register,
@@ -62,8 +62,8 @@ export function register(params: RegisterReq, mode: ErrorMessageMode = 'modal') 
 /**
  * @description: get captcha api
  */
-export function getCaptcha(mode: ErrorMessageMode = 'modal') {
-  return defHttp.get<CaptchaResp>(
+export function getCaptcha(mode: ErrorMessageMode = 'message') {
+  return defHttp.get<BaseDataResp<CaptchaResp>>(
     {
       url: Api.GetCaptcha,
     },
@@ -77,11 +77,14 @@ export function getCaptcha(mode: ErrorMessageMode = 'modal') {
  * @description: getUserInfo
  */
 export function getUserInfo() {
-  return defHttp.get<GetUserInfoModel>({ url: Api.GetUserInfo }, { errorMessageMode: 'none' });
+  return defHttp.get<BaseDataResp<GetUserInfoModel>>(
+    { url: Api.GetUserInfo },
+    { errorMessageMode: 'none' },
+  );
 }
 
 export function getPermCode() {
-  return defHttp.get<string[]>({ url: Api.GetPermCode });
+  return defHttp.get<BaseDataResp<string[]>>({ url: Api.GetPermCode });
 }
 
 export function doLogout() {
@@ -95,14 +98,14 @@ export function doLogout() {
  */
 
 export const getUserList = (params: UserListReq) => {
-  return defHttp.post<UserListResp>({ url: Api.GetUserList, params });
+  return defHttp.post<BaseDataResp<UserListResp>>({ url: Api.GetUserList, params });
 };
 
 /**
  *  author: Ryan Su
  *  @description: create a new user
  */
-export const createOrUpdateUser = (params: UserInfo, mode: ErrorMessageMode = 'modal') => {
+export const createOrUpdateUser = (params: UserInfo, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
     { url: Api.CreateOrUpdateOrDeleteUser, params: params },
     {
@@ -115,7 +118,7 @@ export const createOrUpdateUser = (params: UserInfo, mode: ErrorMessageMode = 'm
  *  author: Ryan Su
  *  @description: delete user
  */
-export const deleteUser = (params: BaseIdReq, mode: ErrorMessageMode = 'modal') => {
+export const deleteUser = (params: BaseIdReq, mode: ErrorMessageMode = 'message') => {
   return defHttp.delete<BaseResp>(
     { url: Api.CreateOrUpdateOrDeleteUser, params: params },
     {
