@@ -57,10 +57,8 @@
   } from './role.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
-  import { useMessage } from '/@/hooks/web/useMessage';
 
   import { RoleInfo } from '/@/api/sys/model/roleModel';
-  import { ApiListResp } from '/@/api/sys/model/apiModel';
   import { ApiAuthorityInfo } from '/@/api/sys/model/authorityModel';
   import { createOrUpdateRole } from '/@/api/sys/role';
   import { getAllMenu } from '/@/api/sys/menu';
@@ -73,6 +71,8 @@
   } from '/@/api/sys/authority';
   import { DataNode } from 'ant-design-vue/lib/tree';
   import console from 'console';
+  import { BaseDataResp } from '/@/api/model/baseModel';
+  import { ApiListResp } from '/@/api/sys/model/apiModel';
 
   export default defineComponent({
     name: 'RoleDrawer',
@@ -81,9 +81,12 @@
     setup(_, { emit }) {
       const isUpdate = ref(true);
       const { t } = useI18n();
-      const { notification } = useMessage();
       const activeKey = ref('1');
-      let tempApiList: ApiListResp = { total: 0, data: [] };
+      let tempApiList: BaseDataResp<ApiListResp> = {
+        code: 0,
+        msg: '',
+        data: { total: 0, data: [] },
+      };
       // children drawer
       const childrenDrawer = ref<boolean>(false);
       const showChildrenDrawer = () => {
@@ -96,13 +99,13 @@
         try {
           treeMenuData.value = [];
           const data = await getAllMenu();
-          const dataConv = convertMenuTreeData(data.data);
+          const dataConv = convertMenuTreeData(data.data.data);
           for (const key in dataConv) {
             treeMenuData.value.push(dataConv[key]);
           }
           const roleId = await validate();
           const checkedData = await getMenuAuthority({ id: Number(roleId['id']) });
-          checkedMenuKeys.value = checkedData.menuIds;
+          checkedMenuKeys.value = checkedData.data.menuIds;
         } catch (error) {
           console.log(error);
         }
@@ -122,13 +125,13 @@
             description: '',
           });
           tempApiList = apiData;
-          const dataConv = convertApiTreeData(apiData.data);
+          const dataConv = convertApiTreeData(apiData.data.data);
           for (const key in dataConv) {
             treeApiData.value.push(dataConv[key]);
           }
           const roleId = await validate();
           const checkedData = await getApiAuthority({ id: Number(roleId['id']) });
-          const checkKeyConv = convertApiToCheckedKeys(checkedData.data, apiData.data);
+          const checkKeyConv = convertApiToCheckedKeys(checkedData.data.data, apiData.data.data);
           checkedApiKeys.value = checkKeyConv;
         } catch (error) {
           console.log(error);
@@ -174,64 +177,60 @@
 
       // handler submit action
       async function handleSubmit() {
-        try {
-          const values = await validate();
-          setDrawerProps({ confirmLoading: true });
-          // defined role id
-          let roleId: number;
-          if (unref(isUpdate)) {
-            roleId = Number(values['id']);
-          } else {
-            roleId = 0;
-          }
-          let params: RoleInfo = {
-            id: roleId,
-            name: values['name'],
-            value: values['value'],
-            defaultRouter: values['defaultRouter'],
-            status: values['status'],
-            remark: values['remark'],
-            orderNo: values['orderNo'],
-            createdAt: 0, // do not need to set
-          };
-          let result = await createOrUpdateRole(params);
-          notification.success({
-            message: t('common.successful'),
-            description: t(result.msg),
-            duration: 3,
-          });
+        const values = await validate();
+        setDrawerProps({ confirmLoading: true });
+        // defined role id
+        let roleId: number;
+        if (unref(isUpdate)) {
+          roleId = Number(values['id']);
+        } else {
+          roleId = 0;
+        }
+        let params: RoleInfo = {
+          id: roleId,
+          title: '',
+          name: values['name'],
+          value: values['value'],
+          defaultRouter: values['defaultRouter'],
+          status: values['status'],
+          remark: values['remark'],
+          orderNo: values['orderNo'],
+          createdAt: 0, // do not need to set
+        };
+        let result = await createOrUpdateRole(params);
+        if (result.code === 0) {
           childrenDrawer.value = false;
           closeDrawer();
           emit('success');
-        } finally {
+        } else {
           setDrawerProps({ confirmLoading: false });
         }
       }
 
       // handle authorization submit
       async function handleAuthorizationSubmit() {
-        try {
-          if (activeKey.value === '1') {
-            const roleData = await validate();
-            const result = await createOrUpdateMenuAuthority({
-              roleId: Number(roleData['id']),
-              menuIds: checkedMenuKeys.value,
-            });
-            message.success(t(result.msg));
-          } else {
-            const apiReqData: ApiAuthorityInfo[] = convertApiCheckedKeysToReq(
-              checkedApiKeys.value,
-              tempApiList.data,
-            );
-            const roleData = await validate();
-            const result = await createOrUpdateApiAuthority({
-              roleId: Number(roleData['id']),
-              data: apiReqData,
-            });
-            message.success(t(result.msg));
+        if (activeKey.value === '1') {
+          const roleData = await validate();
+          const result = await createOrUpdateMenuAuthority({
+            roleId: Number(roleData['id']),
+            menuIds: checkedMenuKeys.value,
+          });
+          message.success(t(result.msg));
+        } else {
+          const apiReqData: ApiAuthorityInfo[] = convertApiCheckedKeysToReq(
+            checkedApiKeys.value,
+            tempApiList.data.data,
+          );
+          const roleData = await validate();
+          const result = await createOrUpdateApiAuthority({
+            roleId: Number(roleData['id']),
+            data: apiReqData,
+          });
+          if (result.code === 0) {
+            childrenDrawer.value = false;
+            message.success(result.msg);
+            closeDrawer();
           }
-        } catch (error) {
-          console.log(error);
         }
       }
 

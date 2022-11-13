@@ -99,7 +99,7 @@ export interface CreateOrUpdateMenuReq {
 /**
  * @description: Get menu return value
  */
-export type RoleMenuResp = RouteItem[];
+export type RoleMenuResp = BaseListResp<RouteItem>;
 
 /**
  *  author: Ryan Su

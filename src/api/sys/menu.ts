@@ -8,7 +8,7 @@ import {
   MenuParamList,
   CreateOrUpdateMenuParamReq,
 } from './model/menuModel';
-import { BaseIdReq, BaseResp } from '/@/api/model/baseModel';
+import { BaseDataResp, BaseIdReq, BaseResp } from '/@/api/model/baseModel';
 
 enum Api {
   GetMenuListByRole = '/sys-api/menu/role',
@@ -23,7 +23,7 @@ enum Api {
  */
 
 export const getMenuList = () => {
-  return defHttp.get<RoleMenuResp>({ url: Api.GetMenuListByRole });
+  return defHttp.get<BaseDataResp<RoleMenuResp>>({ url: Api.GetMenuListByRole });
 };
 
 /**
@@ -32,7 +32,7 @@ export const getMenuList = () => {
  */
 
 export const getAllMenu = (params?: MenuParams) => {
-  return defHttp.get<MenuListResp>({ url: Api.GetAllMenu, params });
+  return defHttp.get<BaseDataResp<MenuListResp>>({ url: Api.GetAllMenu, params });
 };
 
 /**
@@ -41,7 +41,7 @@ export const getAllMenu = (params?: MenuParams) => {
  */
 export const createOrUpdateMenu = (
   params: CreateOrUpdateMenuReq,
-  mode: ErrorMessageMode = 'modal',
+  mode: ErrorMessageMode = 'message',
 ) => {
   return defHttp.post<BaseResp>(
     { url: Api.CreateOrUpdateOrDeleteMenu, params: params },
@@ -55,7 +55,7 @@ export const createOrUpdateMenu = (
  *  author: Ryan Su
  *  @description: Delete menu
  */
-export const deleteMenu = (params: BaseIdReq, mode: ErrorMessageMode = 'modal') => {
+export const deleteMenu = (params: BaseIdReq, mode: ErrorMessageMode = 'message') => {
   return defHttp.delete<BaseResp>(
     { url: Api.CreateOrUpdateOrDeleteMenu, params: params },
     {
@@ -70,7 +70,7 @@ export const deleteMenu = (params: BaseIdReq, mode: ErrorMessageMode = 'modal') 
  */
 export const createOrUpdateMenuParam = (
   params: CreateOrUpdateMenuParamReq,
-  mode: ErrorMessageMode = 'modal',
+  mode: ErrorMessageMode = 'message',
 ) => {
   return defHttp.post<BaseResp>(
     { url: Api.CreateOrUpdateOrDeleteMenuParam, params: params },
@@ -84,7 +84,7 @@ export const createOrUpdateMenuParam = (
  *  author: Ryan Su
  *  @description: Delete menu parameter
  */
-export const deleteMenuParam = (params: BaseIdReq, mode: ErrorMessageMode = 'modal') => {
+export const deleteMenuParam = (params: BaseIdReq, mode: ErrorMessageMode = 'message') => {
   return defHttp.delete<BaseResp>(
     { url: Api.CreateOrUpdateOrDeleteMenuParam, params: params },
     {
@@ -97,8 +97,8 @@ export const deleteMenuParam = (params: BaseIdReq, mode: ErrorMessageMode = 'mod
  *  author: Ryan Su
  *  @description:
  */
-export const getMenuParamListByMenuId = (params: BaseIdReq, mode: ErrorMessageMode = 'modal') => {
-  return defHttp.post<MenuParamList>(
+export const getMenuParamListByMenuId = (params: BaseIdReq, mode: ErrorMessageMode = 'message') => {
+  return defHttp.post<BaseDataResp<MenuParamList>>(
     { url: Api.GetMenuParamsByMenuId, params: params },
     {
       errorMessageMode: mode,

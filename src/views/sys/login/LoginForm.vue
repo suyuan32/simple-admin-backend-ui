@@ -105,7 +105,6 @@
   import LoginFormTitle from './LoginFormTitle.vue';
 
   import { useI18n } from '/@/hooks/web/useI18n';
-  import { useMessage } from '/@/hooks/web/useMessage';
 
   import { useUserStore } from '/@/store/modules/user';
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
@@ -121,7 +120,6 @@
   const InputPassword = Input.Password;
   const go = useGo();
   const { t } = useI18n();
-  const { notification } = useMessage();
   const { prefixCls } = useDesign('login');
   const userStore = useUserStore();
 
@@ -154,14 +152,9 @@
         username: data.account,
         captcha: data.captcha,
         captchaId: data.captchaId,
-        mode: 'modal',
+        mode: 'message',
       })
       .then(() => {
-        notification.success({
-          message: t('sys.login.loginSuccessTitle'),
-          description: `${t('sys.login.loginSuccessDesc')}`,
-          duration: 3,
-        });
         loading.value = false;
         go(PageEnum.BASE_HOME);
       })
@@ -173,9 +166,11 @@
 
   // get captcha
   async function getCaptchaData() {
-    const captcha = await getCaptcha('none').then();
-    formData.captchaId = captcha.captchaId;
-    formData.imgPath = captcha.imgPath;
+    const captcha = await getCaptcha('none');
+    if (captcha.code === 0) {
+      formData.captchaId = captcha.data.captchaId;
+      formData.imgPath = captcha.data.imgPath;
+    }
   }
 
   getCaptchaData();
@@ -185,7 +180,7 @@
       state: new Date().getMilliseconds() + '-' + provider,
       provider: provider,
     });
-    window.open(result.URL);
+    if (result.code === 0) window.open(result.data.URL);
   }
 </script>
 

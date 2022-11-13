@@ -19,7 +19,6 @@
 
   import { ProviderInfo } from '/@/api/sys/model/oauthModel';
   import { createOrUpdateProvider } from '/@/api/sys/oauth';
-  import { message } from 'ant-design-vue';
 
   export default defineComponent({
     name: 'OauthDrawer',
@@ -54,34 +53,33 @@
       );
 
       async function handleSubmit() {
-        try {
-          const values = await validate();
-          setDrawerProps({ confirmLoading: true });
-          // defined provider id
-          let providerId: number;
-          if (unref(isUpdate)) {
-            providerId = Number(values['id']);
-          } else {
-            providerId = 0;
-          }
-          let params: ProviderInfo = {
-            id: providerId,
-            name: values['name'],
-            clientId: values['clientId'],
-            clientSecret: values['clientSecret'],
-            redirectURL: values['redirectURL'],
-            scopes: values['scopes'],
-            authURL: values['authURL'],
-            tokenURL: values['tokenURL'],
-            infoURL: values['infoURL'],
-            authStyle: values['authStyle'],
-            createdAt: 0, // do not need to set
-          };
-          let result = await createOrUpdateProvider(params, 'message');
-          message.success(t(result.msg), 2);
+        const values = await validate();
+        setDrawerProps({ confirmLoading: true });
+        // defined provider id
+        let providerId: number;
+        if (unref(isUpdate)) {
+          providerId = Number(values['id']);
+        } else {
+          providerId = 0;
+        }
+        let params: ProviderInfo = {
+          id: providerId,
+          name: values['name'],
+          clientId: values['clientId'],
+          clientSecret: values['clientSecret'],
+          redirectURL: values['redirectURL'],
+          scopes: values['scopes'],
+          authURL: values['authURL'],
+          tokenURL: values['tokenURL'],
+          infoURL: values['infoURL'],
+          authStyle: values['authStyle'],
+          createdAt: 0, // do not need to set
+        };
+        let result = await createOrUpdateProvider(params, 'message');
+        if (result.code === 0) {
           closeDrawer();
           emit('success');
-        } finally {
+        } else {
           setDrawerProps({ confirmLoading: false });
         }
       }

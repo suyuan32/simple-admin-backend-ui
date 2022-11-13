@@ -16,7 +16,6 @@
   import { detailSchema } from './dictionary.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
-  import { useMessage } from '/@/hooks/web/useMessage';
 
   import { DictionaryDetailInfo } from '/@/api/sys/model/dictionaryModel';
   import { createOrUpdateDictionaryDetail } from '/@/api/sys/dictionary';
@@ -29,7 +28,6 @@
     setup(_, { emit }) {
       const isUpdate = ref(true);
       const { t } = useI18n();
-      const { notification } = useMessage();
       const dictionaryName = ref<string>('');
       const { currentRoute } = useRouter();
 
@@ -61,33 +59,28 @@
       );
 
       async function handleSubmit() {
-        try {
-          const values = await validate();
-          setDrawerProps({ confirmLoading: true });
-          // defined dict id
-          let dictId: number;
-          if (unref(isUpdate)) {
-            dictId = Number(values['id']);
-          } else {
-            dictId = 0;
-          }
-          let params: DictionaryDetailInfo = {
-            id: dictId,
-            title: values['title'],
-            key: values['key'],
-            value: values['value'],
-            status: values['status'],
-            parentId: Number(currentRoute.value.query.id),
-          };
-          let result = await createOrUpdateDictionaryDetail(params);
-          notification.success({
-            message: t('common.successful'),
-            description: t(result.msg),
-            duration: 3,
-          });
+        const values = await validate();
+        setDrawerProps({ confirmLoading: true });
+        // defined dict id
+        let dictId: number;
+        if (unref(isUpdate)) {
+          dictId = Number(values['id']);
+        } else {
+          dictId = 0;
+        }
+        let params: DictionaryDetailInfo = {
+          id: dictId,
+          title: values['title'],
+          key: values['key'],
+          value: values['value'],
+          status: values['status'],
+          parentId: Number(currentRoute.value.query.id),
+        };
+        let result = await createOrUpdateDictionaryDetail(params);
+        if (result.code === 0) {
           closeDrawer();
           emit('success');
-        } finally {
+        } else {
           setDrawerProps({ confirmLoading: false });
         }
       }

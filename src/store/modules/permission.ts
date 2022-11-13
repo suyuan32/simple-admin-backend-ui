@@ -105,7 +105,7 @@ export const usePermissionStore = defineStore({
     },
     async changePermissionCode() {
       const codeList = await getPermCode();
-      this.setPermCodeList(codeList);
+      this.setPermCodeList(codeList.data);
     },
 
     // 构建路由
@@ -222,7 +222,8 @@ export const usePermissionStore = defineStore({
           let routeList: AppRouteRecordRaw[] = [];
           try {
             await this.changePermissionCode();
-            routeList = (await getMenuList()) as AppRouteRecordRaw[];
+            const menus = await getMenuList();
+            routeList = menus.data.data as AppRouteRecordRaw[];
           } catch (error) {
             console.error(error);
           }

@@ -1,6 +1,6 @@
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode } from '/#/axios';
-import { BaseIdReq, BasePageReq, BaseResp } from '/@/api/model/baseModel';
+import { BaseDataResp, BaseIdReq, BasePageReq, BaseResp } from '/@/api/model/baseModel';
 import { OauthLoginReq, ProviderInfo, ProviderListResp, RedirectResp } from './model/oauthModel';
 import { LoginResp } from './model/userModel';
 
@@ -16,7 +16,7 @@ enum Api {
  */
 
 export const getProviderList = (params: BasePageReq) => {
-  return defHttp.post<ProviderListResp>({ url: Api.GetProviderList, params });
+  return defHttp.post<BaseDataResp<ProviderListResp>>({ url: Api.GetProviderList, params });
 };
 
 /**

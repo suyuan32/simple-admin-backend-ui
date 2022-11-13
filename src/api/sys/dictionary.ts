@@ -1,6 +1,6 @@
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode } from '/#/axios';
-import { BaseIdReq, BasePageReq, BaseResp } from '/@/api/model/baseModel';
+import { BaseDataResp, BaseIdReq, BasePageReq, BaseResp } from '/@/api/model/baseModel';
 import {
   DictionaryDetailInfo,
   DictionaryDetailListResp,
@@ -20,7 +20,7 @@ enum Api {
  */
 
 export const getDictionaryList = (params: BasePageReq) => {
-  return defHttp.post<DictionaryListResp>({ url: Api.GetDictionaryList, params });
+  return defHttp.post<BaseDataResp<DictionaryListResp>>({ url: Api.GetDictionaryList, params });
 };
 
 /**
@@ -57,7 +57,10 @@ export const deleteDictionary = (params: BaseIdReq, mode: ErrorMessageMode = 'mo
  */
 
 export const getDictionaryDetailList = (params: BasePageReq) => {
-  return defHttp.post<DictionaryDetailListResp>({ url: Api.GetDictionaryDetailList, params });
+  return defHttp.post<BaseDataResp<DictionaryDetailListResp>>({
+    url: Api.GetDictionaryDetailList,
+    params,
+  });
 };
 
 /**

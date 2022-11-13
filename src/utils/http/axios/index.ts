@@ -52,7 +52,18 @@ const transform: AxiosTransform = {
       throw new Error(t('sys.api.apiRequestFailed'));
     }
 
-    return res.data;
+    if (res.data.code === 0) {
+      return res.data;
+    } else {
+      if (options.errorMessageMode === 'message') {
+        createMessage.error(res.data.msg);
+      } else {
+        createErrorModal({ title: res.data.msg, content: res.data.msg });
+      }
+      return res.data;
+    }
+
+    // return res.data;
   },
 
   // 请求之前处理config
@@ -119,14 +130,7 @@ const transform: AxiosTransform = {
 
     // 设置 accept language
     const locale = useLocaleStore();
-    if (config.headers != null) {
-      if (locale.getLocale === 'zh_CN') {
-        config.headers['Accept-Language'] = 'zh';
-      } else {
-        config.headers['Accept-Language'] = locale.getLocale;
-      }
-    }
-
+    if (config.headers != null) config.headers['Accept-Language'] = locale.getLocale;
     return config;
   },
 

@@ -91,7 +91,10 @@ export const useUserStore = defineStore({
       try {
         const { goHome = true, mode, ...loginParams } = params;
         const data = await login(loginParams, mode);
-        const { token } = data;
+        if (data.code !== 0) {
+          return Promise.reject(null);
+        }
+        const { token } = data.data;
 
         // save token
         this.setToken(token);
@@ -125,16 +128,16 @@ export const useUserStore = defineStore({
     async getUserInfoAction(): Promise<UserInfo | null> {
       if (!this.getToken) return null;
       const userInfo = await getUserInfo();
-      const { roles = [] } = userInfo;
+      const { roles = [] } = userInfo.data;
       if (isArray(roles)) {
         const roleList = roles.map((item) => item.value) as RoleEnum[];
         this.setRoleList(roleList);
       } else {
-        userInfo.roles = [];
+        userInfo.data.roles = [];
         this.setRoleList([]);
       }
-      this.setUserInfo(userInfo);
-      return userInfo;
+      this.setUserInfo(userInfo.data);
+      return userInfo.data;
     },
     /**
      * @description: logout

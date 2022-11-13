@@ -3,6 +3,8 @@
  *  @description:
  */
 
+import { BaseListResp } from '../../model/baseModel';
+
 export interface MenuAuthorityInfo {
   roleId: number;
   menuIds: number[];
@@ -37,7 +39,4 @@ export interface ApiAuthorityInfo {
   method: string;
 }
 
-export interface ApiAuthorityResp {
-  total: number;
-  data: ApiAuthorityInfo[];
-}
+export type ApiAuthorityResp = BaseListResp<ApiAuthorityInfo>;
