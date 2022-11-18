@@ -52,7 +52,7 @@ const transform: AxiosTransform = {
       throw new Error(t('sys.api.apiRequestFailed'));
     }
 
-    if (res.data.code === 0) {
+    if (res.data.code === 0 || res.data.code === undefined) {
       return res.data;
     } else {
       if (options.errorMessageMode === 'message') {
@@ -62,8 +62,6 @@ const transform: AxiosTransform = {
       }
       return res.data;
     }
-
-    // return res.data;
   },
 
   // 请求之前处理config

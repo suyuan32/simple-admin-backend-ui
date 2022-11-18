@@ -1,3 +1,19 @@
+# 0.1.5 (2022/11/13)
+
+### Features
+
+- refactor: error code
+- wip: error code optimize
+- Update change log
+
+### Bug Fixes
+
+- fix: initialize error
+- fix: navigation translation
+- fix: authority list
+- fix: menu and api authorization list
+- fix: move route translation to server
+
 # 0.1.4 (2022/11/10)
 
 ### Features

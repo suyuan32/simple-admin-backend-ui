@@ -40,13 +40,13 @@ export const columns: BasicColumn[] = [
         record.pendingStatus = false;
       }
       return h(Switch, {
-        checked: record.status === true,
+        checked: record.status === 1,
         checkedChildren: t('fileManager.public'),
         unCheckedChildren: t('fileManager.private'),
         loading: record.pendingStatus,
         onChange(checked: boolean) {
           record.pendingStatus = true;
-          const newStatus = checked ? true : false;
+          const newStatus = checked ? 1 : 0;
           const { createMessage } = useMessage();
           setFileStatus(record.id, newStatus)
             .then(() => {
@@ -95,10 +95,19 @@ export const columns: BasicColumn[] = [
 export const searchFormSchema: FormSchema[] = [
   {
     field: 'fileType',
-    label: t('sys.apis.path'),
-    defaultValue: '',
-    component: 'Input',
+    label: t('fileManager.fileType'),
     colProps: { span: 8 },
+    component: 'Select',
+    defaultValue: 0,
+    componentProps: {
+      options: [
+        { label: t('common.all'), value: 0 },
+        { label: t('fileManager.other'), value: 1 },
+        { label: t('fileManager.image'), value: 2 },
+        { label: t('fileManager.video'), value: 3 },
+        { label: t('fileManager.audio'), value: 4 },
+      ],
+    },
   },
   {
     field: 'fileName',

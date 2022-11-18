@@ -194,7 +194,7 @@
         }
         try {
           item.status = UploadResultStatus.UPLOADING;
-          let params = props.uploadParams;
+          const params = props.uploadParams;
           params['md5'] = item.md5;
           const { data } = await props.api?.(
             {
@@ -210,12 +210,21 @@
               item.percent = complete;
             },
           );
-          item.status = UploadResultStatus.SUCCESS;
-          item.responseData = data;
-          return {
-            success: true,
-            error: null,
-          };
+          if (data.code !== 0) {
+            message.error(data.msg);
+            item.status = UploadResultStatus.ERROR;
+            return {
+              success: false,
+              error: data.msg,
+            };
+          } else {
+            item.status = UploadResultStatus.SUCCESS;
+            item.responseData = data;
+            return {
+              success: true,
+              error: null,
+            };
+          }
         } catch (e) {
           console.log(e);
           item.status = UploadResultStatus.ERROR;
@@ -241,8 +250,6 @@
           for (let i = 0; i < uploadFileList.length; i++) {
             uploadFileList[i].md5 = tempFileMd5[uploadFileList[i].name];
           }
-          console.log(tempFileMd5);
-          console.log('uploadFileList:', uploadFileList);
           const data = await Promise.all(
             uploadFileList.map((item) => {
               return uploadApiByItem(item);
@@ -273,7 +280,7 @@
         for (const item of fileListRef.value) {
           const { status, responseData } = item;
           if (status === UploadResultStatus.SUCCESS && responseData) {
-            fileList.push(responseData.url);
+            fileList.push(responseData.data.url);
           }
         }
         // 存在一个上传成功的即可保存

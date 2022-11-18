@@ -103,7 +103,7 @@
       const [registerDrawer, { openDrawer }] = useDrawer();
       const { notification } = useMessage();
       const [registerTable, { reload }] = useTable({
-        title: t('apiDesc.fileList'),
+        title: t('fileManager.fileList'),
         api: getFileList,
         columns,
         formConfig: {
@@ -141,13 +141,11 @@
       }
 
       async function handleDownload(record: Recordable) {
-        let file = await downloadFile(record.id);
+        let file = await downloadFile(record.id, 'none');
         let fileType = file.type.split('/')[0];
         if (fileType === 'image') {
           imageVisible.value = true;
-          // setVisible(true);
           imagePath.value = URL.createObjectURL(file);
-          console.log(imagePath.value);
         } else if (fileType === 'video') {
           videoVisible.value = true;
           videoPath.value = URL.createObjectURL(file);

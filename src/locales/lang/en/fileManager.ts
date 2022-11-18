@@ -11,6 +11,7 @@ export default {
   public: 'Public',
   private: 'Private',
   download: 'Download',
+  fileList: 'File List',
   // notification
   overSizeError: 'The file is over size',
   wrongTypeError: 'The file type is illegal',

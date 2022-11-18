@@ -1,7 +1,7 @@
 import { UploadApiResult } from '../sys/model/uploadModel';
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode, UploadFileParams } from '/#/axios';
-import { BaseIdReq, BasePageReq, BaseResp } from '../model/baseModel';
+import { BaseDataResp, BaseIdReq, BasePageReq, BaseResp } from '../model/baseModel';
 import { FileListResp, updateFileInfoReq } from './model/fileModel';
 
 enum Api {
@@ -19,7 +19,7 @@ export function uploadApi(
   params: UploadFileParams,
   onUploadProgress: (progressEvent: ProgressEvent) => void,
 ) {
-  return defHttp.uploadFile<UploadApiResult>(
+  return defHttp.uploadFile<BaseDataResp<UploadApiResult>>(
     {
       url: Api.uploadFile,
       onUploadProgress,
@@ -33,14 +33,14 @@ export function uploadApi(
  */
 
 export const getFileList = (params: BasePageReq) => {
-  return defHttp.post<FileListResp>({ url: Api.GetFileList, params });
+  return defHttp.post<BaseDataResp<FileListResp>>({ url: Api.GetFileList, params });
 };
 
 /**
  *  author: ryan
  *  @description: update file info
  */
-export const UpdateFileInfo = (params: updateFileInfoReq, mode: ErrorMessageMode = 'modal') => {
+export const UpdateFileInfo = (params: updateFileInfoReq, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
     { url: Api.UpdateFileInfo, params: params },
     {
@@ -66,7 +66,7 @@ export const deleteFile = (params: BaseIdReq, mode: ErrorMessageMode = 'modal') 
  *  author: Ryan Su
  *  @description: set file's status
  */
-export const setFileStatus = (id: number, status: boolean) =>
+export const setFileStatus = (id: number, status: number) =>
   defHttp.post({ url: Api.SetFileStatus, params: { id, status } });
 
 /**
@@ -74,8 +74,11 @@ export const setFileStatus = (id: number, status: boolean) =>
  *  @description: download file
  */
 
-export const downloadFile = (id: number) =>
-  defHttp.get({
-    url: Api.DownloadFile + '/' + id,
-    responseType: 'blob',
-  });
+export const downloadFile = (id: number, mode: ErrorMessageMode = 'none') =>
+  defHttp.get(
+    {
+      url: Api.DownloadFile + '/' + id,
+      responseType: 'blob',
+    },
+    { errorMessageMode: mode },
+  );
