@@ -17,7 +17,7 @@
           <a-input v-model:value="formdata.nickname"
         /></AFormItem>
 
-        <AFormItem :label="t('sys.login.mobile')" name="mobile" :rules="[{ required: true }]">
+        <AFormItem :label="t('sys.login.mobile')" name="mobile">
           <a-input v-model:value="formdata.mobile"
         /></AFormItem>
 
