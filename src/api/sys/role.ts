@@ -5,7 +5,8 @@ import { RoleInfo, RoleListResp } from './model/roleModel';
 
 enum Api {
   GetRoleList = '/sys-api/role/list',
-  CreateOrUpdateOrDeleteRole = '/sys-api/role',
+  CreateOrUpdateRole = '/sys-api/role/create_or_update',
+  DeleteRole = '/sys-api/role/delete',
   SetRoleStatus = '/sys-api/role/status',
 }
 
@@ -19,11 +20,11 @@ export const getRoleList = (params: BasePageReq) => {
 
 /**
  *  author: ryan
- *  @description: create a new menu
+ *  @description: create a new role
  */
 export const createOrUpdateRole = (params: RoleInfo, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
-    { url: Api.CreateOrUpdateOrDeleteRole, params: params },
+    { url: Api.CreateOrUpdateRole, params: params },
     {
       errorMessageMode: mode,
     },
@@ -32,11 +33,11 @@ export const createOrUpdateRole = (params: RoleInfo, mode: ErrorMessageMode = 'm
 
 /**
  *  author: Ryan Su
- *  @description: delete menu
+ *  @description: delete a role
  */
 export const deleteRole = (params: BaseIdReq, mode: ErrorMessageMode = 'message') => {
-  return defHttp.delete<BaseResp>(
-    { url: Api.CreateOrUpdateOrDeleteRole, params: params },
+  return defHttp.post<BaseResp>(
+    { url: Api.DeleteRole, params: params },
     {
       errorMessageMode: mode,
     },

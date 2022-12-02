@@ -8,7 +8,8 @@ enum Api {
   OauthLogin = '/sys-api/oauth/login',
   OauthLoginCallback = '/sys-api/oauth/login/callback',
   GetProviderList = '/sys-api/oauth/provider/list',
-  CreateOrUpdateOrDeleteProvider = '/sys-api/oauth/provider',
+  CreateOrUpdateProvider = '/sys-api/oauth/provider/create_or_update',
+  DeleteProvider = '/sys-api/oauth/provider/delete',
 }
 
 /**
@@ -25,7 +26,7 @@ export const getProviderList = (params: BasePageReq) => {
  */
 export const createOrUpdateProvider = (params: ProviderInfo, mode: ErrorMessageMode = 'modal') => {
   return defHttp.post<BaseResp>(
-    { url: Api.CreateOrUpdateOrDeleteProvider, params: params },
+    { url: Api.CreateOrUpdateProvider, params: params },
     {
       errorMessageMode: mode,
     },
@@ -34,11 +35,11 @@ export const createOrUpdateProvider = (params: ProviderInfo, mode: ErrorMessageM
 
 /**
  *  author: Ryan Su
- *  @description: delete provider
+ *  @description: delete a provider
  */
 export const deleteProvider = (params: BaseIdReq, mode: ErrorMessageMode = 'modal') => {
-  return defHttp.delete<BaseResp>(
-    { url: Api.CreateOrUpdateOrDeleteProvider, params: params },
+  return defHttp.post<BaseResp>(
+    { url: Api.DeleteProvider, params: params },
     {
       errorMessageMode: mode,
     },

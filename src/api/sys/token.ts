@@ -5,7 +5,8 @@ import { TokenInfo, TokenListResp } from './model/tokenModel ';
 
 enum Api {
   GetTokenList = '/sys-api/token/list',
-  CreateOrUpdateOrDeleteToken = '/sys-api/token',
+  CreateOrUpdateToken = '/sys-api/token/create_or_update',
+  DeleteToken = '/sys-api/token/delete',
   SetTokenStatus = '/sys-api/token/status',
   Logout = '/sys-api/token/logout',
 }
@@ -24,7 +25,7 @@ export const getTokenList = (params: BasePageReq) => {
  */
 export const createOrUpdateApi = (params: TokenInfo, mode: ErrorMessageMode = 'modal') => {
   return defHttp.post<BaseResp>(
-    { url: Api.CreateOrUpdateOrDeleteToken, params: params },
+    { url: Api.CreateOrUpdateToken, params: params },
     {
       errorMessageMode: mode,
     },
@@ -33,11 +34,11 @@ export const createOrUpdateApi = (params: TokenInfo, mode: ErrorMessageMode = 'm
 
 /**
  *  author: Ryan Su
- *  @description: delete token
+ *  @description: delete a token
  */
 export const deleteToken = (params: BaseIdReq, mode: ErrorMessageMode = 'modal') => {
-  return defHttp.delete<BaseResp>(
-    { url: Api.CreateOrUpdateOrDeleteToken, params: params },
+  return defHttp.post<BaseResp>(
+    { url: Api.DeleteToken, params: params },
     {
       errorMessageMode: mode,
     },
@@ -46,7 +47,7 @@ export const deleteToken = (params: BaseIdReq, mode: ErrorMessageMode = 'modal')
 
 /**
  *  author: Ryan Su
- *  @description: set token status
+ *  @description: set the token status
  */
 export const setTokenStatus = (id: number, status: number) =>
   defHttp.post({ url: Api.SetTokenStatus, params: { id, status } });

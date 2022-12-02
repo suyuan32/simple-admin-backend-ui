@@ -5,7 +5,8 @@ import { ApiInfo, ApiListResp } from './model/apiModel';
 
 enum Api {
   GetApiList = '/sys-api/api/list',
-  CreateOrUpdateOrDeleteApi = '/sys-api/api',
+  CreateOrUpdateApi = '/sys-api/api/create_or_update',
+  DeleteApi = '/sys-api/api/delete',
 }
 
 /**
@@ -22,7 +23,7 @@ export const getApiList = (params: BasePageReq) => {
  */
 export const createOrUpdateApi = (params: ApiInfo, mode: ErrorMessageMode = 'modal') => {
   return defHttp.post<BaseResp>(
-    { url: Api.CreateOrUpdateOrDeleteApi, params: params },
+    { url: Api.CreateOrUpdateApi, params: params },
     {
       errorMessageMode: mode,
     },
@@ -34,8 +35,8 @@ export const createOrUpdateApi = (params: ApiInfo, mode: ErrorMessageMode = 'mod
  *  @description: delete api
  */
 export const deleteApi = (params: BaseIdReq, mode: ErrorMessageMode = 'modal') => {
-  return defHttp.delete<BaseResp>(
-    { url: Api.CreateOrUpdateOrDeleteApi, params: params },
+  return defHttp.post<BaseResp>(
+    { url: Api.DeleteApi, params: params },
     {
       errorMessageMode: mode,
     },

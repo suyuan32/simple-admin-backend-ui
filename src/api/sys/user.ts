@@ -23,7 +23,8 @@ enum Api {
   GetPermCode = '/sys-api/user/perm',
   GetCaptcha = '/sys-api/captcha',
   GetUserList = '/sys-api/user/list',
-  CreateOrUpdateOrDeleteUser = '/sys-api/user',
+  CreateOrUpdateUser = '/sys-api/user/create_or_update',
+  DeleteUser = '/sys-api/user/delete',
   SetUserStatus = '/sys-api/user/status',
   GetProfile = '/sys-api/user/profile',
   ChangePassword = '/sys-api/user/change-password',
@@ -107,7 +108,7 @@ export const getUserList = (params: UserListReq) => {
  */
 export const createOrUpdateUser = (params: UserInfo, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
-    { url: Api.CreateOrUpdateOrDeleteUser, params: params },
+    { url: Api.CreateOrUpdateUser, params: params },
     {
       errorMessageMode: mode,
     },
@@ -120,7 +121,7 @@ export const createOrUpdateUser = (params: UserInfo, mode: ErrorMessageMode = 'm
  */
 export const deleteUser = (params: BaseIdReq, mode: ErrorMessageMode = 'message') => {
   return defHttp.delete<BaseResp>(
-    { url: Api.CreateOrUpdateOrDeleteUser, params: params },
+    { url: Api.DeleteUser, params: params },
     {
       errorMessageMode: mode,
     },

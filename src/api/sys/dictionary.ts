@@ -10,9 +10,11 @@ import {
 
 enum Api {
   GetDictionaryList = '/sys-api/dict/list',
-  CreateOrUpdateOrDeleteDictionary = '/sys-api/dict',
+  CreateOrUpdateDictionary = '/sys-api/dict/create_or_update',
+  DeleteDictionary = '/sys-api/dict/delete',
   GetDictionaryDetailList = '/sys-api/dict/detail/list',
-  CreateOrUpdateOrDeleteDictionaryDetail = '/sys-api/dict/detail',
+  CreateOrUpdateDictionaryDetail = '/sys-api/dict/detail/create_or_update',
+  DeleteDictionaryDetail = '/sys-api/dict/detail/delete',
 }
 
 /**
@@ -25,14 +27,14 @@ export const getDictionaryList = (params: BasePageReq) => {
 
 /**
  *  author: ryan
- *  @description: create a new dictionary
+ *  @description: create or update a new dictionary
  */
 export const createOrUpdateDictionary = (
   params: DictionaryInfo,
   mode: ErrorMessageMode = 'modal',
 ) => {
   return defHttp.post<BaseResp>(
-    { url: Api.CreateOrUpdateOrDeleteDictionary, params: params },
+    { url: Api.CreateOrUpdateDictionary, params: params },
     {
       errorMessageMode: mode,
     },
@@ -41,11 +43,11 @@ export const createOrUpdateDictionary = (
 
 /**
  *  author: Ryan Su
- *  @description: delete dictionary
+ *  @description: delete a dictionary
  */
 export const deleteDictionary = (params: BaseIdReq, mode: ErrorMessageMode = 'modal') => {
-  return defHttp.delete<BaseResp>(
-    { url: Api.CreateOrUpdateOrDeleteDictionary, params: params },
+  return defHttp.post<BaseResp>(
+    { url: Api.DeleteDictionary, params: params },
     {
       errorMessageMode: mode,
     },
@@ -72,7 +74,7 @@ export const createOrUpdateDictionaryDetail = (
   mode: ErrorMessageMode = 'modal',
 ) => {
   return defHttp.post<BaseResp>(
-    { url: Api.CreateOrUpdateOrDeleteDictionaryDetail, params: params },
+    { url: Api.CreateOrUpdateDictionaryDetail, params: params },
     {
       errorMessageMode: mode,
     },
@@ -81,11 +83,11 @@ export const createOrUpdateDictionaryDetail = (
 
 /**
  *  author: Ryan Su
- *  @description: delete dictionary detail
+ *  @description: delete a dictionary detail
  */
 export const deleteDictionaryDetail = (params: BaseIdReq, mode: ErrorMessageMode = 'modal') => {
-  return defHttp.delete<BaseResp>(
-    { url: Api.CreateOrUpdateOrDeleteDictionaryDetail, params: params },
+  return defHttp.post<BaseResp>(
+    { url: Api.DeleteDictionaryDetail, params: params },
     {
       errorMessageMode: mode,
     },

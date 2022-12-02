@@ -13,13 +13,15 @@ import { BaseDataResp, BaseIdReq, BaseResp } from '/@/api/model/baseModel';
 enum Api {
   GetMenuListByRole = '/sys-api/menu/role',
   GetAllMenu = '/sys-api/menu/list',
-  CreateOrUpdateOrDeleteMenu = '/sys-api/menu',
-  CreateOrUpdateOrDeleteMenuParam = '/sys-api/menu/param',
+  CreateOrUpdateMenu = '/sys-api/menu/create_or_update',
+  DeleteMenu = '/sys-api/menu/delete',
+  CreateOrUpdateMenuParam = '/sys-api/menu/param/create_or_update',
+  DeleteMenuParam = '/sys-api/menu/param/delete',
   GetMenuParamsByMenuId = '/sys-api/menu/param/list',
 }
 
 /**
- * @description: Get user menu based on role id
+ * @description: Get user menu list by role id
  */
 
 export const getMenuList = () => {
@@ -28,7 +30,7 @@ export const getMenuList = () => {
 
 /**
  *  author: ryan
- *  @description: Get all the menu list
+ *  @description: Get all the menus
  */
 
 export const getAllMenu = (params?: MenuParams) => {
@@ -44,7 +46,7 @@ export const createOrUpdateMenu = (
   mode: ErrorMessageMode = 'message',
 ) => {
   return defHttp.post<BaseResp>(
-    { url: Api.CreateOrUpdateOrDeleteMenu, params: params },
+    { url: Api.CreateOrUpdateMenu, params: params },
     {
       errorMessageMode: mode,
     },
@@ -53,11 +55,11 @@ export const createOrUpdateMenu = (
 
 /**
  *  author: Ryan Su
- *  @description: Delete menu
+ *  @description: Delete a menu
  */
 export const deleteMenu = (params: BaseIdReq, mode: ErrorMessageMode = 'message') => {
-  return defHttp.delete<BaseResp>(
-    { url: Api.CreateOrUpdateOrDeleteMenu, params: params },
+  return defHttp.post<BaseResp>(
+    { url: Api.DeleteMenu, params: params },
     {
       errorMessageMode: mode,
     },
@@ -73,7 +75,7 @@ export const createOrUpdateMenuParam = (
   mode: ErrorMessageMode = 'message',
 ) => {
   return defHttp.post<BaseResp>(
-    { url: Api.CreateOrUpdateOrDeleteMenuParam, params: params },
+    { url: Api.CreateOrUpdateMenuParam, params: params },
     {
       errorMessageMode: mode,
     },
@@ -82,11 +84,11 @@ export const createOrUpdateMenuParam = (
 
 /**
  *  author: Ryan Su
- *  @description: Delete menu parameter
+ *  @description: Delete a menu parameter
  */
 export const deleteMenuParam = (params: BaseIdReq, mode: ErrorMessageMode = 'message') => {
-  return defHttp.delete<BaseResp>(
-    { url: Api.CreateOrUpdateOrDeleteMenuParam, params: params },
+  return defHttp.post<BaseResp>(
+    { url: Api.DeleteMenuParam, params: params },
     {
       errorMessageMode: mode,
     },

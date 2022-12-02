@@ -10,8 +10,8 @@ import {
 } from './model/authorityModel';
 
 enum Api {
-  CreateOrUpdateOrDeleteApiAuthority = '/sys-api/authority/api',
-  CreateOrUpdateOrDeleteMenuAuthority = '/sys-api/authority/menu',
+  CreateOrUpdateApiAuthority = '/sys-api/authority/api/create_or_update',
+  CreateOrUpdateMenuAuthority = '/sys-api/authority/menu/create_or_update',
   GetRoleMenuList = '/sys-api/authority/menu/role',
   GetRoleApiList = '/sys-api/authority/api/role',
   GetApiList = '/sys-api/api/list',
@@ -27,7 +27,7 @@ export const getApiList = (params: ApiListReq) => {
 };
 
 /**
- * @description: Get user menu based on api id
+ * @description: Get api authorization list
  */
 
 export const getApiAuthority = (params: BaseIdReq) => {
@@ -36,27 +36,14 @@ export const getApiAuthority = (params: BaseIdReq) => {
 
 /**
  *  author: ryan
- *  @description: create a new menu
+ *  @description: create or update api authorization
  */
 export const createOrUpdateApiAuthority = (
   params: ApiAuthorityReq,
   mode: ErrorMessageMode = 'message',
 ) => {
   return defHttp.post<BaseResp>(
-    { url: Api.CreateOrUpdateOrDeleteApiAuthority, params: params },
-    {
-      errorMessageMode: mode,
-    },
-  );
-};
-
-/**
- *  author: Ryan Su
- *  @description: delete menu
- */
-export const deleteApiAuthority = (params: BaseIdReq, mode: ErrorMessageMode = 'message') => {
-  return defHttp.delete<BaseResp>(
-    { url: Api.GetRoleMenuList, params: params },
+    { url: Api.CreateOrUpdateApiAuthority, params: params },
     {
       errorMessageMode: mode,
     },
@@ -73,7 +60,7 @@ export const createOrUpdateMenuAuthority = (
   mode: ErrorMessageMode = 'message',
 ) => {
   return defHttp.post<BaseResp>(
-    { url: Api.CreateOrUpdateOrDeleteMenuAuthority, params: params },
+    { url: Api.CreateOrUpdateMenuAuthority, params: params },
     {
       errorMessageMode: mode,
     },
