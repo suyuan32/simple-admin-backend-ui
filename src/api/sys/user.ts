@@ -117,10 +117,10 @@ export const createOrUpdateUser = (params: UserInfo, mode: ErrorMessageMode = 'm
 
 /**
  *  author: Ryan Su
- *  @description: delete user
+ *  @description: delete a user
  */
 export const deleteUser = (params: BaseIdReq, mode: ErrorMessageMode = 'message') => {
-  return defHttp.delete<BaseResp>(
+  return defHttp.post<BaseResp>(
     { url: Api.DeleteUser, params: params },
     {
       errorMessageMode: mode,
