@@ -22,3 +22,7 @@ export interface BaseResp {
 export interface BaseIdReq {
   id: number;
 }
+
+export interface BaseIdsReq {
+  ids: number[];
+}
