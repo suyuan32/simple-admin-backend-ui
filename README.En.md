@@ -1,5 +1,5 @@
 <div align="center">
-<img src="https://s1.imagehub.cc/images/2022/08/12/logo_512.png" width="300px" height="300px"/>
+<img src="https://i.postimg.cc/nh8mVKkf/logo.png" width="300px" height="300px"/>
 <h1>Simple Admin UI</h1>
 </div>
 
@@ -21,37 +21,35 @@ Simple Admin UI is a modern UI for Simple Admin. It is based on vue-vben-admin a
 
 ## Current Progress
 
+- [x] Login and Register
+- [x] Menu Management
+- [x] Role Management
+- [x] Role Authority
+- [x] User Management
+- [x] Operation log
+- [x] Service discovery
+- [x] Dictionary management
+- [x] Oauth management
+- [x] Fully support K8s
+- [x] Service Monitor
+- [x] Log collecting
+- [x] JWT blacklist
+- [x] Job Schedule
+- [x] Message queue
+- [x] Ent
+- [x] Backend CRUD generation
+- [x] Frontend CRUD code generation
+- [ ] docker-compose script
 
 
-| Module                | Status   |
-|-----------------------|----------|
-| Login and Register    | Finished |
-| Menu Management       | Finished |
-| Role Management       | Finished |
-| Role Authority        | Finished |
-| User Management       | Finished |
-| Operation log         | Finished |
-| Service discovery     | Finished |
-| Configuration center  | Finished |
-| Dictionary management | Finished |    
-| Oauth management      | Finished |
-| Fully support K8s     | Finished | 
-| Service Monitor       | Finished |
-| Log collecting        | Finished | 
-| JWT blacklist | Finished |
-| Job Schedule | In progress | 
-
-
-## Preview
-
-###Online preview
+### Online preview
 [Online Preview](http://101.132.124.135/#/dashboard)
 Account:   admin 
 Password:  simple-admin
+#### Read Only, cannot register and modify
 
-![pic](https://s1.imagehub.cc/images/2022/09/15/-2022-09-05-21-49-00.png)
-![pic](https://s1.imagehub.cc/images/2022/09/15/register_zh_cn.png)
-![pic](https://s1.imagehub.cc/images/2022/09/15/add_example_api_authority.png)
+![pic](https://i.postimg.cc/qqPNR02x/register-zh-cn.png)
+![pic](https://i.postimg.cc/PxczkCr6/dashboard-zh-cn.png)
 
 [More](https://suyuan32.github.io/simple-admin-core/#/simple-admin/zh-cn/docs/screenshot)
 
