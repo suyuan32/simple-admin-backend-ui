@@ -48,6 +48,7 @@ export default {
   // action
   start: '开始',
   stop: '停止',
+  delete: '删除',
   // notification
   deleteConfirm: '是否确认删除？',
   updateSuccess: '更新成功',
