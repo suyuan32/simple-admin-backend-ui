@@ -4,10 +4,10 @@ import { BaseDataResp, BaseIdReq, BasePageReq, BaseResp, BaseIdsReq } from '/@/a
 import { StudentInfo, StudentListResp } from './model/studentModel';
 
 enum Api {
-  CreateOrUpdateStudent = '/sys-api/student/create_or_update',
-  GetStudentList = '/sys-api/student/list',
-  DeleteStudent = '/sys-api/student/delete',
-  BatchDeleteStudent = '/sys-api/student/batch_delete',
+  CreateOrUpdateStudent = '/example-api/student/create_or_update',
+  GetStudentList = '/example-api/student/list',
+  DeleteStudent = '/example-api/student/delete',
+  BatchDeleteStudent = '/example-api/student/batch_delete',
 }
 
 /**
@@ -43,7 +43,7 @@ export const deleteStudent = (params: BaseIdReq, mode: ErrorMessageMode = 'modal
 };
 
 /**
- *  @description: batch delete student
+ *  @description: batch delete students
  */
 export const batchDeleteStudent = (params: BaseIdsReq, mode: ErrorMessageMode = 'modal') => {
   return defHttp.post<BaseResp>(
