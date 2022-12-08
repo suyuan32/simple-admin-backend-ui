@@ -1,6 +1,11 @@
 <template>
   <div>
     <BasicTable @register="registerTable">
+      <template #tableTitle>
+        <Button type="primary" danger v-if="showDeleteButton" @click="handleBatchDelete()">{{
+          t('common.delete')
+        }}</Button>
+      </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
           <TableAction
@@ -22,20 +27,24 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
-
+  import { createVNode, defineComponent, ref } from 'vue';
+  import { Button, Modal } from 'ant-design-vue';
+  import { ExclamationCircleOutlined } from '@ant-design/icons-vue/lib/icons';
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
 
   import { useI18n } from 'vue-i18n';
 
   import { columns, searchFormSchema } from './token.data';
-  import { deleteToken, getTokenList } from '/@/api/sys/token';
+  import { batchDeleteToken, deleteToken, getTokenList } from '/@/api/sys/token';
 
   export default defineComponent({
     name: 'TokenManagement',
-    components: { BasicTable, TableAction },
+    components: { BasicTable, TableAction, Button },
     setup() {
       const { t } = useI18n();
+      const selectedIds = ref<number[] | string[]>();
+      const showDeleteButton = ref<boolean>(false);
+
       const [registerTable, { reload }] = useTable({
         title: t('sys.token.tokenList'),
         api: getTokenList,
@@ -54,11 +63,40 @@
           dataIndex: 'action',
           fixed: undefined,
         },
+        rowKey: 'id',
+        rowSelection: {
+          type: 'checkbox',
+          onChange: (selectedRowKeys, _selectedRows) => {
+            selectedIds.value = selectedRowKeys;
+            if (selectedRowKeys.length > 0) {
+              showDeleteButton.value = true;
+            } else {
+              showDeleteButton.value = false;
+            }
+          },
+        },
       });
 
       async function handleDelete(record: Recordable) {
         const result = await deleteToken({ id: record.id }, 'modal');
         if (result.code === 0) reload();
+      }
+
+      async function handleBatchDelete() {
+        Modal.confirm({
+          title: t('common.deleteConfirm'),
+          icon: createVNode(ExclamationCircleOutlined),
+          async onOk() {
+            const result = await batchDeleteToken({ ids: selectedIds.value as number[] }, 'modal');
+            if (result.code === 0) {
+              reload();
+              showDeleteButton.value = false;
+            }
+          },
+          onCancel() {
+            console.log('Cancel');
+          },
+        });
       }
 
       function handleSuccess() {
@@ -70,6 +108,8 @@
         registerTable,
         handleDelete,
         handleSuccess,
+        handleBatchDelete,
+        showDeleteButton,
       };
     },
   });

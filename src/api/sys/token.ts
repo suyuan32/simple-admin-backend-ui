@@ -1,12 +1,13 @@
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode } from '/#/axios';
-import { BaseDataResp, BaseIdReq, BasePageReq, BaseResp } from '/@/api/model/baseModel';
+import { BaseDataResp, BaseIdReq, BaseIdsReq, BasePageReq, BaseResp } from '/@/api/model/baseModel';
 import { TokenInfo, TokenListResp } from './model/tokenModel ';
 
 enum Api {
   GetTokenList = '/sys-api/token/list',
   CreateOrUpdateToken = '/sys-api/token/create_or_update',
   DeleteToken = '/sys-api/token/delete',
+  BatchDeleteToken = '/sys-api/token/batch_delete',
   SetTokenStatus = '/sys-api/token/status',
   Logout = '/sys-api/token/logout',
 }
@@ -39,6 +40,19 @@ export const createOrUpdateApi = (params: TokenInfo, mode: ErrorMessageMode = 'm
 export const deleteToken = (params: BaseIdReq, mode: ErrorMessageMode = 'modal') => {
   return defHttp.post<BaseResp>(
     { url: Api.DeleteToken, params: params },
+    {
+      errorMessageMode: mode,
+    },
+  );
+};
+
+/**
+ *  author: Ryan Su
+ *  @description: batch delete tokens
+ */
+export const batchDeleteToken = (params: BaseIdsReq, mode: ErrorMessageMode = 'modal') => {
+  return defHttp.post<BaseResp>(
+    { url: Api.BatchDeleteToken, params: params },
     {
       errorMessageMode: mode,
     },

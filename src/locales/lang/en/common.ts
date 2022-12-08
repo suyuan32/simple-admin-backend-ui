@@ -48,6 +48,7 @@ export default {
   // action
   start: 'Start',
   stop: 'Stop',
+  delete: 'Delete',
   // notification
   deleteConfirm: 'Confirm the deletion?',
   updateSuccess: 'Update successfully',
