@@ -4,8 +4,8 @@ docker:
 	docker build -f Dockerfile -t ${DOCKER_USERNAME}/backendui:${VERSION} .
 
 publish-docker:
-	echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin http://${REPO}
-	docker push ${REPO}/${DOCKER_USERNAME}/backendui:${VERSION}
+	echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin https://${REPO}
+	docker push ${DOCKER_USERNAME}/backendui:${VERSION}
 
 run-docker:
 	docker volume create backendui
