@@ -2,9 +2,10 @@
   <div>
     <BasicTable @register="registerTable">
       <template #tableTitle>
-        <Button type="primary" danger v-if="showDeleteButton" @click="handleBatchDelete()">{{
-          t('common.delete')
-        }}</Button>
+        <Button type="primary" danger v-if="showDeleteButton" @click="handleBatchDelete()">
+          <template #icon><DeleteOutlined /></template>
+          {{ t('common.delete') }}
+        </Button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">
@@ -29,7 +30,7 @@
 <script lang="ts">
   import { createVNode, defineComponent, ref } from 'vue';
   import { Button, Modal } from 'ant-design-vue';
-  import { ExclamationCircleOutlined } from '@ant-design/icons-vue/lib/icons';
+  import { ExclamationCircleOutlined, DeleteOutlined } from '@ant-design/icons-vue/lib/icons';
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
 
   import { useI18n } from 'vue-i18n';
@@ -39,7 +40,7 @@
 
   export default defineComponent({
     name: 'TokenManagement',
-    components: { BasicTable, TableAction, Button },
+    components: { BasicTable, TableAction, Button, DeleteOutlined },
     setup() {
       const { t } = useI18n();
       const selectedIds = ref<number[] | string[]>();
