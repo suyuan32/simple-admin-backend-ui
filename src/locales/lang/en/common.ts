@@ -25,7 +25,7 @@ export default {
   no: 'No',
   started: 'Started',
   stopped: 'Stopped',
-  action: 'action',
+  action: 'Action',
   createTime: 'Create Time',
   updateTime: 'Update Time',
   deleteTime: 'Delete Time',
