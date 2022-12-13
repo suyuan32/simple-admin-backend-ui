@@ -64,9 +64,9 @@ export const columns: BasicColumn[] = [
           const newStatus = checked ? 1 : 0;
           const { createMessage } = useMessage();
           setUserStatus(record.id, newStatus)
-            .then(() => {
+            .then((data) => {
               record.status = newStatus;
-              createMessage.success(t('common.changeStatusSuccess'));
+              if (data.code == 0) createMessage.success(t('common.changeStatusSuccess'));
             })
             .catch(() => {
               createMessage.error(t('common.changeStatusFailed'));
