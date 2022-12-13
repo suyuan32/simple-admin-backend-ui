@@ -13,7 +13,7 @@ import {
 } from './model/userModel';
 
 import { ErrorMessageMode } from '/#/axios';
-import { BaseDataResp, BaseIdReq, BaseResp } from '../model/baseModel';
+import { BaseDataResp, BaseIdReq, BaseIdsReq, BaseResp } from '../model/baseModel';
 
 enum Api {
   Login = '/sys-api/user/login',
@@ -25,6 +25,7 @@ enum Api {
   GetUserList = '/sys-api/user/list',
   CreateOrUpdateUser = '/sys-api/user/create_or_update',
   DeleteUser = '/sys-api/user/delete',
+  BatchDeleteUser = '/sys-api/user/batch_delete',
   SetUserStatus = '/sys-api/user/status',
   GetProfile = '/sys-api/user/profile',
   ChangePassword = '/sys-api/user/change-password',
@@ -75,8 +76,9 @@ export function getCaptcha(mode: ErrorMessageMode = 'message') {
 }
 
 /**
- * @description: getUserInfo
+ * @description: get user's basic info
  */
+
 export function getUserInfo() {
   return defHttp.get<BaseDataResp<GetUserInfoModel>>(
     { url: Api.GetUserInfo },
@@ -92,10 +94,8 @@ export function doLogout() {
   return defHttp.get({ url: Api.Logout });
 }
 
-// user management
-
 /**
- * @description: Get user menu based on api id
+ * @description: get user menu based on api id
  */
 
 export const getUserList = (params: UserListReq) => {
@@ -104,8 +104,9 @@ export const getUserList = (params: UserListReq) => {
 
 /**
  *  author: Ryan Su
- *  @description: create a new user
+ *  @description: create or update a new user
  */
+
 export const createOrUpdateUser = (params: UserInfo, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
     { url: Api.CreateOrUpdateUser, params: params },
@@ -119,9 +120,23 @@ export const createOrUpdateUser = (params: UserInfo, mode: ErrorMessageMode = 'm
  *  author: Ryan Su
  *  @description: delete a user
  */
+
 export const deleteUser = (params: BaseIdReq, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
     { url: Api.DeleteUser, params: params },
+    {
+      errorMessageMode: mode,
+    },
+  );
+};
+
+/**
+ *  author: Ryan Su
+ *  @description: batch delete users
+ */
+export const batchDeleteUser = (params: BaseIdsReq, mode: ErrorMessageMode = 'message') => {
+  return defHttp.post<BaseResp>(
+    { url: Api.BatchDeleteUser, params: params },
     {
       errorMessageMode: mode,
     },
@@ -158,6 +173,7 @@ export function updateProfile(params: UserProfile) {
  *  author: Ryan Su
  *  @description: change user password
  */
+
 export function changePassword(params: ChangePasswordReq) {
   return defHttp.post<BaseResp>(
     { url: Api.ChangePassword, params },

@@ -1,6 +1,12 @@
 <template>
   <div>
     <BasicTable @register="registerTable">
+      <template #tableTitle>
+        <Button type="primary" danger v-if="showDeleteButton" @click="handleBatchDelete()">
+          <template #icon><DeleteOutlined /></template>
+          {{ t('common.delete') }}
+        </Button>
+      </template>
       <template #toolbar>
         <a-button type="primary" @click="handleCreate"> {{ t('sys.user.addUser') }} </a-button>
       </template>
@@ -39,8 +45,9 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
-
+  import { createVNode, defineComponent, ref } from 'vue';
+  import { Button, Modal } from 'ant-design-vue';
+  import { ExclamationCircleOutlined, DeleteOutlined } from '@ant-design/icons-vue/lib/icons';
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
 
   import { useDrawer } from '/@/components/Drawer';
@@ -48,15 +55,18 @@
   import { useI18n } from 'vue-i18n';
 
   import { columns, searchFormSchema } from './user.data';
-  import { getUserList, deleteUser } from '/@/api/sys/user';
+  import { getUserList, deleteUser, batchDeleteUser } from '/@/api/sys/user';
   import { useRoleStore } from '/@/store/modules/role';
   import { logout } from '/@/api/sys/token';
 
   export default defineComponent({
     name: 'UserManagement',
-    components: { BasicTable, UserDrawer, TableAction },
+    components: { BasicTable, UserDrawer, TableAction, Button, DeleteOutlined },
     setup() {
       const { t } = useI18n();
+      const selectedIds = ref<number[] | string[]>();
+      const showDeleteButton = ref<boolean>(false);
+
       const [registerDrawer, { openDrawer }] = useDrawer();
       const roleStoreData = useRoleStore();
 
@@ -81,6 +91,18 @@
           dataIndex: 'action',
           fixed: undefined,
         },
+        rowKey: 'id',
+        rowSelection: {
+          type: 'checkbox',
+          onChange: (selectedRowKeys, _selectedRows) => {
+            selectedIds.value = selectedRowKeys;
+            if (selectedRowKeys.length > 0) {
+              showDeleteButton.value = true;
+            } else {
+              showDeleteButton.value = false;
+            }
+          },
+        },
       });
 
       function handleCreate() {
@@ -99,6 +121,23 @@
       async function handleDelete(record: Recordable) {
         const result = await deleteUser({ id: record.id }, 'modal');
         if (result.code == 0) reload();
+      }
+
+      async function handleBatchDelete() {
+        Modal.confirm({
+          title: t('common.deleteConfirm'),
+          icon: createVNode(ExclamationCircleOutlined),
+          async onOk() {
+            const result = await batchDeleteUser({ ids: selectedIds.value as number[] }, 'modal');
+            if (result.code === 0) {
+              reload();
+              showDeleteButton.value = false;
+            }
+          },
+          onCancel() {
+            console.log('Cancel');
+          },
+        });
       }
 
       async function handleLogout(record: Recordable) {
@@ -120,6 +159,8 @@
         handleLogout,
         handleDelete,
         handleSuccess,
+        handleBatchDelete,
+        showDeleteButton,
       };
     },
   });
