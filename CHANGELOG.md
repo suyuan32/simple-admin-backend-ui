@@ -1,3 +1,13 @@
+## v0.1.9 (2022-12-16)
+
+### New feature:
+
+- batch delete user([`baed1d8`](https://github.com/suyuan32/simple-admin-backend-ui/commit/baed1d8f640d041b57b9bde436c78547ee93047c)) (by Ryan SU)
+
+### Bugs fixed:
+
+- bugs in setting status([`3be3639`](https://github.com/suyuan32/simple-admin-backend-ui/commit/3be36392d950cc4e8b1241bc082fcd5204f58c74)) (by Ryan SU)
+
 ## v0.1.8 (2022-12-12)
 
 ### New feature:
