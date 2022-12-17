@@ -40,12 +40,14 @@
 
   import { columns } from './role.data';
   import { getRoleList, deleteRole } from '/@/api/sys/role';
+  import { useMessage } from '/@/hooks/web/useMessage';
 
   export default defineComponent({
     name: 'RoleManagement',
     components: { BasicTable, RoleDrawer, TableAction },
     setup() {
       const { t } = useI18n();
+      const { createMessage } = useMessage();
       const [registerDrawer, { openDrawer }] = useDrawer();
       const [registerTable, { reload }] = useTable({
         title: t('sys.role.roleList'),
@@ -80,6 +82,10 @@
       }
 
       async function handleDelete(record: Recordable) {
+        if (record.id == 1) {
+          createMessage.warn(t('common.notAllowDelete'));
+          return;
+        }
         const result = await deleteRole({ id: record.id }, 'modal');
         if (result.code === 0) reload();
       }

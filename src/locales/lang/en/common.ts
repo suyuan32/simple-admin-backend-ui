@@ -62,4 +62,6 @@ export default {
   changeStatusSuccess: 'Change status successfully',
   changeStatusFailed: 'Change status failed',
   targetNotExist: 'Target does not exist',
+  notAllowDelete: 'Disallow deletion of this object',
+  notAllowChangeStatus: 'Disallow modification of status',
 };

@@ -163,6 +163,8 @@ export default {
     // action
     addRole: 'Add Role',
     editRole: 'Edit Role',
+    // notification
+    adminStatusChangeForbidden: 'Disallow modification of admin status',
   },
   apis: {
     // noun

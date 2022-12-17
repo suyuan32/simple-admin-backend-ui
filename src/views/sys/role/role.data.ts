@@ -43,9 +43,14 @@ export const columns: BasicColumn[] = [
         unCheckedChildren: t('common.off'),
         loading: record.pendingStatus,
         onChange(checked: boolean) {
+          const { createMessage } = useMessage();
+          if (record.id == 1) {
+            createMessage.warn(t('sys.role.adminStatusChangeForbidden'));
+            return;
+          }
+
           record.pendingStatus = true;
           const newStatus = checked ? 1 : 0;
-          const { createMessage } = useMessage();
           setRoleStatus(record.id, newStatus)
             .then((data) => {
               record.status = newStatus;

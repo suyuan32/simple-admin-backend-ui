@@ -157,6 +157,8 @@ export default {
     // action
     addRole: '新增角色',
     editRole: '编辑角色',
+    // notification
+    adminStatusChangeForbidden: '禁止修改管理员状态',
   },
   apis: {
     // noun

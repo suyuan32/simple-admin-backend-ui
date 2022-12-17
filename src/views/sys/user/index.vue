@@ -58,12 +58,14 @@
   import { getUserList, deleteUser, batchDeleteUser } from '/@/api/sys/user';
   import { useRoleStore } from '/@/store/modules/role';
   import { logout } from '/@/api/sys/token';
+  import { useMessage } from '/@/hooks/web/useMessage';
 
   export default defineComponent({
     name: 'UserManagement',
     components: { BasicTable, UserDrawer, TableAction, Button, DeleteOutlined },
     setup() {
       const { t } = useI18n();
+      const { createMessage } = useMessage();
       const selectedIds = ref<number[] | string[]>();
       const showDeleteButton = ref<boolean>(false);
 
@@ -119,6 +121,10 @@
       }
 
       async function handleDelete(record: Recordable) {
+        if (record.id == 1) {
+          createMessage.warn(t('common.notAllowDelete'));
+          return;
+        }
         const result = await deleteUser({ id: record.id }, 'modal');
         if (result.code == 0) reload();
       }
@@ -128,7 +134,12 @@
           title: t('common.deleteConfirm'),
           icon: createVNode(ExclamationCircleOutlined),
           async onOk() {
-            const result = await batchDeleteUser({ ids: selectedIds.value as number[] }, 'modal');
+            const ids = selectedIds.value as number[];
+            if (ids.indexOf(1) != -1) {
+              createMessage.warn(t('common.notAllowDelete'));
+              return;
+            }
+            const result = await batchDeleteUser({ ids: ids }, 'modal');
             if (result.code === 0) {
               reload();
               showDeleteButton.value = false;
