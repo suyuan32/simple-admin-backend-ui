@@ -29,7 +29,7 @@ export const columns: BasicColumn[] = [
     dataIndex: 'status',
     width: 50,
     customRender: ({ record }) => {
-      if (record.status) {
+      if (record.status == 1) {
         return t('common.on');
       }
       return t('common.off');
@@ -66,7 +66,7 @@ export const detailColumns: BasicColumn[] = [
     dataIndex: 'status',
     width: 50,
     customRender: ({ record }) => {
-      if (record.status) {
+      if (record.status == 1) {
         return t('common.on');
       }
       return t('common.off');
