@@ -42,7 +42,7 @@
   import { useMessage } from '/@/hooks/web/useMessage';
 
   import { detailColumns } from './dictionary.data';
-  import { deleteDictionary, getDictionaryDetailList } from '/@/api/sys/dictionary';
+  import { deleteDictionaryDetail, getDictionaryDetailList } from '/@/api/sys/dictionary';
 
   export default defineComponent({
     name: 'DictionaryDetail',
@@ -96,7 +96,7 @@
       }
 
       async function handleDelete(record: Recordable) {
-        const result = await deleteDictionary({ id: record.id }, 'modal');
+        const result = await deleteDictionaryDetail({ id: record.id }, 'modal');
         notification.success({
           message: t('common.successful'),
           description: t(result.msg),
