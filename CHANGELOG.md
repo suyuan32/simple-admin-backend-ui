@@ -1,3 +1,14 @@
+## v0.2.0 (2022-12-28)
+
+### New feature:
+
+- not allow to delete admin data([`f6fb940`](https://github.com/suyuan32/simple-admin-backend-ui/commit/f6fb9402940d2dad8c3a7de6c1eed56d86ce670c)) (by Ryan SU)
+
+### Bugs fixed:
+
+- dictionary detail api and unuse components([`8400231`](https://github.com/suyuan32/simple-admin-backend-ui/commit/840023140d17413180e529276a37725eecfc9ae7)) (by Ryan SU)
+- dictionary status([`5f6b7db`](https://github.com/suyuan32/simple-admin-backend-ui/commit/5f6b7dbeb082627181778911de17f32ee293811f)) (by Ryan SU)
+
 ## v0.1.9 (2022-12-16)
 
 ### New feature:
