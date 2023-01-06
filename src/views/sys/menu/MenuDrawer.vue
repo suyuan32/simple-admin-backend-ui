@@ -288,35 +288,34 @@
           id: menuId,
           type: values['type'],
           parentId: parentId,
-          path: values['path'] == undefined ? '' : values['path'],
+          path: values['path'] === undefined ? '' : values['path'],
           name: values['name'],
           component: componentValue,
-          redirect: values['redirect'] == undefined ? '' : values['redirect'],
+          redirect: values['redirect'] === undefined ? '' : values['redirect'],
           orderNo: values['orderNo'],
           disabled: values['disabled'],
           title: values['title'],
           icon: values['icon'],
           currentActiveMenu:
-            values['currentActiveMenu'] == undefined ? '' : values['currentActiveMenu'],
+            values['currentActiveMenu'] === undefined ? '' : values['currentActiveMenu'],
           hideMenu: values['hideMenu'],
-          hideBreadcrumb: values['hideBreadcrumb'] == undefined ? true : values['hideBreadcrumb'],
+          hideBreadcrumb: values['hideBreadcrumb'] === undefined ? true : values['hideBreadcrumb'],
           ignoreKeepAlive:
-            values['ignoreKeepAlive'] == undefined ? false : values['ignoreKeepAlive'],
-          hideTab: values['hideTab'] == undefined ? false : values['hideTab'],
-          frameSrc: values['frameSrc'] == undefined ? '' : values['frameSrc'],
-          carryParam: values['carryParam'] == undefined ? false : values['carryParam'],
+            values['ignoreKeepAlive'] === undefined ? false : values['ignoreKeepAlive'],
+          hideTab: values['hideTab'] === undefined ? false : values['hideTab'],
+          frameSrc: values['frameSrc'] === undefined ? '' : values['frameSrc'],
+          carryParam: values['carryParam'] === undefined ? false : values['carryParam'],
           hideChildrenInMenu: values['hideChildrenInMenu'],
-          affix: values['affix'] == undefined ? false : values['affix'],
+          affix: values['affix'] === undefined ? false : values['affix'],
           dynamicLevel: values['dynamicLevel'],
-          realPath: values['realPath'] == undefined ? '' : values['realPath'],
+          realPath: values['realPath'] === undefined ? '' : values['realPath'],
         };
         const result = await createOrUpdateMenu(params);
         if (result.code === 0) {
           closeDrawer();
           emit('success');
-        } else {
-          setDrawerProps({ confirmLoading: false });
         }
+        setDrawerProps({ confirmLoading: false });
       }
 
       return {

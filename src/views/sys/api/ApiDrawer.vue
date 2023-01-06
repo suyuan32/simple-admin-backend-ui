@@ -75,9 +75,8 @@
         if (result.code === 0) {
           closeDrawer();
           emit('success');
-        } else {
-          setDrawerProps({ confirmLoading: false });
         }
+        setDrawerProps({ confirmLoading: false });
       }
 
       return {

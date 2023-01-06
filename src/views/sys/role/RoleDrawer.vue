@@ -202,9 +202,8 @@
           childrenDrawer.value = false;
           closeDrawer();
           emit('success');
-        } else {
-          setDrawerProps({ confirmLoading: false });
         }
+        setDrawerProps({ confirmLoading: false });
       }
 
       // handle authorization submit
