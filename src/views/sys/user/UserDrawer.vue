@@ -19,6 +19,7 @@
   import { UserInfo } from '/@/api/sys/model/userModel';
   import { createOrUpdateUser } from '/@/api/sys/user';
   import { getRoleList } from '/@/api/sys/role';
+  import { useMessage } from '/@/hooks/web/useMessage';
 
   export default defineComponent({
     name: 'UserDrawer',
@@ -27,6 +28,7 @@
     setup(_, { emit }) {
       const isUpdate = ref(true);
       const { t } = useI18n();
+      const { createMessage } = useMessage();
 
       const [registerForm, { resetFields, setFieldsValue, validate, updateSchema }] = useForm({
         labelWidth: 90,
@@ -73,14 +75,20 @@
         let password: string;
         if (unref(isUpdate)) {
           userId = Number(values['id']);
-          if (values['password'] == undefined) {
+          if (values['password'] === undefined) {
             password = '';
           } else {
             password = values['password'];
           }
         } else {
           userId = 0;
-          password = '';
+          if (values['password'] === undefined) {
+            createMessage.warning(t('sys.login.passwordPlaceholder'));
+            setDrawerProps({ confirmLoading: false });
+            return;
+          } else {
+            password = values['password'];
+          }
         }
         let params: UserInfo = {
           id: userId,
@@ -99,9 +107,8 @@
         if (result.code === 0) {
           closeDrawer();
           emit('success');
-        } else {
-          setDrawerProps({ confirmLoading: false });
         }
+        setDrawerProps({ confirmLoading: false });
       }
 
       return {
