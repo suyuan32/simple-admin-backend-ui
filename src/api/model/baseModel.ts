@@ -26,3 +26,11 @@ export interface BaseIdReq {
 export interface BaseIdsReq {
   ids: number[];
 }
+
+export interface BaseUUIDReq {
+  id: string;
+}
+
+export interface BaseUUIDsReq {
+  ids: string[];
+}

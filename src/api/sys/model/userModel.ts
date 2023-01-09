@@ -65,8 +65,7 @@ export interface UserListReq {
 }
 
 export interface UserInfo {
-  id: number;
-  UUID?: string;
+  id: string;
   username: string;
   nickname: string;
   email: string;

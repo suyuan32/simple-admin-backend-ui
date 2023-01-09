@@ -134,11 +134,11 @@
           title: t('common.deleteConfirm'),
           icon: createVNode(ExclamationCircleOutlined),
           async onOk() {
-            const ids = selectedIds.value as number[];
-            if (ids.indexOf(1) != -1) {
-              createMessage.warn(t('common.notAllowDelete'));
-              return;
-            }
+            const ids = selectedIds.value as string[];
+            // if (ids.indexOf(1) != -1) {
+            //   createMessage.warn(t('common.notAllowDelete'));
+            //   return;
+            // }
             const result = await batchDeleteUser({ ids: ids }, 'modal');
             if (result.code === 0) {
               reload();

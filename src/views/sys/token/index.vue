@@ -88,7 +88,7 @@
           title: t('common.deleteConfirm'),
           icon: createVNode(ExclamationCircleOutlined),
           async onOk() {
-            const result = await batchDeleteToken({ ids: selectedIds.value as number[] }, 'modal');
+            const result = await batchDeleteToken({ ids: selectedIds.value as string[] }, 'modal');
             if (result.code === 0) {
               reload();
               showDeleteButton.value = false;

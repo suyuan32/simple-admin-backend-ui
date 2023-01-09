@@ -13,7 +13,7 @@ import {
 } from './model/userModel';
 
 import { ErrorMessageMode } from '/#/axios';
-import { BaseDataResp, BaseIdReq, BaseIdsReq, BaseResp } from '../model/baseModel';
+import { BaseDataResp, BaseResp, BaseUUIDReq, BaseUUIDsReq } from '../model/baseModel';
 
 enum Api {
   Login = '/sys-api/user/login',
@@ -121,7 +121,7 @@ export const createOrUpdateUser = (params: UserInfo, mode: ErrorMessageMode = 'm
  *  @description: delete a user
  */
 
-export const deleteUser = (params: BaseIdReq, mode: ErrorMessageMode = 'message') => {
+export const deleteUser = (params: BaseUUIDReq, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
     { url: Api.DeleteUser, params: params },
     {
@@ -134,7 +134,7 @@ export const deleteUser = (params: BaseIdReq, mode: ErrorMessageMode = 'message'
  *  author: Ryan Su
  *  @description: batch delete users
  */
-export const batchDeleteUser = (params: BaseIdsReq, mode: ErrorMessageMode = 'message') => {
+export const batchDeleteUser = (params: BaseUUIDsReq, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
     { url: Api.BatchDeleteUser, params: params },
     {
@@ -147,7 +147,7 @@ export const batchDeleteUser = (params: BaseIdsReq, mode: ErrorMessageMode = 'me
  *  author: Ryan Su
  *  @description: set role's status
  */
-export const setUserStatus = (id: number, status: number) =>
+export const setUserStatus = (id: string, status: number) =>
   defHttp.post({ url: Api.SetUserStatus, params: { id, status } });
 
 /**

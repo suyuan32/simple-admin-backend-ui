@@ -1,6 +1,14 @@
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode } from '/#/axios';
-import { BaseDataResp, BaseIdReq, BaseIdsReq, BasePageReq, BaseResp } from '/@/api/model/baseModel';
+import {
+  BaseDataResp,
+  BaseIdReq,
+  BaseIdsReq,
+  BasePageReq,
+  BaseResp,
+  BaseUUIDReq,
+  BaseUUIDsReq
+} from '/@/api/model/baseModel';
 import { TokenInfo, TokenListResp } from './model/tokenModel ';
 
 enum Api {
@@ -37,7 +45,7 @@ export const createOrUpdateApi = (params: TokenInfo, mode: ErrorMessageMode = 'm
  *  author: Ryan Su
  *  @description: delete a token
  */
-export const deleteToken = (params: BaseIdReq, mode: ErrorMessageMode = 'modal') => {
+export const deleteToken = (params: BaseUUIDReq, mode: ErrorMessageMode = 'modal') => {
   return defHttp.post<BaseResp>(
     { url: Api.DeleteToken, params: params },
     {
@@ -50,7 +58,7 @@ export const deleteToken = (params: BaseIdReq, mode: ErrorMessageMode = 'modal')
  *  author: Ryan Su
  *  @description: batch delete tokens
  */
-export const batchDeleteToken = (params: BaseIdsReq, mode: ErrorMessageMode = 'modal') => {
+export const batchDeleteToken = (params: BaseUUIDsReq, mode: ErrorMessageMode = 'modal') => {
   return defHttp.post<BaseResp>(
     { url: Api.BatchDeleteToken, params: params },
     {
@@ -63,7 +71,7 @@ export const batchDeleteToken = (params: BaseIdsReq, mode: ErrorMessageMode = 'm
  *  author: Ryan Su
  *  @description: set the token status
  */
-export const setTokenStatus = (id: number, status: number) =>
+export const setTokenStatus = (id: string, status: number) =>
   defHttp.post({ url: Api.SetTokenStatus, params: { id, status } });
 
 /**

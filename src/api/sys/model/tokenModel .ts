@@ -5,7 +5,7 @@ import { BaseListResp } from '../../model/baseModel';
  *  @description: token info response
  */
 export interface TokenInfo {
-  id: number;
+  id: string;
   createdAt?: number;
   UUID: string;
   token: string;

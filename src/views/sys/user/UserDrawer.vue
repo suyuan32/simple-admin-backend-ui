@@ -71,17 +71,17 @@
         const values = await validate();
         setDrawerProps({ confirmLoading: true });
         // defined user id
-        let userId: number;
+        let userId: string;
         let password: string;
         if (unref(isUpdate)) {
-          userId = Number(values['id']);
+          userId = values['id'];
           if (values['password'] === undefined) {
             password = '';
           } else {
             password = values['password'];
           }
         } else {
-          userId = 0;
+          userId = '';
           if (values['password'] === undefined) {
             createMessage.warning(t('sys.login.passwordPlaceholder'));
             setDrawerProps({ confirmLoading: false });
