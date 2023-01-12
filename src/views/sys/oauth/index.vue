@@ -78,7 +78,7 @@
 
       async function handleDelete(record: Recordable) {
         const result = await deleteProvider({ id: record.id }, 'modal');
-        if (result.code === 0) reload();
+        if (result.code === 0) await reload();
       }
 
       function handleSuccess() {

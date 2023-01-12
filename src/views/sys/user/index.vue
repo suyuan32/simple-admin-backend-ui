@@ -75,7 +75,7 @@
       // get role data
       roleStoreData.getRoleInfoFromServer();
 
-      const [registerTable, { reload }] = useTable({
+      const [registerTable, { reload, getSelectRows }] = useTable({
         title: t('sys.user.userList'),
         api: getUserList,
         columns,
@@ -87,6 +87,7 @@
         showTableSetting: true,
         bordered: true,
         showIndexColumn: false,
+        clickToRowSelect: false,
         actionColumn: {
           width: 30,
           title: t('common.action'),
@@ -97,12 +98,8 @@
         rowSelection: {
           type: 'checkbox',
           onChange: (selectedRowKeys, _selectedRows) => {
-            selectedIds.value = selectedRowKeys;
-            if (selectedRowKeys.length > 0) {
-              showDeleteButton.value = true;
-            } else {
-              showDeleteButton.value = false;
-            }
+            selectedIds.value = selectedRowKeys as string[];
+            showDeleteButton.value = selectedRowKeys.length > 0;
           },
         },
       });
@@ -121,12 +118,13 @@
       }
 
       async function handleDelete(record: Recordable) {
-        if (record.id == 1) {
+        if (record.nickname === 'admin') {
           createMessage.warn(t('common.notAllowDelete'));
           return;
         }
+
         const result = await deleteUser({ id: record.id }, 'modal');
-        if (result.code == 0) reload();
+        if (result.code === 0) await reload();
       }
 
       async function handleBatchDelete() {
@@ -135,14 +133,16 @@
           icon: createVNode(ExclamationCircleOutlined),
           async onOk() {
             const ids = selectedIds.value as string[];
-            // if (ids.indexOf(1) != -1) {
-            //   createMessage.warn(t('common.notAllowDelete'));
-            //   return;
-            // }
+            const rowData = getSelectRows()
+            if (rowData.filter(row => row.nickname === 'admin').length > 0) {
+              createMessage.warn(t('common.notAllowDelete'));
+              return;
+            }
+
             const result = await batchDeleteUser({ ids: ids }, 'modal');
             if (result.code === 0) {
-              reload();
               showDeleteButton.value = false;
+              await reload();
             }
           },
           onCancel() {
@@ -154,7 +154,7 @@
       async function handleLogout(record: Recordable) {
         const result = await logout(record.UUID);
 
-        if (result.code == 0) reload();
+        if (result.code == 0) await reload();
       }
 
       function handleSuccess() {

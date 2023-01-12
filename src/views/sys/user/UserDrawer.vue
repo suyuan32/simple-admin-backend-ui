@@ -100,8 +100,6 @@
           roleId: values['roleId'],
           avatar: values['avatar'],
           password: password,
-          createdAt: 0, // do not need to set
-          updatedAt: 0, // do not need to set
         };
         const result = await createOrUpdateUser(params, 'message');
         if (result.code === 0) {

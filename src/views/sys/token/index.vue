@@ -58,6 +58,7 @@
         showTableSetting: true,
         bordered: true,
         showIndexColumn: false,
+        clickToRowSelect: false,
         actionColumn: {
           width: 30,
           title: t('common.action'),
@@ -68,7 +69,7 @@
         rowSelection: {
           type: 'checkbox',
           onChange: (selectedRowKeys, _selectedRows) => {
-            selectedIds.value = selectedRowKeys;
+            selectedIds.value = selectedRowKeys as string[];
             if (selectedRowKeys.length > 0) {
               showDeleteButton.value = true;
             } else {
@@ -80,7 +81,7 @@
 
       async function handleDelete(record: Recordable) {
         const result = await deleteToken({ id: record.id }, 'modal');
-        if (result.code === 0) reload();
+        if (result.code === 0) await reload();
       }
 
       async function handleBatchDelete() {
@@ -90,8 +91,8 @@
           async onOk() {
             const result = await batchDeleteToken({ ids: selectedIds.value as string[] }, 'modal');
             if (result.code === 0) {
-              reload();
               showDeleteButton.value = false;
+              await reload();
             }
           },
           onCancel() {

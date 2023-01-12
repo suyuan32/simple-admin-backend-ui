@@ -87,11 +87,11 @@
           return;
         }
         const result = await deleteRole({ id: record.id }, 'modal');
-        if (result.code === 0) reload();
+        if (result.code === 0) await reload();
       }
 
-      function handleSuccess() {
-        reload();
+      async function handleSuccess() {
+        await reload();
       }
 
       return {
