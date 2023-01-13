@@ -63,5 +63,6 @@ export default {
   changeStatusFailed: 'Change status failed',
   targetNotExist: 'Target does not exist',
   notAllowDelete: 'Disallow deletion of this object',
+  notAllowDeleteAdminData: "Disallow deletion of administrator's data",
   notAllowChangeStatus: 'Disallow modification of status',
 };

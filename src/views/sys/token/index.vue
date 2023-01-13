@@ -70,11 +70,7 @@
           type: 'checkbox',
           onChange: (selectedRowKeys, _selectedRows) => {
             selectedIds.value = selectedRowKeys as string[];
-            if (selectedRowKeys.length > 0) {
-              showDeleteButton.value = true;
-            } else {
-              showDeleteButton.value = false;
-            }
+            showDeleteButton.value = selectedRowKeys.length > 0;
           },
         },
       });

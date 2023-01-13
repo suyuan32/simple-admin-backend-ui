@@ -82,8 +82,8 @@
       }
 
       async function handleDelete(record: Recordable) {
-        if (record.id == 1) {
-          createMessage.warn(t('common.notAllowDelete'));
+        if (record.id === 1) {
+          createMessage.warn(t('common.notAllowDeleteAdminData'));
           return;
         }
         const result = await deleteRole({ id: record.id }, 'modal');

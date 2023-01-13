@@ -134,7 +134,7 @@
       const modalVisible = ref<boolean>(false);
       const paramFormTitle = ref<string>('');
       // form model for menu parameters creating and updating
-      const formdata = reactive<paramFormData>({
+      const formData = reactive<paramFormData>({
         id: 0,
         menuId: 0,
         dataType: 'string',
@@ -145,10 +145,10 @@
 
       function handleOpenParamForm() {
         modalVisible.value = false;
-        formdata.id = 0;
-        formdata.key = '';
-        formdata.value = '';
-        formdata.dataType = 'string';
+        formData.id = 0;
+        formData.key = '';
+        formData.value = '';
+        formData.dataType = 'string';
         paramFormVisible.value = true;
       }
 
@@ -156,16 +156,16 @@
         const result = await getMenuParamListByMenuId({ id: menuId.value });
         dataSource.value = result.data.data;
         paramFormTitle.value = t('sys.menu.addMenuParam');
-        formdata.menuId = menuId.value;
+        formData.menuId = menuId.value;
         modalVisible.value = true;
       }
 
       // menu parameters operations
       function handleEdit(record: Recordable) {
-        formdata.id = record.id;
-        formdata.key = record.key;
-        formdata.value = record.value;
-        formdata.dataType = record.dataType;
+        formData.id = record.id;
+        formData.key = record.key;
+        formData.value = record.value;
+        formData.dataType = record.dataType;
         paramFormTitle.value = t('sys.menu.editMenuParam');
         paramFormVisible.value = true;
       }
@@ -177,11 +177,11 @@
 
       async function handleParamSubmit() {
         const result = await createOrUpdateMenuParam({
-          id: formdata.id,
-          menuId: formdata.menuId,
-          dataType: formdata.dataType,
-          value: formdata.value,
-          key: formdata.key,
+          id: formData.id,
+          menuId: formData.menuId,
+          dataType: formData.dataType,
+          value: formData.value,
+          key: formData.key,
         });
         if (result.code === 0) {
           paramFormVisible.value = false;
@@ -331,7 +331,7 @@
         handleOpenModal,
         modalVisible,
         dataSource,
-        formdata,
+        formData,
         paramFormVisible,
         handleOpenParamForm,
         paramFormTitle,

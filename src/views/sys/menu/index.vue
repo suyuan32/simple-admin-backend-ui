@@ -92,7 +92,7 @@
           description: t(result.msg),
           duration: 3,
         });
-        reload();
+        await reload();
       }
 
       function handleSuccess() {

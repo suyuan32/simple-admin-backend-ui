@@ -29,7 +29,7 @@
           const userStore = useUserStore();
           // save token
           userStore.setToken(token);
-          userStore.afterLoginAction(false);
+          await userStore.afterLoginAction(false);
           go(PageEnum.BASE_HOME);
         } catch (e) {
           message.error(t('sys.oauth.createAccount'), 5);

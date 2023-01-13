@@ -119,7 +119,7 @@
 
       async function handleDelete(record: Recordable) {
         if (record.nickname === 'admin') {
-          createMessage.warn(t('common.notAllowDelete'));
+          createMessage.warn(t('common.notAllowDeleteAdminData'));
           return;
         }
 
@@ -135,7 +135,7 @@
             const ids = selectedIds.value as string[];
             const rowData = getSelectRows()
             if (rowData.filter(row => row.nickname === 'admin').length > 0) {
-              createMessage.warn(t('common.notAllowDelete'));
+              createMessage.warn(t('common.notAllowDeleteAdminData'));
               return;
             }
 
@@ -154,7 +154,7 @@
       async function handleLogout(record: Recordable) {
         const result = await logout(record.UUID);
 
-        if (result.code == 0) await reload();
+        if (result.code === 0) await reload();
       }
 
       function handleSuccess() {

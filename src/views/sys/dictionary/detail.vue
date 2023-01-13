@@ -102,11 +102,11 @@
           description: t(result.msg),
           duration: 3,
         });
-        reload();
+        await reload();
       }
 
-      function handleSuccess() {
-        reload();
+      async function handleSuccess() {
+        await reload();
       }
 
       return {

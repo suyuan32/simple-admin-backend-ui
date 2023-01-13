@@ -45,36 +45,36 @@
   </BasicDrawer>
 </template>
 <script lang="ts">
-  import { defineComponent, ref, computed, unref, watch } from 'vue';
-  import { Tabs, Tree, message } from 'ant-design-vue';
-  import { BasicForm, useForm } from '/@/components/Form/index';
-  import {
-    formSchema,
-    convertMenuTreeData,
-    convertApiTreeData,
-    convertApiCheckedKeysToReq,
-    convertApiToCheckedKeys,
-  } from './role.data';
-  import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
-  import { useI18n } from 'vue-i18n';
+import {computed, defineComponent, ref, unref, watch} from 'vue';
+import {message, Tabs, Tree} from 'ant-design-vue';
+import {BasicForm, useForm} from '/@/components/Form/index';
+import {
+  convertApiCheckedKeysToReq,
+  convertApiToCheckedKeys,
+  convertApiTreeData,
+  convertMenuTreeData,
+  formSchema,
+} from './role.data';
+import {BasicDrawer, useDrawerInner} from '/@/components/Drawer';
+import {useI18n} from 'vue-i18n';
 
-  import { RoleInfo } from '/@/api/sys/model/roleModel';
-  import { ApiAuthorityInfo } from '/@/api/sys/model/authorityModel';
-  import { createOrUpdateRole } from '/@/api/sys/role';
-  import { getAllMenu } from '/@/api/sys/menu';
-  import {
-    createOrUpdateMenuAuthority,
-    getMenuAuthority,
-    getApiList,
-    createOrUpdateApiAuthority,
-    getApiAuthority,
-  } from '/@/api/sys/authority';
-  import { DataNode } from 'ant-design-vue/lib/tree';
-  import console from 'console';
-  import { BaseDataResp } from '/@/api/model/baseModel';
-  import { ApiListResp } from '/@/api/sys/model/apiModel';
+import {RoleInfo} from '/@/api/sys/model/roleModel';
+import {ApiAuthorityInfo} from '/@/api/sys/model/authorityModel';
+import {createOrUpdateRole} from '/@/api/sys/role';
+import {getAllMenu} from '/@/api/sys/menu';
+import {
+  createOrUpdateApiAuthority,
+  createOrUpdateMenuAuthority,
+  getApiAuthority,
+  getApiList,
+  getMenuAuthority,
+} from '/@/api/sys/authority';
+import {DataNode} from 'ant-design-vue/lib/tree';
+import console from 'console';
+import {BaseDataResp} from '/@/api/model/baseModel';
+import {ApiListResp} from '/@/api/sys/model/apiModel';
 
-  export default defineComponent({
+export default defineComponent({
     name: 'RoleDrawer',
     components: { BasicDrawer, BasicForm, ATabs: Tabs, ATabPane: Tabs.TabPane, ATree: Tree },
     emits: ['success', 'register'],
@@ -131,8 +131,7 @@
           }
           const roleId = await validate();
           const checkedData = await getApiAuthority({ id: Number(roleId['id']) });
-          const checkKeyConv = convertApiToCheckedKeys(checkedData.data.data, apiData.data.data);
-          checkedApiKeys.value = checkKeyConv;
+          checkedApiKeys.value = convertApiToCheckedKeys(checkedData.data.data, apiData.data.data);
         } catch (error) {
           console.log(error);
         }
@@ -195,7 +194,6 @@
           status: values['status'],
           remark: values['remark'],
           orderNo: values['orderNo'],
-          createdAt: 0, // do not need to set
         };
         let result = await createOrUpdateRole(params);
         if (result.code === 0) {
