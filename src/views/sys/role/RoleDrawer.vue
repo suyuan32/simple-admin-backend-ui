@@ -45,36 +45,35 @@
   </BasicDrawer>
 </template>
 <script lang="ts">
-import {computed, defineComponent, ref, unref, watch} from 'vue';
-import {message, Tabs, Tree} from 'ant-design-vue';
-import {BasicForm, useForm} from '/@/components/Form/index';
-import {
-  convertApiCheckedKeysToReq,
-  convertApiToCheckedKeys,
-  convertApiTreeData,
-  convertMenuTreeData,
-  formSchema,
-} from './role.data';
-import {BasicDrawer, useDrawerInner} from '/@/components/Drawer';
-import {useI18n} from 'vue-i18n';
+  import { computed, defineComponent, ref, unref, watch } from 'vue';
+  import { message, Tabs, Tree } from 'ant-design-vue';
+  import { BasicForm, useForm } from '/@/components/Form/index';
+  import {
+    convertApiCheckedKeysToReq,
+    convertApiToCheckedKeys,
+    convertApiTreeData,
+    convertMenuTreeData,
+    formSchema,
+  } from './role.data';
+  import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
+  import { useI18n } from 'vue-i18n';
 
-import {RoleInfo} from '/@/api/sys/model/roleModel';
-import {ApiAuthorityInfo} from '/@/api/sys/model/authorityModel';
-import {createOrUpdateRole} from '/@/api/sys/role';
-import {getAllMenu} from '/@/api/sys/menu';
-import {
-  createOrUpdateApiAuthority,
-  createOrUpdateMenuAuthority,
-  getApiAuthority,
-  getApiList,
-  getMenuAuthority,
-} from '/@/api/sys/authority';
-import {DataNode} from 'ant-design-vue/lib/tree';
-import console from 'console';
-import {BaseDataResp} from '/@/api/model/baseModel';
-import {ApiListResp} from '/@/api/sys/model/apiModel';
+  import { ApiAuthorityInfo } from '/@/api/sys/model/authorityModel';
+  import { createOrUpdateRole } from '/@/api/sys/role';
+  import { getAllMenu } from '/@/api/sys/menu';
+  import {
+    createOrUpdateApiAuthority,
+    createOrUpdateMenuAuthority,
+    getApiAuthority,
+    getApiList,
+    getMenuAuthority,
+  } from '/@/api/sys/authority';
+  import { DataNode } from 'ant-design-vue/lib/tree';
+  import console from 'console';
+  import { BaseDataResp } from '/@/api/model/baseModel';
+  import { ApiListResp } from '/@/api/sys/model/apiModel';
 
-export default defineComponent({
+  export default defineComponent({
     name: 'RoleDrawer',
     components: { BasicDrawer, BasicForm, ATabs: Tabs, ATabPane: Tabs.TabPane, ATree: Tree },
     emits: ['success', 'register'],
@@ -178,24 +177,8 @@ export default defineComponent({
       async function handleSubmit() {
         const values = await validate();
         setDrawerProps({ confirmLoading: true });
-        // defined role id
-        let roleId: number;
-        if (unref(isUpdate)) {
-          roleId = Number(values['id']);
-        } else {
-          roleId = 0;
-        }
-        let params: RoleInfo = {
-          id: roleId,
-          title: '',
-          name: values['name'],
-          value: values['value'],
-          defaultRouter: values['defaultRouter'],
-          status: values['status'],
-          remark: values['remark'],
-          orderNo: values['orderNo'],
-        };
-        let result = await createOrUpdateRole(params);
+        values['id'] = unref(isUpdate) ? Number(values['id']) : 0;
+        let result = await createOrUpdateRole(values);
         if (result.code === 0) {
           childrenDrawer.value = false;
           closeDrawer();

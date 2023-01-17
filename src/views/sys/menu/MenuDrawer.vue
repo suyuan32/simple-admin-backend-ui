@@ -61,7 +61,7 @@
   >
     <div class="paramForm">
       <Form
-        :model="formdata"
+        :model="formData"
         name="basic"
         :label-col="{ span: 4 }"
         :wrapper-col="{ span: 16 }"
@@ -69,22 +69,22 @@
         @submit="handleParamSubmit()"
       >
         <FormItem label="ID" name="id" v-show="false">
-          <a-input v-model:value="formdata.id"
+          <a-input v-model:value="formData.id"
         /></FormItem>
 
         <FormItem :label="t('sys.menu.paramType')" name="dataType" :rules="[{ required: true }]">
-          <Select ref="select" v-model:value="formdata.dataType" style="width: 120px">
+          <Select ref="select" v-model:value="formData.dataType" style="width: 120px">
             <SelectOption value="string">String</SelectOption>
             <SelectOption value="json">JSON</SelectOption>
           </Select>
         </FormItem>
 
         <FormItem :label="t('sys.menu.paramKey')" name="key" :rules="[{ required: true }]">
-          <a-input v-model:value="formdata.key"
+          <a-input v-model:value="formData.key"
         /></FormItem>
 
         <FormItem :label="t('sys.menu.paramValue')" name="value" :rules="[{ required: true }]">
-          <a-input v-model:value="formdata.value"
+          <a-input v-model:value="formData.value"
         /></FormItem>
 
         <FormItem :wrapper-col="{ offset: 8, span: 16 }">
@@ -109,7 +109,7 @@
     getMenuParamListByMenuId,
     createOrUpdateMenuParam,
   } from '/@/api/sys/menu';
-  import { CreateOrUpdateMenuReq, MenuListItem, MenuParamInfo } from '/@/api/sys/model/menuModel';
+  import { MenuListItem, MenuParamInfo } from '/@/api/sys/model/menuModel';
 
   export default defineComponent({
     name: 'MenuDrawer',
@@ -272,45 +272,17 @@
         const values = await validate();
         setDrawerProps({ confirmLoading: true });
         // defined the component
-        let componentValue: string;
         if (values.isExt === '1') {
-          componentValue = 'IFrame';
+          values['component'] = 'IFrame';
         } else if (values.type === 0) {
-          componentValue = 'LAYOUT';
-        } else {
-          componentValue = values['component'];
+          values['component'] = 'LAYOUT';
         }
-        // defined the parent id
-        let parentId: number = values['parentId'] ? Number(values['parentId']) : 0;
-        // defined menu id
-        let menuId: number = unref(isUpdate) ? Number(values['id']) : 0;
-        let params: CreateOrUpdateMenuReq = {
-          id: menuId,
-          type: values['type'],
-          parentId: parentId,
-          path: values['path'] === undefined ? '' : values['path'],
-          name: values['name'],
-          component: componentValue,
-          redirect: values['redirect'] === undefined ? '' : values['redirect'],
-          orderNo: values['orderNo'],
-          disabled: values['disabled'],
-          title: values['title'],
-          icon: values['icon'],
-          currentActiveMenu:
-            values['currentActiveMenu'] === undefined ? '' : values['currentActiveMenu'],
-          hideMenu: values['hideMenu'],
-          hideBreadcrumb: values['hideBreadcrumb'] === undefined ? true : values['hideBreadcrumb'],
-          ignoreKeepAlive:
-            values['ignoreKeepAlive'] === undefined ? false : values['ignoreKeepAlive'],
-          hideTab: values['hideTab'] === undefined ? false : values['hideTab'],
-          frameSrc: values['frameSrc'] === undefined ? '' : values['frameSrc'],
-          carryParam: values['carryParam'] === undefined ? false : values['carryParam'],
-          hideChildrenInMenu: values['hideChildrenInMenu'],
-          affix: values['affix'] === undefined ? false : values['affix'],
-          dynamicLevel: values['dynamicLevel'],
-          realPath: values['realPath'] === undefined ? '' : values['realPath'],
-        };
-        const result = await createOrUpdateMenu(params);
+
+        values['parentId'] = values['parentId'] ? Number(values['parentId']) : 0;
+
+        values['id'] = unref(isUpdate) ? Number(values['id']) : 0;
+
+        const result = await createOrUpdateMenu(values);
         if (result.code === 0) {
           closeDrawer();
           emit('success');

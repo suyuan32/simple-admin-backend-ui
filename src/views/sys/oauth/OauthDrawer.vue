@@ -17,7 +17,6 @@
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
 
-  import { ProviderInfo } from '/@/api/sys/model/oauthModel';
   import { createOrUpdateProvider } from '/@/api/sys/oauth';
 
   export default defineComponent({
@@ -55,26 +54,8 @@
       async function handleSubmit() {
         const values = await validate();
         setDrawerProps({ confirmLoading: true });
-        // defined provider id
-        let providerId: number;
-        if (unref(isUpdate)) {
-          providerId = Number(values['id']);
-        } else {
-          providerId = 0;
-        }
-        let params: ProviderInfo = {
-          id: providerId,
-          name: values['name'],
-          clientId: values['clientId'],
-          clientSecret: values['clientSecret'],
-          redirectURL: values['redirectURL'],
-          scopes: values['scopes'],
-          authURL: values['authURL'],
-          tokenURL: values['tokenURL'],
-          infoURL: values['infoURL'],
-          authStyle: values['authStyle'],
-        };
-        let result = await createOrUpdateProvider(params, 'message');
+        values['id'] = unref(isUpdate) ? Number(values['id']) : 0;
+        let result = await createOrUpdateProvider(values, 'message');
         if (result.code === 0) {
           closeDrawer();
           emit('success');

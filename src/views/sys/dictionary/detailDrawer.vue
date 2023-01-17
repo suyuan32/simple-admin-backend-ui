@@ -17,7 +17,6 @@
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
 
-  import { DictionaryDetailInfo } from '/@/api/sys/model/dictionaryModel';
   import { createOrUpdateDictionaryDetail } from '/@/api/sys/dictionary';
   import { useRouter } from 'vue-router';
 
@@ -61,22 +60,9 @@
       async function handleSubmit() {
         const values = await validate();
         setDrawerProps({ confirmLoading: true });
-        // defined dict id
-        let dictId: number;
-        if (unref(isUpdate)) {
-          dictId = Number(values['id']);
-        } else {
-          dictId = 0;
-        }
-        let params: DictionaryDetailInfo = {
-          id: dictId,
-          title: values['title'],
-          key: values['key'],
-          value: values['value'],
-          status: values['status'],
-          parentId: Number(currentRoute.value.query.id),
-        };
-        let result = await createOrUpdateDictionaryDetail(params);
+        values['id'] = unref(isUpdate) ? Number(values['id']) : 0;
+        values['parentId'] = Number(currentRoute.value.query.id);
+        let result = await createOrUpdateDictionaryDetail(values);
         if (result.code === 0) {
           closeDrawer();
           emit('success');

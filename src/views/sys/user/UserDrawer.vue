@@ -16,7 +16,6 @@
   import { formSchema, roleOptionData } from './user.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
-  import { UserInfo } from '/@/api/sys/model/userModel';
   import { createOrUpdateUser } from '/@/api/sys/user';
   import { getRoleList } from '/@/api/sys/role';
   import { useMessage } from '/@/hooks/web/useMessage';
@@ -70,38 +69,19 @@
       async function handleSubmit() {
         const values = await validate();
         setDrawerProps({ confirmLoading: true });
-        // defined user id
-        let userId: string;
-        let password: string;
         if (unref(isUpdate)) {
-          userId = values['id'];
           if (values['password'] === undefined) {
-            password = '';
-          } else {
-            password = values['password'];
+            values['password'] = '';
           }
         } else {
-          userId = '';
           if (values['password'] === undefined) {
             createMessage.warning(t('sys.login.passwordPlaceholder'));
             setDrawerProps({ confirmLoading: false });
             return;
-          } else {
-            password = values['password'];
           }
         }
-        let params: UserInfo = {
-          id: userId,
-          username: values['username'],
-          nickname: values['nickname'],
-          mobile: values['mobile'],
-          email: values['email'],
-          status: values['status'],
-          roleId: values['roleId'],
-          avatar: values['avatar'],
-          password: password,
-        };
-        const result = await createOrUpdateUser(params, 'message');
+        values['id'] = unref(isUpdate) ? values['id'] : '';
+        const result = await createOrUpdateUser(values, 'message');
         if (result.code === 0) {
           closeDrawer();
           emit('success');

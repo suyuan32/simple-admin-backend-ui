@@ -16,8 +16,6 @@
   import { formSchema } from './api.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
-
-  import { ApiInfo } from '/@/api/sys/model/apiModel';
   import { createOrUpdateApi } from '/@/api/sys/api';
 
   export default defineComponent({
@@ -55,23 +53,8 @@
       async function handleSubmit() {
         const values = await validate();
         setDrawerProps({ confirmLoading: true });
-        // defined api id
-        let apiId: number;
-        if (unref(isUpdate)) {
-          apiId = Number(values['id']);
-        } else {
-          apiId = 0;
-        }
-        let params: ApiInfo = {
-          id: apiId,
-          title: '',
-          path: values['path'],
-          description: values['description'],
-          group: values['group'],
-          method: values['method'],
-          createdAt: 0, // do not need to set
-        };
-        let result = await createOrUpdateApi(params);
+        values['id'] = unref(isUpdate) ? Number(values['id']) : 0;
+        let result = await createOrUpdateApi(values);
         if (result.code === 0) {
           closeDrawer();
           emit('success');

@@ -22,7 +22,6 @@
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
 
-  import { DictionaryInfo } from '/@/api/sys/model/dictionaryModel';
   import { createOrUpdateDictionary } from '/@/api/sys/dictionary';
   // import { useRouter } from 'vue-router';
   import { useGo } from '/@/hooks/web/usePage';
@@ -71,21 +70,8 @@
       async function handleSubmit() {
         const values = await validate();
         setDrawerProps({ confirmLoading: true });
-        // defined dict id
-        let dictId: number;
-        if (unref(isUpdate)) {
-          dictId = Number(values['id']);
-        } else {
-          dictId = 0;
-        }
-        let params: DictionaryInfo = {
-          id: dictId,
-          title: values['title'],
-          name: values['name'],
-          description: values['description'],
-          status: values['status'],
-        };
-        let result = await createOrUpdateDictionary(params);
+        values['id'] = unref(isUpdate) ? Number(values['id']) : 0;
+        let result = await createOrUpdateDictionary(values);
         if (result.code === 0) {
           closeDrawer();
           emit('success');
