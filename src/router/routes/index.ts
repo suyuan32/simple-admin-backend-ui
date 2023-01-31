@@ -37,34 +37,10 @@ export const LoginRoute: AppRouteRecordRaw = {
   },
 };
 
-// init route
-export const InitRoute: AppRouteRecordRaw = {
-  path: PageEnum.BASE_INITIAL_PAGE,
-  name: 'InitializeDatabase',
-  component: () => import('/@/views/sys/initialize/index.vue'),
-  meta: {
-    title: t('sys.init.initTitle'),
-    ignoreAuth: true,
-  },
-};
-
-// oauth log in callback route
-export const OauthCallbackRoute: AppRouteRecordRaw = {
-  path: PageEnum.OAUTH_CALLBACK,
-  name: 'OauthCallback',
-  component: () => import('/@/views/sys/oauth/callback.vue'),
-  meta: {
-    title: t('sys.oauth.callback'),
-    ignoreAuth: true,
-  },
-};
-
 // Basic routing without permission
 // 未经许可的基本路由
 export const basicRoutes = [
   LoginRoute,
-  InitRoute,
-  OauthCallbackRoute,
   RootRoute,
   REDIRECT_ROUTE,
   PAGE_NOT_FOUND_ROUTE,

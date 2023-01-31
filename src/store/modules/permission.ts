@@ -206,7 +206,7 @@ export const usePermissionStore = defineStore({
           break;
 
         //  If you are sure that you do not need to do background dynamic permissions, please comment the entire judgment below
-        //  如果确定不需要做后台动态权限，请在下方评论整个判断
+        //  如果确定不需要做后台动态权限，请在下方注释整个判断
         case PermissionModeEnum.BACK:
           const { createMessage } = useMessage();
 
@@ -222,8 +222,7 @@ export const usePermissionStore = defineStore({
           let routeList: AppRouteRecordRaw[] = [];
           try {
             await this.changePermissionCode();
-            const menus = await getMenuList();
-            routeList = menus.data.data as AppRouteRecordRaw[];
+            routeList = (await getMenuList()) as AppRouteRecordRaw[];
           } catch (error) {
             console.error(error);
           }
@@ -247,6 +246,7 @@ export const usePermissionStore = defineStore({
           break;
       }
 
+      routes.push(ERROR_LOG_ROUTE);
       patchHomeAffix(routes);
       return routes;
     },

@@ -10,7 +10,6 @@ export const useGlobSetting = (): Readonly<GlobConfig> => {
     VITE_GLOB_APP_SHORT_NAME,
     VITE_GLOB_API_URL_PREFIX,
     VITE_GLOB_UPLOAD_URL,
-    VITE_FILE_STORE_URL,
   } = getAppEnvConfig();
 
   if (!/[a-zA-Z\_]*/.test(VITE_GLOB_APP_SHORT_NAME)) {
@@ -26,7 +25,6 @@ export const useGlobSetting = (): Readonly<GlobConfig> => {
     shortName: VITE_GLOB_APP_SHORT_NAME,
     urlPrefix: VITE_GLOB_API_URL_PREFIX,
     uploadUrl: VITE_GLOB_UPLOAD_URL,
-    fileStoreUrl: VITE_FILE_STORE_URL,
   };
   return glob as Readonly<GlobConfig>;
 };
