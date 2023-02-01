@@ -20,7 +20,7 @@ export const getRoleList = (params: BasePageReq) => {
 
 /**
  *  author: ryan
- *  @description: create a new role
+ *  @description: Create a new role
  */
 export const createOrUpdateRole = (params: RoleInfo, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
@@ -33,7 +33,7 @@ export const createOrUpdateRole = (params: RoleInfo, mode: ErrorMessageMode = 'm
 
 /**
  *  author: Ryan Su
- *  @description: delete a role
+ *  @description: Delete a role
  */
 export const deleteRole = (params: BaseIdReq, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
@@ -46,7 +46,7 @@ export const deleteRole = (params: BaseIdReq, mode: ErrorMessageMode = 'message'
 
 /**
  *  author: Ryan Su
- *  @description: set role's status
+ *  @description: Set role's status
  */
 export const setRoleStatus = (id: number, status: number) =>
   defHttp.post({ url: Api.SetRoleStatus, params: { id, status } });

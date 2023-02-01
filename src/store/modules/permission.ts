@@ -222,7 +222,8 @@ export const usePermissionStore = defineStore({
           let routeList: AppRouteRecordRaw[] = [];
           try {
             await this.changePermissionCode();
-            routeList = (await getMenuList()) as AppRouteRecordRaw[];
+            const menus = await getMenuList();
+            routeList = menus.data.data as AppRouteRecordRaw[];
           } catch (error) {
             console.error(error);
           }
@@ -246,7 +247,6 @@ export const usePermissionStore = defineStore({
           break;
       }
 
-      routes.push(ERROR_LOG_ROUTE);
       patchHomeAffix(routes);
       return routes;
     },

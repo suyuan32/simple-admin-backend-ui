@@ -1,6 +1,6 @@
 import type { BasicColumn, BasicTableProps, CellFormat, GetColumnsParams } from '../types/table';
 import type { PaginationProps } from '../types/pagination';
-import type { ComputedRef } from 'vue';
+import type { ComputedRef, VNode } from 'vue';
 import { computed, Ref, ref, reactive, toRaw, unref, watch } from 'vue';
 import { renderEditCell } from '../components/editable';
 import { usePermission } from '/@/hooks/web/usePermission';
@@ -15,7 +15,7 @@ function handleItem(item: BasicColumn, ellipsis: boolean) {
   item.align = item.align || DEFAULT_ALIGN;
   if (ellipsis) {
     if (!key) {
-      item.key = dataIndex;
+      item.key = dataIndex as string | number;
     }
     if (!isBoolean(item.ellipsis)) {
       Object.assign(item, {
@@ -156,7 +156,7 @@ export function useColumns(
 
         if (!slots || !slots?.title) {
           // column.slots = { title: `header-${dataIndex}`, ...(slots || {}) };
-          column.customTitle = column.title;
+          column.customTitle = column.title as VNode;
           Reflect.deleteProperty(column, 'title');
         }
         const isDefaultAction = [INDEX_COLUMN_FLAG, ACTION_COLUMN_FLAG].includes(flag!);

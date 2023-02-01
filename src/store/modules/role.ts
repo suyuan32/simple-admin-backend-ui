@@ -21,7 +21,7 @@ export const useRoleStore = defineStore('app-role', {
         page: 1,
         pageSize: 1000,
       });
-      this.roleInfo = roleInfo.data;
+      this.roleInfo = roleInfo.data.data;
     },
   },
 });

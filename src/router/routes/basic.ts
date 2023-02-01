@@ -1,5 +1,4 @@
 import type { AppRouteRecordRaw } from '/@/router/types';
-import { t } from '/@/hooks/web/useI18n';
 import {
   REDIRECT_NAME,
   LAYOUT,
