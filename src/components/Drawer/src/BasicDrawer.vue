@@ -16,6 +16,10 @@
       <slot name="title"></slot>
     </template>
 
+    <template #extra>
+      <slot name="extra"></slot>
+    </template>
+
     <ScrollContainer
       :style="getScrollContentStyle"
       v-loading="getLoading"
