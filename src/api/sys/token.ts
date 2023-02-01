@@ -2,12 +2,10 @@ import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode } from '/#/axios';
 import {
   BaseDataResp,
-  BaseIdReq,
-  BaseIdsReq,
   BasePageReq,
   BaseResp,
   BaseUUIDReq,
-  BaseUUIDsReq
+  BaseUUIDsReq,
 } from '/@/api/model/baseModel';
 import { TokenInfo, TokenListResp } from './model/tokenModel ';
 
