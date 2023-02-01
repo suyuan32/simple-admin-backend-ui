@@ -224,7 +224,7 @@
           path: '',
           redirect: '',
           component: '',
-          orderNo: 0,
+          sort: 0,
           disabled: false,
           title: 'sys.menu.rootMenu',
           trans: t('sys.menu.rootMenu'),

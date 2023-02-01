@@ -13,7 +13,7 @@ export interface RoleInfo {
   defaultRouter: string;
   status: number;
   remark: string;
-  orderNo: number;
+  sort: number;
 }
 
 /**

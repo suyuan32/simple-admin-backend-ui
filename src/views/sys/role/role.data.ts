@@ -26,7 +26,7 @@ export const columns: BasicColumn[] = [
   },
   {
     title: t('common.order'),
-    dataIndex: 'orderNo',
+    dataIndex: 'sort',
     width: 50,
   },
   {
@@ -95,7 +95,7 @@ export const formSchema: FormSchema[] = [
     rules: [{ max: 20 }],
   },
   {
-    field: 'orderNo',
+    field: 'sort',
     label: t('sys.menu.order'),
     defaultValue: 0,
     component: 'InputNumber',

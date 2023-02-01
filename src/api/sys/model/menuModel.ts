@@ -43,7 +43,7 @@ export interface MenuListItem {
   name: string;
   redirect: string;
   component: string;
-  orderNo: number;
+  sort: number;
   disabled: boolean;
   title: string;
   icon: string;
@@ -79,7 +79,7 @@ export interface CreateOrUpdateMenuReq {
   name: string;
   redirect: string;
   component: string;
-  orderNo: number;
+  sort: number;
   disabled: boolean;
   title: string;
   icon: string;

@@ -43,7 +43,7 @@ const isRoleMode = () => {
 const staticMenus: Menu[] = [];
 (() => {
   menuModules.sort((a, b) => {
-    return (a.orderNo || 0) - (b.orderNo || 0);
+    return (a.sort || 0) - (b.sort || 0);
   });
 
   for (const menu of menuModules) {
