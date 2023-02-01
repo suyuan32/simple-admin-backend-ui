@@ -21,7 +21,6 @@
     "noImplicitAny": false,
     "skipLibCheck": true,
     "types": ["vite/client"],
-    "typeRoots": ["./node_modules/@types/", "./types"],
     "removeComments": true,
     "paths": {
       "/@/*": ["src/*"],

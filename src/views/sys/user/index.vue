@@ -133,8 +133,8 @@
           icon: createVNode(ExclamationCircleOutlined),
           async onOk() {
             const ids = selectedIds.value as string[];
-            const rowData = getSelectRows()
-            if (rowData.filter(row => row.nickname === 'admin').length > 0) {
+            const rowData = getSelectRows();
+            if (rowData.filter((row) => row.nickname === 'admin').length > 0) {
               createMessage.warn(t('common.notAllowDeleteAdminData'));
               return;
             }
