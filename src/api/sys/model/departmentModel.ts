@@ -13,6 +13,7 @@ export interface DepartmentInfo {
   phone: string;
   email: string;
   sort: number;
+  remark: string;
   parentId: number;
 }
 

@@ -8,6 +8,7 @@ enum Api {
   GetDepartmentList = '/sys-api/department/list',
   DeleteDepartment = '/sys-api/department/delete',
   BatchDeleteDepartment = '/sys-api/department/batch_delete',
+  SetDepartmentStatus = '/sys-api/department/status',
 }
 
 /**
@@ -56,3 +57,9 @@ export const batchDeleteDepartment = (params: BaseIdsReq, mode: ErrorMessageMode
     },
   );
 };
+
+/**
+ *  @description: set the department status
+ */
+export const setDepartmentStatus = (id: string, status: number) =>
+  defHttp.post({ url: Api.SetDepartmentStatus, params: { id, status } });

@@ -28,7 +28,7 @@ export const getTokenList = (params: BaseListReq) => {
 
 /**
  *  author: ryan
- *  @description: create or update a new token
+ *  @description: Create or update a new token
  */
 export const createOrUpdateApi = (params: TokenInfo, mode: ErrorMessageMode = 'modal') => {
   return defHttp.post<BaseResp>(
@@ -41,7 +41,7 @@ export const createOrUpdateApi = (params: TokenInfo, mode: ErrorMessageMode = 'm
 
 /**
  *  author: Ryan Su
- *  @description: delete a token
+ *  @description: Delete a token
  */
 export const deleteToken = (params: BaseUUIDReq, mode: ErrorMessageMode = 'modal') => {
   return defHttp.post<BaseResp>(
@@ -54,7 +54,7 @@ export const deleteToken = (params: BaseUUIDReq, mode: ErrorMessageMode = 'modal
 
 /**
  *  author: Ryan Su
- *  @description: batch delete tokens
+ *  @description: Batch delete tokens
  */
 export const batchDeleteToken = (params: BaseUUIDsReq, mode: ErrorMessageMode = 'modal') => {
   return defHttp.post<BaseResp>(
@@ -67,7 +67,7 @@ export const batchDeleteToken = (params: BaseUUIDsReq, mode: ErrorMessageMode = 
 
 /**
  *  author: Ryan Su
- *  @description: set the token status
+ *  @description: Set the token status
  */
 export const setTokenStatus = (id: string, status: number) =>
   defHttp.post({ url: Api.SetTokenStatus, params: { id, status } });
