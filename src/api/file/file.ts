@@ -1,7 +1,7 @@
 import { UploadApiResult } from '../sys/model/uploadModel';
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode, UploadFileParams } from '/#/axios';
-import { BaseDataResp, BaseIdReq, BasePageReq, BaseResp } from '../model/baseModel';
+import { BaseDataResp, BaseIdReq, BaseListReq, BaseResp } from '../model/baseModel';
 import { FileListResp, updateFileInfoReq } from './model/fileModel';
 
 enum Api {
@@ -32,7 +32,7 @@ export function uploadApi(
  * @description: Get file list
  */
 
-export const getFileList = (params: BasePageReq) => {
+export const getFileList = (params: BaseListReq) => {
   return defHttp.post<BaseDataResp<FileListResp>>({ url: Api.GetFileList, params });
 };
 

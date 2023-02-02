@@ -1,4 +1,4 @@
-export interface BasePageReq {
+export interface BaseListReq {
   page: number;
   pageSize: number;
 }

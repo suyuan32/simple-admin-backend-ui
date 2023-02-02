@@ -238,4 +238,17 @@ export default {
     // noun
     tokenList: 'Token列表',
   },
+  department: {
+    status: '状态',
+    name: '部门名称',
+    ancestors: '父级列表',
+    leader: '部门负责人',
+    phone: '电话号码',
+    email: '电子邮箱',
+    sort: '排序',
+    parentId: '父级ID',
+    addDepartment: '添加部门',
+    editDepartment: '编辑部门',
+    departmentList: '部门列表',
+  },
 };

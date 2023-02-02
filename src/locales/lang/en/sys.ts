@@ -244,4 +244,17 @@ export default {
     // noun
     tokenList: 'Token List',
   },
+  department: {
+    status: 'Status',
+    name: 'Name',
+    ancestors: 'Ancestors',
+    leader: 'Leader',
+    phone: 'Phone',
+    email: 'Email',
+    sort: 'Sort',
+    parentId: 'ParentId',
+    addDepartment: 'Add Department',
+    editDepartment: 'Edit Department',
+    departmentList: 'Department List',
+  },
 };

@@ -1,6 +1,6 @@
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode } from '/#/axios';
-import { BaseDataResp, BaseIdReq, BasePageReq, BaseResp } from '/@/api/model/baseModel';
+import { BaseDataResp, BaseIdReq, BaseListReq, BaseResp } from '/@/api/model/baseModel';
 import { RoleInfo, RoleListResp } from './model/roleModel';
 
 enum Api {
@@ -14,7 +14,7 @@ enum Api {
  * @description: Get user menu based on role id
  */
 
-export const getRoleList = (params: BasePageReq) => {
+export const getRoleList = (params: BaseListReq) => {
   return defHttp.post<BaseDataResp<RoleListResp>>({ url: Api.GetRoleList, params });
 };
 
