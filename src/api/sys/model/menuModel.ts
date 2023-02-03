@@ -49,7 +49,7 @@ export interface MenuListItem {
   icon: string;
   hideMenu: boolean;
   hideBreadcrumb: boolean;
-  currentActiveMenu: string;
+  currentActiveMenu?: string;
   ignoreKeepAlive: boolean;
   hideTab: boolean;
   frameSrc: string;
@@ -58,7 +58,8 @@ export interface MenuListItem {
   affix: boolean;
   dynamicLevel: number;
   realPath: string;
-  children: MenuListItem[];
+  createdAt?: number;
+  updatedAt?: number;
 }
 
 /**

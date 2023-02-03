@@ -13,9 +13,10 @@
   import { computed, defineComponent, watch, ref, onMounted, unref } from 'vue';
   import { TreeSelect } from 'ant-design-vue';
   import { isArray, isFunction } from '/@/utils/is';
-  import { get } from 'lodash-es';
+  import { get, map, pick } from 'lodash-es';
   import { propTypes } from '/@/utils/propTypes';
   import { LoadingOutlined } from '@ant-design/icons-vue';
+  import { array2tree } from '@axolo/tree-array';
   export default defineComponent({
     name: 'ApiTreeSelect',
     components: { ATreeSelect: TreeSelect, LoadingOutlined },
@@ -24,6 +25,12 @@
       params: { type: Object },
       immediate: { type: Boolean, default: true },
       resultField: propTypes.string.def(''),
+      labelField: propTypes.string.def(''),
+      valueField: propTypes.string.def(''),
+      idKeyField: propTypes.string.def('id'),
+      parentKeyField: propTypes.string.def('parentId'),
+      childrenKeyField: propTypes.string.def('children'),
+      defaultValue: { type: Object },
     },
     emits: ['options-change', 'change'],
     setup(props, { attrs, emit }) {
@@ -76,7 +83,40 @@
         if (!isArray(result)) {
           result = get(result, props.resultField);
         }
-        treeData.value = (result as Recordable[]) || [];
+
+        const treeNodeData = map(result, (obj) => {
+          let tmpData = pick(obj, [
+            props.labelField,
+            props.idKeyField,
+            props.valueField,
+            props.parentKeyField,
+          ]);
+          Object.keys(tmpData).forEach((e) => {
+            if (e === props.labelField) {
+              tmpData['label'] = tmpData[e];
+              delete tmpData[e];
+            } else if (e === props.valueField) {
+              tmpData['value'] = tmpData[e];
+              if (e !== props.idKeyField && e !== props.parentKeyField) {
+                delete tmpData[e];
+              }
+            }
+          });
+          return tmpData;
+        });
+
+        let treeConv = array2tree(treeNodeData, {
+          idKey: props.idKeyField,
+          parentKey: props.parentKeyField,
+          childrenKey: props.childrenKeyField,
+        });
+
+        // add default label
+        if (props.defaultValue) {
+          treeConv.push(props.defaultValue);
+        }
+
+        treeData.value = treeConv;
         isFirstLoaded.value = true;
         emit('options-change', treeData.value);
       }
