@@ -52,7 +52,6 @@
     convertApiCheckedKeysToReq,
     convertApiToCheckedKeys,
     convertApiTreeData,
-    convertMenuTreeData,
     formSchema,
   } from './role.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
@@ -69,9 +68,9 @@
     getMenuAuthority,
   } from '/@/api/sys/authority';
   import { DataNode } from 'ant-design-vue/lib/tree';
-  import console from 'console';
   import { BaseDataResp } from '/@/api/model/baseModel';
   import { ApiListResp } from '/@/api/sys/model/apiModel';
+  import { buildDataNode } from '/@/utils/tree';
 
   export default defineComponent({
     name: 'RoleDrawer',
@@ -98,10 +97,14 @@
         try {
           treeMenuData.value = [];
           const data = await getAllMenu();
-          const dataConv = convertMenuTreeData(data.data.data);
-          for (const key in dataConv) {
-            treeMenuData.value.push(dataConv[key]);
-          }
+          treeMenuData.value = buildDataNode(data.data.data, {
+            idKeyField: 'id',
+            parentKeyField: 'parentId',
+            childrenKeyField: 'children',
+            valueField: 'id',
+            labelField: 'trans',
+          });
+
           const roleId = await validate();
           const checkedData = await getMenuAuthority({ id: Number(roleId['id']) });
           checkedMenuKeys.value = checkedData.data.menuIds;
@@ -130,14 +133,21 @@
           }
           const roleId = await validate();
           const checkedData = await getApiAuthority({ id: Number(roleId['id']) });
-          checkedApiKeys.value = convertApiToCheckedKeys(checkedData.data.data, apiData.data.data);
+          if (checkedData.data.data === null) {
+            checkedApiKeys.value = [];
+          } else {
+            checkedApiKeys.value = convertApiToCheckedKeys(
+              checkedData.data.data,
+              apiData.data.data,
+            );
+          }
         } catch (error) {
           console.log(error);
         }
       }
       // watch the change of children drawer
       watch(childrenDrawer, () => {
-        if (childrenDrawer.value == true) {
+        if (childrenDrawer.value === true) {
           getMenuData();
           getApiData();
         }

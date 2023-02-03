@@ -5,7 +5,6 @@ import { Switch } from 'ant-design-vue';
 import { setRoleStatus } from '/@/api/sys/role';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { useI18n } from '/@/hooks/web/useI18n';
-import { MenuListItem } from '/@/api/sys/model/menuModel';
 import { DataNode } from 'ant-design-vue/lib/tree';
 import { ApiInfo } from '/@/api/sys/model/apiModel';
 import { ApiAuthorityInfo } from '/@/api/sys/model/authorityModel';
@@ -135,31 +134,6 @@ export const formSchema: FormSchema[] = [
     rules: [{ max: 200 }],
   },
 ];
-
-/**
- *  author: Ryan Su
- *  @description: this function is used to convert menu data into tree node data
- */
-
-export function convertMenuTreeData(params: MenuListItem[] | undefined): DataNode[] {
-  if (params === undefined) {
-    return [];
-  }
-  const data: DataNode[] = [];
-  for (const key in params) {
-    const tmp: DataNode = {
-      title: t(params[key].trans),
-      key: params[key].id,
-      children: [],
-    };
-    // console.log(tmp.key);
-    if (params[key].children !== undefined) {
-      tmp.children = convertMenuTreeData(params[key].children);
-    }
-    data.push(tmp);
-  }
-  return data;
-}
 
 /**
  *  author: Ryan Su
