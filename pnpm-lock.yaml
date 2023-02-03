@@ -8,6 +8,7 @@ overrides:
 specifiers:
   '@ant-design/colors': ^7.0.0
   '@ant-design/icons-vue': ^6.1.0
+  '@axolo/tree-array': ^0.0.6
   '@commitlint/cli': ^17.4.2
   '@commitlint/config-conventional': ^17.4.2
   '@iconify/iconify': ^3.1.0
@@ -128,6 +129,7 @@ specifiers:
 dependencies:
   '@ant-design/colors': 7.0.0
   '@ant-design/icons-vue': 6.1.0_vue@3.2.45
+  '@axolo/tree-array': 0.0.6
   '@iconify/iconify': 3.1.0
   '@logicflow/core': 1.1.31
   '@logicflow/extension': 1.1.31
@@ -298,6 +300,10 @@ packages:
       jsonpointer: 5.0.1
       leven: 3.1.0
     dev: true
+
+  /@axolo/tree-array/0.0.6:
+    resolution: {integrity: sha512-x+qBwPSnkCX6hoNsEka699KPWoNDOSrlrAIg9W710KKTsQ/Gj4FdLsdw4QitD6pP+XZzi7lMER7kGWofRZ2SyQ==}
+    dev: false
 
   /@babel/code-frame/7.18.6:
     resolution: {integrity: sha512-TDCmlK5eOvH+eH7cdAFlNXeVJqWIQ7gW9tY1GJIpUtFb6CmjVyq2VM3u71bOyR8CRihcCgMUYoDNyLXao3+70Q==}

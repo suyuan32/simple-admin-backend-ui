@@ -129,6 +129,12 @@ export interface FetchSetting {
   totalField: string;
 }
 
+export interface TreeConfig {
+  id: string;
+  parentId: string;
+  childrenField?: string;
+}
+
 export interface TableSetting {
   redo?: boolean;
   size?: boolean;
@@ -140,6 +146,7 @@ export interface BasicTableProps<T = any> {
   // 点击行选中
   clickToRowSelect?: boolean;
   isTreeTable?: boolean;
+  treeConfig?: TreeConfig;
   // 自定义排序方法
   sortFn?: (sortInfo: SorterResult) => any;
   // 排序方法

@@ -73,6 +73,8 @@
           labelWidth: 120,
           schemas: searchFormSchema,
         },
+        isTreeTable: true,
+        treeConfig: { id: 'id', parentId: 'parentId', childrenField: 'children' },
         useSearchForm: true,
         showTableSetting: true,
         bordered: true,
