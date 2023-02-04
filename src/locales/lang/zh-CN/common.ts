@@ -65,4 +65,5 @@ export default {
   notAllowDelete: '禁止删除该数据',
   notAllowDeleteAdminData: '禁止删除管理员数据',
   notAllowChangeStatus: '禁止改变目标状态',
+  notAllowSameAsParentId: '父级ID不能和自身ID相同',
 };

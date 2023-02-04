@@ -13,10 +13,10 @@
   import { computed, defineComponent, watch, ref, onMounted, unref } from 'vue';
   import { TreeSelect } from 'ant-design-vue';
   import { isArray, isFunction } from '/@/utils/is';
-  import { get, map, pick } from 'lodash-es';
+  import { get } from 'lodash-es';
   import { propTypes } from '/@/utils/propTypes';
   import { LoadingOutlined } from '@ant-design/icons-vue';
-  import { array2tree } from '@axolo/tree-array';
+  import { buildTreeNode } from '/@/utils/tree';
   export default defineComponent({
     name: 'ApiTreeSelect',
     components: { ATreeSelect: TreeSelect, LoadingOutlined },
@@ -83,40 +83,14 @@
         if (!isArray(result)) {
           result = get(result, props.resultField);
         }
-
-        const treeNodeData = map(result, (obj) => {
-          let tmpData = pick(obj, [
-            props.labelField,
-            props.idKeyField,
-            props.valueField,
-            props.parentKeyField,
-          ]);
-          Object.keys(tmpData).forEach((e) => {
-            if (e === props.labelField) {
-              tmpData['label'] = tmpData[e];
-              delete tmpData[e];
-            } else if (e === props.valueField) {
-              tmpData['value'] = tmpData[e];
-              if (e !== props.idKeyField && e !== props.parentKeyField) {
-                delete tmpData[e];
-              }
-            }
-          });
-          return tmpData;
+        treeData.value = buildTreeNode(result, {
+          idKeyField: props.idKeyField,
+          parentKeyField: props.parentKeyField,
+          childrenKeyField: props.childrenKeyField,
+          valueField: props.valueField,
+          labelField: props.labelField,
+          defaultValue: props.defaultValue,
         });
-
-        let treeConv = array2tree(treeNodeData, {
-          idKey: props.idKeyField,
-          parentKey: props.parentKeyField,
-          childrenKey: props.childrenKeyField,
-        });
-
-        // add default label
-        if (props.defaultValue) {
-          treeConv.push(props.defaultValue);
-        }
-
-        treeData.value = treeConv;
         isFirstLoaded.value = true;
         emit('options-change', treeData.value);
       }
