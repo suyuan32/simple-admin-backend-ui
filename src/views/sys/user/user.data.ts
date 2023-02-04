@@ -159,14 +159,8 @@ export const formSchema: FormSchema[] = [
   {
     field: 'homePath',
     label: t('sys.user.homePath'),
-    required: true,
-    component: 'Input',
-    rules: [{ max: 30 }],
-  },
-  {
-    field: 'nickname',
-    label: t('sys.user.nickname'),
-    required: true,
+    required: false,
+    defaultValue: '/dashboard',
     component: 'Input',
     rules: [{ max: 30 }],
   },
@@ -210,7 +204,7 @@ export const formSchema: FormSchema[] = [
     label: t('sys.department.userDepartment'),
     component: 'ApiTreeSelect',
     required: true,
-    defaultValue: 0,
+    defaultValue: 1,
     componentProps: {
       api: getDepartmentList,
       params: {

@@ -231,7 +231,7 @@
 
         values['id'] = unref(isUpdate) ? Number(values['id']) : 0;
 
-        if (values['parentId'] === values['id']) {
+        if (values['parentId'] === values['id'] && unref(isUpdate)) {
           createMessage.error(t('common.notAllowSameAsParentId'));
           setDrawerProps({ confirmLoading: false });
           return;

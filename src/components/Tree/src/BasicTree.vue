@@ -418,7 +418,11 @@
       return () => {
         const { title, helpMessage, toolbar, search, checkable } = props;
         const showTitle = title || toolbar || search || slots.headerTitle;
-        const scrollStyle: CSSProperties = { height: 'calc(100% - 38px)' };
+        const scrollStyle: CSSProperties = {
+          height: 'calc(100% - 38px)',
+          paddingTop: '1rem',
+          paddingRight: '1rem',
+        };
         return (
           <div class={[bem(), 'h-full', attrs.class]}>
             {showTitle && (
