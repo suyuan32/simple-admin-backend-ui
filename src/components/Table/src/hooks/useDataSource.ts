@@ -16,6 +16,7 @@ import { buildUUID } from '/@/utils/uuid';
 import { isFunction, isBoolean, isObject } from '/@/utils/is';
 import { get, cloneDeep, merge } from 'lodash-es';
 import { FETCH_SETTING, ROW_KEY, PAGE_SIZE } from '../const';
+import { array2tree } from '@axolo/tree-array';
 
 interface ActionType {
   getPaginationInfo: ComputedRef<boolean | PaginationProps>;
@@ -264,6 +265,7 @@ export function useDataSource(
       afterFetch,
       useSearchForm,
       pagination,
+      isTreeTable,
     } = unref(propsRef);
     if (!api || !isFunction(api)) return;
     try {
@@ -301,14 +303,24 @@ export function useDataSource(
         params = (await beforeFetch(params)) || params;
       }
 
+      let isArrayResult: boolean;
+      let resultItems: Recordable[];
+      let resultTotal: number;
+
       const result = await api(params);
       const res = result.data;
-      rawDataSourceRef.value = res;
-
-      const isArrayResult = Array.isArray(res);
-
-      let resultItems: Recordable[] = isArrayResult ? res : get(res, listField);
-      const resultTotal: number = isArrayResult ? res.length : get(res, totalField);
+      if (isTreeTable) {
+        const tree = array2tree(res.data);
+        rawDataSourceRef.value = tree;
+        isArrayResult = Array.isArray(tree);
+        resultItems = isArrayResult ? tree : get(tree, listField);
+        resultTotal = isArrayResult ? tree.length : get(tree, totalField);
+      } else {
+        rawDataSourceRef.value = res;
+        isArrayResult = Array.isArray(res);
+        resultItems = isArrayResult ? res : get(res, listField);
+        resultTotal = isArrayResult ? res.length : get(res, totalField);
+      }
 
       // 假如数据变少，导致总页数变少并小于当前选中页码，通过getPaginationRef获取到的页码是不正确的，需获取正确的页码再次执行
       if (resultTotal) {

@@ -16,6 +16,7 @@
   import { get } from 'lodash-es';
   import { propTypes } from '/@/utils/propTypes';
   import { LoadingOutlined } from '@ant-design/icons-vue';
+  import { buildTreeNode } from '/@/utils/tree';
   export default defineComponent({
     name: 'ApiTreeSelect',
     components: { ATreeSelect: TreeSelect, LoadingOutlined },
@@ -24,6 +25,12 @@
       params: { type: Object },
       immediate: { type: Boolean, default: true },
       resultField: propTypes.string.def(''),
+      labelField: propTypes.string.def(''),
+      valueField: propTypes.string.def(''),
+      idKeyField: propTypes.string.def('id'),
+      parentKeyField: propTypes.string.def('parentId'),
+      childrenKeyField: propTypes.string.def('children'),
+      defaultValue: { type: Object },
     },
     emits: ['options-change', 'change'],
     setup(props, { attrs, emit }) {
@@ -76,7 +83,14 @@
         if (!isArray(result)) {
           result = get(result, props.resultField);
         }
-        treeData.value = (result as Recordable[]) || [];
+        treeData.value = buildTreeNode(result, {
+          idKeyField: props.idKeyField,
+          parentKeyField: props.parentKeyField,
+          childrenKeyField: props.childrenKeyField,
+          valueField: props.valueField,
+          labelField: props.labelField,
+          defaultValue: props.defaultValue,
+        });
         isFirstLoaded.value = true;
         emit('options-change', treeData.value);
       }

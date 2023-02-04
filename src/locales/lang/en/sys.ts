@@ -189,6 +189,8 @@ export default {
     avatar: 'Avatar',
     oldPassword: 'Old Password',
     newPassword: 'New Password',
+    description: 'User description',
+    homePath: 'User home page',
     // action
     addUser: 'Add User',
     editUser: 'Edit User',
@@ -243,5 +245,20 @@ export default {
   token: {
     // noun
     tokenList: 'Token List',
+  },
+  department: {
+    status: 'Status',
+    name: 'Name',
+    ancestors: 'Ancestors',
+    leader: 'Leader',
+    phone: 'Phone',
+    email: 'Email',
+    sort: 'Sort',
+    parentId: 'ParentId',
+    addDepartment: 'Add Department',
+    editDepartment: 'Edit Department',
+    departmentList: 'Department List',
+    firstLevelDepartment: 'First level department',
+    userDepartment: 'Department',
   },
 };

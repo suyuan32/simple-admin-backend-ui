@@ -5,10 +5,12 @@ import { Tag } from 'ant-design-vue';
 import { Icon } from '/@/components/Icon';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { formatToDateTime } from '/@/utils/dateUtil';
+import { getAllMenu } from '/@/api/sys/menu';
+import { ColumnType } from 'ant-design-vue/lib/table';
 
 const { t } = useI18n();
 
-export const extraParamColumns = [
+export const extraParamColumns: ColumnType[] = [
   {
     title: 'ID',
     dataIndex: 'id',
@@ -140,17 +142,20 @@ export const formSchema: FormSchema[] = [
   {
     field: 'parentId',
     label: t('sys.menu.menuParent'),
-    component: 'TreeSelect',
+    component: 'ApiTreeSelect',
     required: true,
+    defaultValue: 0,
     componentProps: {
-      // set the field name of the data from the server, the below show that
-      // the label show the field of data.name
-      fieldNames: {
-        label: 'trans',
-        key: 'id',
-        value: 'id',
+      api: getAllMenu,
+      resultField: 'data.data',
+      labelField: 'trans',
+      valueField: 'id',
+      defaultValue: {
+        id: 0,
+        parentId: -1,
+        label: t('sys.menu.rootMenu'),
+        value: 0,
       },
-      getPopupContainer: () => document.body,
     },
   },
   {

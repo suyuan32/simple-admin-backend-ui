@@ -73,6 +73,8 @@ export interface UserInfo {
   roleId: number;
   avatar: string;
   status: number;
+  homePath: string;
+  desc: string;
   password?: string;
   createdAt?: number;
   updatedAt?: number;

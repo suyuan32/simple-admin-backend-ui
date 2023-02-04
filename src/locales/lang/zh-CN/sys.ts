@@ -183,6 +183,8 @@ export default {
     avatar: '头像',
     oldPassword: '旧密码',
     newPassword: '新密码',
+    description: '用户描述',
+    homePath: '用户首页',
     // action
     addUser: '新增用户',
     editUser: '编辑用户',
@@ -237,5 +239,20 @@ export default {
   token: {
     // noun
     tokenList: 'Token列表',
+  },
+  department: {
+    status: '状态',
+    name: '部门名称',
+    ancestors: '父级列表',
+    leader: '部门负责人',
+    phone: '电话号码',
+    email: '电子邮箱',
+    sort: '排序',
+    parentId: '父级ID',
+    addDepartment: '添加部门',
+    editDepartment: '编辑部门',
+    departmentList: '部门列表',
+    firstLevelDepartment: '一级部门',
+    userDepartment: '所属部门',
   },
 };

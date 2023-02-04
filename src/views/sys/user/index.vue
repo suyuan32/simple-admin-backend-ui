@@ -1,54 +1,62 @@
 <template>
-  <div>
-    <BasicTable @register="registerTable">
-      <template #tableTitle>
-        <Button type="primary" danger v-if="showDeleteButton" @click="handleBatchDelete()">
-          <template #icon><DeleteOutlined /></template>
-          {{ t('common.delete') }}
-        </Button>
-      </template>
-      <template #toolbar>
-        <a-button type="primary" @click="handleCreate"> {{ t('sys.user.addUser') }} </a-button>
-      </template>
-      <template #bodyCell="{ column, record }">
-        <template v-if="column.key === 'action'">
-          <TableAction
-            :actions="[
-              {
-                icon: 'clarity:note-edit-line',
-                onClick: handleEdit.bind(null, record),
-              },
-              {
-                icon: 'bx:log-out-circle',
-                color: 'error',
-                popConfirm: {
-                  title: t('sys.user.forceLoggingOut') + '?',
-                  placement: 'left',
-                  confirm: handleLogout.bind(null, record),
-                },
-              },
-              {
-                icon: 'ant-design:delete-outlined',
-                color: 'error',
-                popConfirm: {
-                  title: t('common.deleteConfirm'),
-                  placement: 'left',
-                  confirm: handleDelete.bind(null, record),
-                },
-              },
-            ]"
-          />
-        </template>
-      </template>
-    </BasicTable>
+  <PageWrapper dense contentFullHeight>
+    <Row>
+      <Col :span="5">
+        <DeptTree @select="handleSelect" />
+      </Col>
+      <Col :span="19">
+        <BasicTable @register="registerTable" :searchInfo="searchInfo">
+          <template #tableTitle>
+            <Button type="primary" danger v-if="showDeleteButton" @click="handleBatchDelete()">
+              <template #icon><DeleteOutlined /></template>
+              {{ t('common.delete') }}
+            </Button>
+          </template>
+          <template #toolbar>
+            <a-button type="primary" @click="handleCreate"> {{ t('sys.user.addUser') }} </a-button>
+          </template>
+          <template #bodyCell="{ column, record }">
+            <template v-if="column.key === 'action'">
+              <TableAction
+                :actions="[
+                  {
+                    icon: 'clarity:note-edit-line',
+                    onClick: handleEdit.bind(null, record),
+                  },
+                  {
+                    icon: 'bx:log-out-circle',
+                    color: 'error',
+                    popConfirm: {
+                      title: t('sys.user.forceLoggingOut') + '?',
+                      placement: 'left',
+                      confirm: handleLogout.bind(null, record),
+                    },
+                  },
+                  {
+                    icon: 'ant-design:delete-outlined',
+                    color: 'error',
+                    popConfirm: {
+                      title: t('common.deleteConfirm'),
+                      placement: 'left',
+                      confirm: handleDelete.bind(null, record),
+                    },
+                  },
+                ]"
+              />
+            </template>
+          </template>
+        </BasicTable>
+      </Col>
+    </Row>
     <UserDrawer @register="registerDrawer" @success="handleSuccess" />
-  </div>
+  </PageWrapper>
 </template>
 <script lang="ts">
-  import { createVNode, defineComponent, ref } from 'vue';
+  import { createVNode, defineComponent, reactive, ref } from 'vue';
   import { Button, Modal } from 'ant-design-vue';
   import { ExclamationCircleOutlined, DeleteOutlined } from '@ant-design/icons-vue/lib/icons';
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import DeptTree from './DeptTree.vue';
 
   import { useDrawer } from '/@/components/Drawer';
   import UserDrawer from './UserDrawer.vue';
@@ -59,15 +67,29 @@
   import { useRoleStore } from '/@/store/modules/role';
   import { logout } from '/@/api/sys/token';
   import { useMessage } from '/@/hooks/web/useMessage';
+  import Row from 'ant-design-vue/es/grid/Row';
+  import Col from 'ant-design-vue/es/grid/Col';
+  import { PageWrapper } from '/@/components/Page';
 
   export default defineComponent({
     name: 'UserManagement',
-    components: { BasicTable, UserDrawer, TableAction, Button, DeleteOutlined },
+    components: {
+      BasicTable,
+      UserDrawer,
+      TableAction,
+      PageWrapper,
+      Button,
+      Row,
+      Col,
+      DeptTree,
+      DeleteOutlined,
+    },
     setup() {
       const { t } = useI18n();
       const { createMessage } = useMessage();
       const selectedIds = ref<number[] | string[]>();
       const showDeleteButton = ref<boolean>(false);
+      const searchInfo = reactive<Recordable>({});
 
       const [registerDrawer, { openDrawer }] = useDrawer();
       const roleStoreData = useRoleStore();
@@ -151,6 +173,11 @@
         });
       }
 
+      function handleSelect(deptId = '') {
+        searchInfo.departmentId = deptId;
+        reload();
+      }
+
       async function handleLogout(record: Recordable) {
         const result = await logout(record.UUID);
 
@@ -171,7 +198,9 @@
         handleDelete,
         handleSuccess,
         handleBatchDelete,
+        handleSelect,
         showDeleteButton,
+        searchInfo,
       };
     },
   });

@@ -103,13 +103,13 @@
   import { TableAction } from '/@/components/Table';
   import { useI18n } from 'vue-i18n';
   import {
-    getAllMenu,
     createOrUpdateMenu,
     deleteMenuParam,
     getMenuParamListByMenuId,
     createOrUpdateMenuParam,
   } from '/@/api/sys/menu';
-  import { MenuListItem, MenuParamInfo } from '/@/api/sys/model/menuModel';
+  import { MenuParamInfo } from '/@/api/sys/model/menuModel';
+  import { useMessage } from '/@/hooks/web/useMessage';
 
   export default defineComponent({
     name: 'MenuDrawer',
@@ -133,6 +133,7 @@
       const dataSource = ref<MenuParamInfo[]>([]);
       const modalVisible = ref<boolean>(false);
       const paramFormTitle = ref<string>('');
+      const { createMessage } = useMessage();
       // form model for menu parameters creating and updating
       const formData = reactive<paramFormData>({
         id: 0,
@@ -189,7 +190,7 @@
         }
       }
 
-      const [registerForm, { resetFields, setFieldsValue, updateSchema, validate }] = useForm({
+      const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
         labelWidth: 100,
         schemas: formSchema,
         showActionButtonGroup: false,
@@ -210,58 +211,6 @@
         if ('record' in data) {
           menuId.value = data.record.id;
         }
-
-        // get tree data from data.data
-        let treeData = await getAllMenu().then((data) => {
-          return data.data.data;
-        });
-
-        treeData.push({
-          name: 'root',
-          id: 1,
-          type: 0,
-          parentId: 1,
-          path: '',
-          redirect: '',
-          component: '',
-          sort: 0,
-          disabled: false,
-          title: 'sys.menu.rootMenu',
-          trans: t('sys.menu.rootMenu'),
-          icon: '',
-          hideMenu: false,
-          hideBreadcrumb: false,
-          currentActiveMenu: '',
-          ignoreKeepAlive: false,
-          hideTab: false,
-          frameSrc: '',
-          carryParam: false,
-          hideChildrenInMenu: false,
-          affix: false,
-          dynamicLevel: 0,
-          realPath: '',
-          children: [],
-        });
-
-        const travel = function (data: MenuListItem[]): MenuListItem[] {
-          if (data.length === 0) {
-            return data;
-          }
-          for (let i = 0; i < data.length; i++) {
-            data[i].title = t(data[i].title);
-            if (data[i].children !== null) {
-              data[i].children = travel(data[i].children);
-            }
-          }
-          return data;
-        };
-
-        treeData = travel(treeData);
-
-        updateSchema({
-          field: 'parentId',
-          componentProps: { treeData },
-        });
       });
 
       const getTitle = computed(() =>
@@ -281,6 +230,12 @@
         values['parentId'] = values['parentId'] ? Number(values['parentId']) : 0;
 
         values['id'] = unref(isUpdate) ? Number(values['id']) : 0;
+
+        if (values['parentId'] === values['id'] && unref(isUpdate)) {
+          createMessage.error(t('common.notAllowSameAsParentId'));
+          setDrawerProps({ confirmLoading: false });
+          return;
+        }
 
         const result = await createOrUpdateMenu(values);
         if (result.code === 0) {

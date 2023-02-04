@@ -3,7 +3,6 @@ import { ErrorMessageMode } from '/#/axios';
 import {
   RoleMenuResp,
   MenuListResp,
-  MenuParams,
   CreateOrUpdateMenuReq,
   MenuParamList,
   CreateOrUpdateMenuParamReq,
@@ -33,8 +32,8 @@ export const getMenuList = () => {
  *  @description: Get all the menus
  */
 
-export const getAllMenu = (params?: MenuParams) => {
-  return defHttp.get<BaseDataResp<MenuListResp>>({ url: Api.GetAllMenu, params });
+export const getAllMenu = () => {
+  return defHttp.get<BaseDataResp<MenuListResp>>({ url: Api.GetAllMenu });
 };
 
 /**
