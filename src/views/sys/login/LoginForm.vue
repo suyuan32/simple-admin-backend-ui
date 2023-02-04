@@ -153,6 +153,7 @@
         captcha: data.captcha,
         captchaId: data.captchaId,
         mode: 'message',
+        goHome: false,
       })
       .then(() => {
         loading.value = false;

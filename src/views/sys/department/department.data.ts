@@ -2,7 +2,7 @@ import { BasicColumn } from '/@/components/Table';
 import { FormSchema } from '/@/components/Table';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { formatToDateTime } from '/@/utils/dateUtil';
-import { setDepartmentStatus } from '/@/api/sys/department';
+import { getDepartmentList, setDepartmentStatus } from '/@/api/sys/department';
 import { Switch } from 'ant-design-vue';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { h } from 'vue';
@@ -12,13 +12,13 @@ const { t } = useI18n();
 export const columns: BasicColumn[] = [
   {
     title: t('sys.department.name'),
-    dataIndex: 'name',
-    width: 100,
+    dataIndex: 'trans',
+    width: 60,
   },
   {
     title: t('sys.department.leader'),
     dataIndex: 'leader',
-    width: 100,
+    width: 60,
   },
   {
     title: t('common.statusName'),
@@ -55,7 +55,7 @@ export const columns: BasicColumn[] = [
   {
     title: t('common.createTime'),
     dataIndex: 'createdAt',
-    width: 70,
+    width: 50,
     customRender: ({ record }) => {
       return formatToDateTime(record.createdAt);
     },
@@ -91,6 +91,31 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
   },
   {
+    field: 'parentId',
+    label: t('sys.department.parentId'),
+    component: 'ApiTreeSelect',
+    required: true,
+    defaultValue: 0,
+    componentProps: {
+      api: getDepartmentList,
+      params: {
+        page: 1,
+        pageSize: 1000,
+        name: '',
+        leader: '',
+      },
+      resultField: 'data.data',
+      labelField: 'trans',
+      valueField: 'id',
+      defaultValue: {
+        id: 0,
+        parentId: -1,
+        label: t('sys.department.firstLevelDepartment'),
+        value: 0,
+      },
+    },
+  },
+  {
     field: 'ancestors',
     label: t('sys.department.ancestors'),
     component: 'Input',
@@ -119,11 +144,6 @@ export const formSchema: FormSchema[] = [
     field: 'remark',
     label: t('common.remark'),
     component: 'Input',
-  },
-  {
-    field: 'parentId',
-    label: t('sys.department.parentId'),
-    component: 'InputNumber',
   },
   {
     field: 'status',

@@ -13,11 +13,10 @@
 <script lang="ts">
   import { defineComponent, ref, computed, unref } from 'vue';
   import { BasicForm, useForm } from '/@/components/Form/index';
-  import { formSchema, roleOptionData } from './user.data';
+  import { formSchema } from './user.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
   import { createOrUpdateUser } from '/@/api/sys/user';
-  import { getRoleList } from '/@/api/sys/role';
   import { useMessage } from '/@/hooks/web/useMessage';
 
   export default defineComponent({
@@ -29,7 +28,7 @@
       const { t } = useI18n();
       const { createMessage } = useMessage();
 
-      const [registerForm, { resetFields, setFieldsValue, validate, updateSchema }] = useForm({
+      const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
         labelWidth: 90,
         baseColProps: { span: 24 },
         schemas: formSchema,
@@ -47,19 +46,6 @@
             ...data.record,
           });
         }
-
-        const roleData = await getRoleList({
-          page: 1,
-          pageSize: 1000,
-        });
-
-        // update role schema of drawer
-        updateSchema({
-          field: 'roleId',
-          componentProps: {
-            options: roleOptionData(roleData.data.data, 0),
-          },
-        });
       });
 
       const getTitle = computed(() =>

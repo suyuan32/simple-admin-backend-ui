@@ -189,6 +189,8 @@ export default {
     avatar: 'Avatar',
     oldPassword: 'Old Password',
     newPassword: 'New Password',
+    description: 'User description',
+    homePath: 'User home page',
     // action
     addUser: 'Add User',
     editUser: 'Edit User',
@@ -256,5 +258,7 @@ export default {
     addDepartment: 'Add Department',
     editDepartment: 'Edit Department',
     departmentList: 'Department List',
+    firstLevelDepartment: 'First level department',
+    userDepartment: 'Department',
   },
 };

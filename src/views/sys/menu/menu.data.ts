@@ -153,7 +153,7 @@ export const formSchema: FormSchema[] = [
       defaultValue: {
         id: 0,
         parentId: -1,
-        label: '根菜单',
+        label: t('sys.menu.rootMenu'),
         value: 0,
       },
     },

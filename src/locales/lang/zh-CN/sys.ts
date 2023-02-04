@@ -183,6 +183,8 @@ export default {
     avatar: '头像',
     oldPassword: '旧密码',
     newPassword: '新密码',
+    description: '用户描述',
+    homePath: '用户首页',
     // action
     addUser: '新增用户',
     editUser: '编辑用户',
@@ -250,5 +252,7 @@ export default {
     addDepartment: '添加部门',
     editDepartment: '编辑部门',
     departmentList: '部门列表',
+    firstLevelDepartment: '一级部门',
+    userDepartment: '所属部门',
   },
 };

@@ -6,29 +6,10 @@ import { h } from 'vue';
 import { Switch } from 'ant-design-vue';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { setUserStatus } from '/@/api/sys/user';
-import { RoleInfo } from '/@/api/sys/model/roleModel';
+import { getRoleList } from '/@/api/sys/role';
+import { getDepartmentList } from '/@/api/sys/department';
 
 const { t } = useI18n();
-interface compOption {
-  label: string;
-  value: string | number;
-}
-
-// get role options data
-export const roleOptionData = (roleInfoInStore: RoleInfo[], type: number): compOption[] => {
-  const result: compOption[] = [];
-  // type 1 means search schema
-  if (type === 1) {
-    result.push({ label: '全部', value: 0 });
-  }
-  for (let i = 0; i < roleInfoInStore.length; i++) {
-    result.push({
-      label: roleInfoInStore[i].title,
-      value: roleInfoInStore[i].id,
-    });
-  }
-  return result;
-};
 
 export const columns: BasicColumn[] = [
   {
@@ -169,6 +150,27 @@ export const formSchema: FormSchema[] = [
     rules: [{ max: 30 }],
   },
   {
+    field: 'desc',
+    label: t('sys.user.description'),
+    required: false,
+    component: 'Input',
+    rules: [{ max: 30 }],
+  },
+  {
+    field: 'homePath',
+    label: t('sys.user.homePath'),
+    required: true,
+    component: 'Input',
+    rules: [{ max: 30 }],
+  },
+  {
+    field: 'nickname',
+    label: t('sys.user.nickname'),
+    required: true,
+    component: 'Input',
+    rules: [{ max: 30 }],
+  },
+  {
     field: 'mobile',
     label: t('sys.login.mobile'),
     component: 'Input',
@@ -191,9 +193,35 @@ export const formSchema: FormSchema[] = [
     field: 'roleId',
     label: t('sys.role.roleTitle'),
     required: true,
-    component: 'Select',
+    component: 'ApiSelect',
     componentProps: {
-      options: [],
+      api: getRoleList,
+      params: {
+        page: 1,
+        pageSize: 100,
+      },
+      resultField: 'data.data',
+      labelField: 'title',
+      valueField: 'id',
+    },
+  },
+  {
+    field: 'departmentId',
+    label: t('sys.department.userDepartment'),
+    component: 'ApiTreeSelect',
+    required: true,
+    defaultValue: 0,
+    componentProps: {
+      api: getDepartmentList,
+      params: {
+        page: 1,
+        pageSize: 1000,
+        name: '',
+        leader: '',
+      },
+      resultField: 'data.data',
+      labelField: 'trans',
+      valueField: 'id',
     },
   },
   {
