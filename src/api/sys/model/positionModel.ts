@@ -1,12 +1,11 @@
 import { BaseListResp } from '/@/api/model/baseModel';
 
 /**
- *  @description: Post info response
+ *  @description: Position info response
  */
-export interface PostInfo {
+export interface PositionInfo {
   id: number;
   createdAt?: number;
-  trans: string;
   sort: number;
   name: string;
   code: string;
@@ -14,7 +13,7 @@ export interface PostInfo {
 }
 
 /**
- *  @description: Post list response
+ *  @description: Position list response
  */
 
-export type PostListResp = BaseListResp<PostInfo>;
+export type PositionListResp = BaseListResp<PositionInfo>;

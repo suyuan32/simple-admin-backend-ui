@@ -76,7 +76,7 @@ export interface UserInfo {
   homePath: string;
   desc: string;
   departmentId: number;
-  postId: number;
+  positionId: number;
   password?: string;
   createdAt?: number;
   updatedAt?: number;

@@ -11,4 +11,5 @@ export default {
   oauthManagement: 'Oauth',
   tokenManagement: 'Token',
   otherPages: 'Other pages',
+  positionManagement: 'Position Management',
 };

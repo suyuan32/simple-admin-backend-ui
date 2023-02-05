@@ -9,7 +9,7 @@
       </template>
       <template #toolbar>
         <a-button type="primary" @click="handleCreate">
-          {{ t('sys.post.addPost') }}
+          {{ t('sys.position.addPosition') }}
         </a-button>
       </template>
       <template #bodyCell="{ column, record }">
@@ -34,7 +34,7 @@
         </template>
       </template>
     </BasicTable>
-    <PostDrawer @register="registerDrawer" @success="handleSuccess" />
+    <PositionDrawer @register="registerDrawer" @success="handleSuccess" />
   </div>
 </template>
 <script lang="ts">
@@ -44,16 +44,16 @@
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
 
   import { useDrawer } from '/@/components/Drawer';
-  import PostDrawer from './PostDrawer.vue';
+  import PositionDrawer from './PositionDrawer.vue';
   import { useI18n } from 'vue-i18n';
   import { useMessage } from '/@/hooks/web/useMessage';
 
-  import { columns, searchFormSchema } from './post.data';
-  import { getPostList, deletePost, batchDeletePost } from '/@/api/sys/post';
+  import { columns, searchFormSchema } from './position.data';
+  import { getPositionList, deletePosition, batchDeletePosition } from '/@/api/sys/position';
 
   export default defineComponent({
-    name: 'PostManagement',
-    components: { BasicTable, PostDrawer, TableAction, Button, DeleteOutlined },
+    name: 'PositionManagement',
+    components: { BasicTable, PositionDrawer, TableAction, Button, DeleteOutlined },
     setup() {
       const { t } = useI18n();
       const selectedIds = ref<number[] | string[]>();
@@ -62,8 +62,8 @@
       const [registerDrawer, { openDrawer }] = useDrawer();
       const { notification } = useMessage();
       const [registerTable, { reload }] = useTable({
-        title: t('sys.post.postList'),
-        api: getPostList,
+        title: t('sys.position.positionList'),
+        api: getPositionList,
         columns,
         formConfig: {
           labelWidth: 120,
@@ -104,7 +104,7 @@
       }
 
       async function handleDelete(record: Recordable) {
-        const result = await deletePost({ id: record.id }, 'modal');
+        const result = await deletePosition({ id: record.id }, 'modal');
         if (result.code === 0) {
           notification.success({
             message: t('common.successful'),
@@ -120,9 +120,17 @@
           title: t('common.deleteConfirm'),
           icon: createVNode(ExclamationCircleOutlined),
           async onOk() {
-            const result = await batchDeletePost({ ids: selectedIds.value as number[] }, 'modal');
+            const result = await batchDeletePosition(
+              { ids: selectedIds.value as number[] },
+              'modal',
+            );
             if (result.code === 0) {
               showDeleteButton.value = false;
+              notification.success({
+                message: t('common.successful'),
+                description: t(result.msg),
+                duration: 3,
+              });
               await reload();
             }
           },

@@ -13,14 +13,14 @@
 <script lang="ts">
   import { defineComponent, ref, computed, unref } from 'vue';
   import { BasicForm, useForm } from '/@/components/Form/index';
-  import { formSchema } from './post.data';
+  import { formSchema } from './position.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
 
-  import { createOrUpdatePost } from '/@/api/sys/post';
+  import { createOrUpdatePosition } from '/@/api/sys/position';
 
   export default defineComponent({
-    name: 'PostDrawer',
+    name: 'PositionDrawer',
     components: { BasicDrawer, BasicForm },
     emits: ['success', 'register'],
     setup(_, { emit }) {
@@ -48,14 +48,14 @@
       });
 
       const getTitle = computed(() =>
-        !unref(isUpdate) ? t('sys.post.addPost') : t('sys.post.editPost'),
+        !unref(isUpdate) ? t('sys.position.addPosition') : t('sys.position.editPosition'),
       );
 
       async function handleSubmit() {
         const values = await validate();
         setDrawerProps({ confirmLoading: true });
         values['id'] = unref(isUpdate) ? Number(values['id']) : 0;
-        let result = await createOrUpdatePost(values);
+        let result = await createOrUpdatePosition(values);
         if (result.code === 0) {
           closeDrawer();
           emit('success');

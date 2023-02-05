@@ -8,7 +8,7 @@ import { useMessage } from '/@/hooks/web/useMessage';
 import { setUserStatus } from '/@/api/sys/user';
 import { getRoleList } from '/@/api/sys/role';
 import { getDepartmentList } from '/@/api/sys/department';
-import { getPostList } from '/@/api/sys/post';
+import { getPositionList } from '/@/api/sys/position';
 
 const { t } = useI18n();
 
@@ -220,12 +220,12 @@ export const formSchema: FormSchema[] = [
     },
   },
   {
-    field: 'postId',
-    label: t('sys.post.userPost'),
+    field: 'positionId',
+    label: t('sys.position.userPosition'),
     component: 'ApiSelect',
     required: true,
     componentProps: {
-      api: getPostList,
+      api: getPositionList,
       params: {
         page: 1,
         pageSize: 1000,

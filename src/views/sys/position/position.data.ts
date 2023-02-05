@@ -2,7 +2,7 @@ import { BasicColumn } from '/@/components/Table';
 import { FormSchema } from '/@/components/Table';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { formatToDateTime } from '/@/utils/dateUtil';
-import { setPostStatus } from '/@/api/sys/post';
+import { setPositionStatus } from '/@/api/sys/position';
 import { Switch } from 'ant-design-vue';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { h } from 'vue';
@@ -11,24 +11,24 @@ const { t } = useI18n();
 
 export const columns: BasicColumn[] = [
   {
-    title: t('sys.post.name'),
+    title: t('sys.position.name'),
     dataIndex: 'trans',
     width: 80,
   },
   {
-    title: t('sys.post.code'),
+    title: t('sys.position.code'),
     dataIndex: 'code',
-    width: 50,
+    width: 40,
   },
   {
     title: t('common.remark'),
     dataIndex: 'remark',
-    width: 100,
+    width: 80,
   },
   {
     title: t('common.order'),
     dataIndex: 'sort',
-    width: 30,
+    width: 20,
   },
   {
     title: t('common.statusName'),
@@ -47,7 +47,7 @@ export const columns: BasicColumn[] = [
           const { createMessage } = useMessage();
           record.pendingStatus = true;
           const newStatus = checked ? 1 : 0;
-          setPostStatus(record.id, newStatus)
+          setPositionStatus(record.id, newStatus)
             .then((data) => {
               record.status = newStatus;
               if (data.code == 0) createMessage.success(t('common.changeStatusSuccess'));
@@ -65,7 +65,7 @@ export const columns: BasicColumn[] = [
   {
     title: t('common.createTime'),
     dataIndex: 'createdAt',
-    width: 50,
+    width: 70,
     customRender: ({ record }) => {
       return formatToDateTime(record.createdAt);
     },
@@ -75,7 +75,7 @@ export const columns: BasicColumn[] = [
 export const searchFormSchema: FormSchema[] = [
   {
     field: 'name',
-    label: t('sys.post.name'),
+    label: t('sys.position.name'),
     component: 'Input',
     colProps: { span: 8 },
   },
@@ -90,12 +90,12 @@ export const formSchema: FormSchema[] = [
   },
   {
     field: 'name',
-    label: t('sys.post.name'),
+    label: t('sys.position.name'),
     component: 'Input',
   },
   {
     field: 'code',
-    label: t('sys.post.code'),
+    label: t('sys.position.code'),
     component: 'Input',
   },
   {

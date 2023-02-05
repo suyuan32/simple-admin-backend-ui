@@ -255,12 +255,12 @@ export default {
     firstLevelDepartment: '一级部门',
     userDepartment: '所属部门',
   },
-  post: {
+  position: {
     name: '职位名称',
     code: '职位代码',
-    addPost: '添加职位',
-    editPost: '编辑职位',
-    postList: '职位列表',
-    userPost: '职位',
+    addPosition: '添加职位',
+    editPosition: '编辑职位',
+    positionList: '职位列表',
+    userPosition: '职位',
   },
 };

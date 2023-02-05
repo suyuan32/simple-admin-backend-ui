@@ -11,5 +11,5 @@ export default {
   oauthManagement: 'Oauth管理',
   tokenManagement: 'Token管理',
   otherPages: '其他页面',
-  postManagement: '职位管理',
+  positionManagement: '职位管理',
 };
