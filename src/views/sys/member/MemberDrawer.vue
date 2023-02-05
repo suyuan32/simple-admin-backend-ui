@@ -13,20 +13,19 @@
 <script lang="ts">
   import { defineComponent, ref, computed, unref } from 'vue';
   import { BasicForm, useForm } from '/@/components/Form/index';
-  import { formSchema } from './user.data';
+  import { formSchema } from './member.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
-  import { createOrUpdateUser } from '/@/api/sys/user';
-  import { useMessage } from '/@/hooks/web/useMessage';
+
+  import { createOrUpdateMember } from '/@/api/sys/member';
 
   export default defineComponent({
-    name: 'UserDrawer',
+    name: 'MemberDrawer',
     components: { BasicDrawer, BasicForm },
     emits: ['success', 'register'],
     setup(_, { emit }) {
       const isUpdate = ref(true);
       const { t } = useI18n();
-      const { createMessage } = useMessage();
 
       const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
         labelWidth: 90,
@@ -49,25 +48,14 @@
       });
 
       const getTitle = computed(() =>
-        !unref(isUpdate) ? t('sys.user.addUser') : t('sys.user.editUser'),
+        !unref(isUpdate) ? t('sys.member.addMember') : t('sys.member.editMember'),
       );
 
       async function handleSubmit() {
         const values = await validate();
         setDrawerProps({ confirmLoading: true });
-        if (unref(isUpdate)) {
-          if (values['password'] === undefined) {
-            values['password'] = '';
-          }
-        } else {
-          if (values['password'] === undefined) {
-            createMessage.warning(t('sys.login.passwordPlaceholder'));
-            setDrawerProps({ confirmLoading: false });
-            return;
-          }
-        }
         values['id'] = unref(isUpdate) ? values['id'] : '';
-        const result = await createOrUpdateUser(values, 'message');
+        let result = await createOrUpdateMember(values);
         if (result.code === 0) {
           closeDrawer();
           emit('success', result.msg);
@@ -78,8 +66,8 @@
       return {
         registerDrawer,
         registerForm,
-        handleSubmit,
         getTitle,
+        handleSubmit,
       };
     },
   });

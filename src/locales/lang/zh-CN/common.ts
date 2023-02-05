@@ -51,6 +51,8 @@ export default {
   delete: '删除',
   // notification
   deleteConfirm: '是否确认删除？',
+  operateSucess: '操作成功',
+  operateFailed: '操作失败',
   updateSuccess: '更新成功',
   updateFailed: '更新失败',
   createSuccess: '新建成功',

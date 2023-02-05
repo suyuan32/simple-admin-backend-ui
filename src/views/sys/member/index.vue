@@ -9,7 +9,7 @@
       </template>
       <template #toolbar>
         <a-button type="primary" @click="handleCreate">
-          {{ t('sys.department.addDepartment') }}
+          {{ t('sys.member.addMember') }}
         </a-button>
       </template>
       <template #bodyCell="{ column, record }">
@@ -34,7 +34,7 @@
         </template>
       </template>
     </BasicTable>
-    <DepartmentDrawer @register="registerDrawer" @success="handleSuccess" />
+    <MemberDrawer @register="registerDrawer" @success="handleSuccess" />
   </div>
 </template>
 <script lang="ts">
@@ -44,20 +44,16 @@
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
 
   import { useDrawer } from '/@/components/Drawer';
-  import DepartmentDrawer from './DepartmentDrawer.vue';
+  import MemberDrawer from './MemberDrawer.vue';
   import { useI18n } from 'vue-i18n';
   import { useMessage } from '/@/hooks/web/useMessage';
 
-  import { columns, searchFormSchema } from './department.data';
-  import {
-    getDepartmentList,
-    deleteDepartment,
-    batchDeleteDepartment,
-  } from '/@/api/sys/department';
+  import { columns, searchFormSchema } from './member.data';
+  import { getMemberList, deleteMember, batchDeleteMember } from '/@/api/sys/member';
 
   export default defineComponent({
-    name: 'DepartmentManagement',
-    components: { BasicTable, DepartmentDrawer, TableAction, Button, DeleteOutlined },
+    name: 'MemberManagement',
+    components: { BasicTable, MemberDrawer, TableAction, Button, DeleteOutlined },
     setup() {
       const { t } = useI18n();
       const selectedIds = ref<number[] | string[]>();
@@ -66,15 +62,13 @@
       const [registerDrawer, { openDrawer }] = useDrawer();
       const { notification } = useMessage();
       const [registerTable, { reload }] = useTable({
-        title: t('sys.department.departmentList'),
-        api: getDepartmentList,
+        title: t('sys.member.memberList'),
+        api: getMemberList,
         columns,
         formConfig: {
           labelWidth: 120,
           schemas: searchFormSchema,
         },
-        isTreeTable: true,
-        treeConfig: { id: 'id', parentId: 'parentId', childrenField: 'children' },
         useSearchForm: true,
         showTableSetting: true,
         bordered: true,
@@ -90,7 +84,7 @@
         rowSelection: {
           type: 'checkbox',
           onChange: (selectedRowKeys, _selectedRows) => {
-            selectedIds.value = selectedRowKeys as number[];
+            selectedIds.value = selectedRowKeys as string[];
             showDeleteButton.value = selectedRowKeys.length > 0;
           },
         },
@@ -110,7 +104,7 @@
       }
 
       async function handleDelete(record: Recordable) {
-        const result = await deleteDepartment({ id: record.id }, 'modal');
+        const result = await deleteMember({ id: record.id }, 'modal');
         if (result.code === 0) {
           notification.success({
             message: t('common.successful'),
@@ -126,10 +120,7 @@
           title: t('common.deleteConfirm'),
           icon: createVNode(ExclamationCircleOutlined),
           async onOk() {
-            const result = await batchDeleteDepartment(
-              { ids: selectedIds.value as number[] },
-              'modal',
-            );
+            const result = await batchDeleteMember({ ids: selectedIds.value as string[] }, 'modal');
             if (result.code === 0) {
               showDeleteButton.value = false;
               notification.success({

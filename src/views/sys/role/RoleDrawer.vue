@@ -192,7 +192,7 @@
         if (result.code === 0) {
           childrenDrawer.value = false;
           closeDrawer();
-          emit('success');
+          emit('success', result.msg);
         }
         setDrawerProps({ confirmLoading: false });
       }

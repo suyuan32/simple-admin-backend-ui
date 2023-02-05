@@ -111,15 +111,10 @@
         });
       }
 
-      function handleSuccess() {
-        reload();
-      }
-
       return {
         t,
         registerTable,
         handleDelete,
-        handleSuccess,
         handleBatchDelete,
         showDeleteButton,
       };

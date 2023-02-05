@@ -58,7 +58,7 @@
         let result = await createOrUpdatePosition(values);
         if (result.code === 0) {
           closeDrawer();
-          emit('success');
+          emit('success', result.msg);
         }
         setDrawerProps({ confirmLoading: false });
       }

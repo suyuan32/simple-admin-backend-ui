@@ -270,4 +270,10 @@ export default {
     positionList: 'Position List',
     userPosition: 'Position',
   },
+  member: {
+    rankId: 'Member Rank',
+    addMember: 'Add Member',
+    editMember: 'Edit Member',
+    memberList: 'Member List',
+  },
 };

@@ -94,8 +94,13 @@
         }
       }
 
-      function handleSuccess() {
-        reload();
+      async function handleSuccess(msg) {
+        notification.success({
+          message: t('common.successful'),
+          description: t(msg),
+          duration: 3,
+        });
+        await reload();
       }
 
       return {

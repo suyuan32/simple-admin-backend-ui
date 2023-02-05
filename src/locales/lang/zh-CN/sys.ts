@@ -263,4 +263,10 @@ export default {
     positionList: '职位列表',
     userPosition: '职位',
   },
+  member: {
+    rankId: '会员等级',
+    addMember: '添加会员',
+    editMember: '编辑会员',
+    memberList: '会员列表',
+  },
 };
