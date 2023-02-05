@@ -37,6 +37,7 @@
 
   import { columns, searchFormSchema } from './token.data';
   import { batchDeleteToken, deleteToken, getTokenList } from '/@/api/sys/token';
+  import { useMessage } from '/@/hooks/web/useMessage';
 
   export default defineComponent({
     name: 'TokenManagement',
@@ -45,6 +46,7 @@
       const { t } = useI18n();
       const selectedIds = ref<number[] | string[]>();
       const showDeleteButton = ref<boolean>(false);
+      const { notification } = useMessage();
 
       const [registerTable, { reload }] = useTable({
         title: t('sys.token.tokenList'),
@@ -77,7 +79,14 @@
 
       async function handleDelete(record: Recordable) {
         const result = await deleteToken({ id: record.id }, 'modal');
-        if (result.code === 0) await reload();
+        if (result.code === 0) {
+          notification.success({
+            message: t('common.successful'),
+            description: t(result.msg),
+            duration: 3,
+          });
+          await reload();
+        }
       }
 
       async function handleBatchDelete() {
@@ -88,6 +97,11 @@
             const result = await batchDeleteToken({ ids: selectedIds.value as string[] }, 'modal');
             if (result.code === 0) {
               showDeleteButton.value = false;
+              notification.success({
+                message: t('common.successful'),
+                description: t(result.msg),
+                duration: 3,
+              });
               await reload();
             }
           },

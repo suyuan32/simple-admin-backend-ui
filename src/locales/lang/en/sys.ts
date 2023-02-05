@@ -261,4 +261,13 @@ export default {
     firstLevelDepartment: 'First level department',
     userDepartment: 'Department',
   },
+  post: {
+    name: 'Post Name',
+    code: 'Post Code',
+    remark: 'Remark',
+    addPost: 'Add Post',
+    editPost: 'Edit Post',
+    postList: 'Post List',
+    userPost: 'Post',
+  },
 };
