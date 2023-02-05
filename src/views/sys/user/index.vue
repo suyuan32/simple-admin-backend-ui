@@ -90,6 +90,7 @@
       const selectedIds = ref<number[] | string[]>();
       const showDeleteButton = ref<boolean>(false);
       const searchInfo = reactive<Recordable>({});
+      const { notification } = useMessage();
 
       const [registerDrawer, { openDrawer }] = useDrawer();
       const roleStoreData = useRoleStore();
@@ -146,7 +147,14 @@
         }
 
         const result = await deleteUser({ id: record.id }, 'modal');
-        if (result.code === 0) await reload();
+        if (result.code === 0) {
+          notification.success({
+            message: t('common.successful'),
+            description: t(result.msg),
+            duration: 3,
+          });
+          await reload();
+        }
       }
 
       async function handleBatchDelete() {
@@ -164,6 +172,11 @@
             const result = await batchDeleteUser({ ids: ids }, 'modal');
             if (result.code === 0) {
               showDeleteButton.value = false;
+              notification.success({
+                message: t('common.successful'),
+                description: t(result.msg),
+                duration: 3,
+              });
               await reload();
             }
           },

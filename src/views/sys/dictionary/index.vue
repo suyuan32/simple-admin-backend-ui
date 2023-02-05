@@ -40,13 +40,14 @@
 
   import { columns, searchFormSchema } from './dictionary.data';
   import { getDictionaryList, deleteDictionary } from '/@/api/sys/dictionary';
-  import { message } from 'ant-design-vue';
+  import { useMessage } from '/@/hooks/web/useMessage';
 
   export default defineComponent({
     name: 'DictionaryManagement',
     components: { BasicTable, DictionaryDrawer, TableAction },
     setup() {
       const { t } = useI18n();
+      const { notification } = useMessage();
       const [registerDrawer, { openDrawer }] = useDrawer();
       const [registerTable, { reload }] = useTable({
         title: t('sys.dictionary.dictionaryList'),
@@ -83,8 +84,14 @@
 
       async function handleDelete(record: Recordable) {
         const result = await deleteDictionary({ id: record.id }, 'modal');
-        message.success(t(result.msg), 2);
-        await reload();
+        if (result.code === 0) {
+          notification.success({
+            message: t('common.successful'),
+            description: t(result.msg),
+            duration: 3,
+          });
+          await reload();
+        }
       }
 
       function handleSuccess() {

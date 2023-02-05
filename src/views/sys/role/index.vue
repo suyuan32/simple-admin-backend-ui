@@ -47,7 +47,7 @@
     components: { BasicTable, RoleDrawer, TableAction },
     setup() {
       const { t } = useI18n();
-      const { createMessage } = useMessage();
+      const { createMessage, notification } = useMessage();
       const [registerDrawer, { openDrawer }] = useDrawer();
       const [registerTable, { reload }] = useTable({
         title: t('sys.role.roleList'),
@@ -87,7 +87,14 @@
           return;
         }
         const result = await deleteRole({ id: record.id }, 'modal');
-        if (result.code === 0) await reload();
+        if (result.code === 0) {
+          notification.success({
+            message: t('common.successful'),
+            description: t(result.msg),
+            duration: 3,
+          });
+          await reload();
+        }
       }
 
       async function handleSuccess() {

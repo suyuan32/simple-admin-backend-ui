@@ -84,12 +84,14 @@
 
       async function handleDelete(record: Recordable) {
         const result = await deleteApi({ id: record.id }, 'modal');
-        notification.success({
-          message: t('common.successful'),
-          description: t(result.msg),
-          duration: 3,
-        });
-        await reload();
+        if (result.code === 0) {
+          notification.success({
+            message: t('common.successful'),
+            description: t(result.msg),
+            duration: 3,
+          });
+          await reload();
+        }
       }
 
       async function handleSuccess() {

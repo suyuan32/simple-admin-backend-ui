@@ -40,12 +40,14 @@
 
   import { columns } from './oauth.data';
   import { getProviderList, deleteProvider } from '/@/api/sys/oauth';
+  import { useMessage } from '/@/hooks/web/useMessage';
 
   export default defineComponent({
     name: 'OauthManagement',
     components: { BasicTable, OauthDrawer, TableAction },
     setup() {
       const { t } = useI18n();
+      const { notification } = useMessage();
       const [registerDrawer, { openDrawer }] = useDrawer();
       const [registerTable, { reload }] = useTable({
         title: t('sys.oauth.providerList'),
@@ -78,7 +80,14 @@
 
       async function handleDelete(record: Recordable) {
         const result = await deleteProvider({ id: record.id }, 'modal');
-        if (result.code === 0) await reload();
+        if (result.code === 0) {
+          notification.success({
+            message: t('common.successful'),
+            description: t(result.msg),
+            duration: 3,
+          });
+          await reload();
+        }
       }
 
       function handleSuccess() {
