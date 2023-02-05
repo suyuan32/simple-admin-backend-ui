@@ -269,4 +269,12 @@ export default {
     editMember: '编辑会员',
     memberList: '会员列表',
   },
+  memberRank: {
+    name: '等级名称',
+    description: '等级描述',
+    remark: '备注',
+    addMemberRank: '添加会员等级',
+    editMemberRank: '编辑会员等级',
+    memberRankList: '会员等级列表',
+  },
 };

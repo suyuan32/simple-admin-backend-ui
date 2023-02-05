@@ -6,6 +6,7 @@ import { setMemberStatus } from '/@/api/sys/member';
 import { Switch } from 'ant-design-vue';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { h } from 'vue';
+import { getMemberRankList } from '/@/api/sys/memberRank';
 
 const { t } = useI18n();
 
@@ -21,24 +22,9 @@ export const columns: BasicColumn[] = [
     width: 100,
   },
   {
-    title: t('sys.member.rankId'),
-    dataIndex: 'rankId',
-    width: 100,
-  },
-  {
-    title: t('sys.login.mobile'),
-    dataIndex: 'mobile',
-    width: 100,
-  },
-  {
-    title: t('sys.login.email'),
-    dataIndex: 'email',
-    width: 100,
-  },
-  {
     title: t('common.statusName'),
     dataIndex: 'status',
-    width: 20,
+    width: 50,
     customRender: ({ record }) => {
       if (!Reflect.has(record, 'pendingStatus')) {
         record.pendingStatus = false;
@@ -130,7 +116,18 @@ export const formSchema: FormSchema[] = [
   {
     field: 'rankId',
     label: t('sys.member.rankId'),
-    component: 'InputNumber',
+    component: 'ApiSelect',
+    required: true,
+    componentProps: {
+      api: getMemberRankList,
+      params: {
+        page: 1,
+        pageSize: 1000,
+      },
+      resultField: 'data.data',
+      labelField: 'trans',
+      valueField: 'id',
+    },
   },
   {
     field: 'mobile',

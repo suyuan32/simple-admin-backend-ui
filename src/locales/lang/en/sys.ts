@@ -276,4 +276,12 @@ export default {
     editMember: 'Edit Member',
     memberList: 'Member List',
   },
+  memberRank: {
+    name: 'Rank Name',
+    description: 'Rank Description',
+    remark: 'Remark',
+    addMemberRank: 'Add Rank',
+    editMemberRank: 'Edit Rank',
+    memberRankList: 'Rank List',
+  },
 };
