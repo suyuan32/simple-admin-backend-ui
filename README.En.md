@@ -65,62 +65,13 @@ Simple Admin UI is a modern UI for Simple Admin. It is based on vue-vben-admin a
 - [Ant-Design-Vue](https://2x.antdv.com/docs/vue/introduce-cn/) - ui basic use
 - [Mock.js](https://github.com/nuysoft/Mock) - mockjs basic syntax
 
-## Install and use
+## Quick Start
 
-- Get the project code
-
-```bash
-git clone https://github.com/suyuan32/Simple-Admin-UI.git
-```
-
-- Installation dependencies
-
-```bash
-cd Simple-Admin-ui
-
-pnpm install
-
-# or
-
-npm install
-
-# or
-
-yarn install
-
-```
-
-- run
-
-```bash
-pnpm serve
-
-# or
-
-npm serve
-
-# or
-
-yarn serve
-```
-
-- build
-
-```bash
-pnpm build
-
-# or
-
-npm build
-
-# or
-
-yarn build
-```
+[Quick Start Document](https://doc.ryansu.pro/en/guide/basic-config/env_setting.html)
 
 ## Change Log
 
-[CHANGELOG](./CHANGELOG.zh_CN.md)
+[CHANGELOG](./CHANGELOG.md)
 
 ## Project
 
