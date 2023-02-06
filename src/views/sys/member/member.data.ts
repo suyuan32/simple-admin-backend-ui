@@ -118,6 +118,7 @@ export const formSchema: FormSchema[] = [
     label: t('sys.member.rankId'),
     component: 'ApiSelect',
     required: true,
+    defaultValue: 1,
     componentProps: {
       api: getMemberRankList,
       params: {

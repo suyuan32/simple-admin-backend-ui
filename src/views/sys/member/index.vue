@@ -1,47 +1,55 @@
 <template>
-  <div>
-    <BasicTable @register="registerTable">
-      <template #tableTitle>
-        <Button type="primary" danger v-if="showDeleteButton" @click="handleBatchDelete()">
-          <template #icon><DeleteOutlined /></template>
-          {{ t('common.delete') }}
-        </Button>
-      </template>
-      <template #toolbar>
-        <a-button type="primary" @click="handleCreate">
-          {{ t('sys.member.addMember') }}
-        </a-button>
-      </template>
-      <template #bodyCell="{ column, record }">
-        <template v-if="column.key === 'action'">
-          <TableAction
-            :actions="[
-              {
-                icon: 'clarity:note-edit-line',
-                onClick: handleEdit.bind(null, record),
-              },
-              {
-                icon: 'ant-design:delete-outlined',
-                color: 'error',
-                popConfirm: {
-                  title: t('common.deleteConfirm'),
-                  placement: 'left',
-                  confirm: handleDelete.bind(null, record),
-                },
-              },
-            ]"
-          />
-        </template>
-      </template>
-    </BasicTable>
+  <PageWrapper dense contentFullHeight>
+    <Row>
+      <Col :span="5">
+        <RankTree @select="handleSelect" />
+      </Col>
+      <Col :span="19">
+        <BasicTable @register="registerTable" :searchInfo="searchInfo">
+          <template #tableTitle>
+            <Button type="primary" danger v-if="showDeleteButton" @click="handleBatchDelete()">
+              <template #icon><DeleteOutlined /></template>
+              {{ t('common.delete') }}
+            </Button>
+          </template>
+          <template #toolbar>
+            <a-button type="primary" @click="handleCreate">
+              {{ t('sys.member.addMember') }}
+            </a-button>
+          </template>
+          <template #bodyCell="{ column, record }">
+            <template v-if="column.key === 'action'">
+              <TableAction
+                :actions="[
+                  {
+                    icon: 'clarity:note-edit-line',
+                    onClick: handleEdit.bind(null, record),
+                  },
+                  {
+                    icon: 'ant-design:delete-outlined',
+                    color: 'error',
+                    popConfirm: {
+                      title: t('common.deleteConfirm'),
+                      placement: 'left',
+                      confirm: handleDelete.bind(null, record),
+                    },
+                  },
+                ]"
+              />
+            </template>
+          </template>
+        </BasicTable>
+      </Col>
+    </Row>
     <MemberDrawer @register="registerDrawer" @success="handleSuccess" />
-  </div>
+  </PageWrapper>
 </template>
 <script lang="ts">
-  import { createVNode, defineComponent, ref } from 'vue';
+  import { createVNode, defineComponent, reactive, ref } from 'vue';
   import { Button, Modal } from 'ant-design-vue';
   import { ExclamationCircleOutlined, DeleteOutlined } from '@ant-design/icons-vue/lib/icons';
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import RankTree from './RankTree.vue';
 
   import { useDrawer } from '/@/components/Drawer';
   import MemberDrawer from './MemberDrawer.vue';
@@ -50,13 +58,27 @@
 
   import { columns, searchFormSchema } from './member.data';
   import { getMemberList, deleteMember, batchDeleteMember } from '/@/api/sys/member';
+  import { PageWrapper } from '/@/components/Page';
+  import Row from 'ant-design-vue/es/grid/Row';
+  import Col from 'ant-design-vue/es/grid/Col';
 
   export default defineComponent({
     name: 'MemberManagement',
-    components: { BasicTable, MemberDrawer, TableAction, Button, DeleteOutlined },
+    components: {
+      BasicTable,
+      MemberDrawer,
+      TableAction,
+      Button,
+      PageWrapper,
+      Row,
+      Col,
+      RankTree,
+      DeleteOutlined,
+    },
     setup() {
       const { t } = useI18n();
       const selectedIds = ref<number[] | string[]>();
+      const searchInfo = reactive<Recordable>({});
       const showDeleteButton = ref<boolean>(false);
 
       const [registerDrawer, { openDrawer }] = useDrawer();
@@ -146,6 +168,11 @@
         await reload();
       }
 
+      function handleSelect(rankId = '') {
+        searchInfo.rankId = rankId;
+        reload();
+      }
+
       return {
         t,
         registerTable,
@@ -155,7 +182,9 @@
         handleDelete,
         handleSuccess,
         handleBatchDelete,
+        handleSelect,
         showDeleteButton,
+        searchInfo,
       };
     },
   });
