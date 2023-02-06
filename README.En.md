@@ -19,47 +19,39 @@ Simple Admin UI is a modern UI for Simple Admin. It is based on vue-vben-admin a
 - **Authority** Built-in complete dynamic routing permission generation scheme.
 - **Component** Multiple commonly used components are encapsulated twice
 
-## Current Progress
+## Support functions
 
-- [x] Login and Register
-- [x] Menu Management
-- [x] Role Management
-- [x] Role Authority
-- [x] User Management
-- [x] Operation log
-- [x] Service discovery
-- [x] Dictionary management
-- [x] Oauth management
-- [x] Fully support K8s
-- [x] Service Monitor
-- [x] Log collecting
-- [x] JWT blacklist
-- [x] Job Schedule
-- [x] Message queue
-- [x] Ent
-- [x] Backend CRUD generation
-- [x] Frontend CRUD code generation
-- [ ] docker-compose script
+- User management: The user is the system operator, and this function mainly completes the system user configuration.
+- Department management: Configure the system organization (company, department, group), and the tree structure shows the support data permissions.
+- Position management: configure the positions that system users belong to.
+- Menu management: configure system menu, operation authority, button authority identification, interface authority, etc.
+- Role management: role menu permission assignment, role setting, data range permission division by organization.
+- Dictionary management: maintain some relatively fixed data frequently used in the system.
+- Operation log: system normal operation log record and query; system abnormal information log record and query.
+- Member management: manage registered member information
+- Interface documents: Automatically generate relevant API interface documents based on business codes.
+- Code generation: Generate corresponding additions, deletions, modifications, and queries based on the data table structure
+- Service monitoring: View some basic information about servers
 
+## Project Planning Progress
+
+[RoadMap](https://github.com/suyuan32/simple-admin-core/issues/63)
 
 ### Online preview
-[Online Preview](http://101.132.124.135/#/dashboard)
-Account:   admin 
-Password:  simple-admin
+
+[Online Preview](http://101.132.124.135/#/dashboard) Account: admin Password: simple-admin
+
 #### Read Only, cannot register and modify
 
-![pic](https://i.postimg.cc/qqPNR02x/register-zh-cn.png)
-![pic](https://i.postimg.cc/PxczkCr6/dashboard-zh-cn.png)
+![pic](https://i.postimg.cc/qqPNR02x/register-zh-cn.png) ![pic](https://i.postimg.cc/PxczkCr6/dashboard-zh-cn.png)
 
 [More](https://suyuan32.github.io/simple-admin-core/#/simple-admin/zh-cn/docs/screenshot)
-
 
 ## Documentation
 
 [Simple Admin Documentation](https://suyuan32.github.io/simple-admin-core/)
 
-- vben admin document 
-[Document](https://vvbin.cn/doc-next/)
+- vben admin document [Document](https://vvbin.cn/doc-next/)
 - ant-design-vue [Document](https://antdv.com/components/overview)
 
 ## Preparation
@@ -88,9 +80,9 @@ cd Simple-Admin-ui
 
 pnpm install
 
-# or 
+# or
 
-npm install 
+npm install
 
 # or
 
@@ -107,7 +99,7 @@ pnpm serve
 
 npm serve
 
-# or 
+# or
 
 yarn serve
 ```
@@ -117,7 +109,7 @@ yarn serve
 ```bash
 pnpm build
 
-# or 
+# or
 
 npm build
 

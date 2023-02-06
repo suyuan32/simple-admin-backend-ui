@@ -13,12 +13,12 @@ export const columns: BasicColumn[] = [
   {
     title: 'UUID',
     dataIndex: 'UUID',
-    width: 200,
+    width: 100,
   },
   {
     title: 'Token',
     dataIndex: 'token',
-    width: 200,
+    width: 100,
   },
   {
     title: t('common.source'),
@@ -28,7 +28,7 @@ export const columns: BasicColumn[] = [
   {
     title: t('common.statusName'),
     dataIndex: 'status',
-    width: 120,
+    width: 50,
     customRender: ({ record }) => {
       if (!Reflect.has(record, 'pendingStatus')) {
         record.pendingStatus = false;
@@ -60,7 +60,7 @@ export const columns: BasicColumn[] = [
   {
     title: t('common.createTime'),
     dataIndex: 'createdAt',
-    width: 70,
+    width: 50,
     customRender: ({ record }) => {
       return formatToDateTime(record.createdAt);
     },
@@ -68,7 +68,7 @@ export const columns: BasicColumn[] = [
   {
     title: t('common.expiredAt'),
     dataIndex: 'expiredAt',
-    width: 70,
+    width: 50,
     customRender: ({ record }) => {
       return formatToDateTime(record.expiredAt);
     },

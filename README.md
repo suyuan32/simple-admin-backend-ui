@@ -7,7 +7,7 @@
 
 ## 简介
 
-Simple Admin UI 是基于vue-vben-admin二次开发的为Simple Admin专门开发的后台管理界面，基于Vue3和TypeScript开发， 提供后台错误统一处理，国际化等功能，本项目完全免费，可用于学习和商用
+Simple Admin UI 是基于 vue-vben-admin 二次开发的为 Simple Admin 专门开发的后台管理界面，基于 Vue3 和 TypeScript 开发， 提供后台错误统一处理，国际化等功能，本项目完全免费，可用于学习和商用
 
 ## 特性
 
@@ -19,45 +19,35 @@ Simple Admin UI 是基于vue-vben-admin二次开发的为Simple Admin专门开�
 - **权限** 内置完善的动态路由权限生成方案
 - **组件** 二次封装了多个常用的组件
 
-## 当前进度
+## 支持功能
 
+- 用户管理：用户是系统操作者，该功能主要完成系统用户配置。
+- 部门管理：配置系统组织机构（公司、部门、小组），树结构展现支持数据权限。
+- 岗位管理：配置系统用户所属担任职务。
+- 菜单管理：配置系统菜单，操作权限，按钮权限标识，接口权限等。
+- 角色管理：角色菜单权限分配、设置角色按机构进行数据范围权限划分。
+- 字典管理：对系统中经常使用的一些较为固定的数据进行维护。
+- 操作日志：系统正常操作日志记录和查询；系统异常信息日志记录和查询。
+- 会员管理：管理注册会员信息
+- 接口文档：根据业务代码自动生成相关的 api 接口文档。
+- 代码生成：根据数据表结构生成对应的增删改查相对应业务
+- 服务监控：查看一些服务器的基本信息
 
-- [x] 登录注册
-- [x] 菜单管理
-- [x] 角色管理
-- [x] 角色权限
-- [x] 用户管理
-- [x] 操作日志
-- [x] 服务注册发现
-- [x] 字典功能
-- [x] 三方登录管理
-- [x] 全面支持 K8s
-- [x] 服务监控
-- [x] 日志收集
-- [x] JWT黑名单
-- [x] 定时任务
-- [x] 消息队列
-- [x] Ent
-- [x] 后端 CRUD 代码生成
-- [x] 前端 CRUD 代码生成
-- [ ] 一键运行 demo 脚本
+## 项目规划进度
 
+[RoadMap](https://github.com/suyuan32/simple-admin-core/issues/63)
 
 ## 预览
 
 ### 在线预览
-[在线预览](http://101.132.124.135/#/dashboard)
-账号 admin
-密码 simple-admin
+
+[在线预览](http://101.132.124.135/#/dashboard) 账号 admin 密码 simple-admin
+
 #### 只读，不可修改和注册
 
-![pic](https://i.postimg.cc/qqPNR02x/register-zh-cn.png)
-![pic](https://i.postimg.cc/PxczkCr6/dashboard-zh-cn.png)
+![pic](https://i.postimg.cc/qqPNR02x/register-zh-cn.png) ![pic](https://i.postimg.cc/PxczkCr6/dashboard-zh-cn.png)
 
 [更多预览](https://suyuan32.github.io/simple-admin-core/#/simple-admin/zh-cn/docs/screenshot)
-
-
-
 
 ## 文档
 
@@ -92,9 +82,9 @@ cd Simple-Admin-ui
 
 pnpm install
 
-# or 
+# or
 
-npm install 
+npm install
 
 # or
 
@@ -111,7 +101,7 @@ pnpm serve
 
 npm serve
 
-# or 
+# or
 
 yarn serve
 ```
@@ -121,7 +111,7 @@ yarn serve
 ```bash
 pnpm build
 
-# or 
+# or
 
 npm build
 
