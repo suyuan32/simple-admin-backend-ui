@@ -13,14 +13,14 @@
 <script lang="ts">
   import { defineComponent, ref, computed, unref } from 'vue';
   import { BasicForm, useForm } from '/@/components/Form/index';
-  import { formSchema } from './memberRank.data';
+  import { formSchema } from './dictionaryDetail.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
 
-  import { createMemberRank, updateMemberRank } from '/@/api/sys/memberRank';
+  import { createDictionaryDetail, updateDictionaryDetail } from '/@/api/sys/dictionaryDetail';
 
   export default defineComponent({
-    name: 'MemberRankDrawer',
+    name: 'DictionaryDetailDrawer',
     components: { BasicDrawer, BasicForm },
     emits: ['success', 'register'],
     setup(_, { emit }) {
@@ -48,7 +48,9 @@
       });
 
       const getTitle = computed(() =>
-        !unref(isUpdate) ? t('sys.memberRank.addMemberRank') : t('sys.memberRank.editMemberRank'),
+        !unref(isUpdate)
+          ? t('sys.dictionaryDetail.addDictionaryDetail')
+          : t('sys.dictionaryDetail.editDictionaryDetail'),
       );
 
       async function handleSubmit() {
@@ -56,8 +58,8 @@
         setDrawerProps({ confirmLoading: true });
         values['id'] = unref(isUpdate) ? Number(values['id']) : 0;
         let result = unref(isUpdate)
-          ? await updateMemberRank(values)
-          : await createMemberRank(values);
+          ? await updateDictionaryDetail(values)
+          : await createDictionaryDetail(values);
         if (result.code === 0) {
           closeDrawer();
           emit('success', result.msg);

@@ -17,7 +17,7 @@
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
 
-  import { createOrUpdateProvider } from '/@/api/sys/oauth';
+  import { createOauthProvider, updateOauthProvider } from '/@/api/sys/oauthProvider';
 
   export default defineComponent({
     name: 'OauthDrawer',
@@ -55,7 +55,9 @@
         const values = await validate();
         setDrawerProps({ confirmLoading: true });
         values['id'] = unref(isUpdate) ? Number(values['id']) : 0;
-        let result = await createOrUpdateProvider(values, 'message');
+        let result = unref(isUpdate)
+          ? await updateOauthProvider(values)
+          : await createOauthProvider(values);
         if (result.code === 0) {
           closeDrawer();
           emit('success', result.msg);

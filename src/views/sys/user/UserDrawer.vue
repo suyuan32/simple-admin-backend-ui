@@ -16,7 +16,7 @@
   import { formSchema } from './user.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
-  import { createOrUpdateUser } from '/@/api/sys/user';
+  import { createUser, updateUser } from '/@/api/sys/user';
   import { useMessage } from '/@/hooks/web/useMessage';
 
   export default defineComponent({
@@ -67,7 +67,7 @@
           }
         }
         values['id'] = unref(isUpdate) ? values['id'] : '';
-        const result = await createOrUpdateUser(values, 'message');
+        const result = unref(isUpdate) ? await updateUser(values) : await createUser(values);
         if (result.code === 0) {
           closeDrawer();
           emit('success', result.msg);

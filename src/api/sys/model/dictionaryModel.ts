@@ -1,42 +1,20 @@
-import { BaseListResp } from '../../model/baseModel';
+import { BaseListResp } from '/@/api/model/baseModel';
 
 /**
- *  author: Ryan Su
- *  @description: dictionary info response
+ *  @description: Dictionary info response
  */
 export interface DictionaryInfo {
   id: number;
   createdAt?: number;
-  name: string;
-  title: string;
-  description: string;
-  status: boolean;
+  updatedAt?: number;
+  title?: string;
+  name?: string;
+  status?: number;
+  desc?: string;
 }
 
 /**
- *  author: Ryan Su
- *  @description: dictionary list response
+ *  @description: Dictionary list response
  */
 
 export type DictionaryListResp = BaseListResp<DictionaryInfo>;
-
-/**
- *  author: Ryan Su
- *  @description: dictionary detail info response
- */
-export interface DictionaryDetailInfo {
-  id: number;
-  createdAt?: number;
-  title: string;
-  key: string;
-  value: string;
-  status: number;
-  parentId: number;
-}
-
-/**
- *  author: Ryan Su
- *  @description: dictionary detail list response
- */
-
-export type DictionaryDetailListResp = BaseListResp<DictionaryDetailInfo>;

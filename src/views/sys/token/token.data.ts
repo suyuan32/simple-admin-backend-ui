@@ -1,24 +1,24 @@
-import { Switch } from 'ant-design-vue';
-import { h } from 'vue';
-import { setTokenStatus } from '/@/api/sys/token';
 import { BasicColumn } from '/@/components/Table';
 import { FormSchema } from '/@/components/Table';
 import { useI18n } from '/@/hooks/web/useI18n';
-import { useMessage } from '/@/hooks/web/useMessage';
 import { formatToDateTime } from '/@/utils/dateUtil';
+import { updateToken } from '/@/api/sys/token';
+import { Switch } from 'ant-design-vue';
+import { useMessage } from '/@/hooks/web/useMessage';
+import { h } from 'vue';
 
 const { t } = useI18n();
 
 export const columns: BasicColumn[] = [
   {
     title: 'UUID',
-    dataIndex: 'UUID',
-    width: 100,
+    dataIndex: 'uuid',
+    width: 200,
   },
   {
     title: 'Token',
     dataIndex: 'token',
-    width: 100,
+    width: 200,
   },
   {
     title: t('common.source'),
@@ -26,7 +26,7 @@ export const columns: BasicColumn[] = [
     width: 30,
   },
   {
-    title: t('common.statusName'),
+    title: t('common.status'),
     dataIndex: 'status',
     width: 50,
     customRender: ({ record }) => {
@@ -39,16 +39,16 @@ export const columns: BasicColumn[] = [
         unCheckedChildren: t('common.off'),
         loading: record.pendingStatus,
         onChange(checked: boolean) {
-          record.pendingStatus = true;
-          const newStatus = checked ? 1 : 0;
           const { createMessage } = useMessage();
-          setTokenStatus(record.id, newStatus)
+          record.pendingStatus = true;
+          const newStatus = checked ? 1 : 2;
+          updateToken({ id: record.id, status: newStatus })
             .then((data) => {
               record.status = newStatus;
               if (data.code == 0) createMessage.success(t('common.changeStatusSuccess'));
             })
             .catch(() => {
-              createMessage.error(t('common.updateFailed'));
+              createMessage.error(t('common.changeStatusFailed'));
             })
             .finally(() => {
               record.pendingStatus = false;

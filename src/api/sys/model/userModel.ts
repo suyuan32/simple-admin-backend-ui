@@ -1,3 +1,46 @@
+import { BaseListResp } from '/@/api/model/baseModel';
+
+/**
+ *  @description: User info response
+ */
+export interface UserInfo {
+  id: string;
+  createdAt?: number;
+  updatedAt?: number;
+  status?: number;
+  username?: string;
+  nickname?: string;
+  password?: string;
+  description?: string;
+  homePath?: string;
+  roleId?: number;
+  mobile?: string;
+  email?: string;
+  avatar?: string;
+  departmentId?: number;
+  positionId?: number;
+  roleName?: string;
+  roleValue?: string;
+}
+
+/**
+ *  @description: User list response
+ */
+
+export type UserListResp = BaseListResp<UserInfo>;
+
+export interface UserProfile {
+  avatar: string;
+  nickname: string;
+  email: string;
+  mobile: string;
+}
+
+export interface ChangePasswordReq {
+  oldPassword: string;
+  newPassword: string;
+}
+
 /**
  * @description: Login interface parameters
  */
@@ -53,48 +96,4 @@ export interface GetUserInfoModel {
 export interface CaptchaResp {
   captchaId: string;
   imgPath: string;
-}
-
-export interface UserListReq {
-  page: number;
-  pageSize: number;
-  username: string;
-  nickname: string;
-  email: string;
-  mobile: string;
-}
-
-export interface UserInfo {
-  id: string;
-  username: string;
-  nickname: string;
-  email: string;
-  mobile: string;
-  roleId: number;
-  avatar: string;
-  status: number;
-  homePath: string;
-  desc: string;
-  departmentId: number;
-  positionId: number;
-  password?: string;
-  createdAt?: number;
-  updatedAt?: number;
-}
-
-export interface UserListResp {
-  total: number;
-  data: UserInfo[];
-}
-
-export interface UserProfile {
-  avatar: string;
-  nickname: string;
-  email: string;
-  mobile: string;
-}
-
-export interface ChangePasswordReq {
-  oldPassword: string;
-  newPassword: string;
 }

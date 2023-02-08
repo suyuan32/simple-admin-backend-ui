@@ -277,4 +277,18 @@ export default {
     editMemberRank: '编辑会员等级',
     memberRankList: '会员等级列表',
   },
+  oauthProvider: {
+    name: 'Name',
+    clientId: 'ClientId',
+    clientSecret: 'ClientSecret',
+    redirectUrl: 'RedirectUrl',
+    scopes: 'Scopes',
+    authUrl: 'AuthUrl',
+    tokenUrl: 'TokenUrl',
+    authStyle: 'AuthStyle',
+    infoUrl: 'InfoUrl',
+    addOauthProvider: '添加 OauthProvider',
+    editOauthProvider: '编辑 OauthProvider',
+    oauthProviderList: 'OauthProvider 列表',
+  },
 };

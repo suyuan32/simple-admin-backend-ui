@@ -18,7 +18,7 @@ export const columns: BasicColumn[] = [
   },
   {
     title: t('sys.apis.description'),
-    dataIndex: 'title',
+    dataIndex: 'trans',
     width: 200,
   },
   {

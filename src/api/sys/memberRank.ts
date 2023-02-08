@@ -1,32 +1,33 @@
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode } from '/#/axios';
-import { BaseDataResp, BaseListReq, BaseResp, BaseIdsReq, BaseIdReq } from '/@/api/model/baseModel';
+import { BaseDataResp, BaseListReq, BaseResp, BaseIDsReq, BaseIDReq } from '/@/api/model/baseModel';
 import { MemberRankInfo, MemberRankListResp } from './model/memberRankModel';
 
 enum Api {
-  CreateOrUpdateMemberRank = '/sys-api/member_rank/create_or_update',
+  CreateMemberRank = '/sys-api/member_rank/create',
+  UpdateMemberRank = '/sys-api/member_rank/update',
   GetMemberRankList = '/sys-api/member_rank/list',
   DeleteMemberRank = '/sys-api/member_rank/delete',
-  BatchDeleteMemberRank = '/sys-api/member_rank/batch_delete',
+  GetMemberRankById = '/sys-api/member_rank',
 }
 
 /**
  * @description: Get member rank list
  */
 
-export const getMemberRankList = (params: BaseListReq) => {
-  return defHttp.post<BaseDataResp<MemberRankListResp>>({ url: Api.GetMemberRankList, params });
+export const getMemberRankList = (params: BaseListReq, mode: ErrorMessageMode = 'message') => {
+  return defHttp.post<BaseDataResp<MemberRankListResp>>(
+    { url: Api.GetMemberRankList, params },
+    { errorMessageMode: mode },
+  );
 };
 
 /**
- *  @description: create a new member rank
+ *  @description: Create a new member rank
  */
-export const createOrUpdateMemberRank = (
-  params: MemberRankInfo,
-  mode: ErrorMessageMode = 'modal',
-) => {
+export const createMemberRank = (params: MemberRankInfo, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
-    { url: Api.CreateOrUpdateMemberRank, params: params },
+    { url: Api.CreateMemberRank, params: params },
     {
       errorMessageMode: mode,
     },
@@ -34,9 +35,21 @@ export const createOrUpdateMemberRank = (
 };
 
 /**
- *  @description: delete member rank
+ *  @description: Update the member rank
  */
-export const deleteMemberRank = (params: BaseIdReq, mode: ErrorMessageMode = 'modal') => {
+export const updateMemberRank = (params: MemberRankInfo, mode: ErrorMessageMode = 'message') => {
+  return defHttp.post<BaseResp>(
+    { url: Api.UpdateMemberRank, params: params },
+    {
+      errorMessageMode: mode,
+    },
+  );
+};
+
+/**
+ *  @description: Delete member ranks
+ */
+export const deleteMemberRank = (params: BaseIDsReq, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
     { url: Api.DeleteMemberRank, params: params },
     {
@@ -46,11 +59,11 @@ export const deleteMemberRank = (params: BaseIdReq, mode: ErrorMessageMode = 'mo
 };
 
 /**
- *  @description: batch delete member ranks
+ *  @description: Get member rank By ID
  */
-export const batchDeleteMemberRank = (params: BaseIdsReq, mode: ErrorMessageMode = 'modal') => {
-  return defHttp.post<BaseResp>(
-    { url: Api.BatchDeleteMemberRank, params: params },
+export const getMemberRankById = (params: BaseIDReq, mode: ErrorMessageMode = 'message') => {
+  return defHttp.post<BaseDataResp<MemberRankInfo>>(
+    { url: Api.GetMemberRankById, params: params },
     {
       errorMessageMode: mode,
     },

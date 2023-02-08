@@ -9,7 +9,7 @@
       </template>
       <template #toolbar>
         <a-button type="primary" @click="handleCreate">
-          {{ t('sys.apis.addApi') }}
+          {{ t('sys.dictionaryDetail.addDictionaryDetail') }}
         </a-button>
       </template>
       <template #bodyCell="{ column, record }">
@@ -34,7 +34,7 @@
         </template>
       </template>
     </BasicTable>
-    <ApiDrawer @register="registerDrawer" @success="handleSuccess" />
+    <DictionaryDetailDrawer @register="registerDrawer" @success="handleSuccess" />
   </div>
 </template>
 <script lang="ts">
@@ -44,16 +44,16 @@
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
 
   import { useDrawer } from '/@/components/Drawer';
-  import ApiDrawer from './ApiDrawer.vue';
+  import DictionaryDetailDrawer from './DictionaryDetailDrawer.vue';
   import { useI18n } from 'vue-i18n';
   import { useMessage } from '/@/hooks/web/useMessage';
 
-  import { columns, searchFormSchema } from './api.data';
-  import { getApiList, deleteApi } from '/@/api/sys/api';
+  import { columns, searchFormSchema } from './dictionaryDetail.data';
+  import { getDictionaryDetailList, deleteDictionaryDetail } from '/@/api/sys/dictionaryDetail';
 
   export default defineComponent({
-    name: 'ApiManagement',
-    components: { BasicTable, ApiDrawer, TableAction, Button, DeleteOutlined },
+    name: 'DictionaryDetailManagement',
+    components: { BasicTable, DictionaryDetailDrawer, TableAction, Button, DeleteOutlined },
     setup() {
       const { t } = useI18n();
       const selectedIds = ref<number[] | string[]>();
@@ -62,8 +62,8 @@
       const [registerDrawer, { openDrawer }] = useDrawer();
       const { notification } = useMessage();
       const [registerTable, { reload }] = useTable({
-        title: t('sys.apis.apiList'),
-        api: getApiList,
+        title: t('sys.dictionaryDetail.dictionaryDetailList'),
+        api: getDictionaryDetailList,
         columns,
         formConfig: {
           labelWidth: 120,
@@ -104,7 +104,7 @@
       }
 
       async function handleDelete(record: Recordable) {
-        const result = await deleteApi({ ids: [record.id] }, 'modal');
+        const result = await deleteDictionaryDetail({ ids: [record.id] }, 'modal');
         if (result.code === 0) {
           notification.success({
             message: t('common.successful'),
@@ -120,7 +120,10 @@
           title: t('common.deleteConfirm'),
           icon: createVNode(ExclamationCircleOutlined),
           async onOk() {
-            const result = await deleteApi({ ids: selectedIds.value as number[] }, 'modal');
+            const result = await deleteDictionaryDetail(
+              { ids: selectedIds.value as number[] },
+              'modal',
+            );
             if (result.code === 0) {
               showDeleteButton.value = false;
               notification.success({

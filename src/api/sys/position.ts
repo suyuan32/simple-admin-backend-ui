@@ -1,30 +1,33 @@
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode } from '/#/axios';
-import { BaseDataResp, BaseListReq, BaseResp, BaseIdsReq, BaseIdReq } from '/@/api/model/baseModel';
+import { BaseDataResp, BaseListReq, BaseResp, BaseIDsReq, BaseIDReq } from '/@/api/model/baseModel';
 import { PositionInfo, PositionListResp } from './model/positionModel';
 
 enum Api {
-  CreateOrUpdatePosition = '/sys-api/position/create_or_update',
+  CreatePosition = '/sys-api/position/create',
+  UpdatePosition = '/sys-api/position/update',
   GetPositionList = '/sys-api/position/list',
   DeletePosition = '/sys-api/position/delete',
-  BatchDeletePosition = '/sys-api/position/batch_delete',
-  SetPositionStatus = '/sys-api/position/status',
+  GetPositionById = '/sys-api/position',
 }
 
 /**
  * @description: Get position list
  */
 
-export const getPositionList = (params: BaseListReq) => {
-  return defHttp.post<BaseDataResp<PositionListResp>>({ url: Api.GetPositionList, params });
+export const getPositionList = (params: BaseListReq, mode: ErrorMessageMode = 'message') => {
+  return defHttp.post<BaseDataResp<PositionListResp>>(
+    { url: Api.GetPositionList, params },
+    { errorMessageMode: mode },
+  );
 };
 
 /**
- *  @description: create a new position
+ *  @description: Create a new position
  */
-export const createOrUpdatePosition = (params: PositionInfo, mode: ErrorMessageMode = 'modal') => {
+export const createPosition = (params: PositionInfo, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
-    { url: Api.CreateOrUpdatePosition, params: params },
+    { url: Api.CreatePosition, params: params },
     {
       errorMessageMode: mode,
     },
@@ -32,9 +35,21 @@ export const createOrUpdatePosition = (params: PositionInfo, mode: ErrorMessageM
 };
 
 /**
- *  @description: delete position
+ *  @description: Update the position
  */
-export const deletePosition = (params: BaseIdReq, mode: ErrorMessageMode = 'modal') => {
+export const updatePosition = (params: PositionInfo, mode: ErrorMessageMode = 'message') => {
+  return defHttp.post<BaseResp>(
+    { url: Api.UpdatePosition, params: params },
+    {
+      errorMessageMode: mode,
+    },
+  );
+};
+
+/**
+ *  @description: Delete positions
+ */
+export const deletePosition = (params: BaseIDsReq, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
     { url: Api.DeletePosition, params: params },
     {
@@ -44,19 +59,13 @@ export const deletePosition = (params: BaseIdReq, mode: ErrorMessageMode = 'moda
 };
 
 /**
- *  @description: batch delete positions
+ *  @description: Get position By ID
  */
-export const batchDeletePosition = (params: BaseIdsReq, mode: ErrorMessageMode = 'modal') => {
-  return defHttp.post<BaseResp>(
-    { url: Api.BatchDeletePosition, params: params },
+export const getPositionById = (params: BaseIDReq, mode: ErrorMessageMode = 'message') => {
+  return defHttp.post<BaseDataResp<PositionInfo>>(
+    { url: Api.GetPositionById, params: params },
     {
       errorMessageMode: mode,
     },
   );
 };
-
-/**
- *  @description: set the position status
- */
-export const setPositionStatus = (id: string, status: number) =>
-  defHttp.post({ url: Api.SetPositionStatus, params: { id, status } });

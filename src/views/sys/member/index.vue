@@ -57,7 +57,7 @@
   import { useMessage } from '/@/hooks/web/useMessage';
 
   import { columns, searchFormSchema } from './member.data';
-  import { getMemberList, deleteMember, batchDeleteMember } from '/@/api/sys/member';
+  import { getMemberList, deleteMember } from '/@/api/sys/member';
   import { PageWrapper } from '/@/components/Page';
   import Row from 'ant-design-vue/es/grid/Row';
   import Col from 'ant-design-vue/es/grid/Col';
@@ -126,7 +126,7 @@
       }
 
       async function handleDelete(record: Recordable) {
-        const result = await deleteMember({ id: record.id }, 'modal');
+        const result = await deleteMember({ ids: [record.id] }, 'modal');
         if (result.code === 0) {
           notification.success({
             message: t('common.successful'),
@@ -142,7 +142,7 @@
           title: t('common.deleteConfirm'),
           icon: createVNode(ExclamationCircleOutlined),
           async onOk() {
-            const result = await batchDeleteMember({ ids: selectedIds.value as string[] }, 'modal');
+            const result = await deleteMember({ ids: selectedIds.value as string[] }, 'modal');
             if (result.code === 0) {
               showDeleteButton.value = false;
               notification.success({

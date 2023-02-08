@@ -73,7 +73,7 @@
         /></FormItem>
 
         <FormItem :label="t('sys.menu.paramType')" name="dataType" :rules="[{ required: true }]">
-          <Select ref="select" v-model:value="formData.dataType" style="width: 120px">
+          <Select ref="select" v-model:value="formData.type" style="width: 120px">
             <SelectOption value="string">String</SelectOption>
             <SelectOption value="json">JSON</SelectOption>
           </Select>
@@ -98,18 +98,14 @@
   import { defineComponent, ref, computed, unref, reactive } from 'vue';
   import { Modal, Table, Button, Form, FormItem, Select, SelectOption } from 'ant-design-vue';
   import { BasicForm, useForm } from '/@/components/Form/index';
-  import { extraParamColumns, formSchema, paramFormData } from './menu.data';
+  import { extraParamColumns, formSchema } from './menu.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { TableAction } from '/@/components/Table';
   import { useI18n } from 'vue-i18n';
-  import {
-    createOrUpdateMenu,
-    deleteMenuParam,
-    getMenuParamListByMenuId,
-    createOrUpdateMenuParam,
-  } from '/@/api/sys/menu';
-  import { MenuParamInfo } from '/@/api/sys/model/menuModel';
+  import { createMenu, updateMenu } from '/@/api/sys/menu';
   import { useMessage } from '/@/hooks/web/useMessage';
+  import { MenuParamInfo } from '/@/api/sys/model/menuParamModel';
+  import { createMenuParam, deleteMenuParam, getMenuParamList } from '/@/api/sys/menuParam';
 
   export default defineComponent({
     name: 'MenuDrawer',
@@ -135,13 +131,7 @@
       const paramFormTitle = ref<string>('');
       const { createMessage } = useMessage();
       // form model for menu parameters creating and updating
-      const formData = reactive<paramFormData>({
-        id: 0,
-        menuId: 0,
-        dataType: 'string',
-        key: '',
-        value: '',
-      });
+      const formData = reactive<MenuParamInfo>({ id: 0 });
       const paramFormVisible = ref<boolean>(false);
 
       function handleOpenParamForm() {
@@ -149,12 +139,12 @@
         formData.id = 0;
         formData.key = '';
         formData.value = '';
-        formData.dataType = 'string';
+        formData.type = 'string';
         paramFormVisible.value = true;
       }
 
       async function handleOpenModal() {
-        const result = await getMenuParamListByMenuId({ id: menuId.value });
+        const result = await getMenuParamList({ menuId: menuId.value });
         dataSource.value = result.data.data;
         paramFormTitle.value = t('sys.menu.addMenuParam');
         formData.menuId = menuId.value;
@@ -166,21 +156,21 @@
         formData.id = record.id;
         formData.key = record.key;
         formData.value = record.value;
-        formData.dataType = record.dataType;
+        formData.type = record.dataType;
         paramFormTitle.value = t('sys.menu.editMenuParam');
         paramFormVisible.value = true;
       }
 
       async function handleDelete(record: Recordable) {
-        const result = await deleteMenuParam({ id: record.id }, 'modal');
+        const result = await deleteMenuParam({ ids: [record.id] }, 'modal');
         if (result.code === 0) handleOpenModal();
       }
 
       async function handleParamSubmit() {
-        const result = await createOrUpdateMenuParam({
+        const result = await createMenuParam({
           id: formData.id,
           menuId: formData.menuId,
-          dataType: formData.dataType,
+          type: formData.type,
           value: formData.value,
           key: formData.key,
         });
@@ -237,7 +227,7 @@
           return;
         }
 
-        const result = await createOrUpdateMenu(values);
+        const result = unref(isUpdate) ? await updateMenu(values) : await createMenu(values);
         if (result.code === 0) {
           closeDrawer();
           emit('success', result.msg);

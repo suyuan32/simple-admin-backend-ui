@@ -17,7 +17,7 @@
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
 
-  import { createOrUpdateDepartment } from '/@/api/sys/department';
+  import { createDepartment, updateDepartment } from '/@/api/sys/department';
 
   export default defineComponent({
     name: 'DepartmentDrawer',
@@ -55,7 +55,9 @@
         const values = await validate();
         setDrawerProps({ confirmLoading: true });
         values['id'] = unref(isUpdate) ? Number(values['id']) : 0;
-        let result = await createOrUpdateDepartment(values);
+        let result = unref(isUpdate)
+          ? await updateDepartment(values)
+          : await createDepartment(values);
         if (result.code === 0) {
           closeDrawer();
           emit('success', result.msg);

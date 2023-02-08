@@ -5,7 +5,7 @@ import { Tag } from 'ant-design-vue';
 import { Icon } from '/@/components/Icon';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { formatToDateTime } from '/@/utils/dateUtil';
-import { getAllMenu } from '/@/api/sys/menu';
+import { getMenuList } from '/@/api/sys/menu';
 import { ColumnType } from 'ant-design-vue/lib/table';
 
 const { t } = useI18n();
@@ -43,14 +43,6 @@ export const extraParamColumns: ColumnType[] = [
   },
 ];
 
-export interface paramFormData {
-  id: number;
-  menuId: number;
-  dataType: string;
-  key: string;
-  value: string;
-}
-
 export const columns: BasicColumn[] = [
   {
     title: t('sys.menu.menuName'),
@@ -60,7 +52,6 @@ export const columns: BasicColumn[] = [
   },
   {
     title: t('sys.menu.icon'),
-    dataIndex: 'icon',
     width: 50,
     customRender: ({ record }) => {
       return h(Icon, { icon: record.icon });
@@ -77,7 +68,7 @@ export const columns: BasicColumn[] = [
     width: 80,
   },
   {
-    title: t('sys.menu.statusName'),
+    title: t('sys.menu.status'),
     dataIndex: 'disabled',
     width: 80,
     customRender: ({ record }) => {
@@ -144,17 +135,17 @@ export const formSchema: FormSchema[] = [
     label: t('sys.menu.menuParent'),
     component: 'ApiTreeSelect',
     required: true,
-    defaultValue: 0,
+    defaultValue: 1000000,
     componentProps: {
-      api: getAllMenu,
+      api: getMenuList,
       resultField: 'data.data',
       labelField: 'trans',
       valueField: 'id',
       defaultValue: {
-        id: 0,
+        id: 1000000,
         parentId: -1,
         label: t('sys.menu.rootMenu'),
-        value: 0,
+        value: 1000000,
       },
     },
   },
@@ -236,7 +227,7 @@ export const formSchema: FormSchema[] = [
   },
   {
     field: 'disabled',
-    label: t('sys.menu.statusName'),
+    label: t('sys.menu.status'),
     component: 'RadioButtonGroup',
     defaultValue: false,
     componentProps: {

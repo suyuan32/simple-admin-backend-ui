@@ -17,7 +17,7 @@
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
 
-  import { createOrUpdateMember } from '/@/api/sys/member';
+  import { createMember, updateMember } from '/@/api/sys/member';
 
   export default defineComponent({
     name: 'MemberDrawer',
@@ -55,7 +55,7 @@
         const values = await validate();
         setDrawerProps({ confirmLoading: true });
         values['id'] = unref(isUpdate) ? values['id'] : '';
-        let result = await createOrUpdateMember(values);
+        let result = unref(isUpdate) ? await updateMember(values) : await createMember(values);
         if (result.code === 0) {
           closeDrawer();
           emit('success', result.msg);

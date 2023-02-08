@@ -6,13 +6,15 @@ import { BaseListResp } from '/@/api/model/baseModel';
 export interface MemberInfo {
   id: string;
   createdAt?: number;
-  username: string;
-  password: string;
-  nickname: string;
-  rankId: number;
-  mobile: string;
-  email: string;
-  avatar: string;
+  updatedAt?: number;
+  status?: number;
+  username?: string;
+  password?: string;
+  nickname?: string;
+  rankId?: number;
+  mobile?: string;
+  email?: string;
+  avatar?: string;
 }
 
 /**

@@ -6,10 +6,12 @@ import { BaseListResp } from '/@/api/model/baseModel';
 export interface PositionInfo {
   id: number;
   createdAt?: number;
-  sort: number;
-  name: string;
-  code: string;
-  remark: string;
+  updatedAt?: number;
+  status?: number;
+  sort?: number;
+  name?: string;
+  code?: string;
+  remark?: string;
 }
 
 /**

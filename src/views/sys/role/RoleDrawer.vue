@@ -58,8 +58,8 @@
   import { useI18n } from 'vue-i18n';
 
   import { ApiAuthorityInfo } from '/@/api/sys/model/authorityModel';
-  import { createOrUpdateRole } from '/@/api/sys/role';
-  import { getAllMenu } from '/@/api/sys/menu';
+  import { createRole, updateRole } from '/@/api/sys/role';
+  import { getMenuList } from '/@/api/sys/menu';
   import {
     createOrUpdateApiAuthority,
     createOrUpdateMenuAuthority,
@@ -96,7 +96,7 @@
       async function getMenuData() {
         try {
           treeMenuData.value = [];
-          const data = await getAllMenu();
+          const data = await getMenuList();
           treeMenuData.value = buildDataNode(data.data.data, {
             idKeyField: 'id',
             parentKeyField: 'parentId',
@@ -188,7 +188,7 @@
         const values = await validate();
         setDrawerProps({ confirmLoading: true });
         values['id'] = unref(isUpdate) ? Number(values['id']) : 0;
-        let result = await createOrUpdateRole(values);
+        let result = unref(isUpdate) ? await updateRole(values) : await createRole(values);
         if (result.code === 0) {
           childrenDrawer.value = false;
           closeDrawer();

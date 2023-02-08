@@ -8,11 +8,6 @@
     @ok="handleSubmit"
   >
     <BasicForm @register="registerForm" />
-    <template v-if="isUpdate" #extra>
-      <a-button type="primary" style="margin-right: 8px" @click="handleOpenDetail">
-        {{ t('sys.dictionary.addDictionaryDetail') }}</a-button
-      >
-    </template>
   </BasicDrawer>
 </template>
 <script lang="ts">
@@ -22,9 +17,7 @@
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
 
-  import { createOrUpdateDictionary } from '/@/api/sys/dictionary';
-  // import { useRouter } from 'vue-router';
-  import { useGo } from '/@/hooks/web/usePage';
+  import { createDictionary, updateDictionary } from '/@/api/sys/dictionary';
 
   export default defineComponent({
     name: 'DictionaryDrawer',
@@ -33,9 +26,6 @@
     setup(_, { emit }) {
       const isUpdate = ref(true);
       const { t } = useI18n();
-      const go = useGo();
-      const dictionaryName = ref<string>('');
-      const dictionaryId = ref<number>(0);
 
       const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
         labelWidth: 90,
@@ -54,8 +44,6 @@
           setFieldsValue({
             ...data.record,
           });
-          dictionaryName.value = data.record.name;
-          dictionaryId.value = data.record.id;
         }
       });
 
@@ -63,15 +51,13 @@
         !unref(isUpdate) ? t('sys.dictionary.addDictionary') : t('sys.dictionary.editDictionary'),
       );
 
-      function handleOpenDetail() {
-        go('/dictionary/detail?id=' + dictionaryId.value + '&name=' + dictionaryName.value);
-      }
-
       async function handleSubmit() {
         const values = await validate();
         setDrawerProps({ confirmLoading: true });
         values['id'] = unref(isUpdate) ? Number(values['id']) : 0;
-        let result = await createOrUpdateDictionary(values);
+        let result = unref(isUpdate)
+          ? await updateDictionary(values)
+          : await createDictionary(values);
         if (result.code === 0) {
           closeDrawer();
           emit('success', result.msg);
@@ -83,10 +69,7 @@
         registerDrawer,
         registerForm,
         getTitle,
-        isUpdate,
         handleSubmit,
-        t,
-        handleOpenDetail,
       };
     },
   });

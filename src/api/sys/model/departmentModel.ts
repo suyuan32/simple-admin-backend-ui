@@ -6,15 +6,17 @@ import { BaseListResp } from '/@/api/model/baseModel';
 export interface DepartmentInfo {
   id: number;
   createdAt?: number;
-  status: number;
-  name: string;
-  ancestors: string;
-  leader: string;
-  phone: string;
-  email: string;
-  sort: number;
-  remark: string;
-  parentId: number;
+  updatedAt?: number;
+  trans?: string;
+  status?: number;
+  sort?: number;
+  name?: string;
+  ancestors?: string;
+  leader?: string;
+  phone?: string;
+  email?: string;
+  remark?: string;
+  parentId?: number;
 }
 
 /**

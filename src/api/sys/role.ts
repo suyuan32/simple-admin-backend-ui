@@ -1,30 +1,33 @@
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode } from '/#/axios';
-import { BaseDataResp, BaseIdReq, BaseListReq, BaseResp } from '/@/api/model/baseModel';
+import { BaseDataResp, BaseListReq, BaseResp, BaseIDsReq, BaseIDReq } from '/@/api/model/baseModel';
 import { RoleInfo, RoleListResp } from './model/roleModel';
 
 enum Api {
+  CreateRole = '/sys-api/role/create',
+  UpdateRole = '/sys-api/role/update',
   GetRoleList = '/sys-api/role/list',
-  CreateOrUpdateRole = '/sys-api/role/create_or_update',
   DeleteRole = '/sys-api/role/delete',
-  SetRoleStatus = '/sys-api/role/status',
+  GetRoleById = '/sys-api/role',
 }
 
 /**
- * @description: Get user menu based on role id
+ * @description: Get role list
  */
 
-export const getRoleList = (params: BaseListReq) => {
-  return defHttp.post<BaseDataResp<RoleListResp>>({ url: Api.GetRoleList, params });
+export const getRoleList = (params: BaseListReq, mode: ErrorMessageMode = 'message') => {
+  return defHttp.post<BaseDataResp<RoleListResp>>(
+    { url: Api.GetRoleList, params },
+    { errorMessageMode: mode },
+  );
 };
 
 /**
- *  author: ryan
  *  @description: Create a new role
  */
-export const createOrUpdateRole = (params: RoleInfo, mode: ErrorMessageMode = 'message') => {
+export const createRole = (params: RoleInfo, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
-    { url: Api.CreateOrUpdateRole, params: params },
+    { url: Api.CreateRole, params: params },
     {
       errorMessageMode: mode,
     },
@@ -32,10 +35,21 @@ export const createOrUpdateRole = (params: RoleInfo, mode: ErrorMessageMode = 'm
 };
 
 /**
- *  author: Ryan Su
- *  @description: Delete a role
+ *  @description: Update the role
  */
-export const deleteRole = (params: BaseIdReq, mode: ErrorMessageMode = 'message') => {
+export const updateRole = (params: RoleInfo, mode: ErrorMessageMode = 'message') => {
+  return defHttp.post<BaseResp>(
+    { url: Api.UpdateRole, params: params },
+    {
+      errorMessageMode: mode,
+    },
+  );
+};
+
+/**
+ *  @description: Delete roles
+ */
+export const deleteRole = (params: BaseIDsReq, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
     { url: Api.DeleteRole, params: params },
     {
@@ -45,8 +59,13 @@ export const deleteRole = (params: BaseIdReq, mode: ErrorMessageMode = 'message'
 };
 
 /**
- *  author: Ryan Su
- *  @description: Set role's status
+ *  @description: Get role By ID
  */
-export const setRoleStatus = (id: number, status: number) =>
-  defHttp.post({ url: Api.SetRoleStatus, params: { id, status } });
+export const getRoleById = (params: BaseIDReq, mode: ErrorMessageMode = 'message') => {
+  return defHttp.post<BaseDataResp<RoleInfo>>(
+    { url: Api.GetRoleById, params: params },
+    {
+      errorMessageMode: mode,
+    },
+  );
+};

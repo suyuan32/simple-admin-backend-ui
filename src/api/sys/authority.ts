@@ -1,6 +1,6 @@
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode } from '/#/axios';
-import { BaseDataResp, BaseIdReq, BaseResp } from '/@/api/model/baseModel';
+import { BaseDataResp, BaseIDReq, BaseResp } from '/@/api/model/baseModel';
 import { ApiListResp } from './model/apiModel';
 import {
   ApiAuthorityReq,
@@ -30,7 +30,7 @@ export const getApiList = (params: ApiListReq) => {
  * @description: Get api authorization list
  */
 
-export const getApiAuthority = (params: BaseIdReq) => {
+export const getApiAuthority = (params: BaseIDReq) => {
   return defHttp.post<BaseDataResp<ApiAuthorityResp>>({ url: Api.GetRoleApiList, params });
 };
 
@@ -72,7 +72,7 @@ export const createOrUpdateMenuAuthority = (
  *  @description: get role's menu authorization ids
  */
 
-export const getMenuAuthority = (params: BaseIdReq) => {
+export const getMenuAuthority = (params: BaseIDReq) => {
   return defHttp.post<BaseDataResp<MenuAuthorityInfo>>({
     url: Api.GetRoleMenuList,
     params,

@@ -284,4 +284,18 @@ export default {
     editMemberRank: 'Edit Rank',
     memberRankList: 'Rank List',
   },
+  oauthProvider: {
+    name: 'Name',
+    clientId: 'ClientId',
+    clientSecret: 'ClientSecret',
+    redirectUrl: 'RedirectUrl',
+    scopes: 'Scopes',
+    authUrl: 'AuthUrl',
+    tokenUrl: 'TokenUrl',
+    authStyle: 'AuthStyle',
+    infoUrl: 'InfoUrl',
+    addOauthProvider: 'Add OauthProvider',
+    editOauthProvider: 'Edit OauthProvider',
+    oauthProviderList: 'OauthProvider List',
+  },
 };

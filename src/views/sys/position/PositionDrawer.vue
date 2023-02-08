@@ -17,7 +17,7 @@
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
 
-  import { createOrUpdatePosition } from '/@/api/sys/position';
+  import { createPosition, updatePosition } from '/@/api/sys/position';
 
   export default defineComponent({
     name: 'PositionDrawer',
@@ -55,7 +55,7 @@
         const values = await validate();
         setDrawerProps({ confirmLoading: true });
         values['id'] = unref(isUpdate) ? Number(values['id']) : 0;
-        let result = await createOrUpdatePosition(values);
+        let result = unref(isUpdate) ? await updatePosition(values) : await createPosition(values);
         if (result.code === 0) {
           closeDrawer();
           emit('success', result.msg);

@@ -4,17 +4,17 @@ import {
   BaseDataResp,
   BaseListReq,
   BaseResp,
-  BaseUUIDReq,
   BaseUUIDsReq,
+  BaseUUIDReq,
 } from '/@/api/model/baseModel';
-import { TokenInfo, TokenListResp } from './model/tokenModel ';
+import { TokenInfo, TokenListResp } from './model/tokenModel';
 
 enum Api {
+  CreateToken = '/sys-api/token/create',
+  UpdateToken = '/sys-api/token/update',
   GetTokenList = '/sys-api/token/list',
-  CreateOrUpdateToken = '/sys-api/token/create_or_update',
   DeleteToken = '/sys-api/token/delete',
-  BatchDeleteToken = '/sys-api/token/batch_delete',
-  SetTokenStatus = '/sys-api/token/status',
+  GetTokenById = '/sys-api/token',
   Logout = '/sys-api/token/logout',
 }
 
@@ -22,17 +22,19 @@ enum Api {
  * @description: Get token list
  */
 
-export const getTokenList = (params: BaseListReq) => {
-  return defHttp.post<BaseDataResp<TokenListResp>>({ url: Api.GetTokenList, params });
+export const getTokenList = (params: BaseListReq, mode: ErrorMessageMode = 'message') => {
+  return defHttp.post<BaseDataResp<TokenListResp>>(
+    { url: Api.GetTokenList, params },
+    { errorMessageMode: mode },
+  );
 };
 
 /**
- *  author: ryan
- *  @description: Create or update a new token
+ *  @description: Create a new token
  */
-export const createOrUpdateApi = (params: TokenInfo, mode: ErrorMessageMode = 'modal') => {
+export const createToken = (params: TokenInfo, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
-    { url: Api.CreateOrUpdateToken, params: params },
+    { url: Api.CreateToken, params: params },
     {
       errorMessageMode: mode,
     },
@@ -40,10 +42,21 @@ export const createOrUpdateApi = (params: TokenInfo, mode: ErrorMessageMode = 'm
 };
 
 /**
- *  author: Ryan Su
- *  @description: Delete a token
+ *  @description: Update the token
  */
-export const deleteToken = (params: BaseUUIDReq, mode: ErrorMessageMode = 'modal') => {
+export const updateToken = (params: TokenInfo, mode: ErrorMessageMode = 'message') => {
+  return defHttp.post<BaseResp>(
+    { url: Api.UpdateToken, params: params },
+    {
+      errorMessageMode: mode,
+    },
+  );
+};
+
+/**
+ *  @description: Delete tokens
+ */
+export const deleteToken = (params: BaseUUIDsReq, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
     { url: Api.DeleteToken, params: params },
     {
@@ -53,28 +66,15 @@ export const deleteToken = (params: BaseUUIDReq, mode: ErrorMessageMode = 'modal
 };
 
 /**
- *  author: Ryan Su
- *  @description: Batch delete tokens
+ *  @description: Get token By ID
  */
-export const batchDeleteToken = (params: BaseUUIDsReq, mode: ErrorMessageMode = 'modal') => {
-  return defHttp.post<BaseResp>(
-    { url: Api.BatchDeleteToken, params: params },
+export const getTokenById = (params: BaseUUIDReq, mode: ErrorMessageMode = 'message') => {
+  return defHttp.post<BaseDataResp<TokenInfo>>(
+    { url: Api.GetTokenById, params: params },
     {
       errorMessageMode: mode,
     },
   );
 };
-
-/**
- *  author: Ryan Su
- *  @description: Set the token status
- */
-export const setTokenStatus = (id: string, status: number) =>
-  defHttp.post({ url: Api.SetTokenStatus, params: { id, status } });
-
-/**
- *  author: Ryan Su
- *  @description: Force logging out
- */
 
 export const logout = (uuid: string) => defHttp.post({ url: Api.Logout, params: { UUID: uuid } });

@@ -34,10 +34,10 @@
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
 
   import { useI18n } from 'vue-i18n';
+  import { useMessage } from '/@/hooks/web/useMessage';
 
   import { columns, searchFormSchema } from './token.data';
-  import { batchDeleteToken, deleteToken, getTokenList } from '/@/api/sys/token';
-  import { useMessage } from '/@/hooks/web/useMessage';
+  import { getTokenList, deleteToken } from '/@/api/sys/token';
 
   export default defineComponent({
     name: 'TokenManagement',
@@ -46,8 +46,8 @@
       const { t } = useI18n();
       const selectedIds = ref<number[] | string[]>();
       const showDeleteButton = ref<boolean>(false);
-      const { notification } = useMessage();
 
+      const { notification } = useMessage();
       const [registerTable, { reload }] = useTable({
         title: t('sys.token.tokenList'),
         api: getTokenList,
@@ -78,7 +78,7 @@
       });
 
       async function handleDelete(record: Recordable) {
-        const result = await deleteToken({ id: record.id }, 'modal');
+        const result = await deleteToken({ ids: [record.id] }, 'modal');
         if (result.code === 0) {
           notification.success({
             message: t('common.successful'),
@@ -94,7 +94,7 @@
           title: t('common.deleteConfirm'),
           icon: createVNode(ExclamationCircleOutlined),
           async onOk() {
-            const result = await batchDeleteToken({ ids: selectedIds.value as string[] }, 'modal');
+            const result = await deleteToken({ ids: selectedIds.value as string[] }, 'modal');
             if (result.code === 0) {
               showDeleteButton.value = false;
               notification.success({
@@ -111,10 +111,20 @@
         });
       }
 
+      async function handleSuccess(msg) {
+        notification.success({
+          message: t('common.successful'),
+          description: t(msg),
+          duration: 3,
+        });
+        await reload();
+      }
+
       return {
         t,
         registerTable,
         handleDelete,
+        handleSuccess,
         handleBatchDelete,
         showDeleteButton,
       };

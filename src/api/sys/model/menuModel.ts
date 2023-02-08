@@ -22,112 +22,47 @@ export interface MenuPageResp {
 
 /**
  *  author: ryan
- *  @description: menu params for get all menu api
- */
-
-export type MenuParams = {
-  menuName?: string;
-  status?: string;
-};
-
-/**
- *  author: ryan
  *  @description: the items for menu list table
  */
-export interface MenuListItem {
+export interface MenuInfo {
   id: number;
-  type: number;
-  trans: string;
-  parentId: number;
-  path: string;
-  name: string;
-  redirect: string;
-  component: string;
-  sort: number;
-  disabled: boolean;
-  title: string;
-  icon: string;
-  hideMenu: boolean;
-  hideBreadcrumb: boolean;
-  currentActiveMenu?: string;
-  ignoreKeepAlive: boolean;
-  hideTab: boolean;
-  frameSrc: string;
-  carryParam: boolean;
-  hideChildrenInMenu: boolean;
-  affix: boolean;
-  dynamicLevel: number;
-  realPath: string;
+  type?: number;
+  trans?: string;
+  parentId?: number;
+  path?: string;
+  name?: string;
+  redirect?: string;
+  component?: string;
+  sort?: number;
+  disabled?: boolean;
+  meta: Meta;
   createdAt?: number;
   updatedAt?: number;
+}
+
+interface Meta {
+  title?: string;
+  icon?: string;
+  hideMenu?: boolean;
+  hideBreadcrumb?: boolean;
+  currentActiveMenu?: string;
+  ignoreKeepAlive?: boolean;
+  hideTab?: boolean;
+  frameSrc?: string;
+  carryParam?: boolean;
+  hideChildrenInMenu?: boolean;
+  affix?: boolean;
+  dynamicLevel?: number;
+  realPath?: string;
 }
 
 /**
  *  author: ryan
  *  @description: menu list response model
  */
-export type MenuListResp = BaseListResp<MenuListItem>;
-
-/**
- *  author: ryan
- *  @description: create menu reqest model
- */
-export interface CreateOrUpdateMenuReq {
-  id: number;
-  type: number;
-  parentId: number;
-  path: string;
-  name: string;
-  redirect: string;
-  component: string;
-  sort: number;
-  disabled: boolean;
-  title: string;
-  icon: string;
-  hideMenu: boolean;
-  hideBreadcrumb: boolean;
-  currentActiveMenu: string;
-  ignoreKeepAlive: boolean;
-  hideTab: boolean;
-  frameSrc: string;
-  carryParam: boolean;
-  hideChildrenInMenu: boolean;
-  affix: boolean;
-  dynamicLevel: number;
-  realPath: string;
-}
+export type MenuListResp = BaseListResp<MenuInfo>;
 
 /**
  * @description: Get menu return value
  */
 export type RoleMenuResp = BaseListResp<RouteItem>;
-
-/**
- *  author: Ryan Su
- *  @description: Create or update a extra menu parameter request
- */
-export interface CreateOrUpdateMenuParamReq {
-  id: number;
-  dataType: string;
-  menuId: number;
-  value: string;
-  key: string;
-}
-
-/**
- *  author: Ryan Su
- *  @description: Menu extra parameter information
- */
-export interface MenuParamInfo extends CreateOrUpdateMenuParamReq {
-  createdAt: number;
-  updatedAt: number;
-}
-
-/**
- *  author: Ryan Su
- *  @description: Menu parameters list
- */
-export interface MenuParamList {
-  total: number;
-  data: MenuParamInfo[];
-}

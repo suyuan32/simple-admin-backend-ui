@@ -6,9 +6,10 @@ import { BaseListResp } from '/@/api/model/baseModel';
 export interface MemberRankInfo {
   id: number;
   createdAt?: number;
-  name: string;
-  description: string;
-  remark: string;
+  updatedAt?: number;
+  name?: string;
+  description?: string;
+  remark?: string;
 }
 
 /**

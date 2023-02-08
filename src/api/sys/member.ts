@@ -4,33 +4,36 @@ import {
   BaseDataResp,
   BaseListReq,
   BaseResp,
-  BaseUUIDReq,
   BaseUUIDsReq,
+  BaseUUIDReq,
 } from '/@/api/model/baseModel';
 import { MemberInfo, MemberListResp } from './model/memberModel';
 
 enum Api {
-  CreateOrUpdateMember = '/sys-api/member/create_or_update',
+  CreateMember = '/sys-api/member/create',
+  UpdateMember = '/sys-api/member/update',
   GetMemberList = '/sys-api/member/list',
   DeleteMember = '/sys-api/member/delete',
-  BatchDeleteMember = '/sys-api/member/batch_delete',
-  SetMemberStatus = '/sys-api/member/status',
+  GetMemberById = '/sys-api/member',
 }
 
 /**
  * @description: Get member list
  */
 
-export const getMemberList = (params: BaseListReq) => {
-  return defHttp.post<BaseDataResp<MemberListResp>>({ url: Api.GetMemberList, params });
+export const getMemberList = (params: BaseListReq, mode: ErrorMessageMode = 'message') => {
+  return defHttp.post<BaseDataResp<MemberListResp>>(
+    { url: Api.GetMemberList, params },
+    { errorMessageMode: mode },
+  );
 };
 
 /**
- *  @description: create a new member
+ *  @description: Create a new member
  */
-export const createOrUpdateMember = (params: MemberInfo, mode: ErrorMessageMode = 'modal') => {
+export const createMember = (params: MemberInfo, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
-    { url: Api.CreateOrUpdateMember, params: params },
+    { url: Api.CreateMember, params: params },
     {
       errorMessageMode: mode,
     },
@@ -38,9 +41,21 @@ export const createOrUpdateMember = (params: MemberInfo, mode: ErrorMessageMode 
 };
 
 /**
- *  @description: delete member
+ *  @description: Update the member
  */
-export const deleteMember = (params: BaseUUIDReq, mode: ErrorMessageMode = 'modal') => {
+export const updateMember = (params: MemberInfo, mode: ErrorMessageMode = 'message') => {
+  return defHttp.post<BaseResp>(
+    { url: Api.UpdateMember, params: params },
+    {
+      errorMessageMode: mode,
+    },
+  );
+};
+
+/**
+ *  @description: Delete members
+ */
+export const deleteMember = (params: BaseUUIDsReq, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
     { url: Api.DeleteMember, params: params },
     {
@@ -50,19 +65,13 @@ export const deleteMember = (params: BaseUUIDReq, mode: ErrorMessageMode = 'moda
 };
 
 /**
- *  @description: batch delete members
+ *  @description: Get member By ID
  */
-export const batchDeleteMember = (params: BaseUUIDsReq, mode: ErrorMessageMode = 'modal') => {
-  return defHttp.post<BaseResp>(
-    { url: Api.BatchDeleteMember, params: params },
+export const getMemberById = (params: BaseUUIDReq, mode: ErrorMessageMode = 'message') => {
+  return defHttp.post<BaseDataResp<MemberInfo>>(
+    { url: Api.GetMemberById, params: params },
     {
       errorMessageMode: mode,
     },
   );
 };
-
-/**
- *  @description: set the member status
- */
-export const setMemberStatus = (id: string, status: number) =>
-  defHttp.post({ url: Api.SetMemberStatus, params: { id, status } });

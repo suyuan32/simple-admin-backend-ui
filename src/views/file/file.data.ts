@@ -32,7 +32,7 @@ export const columns: BasicColumn[] = [
     },
   },
   {
-    title: t('common.statusName'),
+    title: t('common.status'),
     dataIndex: 'status',
     width: 40,
     customRender: ({ record }) => {
