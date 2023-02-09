@@ -1,6 +1,6 @@
 <template>
   <div>
-    <BasicTable @register="registerTable">
+    <BasicTable @register="registerTable" :searchInfo="searchInfo">
       <template #tableTitle>
         <Button type="primary" danger v-if="showDeleteButton" @click="handleBatchDelete()">
           <template #icon><DeleteOutlined /></template>
@@ -9,7 +9,7 @@
       </template>
       <template #toolbar>
         <a-button type="primary" @click="handleCreate">
-          {{ t('sys.dictionaryDetail.addDictionaryDetail') }}
+          {{ t('sys.dictionary.addDictionaryDetail') }}
         </a-button>
       </template>
       <template #bodyCell="{ column, record }">
@@ -38,7 +38,7 @@
   </div>
 </template>
 <script lang="ts">
-  import { createVNode, defineComponent, ref } from 'vue';
+  import { createVNode, defineComponent, reactive, ref, unref } from 'vue';
   import { Button, Modal } from 'ant-design-vue';
   import { ExclamationCircleOutlined, DeleteOutlined } from '@ant-design/icons-vue/lib/icons';
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
@@ -50,6 +50,7 @@
 
   import { columns, searchFormSchema } from './dictionaryDetail.data';
   import { getDictionaryDetailList, deleteDictionaryDetail } from '/@/api/sys/dictionaryDetail';
+  import { useRouter } from 'vue-router';
 
   export default defineComponent({
     name: 'DictionaryDetailManagement',
@@ -58,11 +59,15 @@
       const { t } = useI18n();
       const selectedIds = ref<number[] | string[]>();
       const showDeleteButton = ref<boolean>(false);
+      const { currentRoute } = useRouter();
+      const searchInfo = reactive<Recordable>({
+        dictionaryId: Number(unref(currentRoute).params.dictionaryId),
+      });
 
       const [registerDrawer, { openDrawer }] = useDrawer();
       const { notification } = useMessage();
       const [registerTable, { reload }] = useTable({
-        title: t('sys.dictionaryDetail.dictionaryDetailList'),
+        title: t('sys.dictionary.dictionaryDetailList'),
         api: getDictionaryDetailList,
         columns,
         formConfig: {
@@ -91,7 +96,9 @@
       });
 
       function handleCreate() {
+        console.log(Number(unref(currentRoute).params.dictionaryId));
         openDrawer(true, {
+          dictionaryId: Number(unref(currentRoute).params.dictionaryId),
           isUpdate: false,
         });
       }
@@ -159,6 +166,7 @@
         handleSuccess,
         handleBatchDelete,
         showDeleteButton,
+        searchInfo,
       };
     },
   });

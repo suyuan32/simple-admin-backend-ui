@@ -39,18 +39,24 @@
         setDrawerProps({ confirmLoading: false });
 
         isUpdate.value = !!data?.isUpdate;
+        const dictionaryId = data?.dictionaryId;
+        console.log(dictionaryId);
 
         if (unref(isUpdate)) {
           setFieldsValue({
             ...data.record,
+          });
+        } else {
+          setFieldsValue({
+            dictionaryId: dictionaryId,
           });
         }
       });
 
       const getTitle = computed(() =>
         !unref(isUpdate)
-          ? t('sys.dictionaryDetail.addDictionaryDetail')
-          : t('sys.dictionaryDetail.editDictionaryDetail'),
+          ? t('sys.dictionary.addDictionaryDetail')
+          : t('sys.dictionary.editDictionaryDetail'),
       );
 
       async function handleSubmit() {

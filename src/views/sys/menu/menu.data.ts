@@ -68,7 +68,7 @@ export const columns: BasicColumn[] = [
     width: 80,
   },
   {
-    title: t('sys.menu.status'),
+    title: t('common.status'),
     dataIndex: 'disabled',
     width: 80,
     customRender: ({ record }) => {
@@ -227,7 +227,7 @@ export const formSchema: FormSchema[] = [
   },
   {
     field: 'disabled',
-    label: t('sys.menu.status'),
+    label: t('common.status'),
     component: 'RadioButtonGroup',
     defaultValue: false,
     componentProps: {

@@ -212,6 +212,8 @@ export default {
     name: '字典名称',
     dictionaryList: '字典列表',
     dictionaryDetailList: '键值列表',
+    key: '键',
+    value: '值',
     // action
     addDictionary: '添加字典',
     addDictionaryDetail: '添加键值',

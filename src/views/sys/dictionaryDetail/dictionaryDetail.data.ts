@@ -6,22 +6,23 @@ import { updateDictionaryDetail } from '/@/api/sys/dictionaryDetail';
 import { Switch } from 'ant-design-vue';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { h } from 'vue';
+import { getDictionaryList } from '/@/api/sys/dictionary';
 
 const { t } = useI18n();
 
 export const columns: BasicColumn[] = [
   {
-    title: t('sys.dictionaryDetail.title'),
+    title: t('common.displayName'),
     dataIndex: 'title',
     width: 100,
   },
   {
-    title: t('sys.dictionaryDetail.key'),
+    title: t('sys.dictionary.key'),
     dataIndex: 'key',
     width: 100,
   },
   {
-    title: t('sys.dictionaryDetail.value'),
+    title: t('sys.dictionary.value'),
     dataIndex: 'value',
     width: 100,
   },
@@ -69,20 +70,8 @@ export const columns: BasicColumn[] = [
 
 export const searchFormSchema: FormSchema[] = [
   {
-    field: 'title',
-    label: t('sys.dictionaryDetail.title'),
-    component: 'Input',
-    colProps: { span: 8 },
-  },
-  {
     field: 'key',
-    label: t('sys.dictionaryDetail.key'),
-    component: 'Input',
-    colProps: { span: 8 },
-  },
-  {
-    field: 'value',
-    label: t('sys.dictionaryDetail.value'),
+    label: t('sys.dictionary.key'),
     component: 'Input',
     colProps: { span: 8 },
   },
@@ -98,22 +87,22 @@ export const formSchema: FormSchema[] = [
 
   {
     field: 'title',
-    label: t('sys.dictionaryDetail.title'),
+    label: t('common.displayName'),
     component: 'Input',
   },
   {
     field: 'key',
-    label: t('sys.dictionaryDetail.key'),
+    label: t('sys.dictionary.key'),
     component: 'Input',
   },
   {
     field: 'value',
-    label: t('sys.dictionaryDetail.value'),
+    label: t('sys.dictionary.value'),
     component: 'Input',
   },
   {
     field: 'status',
-    label: t('sys.dictionaryDetail.status'),
+    label: t('common.status'),
     component: 'RadioButtonGroup',
     defaultValue: 1,
     componentProps: {
@@ -121,6 +110,23 @@ export const formSchema: FormSchema[] = [
         { label: t('common.on'), value: 1 },
         { label: t('common.off'), value: 2 },
       ],
+    },
+  },
+  {
+    field: 'dictionaryId',
+    label: t('sys.dictionary.name'),
+    component: 'ApiSelect',
+    required: true,
+    // defaultValue: Number(unref(currentRoute).params),
+    componentProps: {
+      api: getDictionaryList,
+      params: {
+        page: 1,
+        pageSize: 1000,
+      },
+      resultField: 'data.data',
+      labelField: 'title',
+      valueField: 'id',
     },
   },
 ];

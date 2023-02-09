@@ -25,7 +25,7 @@ enum Api {
   GetUserInfo = '/sys-api/user/info',
   GetPermCode = '/sys-api/user/perm',
   GetCaptcha = '/sys-api/captcha',
-  GetProfile = '/sys-api/user/profile',
+  Profile = '/sys-api/user/profile',
   ChangePassword = '/sys-api/user/change_password',
 }
 
@@ -119,7 +119,7 @@ export function register(params: RegisterReq, mode: ErrorMessageMode = 'message'
 }
 
 /**
- * @description: get captcha api
+ * @description: Get captcha api
  */
 export function getCaptcha(mode: ErrorMessageMode = 'message') {
   return defHttp.get<BaseDataResp<CaptchaResp>>(
@@ -133,7 +133,7 @@ export function getCaptcha(mode: ErrorMessageMode = 'message') {
 }
 
 /**
- * @description: get user's basic info
+ * @description: Get user's basic info
  */
 
 export function getUserInfo() {
@@ -157,7 +157,7 @@ export function doLogout() {
  */
 export function getUserProfile() {
   return defHttp.get<BaseDataResp<UserProfile>>(
-    { url: Api.GetProfile },
+    { url: Api.Profile },
     { errorMessageMode: 'message' },
   );
 }
@@ -167,7 +167,7 @@ export function getUserProfile() {
  *  @description: update user profile
  */
 export function updateProfile(params: UserProfile) {
-  return defHttp.post<BaseResp>({ url: Api.GetProfile, params }, { errorMessageMode: 'message' });
+  return defHttp.post<BaseResp>({ url: Api.Profile, params }, { errorMessageMode: 'message' });
 }
 
 /**
