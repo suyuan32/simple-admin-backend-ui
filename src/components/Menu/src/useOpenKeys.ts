@@ -43,7 +43,6 @@ export function useOpenKeys(
 
   const getOpenKeys = computed(() => {
     const collapse = unref(getIsMixSidebar) ? false : unref(getCollapsed);
-
     return collapse ? menuState.collapsedOpenKeys : menuState.openKeys;
   });
 

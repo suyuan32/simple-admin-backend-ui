@@ -105,7 +105,7 @@ const isMenu = (type: Number) => type === 1;
 
 export const formSchema: FormSchema[] = [
   {
-    field: 'type',
+    field: 'menuType',
     label: t('sys.menu.type'),
     component: 'RadioButtonGroup',
     defaultValue: 1,
@@ -174,7 +174,7 @@ export const formSchema: FormSchema[] = [
     field: 'path',
     label: t('sys.menu.routePath'),
     component: 'Input',
-    ifShow: ({ values }) => isMenu(values.type),
+    ifShow: ({ values }) => isMenu(values.menuType),
     rules: [{ max: 200 }],
   },
   {
@@ -183,14 +183,14 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
     required: true,
     rules: [{ max: 100 }],
-    ifShow: ({ values }) => isMenu(values.type),
+    ifShow: ({ values }) => isMenu(values.menuType),
   },
   {
     field: 'redirect',
     label: t('sys.menu.redirectPath'),
     component: 'Input',
     defaultValue: '',
-    ifShow: ({ values }) => isMenu(values.type),
+    ifShow: ({ values }) => isMenu(values.menuType),
     rules: [{ max: 100 }],
   },
   {
@@ -198,7 +198,7 @@ export const formSchema: FormSchema[] = [
     label: t('sys.menu.frameSrc'),
     component: 'Input',
     defaultValue: '',
-    ifShow: ({ values }) => isMenu(values.type),
+    ifShow: ({ values }) => isMenu(values.menuType),
     rules: [{ max: 100 }],
   },
   {
@@ -214,7 +214,7 @@ export const formSchema: FormSchema[] = [
     label: t('sys.menu.realPath'),
     component: 'Input',
     defaultValue: '',
-    ifShow: ({ values }) => isMenu(values.type),
+    ifShow: ({ values }) => isMenu(values.menuType),
     rules: [{ max: 200 }],
   },
   {
@@ -222,7 +222,7 @@ export const formSchema: FormSchema[] = [
     label: t('sys.menu.currentActiveMenu'),
     component: 'Input',
     defaultValue: '',
-    ifShow: ({ values }) => isMenu(values.type),
+    ifShow: ({ values }) => isMenu(values.menuType),
     rules: [{ max: 50 }],
   },
   {
@@ -260,7 +260,7 @@ export const formSchema: FormSchema[] = [
         { label: t('common.no'), value: true },
       ],
     },
-    ifShow: ({ values }) => isMenu(values.type),
+    ifShow: ({ values }) => isMenu(values.menuType),
   },
   {
     field: 'hideMenu',
@@ -285,7 +285,7 @@ export const formSchema: FormSchema[] = [
         { label: t('common.no'), value: true },
       ],
     },
-    ifShow: ({ values }) => isMenu(values.type),
+    ifShow: ({ values }) => isMenu(values.menuType),
   },
   {
     field: 'hideTab',
@@ -298,7 +298,7 @@ export const formSchema: FormSchema[] = [
         { label: t('common.no'), value: false },
       ],
     },
-    ifShow: ({ values }) => isMenu(values.type),
+    ifShow: ({ values }) => isMenu(values.menuType),
   },
   {
     field: 'carryParam',
@@ -311,7 +311,7 @@ export const formSchema: FormSchema[] = [
         { label: t('common.no'), value: false },
       ],
     },
-    ifShow: ({ values }) => isMenu(values.type),
+    ifShow: ({ values }) => isMenu(values.menuType),
   },
   {
     field: 'hideChildrenInMenu',
@@ -336,7 +336,7 @@ export const formSchema: FormSchema[] = [
         { label: t('common.no'), value: false },
       ],
     },
-    ifShow: ({ values }) => isMenu(values.type),
+    ifShow: ({ values }) => isMenu(values.menuType),
   },
   {
     field: 'hideTab',
@@ -349,6 +349,6 @@ export const formSchema: FormSchema[] = [
         { label: t('common.no'), value: false },
       ],
     },
-    ifShow: ({ values }) => isMenu(values.type),
+    ifShow: ({ values }) => isMenu(values.menuType),
   },
 ];

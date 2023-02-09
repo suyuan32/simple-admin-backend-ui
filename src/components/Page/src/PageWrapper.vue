@@ -33,7 +33,7 @@
   </div>
 </template>
 <script lang="ts">
-  import { CSSProperties, PropType, provide } from 'vue';
+  import { ComputedRef, CSSProperties, PropType, provide } from 'vue';
 
   import { defineComponent, computed, watch, ref, unref } from 'vue';
   import PageFooter from './PageFooter.vue';
@@ -81,7 +81,7 @@
 
       const getUpwardSpace = computed(() => props.upwardSpace);
       const { redoHeight, setCompensation, contentHeight } = useContentHeight(
-        getIsContentFullHeight,
+        getIsContentFullHeight as ComputedRef<Boolean>,
         wrapperRef,
         [headerRef, footerRef],
         [contentRef],
