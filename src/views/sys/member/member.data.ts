@@ -2,11 +2,11 @@ import { BasicColumn } from '/@/components/Table';
 import { FormSchema } from '/@/components/Table';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { formatToDateTime } from '/@/utils/dateUtil';
-import { setMemberStatus } from '/@/api/sys/member';
 import { Switch } from 'ant-design-vue';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { h } from 'vue';
 import { getMemberRankList } from '/@/api/sys/memberRank';
+import { updateMember } from '/@/api/sys/member';
 
 const { t } = useI18n();
 
@@ -22,7 +22,7 @@ export const columns: BasicColumn[] = [
     width: 100,
   },
   {
-    title: t('common.statusName'),
+    title: t('common.status'),
     dataIndex: 'status',
     width: 50,
     customRender: ({ record }) => {
@@ -38,7 +38,7 @@ export const columns: BasicColumn[] = [
           const { createMessage } = useMessage();
           record.pendingStatus = true;
           const newStatus = checked ? 1 : 0;
-          setMemberStatus(record.id, newStatus)
+          updateMember({ id: record.id, status: newStatus })
             .then((data) => {
               record.status = newStatus;
               if (data.code == 0) createMessage.success(t('common.changeStatusSuccess'));
@@ -147,13 +147,13 @@ export const formSchema: FormSchema[] = [
   },
   {
     field: 'status',
-    label: t('common.statusName'),
+    label: t('common.status'),
     component: 'RadioButtonGroup',
     defaultValue: 1,
     componentProps: {
       options: [
         { label: t('common.on'), value: 1 },
-        { label: t('common.off'), value: 0 },
+        { label: t('common.off'), value: 2 },
       ],
     },
   },

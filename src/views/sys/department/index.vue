@@ -49,11 +49,7 @@
   import { useMessage } from '/@/hooks/web/useMessage';
 
   import { columns, searchFormSchema } from './department.data';
-  import {
-    getDepartmentList,
-    deleteDepartment,
-    batchDeleteDepartment,
-  } from '/@/api/sys/department';
+  import { getDepartmentList, deleteDepartment } from '/@/api/sys/department';
 
   export default defineComponent({
     name: 'DepartmentManagement',
@@ -73,8 +69,6 @@
           labelWidth: 120,
           schemas: searchFormSchema,
         },
-        isTreeTable: true,
-        treeConfig: { id: 'id', parentId: 'parentId', childrenField: 'children' },
         useSearchForm: true,
         showTableSetting: true,
         bordered: true,
@@ -110,7 +104,7 @@
       }
 
       async function handleDelete(record: Recordable) {
-        const result = await deleteDepartment({ id: record.id }, 'modal');
+        const result = await deleteDepartment({ ids: [record.id] }, 'modal');
         if (result.code === 0) {
           notification.success({
             message: t('common.successful'),
@@ -126,10 +120,7 @@
           title: t('common.deleteConfirm'),
           icon: createVNode(ExclamationCircleOutlined),
           async onOk() {
-            const result = await batchDeleteDepartment(
-              { ids: selectedIds.value as number[] },
-              'modal',
-            );
+            const result = await deleteDepartment({ ids: selectedIds.value as number[] }, 'modal');
             if (result.code === 0) {
               showDeleteButton.value = false;
               notification.success({

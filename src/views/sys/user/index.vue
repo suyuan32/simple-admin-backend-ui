@@ -63,7 +63,7 @@
   import { useI18n } from 'vue-i18n';
 
   import { columns, searchFormSchema } from './user.data';
-  import { getUserList, deleteUser, batchDeleteUser } from '/@/api/sys/user';
+  import { getUserList, deleteUser } from '/@/api/sys/user';
   import { useRoleStore } from '/@/store/modules/role';
   import { logout } from '/@/api/sys/token';
   import { useMessage } from '/@/hooks/web/useMessage';
@@ -146,7 +146,7 @@
           return;
         }
 
-        const result = await deleteUser({ id: record.id }, 'modal');
+        const result = await deleteUser({ ids: [record.id] }, 'modal');
         if (result.code === 0) {
           notification.success({
             message: t('common.successful'),
@@ -169,7 +169,7 @@
               return;
             }
 
-            const result = await batchDeleteUser({ ids: ids }, 'modal');
+            const result = await deleteUser({ ids: ids }, 'modal');
             if (result.code === 0) {
               showDeleteButton.value = false;
               notification.success({

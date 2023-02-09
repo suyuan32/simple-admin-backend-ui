@@ -1,13 +1,13 @@
-import { BaseListResp } from '../../model/baseModel';
+import { BaseListResp } from '/@/api/model/baseModel';
 
 /**
- *  author: Ryan Su
- *  @description: api info response
+ *  @description: Api info response
  */
 export interface ApiInfo {
   id: number;
   createdAt?: number;
-  title: string;
+  updatedAt?: number;
+  trans: string;
   path: string;
   description: string;
   group: string;
@@ -15,8 +15,7 @@ export interface ApiInfo {
 }
 
 /**
- *  author: Ryan Su
- *  @description: api list response
+ *  @description: Api list response
  */
 
 export type ApiListResp = BaseListResp<ApiInfo>;

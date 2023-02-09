@@ -49,11 +49,7 @@
   import { useMessage } from '/@/hooks/web/useMessage';
 
   import { columns, searchFormSchema } from './memberRank.data';
-  import {
-    getMemberRankList,
-    deleteMemberRank,
-    batchDeleteMemberRank,
-  } from '/@/api/sys/memberRank';
+  import { getMemberRankList, deleteMemberRank } from '/@/api/sys/memberRank';
 
   export default defineComponent({
     name: 'MemberRankManagement',
@@ -108,7 +104,7 @@
       }
 
       async function handleDelete(record: Recordable) {
-        const result = await deleteMemberRank({ id: record.id }, 'modal');
+        const result = await deleteMemberRank({ ids: [record.id] }, 'modal');
         if (result.code === 0) {
           notification.success({
             message: t('common.successful'),
@@ -124,10 +120,7 @@
           title: t('common.deleteConfirm'),
           icon: createVNode(ExclamationCircleOutlined),
           async onOk() {
-            const result = await batchDeleteMemberRank(
-              { ids: selectedIds.value as number[] },
-              'modal',
-            );
+            const result = await deleteMemberRank({ ids: selectedIds.value as number[] }, 'modal');
             if (result.code === 0) {
               showDeleteButton.value = false;
               notification.success({

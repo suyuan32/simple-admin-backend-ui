@@ -34,7 +34,7 @@
 
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
   import { useI18n } from 'vue-i18n';
-  import { deleteMenu, getAllMenu } from '/@/api/sys/menu';
+  import { deleteMenu, getMenuList } from '/@/api/sys/menu';
 
   import { useDrawer } from '/@/components/Drawer';
   import MenuDrawer from './MenuDrawer.vue';
@@ -51,7 +51,7 @@
       const [registerDrawer, { openDrawer }] = useDrawer();
       const [registerTable, { reload }] = useTable({
         title: t('sys.menu.menuList'),
-        api: getAllMenu,
+        api: getMenuList,
         columns,
         formConfig: {
           labelWidth: 120,
@@ -86,7 +86,7 @@
       }
 
       async function handleDelete(record: Recordable) {
-        const result = await deleteMenu({ id: record.id }, 'modal');
+        const result = await deleteMenu({ id: record.id }, 'message');
         if (result.code === 0) {
           notification.success({
             message: t('common.successful'),

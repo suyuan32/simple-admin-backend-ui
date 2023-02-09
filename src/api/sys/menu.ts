@@ -1,51 +1,42 @@
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode } from '/#/axios';
-import {
-  RoleMenuResp,
-  MenuListResp,
-  CreateOrUpdateMenuReq,
-  MenuParamList,
-  CreateOrUpdateMenuParamReq,
-} from './model/menuModel';
-import { BaseDataResp, BaseIdReq, BaseResp } from '/@/api/model/baseModel';
+import { BaseDataResp, BaseResp, BaseIDReq } from '/@/api/model/baseModel';
+import { MenuInfo, MenuListResp, RoleMenuResp } from './model/menuModel';
 
 enum Api {
-  GetMenuListByRole = '/sys-api/menu/role',
-  GetAllMenu = '/sys-api/menu/list',
-  CreateOrUpdateMenu = '/sys-api/menu/create_or_update',
+  CreateMenu = '/sys-api/menu/create',
+  UpdateMenu = '/sys-api/menu/update',
+  GetMenuList = '/sys-api/menu/list',
   DeleteMenu = '/sys-api/menu/delete',
-  CreateOrUpdateMenuParam = '/sys-api/menu/param/create_or_update',
-  DeleteMenuParam = '/sys-api/menu/param/delete',
-  GetMenuParamsByMenuId = '/sys-api/menu/param/list',
+  GetMenuById = '/sys-api/menu',
+  GetMenuListByRole = '/sys-api/menu/role/list',
 }
 
 /**
  * @description: Get user menu list by role id
  */
 
-export const getMenuList = () => {
+export const getMenuListByRole = () => {
   return defHttp.get<BaseDataResp<RoleMenuResp>>({ url: Api.GetMenuListByRole });
 };
 
 /**
- *  author: ryan
- *  @description: Get all the menus
+ * @description: Get menu list
  */
 
-export const getAllMenu = () => {
-  return defHttp.get<BaseDataResp<MenuListResp>>({ url: Api.GetAllMenu });
+export const getMenuList = (mode: ErrorMessageMode = 'message') => {
+  return defHttp.get<BaseDataResp<MenuListResp>>(
+    { url: Api.GetMenuList },
+    { errorMessageMode: mode },
+  );
 };
 
 /**
- *  author: ryan
  *  @description: Create a new menu
  */
-export const createOrUpdateMenu = (
-  params: CreateOrUpdateMenuReq,
-  mode: ErrorMessageMode = 'message',
-) => {
+export const createMenu = (params: MenuInfo, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
-    { url: Api.CreateOrUpdateMenu, params: params },
+    { url: Api.CreateMenu, params: params },
     {
       errorMessageMode: mode,
     },
@@ -53,10 +44,21 @@ export const createOrUpdateMenu = (
 };
 
 /**
- *  author: Ryan Su
- *  @description: Delete a menu
+ *  @description: Update the menu
  */
-export const deleteMenu = (params: BaseIdReq, mode: ErrorMessageMode = 'message') => {
+export const updateMenu = (params: MenuInfo, mode: ErrorMessageMode = 'message') => {
+  return defHttp.post<BaseResp>(
+    { url: Api.UpdateMenu, params: params },
+    {
+      errorMessageMode: mode,
+    },
+  );
+};
+
+/**
+ *  @description: Delete menus
+ */
+export const deleteMenu = (params: BaseIDReq, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
     { url: Api.DeleteMenu, params: params },
     {
@@ -66,41 +68,11 @@ export const deleteMenu = (params: BaseIdReq, mode: ErrorMessageMode = 'message'
 };
 
 /**
- *  author: ryan
- *  @description: Create a new menu parameter for the menu
+ *  @description: Get menu By ID
  */
-export const createOrUpdateMenuParam = (
-  params: CreateOrUpdateMenuParamReq,
-  mode: ErrorMessageMode = 'message',
-) => {
-  return defHttp.post<BaseResp>(
-    { url: Api.CreateOrUpdateMenuParam, params: params },
-    {
-      errorMessageMode: mode,
-    },
-  );
-};
-
-/**
- *  author: Ryan Su
- *  @description: Delete a menu parameter
- */
-export const deleteMenuParam = (params: BaseIdReq, mode: ErrorMessageMode = 'message') => {
-  return defHttp.post<BaseResp>(
-    { url: Api.DeleteMenuParam, params: params },
-    {
-      errorMessageMode: mode,
-    },
-  );
-};
-
-/**
- *  author: Ryan Su
- *  @description:
- */
-export const getMenuParamListByMenuId = (params: BaseIdReq, mode: ErrorMessageMode = 'message') => {
-  return defHttp.post<BaseDataResp<MenuParamList>>(
-    { url: Api.GetMenuParamsByMenuId, params: params },
+export const getMenuById = (params: BaseIDReq, mode: ErrorMessageMode = 'message') => {
+  return defHttp.post<BaseDataResp<MenuInfo>>(
+    { url: Api.GetMenuById, params: params },
     {
       errorMessageMode: mode,
     },

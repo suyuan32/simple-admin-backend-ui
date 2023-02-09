@@ -1,7 +1,7 @@
 import { UploadApiResult } from '../sys/model/uploadModel';
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode, UploadFileParams } from '/#/axios';
-import { BaseDataResp, BaseIdReq, BaseListReq, BaseResp } from '../model/baseModel';
+import { BaseDataResp, BaseIDReq, BaseListReq, BaseResp } from '../model/baseModel';
 import { FileListResp, updateFileInfoReq } from './model/fileModel';
 
 enum Api {
@@ -53,7 +53,7 @@ export const UpdateFileInfo = (params: updateFileInfoReq, mode: ErrorMessageMode
  *  author: Ryan Su
  *  @description: delete api
  */
-export const deleteFile = (params: BaseIdReq, mode: ErrorMessageMode = 'modal') => {
+export const deleteFile = (params: BaseIDReq, mode: ErrorMessageMode = 'modal') => {
   return defHttp.delete<BaseResp>(
     { url: Api.UpdateFileInfo, params: params },
     {

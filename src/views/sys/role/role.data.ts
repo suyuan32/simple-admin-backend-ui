@@ -2,20 +2,20 @@ import { BasicColumn } from '/@/components/Table';
 import { FormSchema } from '/@/components/Table';
 import { h } from 'vue';
 import { Switch } from 'ant-design-vue';
-import { setRoleStatus } from '/@/api/sys/role';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { DataNode } from 'ant-design-vue/lib/tree';
 import { ApiInfo } from '/@/api/sys/model/apiModel';
 import { ApiAuthorityInfo } from '/@/api/sys/model/authorityModel';
 import { formatToDateTime } from '/@/utils/dateUtil';
+import { updateRole } from '/@/api/sys/role';
 
 const { t } = useI18n();
 
 export const columns: BasicColumn[] = [
   {
     title: t('sys.role.roleName'),
-    dataIndex: 'title',
+    dataIndex: 'trans',
     width: 200,
   },
   {
@@ -24,12 +24,12 @@ export const columns: BasicColumn[] = [
     width: 180,
   },
   {
-    title: t('common.order'),
+    title: t('common.sort'),
     dataIndex: 'sort',
     width: 50,
   },
   {
-    title: t('common.statusName'),
+    title: t('common.status'),
     dataIndex: 'status',
     width: 120,
     customRender: ({ record }) => {
@@ -49,8 +49,8 @@ export const columns: BasicColumn[] = [
           }
 
           record.pendingStatus = true;
-          const newStatus = checked ? 1 : 0;
-          setRoleStatus(record.id, newStatus)
+          const newStatus = checked ? 1 : 2;
+          updateRole({ id: record.id, status: newStatus })
             .then((data) => {
               record.status = newStatus;
               if (data.code == 0) createMessage.success(t('common.changeStatusSuccess'));
@@ -117,7 +117,7 @@ export const formSchema: FormSchema[] = [
   },
   {
     field: 'status',
-    label: t('common.statusName'),
+    label: t('common.status'),
     component: 'RadioButtonGroup',
     defaultValue: 1,
     componentProps: {
@@ -161,7 +161,7 @@ export function convertApiTreeData(params: ApiInfo[]): DataNode[] {
     for (let i = 0; i < params.length; i++) {
       if (params[i].group == k) {
         apiTmp.children?.push({
-          title: t(params[i].title),
+          title: t(params[i].trans),
           key: params[i].id,
         });
       }

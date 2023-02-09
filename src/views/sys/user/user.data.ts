@@ -5,10 +5,10 @@ import { formatToDateTime } from '/@/utils/dateUtil';
 import { h } from 'vue';
 import { Switch } from 'ant-design-vue';
 import { useMessage } from '/@/hooks/web/useMessage';
-import { setUserStatus } from '/@/api/sys/user';
 import { getRoleList } from '/@/api/sys/role';
 import { getDepartmentList } from '/@/api/sys/department';
 import { getPositionList } from '/@/api/sys/position';
+import { updateUser } from '/@/api/sys/user';
 
 const { t } = useI18n();
 
@@ -29,7 +29,7 @@ export const columns: BasicColumn[] = [
     width: 80,
   },
   {
-    title: t('common.statusName'),
+    title: t('common.status'),
     dataIndex: 'status',
     width: 20,
     customRender: ({ record }) => {
@@ -49,8 +49,8 @@ export const columns: BasicColumn[] = [
           }
 
           record.pendingStatus = true;
-          const newStatus = checked ? 1 : 0;
-          setUserStatus(record.id, newStatus)
+          const newStatus = checked ? 1 : 2;
+          updateUser({ id: record.id, status: newStatus })
             .then((data) => {
               record.status = newStatus;
               if (data.code == 0) createMessage.success(t('common.changeStatusSuccess'));
@@ -238,7 +238,7 @@ export const formSchema: FormSchema[] = [
   },
   {
     field: 'status',
-    label: t('sys.menu.statusName'),
+    label: t('sys.menu.status'),
     component: 'RadioButtonGroup',
     defaultValue: 1,
     componentProps: {

@@ -212,6 +212,8 @@ export default {
     name: '字典名称',
     dictionaryList: '字典列表',
     dictionaryDetailList: '键值列表',
+    key: '键',
+    value: '值',
     // action
     addDictionary: '添加字典',
     addDictionaryDetail: '添加键值',
@@ -276,5 +278,19 @@ export default {
     addMemberRank: '添加会员等级',
     editMemberRank: '编辑会员等级',
     memberRankList: '会员等级列表',
+  },
+  oauthProvider: {
+    name: 'Name',
+    clientId: 'ClientId',
+    clientSecret: 'ClientSecret',
+    redirectUrl: 'RedirectUrl',
+    scopes: 'Scopes',
+    authUrl: 'AuthUrl',
+    tokenUrl: 'TokenUrl',
+    authStyle: 'AuthStyle',
+    infoUrl: 'InfoUrl',
+    addOauthProvider: '添加 OauthProvider',
+    editOauthProvider: '编辑 OauthProvider',
+    oauthProviderList: 'OauthProvider 列表',
   },
 };

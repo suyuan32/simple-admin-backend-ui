@@ -2,7 +2,7 @@ import { BasicColumn } from '/@/components/Table';
 import { FormSchema } from '/@/components/Table';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { formatToDateTime } from '/@/utils/dateUtil';
-import { setPositionStatus } from '/@/api/sys/position';
+import { updatePosition } from '/@/api/sys/position';
 import { Switch } from 'ant-design-vue';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { h } from 'vue';
@@ -26,14 +26,14 @@ export const columns: BasicColumn[] = [
     width: 80,
   },
   {
-    title: t('common.order'),
+    title: t('common.sort'),
     dataIndex: 'sort',
     width: 20,
   },
   {
-    title: t('common.statusName'),
+    title: t('common.status'),
     dataIndex: 'status',
-    width: 40,
+    width: 50,
     customRender: ({ record }) => {
       if (!Reflect.has(record, 'pendingStatus')) {
         record.pendingStatus = false;
@@ -46,8 +46,8 @@ export const columns: BasicColumn[] = [
         onChange(checked: boolean) {
           const { createMessage } = useMessage();
           record.pendingStatus = true;
-          const newStatus = checked ? 1 : 0;
-          setPositionStatus(record.id, newStatus)
+          const newStatus = checked ? 1 : 2;
+          updatePosition({ id: record.id, status: newStatus })
             .then((data) => {
               record.status = newStatus;
               if (data.code == 0) createMessage.success(t('common.changeStatusSuccess'));
@@ -79,6 +79,18 @@ export const searchFormSchema: FormSchema[] = [
     component: 'Input',
     colProps: { span: 8 },
   },
+  {
+    field: 'code',
+    label: t('sys.position.code'),
+    component: 'Input',
+    colProps: { span: 8 },
+  },
+  {
+    field: 'remark',
+    label: t('common.remark'),
+    component: 'Input',
+    colProps: { span: 8 },
+  },
 ];
 
 export const formSchema: FormSchema[] = [
@@ -87,6 +99,12 @@ export const formSchema: FormSchema[] = [
     label: 'ID',
     component: 'Input',
     show: false,
+  },
+
+  {
+    field: 'sort',
+    label: t('common.sort'),
+    component: 'InputNumber',
   },
   {
     field: 'name',
@@ -104,19 +122,14 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
   },
   {
-    field: 'sort',
-    label: t('common.order'),
-    component: 'InputNumber',
-  },
-  {
     field: 'status',
-    label: t('common.statusName'),
+    label: t('common.status'),
     component: 'RadioButtonGroup',
     defaultValue: 1,
     componentProps: {
       options: [
         { label: t('common.on'), value: 1 },
-        { label: t('common.off'), value: 0 },
+        { label: t('common.off'), value: 2 },
       ],
     },
   },

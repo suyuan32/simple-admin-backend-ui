@@ -1,33 +1,33 @@
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode } from '/#/axios';
-import { BaseDataResp, BaseListReq, BaseResp, BaseIdsReq, BaseIdReq } from '/@/api/model/baseModel';
+import { BaseDataResp, BaseListReq, BaseResp, BaseIDsReq, BaseIDReq } from '/@/api/model/baseModel';
 import { DepartmentInfo, DepartmentListResp } from './model/departmentModel';
 
 enum Api {
-  CreateOrUpdateDepartment = '/sys-api/department/create_or_update',
+  CreateDepartment = '/sys-api/department/create',
+  UpdateDepartment = '/sys-api/department/update',
   GetDepartmentList = '/sys-api/department/list',
   DeleteDepartment = '/sys-api/department/delete',
-  BatchDeleteDepartment = '/sys-api/department/batch_delete',
-  SetDepartmentStatus = '/sys-api/department/status',
+  GetDepartmentById = '/sys-api/department',
 }
 
 /**
  * @description: Get department list
  */
 
-export const getDepartmentList = (params: BaseListReq) => {
-  return defHttp.post<BaseDataResp<DepartmentListResp>>({ url: Api.GetDepartmentList, params });
+export const getDepartmentList = (params: BaseListReq, mode: ErrorMessageMode = 'message') => {
+  return defHttp.post<BaseDataResp<DepartmentListResp>>(
+    { url: Api.GetDepartmentList, params },
+    { errorMessageMode: mode },
+  );
 };
 
 /**
- *  @description: create a new department
+ *  @description: Create a new department
  */
-export const createOrUpdateDepartment = (
-  params: DepartmentInfo,
-  mode: ErrorMessageMode = 'modal',
-) => {
+export const createDepartment = (params: DepartmentInfo, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
-    { url: Api.CreateOrUpdateDepartment, params: params },
+    { url: Api.CreateDepartment, params: params },
     {
       errorMessageMode: mode,
     },
@@ -35,9 +35,21 @@ export const createOrUpdateDepartment = (
 };
 
 /**
- *  @description: delete department
+ *  @description: Update the department
  */
-export const deleteDepartment = (params: BaseIdReq, mode: ErrorMessageMode = 'modal') => {
+export const updateDepartment = (params: DepartmentInfo, mode: ErrorMessageMode = 'message') => {
+  return defHttp.post<BaseResp>(
+    { url: Api.UpdateDepartment, params: params },
+    {
+      errorMessageMode: mode,
+    },
+  );
+};
+
+/**
+ *  @description: Delete departments
+ */
+export const deleteDepartment = (params: BaseIDsReq, mode: ErrorMessageMode = 'message') => {
   return defHttp.post<BaseResp>(
     { url: Api.DeleteDepartment, params: params },
     {
@@ -47,19 +59,13 @@ export const deleteDepartment = (params: BaseIdReq, mode: ErrorMessageMode = 'mo
 };
 
 /**
- *  @description: batch delete departments
+ *  @description: Get department By ID
  */
-export const batchDeleteDepartment = (params: BaseIdsReq, mode: ErrorMessageMode = 'modal') => {
-  return defHttp.post<BaseResp>(
-    { url: Api.BatchDeleteDepartment, params: params },
+export const getDepartmentById = (params: BaseIDReq, mode: ErrorMessageMode = 'message') => {
+  return defHttp.post<BaseDataResp<DepartmentInfo>>(
+    { url: Api.GetDepartmentById, params: params },
     {
       errorMessageMode: mode,
     },
   );
 };
-
-/**
- *  @description: set the department status
- */
-export const setDepartmentStatus = (id: string, status: number) =>
-  defHttp.post({ url: Api.SetDepartmentStatus, params: { id, status } });

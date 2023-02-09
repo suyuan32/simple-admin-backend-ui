@@ -86,7 +86,7 @@
           createMessage.warn(t('common.notAllowDeleteAdminData'));
           return;
         }
-        const result = await deleteRole({ id: record.id }, 'modal');
+        const result = await deleteRole({ ids: [record.id] }, 'modal');
         if (result.code === 0) {
           notification.success({
             message: t('common.successful'),

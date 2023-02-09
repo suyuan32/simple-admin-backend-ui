@@ -16,7 +16,7 @@
   import { formSchema } from './api.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
-  import { createOrUpdateApi } from '/@/api/sys/api';
+  import { createApi, updateApi } from '/@/api/sys/api';
 
   export default defineComponent({
     name: 'ApiDrawer',
@@ -54,7 +54,7 @@
         const values = await validate();
         setDrawerProps({ confirmLoading: true });
         values['id'] = unref(isUpdate) ? Number(values['id']) : 0;
-        let result = await createOrUpdateApi(values);
+        let result = unref(isUpdate) ? await updateApi(values) : await createApi(values);
         if (result.code === 0) {
           closeDrawer();
           emit('success', result.msg);

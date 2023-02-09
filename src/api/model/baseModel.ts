@@ -19,11 +19,11 @@ export interface BaseResp {
   msg: string;
 }
 
-export interface BaseIdReq {
+export interface BaseIDReq {
   id: number;
 }
 
-export interface BaseIdsReq {
+export interface BaseIDsReq {
   ids: number[];
 }
 

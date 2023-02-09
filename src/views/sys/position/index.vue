@@ -49,7 +49,7 @@
   import { useMessage } from '/@/hooks/web/useMessage';
 
   import { columns, searchFormSchema } from './position.data';
-  import { getPositionList, deletePosition, batchDeletePosition } from '/@/api/sys/position';
+  import { getPositionList, deletePosition } from '/@/api/sys/position';
 
   export default defineComponent({
     name: 'PositionManagement',
@@ -104,7 +104,7 @@
       }
 
       async function handleDelete(record: Recordable) {
-        const result = await deletePosition({ id: record.id }, 'modal');
+        const result = await deletePosition({ ids: [record.id] }, 'modal');
         if (result.code === 0) {
           notification.success({
             message: t('common.successful'),
@@ -120,10 +120,7 @@
           title: t('common.deleteConfirm'),
           icon: createVNode(ExclamationCircleOutlined),
           async onOk() {
-            const result = await batchDeletePosition(
-              { ids: selectedIds.value as number[] },
-              'modal',
-            );
+            const result = await deletePosition({ ids: selectedIds.value as number[] }, 'modal');
             if (result.code === 0) {
               showDeleteButton.value = false;
               notification.success({

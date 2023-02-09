@@ -2,28 +2,34 @@ import { BasicColumn } from '/@/components/Table';
 import { FormSchema } from '/@/components/Table';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { formatToDateTime } from '/@/utils/dateUtil';
-import { getDepartmentList, updateDepartment } from '/@/api/sys/department';
+import { updateDictionaryDetail } from '/@/api/sys/dictionaryDetail';
 import { Switch } from 'ant-design-vue';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { h } from 'vue';
+import { getDictionaryList } from '/@/api/sys/dictionary';
 
 const { t } = useI18n();
 
 export const columns: BasicColumn[] = [
   {
-    title: t('sys.department.name'),
-    dataIndex: 'trans',
-    width: 60,
+    title: t('common.displayName'),
+    dataIndex: 'title',
+    width: 100,
   },
   {
-    title: t('sys.department.leader'),
-    dataIndex: 'leader',
-    width: 60,
+    title: t('sys.dictionary.key'),
+    dataIndex: 'key',
+    width: 100,
+  },
+  {
+    title: t('sys.dictionary.value'),
+    dataIndex: 'value',
+    width: 100,
   },
   {
     title: t('common.status'),
     dataIndex: 'status',
-    width: 20,
+    width: 50,
     customRender: ({ record }) => {
       if (!Reflect.has(record, 'pendingStatus')) {
         record.pendingStatus = false;
@@ -36,8 +42,8 @@ export const columns: BasicColumn[] = [
         onChange(checked: boolean) {
           const { createMessage } = useMessage();
           record.pendingStatus = true;
-          const newStatus = checked ? 1 : 0;
-          updateDepartment({ id: record.id, status: newStatus })
+          const newStatus = checked ? 1 : 2;
+          updateDictionaryDetail({ id: record.id, status: newStatus })
             .then((data) => {
               record.status = newStatus;
               if (data.code == 0) createMessage.success(t('common.changeStatusSuccess'));
@@ -55,7 +61,7 @@ export const columns: BasicColumn[] = [
   {
     title: t('common.createTime'),
     dataIndex: 'createdAt',
-    width: 50,
+    width: 70,
     customRender: ({ record }) => {
       return formatToDateTime(record.createdAt);
     },
@@ -64,14 +70,8 @@ export const columns: BasicColumn[] = [
 
 export const searchFormSchema: FormSchema[] = [
   {
-    field: 'name',
-    label: t('sys.department.name'),
-    component: 'Input',
-    colProps: { span: 8 },
-  },
-  {
-    field: 'leader',
-    label: t('sys.department.leader'),
+    field: 'key',
+    label: t('sys.dictionary.key'),
     component: 'Input',
     colProps: { span: 8 },
   },
@@ -86,75 +86,47 @@ export const formSchema: FormSchema[] = [
   },
 
   {
-    field: 'name',
-    label: t('sys.department.name'),
+    field: 'title',
+    label: t('common.displayName'),
     component: 'Input',
   },
   {
-    field: 'parentId',
-    label: t('sys.department.parentId'),
-    component: 'ApiTreeSelect',
-    required: true,
-    defaultValue: 0,
-    componentProps: {
-      api: getDepartmentList,
-      params: {
-        page: 1,
-        pageSize: 1000,
-        name: '',
-        leader: '',
-      },
-      resultField: 'data.data',
-      labelField: 'trans',
-      valueField: 'id',
-      defaultValue: {
-        id: 0,
-        parentId: -1,
-        label: t('sys.department.firstLevelDepartment'),
-        value: 0,
-      },
-    },
-  },
-  {
-    field: 'ancestors',
-    label: t('sys.department.ancestors'),
+    field: 'key',
+    label: t('sys.dictionary.key'),
     component: 'Input',
   },
   {
-    field: 'leader',
-    label: t('sys.department.leader'),
-    component: 'Input',
-  },
-  {
-    field: 'phone',
-    label: t('sys.department.phone'),
-    component: 'Input',
-  },
-  {
-    field: 'email',
-    label: t('sys.department.email'),
-    component: 'Input',
-  },
-  {
-    field: 'sort',
-    label: t('sys.department.sort'),
-    component: 'InputNumber',
-  },
-  {
-    field: 'remark',
-    label: t('common.remark'),
+    field: 'value',
+    label: t('sys.dictionary.value'),
     component: 'Input',
   },
   {
     field: 'status',
-    label: t('sys.department.status'),
+    label: t('common.status'),
     component: 'RadioButtonGroup',
     defaultValue: 1,
     componentProps: {
       options: [
         { label: t('common.on'), value: 1 },
-        { label: t('common.off'), value: 0 },
+        { label: t('common.off'), value: 2 },
       ],
+    },
+  },
+  {
+    field: 'dictionaryId',
+    label: t('sys.dictionary.name'),
+    component: 'ApiSelect',
+    required: true,
+    // defaultValue: Number(unref(currentRoute).params),
+    componentProps: {
+      api: getDictionaryList,
+      params: {
+        page: 1,
+        pageSize: 1000,
+      },
+      resultField: 'data.data',
+      labelField: 'title',
+      valueField: 'id',
     },
   },
 ];

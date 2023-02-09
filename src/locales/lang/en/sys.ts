@@ -218,6 +218,8 @@ export default {
     name: 'Dictionary Name',
     dictionaryList: 'Dictionary List',
     dictionaryDetailList: 'Key/Value List',
+    key: 'Key',
+    value: 'Value',
     // action
     addDictionary: 'Add Dictionary',
     addDictionaryDetail: 'Add Key/Value',
@@ -283,5 +285,19 @@ export default {
     addMemberRank: 'Add Rank',
     editMemberRank: 'Edit Rank',
     memberRankList: 'Rank List',
+  },
+  oauthProvider: {
+    name: 'Name',
+    clientId: 'ClientId',
+    clientSecret: 'ClientSecret',
+    redirectUrl: 'RedirectUrl',
+    scopes: 'Scopes',
+    authUrl: 'AuthUrl',
+    tokenUrl: 'TokenUrl',
+    authStyle: 'AuthStyle',
+    infoUrl: 'InfoUrl',
+    addOauthProvider: 'Add OauthProvider',
+    editOauthProvider: 'Edit OauthProvider',
+    oauthProviderList: 'OauthProvider List',
   },
 };

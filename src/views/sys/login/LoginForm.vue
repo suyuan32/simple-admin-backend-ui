@@ -112,7 +112,7 @@
   import { getCaptcha } from '/@/api/sys/user';
   import { useGo } from '/@/hooks/web/usePage';
   import { PageEnum } from '/@/enums/pageEnum';
-  import { oauthLogin } from '/@/api/sys/oauth';
+  import { oauthLogin } from '/@/api/sys/oauthProvider';
 
   const ACol = Col;
   const ARow = Row;

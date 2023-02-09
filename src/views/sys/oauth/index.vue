@@ -39,7 +39,7 @@
   import { useI18n } from 'vue-i18n';
 
   import { columns } from './oauth.data';
-  import { getProviderList, deleteProvider } from '/@/api/sys/oauth';
+  import { getOauthProviderList, deleteOauthProvider } from '/@/api/sys/oauthProvider';
   import { useMessage } from '/@/hooks/web/useMessage';
 
   export default defineComponent({
@@ -51,7 +51,7 @@
       const [registerDrawer, { openDrawer }] = useDrawer();
       const [registerTable, { reload }] = useTable({
         title: t('sys.oauth.providerList'),
-        api: getProviderList,
+        api: getOauthProviderList,
         columns,
         useSearchForm: false,
         showTableSetting: true,
@@ -79,7 +79,7 @@
       }
 
       async function handleDelete(record: Recordable) {
-        const result = await deleteProvider({ id: record.id }, 'modal');
+        const result = await deleteOauthProvider({ ids: [record.id] }, 'modal');
         if (result.code === 0) {
           notification.success({
             message: t('common.successful'),
