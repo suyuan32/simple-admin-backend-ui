@@ -5,7 +5,7 @@
   import { message } from 'ant-design-vue';
   import { defineComponent, ref } from 'vue';
   import { useRouter } from 'vue-router';
-  import { oauthLoginCallback } from '/@/api/sys/oauth';
+  import { oauthLoginCallback } from '/@/api/sys/oauthProvider';
   import { PageEnum } from '/@/enums/pageEnum';
   import { useI18n } from '/@/hooks/web/useI18n';
   import { useGo } from '/@/hooks/web/usePage';
