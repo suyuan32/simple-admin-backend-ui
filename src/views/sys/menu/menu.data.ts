@@ -218,14 +218,6 @@ export const formSchema: FormSchema[] = [
     rules: [{ max: 200 }],
   },
   {
-    field: 'currentActiveMenu',
-    label: t('sys.menu.currentActiveMenu'),
-    component: 'Input',
-    defaultValue: '',
-    ifShow: ({ values }) => isMenu(values.menuType),
-    rules: [{ max: 50 }],
-  },
-  {
     field: 'disabled',
     label: t('common.status'),
     component: 'RadioButtonGroup',

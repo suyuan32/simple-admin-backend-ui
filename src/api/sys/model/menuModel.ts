@@ -45,7 +45,6 @@ interface Meta {
   icon?: string;
   hideMenu?: boolean;
   hideBreadcrumb?: boolean;
-  currentActiveMenu?: string;
   ignoreKeepAlive?: boolean;
   hideTab?: boolean;
   frameSrc?: string;
