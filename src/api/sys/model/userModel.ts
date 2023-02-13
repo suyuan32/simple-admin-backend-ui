@@ -18,7 +18,7 @@ export interface UserInfo {
   email?: string;
   avatar?: string;
   departmentId?: number;
-  positionId?: number;
+  positionIds?: number[];
 }
 
 /**
