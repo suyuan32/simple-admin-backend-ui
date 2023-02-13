@@ -9,7 +9,7 @@ export interface RoleInfo {
   updatedAt?: number;
   status?: number;
   name?: string;
-  value?: string;
+  code?: string;
   defaultRouter?: string;
   remark?: string;
   sort?: number;

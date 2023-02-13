@@ -185,10 +185,10 @@ export const formSchema: FormSchema[] = [
     rules: [{ min: 6, max: 30 }],
   },
   {
-    field: 'roleId',
+    field: 'roleIds',
     label: t('sys.role.roleTitle'),
     required: true,
-    component: 'ApiSelect',
+    component: 'ApiMultipleSelect',
     componentProps: {
       api: getRoleList,
       params: {
@@ -196,7 +196,7 @@ export const formSchema: FormSchema[] = [
         pageSize: 100,
       },
       resultField: 'data.data',
-      labelField: 'title',
+      labelField: 'trans',
       valueField: 'id',
     },
   },
@@ -238,13 +238,13 @@ export const formSchema: FormSchema[] = [
   },
   {
     field: 'status',
-    label: t('sys.menu.status'),
+    label: t('common.status'),
     component: 'RadioButtonGroup',
     defaultValue: 1,
     componentProps: {
       options: [
         { label: t('common.on'), value: 1 },
-        { label: t('common.off'), value: 0 },
+        { label: t('common.off'), value: 2 },
       ],
     },
   },

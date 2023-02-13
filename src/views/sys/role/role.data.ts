@@ -20,7 +20,7 @@ export const columns: BasicColumn[] = [
   },
   {
     title: t('sys.role.roleValue'),
-    dataIndex: 'value',
+    dataIndex: 'code',
     width: 180,
   },
   {
@@ -102,7 +102,7 @@ export const formSchema: FormSchema[] = [
     rules: [{ type: 'number', max: 1000 }],
   },
   {
-    field: 'value',
+    field: 'code',
     label: t('sys.role.roleValue'),
     required: true,
     component: 'Input',
