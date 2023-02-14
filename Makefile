@@ -1,6 +1,6 @@
 docker:
-	yarn install
-	yarn build
+	pnpm install
+	pnpm build
 	docker build -f Dockerfile -t ${DOCKER_USERNAME}/backend-ui:${VERSION} .
 
 docker-not-build:
