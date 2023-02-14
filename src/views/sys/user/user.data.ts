@@ -91,20 +91,20 @@ export const searchFormSchema: FormSchema[] = [
     rules: [{ max: 30 }],
   },
   {
-    field: 'roleId',
+    field: 'roleIds',
     label: t('sys.role.roleTitle'),
-    component: 'Select',
-    colProps: { span: 8 },
+    component: 'ApiMultipleSelect',
     componentProps: {
-      // search form does not support updateSchema function yet
-      // therefore we have to manually set the options
-      options: [
-        { label: t('common.all'), value: 0 },
-        { label: t('sys.role.admin'), value: 1 },
-        { label: t('sys.role.stuff'), value: 2 },
-        { label: t('sys.role.member'), value: 3 },
-      ],
+      api: getRoleList,
+      params: {
+        page: 1,
+        pageSize: 100,
+      },
+      resultField: 'data.data',
+      labelField: 'trans',
+      valueField: 'id',
     },
+    colProps: { span: 8 },
   },
   {
     field: 'mobile',
