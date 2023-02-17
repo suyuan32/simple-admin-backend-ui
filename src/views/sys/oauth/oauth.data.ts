@@ -55,7 +55,7 @@ export const formSchema: FormSchema[] = [
     rules: [{ max: 100 }],
   },
   {
-    field: 'redirectURL',
+    field: 'redirectUrl',
     label: t('sys.oauth.redirectURL'),
     required: true,
     component: 'Input',
@@ -69,21 +69,21 @@ export const formSchema: FormSchema[] = [
     rules: [{ max: 300 }],
   },
   {
-    field: 'authURL',
+    field: 'authUrl',
     label: t('sys.oauth.authURL'),
     required: true,
     component: 'Input',
     rules: [{ max: 200 }],
   },
   {
-    field: 'tokenURL',
+    field: 'tokenUrl',
     label: t('sys.oauth.tokenURL'),
     required: true,
     component: 'Input',
     rules: [{ max: 200 }],
   },
   {
-    field: 'infoURL',
+    field: 'infoUrl',
     label: t('sys.oauth.infoURL'),
     required: true,
     component: 'Input',
