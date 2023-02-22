@@ -49,7 +49,7 @@ export const searchFormSchema: FormSchema[] = [
     label: t('sys.apis.group'),
     component: 'Input',
     colProps: { span: 8 },
-    rules: [{ max: 20 }],
+    rules: [{ max: 40 }],
   },
   {
     field: 'description',
