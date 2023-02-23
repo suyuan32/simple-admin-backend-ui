@@ -59,10 +59,14 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
     show: false,
   },
-
   {
     field: 'name',
     label: t('sys.memberRank.name'),
+    component: 'Input',
+  },
+  {
+    field: 'code',
+    label: t('sys.memberRank.code'),
     component: 'Input',
   },
   {

@@ -12,6 +12,12 @@
         {{ t('common.start') }}
       </a-button>
     </ACard>
+    <ACard :title="t('sys.init.initMMSDatabase')" :bordered="false" style="width: 50%">
+      <p><a href="https://github.com/suyuan32/simple-admin-member-api">Member Github</a></p>
+      <a-button type="primary" :loading="fileInitButtonLoading" @click="initMMSDatabase">
+        {{ t('common.start') }}
+      </a-button>
+    </ACard>
   </PageWrapper>
 </template>
 <script lang="ts" setup>
@@ -22,11 +28,13 @@
   // api
   import { initialzeCoreDatabase } from '/@/api/sys/initialize';
   import { initializeFileDatabase } from '/@/api/file/initialize';
+  import { initializeMMSDatabase } from '/@/api/member/initialize';
 
   const { t } = useI18n();
   const ACard = Card;
   const coreInitButtonLoading = ref<boolean>(false);
   const fileInitButtonLoading = ref<boolean>(false);
+  const mmsInitButtonLoading = ref<boolean>(false);
 
   async function initCoreDatabase() {
     coreInitButtonLoading.value = true;
@@ -44,5 +52,14 @@
       message.success(result.msg, 3);
     }
     fileInitButtonLoading.value = false;
+  }
+
+  async function initMMSDatabase() {
+    mmsInitButtonLoading.value = true;
+    const result = await initializeMMSDatabase();
+    if (result.code === 0) {
+      message.success(result.msg, 3);
+    }
+    mmsInitButtonLoading.value = false;
   }
 </script>

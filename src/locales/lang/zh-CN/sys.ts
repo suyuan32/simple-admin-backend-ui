@@ -197,6 +197,7 @@ export default {
     initProgressTitle: '处理进度',
     initCoreDatabase: '核心数据库初始化',
     initFileDatabase: '文件管理数据库初始化（可选）',
+    initMMSDatabase: '会员服务(MMS)数据库初始化（可选）',
   },
   sys: {
     version: '系统版本',
@@ -278,6 +279,7 @@ export default {
     addMemberRank: '添加会员等级',
     editMemberRank: '编辑会员等级',
     memberRankList: '会员等级列表',
+    code: '等级代码',
   },
   oauthProvider: {
     name: 'Name',

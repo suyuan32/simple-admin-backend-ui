@@ -1,14 +1,14 @@
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode } from '/#/axios';
 import { BaseDataResp, BaseListReq, BaseResp, BaseIDsReq, BaseIDReq } from '/@/api/model/baseModel';
-import { MemberRankInfo, MemberRankListResp } from './model/memberRankModel';
+import { MemberRankInfo, MemberRankListResp } from '../member/model/memberRankModel';
 
 enum Api {
-  CreateMemberRank = '/sys-api/member_rank/create',
-  UpdateMemberRank = '/sys-api/member_rank/update',
-  GetMemberRankList = '/sys-api/member_rank/list',
-  DeleteMemberRank = '/sys-api/member_rank/delete',
-  GetMemberRankById = '/sys-api/member_rank',
+  CreateMemberRank = '/mms-api/member_rank/create',
+  UpdateMemberRank = '/mms-api/member_rank/update',
+  GetMemberRankList = '/mms-api/member_rank/list',
+  DeleteMemberRank = '/mms-api/member_rank/delete',
+  GetMemberRankById = '/mms-api/member_rank',
 }
 
 /**

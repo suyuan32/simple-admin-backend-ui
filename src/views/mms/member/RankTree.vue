@@ -15,7 +15,7 @@
 <script lang="ts">
   import { defineComponent, onMounted, ref } from 'vue';
   import { useI18n } from 'vue-i18n';
-  import { getMemberRankList } from '/@/api/sys/memberRank';
+  import { getMemberRankList } from '../../../api/member/memberRank';
 
   import { BasicTree, TreeItem } from '/@/components/Tree';
   import { buildDataNode } from '/@/utils/tree';

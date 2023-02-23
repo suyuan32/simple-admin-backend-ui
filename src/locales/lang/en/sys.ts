@@ -203,6 +203,7 @@ export default {
     initProgressTitle: 'Progress',
     initCoreDatabase: 'Initialize core database',
     initFileDatabase: 'Initialize file manager database (optional)',
+    initMMSDatabase: 'Initialize member management service database (optional)',
   },
   sys: {
     version: 'Version',
@@ -285,6 +286,7 @@ export default {
     addMemberRank: 'Add Rank',
     editMemberRank: 'Edit Rank',
     memberRankList: 'Rank List',
+    code: 'Rank Code',
   },
   oauthProvider: {
     name: 'Name',

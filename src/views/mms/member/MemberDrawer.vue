@@ -17,7 +17,7 @@
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
 
-  import { createMember, updateMember } from '/@/api/sys/member';
+  import { createMember, updateMember } from '../../../api/member/member';
 
   export default defineComponent({
     name: 'MemberDrawer',

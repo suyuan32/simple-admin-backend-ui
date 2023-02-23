@@ -17,7 +17,7 @@
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
 
-  import { createMemberRank, updateMemberRank } from '/@/api/sys/memberRank';
+  import { createMemberRank, updateMemberRank } from '../../../api/member/memberRank';
 
   export default defineComponent({
     name: 'MemberRankDrawer',

@@ -1,69 +1,91 @@
 <template>
-  <div>
-    <BasicTable @register="registerTable">
-      <template #tableTitle>
-        <Button type="primary" danger v-if="showDeleteButton" @click="handleBatchDelete()">
-          <template #icon><DeleteOutlined /></template>
-          {{ t('common.delete') }}
-        </Button>
-      </template>
-      <template #toolbar>
-        <a-button type="primary" @click="handleCreate">
-          {{ t('sys.memberRank.addMemberRank') }}
-        </a-button>
-      </template>
-      <template #bodyCell="{ column, record }">
-        <template v-if="column.key === 'action'">
-          <TableAction
-            :actions="[
-              {
-                icon: 'clarity:note-edit-line',
-                onClick: handleEdit.bind(null, record),
-              },
-              {
-                icon: 'ant-design:delete-outlined',
-                color: 'error',
-                popConfirm: {
-                  title: t('common.deleteConfirm'),
-                  placement: 'left',
-                  confirm: handleDelete.bind(null, record),
-                },
-              },
-            ]"
-          />
-        </template>
-      </template>
-    </BasicTable>
-    <MemberRankDrawer @register="registerDrawer" @success="handleSuccess" />
-  </div>
+  <PageWrapper dense contentFullHeight>
+    <Row>
+      <Col :span="5">
+        <RankTree @select="handleSelect" />
+      </Col>
+      <Col :span="19">
+        <BasicTable @register="registerTable" :searchInfo="searchInfo">
+          <template #tableTitle>
+            <Button type="primary" danger v-if="showDeleteButton" @click="handleBatchDelete()">
+              <template #icon><DeleteOutlined /></template>
+              {{ t('common.delete') }}
+            </Button>
+          </template>
+          <template #toolbar>
+            <a-button type="primary" @click="handleCreate">
+              {{ t('sys.member.addMember') }}
+            </a-button>
+          </template>
+          <template #bodyCell="{ column, record }">
+            <template v-if="column.key === 'action'">
+              <TableAction
+                :actions="[
+                  {
+                    icon: 'clarity:note-edit-line',
+                    onClick: handleEdit.bind(null, record),
+                  },
+                  {
+                    icon: 'ant-design:delete-outlined',
+                    color: 'error',
+                    popConfirm: {
+                      title: t('common.deleteConfirm'),
+                      placement: 'left',
+                      confirm: handleDelete.bind(null, record),
+                    },
+                  },
+                ]"
+              />
+            </template>
+          </template>
+        </BasicTable>
+      </Col>
+    </Row>
+    <MemberDrawer @register="registerDrawer" @success="handleSuccess" />
+  </PageWrapper>
 </template>
 <script lang="ts">
-  import { createVNode, defineComponent, ref } from 'vue';
+  import { createVNode, defineComponent, reactive, ref } from 'vue';
   import { Button, Modal } from 'ant-design-vue';
   import { ExclamationCircleOutlined, DeleteOutlined } from '@ant-design/icons-vue/lib/icons';
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import RankTree from './RankTree.vue';
 
   import { useDrawer } from '/@/components/Drawer';
-  import MemberRankDrawer from './MemberRankDrawer.vue';
+  import MemberDrawer from './MemberDrawer.vue';
   import { useI18n } from 'vue-i18n';
   import { useMessage } from '/@/hooks/web/useMessage';
 
-  import { columns, searchFormSchema } from './memberRank.data';
-  import { getMemberRankList, deleteMemberRank } from '/@/api/sys/memberRank';
+  import { columns, searchFormSchema } from './member.data';
+  import { getMemberList, deleteMember } from '../../../api/member/member';
+  import { PageWrapper } from '/@/components/Page';
+  import Row from 'ant-design-vue/es/grid/Row';
+  import Col from 'ant-design-vue/es/grid/Col';
 
   export default defineComponent({
-    name: 'MemberRankManagement',
-    components: { BasicTable, MemberRankDrawer, TableAction, Button, DeleteOutlined },
+    name: 'MemberManagement',
+    components: {
+      BasicTable,
+      MemberDrawer,
+      TableAction,
+      Button,
+      PageWrapper,
+      Row,
+      Col,
+      RankTree,
+      DeleteOutlined,
+    },
     setup() {
       const { t } = useI18n();
       const selectedIds = ref<number[] | string[]>();
+      const searchInfo = reactive<Recordable>({});
       const showDeleteButton = ref<boolean>(false);
 
       const [registerDrawer, { openDrawer }] = useDrawer();
       const { notification } = useMessage();
       const [registerTable, { reload }] = useTable({
-        title: t('sys.memberRank.memberRankList'),
-        api: getMemberRankList,
+        title: t('sys.member.memberList'),
+        api: getMemberList,
         columns,
         formConfig: {
           labelWidth: 120,
@@ -84,7 +106,7 @@
         rowSelection: {
           type: 'checkbox',
           onChange: (selectedRowKeys, _selectedRows) => {
-            selectedIds.value = selectedRowKeys as number[];
+            selectedIds.value = selectedRowKeys as string[];
             showDeleteButton.value = selectedRowKeys.length > 0;
           },
         },
@@ -104,7 +126,7 @@
       }
 
       async function handleDelete(record: Recordable) {
-        const result = await deleteMemberRank({ ids: [record.id] }, 'modal');
+        const result = await deleteMember({ ids: [record.id] }, 'modal');
         if (result.code === 0) {
           notification.success({
             message: t('common.successful'),
@@ -120,7 +142,7 @@
           title: t('common.deleteConfirm'),
           icon: createVNode(ExclamationCircleOutlined),
           async onOk() {
-            const result = await deleteMemberRank({ ids: selectedIds.value as number[] }, 'modal');
+            const result = await deleteMember({ ids: selectedIds.value as string[] }, 'modal');
             if (result.code === 0) {
               showDeleteButton.value = false;
               notification.success({
@@ -146,6 +168,11 @@
         await reload();
       }
 
+      function handleSelect(rankId = '') {
+        searchInfo.rankId = rankId;
+        reload();
+      }
+
       return {
         t,
         registerTable,
@@ -155,7 +182,9 @@
         handleDelete,
         handleSuccess,
         handleBatchDelete,
+        handleSelect,
         showDeleteButton,
+        searchInfo,
       };
     },
   });

@@ -5,8 +5,8 @@ import { formatToDateTime } from '/@/utils/dateUtil';
 import { Switch } from 'ant-design-vue';
 import { useMessage } from '/@/hooks/web/useMessage';
 import { h } from 'vue';
-import { getMemberRankList } from '/@/api/sys/memberRank';
-import { updateMember } from '/@/api/sys/member';
+import { getMemberRankList } from '../../../api/member/memberRank';
+import { updateMember } from '../../../api/member/member';
 
 const { t } = useI18n();
 

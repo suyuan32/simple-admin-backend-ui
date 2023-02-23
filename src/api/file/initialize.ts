@@ -6,7 +6,7 @@ enum Api {
 }
 
 /**
- * @description: initialize the core database
+ * @description: initialize the file manager database
  */
 
 export const initializeFileDatabase = () => {

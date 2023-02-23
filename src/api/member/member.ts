@@ -10,11 +10,11 @@ import {
 import { MemberInfo, MemberListResp } from './model/memberModel';
 
 enum Api {
-  CreateMember = '/sys-api/member/create',
-  UpdateMember = '/sys-api/member/update',
-  GetMemberList = '/sys-api/member/list',
-  DeleteMember = '/sys-api/member/delete',
-  GetMemberById = '/sys-api/member',
+  CreateMember = '/mms-api/member/create',
+  UpdateMember = '/mms-api/member/update',
+  GetMemberList = '/mms-api/member/list',
+  DeleteMember = '/mms-api/member/delete',
+  GetMemberById = '/mms-api/member',
 }
 
 /**
