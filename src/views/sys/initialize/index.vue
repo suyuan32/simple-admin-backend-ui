@@ -14,7 +14,7 @@
     </ACard>
     <ACard :title="t('sys.init.initMMSDatabase')" :bordered="false" style="width: 50%">
       <p><a href="https://github.com/suyuan32/simple-admin-member-api">Member Github</a></p>
-      <a-button type="primary" :loading="fileInitButtonLoading" @click="initMMSDatabase">
+      <a-button type="primary" :loading="mmsInitButtonLoading" @click="initMMSDatabase">
         {{ t('common.start') }}
       </a-button>
     </ACard>
