@@ -18,10 +18,10 @@ export interface MenuAuthorityInfo {
 export interface ApiListReq {
   page: number;
   pageSize: number;
-  path: string;
-  group: string;
-  description: string;
-  method: string;
+  path?: string;
+  group?: string;
+  description?: string;
+  method?: string;
 }
 
 /**

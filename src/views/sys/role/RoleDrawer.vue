@@ -25,16 +25,17 @@
     >
       <ATabs v-model:activeKey="activeKey" centered>
         <ATabPane key="1" :tab="t('sys.authority.menuAuthority')">
-          <ATree
-            v-model:checkedKeys="checkedMenuKeys"
+          <BasicTree
             checkable
             :height="600"
-            :tree-data="treeMenuData"
+            :treeData="treeMenuData"
+            :checkStrictly="true"
+            ref="treeMenuRef"
           />
         </ATabPane>
         <ATabPane key="2" :tab="t('sys.authority.apiAuthority')">
           <ATree
-            v-model:checkedKeys="checkedApiKeys"
+            v-model:checked-keys="checkedApiKeys"
             checkable
             :height="600"
             :tree-data="treeApiData"
@@ -71,10 +72,18 @@
   import { BaseDataResp } from '/@/api/model/baseModel';
   import { ApiListResp } from '/@/api/sys/model/apiModel';
   import { buildDataNode } from '/@/utils/tree';
+  import { BasicTree, TreeActionType } from '/@/components/Tree';
 
   export default defineComponent({
     name: 'RoleDrawer',
-    components: { BasicDrawer, BasicForm, ATabs: Tabs, ATabPane: Tabs.TabPane, ATree: Tree },
+    components: {
+      BasicDrawer,
+      BasicForm,
+      ATabs: Tabs,
+      ATabPane: Tabs.TabPane,
+      ATree: Tree,
+      BasicTree,
+    },
     emits: ['success', 'register'],
     setup(_, { emit }) {
       const isUpdate = ref(true);
@@ -91,8 +100,17 @@
         childrenDrawer.value = true;
       };
       // defined menu items
-      const checkedMenuKeys = ref<number[]>([]);
+      const treeMenuRef = ref<Nullable<TreeActionType>>(null);
       const treeMenuData = ref<DataNode[]>([]);
+
+      function getMenuTree() {
+        const tree = unref(treeMenuRef);
+        if (!tree) {
+          throw new Error('menu tree is null!');
+        }
+        return tree;
+      }
+
       async function getMenuData() {
         try {
           treeMenuData.value = [];
@@ -107,7 +125,8 @@
 
           const roleId = await validate();
           const checkedData = await getMenuAuthority({ id: Number(roleId['id']) });
-          checkedMenuKeys.value = checkedData.data.menuIds;
+          getMenuTree().setCheckedKeys(checkedData.data.menuIds);
+          getMenuTree().expandAll(true);
         } catch (error) {
           console.log(error);
         }
@@ -121,10 +140,6 @@
           const apiData = await getApiList({
             page: 1,
             pageSize: 10000,
-            path: '',
-            group: '',
-            method: '',
-            description: '',
           });
           tempApiList = apiData;
           const dataConv = convertApiTreeData(apiData.data.data);
@@ -203,7 +218,7 @@
           const roleData = await validate();
           const result = await createOrUpdateMenuAuthority({
             roleId: Number(roleData['id']),
-            menuIds: checkedMenuKeys.value,
+            menuIds: getMenuTree().getCheckedKeys()['checked'] as number[],
           });
           message.success(t(result.msg));
         } else {
@@ -236,10 +251,10 @@
         handleSubmit,
         handleCancel,
         handleAuthorizationSubmit,
-        checkedMenuKeys,
         treeMenuData,
-        checkedApiKeys,
         treeApiData,
+        treeMenuRef,
+        checkedApiKeys,
       };
     },
   });
