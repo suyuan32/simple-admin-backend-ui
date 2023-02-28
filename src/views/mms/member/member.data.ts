@@ -102,6 +102,7 @@ export const formSchema: FormSchema[] = [
     field: 'username',
     label: t('sys.login.username'),
     component: 'Input',
+    required: true,
   },
   {
     field: 'password',
@@ -112,6 +113,7 @@ export const formSchema: FormSchema[] = [
     field: 'nickname',
     label: t('sys.user.nickname'),
     component: 'Input',
+    required: true,
   },
   {
     field: 'rankId',
@@ -139,6 +141,7 @@ export const formSchema: FormSchema[] = [
     field: 'email',
     label: t('sys.login.email'),
     component: 'Input',
+    required: true,
   },
   {
     field: 'avatar',

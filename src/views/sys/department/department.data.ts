@@ -89,6 +89,7 @@ export const formSchema: FormSchema[] = [
     field: 'name',
     label: t('sys.department.name'),
     component: 'Input',
+    required: true,
   },
   {
     field: 'parentId',
@@ -124,21 +125,25 @@ export const formSchema: FormSchema[] = [
     field: 'leader',
     label: t('sys.department.leader'),
     component: 'Input',
+    required: true,
   },
   {
     field: 'phone',
     label: t('sys.department.phone'),
     component: 'Input',
+    required: true,
   },
   {
     field: 'email',
     label: t('sys.department.email'),
     component: 'Input',
+    required: true,
   },
   {
     field: 'sort',
     label: t('sys.department.sort'),
     component: 'InputNumber',
+    required: true,
   },
   {
     field: 'remark',

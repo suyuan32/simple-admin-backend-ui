@@ -100,21 +100,23 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
     show: false,
   },
-
-  {
-    field: 'sort',
-    label: t('common.sort'),
-    component: 'InputNumber',
-  },
   {
     field: 'name',
     label: t('sys.position.name'),
     component: 'Input',
+    required: true,
   },
   {
     field: 'code',
     label: t('sys.position.code'),
     component: 'Input',
+    required: true,
+  },
+  {
+    field: 'sort',
+    label: t('common.sort'),
+    component: 'InputNumber',
+    required: true,
   },
   {
     field: 'remark',
