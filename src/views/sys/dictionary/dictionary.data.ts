@@ -77,11 +77,13 @@ export const formSchema: FormSchema[] = [
     field: 'title',
     label: t('common.displayName'),
     component: 'Input',
+    required: true,
   },
   {
     field: 'name',
     label: t('sys.dictionary.name'),
     component: 'Input',
+    required: true,
   },
   {
     field: 'desc',

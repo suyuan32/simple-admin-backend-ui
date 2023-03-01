@@ -89,16 +89,25 @@ export const formSchema: FormSchema[] = [
     field: 'title',
     label: t('common.displayName'),
     component: 'Input',
+    required: true,
   },
   {
     field: 'key',
     label: t('sys.dictionary.key'),
     component: 'Input',
+    required: true,
   },
   {
     field: 'value',
     label: t('sys.dictionary.value'),
     component: 'Input',
+    required: true,
+  },
+  {
+    field: 'sort',
+    label: t('common.sort'),
+    component: 'InputNumber',
+    required: true,
   },
   {
     field: 'status',
