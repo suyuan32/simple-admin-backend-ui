@@ -296,4 +296,15 @@ export default {
     editOauthProvider: '编辑 OauthProvider',
     oauthProviderList: 'OauthProvider 列表',
   },
+  task: {
+    status: '任务状态',
+    name: '任务名称',
+    taskGroup: '任务分组',
+    cronExpression: 'Cron表达式',
+    pattern: '任务标识',
+    payload: '任务数据',
+    addTask: '添加任务',
+    editTask: '编辑任务',
+    taskList: '任务列表',
+  },
 };

@@ -303,4 +303,15 @@ export default {
     editOauthProvider: 'Edit OauthProvider',
     oauthProviderList: 'OauthProvider List',
   },
+  task: {
+    status: 'Status',
+    name: 'Task Name',
+    taskGroup: 'Task Group',
+    cronExpression: 'Cron Expression',
+    pattern: 'Pattern',
+    payload: 'Payload',
+    addTask: 'Add Task',
+    editTask: 'Edit Task',
+    taskList: 'Task List',
+  },
 };
