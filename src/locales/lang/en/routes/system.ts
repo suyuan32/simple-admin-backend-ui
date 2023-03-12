@@ -7,9 +7,10 @@ export default {
   fileManagementTitle: 'File',
   userProfileTitle: 'Profile',
   dictionaryManagementTitle: 'Dictionary',
-  dictionaryDetailManagementTitle: 'Key/Value Management',
+  dictionaryDetailManagementTitle: 'Key/Value',
   oauthManagement: 'Oauth',
   tokenManagement: 'Token',
-  otherPages: 'Other pages',
-  positionManagement: 'Position Management',
+  otherPages: 'Other Pages',
+  positionManagement: 'Position',
+  taskManagement: 'Scheduled Task',
 };

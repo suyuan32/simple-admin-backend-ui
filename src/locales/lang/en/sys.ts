@@ -204,6 +204,7 @@ export default {
     initCoreDatabase: 'Initialize core database',
     initFileDatabase: 'Initialize file manager database (optional)',
     initMMSDatabase: 'Initialize member management service database (optional)',
+    initJobDatabase: 'Initialize scheduled task management service database (optional)',
   },
   sys: {
     version: 'Version',

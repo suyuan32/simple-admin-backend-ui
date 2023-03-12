@@ -198,6 +198,7 @@ export default {
     initCoreDatabase: '核心数据库初始化',
     initFileDatabase: '文件管理数据库初始化（可选）',
     initMMSDatabase: '会员服务(MMS)数据库初始化（可选）',
+    initJobDatabase: '定时任务服务数据库初始化（可选）',
   },
   sys: {
     version: '系统版本',

@@ -3,6 +3,7 @@ import { BaseResp } from '/@/api/model/baseModel';
 
 enum Api {
   InitializeDatabase = '/sys-api/core/init/database',
+  InitializeJobDatabase = '/sys-api/core/init/job_database',
 }
 
 /**
@@ -11,4 +12,12 @@ enum Api {
 
 export const initialzeCoreDatabase = () => {
   return defHttp.get<BaseResp>({ url: Api.InitializeDatabase });
+};
+
+/**
+ * @description: initialize the job management service database
+ */
+
+export const initializeJobDatabase = () => {
+  return defHttp.get<BaseResp>({ url: Api.InitializeJobDatabase });
 };
