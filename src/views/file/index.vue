@@ -150,8 +150,15 @@
           videoVisible.value = true;
           videoPath.value = URL.createObjectURL(file);
           videoTitle.value = record.name;
+        } else {
+          currentFileName.value = record.name + '.' + record.path.split('.')[1];
+          const link = document.createElement('a');
+          link.href = URL.createObjectURL(file);
+          link.download = currentFileName.value;
+          link.click();
+          link.remove();
+          URL.revokeObjectURL(link.href);
         }
-        currentFileName.value = record.name + '.' + record.path.split('.')[1];
       }
 
       function handleDownloadVideo() {
