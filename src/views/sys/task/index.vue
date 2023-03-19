@@ -21,6 +21,10 @@
                 onClick: handleEdit.bind(null, record),
               },
               {
+                icon: 'ic:round-library-books',
+                onClick: handleOpenLogModal.bind(null, record),
+              },
+              {
                 icon: 'ant-design:delete-outlined',
                 color: 'error',
                 popConfirm: {
@@ -35,6 +39,7 @@
       </template>
     </BasicTable>
     <TaskDrawer @register="registerDrawer" @success="handleSuccess" />
+    <LogModal @register="registerModal" :defaultFullscreen="true" />
   </div>
 </template>
 <script lang="ts">
@@ -50,10 +55,12 @@
 
   import { columns, searchFormSchema } from './task.data';
   import { getTaskList, deleteTask } from '/@/api/sys/task';
+  import LogModal from './LogModal.vue';
+  import { useModal } from '/@/components/Modal';
 
   export default defineComponent({
     name: 'TaskManagement',
-    components: { BasicTable, TaskDrawer, TableAction, Button, DeleteOutlined },
+    components: { BasicTable, TaskDrawer, TableAction, Button, DeleteOutlined, LogModal },
     setup() {
       const { t } = useI18n();
       const selectedIds = ref<number[] | string[]>();
@@ -75,7 +82,7 @@
         showIndexColumn: false,
         clickToRowSelect: false,
         actionColumn: {
-          width: 30,
+          width: 60,
           title: t('common.action'),
           dataIndex: 'action',
           fixed: undefined,
@@ -89,6 +96,12 @@
           },
         },
       });
+
+      const [registerModal, { openModal }] = useModal();
+
+      function handleOpenLogModal(record: Recordable) {
+        openModal(true, { record });
+      }
 
       function handleCreate() {
         openDrawer(true, {
@@ -150,6 +163,8 @@
         t,
         registerTable,
         registerDrawer,
+        registerModal,
+        handleOpenLogModal,
         handleCreate,
         handleEdit,
         handleDelete,

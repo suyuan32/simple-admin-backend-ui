@@ -314,4 +314,13 @@ export default {
     editTask: 'Edit Task',
     taskList: 'Task List',
   },
+  taskLog: {
+    id: 'Id',
+    startedAt: 'Started Time',
+    finishedAt: 'Finished Time',
+    result: 'Result',
+    addTaskLog: 'Add Task Log',
+    editTaskLog: 'Edit Task Log',
+    taskLogList: 'Task Log List',
+  },
 };

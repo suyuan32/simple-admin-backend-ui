@@ -307,4 +307,13 @@ export default {
     editTask: '编辑任务',
     taskList: '任务列表',
   },
+  taskLog: {
+    id: 'Id',
+    startedAt: '开始时间',
+    finishedAt: '完成时间',
+    result: '任务结果',
+    addTaskLog: '添加任务日志',
+    editTaskLog: '编辑任务日志',
+    taskLogList: '任务日志列表',
+  },
 };
