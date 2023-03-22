@@ -84,10 +84,10 @@
 
     <div class="flex justify-evenly enter-x" :class="`${prefixCls}-sign-in-way`">
       <GithubFilled @click="oauthLoginHandler('github')" />
-      <WechatFilled />
-      <AlipayCircleFilled />
+      <WechatFilled @click="oauthLoginHandler('wechat')" />
+      <AlipayCircleFilled @click="oauthLoginHandler('alipay')" />
       <GoogleCircleFilled @click="oauthLoginHandler('google')" />
-      <TwitterCircleFilled />
+      <TwitterCircleFilled @click="oauthLoginHandler('twitter')" />
     </div>
   </Form>
 </template>
