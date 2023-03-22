@@ -13,6 +13,7 @@ specifiers:
   '@commitlint/config-conventional': ^17.4.3
   '@iconify/iconify': ^3.1.0
   '@iconify/json': ^2.2.22
+  '@kirklin/vite-plugin-vben-theme': ^0.1.1
   '@logicflow/core': ^1.1.31
   '@logicflow/extension': ^1.1.31
   '@purge-icons/generated': ^0.9.0
@@ -43,7 +44,7 @@ specifiers:
   '@zxcvbn-ts/core': ^2.2.0
   ant-design-vue: ^3.2.15
   autoprefixer: ^10.4.13
-  axios: ^1.3.0
+  axios: ^1.3.4
   codemirror: ^6.0.1
   conventional-changelog-cli: ^2.2.2
   cropperjs: ^1.5.13
@@ -110,7 +111,6 @@ specifiers:
   vite-plugin-pwa: ^0.14.4
   vite-plugin-style-import: ^2.0.0
   vite-plugin-svg-icons: ^2.0.1
-  vite-plugin-theme: github:tt-sevth/vite-plugin-theme
   vite-plugin-vue-setup-extend: ^0.4.0
   vite-plugin-windicss: ^1.8.10
   vue: ^3.2.47
@@ -137,7 +137,7 @@ dependencies:
   '@vueuse/shared': 9.12.0_vue@3.2.47
   '@zxcvbn-ts/core': 2.2.0
   ant-design-vue: 3.2.15_vue@3.2.47
-  axios: 1.3.0
+  axios: 1.3.4
   codemirror: 6.0.1
   cropperjs: 1.5.13
   crypto-js: 4.1.1
@@ -174,6 +174,7 @@ devDependencies:
   '@commitlint/cli': 17.4.3
   '@commitlint/config-conventional': 17.4.3
   '@iconify/json': 2.2.22
+  '@kirklin/vite-plugin-vben-theme': 0.1.1_vite@4.1.1
   '@purge-icons/generated': 0.9.0
   '@types/codemirror': 5.60.7
   '@types/crypto-js': 4.1.1
@@ -241,7 +242,6 @@ devDependencies:
   vite-plugin-pwa: 0.14.4_vite@4.1.1
   vite-plugin-style-import: 2.0.0_vite@4.1.1
   vite-plugin-svg-icons: 2.0.1_vite@4.1.1
-  vite-plugin-theme: github.com/tt-sevth/vite-plugin-theme/2cafaae528f6c0d8c34cb92f0a36a8d01301449a_vite@4.1.1
   vite-plugin-vue-setup-extend: 0.4.0_vite@4.1.1
   vite-plugin-windicss: 1.8.10_vite@4.1.1
   vue-eslint-parser: 9.1.0_eslint@8.33.0
@@ -2170,6 +2170,24 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
+  /@kirklin/vite-plugin-vben-theme/0.1.1_vite@4.1.1:
+    resolution: {integrity: sha512-3IvbxeJ1hb+RFKqTzgwjhF9/WHwN41jMAfJANa7pNIoRKfVRp9bprTGLZtZ0OiK6jztgNuJS8QZ4jYPj3dn5WA==}
+    peerDependencies:
+      vite: '>=3.2.0'
+    dependencies:
+      '@types/node': 18.13.0
+      '@types/tinycolor2': 1.4.3
+      clean-css: 5.3.2
+      debug: 4.3.4
+      esbuild: 0.15.18
+      esbuild-plugin-alias: 0.2.1
+      picocolors: 1.0.0
+      tinycolor2: 1.5.2
+      vite: 4.1.1_6b4oizgqe2onfhjq3k3l5ruhmm
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   /@lezer/common/1.0.2:
     resolution: {integrity: sha512-SVgiGtMnMnW3ActR8SXgsDhw7a0w0ChHSYAyAUxxrOiJ1OqYWEKk/xJd84tTSPo1mo6DXLObAJALNnd0Hrv7Ng==}
     dev: false
@@ -2636,6 +2654,7 @@ packages:
 
   /@types/node/14.18.36:
     resolution: {integrity: sha512-FXKWbsJ6a1hIrRxv+FoukuHnGTgEzKYGi7kilfMae96AL9UNkPFNWJEEYWzdRI9ooIkbr4AKldyuSTLql06vLQ==}
+    dev: false
 
   /@types/node/18.13.0:
     resolution: {integrity: sha512-gC3TazRzGoOnoKAhUx+Q0t8S9Tzs74z7m0ipwGpSqQrleP14hKxP4/JUeEQcD3W1/aIpnWl8pHowI7WokuZpXg==}
@@ -3395,8 +3414,8 @@ packages:
       - debug
     dev: true
 
-  /axios/1.3.0:
-    resolution: {integrity: sha512-oCye5nHhTypzkdLIvF9SaHfr8UAquqCn1KY3j8vsrjeol8yohAdGxIpRPbF1bOLsx33HOAatdfMX1yzsj2cHwg==}
+  /axios/1.3.4:
+    resolution: {integrity: sha512-toYm+Bsyl6VC5wSkfkbbNB6ROv7KY93PEBBL6xyDczaIHasAiv4wPqQ/c4RjoQzipxRD2W5g21cOqQulZ7rHwQ==}
     dependencies:
       follow-redirects: 1.15.2
       form-data: 4.0.0
@@ -3405,8 +3424,8 @@ packages:
       - debug
     dev: false
 
-  /axios/1.3.0_debug@4.3.4:
-    resolution: {integrity: sha512-oCye5nHhTypzkdLIvF9SaHfr8UAquqCn1KY3j8vsrjeol8yohAdGxIpRPbF1bOLsx33HOAatdfMX1yzsj2cHwg==}
+  /axios/1.3.4_debug@4.3.4:
+    resolution: {integrity: sha512-toYm+Bsyl6VC5wSkfkbbNB6ROv7KY93PEBBL6xyDczaIHasAiv4wPqQ/c4RjoQzipxRD2W5g21cOqQulZ7rHwQ==}
     dependencies:
       follow-redirects: 1.15.2_debug@4.3.4
       form-data: 4.0.0
@@ -5323,8 +5342,8 @@ packages:
     dev: true
     optional: true
 
-  /esbuild-plugin-alias/0.1.2:
-    resolution: {integrity: sha512-WsX0OJy8IGOsGZV+4oHEU5B6XQUpxOsZN1iSoYf9COTDbY7WXcOwd1oCLYNWUIWCExyGXSghIGq2k7sXBldxwQ==}
+  /esbuild-plugin-alias/0.2.1:
+    resolution: {integrity: sha512-jyfL/pwPqaFXyKnj8lP8iLk6Z0m099uXR45aSN8Av1XD4vhvQutxxPzgA2bTcAwQpa1zCXDcWOlhFgyP3GKqhQ==}
     dev: true
 
   /esbuild-sunos-64/0.14.54:
@@ -5398,12 +5417,6 @@ packages:
     requiresBuild: true
     dev: true
     optional: true
-
-  /esbuild/0.11.23:
-    resolution: {integrity: sha512-iaiZZ9vUF5wJV8ob1tl+5aJTrwDczlvGP0JoMmnpC2B0ppiMCu8n8gmy5ZTGl5bcG081XBVn+U+jP+mPFm5T5Q==}
-    hasBin: true
-    requiresBuild: true
-    dev: true
 
   /esbuild/0.11.3:
     resolution: {integrity: sha512-BzVRHcCtFepjS9WcqRjqoIxLqgpK21a8J4Zi4msSGxDxiXVO1IbcqT1KjhdDDnJxKfe7bvzZrvMEX+bVO0Elcw==}
@@ -10902,7 +10915,7 @@ packages:
       vite: '>=3'
     dependencies:
       '@octokit/rest': 19.0.7
-      axios: 1.3.0_debug@4.3.4
+      axios: 1.3.4_debug@4.3.4
       debug: 4.3.4
       picocolors: 1.0.0
       vite: 4.1.1_6b4oizgqe2onfhjq3k3l5ruhmm
@@ -11631,23 +11644,3 @@ packages:
     dependencies:
       tslib: 2.3.0
     dev: false
-
-  github.com/tt-sevth/vite-plugin-theme/2cafaae528f6c0d8c34cb92f0a36a8d01301449a_vite@4.1.1:
-    resolution: {tarball: https://codeload.github.com/tt-sevth/vite-plugin-theme/tar.gz/2cafaae528f6c0d8c34cb92f0a36a8d01301449a}
-    id: github.com/tt-sevth/vite-plugin-theme/2cafaae528f6c0d8c34cb92f0a36a8d01301449a
-    name: vite-plugin-theme
-    version: 1.0.4
-    peerDependencies:
-      vite: '>=3.2.0'
-    dependencies:
-      '@types/node': 14.18.36
-      '@types/tinycolor2': 1.4.3
-      clean-css: 5.3.2
-      debug: 4.3.4
-      esbuild: 0.11.23
-      esbuild-plugin-alias: 0.1.2
-      tinycolor2: 1.5.2
-      vite: 4.1.1_6b4oizgqe2onfhjq3k3l5ruhmm
-    transitivePeerDependencies:
-      - supports-color
-    dev: true

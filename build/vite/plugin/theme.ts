@@ -1,6 +1,6 @@
 /**
  * Vite plugin for website theme color switching
- * https://github.com/anncwb/vite-plugin-theme
+ * https://github.com/anncwb/@kirklin/vite-plugin-vben-theme
  */
 import type { PluginOption } from 'vite';
 import path from 'path';
@@ -10,7 +10,7 @@ import {
   mixLighten,
   mixDarken,
   tinycolor,
-} from 'vite-plugin-theme';
+} from '@kirklin/vite-plugin-vben-theme';
 import { getThemeColors, generateColors } from '../../config/themeConfig';
 import { generateModifyVars } from '../../generate/generateModifyVars';
 
