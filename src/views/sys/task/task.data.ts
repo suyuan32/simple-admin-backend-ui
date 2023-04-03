@@ -78,12 +78,14 @@ export const searchFormSchema: FormSchema[] = [
     label: t('sys.task.name'),
     component: 'Input',
     colProps: { span: 8 },
+    rules: [{ max: 50 }],
   },
   {
     field: 'taskGroup',
     label: t('sys.task.taskGroup'),
     component: 'Input',
     colProps: { span: 8 },
+    rules: [{ max: 40 }],
   },
 ];
 
@@ -100,24 +102,28 @@ export const formSchema: FormSchema[] = [
     label: t('sys.task.name'),
     component: 'Input',
     required: true,
+    rules: [{ max: 50 }],
   },
   {
     field: 'taskGroup',
     label: t('sys.task.taskGroup'),
     component: 'Input',
     required: true,
+    rules: [{ max: 40 }],
   },
   {
     field: 'cronExpression',
     label: t('sys.task.cronExpression'),
     component: 'Input',
     required: true,
+    rules: [{ max: 80 }],
   },
   {
     field: 'pattern',
     label: t('sys.task.pattern'),
     component: 'Input',
     required: true,
+    rules: [{ max: 100 }],
   },
   {
     field: 'payload',

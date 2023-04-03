@@ -191,7 +191,7 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
     defaultValue: '',
     ifShow: ({ values }) => isMenu(values.menuType),
-    rules: [{ max: 100 }],
+    rules: [{ max: 300 }],
   },
   {
     field: 'frameSrc',
@@ -199,7 +199,7 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
     defaultValue: '',
     ifShow: ({ values }) => isMenu(values.menuType),
-    rules: [{ max: 100 }],
+    rules: [{ max: 300 }],
   },
   {
     field: 'dynamicLevel',
@@ -215,7 +215,7 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
     defaultValue: '',
     ifShow: ({ values }) => isMenu(values.menuType),
-    rules: [{ max: 200 }],
+    rules: [{ max: 300 }],
   },
   {
     field: 'disabled',

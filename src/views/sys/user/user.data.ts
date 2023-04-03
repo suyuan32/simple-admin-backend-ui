@@ -141,21 +141,21 @@ export const formSchema: FormSchema[] = [
     label: t('sys.login.username'),
     required: true,
     component: 'Input',
-    rules: [{ max: 30 }],
+    rules: [{ max: 50 }],
   },
   {
     field: 'nickname',
     label: t('sys.user.nickname'),
     required: true,
     component: 'Input',
-    rules: [{ max: 30 }],
+    rules: [{ max: 40 }],
   },
   {
     field: 'desc',
     label: t('sys.user.description'),
     required: false,
     component: 'Input',
-    rules: [{ max: 30 }],
+    rules: [{ max: 100 }],
   },
   {
     field: 'homePath',
@@ -163,7 +163,7 @@ export const formSchema: FormSchema[] = [
     required: false,
     defaultValue: '/dashboard',
     component: 'Input',
-    rules: [{ max: 30 }],
+    rules: [{ max: 70 }],
   },
   {
     field: 'mobile',
@@ -182,7 +182,7 @@ export const formSchema: FormSchema[] = [
     field: 'password',
     label: t('sys.login.password'),
     component: 'Input',
-    rules: [{ min: 6, max: 30 }],
+    rules: [{ min: 6 }],
   },
   {
     field: 'roleIds',

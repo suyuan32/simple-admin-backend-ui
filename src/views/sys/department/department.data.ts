@@ -68,12 +68,14 @@ export const searchFormSchema: FormSchema[] = [
     label: t('sys.department.name'),
     component: 'Input',
     colProps: { span: 8 },
+    rules: [{ min: 1, max: 200 }],
   },
   {
     field: 'leader',
     label: t('sys.department.leader'),
     component: 'Input',
     colProps: { span: 8 },
+    rules: [{ max: 20 }],
   },
 ];
 
@@ -90,6 +92,7 @@ export const formSchema: FormSchema[] = [
     label: t('sys.department.name'),
     component: 'Input',
     required: true,
+    rules: [{ min: 1, max: 200 }],
   },
   {
     field: 'parentId',
@@ -120,35 +123,41 @@ export const formSchema: FormSchema[] = [
     field: 'ancestors',
     label: t('sys.department.ancestors'),
     component: 'Input',
+    rules: [{ max: 200 }],
   },
   {
     field: 'leader',
     label: t('sys.department.leader'),
     component: 'Input',
     required: true,
+    rules: [{ max: 20 }],
   },
   {
     field: 'phone',
     label: t('sys.department.phone'),
     component: 'Input',
     required: true,
+    rules: [{ max: 18 }],
   },
   {
     field: 'email',
     label: t('sys.department.email'),
     component: 'Input',
     required: true,
+    rules: [{ max: 70 }],
   },
   {
     field: 'sort',
     label: t('sys.department.sort'),
     component: 'InputNumber',
     required: true,
+    rules: [{ type: 'number', max: 10000 }],
   },
   {
     field: 'remark',
     label: t('common.remark'),
     component: 'Input',
+    rules: [{ max: 200 }],
   },
   {
     field: 'status',

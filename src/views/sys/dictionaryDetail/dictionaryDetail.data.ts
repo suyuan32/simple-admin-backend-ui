@@ -90,24 +90,28 @@ export const formSchema: FormSchema[] = [
     label: t('common.displayName'),
     component: 'Input',
     required: true,
+    rules: [{ max: 50 }],
   },
   {
     field: 'key',
     label: t('sys.dictionary.key'),
     component: 'Input',
     required: true,
+    rules: [{ max: 80 }],
   },
   {
     field: 'value',
     label: t('sys.dictionary.value'),
     component: 'Input',
     required: true,
+    rules: [{ max: 100 }],
   },
   {
     field: 'sort',
     label: t('common.sort'),
     component: 'InputNumber',
     required: true,
+    rules: [{ type: 'number', max: 10000 }],
   },
   {
     field: 'status',

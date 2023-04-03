@@ -78,18 +78,21 @@ export const searchFormSchema: FormSchema[] = [
     label: t('sys.position.name'),
     component: 'Input',
     colProps: { span: 8 },
+    rules: [{ max: 50 }],
   },
   {
     field: 'code',
     label: t('sys.position.code'),
     component: 'Input',
     colProps: { span: 8 },
+    rules: [{ max: 20 }],
   },
   {
     field: 'remark',
     label: t('common.remark'),
     component: 'Input',
     colProps: { span: 8 },
+    rules: [{ max: 200 }],
   },
 ];
 
@@ -105,23 +108,27 @@ export const formSchema: FormSchema[] = [
     label: t('sys.position.name'),
     component: 'Input',
     required: true,
+    rules: [{ max: 50 }],
   },
   {
     field: 'code',
     label: t('sys.position.code'),
     component: 'Input',
     required: true,
+    rules: [{ max: 20 }],
   },
   {
     field: 'sort',
     label: t('common.sort'),
     component: 'InputNumber',
     required: true,
+    rules: [{ type: 'number', max: 10000 }],
   },
   {
     field: 'remark',
     label: t('common.remark'),
     component: 'Input',
+    rules: [{ max: 200 }],
   },
   {
     field: 'status',

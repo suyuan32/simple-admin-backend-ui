@@ -63,6 +63,7 @@ export const searchFormSchema: FormSchema[] = [
     label: t('sys.dictionary.name'),
     component: 'Input',
     colProps: { span: 8 },
+    rules: [{ min: 1, max: 50 }],
   },
 ];
 
@@ -78,17 +79,20 @@ export const formSchema: FormSchema[] = [
     label: t('common.displayName'),
     component: 'Input',
     required: true,
+    rules: [{ min: 1, max: 50 }],
   },
   {
     field: 'name',
     label: t('sys.dictionary.name'),
     component: 'Input',
     required: true,
+    rules: [{ min: 1, max: 50 }],
   },
   {
     field: 'desc',
     label: t('common.description'),
     component: 'Input',
+    rules: [{ max: 200 }],
   },
   {
     field: 'status',
