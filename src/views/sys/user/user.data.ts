@@ -81,14 +81,14 @@ export const searchFormSchema: FormSchema[] = [
     label: t('sys.login.username'),
     component: 'Input',
     colProps: { span: 8 },
-    rules: [{ max: 30 }],
+    rules: [{ max: 50 }],
   },
   {
     field: 'nickname',
     label: t('sys.user.nickname'),
     component: 'Input',
     colProps: { span: 8 },
-    rules: [{ max: 30 }],
+    rules: [{ max: 40 }],
   },
   {
     field: 'roleIds',
@@ -118,7 +118,7 @@ export const searchFormSchema: FormSchema[] = [
     label: t('sys.login.email'),
     component: 'Input',
     colProps: { span: 8 },
-    rules: [{ type: 'email' }],
+    rules: [{ max: 70 }],
   },
 ];
 

@@ -68,7 +68,7 @@ export const searchFormSchema: FormSchema[] = [
     label: t('sys.department.name'),
     component: 'Input',
     colProps: { span: 8 },
-    rules: [{ min: 1, max: 200 }],
+    rules: [{ max: 50 }],
   },
   {
     field: 'leader',
