@@ -61,7 +61,6 @@ export const searchFormSchema: FormSchema[] = [
   {
     field: 'method',
     label: t('sys.apis.method'),
-    required: true,
     component: 'Select',
     componentProps: {
       options: [
