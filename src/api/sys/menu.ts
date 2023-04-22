@@ -39,6 +39,7 @@ export const createMenu = (params: MenuInfo, mode: ErrorMessageMode = 'message')
     { url: Api.CreateMenu, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -51,6 +52,7 @@ export const updateMenu = (params: MenuInfo, mode: ErrorMessageMode = 'message')
     { url: Api.UpdateMenu, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -63,6 +65,7 @@ export const deleteMenu = (params: BaseIDReq, mode: ErrorMessageMode = 'message'
     { url: Api.DeleteMenu, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };

@@ -30,6 +30,7 @@ export const createPosition = (params: PositionInfo, mode: ErrorMessageMode = 'm
     { url: Api.CreatePosition, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -42,6 +43,7 @@ export const updatePosition = (params: PositionInfo, mode: ErrorMessageMode = 'm
     { url: Api.UpdatePosition, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -54,6 +56,7 @@ export const deletePosition = (params: BaseIDsReq, mode: ErrorMessageMode = 'mes
     { url: Api.DeletePosition, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };

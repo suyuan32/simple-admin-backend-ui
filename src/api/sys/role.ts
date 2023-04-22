@@ -30,6 +30,7 @@ export const createRole = (params: RoleInfo, mode: ErrorMessageMode = 'message')
     { url: Api.CreateRole, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -42,6 +43,7 @@ export const updateRole = (params: RoleInfo, mode: ErrorMessageMode = 'message')
     { url: Api.UpdateRole, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -54,6 +56,7 @@ export const deleteRole = (params: BaseIDsReq, mode: ErrorMessageMode = 'message
     { url: Api.DeleteRole, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };

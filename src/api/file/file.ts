@@ -1,8 +1,9 @@
-import { UploadApiResult } from '../sys/model/uploadModel';
+import { UploadApiResult } from '/@/api/sys/model/uploadModel';
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode, UploadFileParams } from '/#/axios';
 import { BaseDataResp, BaseIDReq, BaseListReq, BaseResp } from '../model/baseModel';
 import { FileListResp, updateFileInfoReq } from './model/fileModel';
+import { AxiosProgressEvent } from 'axios';
 
 enum Api {
   uploadFile = '/file-manager/upload',
@@ -17,7 +18,7 @@ enum Api {
  */
 export function uploadApi(
   params: UploadFileParams,
-  onUploadProgress: (progressEvent: ProgressEvent) => void,
+  onUploadProgress: (progressEvent: AxiosProgressEvent) => void,
 ) {
   return defHttp.uploadFile<BaseDataResp<UploadApiResult>>(
     {
@@ -45,6 +46,7 @@ export const UpdateFileInfo = (params: updateFileInfoReq, mode: ErrorMessageMode
     { url: Api.UpdateFileInfo, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -58,6 +60,7 @@ export const deleteFile = (params: BaseIDReq, mode: ErrorMessageMode = 'modal') 
     { url: Api.UpdateFileInfo, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };

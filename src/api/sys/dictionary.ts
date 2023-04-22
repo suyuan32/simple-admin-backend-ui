@@ -30,6 +30,7 @@ export const createDictionary = (params: DictionaryInfo, mode: ErrorMessageMode 
     { url: Api.CreateDictionary, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -42,6 +43,7 @@ export const updateDictionary = (params: DictionaryInfo, mode: ErrorMessageMode 
     { url: Api.UpdateDictionary, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -54,6 +56,7 @@ export const deleteDictionary = (params: BaseIDsReq, mode: ErrorMessageMode = 'm
     { url: Api.DeleteDictionary, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };

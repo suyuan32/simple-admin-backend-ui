@@ -41,6 +41,7 @@ export const createOauthProvider = (
     { url: Api.CreateOauthProvider, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -56,6 +57,7 @@ export const updateOauthProvider = (
     { url: Api.UpdateOauthProvider, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -68,6 +70,7 @@ export const deleteOauthProvider = (params: BaseIDsReq, mode: ErrorMessageMode =
     { url: Api.DeleteOauthProvider, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };

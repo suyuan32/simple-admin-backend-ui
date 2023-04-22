@@ -46,6 +46,7 @@ export const createOrUpdateApiAuthority = (
     { url: Api.CreateOrUpdateApiAuthority, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -63,6 +64,7 @@ export const createOrUpdateMenuAuthority = (
     { url: Api.CreateOrUpdateMenuAuthority, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };

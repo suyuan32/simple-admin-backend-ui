@@ -30,6 +30,7 @@ export const createMemberRank = (params: MemberRankInfo, mode: ErrorMessageMode 
     { url: Api.CreateMemberRank, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -42,6 +43,7 @@ export const updateMemberRank = (params: MemberRankInfo, mode: ErrorMessageMode 
     { url: Api.UpdateMemberRank, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -54,6 +56,7 @@ export const deleteMemberRank = (params: BaseIDsReq, mode: ErrorMessageMode = 'm
     { url: Api.DeleteMemberRank, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };

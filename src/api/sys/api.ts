@@ -30,6 +30,7 @@ export const createApi = (params: ApiInfo, mode: ErrorMessageMode = 'message') =
     { url: Api.CreateApi, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -42,6 +43,7 @@ export const updateApi = (params: ApiInfo, mode: ErrorMessageMode = 'message') =
     { url: Api.UpdateApi, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -54,6 +56,7 @@ export const deleteApi = (params: BaseIDsReq, mode: ErrorMessageMode = 'message'
     { url: Api.DeleteApi, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };

@@ -48,6 +48,7 @@ export const createUser = (params: UserInfo, mode: ErrorMessageMode = 'message')
     { url: Api.CreateUser, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -60,6 +61,7 @@ export const updateUser = (params: UserInfo, mode: ErrorMessageMode = 'message')
     { url: Api.UpdateUser, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -72,6 +74,7 @@ export const deleteUser = (params: BaseUUIDsReq, mode: ErrorMessageMode = 'messa
     { url: Api.DeleteUser, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -99,6 +102,7 @@ export function login(params: LoginReq, mode: ErrorMessageMode = 'message') {
     },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 }
@@ -114,6 +118,7 @@ export function register(params: RegisterReq, mode: ErrorMessageMode = 'message'
     },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 }

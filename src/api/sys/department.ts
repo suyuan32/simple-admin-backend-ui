@@ -30,6 +30,7 @@ export const createDepartment = (params: DepartmentInfo, mode: ErrorMessageMode 
     { url: Api.CreateDepartment, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -42,6 +43,7 @@ export const updateDepartment = (params: DepartmentInfo, mode: ErrorMessageMode 
     { url: Api.UpdateDepartment, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -54,6 +56,7 @@ export const deleteDepartment = (params: BaseIDsReq, mode: ErrorMessageMode = 'm
     { url: Api.DeleteDepartment, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };

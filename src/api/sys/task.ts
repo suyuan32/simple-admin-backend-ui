@@ -30,6 +30,7 @@ export const createTask = (params: TaskInfo, mode: ErrorMessageMode = 'message')
     { url: Api.CreateTask, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -42,6 +43,7 @@ export const updateTask = (params: TaskInfo, mode: ErrorMessageMode = 'message')
     { url: Api.UpdateTask, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -54,6 +56,7 @@ export const deleteTask = (params: BaseIDsReq, mode: ErrorMessageMode = 'message
     { url: Api.DeleteTask, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };

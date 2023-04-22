@@ -30,6 +30,7 @@ export const createTaskLog = (params: TaskLogInfo, mode: ErrorMessageMode = 'mes
     { url: Api.CreateTaskLog, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -42,6 +43,7 @@ export const updateTaskLog = (params: TaskLogInfo, mode: ErrorMessageMode = 'mes
     { url: Api.UpdateTaskLog, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -54,6 +56,7 @@ export const deleteTaskLog = (params: BaseIDsReq, mode: ErrorMessageMode = 'mess
     { url: Api.DeleteTaskLog, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };

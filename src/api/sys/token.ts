@@ -37,6 +37,7 @@ export const createToken = (params: TokenInfo, mode: ErrorMessageMode = 'message
     { url: Api.CreateToken, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -49,6 +50,7 @@ export const updateToken = (params: TokenInfo, mode: ErrorMessageMode = 'message
     { url: Api.UpdateToken, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -61,6 +63,7 @@ export const deleteToken = (params: BaseUUIDsReq, mode: ErrorMessageMode = 'mess
     { url: Api.DeleteToken, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };

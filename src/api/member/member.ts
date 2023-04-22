@@ -36,6 +36,7 @@ export const createMember = (params: MemberInfo, mode: ErrorMessageMode = 'messa
     { url: Api.CreateMember, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -48,6 +49,7 @@ export const updateMember = (params: MemberInfo, mode: ErrorMessageMode = 'messa
     { url: Api.UpdateMember, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
@@ -60,6 +62,7 @@ export const deleteMember = (params: BaseUUIDsReq, mode: ErrorMessageMode = 'mes
     { url: Api.DeleteMember, params: params },
     {
       errorMessageMode: mode,
+      successMessageMode: mode,
     },
   );
 };
