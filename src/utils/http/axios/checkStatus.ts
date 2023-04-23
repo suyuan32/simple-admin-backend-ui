@@ -6,7 +6,7 @@ import projectSetting from '/@/settings/projectSetting';
 import { SessionTimeoutProcessingEnum } from '/@/enums/appEnum';
 import httpStatus from 'http-status';
 
-const { createMessage, createErrorModal } = useMessage();
+const { createMessage, createErrorModal, notification } = useMessage();
 const error = createMessage.error!;
 const stp = projectSetting.sessionTimeoutProcessing;
 
@@ -78,6 +78,12 @@ export function checkStatus(
       createErrorModal({ title: t('sys.api.errorTip'), content: errMessage });
     } else if (errorMessageMode === 'message') {
       error({ content: errMessage, key: `global_error_message_status_${status}` });
+    } else {
+      notification.warning({
+        message: t('common.failed'),
+        description: errMessage,
+        duration: 3,
+      });
     }
   }
 }
