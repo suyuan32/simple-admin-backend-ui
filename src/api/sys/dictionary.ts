@@ -15,7 +15,7 @@ enum Api {
  * @description: Get dictionary list
  */
 
-export const getDictionaryList = (params: BaseListReq, mode: ErrorMessageMode = 'message') => {
+export const getDictionaryList = (params: BaseListReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseDataResp<DictionaryListResp>>(
     { url: Api.GetDictionaryList, params },
     { errorMessageMode: mode },
@@ -25,7 +25,7 @@ export const getDictionaryList = (params: BaseListReq, mode: ErrorMessageMode = 
 /**
  *  @description: Create a new dictionary
  */
-export const createDictionary = (params: DictionaryInfo, mode: ErrorMessageMode = 'message') => {
+export const createDictionary = (params: DictionaryInfo, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.CreateDictionary, params: params },
     {
@@ -38,7 +38,7 @@ export const createDictionary = (params: DictionaryInfo, mode: ErrorMessageMode 
 /**
  *  @description: Update the dictionary
  */
-export const updateDictionary = (params: DictionaryInfo, mode: ErrorMessageMode = 'message') => {
+export const updateDictionary = (params: DictionaryInfo, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.UpdateDictionary, params: params },
     {
@@ -51,7 +51,7 @@ export const updateDictionary = (params: DictionaryInfo, mode: ErrorMessageMode 
 /**
  *  @description: Delete dictionarys
  */
-export const deleteDictionary = (params: BaseIDsReq, mode: ErrorMessageMode = 'message') => {
+export const deleteDictionary = (params: BaseIDsReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.DeleteDictionary, params: params },
     {
@@ -64,7 +64,7 @@ export const deleteDictionary = (params: BaseIDsReq, mode: ErrorMessageMode = 'm
 /**
  *  @description: Get dictionary By ID
  */
-export const getDictionaryById = (params: BaseIDReq, mode: ErrorMessageMode = 'message') => {
+export const getDictionaryById = (params: BaseIDReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseDataResp<DictionaryInfo>>(
     { url: Api.GetDictionaryById, params: params },
     {

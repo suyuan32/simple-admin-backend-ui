@@ -15,7 +15,7 @@ enum Api {
  * @description: Get task log list
  */
 
-export const getTaskLogList = (params: BaseListReq, mode: ErrorMessageMode = 'message') => {
+export const getTaskLogList = (params: BaseListReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseDataResp<TaskLogListResp>>(
     { url: Api.GetTaskLogList, params },
     { errorMessageMode: mode },
@@ -25,7 +25,7 @@ export const getTaskLogList = (params: BaseListReq, mode: ErrorMessageMode = 'me
 /**
  *  @description: Create a new task log
  */
-export const createTaskLog = (params: TaskLogInfo, mode: ErrorMessageMode = 'message') => {
+export const createTaskLog = (params: TaskLogInfo, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.CreateTaskLog, params: params },
     {
@@ -38,7 +38,7 @@ export const createTaskLog = (params: TaskLogInfo, mode: ErrorMessageMode = 'mes
 /**
  *  @description: Update the task log
  */
-export const updateTaskLog = (params: TaskLogInfo, mode: ErrorMessageMode = 'message') => {
+export const updateTaskLog = (params: TaskLogInfo, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.UpdateTaskLog, params: params },
     {
@@ -51,7 +51,7 @@ export const updateTaskLog = (params: TaskLogInfo, mode: ErrorMessageMode = 'mes
 /**
  *  @description: Delete task logs
  */
-export const deleteTaskLog = (params: BaseIDsReq, mode: ErrorMessageMode = 'message') => {
+export const deleteTaskLog = (params: BaseIDsReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.DeleteTaskLog, params: params },
     {
@@ -64,7 +64,7 @@ export const deleteTaskLog = (params: BaseIDsReq, mode: ErrorMessageMode = 'mess
 /**
  *  @description: Get task log By ID
  */
-export const getTaskLogById = (params: BaseIDReq, mode: ErrorMessageMode = 'message') => {
+export const getTaskLogById = (params: BaseIDReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseDataResp<TaskLogInfo>>(
     { url: Api.GetTaskLogById, params: params },
     {

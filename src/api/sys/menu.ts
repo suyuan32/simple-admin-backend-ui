@@ -24,7 +24,7 @@ export const getMenuListByRole = () => {
  * @description: Get menu list
  */
 
-export const getMenuList = (mode: ErrorMessageMode = 'message') => {
+export const getMenuList = (mode: ErrorMessageMode = 'notice') => {
   return defHttp.get<BaseDataResp<MenuListResp>>(
     { url: Api.GetMenuList },
     { errorMessageMode: mode },
@@ -34,7 +34,7 @@ export const getMenuList = (mode: ErrorMessageMode = 'message') => {
 /**
  *  @description: Create a new menu
  */
-export const createMenu = (params: MenuInfo, mode: ErrorMessageMode = 'message') => {
+export const createMenu = (params: MenuInfo, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.CreateMenu, params: params },
     {
@@ -47,7 +47,7 @@ export const createMenu = (params: MenuInfo, mode: ErrorMessageMode = 'message')
 /**
  *  @description: Update the menu
  */
-export const updateMenu = (params: MenuInfo, mode: ErrorMessageMode = 'message') => {
+export const updateMenu = (params: MenuInfo, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.UpdateMenu, params: params },
     {
@@ -60,7 +60,7 @@ export const updateMenu = (params: MenuInfo, mode: ErrorMessageMode = 'message')
 /**
  *  @description: Delete menus
  */
-export const deleteMenu = (params: BaseIDReq, mode: ErrorMessageMode = 'message') => {
+export const deleteMenu = (params: BaseIDReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.DeleteMenu, params: params },
     {
@@ -73,7 +73,7 @@ export const deleteMenu = (params: BaseIDReq, mode: ErrorMessageMode = 'message'
 /**
  *  @description: Get menu By ID
  */
-export const getMenuById = (params: BaseIDReq, mode: ErrorMessageMode = 'message') => {
+export const getMenuById = (params: BaseIDReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseDataResp<MenuInfo>>(
     { url: Api.GetMenuById, params: params },
     {

@@ -71,7 +71,7 @@
           title: t('common.deleteConfirm'),
           icon: createVNode(ExclamationCircleOutlined),
           async onOk() {
-            const result = await deleteTaskLog({ ids: selectedIds.value as number[] }, 'modal');
+            const result = await deleteTaskLog({ ids: selectedIds.value as number[] });
             if (result.code === 0) {
               showDeleteButton.value = false;
               notification.success({

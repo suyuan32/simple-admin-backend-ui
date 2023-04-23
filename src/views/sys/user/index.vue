@@ -90,7 +90,6 @@
       const selectedIds = ref<number[] | string[]>();
       const showDeleteButton = ref<boolean>(false);
       const searchInfo = reactive<Recordable>({});
-      const { notification } = useMessage();
 
       const [registerDrawer, { openDrawer }] = useDrawer();
       const roleStoreData = useRoleStore();
@@ -146,13 +145,8 @@
           return;
         }
 
-        const result = await deleteUser({ ids: [record.id] }, 'modal');
+        const result = await deleteUser({ ids: [record.id] });
         if (result.code === 0) {
-          notification.success({
-            message: t('common.successful'),
-            description: t(result.msg),
-            duration: 3,
-          });
           await reload();
         }
       }
@@ -169,14 +163,8 @@
               return;
             }
 
-            const result = await deleteUser({ ids: ids }, 'modal');
+            const result = await deleteUser({ ids: ids });
             if (result.code === 0) {
-              showDeleteButton.value = false;
-              notification.success({
-                message: t('common.successful'),
-                description: t(result.msg),
-                duration: 3,
-              });
               await reload();
             }
           },
@@ -197,12 +185,7 @@
         if (result.code === 0) await reload();
       }
 
-      async function handleSuccess(msg) {
-        notification.success({
-          message: t('common.successful'),
-          description: t(msg),
-          duration: 3,
-        });
+      async function handleSuccess() {
         await reload();
       }
 

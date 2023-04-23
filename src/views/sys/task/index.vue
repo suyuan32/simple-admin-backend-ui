@@ -51,7 +51,6 @@
   import { useDrawer } from '/@/components/Drawer';
   import TaskDrawer from './TaskDrawer.vue';
   import { useI18n } from 'vue-i18n';
-  import { useMessage } from '/@/hooks/web/useMessage';
 
   import { columns, searchFormSchema } from './task.data';
   import { getTaskList, deleteTask } from '/@/api/sys/task';
@@ -67,7 +66,6 @@
       const showDeleteButton = ref<boolean>(false);
 
       const [registerDrawer, { openDrawer }] = useDrawer();
-      const { notification } = useMessage();
       const [registerTable, { reload }] = useTable({
         title: t('sys.task.taskList'),
         api: getTaskList,
@@ -117,13 +115,8 @@
       }
 
       async function handleDelete(record: Recordable) {
-        const result = await deleteTask({ ids: [record.id] }, 'modal');
+        const result = await deleteTask({ ids: [record.id] });
         if (result.code === 0) {
-          notification.success({
-            message: t('common.successful'),
-            description: t(result.msg),
-            duration: 3,
-          });
           await reload();
         }
       }
@@ -133,14 +126,9 @@
           title: t('common.deleteConfirm'),
           icon: createVNode(ExclamationCircleOutlined),
           async onOk() {
-            const result = await deleteTask({ ids: selectedIds.value as number[] }, 'modal');
+            const result = await deleteTask({ ids: selectedIds.value as number[] });
             if (result.code === 0) {
               showDeleteButton.value = false;
-              notification.success({
-                message: t('common.successful'),
-                description: t(result.msg),
-                duration: 3,
-              });
               await reload();
             }
           },
@@ -150,12 +138,7 @@
         });
       }
 
-      async function handleSuccess(msg) {
-        notification.success({
-          message: t('common.successful'),
-          description: t(msg),
-          duration: 3,
-        });
+      async function handleSuccess() {
         await reload();
       }
 

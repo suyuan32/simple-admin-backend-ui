@@ -22,7 +22,7 @@ enum Api {
  * @description: Get token list
  */
 
-export const getTokenList = (params: BaseListReq, mode: ErrorMessageMode = 'message') => {
+export const getTokenList = (params: BaseListReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseDataResp<TokenListResp>>(
     { url: Api.GetTokenList, params },
     { errorMessageMode: mode },
@@ -32,7 +32,7 @@ export const getTokenList = (params: BaseListReq, mode: ErrorMessageMode = 'mess
 /**
  *  @description: Create a new token
  */
-export const createToken = (params: TokenInfo, mode: ErrorMessageMode = 'message') => {
+export const createToken = (params: TokenInfo, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.CreateToken, params: params },
     {
@@ -45,7 +45,7 @@ export const createToken = (params: TokenInfo, mode: ErrorMessageMode = 'message
 /**
  *  @description: Update the token
  */
-export const updateToken = (params: TokenInfo, mode: ErrorMessageMode = 'message') => {
+export const updateToken = (params: TokenInfo, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.UpdateToken, params: params },
     {
@@ -58,7 +58,7 @@ export const updateToken = (params: TokenInfo, mode: ErrorMessageMode = 'message
 /**
  *  @description: Delete tokens
  */
-export const deleteToken = (params: BaseUUIDsReq, mode: ErrorMessageMode = 'message') => {
+export const deleteToken = (params: BaseUUIDsReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.DeleteToken, params: params },
     {
@@ -71,7 +71,7 @@ export const deleteToken = (params: BaseUUIDsReq, mode: ErrorMessageMode = 'mess
 /**
  *  @description: Get token By ID
  */
-export const getTokenById = (params: BaseUUIDReq, mode: ErrorMessageMode = 'message') => {
+export const getTokenById = (params: BaseUUIDReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseDataResp<TokenInfo>>(
     { url: Api.GetTokenById, params: params },
     {

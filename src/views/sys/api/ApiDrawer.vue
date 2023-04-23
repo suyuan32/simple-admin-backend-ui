@@ -57,7 +57,7 @@
         let result = unref(isUpdate) ? await updateApi(values) : await createApi(values);
         if (result.code === 0) {
           closeDrawer();
-          emit('success', result.msg);
+          emit('success');
         }
         setDrawerProps({ confirmLoading: false });
       }

@@ -21,7 +21,7 @@ enum Api {
  * @description: Get member list
  */
 
-export const getMemberList = (params: BaseListReq, mode: ErrorMessageMode = 'message') => {
+export const getMemberList = (params: BaseListReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseDataResp<MemberListResp>>(
     { url: Api.GetMemberList, params },
     { errorMessageMode: mode },
@@ -31,7 +31,7 @@ export const getMemberList = (params: BaseListReq, mode: ErrorMessageMode = 'mes
 /**
  *  @description: Create a new member
  */
-export const createMember = (params: MemberInfo, mode: ErrorMessageMode = 'message') => {
+export const createMember = (params: MemberInfo, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.CreateMember, params: params },
     {
@@ -44,7 +44,7 @@ export const createMember = (params: MemberInfo, mode: ErrorMessageMode = 'messa
 /**
  *  @description: Update the member
  */
-export const updateMember = (params: MemberInfo, mode: ErrorMessageMode = 'message') => {
+export const updateMember = (params: MemberInfo, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.UpdateMember, params: params },
     {
@@ -57,7 +57,7 @@ export const updateMember = (params: MemberInfo, mode: ErrorMessageMode = 'messa
 /**
  *  @description: Delete members
  */
-export const deleteMember = (params: BaseUUIDsReq, mode: ErrorMessageMode = 'message') => {
+export const deleteMember = (params: BaseUUIDsReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.DeleteMember, params: params },
     {
@@ -70,7 +70,7 @@ export const deleteMember = (params: BaseUUIDsReq, mode: ErrorMessageMode = 'mes
 /**
  *  @description: Get member By ID
  */
-export const getMemberById = (params: BaseUUIDReq, mode: ErrorMessageMode = 'message') => {
+export const getMemberById = (params: BaseUUIDReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseDataResp<MemberInfo>>(
     { url: Api.GetMemberById, params: params },
     {

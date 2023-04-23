@@ -15,7 +15,7 @@ enum Api {
  * @description: Get role list
  */
 
-export const getRoleList = (params: BaseListReq, mode: ErrorMessageMode = 'message') => {
+export const getRoleList = (params: BaseListReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseDataResp<RoleListResp>>(
     { url: Api.GetRoleList, params },
     { errorMessageMode: mode },
@@ -25,7 +25,7 @@ export const getRoleList = (params: BaseListReq, mode: ErrorMessageMode = 'messa
 /**
  *  @description: Create a new role
  */
-export const createRole = (params: RoleInfo, mode: ErrorMessageMode = 'message') => {
+export const createRole = (params: RoleInfo, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.CreateRole, params: params },
     {
@@ -38,7 +38,7 @@ export const createRole = (params: RoleInfo, mode: ErrorMessageMode = 'message')
 /**
  *  @description: Update the role
  */
-export const updateRole = (params: RoleInfo, mode: ErrorMessageMode = 'message') => {
+export const updateRole = (params: RoleInfo, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.UpdateRole, params: params },
     {
@@ -51,7 +51,7 @@ export const updateRole = (params: RoleInfo, mode: ErrorMessageMode = 'message')
 /**
  *  @description: Delete roles
  */
-export const deleteRole = (params: BaseIDsReq, mode: ErrorMessageMode = 'message') => {
+export const deleteRole = (params: BaseIDsReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.DeleteRole, params: params },
     {
@@ -64,7 +64,7 @@ export const deleteRole = (params: BaseIDsReq, mode: ErrorMessageMode = 'message
 /**
  *  @description: Get role By ID
  */
-export const getRoleById = (params: BaseIDReq, mode: ErrorMessageMode = 'message') => {
+export const getRoleById = (params: BaseIDReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseDataResp<RoleInfo>>(
     { url: Api.GetRoleById, params: params },
     {

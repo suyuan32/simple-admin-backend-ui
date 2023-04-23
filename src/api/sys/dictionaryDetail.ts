@@ -15,10 +15,7 @@ enum Api {
  * @description: Get dictionary detail list
  */
 
-export const getDictionaryDetailList = (
-  params: BaseListReq,
-  mode: ErrorMessageMode = 'message',
-) => {
+export const getDictionaryDetailList = (params: BaseListReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseDataResp<DictionaryDetailListResp>>(
     { url: Api.GetDictionaryDetailList, params },
     { errorMessageMode: mode },
@@ -30,7 +27,7 @@ export const getDictionaryDetailList = (
  */
 export const createDictionaryDetail = (
   params: DictionaryDetailInfo,
-  mode: ErrorMessageMode = 'message',
+  mode: ErrorMessageMode = 'notice',
 ) => {
   return defHttp.post<BaseResp>(
     { url: Api.CreateDictionaryDetail, params: params },
@@ -46,7 +43,7 @@ export const createDictionaryDetail = (
  */
 export const updateDictionaryDetail = (
   params: DictionaryDetailInfo,
-  mode: ErrorMessageMode = 'message',
+  mode: ErrorMessageMode = 'notice',
 ) => {
   return defHttp.post<BaseResp>(
     { url: Api.UpdateDictionaryDetail, params: params },
@@ -60,7 +57,7 @@ export const updateDictionaryDetail = (
 /**
  *  @description: Delete dictionary details
  */
-export const deleteDictionaryDetail = (params: BaseIDsReq, mode: ErrorMessageMode = 'message') => {
+export const deleteDictionaryDetail = (params: BaseIDsReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.DeleteDictionaryDetail, params: params },
     {
@@ -73,7 +70,7 @@ export const deleteDictionaryDetail = (params: BaseIDsReq, mode: ErrorMessageMod
 /**
  *  @description: Get dictionary detail By ID
  */
-export const getDictionaryDetailById = (params: BaseIDReq, mode: ErrorMessageMode = 'message') => {
+export const getDictionaryDetailById = (params: BaseIDReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseDataResp<DictionaryDetailInfo>>(
     { url: Api.GetDictionaryDetailById, params: params },
     {

@@ -15,7 +15,7 @@ enum Api {
  * @description: Get task list
  */
 
-export const getTaskList = (params: BaseListReq, mode: ErrorMessageMode = 'message') => {
+export const getTaskList = (params: BaseListReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseDataResp<TaskListResp>>(
     { url: Api.GetTaskList, params },
     { errorMessageMode: mode },
@@ -25,7 +25,7 @@ export const getTaskList = (params: BaseListReq, mode: ErrorMessageMode = 'messa
 /**
  *  @description: Create a new task
  */
-export const createTask = (params: TaskInfo, mode: ErrorMessageMode = 'message') => {
+export const createTask = (params: TaskInfo, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.CreateTask, params: params },
     {
@@ -38,7 +38,7 @@ export const createTask = (params: TaskInfo, mode: ErrorMessageMode = 'message')
 /**
  *  @description: Update the task
  */
-export const updateTask = (params: TaskInfo, mode: ErrorMessageMode = 'message') => {
+export const updateTask = (params: TaskInfo, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.UpdateTask, params: params },
     {
@@ -51,7 +51,7 @@ export const updateTask = (params: TaskInfo, mode: ErrorMessageMode = 'message')
 /**
  *  @description: Delete tasks
  */
-export const deleteTask = (params: BaseIDsReq, mode: ErrorMessageMode = 'message') => {
+export const deleteTask = (params: BaseIDsReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.DeleteTask, params: params },
     {
@@ -64,7 +64,7 @@ export const deleteTask = (params: BaseIDsReq, mode: ErrorMessageMode = 'message
 /**
  *  @description: Get task By ID
  */
-export const getTaskById = (params: BaseIDReq, mode: ErrorMessageMode = 'message') => {
+export const getTaskById = (params: BaseIDReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseDataResp<TaskInfo>>(
     { url: Api.GetTaskById, params: params },
     {

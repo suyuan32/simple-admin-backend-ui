@@ -46,7 +46,6 @@
   import { useDrawer } from '/@/components/Drawer';
   import DepartmentDrawer from './DepartmentDrawer.vue';
   import { useI18n } from 'vue-i18n';
-  import { useMessage } from '/@/hooks/web/useMessage';
 
   import { columns, searchFormSchema } from './department.data';
   import { getDepartmentList, deleteDepartment } from '/@/api/sys/department';
@@ -60,7 +59,6 @@
       const showDeleteButton = ref<boolean>(false);
 
       const [registerDrawer, { openDrawer }] = useDrawer();
-      const { notification } = useMessage();
       const [registerTable, { reload }] = useTable({
         title: t('sys.department.departmentList'),
         api: getDepartmentList,
@@ -104,13 +102,8 @@
       }
 
       async function handleDelete(record: Recordable) {
-        const result = await deleteDepartment({ ids: [record.id] }, 'modal');
+        const result = await deleteDepartment({ ids: [record.id] });
         if (result.code === 0) {
-          notification.success({
-            message: t('common.successful'),
-            description: t(result.msg),
-            duration: 3,
-          });
           await reload();
         }
       }
@@ -120,14 +113,9 @@
           title: t('common.deleteConfirm'),
           icon: createVNode(ExclamationCircleOutlined),
           async onOk() {
-            const result = await deleteDepartment({ ids: selectedIds.value as number[] }, 'modal');
+            const result = await deleteDepartment({ ids: selectedIds.value as number[] });
             if (result.code === 0) {
               showDeleteButton.value = false;
-              notification.success({
-                message: t('common.successful'),
-                description: t(result.msg),
-                duration: 3,
-              });
               await reload();
             }
           },
@@ -137,12 +125,7 @@
         });
       }
 
-      async function handleSuccess(msg) {
-        notification.success({
-          message: t('common.successful'),
-          description: t(msg),
-          duration: 3,
-        });
+      async function handleSuccess() {
         await reload();
       }
 

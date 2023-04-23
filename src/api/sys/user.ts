@@ -33,7 +33,7 @@ enum Api {
  * @description: Get user list
  */
 
-export const getUserList = (params: BaseListReq, mode: ErrorMessageMode = 'message') => {
+export const getUserList = (params: BaseListReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseDataResp<UserListResp>>(
     { url: Api.GetUserList, params },
     { errorMessageMode: mode },
@@ -43,7 +43,7 @@ export const getUserList = (params: BaseListReq, mode: ErrorMessageMode = 'messa
 /**
  *  @description: Create a new user
  */
-export const createUser = (params: UserInfo, mode: ErrorMessageMode = 'message') => {
+export const createUser = (params: UserInfo, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.CreateUser, params: params },
     {
@@ -56,7 +56,7 @@ export const createUser = (params: UserInfo, mode: ErrorMessageMode = 'message')
 /**
  *  @description: Update the user
  */
-export const updateUser = (params: UserInfo, mode: ErrorMessageMode = 'message') => {
+export const updateUser = (params: UserInfo, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.UpdateUser, params: params },
     {
@@ -69,7 +69,7 @@ export const updateUser = (params: UserInfo, mode: ErrorMessageMode = 'message')
 /**
  *  @description: Delete users
  */
-export const deleteUser = (params: BaseUUIDsReq, mode: ErrorMessageMode = 'message') => {
+export const deleteUser = (params: BaseUUIDsReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.DeleteUser, params: params },
     {
@@ -82,7 +82,7 @@ export const deleteUser = (params: BaseUUIDsReq, mode: ErrorMessageMode = 'messa
 /**
  *  @description: Get user By ID
  */
-export const getUserById = (params: BaseUUIDReq, mode: ErrorMessageMode = 'message') => {
+export const getUserById = (params: BaseUUIDReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseDataResp<UserInfo>>(
     { url: Api.GetUserById, params: params },
     {
@@ -94,7 +94,7 @@ export const getUserById = (params: BaseUUIDReq, mode: ErrorMessageMode = 'messa
 /**
  * @description: User login api
  */
-export function login(params: LoginReq, mode: ErrorMessageMode = 'message') {
+export function login(params: LoginReq, mode: ErrorMessageMode = 'notice') {
   return defHttp.post<BaseDataResp<LoginResp>>(
     {
       url: Api.Login,
@@ -110,7 +110,7 @@ export function login(params: LoginReq, mode: ErrorMessageMode = 'message') {
 /**
  * @description: User register api
  */
-export function register(params: RegisterReq, mode: ErrorMessageMode = 'message') {
+export function register(params: RegisterReq, mode: ErrorMessageMode = 'notice') {
   return defHttp.post<BaseResp>(
     {
       url: Api.Register,
@@ -126,7 +126,7 @@ export function register(params: RegisterReq, mode: ErrorMessageMode = 'message'
 /**
  * @description: Get captcha api
  */
-export function getCaptcha(mode: ErrorMessageMode = 'message') {
+export function getCaptcha(mode: ErrorMessageMode = 'notice') {
   return defHttp.get<BaseDataResp<CaptchaResp>>(
     {
       url: Api.GetCaptcha,

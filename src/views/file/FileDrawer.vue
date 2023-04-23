@@ -16,7 +16,6 @@
   import { formSchema } from './file.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
-  import { useMessage } from '/@/hooks/web/useMessage';
   import { updateFileInfoReq } from '/@/api/file/model/fileModel';
   import { UpdateFileInfo } from '../../api/file/file';
 
@@ -27,7 +26,6 @@
     setup(_, { emit }) {
       const isUpdate = ref(true);
       const { t } = useI18n();
-      const { notification } = useMessage();
 
       const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
         labelWidth: 90,
@@ -61,12 +59,7 @@
             id: Number(values['id']),
             name: values['name'],
           };
-          let result = await UpdateFileInfo(params);
-          notification.success({
-            message: t('common.successful'),
-            description: t(result.msg),
-            duration: 3,
-          });
+          await UpdateFileInfo(params);
           closeDrawer();
           emit('success');
         } finally {

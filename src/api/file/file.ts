@@ -41,7 +41,7 @@ export const getFileList = (params: BaseListReq) => {
  *  author: ryan
  *  @description: update file info
  */
-export const UpdateFileInfo = (params: updateFileInfoReq, mode: ErrorMessageMode = 'message') => {
+export const UpdateFileInfo = (params: updateFileInfoReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.UpdateFileInfo, params: params },
     {

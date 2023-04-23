@@ -40,7 +40,7 @@ export const getApiAuthority = (params: BaseIDReq) => {
  */
 export const createOrUpdateApiAuthority = (
   params: ApiAuthorityReq,
-  mode: ErrorMessageMode = 'message',
+  mode: ErrorMessageMode = 'notice',
 ) => {
   return defHttp.post<BaseResp>(
     { url: Api.CreateOrUpdateApiAuthority, params: params },
@@ -58,7 +58,7 @@ export const createOrUpdateApiAuthority = (
 
 export const createOrUpdateMenuAuthority = (
   params: MenuAuthorityInfo,
-  mode: ErrorMessageMode = 'message',
+  mode: ErrorMessageMode = 'notice',
 ) => {
   return defHttp.post<BaseResp>(
     { url: Api.CreateOrUpdateMenuAuthority, params: params },

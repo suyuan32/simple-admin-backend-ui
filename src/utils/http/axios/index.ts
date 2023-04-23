@@ -71,7 +71,14 @@ const transform: AxiosTransform = {
         createMessage.error(res.data.msg);
       } else if (options.errorMessageMode === 'modal') {
         createErrorModal({ title: res.data.msg, content: res.data.msg });
+      } else if (options.errorMessageMode === 'notice') {
+        notification.warning({
+          message: t('common.failed'),
+          description: t(res.data.msg),
+          duration: 3,
+        });
       }
+
       return res.data;
     }
   },

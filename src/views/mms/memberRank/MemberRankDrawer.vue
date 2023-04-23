@@ -60,7 +60,7 @@
           : await createMemberRank(values);
         if (result.code === 0) {
           closeDrawer();
-          emit('success', result.msg);
+          emit('success');
         }
         setDrawerProps({ confirmLoading: false });
       }

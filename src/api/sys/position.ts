@@ -15,7 +15,7 @@ enum Api {
  * @description: Get position list
  */
 
-export const getPositionList = (params: BaseListReq, mode: ErrorMessageMode = 'message') => {
+export const getPositionList = (params: BaseListReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseDataResp<PositionListResp>>(
     { url: Api.GetPositionList, params },
     { errorMessageMode: mode },
@@ -25,7 +25,7 @@ export const getPositionList = (params: BaseListReq, mode: ErrorMessageMode = 'm
 /**
  *  @description: Create a new position
  */
-export const createPosition = (params: PositionInfo, mode: ErrorMessageMode = 'message') => {
+export const createPosition = (params: PositionInfo, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.CreatePosition, params: params },
     {
@@ -38,7 +38,7 @@ export const createPosition = (params: PositionInfo, mode: ErrorMessageMode = 'm
 /**
  *  @description: Update the position
  */
-export const updatePosition = (params: PositionInfo, mode: ErrorMessageMode = 'message') => {
+export const updatePosition = (params: PositionInfo, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.UpdatePosition, params: params },
     {
@@ -51,7 +51,7 @@ export const updatePosition = (params: PositionInfo, mode: ErrorMessageMode = 'm
 /**
  *  @description: Delete positions
  */
-export const deletePosition = (params: BaseIDsReq, mode: ErrorMessageMode = 'message') => {
+export const deletePosition = (params: BaseIDsReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.DeletePosition, params: params },
     {
@@ -64,7 +64,7 @@ export const deletePosition = (params: BaseIDsReq, mode: ErrorMessageMode = 'mes
 /**
  *  @description: Get position By ID
  */
-export const getPositionById = (params: BaseIDReq, mode: ErrorMessageMode = 'message') => {
+export const getPositionById = (params: BaseIDReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseDataResp<PositionInfo>>(
     { url: Api.GetPositionById, params: params },
     {

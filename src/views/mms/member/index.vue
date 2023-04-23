@@ -54,7 +54,6 @@
   import { useDrawer } from '/@/components/Drawer';
   import MemberDrawer from './MemberDrawer.vue';
   import { useI18n } from 'vue-i18n';
-  import { useMessage } from '/@/hooks/web/useMessage';
 
   import { columns, searchFormSchema } from './member.data';
   import { getMemberList, deleteMember } from '../../../api/member/member';
@@ -82,7 +81,6 @@
       const showDeleteButton = ref<boolean>(false);
 
       const [registerDrawer, { openDrawer }] = useDrawer();
-      const { notification } = useMessage();
       const [registerTable, { reload }] = useTable({
         title: t('sys.member.memberList'),
         api: getMemberList,
@@ -126,13 +124,8 @@
       }
 
       async function handleDelete(record: Recordable) {
-        const result = await deleteMember({ ids: [record.id] }, 'modal');
+        const result = await deleteMember({ ids: [record.id] });
         if (result.code === 0) {
-          notification.success({
-            message: t('common.successful'),
-            description: t(result.msg),
-            duration: 3,
-          });
           await reload();
         }
       }
@@ -142,14 +135,9 @@
           title: t('common.deleteConfirm'),
           icon: createVNode(ExclamationCircleOutlined),
           async onOk() {
-            const result = await deleteMember({ ids: selectedIds.value as string[] }, 'modal');
+            const result = await deleteMember({ ids: selectedIds.value as string[] });
             if (result.code === 0) {
               showDeleteButton.value = false;
-              notification.success({
-                message: t('common.successful'),
-                description: t(result.msg),
-                duration: 3,
-              });
               await reload();
             }
           },
@@ -159,12 +147,7 @@
         });
       }
 
-      async function handleSuccess(msg) {
-        notification.success({
-          message: t('common.successful'),
-          description: t(msg),
-          duration: 3,
-        });
+      async function handleSuccess() {
         await reload();
       }
 

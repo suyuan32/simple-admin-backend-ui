@@ -47,7 +47,7 @@
     components: { BasicTable, RoleDrawer, TableAction },
     setup() {
       const { t } = useI18n();
-      const { createMessage, notification } = useMessage();
+      const { createMessage } = useMessage();
       const [registerDrawer, { openDrawer }] = useDrawer();
       const [registerTable, { reload }] = useTable({
         title: t('sys.role.roleList'),
@@ -86,23 +86,13 @@
           createMessage.warn(t('common.notAllowDeleteAdminData'));
           return;
         }
-        const result = await deleteRole({ ids: [record.id] }, 'modal');
+        const result = await deleteRole({ ids: [record.id] });
         if (result.code === 0) {
-          notification.success({
-            message: t('common.successful'),
-            description: t(result.msg),
-            duration: 3,
-          });
           await reload();
         }
       }
 
-      async function handleSuccess(msg) {
-        notification.success({
-          message: t('common.successful'),
-          description: t(msg),
-          duration: 3,
-        });
+      async function handleSuccess() {
         await reload();
       }
 

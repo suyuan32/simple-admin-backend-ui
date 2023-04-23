@@ -34,7 +34,6 @@
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
 
   import { useI18n } from 'vue-i18n';
-  import { useMessage } from '/@/hooks/web/useMessage';
 
   import { columns, searchFormSchema } from './token.data';
   import { getTokenList, deleteToken } from '/@/api/sys/token';
@@ -47,7 +46,6 @@
       const selectedIds = ref<number[] | string[]>();
       const showDeleteButton = ref<boolean>(false);
 
-      const { notification } = useMessage();
       const [registerTable, { reload }] = useTable({
         title: t('sys.token.tokenList'),
         api: getTokenList,
@@ -78,13 +76,8 @@
       });
 
       async function handleDelete(record: Recordable) {
-        const result = await deleteToken({ ids: [record.id] }, 'modal');
+        const result = await deleteToken({ ids: [record.id] });
         if (result.code === 0) {
-          notification.success({
-            message: t('common.successful'),
-            description: t(result.msg),
-            duration: 3,
-          });
           await reload();
         }
       }
@@ -94,14 +87,9 @@
           title: t('common.deleteConfirm'),
           icon: createVNode(ExclamationCircleOutlined),
           async onOk() {
-            const result = await deleteToken({ ids: selectedIds.value as string[] }, 'modal');
+            const result = await deleteToken({ ids: selectedIds.value as string[] });
             if (result.code === 0) {
               showDeleteButton.value = false;
-              notification.success({
-                message: t('common.successful'),
-                description: t(result.msg),
-                duration: 3,
-              });
               await reload();
             }
           },
@@ -111,12 +99,7 @@
         });
       }
 
-      async function handleSuccess(msg) {
-        notification.success({
-          message: t('common.successful'),
-          description: t(msg),
-          duration: 3,
-        });
+      async function handleSuccess() {
         await reload();
       }
 
