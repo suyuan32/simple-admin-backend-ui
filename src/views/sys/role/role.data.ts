@@ -51,12 +51,8 @@ export const columns: BasicColumn[] = [
           record.pendingStatus = true;
           const newStatus = checked ? 1 : 2;
           updateRole({ id: record.id, status: newStatus })
-            .then((data) => {
+            .then(() => {
               record.status = newStatus;
-              if (data.code == 0) createMessage.success(t('common.changeStatusSuccess'));
-            })
-            .catch(() => {
-              createMessage.error(t('common.updateFailed'));
             })
             .finally(() => {
               record.pendingStatus = false;

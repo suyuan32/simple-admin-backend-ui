@@ -51,12 +51,8 @@ export const columns: BasicColumn[] = [
           record.pendingStatus = true;
           const newStatus = checked ? 1 : 2;
           updateUser({ id: record.id, status: newStatus })
-            .then((data) => {
+            .then(() => {
               record.status = newStatus;
-              if (data.code == 0) createMessage.success(t('common.changeStatusSuccess'));
-            })
-            .catch(() => {
-              createMessage.error(t('common.changeStatusFailed'));
             })
             .finally(() => {
               record.pendingStatus = false;

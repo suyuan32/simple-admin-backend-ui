@@ -4,7 +4,6 @@ import { setFileStatus } from '../../api/file/file';
 import { BasicColumn } from '/@/components/Table';
 import { FormSchema } from '/@/components/Table';
 import { useI18n } from '/@/hooks/web/useI18n';
-import { useMessage } from '/@/hooks/web/useMessage';
 import { formatToDateTime } from '/@/utils/dateUtil';
 
 const { t } = useI18n();
@@ -47,14 +46,9 @@ export const columns: BasicColumn[] = [
         onChange(checked: boolean) {
           record.pendingStatus = true;
           const newStatus = checked ? 1 : 0;
-          const { createMessage } = useMessage();
           setFileStatus(record.id, newStatus)
             .then(() => {
               record.status = newStatus;
-              createMessage.success(t('common.changeStatusSuccess'));
-            })
-            .catch(() => {
-              createMessage.error(t('common.changeStatusFailed'));
             })
             .finally(() => {
               record.pendingStatus = false;

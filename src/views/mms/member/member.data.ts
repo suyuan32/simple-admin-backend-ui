@@ -3,7 +3,6 @@ import { FormSchema } from '/@/components/Table';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { formatToDateTime } from '/@/utils/dateUtil';
 import { Switch } from 'ant-design-vue';
-import { useMessage } from '/@/hooks/web/useMessage';
 import { h } from 'vue';
 import { getMemberRankList } from '../../../api/member/memberRank';
 import { updateMember } from '../../../api/member/member';
@@ -35,16 +34,11 @@ export const columns: BasicColumn[] = [
         unCheckedChildren: t('common.off'),
         loading: record.pendingStatus,
         onChange(checked: boolean) {
-          const { createMessage } = useMessage();
           record.pendingStatus = true;
           const newStatus = checked ? 1 : 0;
           updateMember({ id: record.id, status: newStatus })
-            .then((data) => {
+            .then(() => {
               record.status = newStatus;
-              if (data.code == 0) createMessage.success(t('common.changeStatusSuccess'));
-            })
-            .catch(() => {
-              createMessage.error(t('common.changeStatusFailed'));
             })
             .finally(() => {
               record.pendingStatus = false;
