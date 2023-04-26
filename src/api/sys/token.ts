@@ -80,4 +80,8 @@ export const getTokenById = (params: BaseUUIDReq, mode: ErrorMessageMode = 'noti
   );
 };
 
-export const logout = (uuid: string) => defHttp.post({ url: Api.Logout, params: { UUID: uuid } });
+/**
+ *  @description: Force user log out
+ */
+
+export const logout = (id: string) => defHttp.post({ url: Api.Logout, params: { id: id } });

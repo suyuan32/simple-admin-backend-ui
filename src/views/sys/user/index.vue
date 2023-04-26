@@ -180,7 +180,7 @@
       }
 
       async function handleLogout(record: Recordable) {
-        const result = await logout(record.UUID);
+        const result = await logout(record.id);
 
         if (result.code === 0) await reload();
       }
