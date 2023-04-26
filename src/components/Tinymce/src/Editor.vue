@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-  import type { Editor, RawEditorSettings } from 'tinymce';
+  import type { Editor, RawEditorOptions } from 'tinymce';
   import tinymce from 'tinymce/tinymce';
   import 'tinymce/themes/silver';
   import 'tinymce/icons/default/icons';
@@ -75,7 +75,7 @@
 
   const tinymceProps = {
     options: {
-      type: Object as PropType<Partial<RawEditorSettings>>,
+      type: Object as PropType<Partial<RawEditorOptions>>,
       default: () => ({}),
     },
     value: {
@@ -144,7 +144,7 @@
         return ['zh_CN', 'en'].includes(lang) ? lang : 'zh_CN';
       });
 
-      const initOptions = computed((): RawEditorSettings => {
+      const initOptions = computed((): RawEditorOptions => {
         const { height, options, toolbar, plugins } = props;
         const publicPath = import.meta.env.VITE_PUBLIC_PATH || '/';
         return {
@@ -177,7 +177,7 @@
         const getdDisabled = options && Reflect.get(options, 'readonly');
         const editor = unref(editorRef);
         if (editor) {
-          editor.setMode(getdDisabled ? 'readonly' : 'design');
+          editor.mode.set(getdDisabled ? 'readonly' : 'design');
         }
         return getdDisabled ?? false;
       });
@@ -189,7 +189,7 @@
           if (!editor) {
             return;
           }
-          editor.setMode(attrs.disabled ? 'readonly' : 'design');
+          editor.mode.set(attrs.disabled ? 'readonly' : 'design');
         },
       );
 
