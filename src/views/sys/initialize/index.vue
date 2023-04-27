@@ -34,6 +34,9 @@
         </ACard>
       </ACol>
     </ARow>
+    <ARow>
+      <ATinymce v-model="value" @change="handleChange" width="100%" />
+    </ARow>
   </PageWrapper>
 </template>
 <script lang="ts" setup>
@@ -45,15 +48,23 @@
   import { initializeJobDatabase, initialzeCoreDatabase } from '/@/api/sys/initialize';
   import { initializeFileDatabase } from '/@/api/file/initialize';
   import { initializeMMSDatabase } from '/@/api/member/initialize';
+  import { Tinymce } from '/@/components/Tinymce/index';
 
   const { t } = useI18n();
   const ACard = Card;
   const ACol = Col;
   const ARow = Row;
+  const ATinymce = Tinymce;
   const coreInitButtonLoading = ref<boolean>(false);
   const fileInitButtonLoading = ref<boolean>(false);
   const mmsInitButtonLoading = ref<boolean>(false);
   const jobInitButtonLoading = ref<boolean>(false);
+
+  const value = ref('hello world!');
+
+  function handleChange(value: string) {
+    console.log(value);
+  }
 
   async function initCoreDatabase() {
     coreInitButtonLoading.value = true;

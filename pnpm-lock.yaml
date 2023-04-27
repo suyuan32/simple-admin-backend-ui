@@ -24,6 +24,9 @@ dependencies:
   '@logicflow/extension':
     specifier: ^1.2.3
     version: 1.2.3
+  '@tinymce/tinymce-vue':
+    specifier: ^5.1.0
+    version: 5.1.0(vue@3.2.47)
   '@vue/runtime-core':
     specifier: ^3.2.47
     version: 3.2.47
@@ -103,8 +106,8 @@ dependencies:
     specifier: ^1.15.0
     version: 1.15.0
   tinymce:
-    specifier: ^6.4.1
-    version: 6.4.1
+    specifier: ^6.4.2
+    version: 6.4.2
   vditor:
     specifier: ^3.9.2
     version: 3.9.2
@@ -2801,6 +2804,15 @@ packages:
       magic-string: 0.25.9
       string.prototype.matchall: 4.0.8
     dev: true
+
+  /@tinymce/tinymce-vue@5.1.0(vue@3.2.47):
+    resolution: {integrity: sha512-Z4R8zaOKrAXBhHWsq+qUlwHY+rvze2RgxHDrZ5+qTYkGvRofW5880HLG9gvv6TRPVsNSQBNMdsaOjJ/eueccgA==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      tinymce: 6.4.2
+      vue: 3.2.47
+    dev: false
 
   /@trysound/sax@0.2.0:
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
@@ -10741,8 +10753,8 @@ packages:
     resolution: {integrity: sha512-XPaBkWQJdsf3pLKJV9p4qN/S+fm2Oj8AIPo1BTUhg5oxkvm9+SVEGFdhyOz7tTdUTfvxMiAs4sp6/eZO2Ew+pw==}
     dev: true
 
-  /tinymce@6.4.1:
-    resolution: {integrity: sha512-+/cS2AM9l6p72IBs2uolHbGsBUztLs0WslqNgFaTXtmMksTNUOhh8p08xtA/fa03UGlWEC6/EJoeV95/QDXa2A==}
+  /tinymce@6.4.2:
+    resolution: {integrity: sha512-te+4c8PoAwTKPMBQtMQehnSZlOO9Ay5tDgaRFJKBehYb6SlX2PYZ0v3oe/cmiv5EfqdwZLkEMXk2MNOeApZZLg==}
     dev: false
 
   /tmp@0.0.33:
