@@ -59,6 +59,7 @@
   import { useDesign } from '/@/hooks/web/useDesign';
   import { List, Avatar, Tag, Typography } from 'ant-design-vue';
   import { isNumber } from '/@/utils/is';
+
   export default defineComponent({
     components: {
       [Avatar.name]: Avatar,
@@ -112,7 +113,7 @@
       const isTitleClickable = computed(() => !!props.onTitleClick);
       const getPagination = computed(() => {
         const { list, pageSize } = props;
-        if (pageSize > 0 && list && list.length > pageSize) {
+        if ((pageSize as number) > 0 && list && list.length > (pageSize as number)) {
           return {
             total: list.length,
             pageSize,
