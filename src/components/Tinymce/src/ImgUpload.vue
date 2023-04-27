@@ -8,7 +8,13 @@
       :showUploadList="false"
       accept=".jpg,.jpeg,.gif,.png,.webp"
     >
-      <a-button type="primary" v-bind="{ ...getButtonProps }">
+      <a-button
+        type="primary"
+        shape="round"
+        preIcon="material-symbols:image-sharp"
+        iconSize="14"
+        v-bind="{ ...getButtonProps }"
+      >
         {{ t('component.upload.imgUpload') }}
       </a-button>
     </Upload>

@@ -113,7 +113,7 @@
   import { Tooltip, Popover, Checkbox, Divider } from 'ant-design-vue';
   import type { CheckboxChangeEvent } from 'ant-design-vue/lib/checkbox/interface';
   import { SettingOutlined, DragOutlined } from '@ant-design/icons-vue';
-  import { Icon } from '/@/components/Icon';
+  import Icon from '@/components/Icon/Icon.vue';
   import { ScrollContainer } from '/@/components/Container';
   import { useI18n } from '/@/hooks/web/useI18n';
   import { useTableContext } from '../../hooks/useTableContext';
@@ -414,8 +414,8 @@
 
   .@{prefix-cls} {
     &__popover-title {
-      position: relative;
       display: flex;
+      position: relative;
       align-items: center;
       justify-content: space-between;
     }

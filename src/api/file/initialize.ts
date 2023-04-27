@@ -2,7 +2,7 @@ import { defHttp } from '/@/utils/http/axios';
 import { BaseResp } from '/@/api/model/baseModel';
 
 enum Api {
-  InitializeDatabase = '/file-manager/init/database',
+  InitializeDatabase = '/fms-api/init/database',
 }
 
 /**

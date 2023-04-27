@@ -6,11 +6,11 @@ import { FileListResp, updateFileInfoReq } from './model/fileModel';
 import { AxiosProgressEvent } from 'axios';
 
 enum Api {
-  uploadFile = '/file-manager/upload',
-  GetFileList = '/file-manager/file/list',
-  UpdateFileInfo = '/file-manager/file',
-  SetFileStatus = '/file-manager/file/status',
-  DownloadFile = '/file-manager/file/download',
+  uploadFile = '/fms-api/upload',
+  GetFileList = '/fms-api/file/list',
+  UpdateFileInfo = '/fms-api/file',
+  SetFileStatus = '/fms-api/file/status',
+  DownloadFile = '/fms-api/file/download',
 }
 
 /**
