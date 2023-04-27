@@ -12,7 +12,7 @@
   import { Card, CardGrid } from 'ant-design-vue';
   import { defineComponent } from 'vue';
   import { navItems } from './data';
-  import { Icon } from '/@/components/Icon';
+  import Icon from '@/components/Icon/Icon.vue';
   import { useGo } from '/@/hooks/web/usePage';
   import { useI18n } from '/@/hooks/web/useI18n';
 

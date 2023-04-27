@@ -7,7 +7,7 @@
 </template>
 <script lang="ts" setup>
   import { computed, unref } from 'vue';
-  import { SvgIcon } from '/@/components/Icon';
+  import { SvgIcon } from '@/components/Icon/Icon.vue';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useRootSetting } from '/@/hooks/setting/useRootSetting';
   import { updateHeaderBgColor, updateSidebarBgColor } from '/@/logics/theme/updateBackground';
@@ -44,26 +44,26 @@
   }
 
   .@{prefix-cls} {
-    position: relative;
     display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
     width: 50px;
     height: 26px;
-    padding: 0 6px;
     margin-left: auto;
-    cursor: pointer;
-    background-color: #151515;
+    padding: 0 6px;
     border-radius: 30px;
-    justify-content: space-between;
-    align-items: center;
+    background-color: #151515;
+    cursor: pointer;
 
     &-inner {
       position: absolute;
       z-index: 1;
       width: 18px;
       height: 18px;
-      background-color: #fff;
-      border-radius: 50%;
       transition: transform 0.5s, background-color 0.5s;
+      border-radius: 50%;
+      background-color: #fff;
       will-change: transform;
     }
 

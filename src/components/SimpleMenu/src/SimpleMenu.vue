@@ -2,6 +2,7 @@
   <Menu
     v-bind="getBindValues"
     :activeName="activeName"
+    :openNames="getOpenKeys"
     :class="prefixCls"
     :activeSubMenuNames="activeSubMenuNames"
     @select="handleSelect"
@@ -20,7 +21,7 @@
   import type { MenuState } from './types';
   import type { Menu as MenuType } from '/@/router/types';
   import type { RouteLocationNormalizedLoaded } from 'vue-router';
-  import { defineComponent, computed, ref, unref, reactive, toRefs, watch, Ref } from 'vue';
+  import { defineComponent, computed, ref, unref, reactive, toRefs, watch, PropType } from 'vue';
   import { useDesign } from '/@/hooks/web/useDesign';
   import Menu from './components/Menu.vue';
   import SimpleSubMenu from './SimpleSubMenu.vue';
@@ -32,6 +33,7 @@
   import { openWindow } from '/@/utils';
 
   import { useOpenKeys } from './useOpenKeys';
+
   export default defineComponent({
     name: 'SimpleMenu',
     components: {
@@ -73,8 +75,8 @@
         menuState,
         items,
         accordion,
-        mixSider as Ref<boolean>,
-        collapse as Ref<boolean>,
+        mixSider as any,
+        collapse as any,
       );
 
       const getBindValues = computed(() => ({ ...attrs, ...props }));
@@ -155,5 +157,5 @@
   });
 </script>
 <style lang="less">
-  @import './index.less';
+  @import url('./index.less');
 </style>
