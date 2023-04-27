@@ -104,3 +104,4 @@ dist
 
 # vscode private configuration file
 .vscode/redis.json
+vite.config.ts
