@@ -7,7 +7,7 @@
 </template>
 <script lang="ts" setup>
   import { computed, unref } from 'vue';
-  import { SvgIcon } from '@/components/Icon/Icon.vue';
+  import SvgIcon from '@/components/Icon/Icon.vue';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useRootSetting } from '/@/hooks/setting/useRootSetting';
   import { updateHeaderBgColor, updateSidebarBgColor } from '/@/logics/theme/updateBackground';
