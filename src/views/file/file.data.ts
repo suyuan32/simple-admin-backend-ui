@@ -42,7 +42,7 @@ export const columns: BasicColumn[] = [
         checkedChildren: t('fileManager.public'),
         unCheckedChildren: t('fileManager.private'),
         loading: record.pendingStatus,
-        onChange(checked: boolean) {
+        onChange(checked, _) {
           record.pendingStatus = true;
           const newStatus = checked ? 1 : 0;
           setFileStatus(record.id, newStatus)

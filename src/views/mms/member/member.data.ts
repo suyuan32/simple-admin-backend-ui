@@ -32,7 +32,7 @@ export const columns: BasicColumn[] = [
         checkedChildren: t('common.on'),
         unCheckedChildren: t('common.off'),
         loading: record.pendingStatus,
-        onChange(checked: boolean) {
+        onChange(checked, _) {
           record.pendingStatus = true;
           const newStatus = checked ? 1 : 0;
           updateMember({ id: record.id, status: newStatus })
