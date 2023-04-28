@@ -17,6 +17,7 @@
   import { get } from 'lodash-es';
   import { propTypes } from '/@/utils/propTypes';
   import { LoadingOutlined } from '@ant-design/icons-vue';
+  import type { DataNode } from 'ant-design-vue/lib/vc-tree/interface';
 
   export default defineComponent({
     name: 'ApiTree',
@@ -30,7 +31,7 @@
     },
     emits: ['options-change', 'change'],
     setup(props, { attrs, emit }) {
-      const treeData = ref<Recordable<any>[]>([]);
+      const treeData = ref<DataNode[]>([]);
       const isFirstLoaded = ref<Boolean>(false);
       const loading = ref(false);
       const getAttrs = computed(() => {
@@ -82,7 +83,7 @@
         if (!isArray(result)) {
           result = get(result, props.resultField);
         }
-        treeData.value = (result as Recordable<any>[]) || [];
+        treeData.value = (result as DataNode[]) || [];
         isFirstLoaded.value = true;
         emit('options-change', treeData.value);
       }
