@@ -90,6 +90,7 @@ export type ComponentType =
   | 'InputCountDown'
   | 'Select'
   | 'ApiSelect'
+  | 'ApiMultipleSelect'
   | 'TreeSelect'
   | 'ApiTree'
   | 'ApiTreeSelect'

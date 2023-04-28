@@ -10,26 +10,32 @@
 </template>
 
 <script lang="ts">
-  import { type Recordable } from '@vben/types';
-  import { type PropType, computed, defineComponent, watch, ref, onMounted, unref } from 'vue';
+  import { computed, defineComponent, watch, ref, onMounted, unref } from 'vue';
   import { TreeSelect } from 'ant-design-vue';
   import { isArray, isFunction } from '/@/utils/is';
   import { get } from 'lodash-es';
   import { propTypes } from '/@/utils/propTypes';
   import { LoadingOutlined } from '@ant-design/icons-vue';
+  import { buildTreeNode } from '/@/utils/tree';
 
   export default defineComponent({
     name: 'ApiTreeSelect',
     components: { ATreeSelect: TreeSelect, LoadingOutlined },
     props: {
-      api: { type: Function as PropType<(arg?: Recordable<any>) => Promise<Recordable<any>>> },
+      api: { type: Function as PropType<(arg?: Recordable) => Promise<Recordable>> },
       params: { type: Object },
       immediate: { type: Boolean, default: true },
       resultField: propTypes.string.def(''),
+      labelField: propTypes.string.def(''),
+      valueField: propTypes.string.def(''),
+      idKeyField: propTypes.string.def('id'),
+      parentKeyField: propTypes.string.def('parentId'),
+      childrenKeyField: propTypes.string.def('children'),
+      defaultValue: { type: Object },
     },
     emits: ['options-change', 'change'],
     setup(props, { attrs, emit }) {
-      const treeData = ref<Recordable<any>[]>([]);
+      const treeData = ref<Recordable[]>([]);
       const isFirstLoaded = ref<Boolean>(false);
       const loading = ref(false);
       const getAttrs = computed(() => {
@@ -78,7 +84,14 @@
         if (!isArray(result)) {
           result = get(result, props.resultField);
         }
-        treeData.value = (result as Recordable<any>[]) || [];
+        treeData.value = buildTreeNode(result, {
+          idKeyField: props.idKeyField,
+          parentKeyField: props.parentKeyField,
+          childrenKeyField: props.childrenKeyField,
+          valueField: props.valueField,
+          labelField: props.labelField,
+          defaultValue: props.defaultValue,
+        });
         isFirstLoaded.value = true;
         emit('options-change', treeData.value);
       }

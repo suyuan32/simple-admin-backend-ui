@@ -4,6 +4,7 @@
     v-bind="$attrs"
     @change="handleChange"
     :options="getOptions"
+    mode="multiple"
     v-model:value="state"
   >
     <template #[item]="data" v-for="item in Object.keys($slots)">
@@ -34,7 +35,7 @@
   type OptionsItem = { label: string; value: string; disabled?: boolean };
 
   export default defineComponent({
-    name: 'ApiSelect',
+    name: 'ApiMultipleSelect',
     components: {
       Select,
       LoadingOutlined,
@@ -69,7 +70,7 @@
       const { t } = useI18n();
 
       // Embedded in the form, just use the hook binding to perform form verification
-      const [state] = useRuleFormItem(props, 'value', 'change', emitData);
+      const [state] = useRuleFormItem(props, 'value', 'change', emitData) as number[] | string[];
 
       const getOptions = computed(() => {
         const { labelField, valueField, numberToString } = props;
@@ -92,7 +93,7 @@
       });
 
       watch(
-        () => state.value,
+        () => state.toString,
         (v) => {
           emit('update:value', v);
         },
