@@ -254,6 +254,7 @@
     &-toolbar {
       display: flex;
       justify-content: space-between;
+      /* stylelint-disable-next-line order/properties-order */
       align-items: center;
       margin-top: 10px;
     }
@@ -275,9 +276,12 @@
     &-group {
       display: flex;
       padding-top: 8px;
+      /* stylelint-disable-next-line order/properties-order */
       margin-top: 8px;
       border-top: 1px solid @border-color-base;
+      /* stylelint-disable-next-line order/properties-order */
       justify-content: space-around;
+      /* stylelint-disable-next-line order/properties-order */
       align-items: center;
     }
   }

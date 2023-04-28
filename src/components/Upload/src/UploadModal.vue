@@ -196,6 +196,7 @@
           item.status = UploadResultStatus.UPLOADING;
           const params = props.uploadParams;
           params['md5'] = item.md5;
+          // eslint-disable-next-line no-unsafe-optional-chaining
           const { data } = await props.api?.(
             {
               data: {
@@ -342,9 +343,9 @@
       margin-bottom: 8px;
 
       &__btn {
+        flex: 1;
         margin-left: 8px;
         text-align: right;
-        flex: 1;
       }
     }
   }
