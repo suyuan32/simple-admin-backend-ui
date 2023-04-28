@@ -48,6 +48,7 @@
   .@{prefix-cls} {
     display: flex;
     justify-content: space-between;
+    /* stylelint-disable-next-line order/properties-order */
     align-items: center;
   }
 </style>

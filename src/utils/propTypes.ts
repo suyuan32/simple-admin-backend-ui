@@ -33,6 +33,9 @@
 // ]);
 
 import { createTypes } from 'vue-types';
+import { VNodeChild } from 'vue';
+
+export type VueNode = VNodeChild | JSX.Element;
 
 const propTypes = createTypes({
   func: undefined,

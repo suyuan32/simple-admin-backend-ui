@@ -1,4 +1,4 @@
-import { UploadApiResult } from '/@/api/sys/model/uploadModel';
+import { UploadApiResp } from '/@/api/sys/model/uploadModel';
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode, UploadFileParams } from '/#/axios';
 import { BaseDataResp, BaseIDReq, BaseListReq, BaseResp } from '../model/baseModel';
@@ -20,7 +20,7 @@ export function uploadApi(
   params: UploadFileParams,
   onUploadProgress: (progressEvent: AxiosProgressEvent) => void,
 ) {
-  return defHttp.uploadFile<BaseDataResp<UploadApiResult>>(
+  return defHttp.uploadFile<BaseDataResp<UploadApiResp>>(
     {
       url: Api.uploadFile,
       onUploadProgress,
