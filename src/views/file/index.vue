@@ -141,6 +141,7 @@
       async function handleDownload(record: Recordable) {
         let file = await downloadFile(record.id, 'none');
         let fileType = file.type.split('/')[0];
+        currentFileName.value = record.name + '.' + record.path.split('.')[1];
         if (fileType === 'image') {
           imageVisible.value = true;
           imagePath.value = URL.createObjectURL(file);
@@ -149,7 +150,6 @@
           videoPath.value = URL.createObjectURL(file);
           videoTitle.value = record.name;
         } else {
-          currentFileName.value = record.name + '.' + record.path.split('.')[1];
           const link = document.createElement('a');
           link.href = URL.createObjectURL(file);
           link.download = currentFileName.value;
