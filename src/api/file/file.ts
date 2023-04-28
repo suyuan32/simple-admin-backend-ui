@@ -69,8 +69,14 @@ export const deleteFile = (params: BaseIDReq, mode: ErrorMessageMode = 'modal') 
  *  author: Ryan Su
  *  @description: set file's status
  */
-export const setFileStatus = (id: number, status: number) =>
-  defHttp.post({ url: Api.SetFileStatus, params: { id, status } });
+export const setFileStatus = (id: number, status: number, mode: ErrorMessageMode = 'notice') =>
+  defHttp.post(
+    { url: Api.SetFileStatus, params: { id, status } },
+    {
+      errorMessageMode: mode,
+      successMessageMode: mode,
+    },
+  );
 
 /**
  *  author: Ryan Su
