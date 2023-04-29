@@ -10,6 +10,7 @@ export class AxiosRetry {
   retry(axiosInstance: AxiosInstance, error: AxiosError) {
     // @ts-ignore
     const { config } = error.response;
+    // eslint-disable-next-line no-unsafe-optional-chaining
     const { waitTime, count } = config?.requestOptions?.retryRequest;
     config.__retryCount = config.__retryCount || 0;
     if (config.__retryCount >= count) {

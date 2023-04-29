@@ -169,7 +169,7 @@ export function useContentHeight(
       calcContentHeight();
     });
   });
-  useWindowSizeFn(
+  useWindowSizeFn<void>(
     () => {
       calcContentHeight();
     },
