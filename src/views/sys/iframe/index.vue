@@ -26,11 +26,11 @@
   const loading = ref(true);
   const topRef = ref(50);
   const heightRef = ref(window.innerHeight);
-  const frameRef = ref<HTMLFrameElement>();
+  const frameRef = ref<HTMLIFrameElement>();
   const { headerHeightRef } = useLayoutHeight();
 
   const { prefixCls } = useDesign('iframe-page');
-  useWindowSizeFn(calcHeight, 150, { immediate: true });
+  useWindowSizeFn<void>(calcHeight, 150, { immediate: true });
 
   const getWrapStyle = computed((): CSSProperties => {
     return {
@@ -79,12 +79,12 @@
     }
 
     &__main {
+      box-sizing: border-box;
       width: 100%;
       height: 100%;
       overflow: hidden;
-      background-color: @component-background;
       border: 0;
-      box-sizing: border-box;
+      background-color: @component-background;
     }
   }
 </style>
