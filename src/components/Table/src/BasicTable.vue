@@ -73,6 +73,9 @@
   import { basicProps } from './props';
   import { isFunction } from '/@/utils/is';
   import { warn } from '/@/utils/log';
+  import { TablePaginationConfig } from 'ant-design-vue/es/table/interface';
+  import { FilterValue, SorterResult } from 'ant-design-vue/lib/table/interface';
+  import { DefaultRecordType } from 'ant-design-vue/lib/vc-table/interface';
 
   export default defineComponent({
     name: 'BasicTable',
@@ -172,12 +175,18 @@
         emit,
       );
 
-      function handleTableChange(...args) {
-        onTableChange.call(undefined, ...args);
-        emit('change', ...args);
+      function handleTableChange(
+        pagination: TablePaginationConfig,
+        filters: Record<string, FilterValue | null>,
+        sorter: SorterResult<DefaultRecordType> | SorterResult<DefaultRecordType>[],
+      ) {
+        onTableChange.call(undefined, pagination, filters, sorter);
+        emit('change', [pagination, filters, sorter]);
         // 解决通过useTable注册onChange时不起作用的问题
         const { onChange } = unref(getProps);
-        onChange && isFunction(onChange) && onChange.call(undefined, ...args);
+        onChange &&
+          isFunction(onChange) &&
+          onChange.call(undefined, pagination, filters, sorter, undefined);
       }
 
       const {
@@ -379,10 +388,10 @@
 
       .ant-form {
         width: 100%;
-        padding: 12px 10px 6px;
         margin-bottom: 16px;
-        background-color: @component-background;
+        padding: 12px 10px 6px;
         border-radius: 2px;
+        background-color: @component-background;
       }
     }
 
@@ -392,8 +401,8 @@
 
     .ant-table-wrapper {
       padding: 6px;
-      background-color: @component-background;
       border-radius: 2px;
+      background-color: @component-background;
 
       .ant-table-title {
         min-height: 40px;
@@ -411,10 +420,10 @@
 
       &-title {
         display: flex;
+        align-items: center;
+        justify-content: space-between;
         padding: 8px 6px;
         border-bottom: none;
-        justify-content: space-between;
-        align-items: center;
       }
 
       //.ant-table-tbody > tr.ant-table-row-selected td {
