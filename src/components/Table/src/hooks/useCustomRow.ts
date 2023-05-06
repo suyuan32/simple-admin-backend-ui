@@ -50,7 +50,7 @@ export function useCustomRow(
             // 找到tr
             const tr: HTMLElement = (e as MouseEvent)
               .composedPath?.()
-              .find((dom: HTMLElement) => dom.tagName === 'TR') as HTMLElement;
+              .find((dom: EventTarget) => (dom as HTMLElement).tagName === 'TR') as HTMLElement;
             if (!tr) return;
             // 找到Checkbox，检查是否为disabled
             const checkBox = tr.querySelector('input[type=checkbox]');
