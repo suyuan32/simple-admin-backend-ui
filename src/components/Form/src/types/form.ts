@@ -1,10 +1,11 @@
-import type { NamePath, RuleObject } from 'ant-design-vue/lib/form/interface';
+import type { FormLabelAlign, NamePath, RuleObject } from 'ant-design-vue/lib/form/interface';
 import type { VNode, CSSProperties } from 'vue';
 import type { ButtonProps as AntdButtonProps } from '/@/components/Button';
 import type { FormItem } from './formItem';
 import type { ColEx, ComponentType } from './index';
 import type { TableActionType } from '/@/components/Table/src/types/table';
 import type { RowProps } from 'ant-design-vue/lib/grid/Row';
+import { FormLayout } from 'ant-design-vue/lib/form/Form';
 
 export type FieldMapToTime = [string, [string, string], (string | [string, string])?][];
 
@@ -49,13 +50,13 @@ export type UseFormReturnType = [RegisterFn, FormActionType];
 
 export interface FormProps {
   name?: string;
-  layout?: 'vertical' | 'inline' | 'horizontal';
+  layout?: FormLayout;
   // Form value
   model?: Recordable;
   // The width of all items in the entire form
   labelWidth?: number | string;
   // alignment
-  labelAlign?: 'left' | 'right';
+  labelAlign?: FormLabelAlign;
   // Row configuration for the entire form
   rowProps?: RowProps;
   // Submit form on reset

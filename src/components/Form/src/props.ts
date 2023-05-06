@@ -5,6 +5,8 @@ import type { TableActionType } from '/@/components/Table';
 import type { ButtonProps } from 'ant-design-vue/es/button/buttonTypes';
 import type { RowProps } from 'ant-design-vue/lib/grid/Row';
 import { propTypes } from '/@/utils/propTypes';
+import { FormLayout } from 'ant-design-vue/lib/form/Form';
+import { FormLabelAlign } from 'ant-design-vue/lib/form/interface';
 
 export const basicProps = {
   model: {
@@ -88,7 +90,8 @@ export const basicProps = {
 
   labelCol: Object as PropType<Partial<ColEx>>,
 
-  layout: propTypes.oneOf(['horizontal', 'vertical', 'inline']).def('horizontal'),
+  layout: propTypes.oneOfType<FormLayout>([String]).def('horizontal'),
+
   tableAction: {
     type: Object as PropType<TableActionType>,
   },
@@ -97,7 +100,7 @@ export const basicProps = {
 
   colon: propTypes.bool,
 
-  labelAlign: propTypes.string,
+  labelAlign: propTypes.oneOfType<FormLabelAlign>([String]).def('left'),
 
   rowProps: Object as PropType<RowProps>,
 };
