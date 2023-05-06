@@ -49,7 +49,7 @@ export type RegisterFn = (formInstance: FormActionType) => void;
 export type UseFormReturnType = [RegisterFn, FormActionType];
 
 export interface FormProps {
-  name?: string;
+  name?: StringConstructor;
   layout?: FormLayout;
   // Form value
   model?: Recordable;
