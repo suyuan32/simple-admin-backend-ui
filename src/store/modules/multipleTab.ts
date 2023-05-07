@@ -14,6 +14,7 @@ import { MULTIPLE_TABS_KEY } from '/@/enums/cacheEnum';
 
 import projectSetting from '/@/settings/projectSetting';
 import { useUserStore } from '/@/store/modules/user';
+import { Key } from 'ant-design-vue/es/_util/type';
 
 export interface MultipleTabState {
   cacheTabList: Set<string>;
@@ -217,7 +218,7 @@ export const useMultipleTabStore = defineStore({
     },
 
     // Close according to key
-    async closeTabByKey(key: string, router: Router) {
+    async closeTabByKey(key: Key, router: Router) {
       const index = this.tabList.findIndex((item) => (item.fullPath || item.path) === key);
       if (index !== -1) {
         await this.closeTab(this.tabList[index], router);

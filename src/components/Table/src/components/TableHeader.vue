@@ -68,8 +68,8 @@
 
   .@{prefix-cls} {
     &__toolbar {
-      flex: 1;
       display: flex;
+      flex: 1;
       align-items: center;
       justify-content: flex-end;
 

@@ -39,13 +39,15 @@ export const useRedo = (_router?: Router) => {
         resolve(false);
         return;
       }
-      if (name && Object.keys(params).length > 0) {
-        params['_redirect_type'] = 'name';
+
+      if (name && Object.keys(query).length > 0) {
+        query['_redirect_type'] = 'name';
         params['path'] = String(name);
       } else {
-        params['_redirect_type'] = 'path';
+        query['_redirect_type'] = 'path';
         params['path'] = fullPath;
       }
+
       replace({ name: REDIRECT_NAME, params, query }).then(() => resolve(true));
     });
   }
