@@ -90,6 +90,34 @@
 <style lang="less">
   @prefix-cls: ~'@{namespace}-collapse-container';
 
+  [data-theme='dark'] {
+    .@{prefix-cls} {
+      transition: all 0.3s ease-in-out;
+      border-radius: 2px;
+      background-color: #262626;
+
+      &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 32px;
+        border-bottom: 1px solid @border-color-light;
+      }
+
+      &__footer {
+        border-top: 1px solid @border-color-light;
+      }
+
+      &__action {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: flex-end;
+        text-align: right;
+      }
+    }
+  }
+
   .@{prefix-cls} {
     transition: all 0.3s ease-in-out;
     border-radius: 2px;
