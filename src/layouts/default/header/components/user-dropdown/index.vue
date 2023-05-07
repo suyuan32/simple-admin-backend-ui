@@ -12,6 +12,11 @@
     <template #overlay>
       <Menu @click="handleMenuClick">
         <MenuItem
+          key="profile"
+          :text="t('layout.header.profile')"
+          icon="ion:document-text-outline"
+        />
+        <MenuItem
           key="doc"
           :text="t('layout.header.dropdownItemDoc')"
           icon="ion:document-text-outline"
@@ -54,8 +59,9 @@
   import { openWindow } from '/@/utils';
 
   import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent';
+  import { useGo } from '/@/hooks/web/usePage';
 
-  type MenuEvent = 'logout' | 'doc' | 'lock';
+  type MenuEvent = 'logout' | 'doc' | 'lock' | 'profile';
 
   export default defineComponent({
     name: 'UserDropdown',
@@ -74,6 +80,7 @@
       const { t } = useI18n();
       const { getShowDoc, getUseLockPage } = useHeaderSetting();
       const userStore = useUserStore();
+      const go = useGo();
 
       const getUserInfo = computed(() => {
         const { nickname = '', avatar, desc } = userStore.getUserInfo || {};
@@ -96,6 +103,11 @@
         openWindow(DOC_URL);
       }
 
+      // open modal for change self information
+      function handleProfile() {
+        go('/profile');
+      }
+
       function handleMenuClick(e: MenuInfo) {
         switch (e.key as MenuEvent) {
           case 'logout':
@@ -106,6 +118,9 @@
             break;
           case 'lock':
             handleLock();
+            break;
+          case 'profile':
+            handleProfile();
             break;
         }
       }
