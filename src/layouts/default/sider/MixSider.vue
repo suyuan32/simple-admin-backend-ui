@@ -451,10 +451,13 @@
     &-module {
       position: relative;
       padding-top: 1px;
+      padding-inline-start: 0;
 
       &__item {
         position: relative;
+        width: 100%;
         padding: 12px 0;
+        list-style-type: none;
         transition: all 0.3s ease;
         color: rgb(255 255 255 / 65%);
         text-align: center;
