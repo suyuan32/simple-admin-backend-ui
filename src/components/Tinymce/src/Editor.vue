@@ -143,7 +143,7 @@
         const publicPath = import.meta.env.VITE_PUBLIC_PATH || '/';
         return {
           selector: `#${unref(tinymceId)}`,
-          height,
+          height: height,
           toolbar,
           menubar: 'file edit insert view format table',
           plugins,
@@ -256,14 +256,14 @@
         const normalizedEvents = Array.isArray(modelEvents) ? modelEvents.join(' ') : modelEvents;
 
         watch(
-          () => props.modelValue,
+          () => props.modelValue as string,
           (val: string, prevVal: string) => {
             setValue(editor, val, prevVal);
           },
         );
 
         watch(
-          () => props.value,
+          () => props.value as string,
           (val: string, prevVal: string) => {
             setValue(editor, val, prevVal);
           },
@@ -334,8 +334,8 @@
     line-height: normal;
 
     textarea {
-      z-index: -1;
       visibility: hidden;
+      z-index: -1;
     }
   }
 </style>
