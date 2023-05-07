@@ -76,11 +76,11 @@
       width: 100%;
       padding: 0 12px 0 20px;
       border-top: 1px solid gray;
-      background-color: #262626;
+      background-color: #1f1f1f;
       text-align: right;
 
       > * {
-        margin-right: 8px;
+        margin-right: 20px;
       }
     }
   }

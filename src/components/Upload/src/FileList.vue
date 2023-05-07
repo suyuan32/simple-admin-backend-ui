@@ -70,6 +70,12 @@
   });
 </script>
 <style lang="less">
+  [data-theme='dark'] {
+    .file-table > thead {
+      background-color: #262626;
+    }
+  }
+
   .file-table {
     width: 100%;
     border-collapse: collapse;

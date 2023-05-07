@@ -170,6 +170,29 @@
   });
 </script>
 <style scoped lang="less">
+  [data-theme='dark'] {
+    .virtual-scroll {
+      display: block;
+      position: relative;
+      flex: 1 1 auto;
+      width: 100%;
+      max-width: 100%;
+      overflow: auto;
+      background-color: #262626;
+      color: #fff;
+
+      &__container {
+        display: block;
+      }
+
+      &__item {
+        position: absolute;
+        right: 0;
+        left: 0;
+      }
+    }
+  }
+
   .virtual-scroll {
     display: block;
     position: relative;
@@ -177,6 +200,7 @@
     width: 100%;
     max-width: 100%;
     overflow: auto;
+    color: @text-color;
 
     &__container {
       display: block;
