@@ -376,7 +376,7 @@
           margin-bottom: 16px;
           padding: 12px 10px 6px;
           border-radius: 2px;
-          background-color: #262626;
+          background-color: #141414;
         }
       }
 
@@ -388,7 +388,7 @@
         height: 100%;
         padding: 6px;
         border-radius: 2px;
-        background-color: #262626;
+        background-color: #141414;
       }
     }
   }

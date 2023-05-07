@@ -33,6 +33,8 @@
   import { CreateContextOptions } from '/@/components/ContextMenu';
   import { treeEmits, treeProps } from './types/tree';
   import { createBEM } from '/@/utils/bem';
+  import { useAppStore } from '/@/store/modules/app';
+  import { ThemeEnum } from '/@/enums/appEnum';
 
   export default defineComponent({
     name: 'BasicTree',
@@ -415,6 +417,27 @@
 
       expose(instance);
 
+      const bgColor = ref<string>();
+
+      const appStore = useAppStore();
+
+      const changePrefix = function (value: string) {
+        if (value === ThemeEnum.DARK) {
+          bgColor.value = unref(props.treeWrapperClassName) + ' bg-dark-800 ';
+        } else {
+          bgColor.value = unref(props.treeWrapperClassName) + ' bg-white ';
+        }
+      };
+
+      changePrefix(appStore.getDarkMode);
+
+      watch(
+        () => appStore.getDarkMode,
+        (value, _oldValue) => {
+          changePrefix(value);
+        },
+      );
+
       return () => {
         const { title, helpMessage, toolbar, search, checkable } = props;
         const showTitle = title || toolbar || search || slots.headerTitle;
@@ -441,11 +464,7 @@
                 {extendSlots(slots)}
               </TreeHeader>
             )}
-            <Spin
-              wrapperClassName={unref(props.treeWrapperClassName)}
-              spinning={unref(props.loading)}
-              tip="加载中..."
-            >
+            <Spin wrapperClassName={unref(bgColor)} spinning={unref(props.loading)} tip="加载中...">
               <ScrollContainer style={scrollStyle} v-show={!unref(getNotFound)}>
                 <Tree {...unref(getBindValues)} showIcon={false} treeData={treeData.value} />
               </ScrollContainer>
