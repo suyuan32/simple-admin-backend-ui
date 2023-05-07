@@ -43,8 +43,8 @@
       const getBindValue = computed(() => {
         return props.def ? { checked: props.def } : {};
       });
-      function handleChange(checked: boolean | number | string, e: Event) {
-        props.event && baseHandler(props.event, e);
+      function handleChange(checked: boolean | number | string, _e: Event) {
+        props.event && baseHandler(props.event, checked);
       }
       return {
         prefixCls,
@@ -55,6 +55,7 @@
     },
   });
 </script>
+
 <style lang="less" scoped>
   @prefix-cls: ~'@{namespace}-setting-switch-item';
 
