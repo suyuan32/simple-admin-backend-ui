@@ -160,7 +160,7 @@
         username: data.account,
         captcha: data.captcha,
         captchaId: data.captchaId,
-        mode: 'message',
+        mode: 'none',
         goHome: false,
       })
       .then(() => {
