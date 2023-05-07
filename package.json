@@ -102,6 +102,7 @@
     "tinymce": "^6.4.2",
     "vditor": "^3.9.2",
     "vue": "^3.2.47",
+    "vue-codemirror6": "^1.1.20",
     "vue-i18n": "^9.2.2",
     "vue-json-pretty": "^2.2.4",
     "vue-router": "^4.1.6",

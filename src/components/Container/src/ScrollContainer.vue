@@ -86,7 +86,6 @@
       .scrollbar__wrap {
         margin-bottom: 18px !important;
         overflow-x: hidden;
-        background: #262626;
         color: #d2d2d2;
       }
 

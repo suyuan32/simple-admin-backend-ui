@@ -1,15 +1,11 @@
 <template>
-  <CodeEditor v-model:value="value" />
+  <CountButton />
 </template>
 <script lang="ts">
-  import { defineComponent, ref } from 'vue';
-  import { CodeEditor } from '/@/components/CodeEditor';
+  import { defineComponent } from 'vue';
+  import { CountButton } from '/@/components/CountDown';
 
   export default defineComponent({
-    components: { CodeEditor },
-    setup() {
-      const value = ref<string>();
-      return { value };
-    },
+    components: { CountButton },
   });
 </script>
