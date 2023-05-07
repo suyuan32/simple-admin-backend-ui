@@ -60,7 +60,7 @@ export default {
 
     drawerTitle: '项目配置',
 
-    darkMode: '主题',
+    darkMode: '夜间模式',
     navMode: '导航栏模式',
     interfaceFunction: '界面功能',
     interfaceDisplay: '界面显示',
