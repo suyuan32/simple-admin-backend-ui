@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <PageWrapper>
     <BasicTable @register="registerTable">
       <template #toolbar>
         <a-button type="primary" @click="handleCreate"> {{ t('sys.role.addRole') }} </a-button>
@@ -27,7 +27,7 @@
       </template>
     </BasicTable>
     <RoleDrawer @register="registerDrawer" @success="handleSuccess" />
-  </div>
+  </PageWrapper>
 </template>
 <script lang="ts">
   import { defineComponent } from 'vue';
@@ -41,10 +41,11 @@
   import { columns } from './role.data';
   import { getRoleList, deleteRole } from '/@/api/sys/role';
   import { useMessage } from '/@/hooks/web/useMessage';
+  import { PageWrapper } from '/@/components/Page';
 
   export default defineComponent({
     name: 'RoleManagement',
-    components: { BasicTable, RoleDrawer, TableAction },
+    components: { BasicTable, RoleDrawer, TableAction, PageWrapper },
     setup() {
       const { t } = useI18n();
       const { createMessage } = useMessage();

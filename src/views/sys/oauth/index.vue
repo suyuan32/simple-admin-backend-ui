@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <PageWrapper>
     <BasicTable @register="registerTable">
       <template #toolbar>
         <a-button type="primary" @click="handleCreate"> {{ t('sys.oauth.addProvider') }} </a-button>
@@ -27,7 +27,7 @@
       </template>
     </BasicTable>
     <OauthDrawer @register="registerDrawer" @success="handleSuccess" />
-  </div>
+  </PageWrapper>
 </template>
 <script lang="ts">
   import { defineComponent } from 'vue';
@@ -40,10 +40,11 @@
 
   import { columns } from './oauth.data';
   import { getOauthProviderList, deleteOauthProvider } from '/@/api/sys/oauthProvider';
+  import { PageWrapper } from '/@/components/Page';
 
   export default defineComponent({
     name: 'OauthManagement',
-    components: { BasicTable, OauthDrawer, TableAction },
+    components: { BasicTable, OauthDrawer, TableAction, PageWrapper },
     setup() {
       const { t } = useI18n();
       const [registerDrawer, { openDrawer }] = useDrawer();
