@@ -80,7 +80,7 @@
       text-align: right;
 
       > * {
-        margin-right: 20px;
+        margin-right: 8px;
       }
     }
   }
