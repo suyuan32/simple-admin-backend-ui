@@ -202,6 +202,64 @@
   @prefix-cls: ~'@{namespace}-basic-drawer';
   @prefix-cls-detail: ~'@{namespace}-basic-drawer__detail';
 
+  [data-theme='dark'] {
+    .@{prefix-cls} {
+      .dark-drawer-wrapper-body {
+        overflow: hidden;
+      }
+
+      .dark-drawer-close {
+        &:hover {
+          color: @error-color;
+        }
+      }
+
+      .dark-drawer-body {
+        height: calc(100% - @header-height);
+        padding: 0;
+        background-color: #262626;
+
+        .scrollbar__wrap {
+          margin-bottom: 0 !important;
+          padding: 16px !important;
+        }
+
+        > .scrollbar > .scrollbar__bar.is-horizontal {
+          display: none;
+        }
+      }
+    }
+
+    .@{prefix-cls-detail} {
+      position: absolute;
+
+      .dark-drawer-header {
+        box-sizing: border-box;
+        width: 100%;
+        height: @detail-header-height;
+        padding: 0;
+        border-top: 1px solid @border-color-base;
+      }
+
+      .dark-drawer-title {
+        height: 100%;
+      }
+
+      .dark-drawer-close {
+        height: @detail-header-height;
+        line-height: @detail-header-height;
+      }
+
+      .scrollbar__wrap {
+        padding: 0 !important;
+      }
+
+      .dark-drawer-body {
+        height: calc(100% - @detail-header-height);
+      }
+    }
+  }
+
   .@{prefix-cls} {
     .ant-drawer-wrapper-body {
       overflow: hidden;

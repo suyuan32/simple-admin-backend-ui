@@ -17,6 +17,10 @@
           <TableAction
             :actions="[
               {
+                icon: 'ant-design:file-add-outlined',
+                onClick: handleAddDetail.bind(null, record),
+              },
+              {
                 icon: 'clarity:note-edit-line',
                 onClick: handleEdit.bind(null, record),
               },
@@ -49,6 +53,7 @@
 
   import { columns, searchFormSchema } from './dictionary.data';
   import { getDictionaryList, deleteDictionary } from '/@/api/sys/dictionary';
+  import { useGo } from '/@/hooks/web/usePage';
 
   export default defineComponent({
     name: 'DictionaryManagement',
@@ -57,6 +62,7 @@
       const { t } = useI18n();
       const selectedIds = ref<number[] | string[]>();
       const showDeleteButton = ref<boolean>(false);
+      const go = useGo();
 
       const [registerDrawer, { openDrawer }] = useDrawer();
       const [registerTable, { reload }] = useTable({
@@ -129,6 +135,10 @@
         await reload();
       }
 
+      function handleAddDetail(record: Recordable) {
+        go('/dictionary/detail/' + record.id);
+      }
+
       return {
         t,
         registerTable,
@@ -139,6 +149,7 @@
         handleSuccess,
         handleBatchDelete,
         showDeleteButton,
+        handleAddDetail,
       };
     },
   });
