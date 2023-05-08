@@ -35,22 +35,21 @@
         />
       </FormItem>
 
-      <ARow class="enter-x">
-        <FormItem name="captcha" class="enter-x" :rules="[{ required: true, len: 5 }]">
-          <Input
-            size="large"
-            v-model:value="formData.captcha"
-            :placeholder="t('sys.login.captcha')"
-          >
-            <template #suffix>
-              <img :src="formData.imgPath" class="absolute right-0 h-full cursor-pointer" />
-            </template>
-          </Input>
-        </FormItem>
-        <FormItem name="captchaId" class="enter-x" v-show="false">
-          <Input :value="formData.captchaId" />
-        </FormItem>
-      </ARow>
+      <FormItem name="captcha" class="enter-x" :rules="[{ required: true, len: 5 }]">
+        <Input size="large" v-model:value="formData.captcha" :placeholder="t('sys.login.captcha')">
+          <template #suffix>
+            <img
+              :src="formData.imgPath"
+              class="absolute right-0 h-full cursor-pointer"
+              @click="getCaptchaData()"
+            />
+          </template>
+        </Input>
+      </FormItem>
+
+      <FormItem name="captchaId" class="enter-x" v-show="false">
+        <Input :value="formData.captchaId" />
+      </FormItem>
 
       <FormItem class="enter-x" name="policy">
         <!-- No logic, you need to deal with it yourself -->
@@ -78,13 +77,12 @@
 <script lang="ts" setup>
   import { reactive, ref, unref, computed } from 'vue';
   import LoginFormTitle from './LoginFormTitle.vue';
-  import { Form, Input, Button, Checkbox, Row, message } from 'ant-design-vue';
+  import { Form, Input, Button, Checkbox, message } from 'ant-design-vue';
   import { StrengthMeter } from '/@/components/StrengthMeter';
   import { useI18n } from '/@/hooks/web/useI18n';
   import { useLoginState, useFormRules, useFormValid, LoginStateEnum } from './useLogin';
   import { getCaptcha, register } from '/@/api/sys/user';
 
-  const ARow = Row;
   const FormItem = Form.Item;
   const InputPassword = Input.Password;
   const { t } = useI18n();

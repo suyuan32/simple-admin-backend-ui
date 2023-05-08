@@ -25,18 +25,26 @@
       />
     </FormItem>
 
-    <ARow class="enter-x">
-      <FormItem name="captcha" class="enter-x" :rules="[{ required: true, len: 5 }]">
-        <Input size="large" v-model:value="formData.captcha" :placeholder="t('sys.login.captcha')">
-          <template #suffix>
-            <img :src="formData.imgPath" class="absolute right-0 h-full cursor-pointer" />
-          </template>
-        </Input>
-      </FormItem>
-      <FormItem name="captchaId" class="enter-x" v-show="false">
-        <Input :value="formData.captchaId" />
-      </FormItem>
-    </ARow>
+    <FormItem name="captcha" class="enter-x" :rules="[{ required: true, len: 5 }]">
+      <Input
+        size="large"
+        v-model:value="formData.captcha"
+        :placeholder="t('sys.login.captcha')"
+        class="fix-auto-fill"
+      >
+        <template #suffix>
+          <img
+            :src="formData.imgPath"
+            class="absolute right-0 h-full cursor-pointer"
+            @click="getCaptchaData()"
+          />
+        </template>
+      </Input>
+    </FormItem>
+
+    <FormItem name="captchaId" class="enter-x" v-show="false">
+      <Input :value="formData.captchaId" />
+    </FormItem>
 
     <ARow class="enter-x">
       <ACol :span="12">
