@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <PageWrapper>
     <BasicTable @register="registerTable">
       <template #toolbar>
         <a-button type="primary" @click="handleCreate"> {{ t('sys.menu.addMenu') }} </a-button>
@@ -27,7 +27,7 @@
       </template>
     </BasicTable>
     <MenuDrawer @register="registerDrawer" @success="handleSuccess" />
-  </div>
+  </PageWrapper>
 </template>
 <script lang="ts">
   import { defineComponent } from 'vue';
@@ -40,10 +40,11 @@
   import MenuDrawer from './MenuDrawer.vue';
 
   import { columns } from './menu.data';
+  import { PageWrapper } from '/@/components/Page';
 
   export default defineComponent({
     name: 'MenuManagement',
-    components: { BasicTable, MenuDrawer, TableAction },
+    components: { BasicTable, MenuDrawer, TableAction, PageWrapper },
     setup() {
       const { t } = useI18n();
       const [registerDrawer, { openDrawer }] = useDrawer();
