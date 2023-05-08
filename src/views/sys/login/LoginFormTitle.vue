@@ -1,5 +1,5 @@
 <template>
-  <h2 class="mb-3 text-2xl font-bold text-center xl:text-3xl enter-x xl:text-left">
+  <h2 class="mb-3 text-2xl font-bold text-center xl:text-3xl enter-x xl:text-left form-title">
     {{ getFormTitle }}
   </h2>
 </template>
@@ -24,3 +24,15 @@
     return titleObj[unref(getLoginState)];
   });
 </script>
+
+<style lang="less" scoped>
+  [data-theme='dark'] {
+    .form-title {
+      color: #fff;
+    }
+  }
+
+  .form-title {
+    color: #5e5e5e;
+  }
+</style>

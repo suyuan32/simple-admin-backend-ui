@@ -14,6 +14,11 @@ export enum ThemeEnum {
   LIGHT = 'light',
 }
 
+export enum CssPrefixEnum {
+  DARK = 'dark',
+  DEFAULT = 'ant',
+}
+
 export enum SettingButtonPositionEnum {
   AUTO = 'auto',
   HEADER = 'header',

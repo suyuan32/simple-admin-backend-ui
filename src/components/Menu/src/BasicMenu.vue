@@ -33,6 +33,7 @@
   import { getCurrentParentPath } from '/@/router/menus';
   import { listenerRouteChange } from '/@/logics/mitt/routeChange';
   import { getAllParentPath } from '/@/router/helper/menuHelper';
+  import { MenuInfo } from 'ant-design-vue/lib/menu/src/interface';
 
   export default defineComponent({
     name: 'BasicMenu',
@@ -117,16 +118,16 @@
           },
         );
 
-      async function handleMenuClick({ key }: { key: string; keyPath: string[] }) {
+      async function handleMenuClick(info: MenuInfo) {
         const { beforeClickFn } = props;
         if (beforeClickFn && isFunction(beforeClickFn)) {
-          const flag = await beforeClickFn(key);
+          const flag = await beforeClickFn(info.key);
           if (!flag) return;
         }
-        emit('menuClick', key);
+        emit('menuClick', info.key);
 
         isClickGo.value = true;
-        menuState.selectedKeys = [key];
+        menuState.selectedKeys = [info.key];
       }
 
       async function handleMenuChange(route?: RouteLocationNormalizedLoaded) {

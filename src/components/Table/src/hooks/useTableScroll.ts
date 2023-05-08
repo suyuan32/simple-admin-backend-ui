@@ -6,6 +6,8 @@ import { useWindowSizeFn } from '/@/hooks/event/useWindowSizeFn';
 import { useModalContext } from '/@/components/Modal';
 import { onMountedOrActivated } from '/@/hooks/core/onMountedOrActivated';
 import { useDebounceFn } from '@vueuse/core';
+import { useAppStore } from '/@/store/modules/app';
+import { ThemeEnum } from '/@/enums/appEnum';
 
 export function useTableScroll(
   propsRef: ComputedRef<BasicTableProps>,
@@ -55,6 +57,9 @@ export function useTableScroll(
   let bodyEl: HTMLElement | null;
 
   async function calcTableHeight() {
+    const appStore = useAppStore();
+    const darkMode = appStore.getDarkMode;
+
     const { resizeHeightOffset, pagination, maxHeight, isCanResizeParent, useSearchForm } =
       unref(propsRef);
     const tableData = unref(getDataSourceRef);
@@ -66,7 +71,11 @@ export function useTableScroll(
     if (!tableEl) return;
 
     if (!bodyEl) {
-      bodyEl = tableEl.querySelector('.ant-table-body');
+      if (darkMode == ThemeEnum.DARK) {
+        bodyEl = tableEl.querySelector('.dark-table-body');
+      } else {
+        bodyEl = tableEl.querySelector('.ant-table-body');
+      }
       if (!bodyEl) return;
     }
 
@@ -94,7 +103,13 @@ export function useTableScroll(
     await nextTick();
     // Add a delay to get the correct bottomIncludeBody paginationHeight footerHeight headerHeight
 
-    const headEl = tableEl.querySelector('.ant-table-thead ');
+    let headEl: Element | null;
+
+    if (darkMode == ThemeEnum.DARK) {
+      headEl = tableEl.querySelector('.dark-table-thead ');
+    } else {
+      headEl = tableEl.querySelector('.ant-table-thead ');
+    }
 
     if (!headEl) return;
 
@@ -103,7 +118,11 @@ export function useTableScroll(
     // Pager height
     let paginationHeight = 2;
     if (!isBoolean(pagination)) {
-      paginationEl = tableEl.querySelector('.ant-pagination') as HTMLElement;
+      if (darkMode == ThemeEnum.DARK) {
+        paginationEl = tableEl.querySelector('.dark-pagination') as HTMLElement;
+      } else {
+        paginationEl = tableEl.querySelector('.ant-pagination') as HTMLElement;
+      }
       if (paginationEl) {
         const offsetHeight = paginationEl.offsetHeight;
         paginationHeight += offsetHeight || 0;
@@ -118,7 +137,11 @@ export function useTableScroll(
     let footerHeight = 0;
     if (!isBoolean(pagination)) {
       if (!footerEl) {
-        footerEl = tableEl.querySelector('.ant-table-footer') as HTMLElement;
+        if (darkMode == ThemeEnum.DARK) {
+          footerEl = tableEl.querySelector('.dark-table-footer') as HTMLElement;
+        } else {
+          footerEl = tableEl.querySelector('.ant-table-footer') as HTMLElement;
+        }
       } else {
         const offsetHeight = footerEl.offsetHeight;
         footerHeight += offsetHeight || 0;
@@ -148,8 +171,15 @@ export function useTableScroll(
         paddingHeight = 0;
       }
 
-      const headerCellHeight =
-        (tableEl.querySelector('.ant-table-title') as HTMLElement)?.offsetHeight ?? 0;
+      let headerCellHeight: number;
+
+      if (darkMode == ThemeEnum.DARK) {
+        headerCellHeight =
+          (tableEl.querySelector('.dark-table-title') as HTMLElement)?.offsetHeight ?? 0;
+      } else {
+        headerCellHeight =
+          (tableEl.querySelector('.ant-table-title') as HTMLElement)?.offsetHeight ?? 0;
+      }
 
       console.log(wrapHeight - formHeight - headerCellHeight - tablePadding - paginationMargin);
       bottomIncludeBody =

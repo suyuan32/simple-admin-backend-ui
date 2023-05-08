@@ -1,5 +1,5 @@
 <template>
-  <PageWrapper :title="t('sys.init.initTitle')" :content-full-height="true">
+  <PageWrapper :title="t('sys.init.initTitle')" :content-full-height="true" class="bg">
     <ARow :gutter="16">
       <ACol :span="6">
         <ACard :title="t('sys.init.initCoreDatabase')" :hoverable="true">
@@ -91,3 +91,15 @@
     jobInitButtonLoading.value = false;
   }
 </script>
+
+<style lang="less" scoped>
+  [data-theme='dark'] {
+    .bg {
+      background-color: #262626;
+    }
+  }
+
+  .bg {
+    background-color: white;
+  }
+</style>

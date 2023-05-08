@@ -3,14 +3,14 @@ import { BasicDrawer } from '/@/components/Drawer/index';
 import { Divider } from 'ant-design-vue';
 import {
   TypePicker,
-  // ThemeColorPicker,
+  ThemeColorPicker,
   SettingFooter,
   SwitchItem,
   SelectItem,
   InputNumberItem,
 } from './components';
 
-// import { AppDarkModeToggle } from '/@/components/Application';
+import { AppDarkModeToggle } from '/@/components/Application';
 
 import { MenuTypeEnum, TriggerEnum } from '/@/enums/menuEnum';
 
@@ -33,11 +33,11 @@ import {
   mixSidebarTriggerOptions,
 } from './enum';
 
-// import {
-//   HEADER_PRESET_BG_COLOR_LIST,
-//   SIDE_BAR_BG_COLOR_LIST,
-//   APP_PRESET_COLOR_LIST,
-// } from '/@/settings/designSetting';
+import {
+  HEADER_PRESET_BG_COLOR_LIST,
+  SIDE_BAR_BG_COLOR_LIST,
+  // APP_PRESET_COLOR_LIST,
+} from '/@/settings/designSetting';
 
 const { t } = useI18n();
 
@@ -73,7 +73,7 @@ export default defineComponent({
       getTopMenuAlign,
       getAccordion,
       getMenuWidth,
-      // getMenuBgColor,
+      getMenuBgColor,
       getIsTopMenu,
       getSplit,
       getIsMixSidebar,
@@ -85,7 +85,7 @@ export default defineComponent({
     const {
       getShowHeader,
       getFixed: getHeaderFixed,
-      // getHeaderBgColor,
+      getHeaderBgColor,
       getShowSearch,
     } = useHeaderSetting();
 
@@ -113,25 +113,25 @@ export default defineComponent({
       );
     }
 
-    // function renderHeaderTheme() {
-    //   return (
-    //     <ThemeColorPicker
-    //       colorList={HEADER_PRESET_BG_COLOR_LIST}
-    //       def={unref(getHeaderBgColor)}
-    //       event={HandlerEnum.HEADER_THEME}
-    //     />
-    //   );
-    // }
+    function renderHeaderTheme() {
+      return (
+        <ThemeColorPicker
+          colorList={HEADER_PRESET_BG_COLOR_LIST}
+          def={unref(getHeaderBgColor)}
+          event={HandlerEnum.HEADER_THEME}
+        />
+      );
+    }
 
-    // function renderSiderTheme() {
-    //   return (
-    //     <ThemeColorPicker
-    //       colorList={SIDE_BAR_BG_COLOR_LIST}
-    //       def={unref(getMenuBgColor)}
-    //       event={HandlerEnum.MENU_THEME}
-    //     />
-    //   );
-    // }
+    function renderSiderTheme() {
+      return (
+        <ThemeColorPicker
+          colorList={SIDE_BAR_BG_COLOR_LIST}
+          def={unref(getMenuBgColor)}
+          event={HandlerEnum.MENU_THEME}
+        />
+      );
+    }
 
     // function renderMainTheme() {
     //   return (
@@ -404,15 +404,15 @@ export default defineComponent({
         class="setting-drawer"
       >
         {unref(getShowDarkModeToggle) && <Divider>{() => t('layout.setting.darkMode')}</Divider>}
-        {/* {unref(getShowDarkModeToggle) && <AppDarkModeToggle class="mx-auto" />} */}
+        {unref(getShowDarkModeToggle) && <AppDarkModeToggle class="mx-auto" />}
         <Divider>{() => t('layout.setting.navMode')}</Divider>
         {renderSidebar()}
         {/* <Divider>{() => t('layout.setting.sysTheme')}</Divider>
-        {renderMainTheme()}
+        {renderMainTheme()} */}
         <Divider>{() => t('layout.setting.headerTheme')}</Divider>
         {renderHeaderTheme()}
         <Divider>{() => t('layout.setting.sidebarTheme')}</Divider>
-        {renderSiderTheme()} */}
+        {renderSiderTheme()}
         <Divider>{() => t('layout.setting.interfaceFunction')}</Divider>
         {renderFeatures()}
         <Divider>{() => t('layout.setting.interfaceDisplay')}</Divider>

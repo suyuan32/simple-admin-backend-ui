@@ -4,6 +4,7 @@
       ref="formRef"
       submitOnReset
       v-bind="getFormProps"
+      labelAlign="right"
       v-if="getBindValues.useSearchForm"
       :tableAction="tableAction"
       @register="registerForm"
@@ -28,13 +29,9 @@
       <template #headerCell="{ column }">
         <HeaderCell :column="column" />
       </template>
-      <!-- 增加对antdv3.x兼容 -->
       <template #bodyCell="data">
         <slot name="bodyCell" v-bind="data || {}"></slot>
       </template>
-      <!--      <template #[`header-${column.dataIndex}`] v-for="(column, index) in columns" :key="index">-->
-      <!--        <HeaderCell :column="column" />-->
-      <!--      </template>-->
     </Table>
   </div>
 </template>
@@ -73,6 +70,9 @@
   import { basicProps } from './props';
   import { isFunction } from '/@/utils/is';
   import { warn } from '/@/utils/log';
+  import { TablePaginationConfig } from 'ant-design-vue/es/table/interface';
+  import { FilterValue, SorterResult } from 'ant-design-vue/lib/table/interface';
+  import { DefaultRecordType } from 'ant-design-vue/lib/vc-table/interface';
 
   export default defineComponent({
     name: 'BasicTable',
@@ -172,12 +172,18 @@
         emit,
       );
 
-      function handleTableChange(...args) {
-        onTableChange.call(undefined, ...args);
-        emit('change', ...args);
+      function handleTableChange(
+        pagination: TablePaginationConfig,
+        filters: Record<string, FilterValue | null>,
+        sorter: SorterResult<DefaultRecordType> | SorterResult<DefaultRecordType>[],
+      ) {
+        onTableChange.call(undefined, pagination, filters, sorter);
+        emit('change', [pagination, filters, sorter]);
         // 解决通过useTable注册onChange时不起作用的问题
         const { onChange } = unref(getProps);
-        onChange && isFunction(onChange) && onChange.call(undefined, ...args);
+        onChange &&
+          isFunction(onChange) &&
+          onChange.call(undefined, pagination, filters, sorter, undefined);
       }
 
       const {
@@ -358,9 +364,32 @@
   @prefix-cls: ~'@{namespace}-basic-table';
 
   [data-theme='dark'] {
-    .ant-table-tbody > tr:hover.ant-table-row-selected > td,
-    .ant-table-tbody > tr.ant-table-row-selected td {
-      background-color: #262626;
+    .@{prefix-cls} {
+      max-width: 100%;
+      height: 100%;
+
+      &-form-container {
+        padding: 16px;
+
+        .dark-form {
+          width: 100%;
+          margin-bottom: 16px;
+          padding: 12px 10px 6px;
+          border-radius: 2px;
+          background-color: #141414;
+        }
+      }
+
+      .dark-tag {
+        margin-right: 0;
+      }
+
+      .dark-table-wrapper {
+        height: 100%;
+        padding: 6px;
+        border-radius: 2px;
+        background-color: #141414;
+      }
     }
   }
 
@@ -368,21 +397,15 @@
     max-width: 100%;
     height: 100%;
 
-    &-row__striped {
-      td {
-        background-color: @app-content-background;
-      }
-    }
-
     &-form-container {
       padding: 16px;
 
       .ant-form {
         width: 100%;
-        padding: 12px 10px 6px;
         margin-bottom: 16px;
-        background-color: @component-background;
+        padding: 12px 10px 6px;
         border-radius: 2px;
+        background-color: @component-background;
       }
     }
 
@@ -392,65 +415,8 @@
 
     .ant-table-wrapper {
       padding: 6px;
-      background-color: @component-background;
       border-radius: 2px;
-
-      .ant-table-title {
-        min-height: 40px;
-        padding: 0 0 8px !important;
-      }
-
-      .ant-table.ant-table-bordered .ant-table-title {
-        border: none !important;
-      }
-    }
-
-    .ant-table {
-      width: 100%;
-      overflow-x: hidden;
-
-      &-title {
-        display: flex;
-        padding: 8px 6px;
-        border-bottom: none;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      //.ant-table-tbody > tr.ant-table-row-selected td {
-      //background-color: fade(@primary-color, 8%) !important;
-      //}
-    }
-
-    .ant-pagination {
-      margin: 10px 0 0;
-    }
-
-    .ant-table-footer {
-      padding: 0;
-
-      .ant-table-wrapper {
-        padding: 0;
-      }
-
-      table {
-        border: none !important;
-      }
-
-      .ant-table-body {
-        overflow-x: hidden !important;
-        //  overflow-y: scroll !important;
-      }
-
-      td {
-        padding: 12px 8px;
-      }
-    }
-
-    &--inset {
-      .ant-table-wrapper {
-        padding: 0;
-      }
+      background-color: @component-background;
     }
   }
 </style>

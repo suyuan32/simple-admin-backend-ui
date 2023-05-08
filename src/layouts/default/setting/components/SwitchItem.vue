@@ -43,8 +43,8 @@
       const getBindValue = computed(() => {
         return props.def ? { checked: props.def } : {};
       });
-      function handleChange(e: ChangeEvent) {
-        props.event && baseHandler(props.event, e);
+      function handleChange(checked: boolean | number | string, _e: Event) {
+        props.event && baseHandler(props.event, checked);
       }
       return {
         prefixCls,
@@ -55,12 +55,23 @@
     },
   });
 </script>
+
 <style lang="less" scoped>
   @prefix-cls: ~'@{namespace}-setting-switch-item';
+
+  [data-theme='dark'] {
+    .@{prefix-cls} {
+      display: flex;
+      justify-content: space-between;
+      margin: 16px 0;
+      color: rgb(233 233 233);
+    }
+  }
 
   .@{prefix-cls} {
     display: flex;
     justify-content: space-between;
     margin: 16px 0;
+    color: #262626;
   }
 </style>

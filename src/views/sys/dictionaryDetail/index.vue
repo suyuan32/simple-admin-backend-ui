@@ -94,7 +94,6 @@
       });
 
       function handleCreate() {
-        console.log(Number(unref(currentRoute).params.dictionaryId));
         openDrawer(true, {
           dictionaryId: Number(unref(currentRoute).params.dictionaryId),
           isUpdate: false,

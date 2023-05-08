@@ -2,14 +2,17 @@ import type { VNodeChild } from 'vue';
 import type { PaginationProps } from './pagination';
 import type { FormProps } from '/@/components/Form';
 import type {
+  FilterValue,
   TableRowSelection as ITableRowSelection,
   Key,
+  SorterResult,
 } from 'ant-design-vue/lib/table/interface';
 import type { ColumnProps } from 'ant-design-vue/lib/table';
 
 import { ComponentType } from './componentType';
 import { VueNode } from '/@/utils/propTypes';
 import { RoleEnum } from '/@/enums/roleEnum';
+import { DefaultRecordType } from 'ant-design-vue/lib/vc-table/interface';
 
 export declare type SortOrder = 'ascend' | 'descend';
 
@@ -63,12 +66,12 @@ export interface TableCustomRecord<T = Recordable> {
   index?: number;
 }
 
-export interface SorterResult {
-  column: ColumnProps;
-  order: SortOrder;
-  field: string;
-  columnKey: string;
-}
+// export interface SorterResult {
+//   column: ColumnProps;
+//   order: SortOrder;
+//   field: string;
+//   columnKey: string;
+// }
 
 export interface FetchParams {
   searchInfo?: Recordable;
@@ -91,17 +94,20 @@ export interface TableActionType {
   getSelectRows: <T = Recordable>() => T[];
   clearSelectedRowKeys: () => void;
   expandAll: () => void;
-  expandRows: (keys: string[] | number[]) => void;
+  expandRows: (keys: Key[]) => void;
   collapseAll: () => void;
   scrollTo: (pos: string) => void; // pos: id | "top" | "bottom"
   getSelectRowKeys: () => Key[];
   deleteSelectRowByKey: (key: string) => void;
   setPagination: (info: Partial<PaginationProps>) => void;
   setTableData: <T = Recordable>(values: T[]) => void;
-  updateTableDataRecord: (rowKey: string | number, record: Recordable) => Recordable | void;
-  deleteTableDataRecord: (rowKey: string | number | string[] | number[]) => void;
-  insertTableDataRecord: (record: Recordable | Recordable[], index?: number) => Recordable[] | void;
-  findTableDataRecord: (rowKey: string | number) => Recordable | void;
+  updateTableDataRecord: (rowKey: Key, record: Recordable) => Recordable | void;
+  deleteTableDataRecord: (rowKey: Key | Key[]) => void;
+  insertTableDataRecord: (
+    record: Recordable<any> | Recordable<any>[],
+    index?: number | undefined,
+  ) => Recordable[];
+  findTableDataRecord: (rowKey: Key) => Recordable | void;
   getColumns: (opt?: GetColumnsParams) => BasicColumn[];
   setColumns: (columns: BasicColumn[] | string[]) => void;
   getDataSource: <T = Recordable>() => T[];
@@ -109,13 +115,13 @@ export interface TableActionType {
   setLoading: (loading: boolean) => void;
   setProps: (props: Partial<BasicTableProps>) => void;
   redoHeight: () => void;
-  setSelectedRowKeys: (rowKeys: string[] | number[]) => void;
+  setSelectedRowKeys: (rowKeys: Key[]) => void;
   getPaginationRef: () => PaginationProps | boolean;
   getSize: () => SizeType;
   getRowSelection: () => TableRowSelection<Recordable>;
   getCacheColumns: () => BasicColumn[];
   emit?: EmitType;
-  updateTableData: (index: number, key: string, value: any) => Recordable;
+  updateTableData: (index: number, key: Key, value: any) => Recordable;
   setShowPagination: (show: boolean) => Promise<void>;
   getShowPagination: () => boolean;
   setCacheColumnsByField?: (dataIndex: string | undefined, value: BasicColumn) => void;
@@ -151,9 +157,9 @@ export interface BasicTableProps<T = any> {
   isTreeTable?: boolean;
   treeConfig?: TreeConfig;
   // 自定义排序方法
-  sortFn?: (sortInfo: SorterResult) => any;
+  sortFn?: (sortInfo: SorterResult<DefaultRecordType> | SorterResult<DefaultRecordType>[]) => any;
   // 排序方法
-  filterFn?: (data: Partial<Recordable<string[]>>) => any;
+  filterFn?: (data: Record<string, FilterValue | null>) => any;
   // 取消表格的默认padding
   inset?: boolean;
   // 显示表格设置
@@ -212,7 +218,7 @@ export interface BasicTableProps<T = any> {
   // 在分页改变的时候清空选项
   clearSelectOnPageChange?: boolean;
   //
-  rowKey?: string | ((record: Recordable) => string);
+  rowKey?: Key | ((record: Recordable) => string);
   // 数据
   dataSource?: Recordable[];
   // 标题右侧提示
@@ -248,15 +254,15 @@ export interface BasicTableProps<T = any> {
 
   /**
    * Initial expanded row keys
-   * @type string[]
+   * @type Key[]
    */
-  defaultExpandedRowKeys?: string[];
+  defaultExpandedRowKeys?: Key[];
 
   /**
    * Current expanded row keys
    * @type string[]
    */
-  expandedRowKeys?: string[];
+  expandedRowKeys?: Key[];
 
   /**
    * Expanded container render for each row

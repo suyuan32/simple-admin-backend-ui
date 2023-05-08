@@ -1,4 +1,4 @@
-import type { BasicTableProps, FetchParams, SorterResult } from '../types/table';
+import type { BasicTableProps, FetchParams } from '../types/table';
 import type { PaginationProps } from '../types/pagination';
 import {
   ref,
@@ -17,6 +17,13 @@ import { isFunction, isBoolean, isObject } from '/@/utils/is';
 import { get, cloneDeep, merge } from 'lodash-es';
 import { FETCH_SETTING, ROW_KEY, PAGE_SIZE } from '../const';
 import { array2tree } from '@axolo/tree-array';
+import {
+  FilterValue,
+  Key,
+  SorterResult,
+  TablePaginationConfig,
+} from 'ant-design-vue/lib/table/interface';
+import { DefaultRecordType } from 'ant-design-vue/lib/vc-table/interface';
 
 interface ActionType {
   getPaginationInfo: ComputedRef<boolean | PaginationProps>;
@@ -66,15 +73,15 @@ export function useDataSource(
   );
 
   function handleTableChange(
-    pagination: PaginationProps,
-    filters: Partial<Recordable<string[]>>,
-    sorter: SorterResult,
+    pagination: TablePaginationConfig,
+    filters: Record<string, FilterValue | null>,
+    sorter: SorterResult<DefaultRecordType> | SorterResult<DefaultRecordType>[],
   ) {
     const { clearSelectOnPageChange, sortFn, filterFn } = unref(propsRef);
     if (clearSelectOnPageChange) {
       clearSelectedRowKeys();
     }
-    setPagination(pagination);
+    setPagination(pagination as PaginationProps);
 
     const params: Recordable = {};
     if (sorter && isFunction(sortFn)) {
@@ -139,7 +146,7 @@ export function useDataSource(
     return unref(dataSourceRef);
   });
 
-  async function updateTableData(index: number, key: string, value: any) {
+  async function updateTableData(index: number, key: Key, value: any) {
     const record = dataSourceRef.value[index];
     if (record) {
       dataSourceRef.value[index][key] = value;
@@ -161,7 +168,7 @@ export function useDataSource(
     }
   }
 
-  function deleteTableDataRecord(rowKey: string | number | string[] | number[]) {
+  function deleteTableDataRecord(rowKey: Key | Key[]) {
     if (!dataSourceRef.value || dataSourceRef.value.length == 0) return;
     const rowKeyName = unref(getRowKey);
     if (!rowKeyName) return;
@@ -209,8 +216,8 @@ export function useDataSource(
 
   function insertTableDataRecord(
     record: Recordable | Recordable[],
-    index: number,
-  ): Recordable[] | undefined {
+    index: number | undefined,
+  ): Recordable[] {
     // if (!dataSourceRef.value || dataSourceRef.value.length == 0) return;
     index = index ?? dataSourceRef.value?.length;
     const _record = isObject(record) ? [record as Recordable] : (record as Recordable[]);
@@ -218,7 +225,7 @@ export function useDataSource(
     return unref(dataSourceRef);
   }
 
-  function findTableDataRecord(rowKey: string | number) {
+  function findTableDataRecord(rowKey: Key) {
     if (!dataSourceRef.value || dataSourceRef.value.length == 0) return;
 
     const rowKeyName = unref(getRowKey);

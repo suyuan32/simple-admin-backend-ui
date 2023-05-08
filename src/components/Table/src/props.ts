@@ -4,7 +4,6 @@ import type {
   BasicColumn,
   FetchSetting,
   TableSetting,
-  SorterResult,
   TableCustomRecord,
   TableRowSelection,
   SizeType,
@@ -13,6 +12,7 @@ import type { FormProps } from '/@/components/Form';
 
 import { DEFAULT_FILTER_FN, DEFAULT_SORT_FN, FETCH_SETTING, DEFAULT_SIZE } from './const';
 import { propTypes } from '/@/utils/propTypes';
+import { SorterResult } from 'ant-design-vue/lib/table/interface';
 
 export const basicProps = {
   clickToRowSelect: { type: Boolean, default: true },

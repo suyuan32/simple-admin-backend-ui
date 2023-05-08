@@ -1,10 +1,11 @@
 <template>
   <div :class="prefixCls" class="relative w-full h-full px-4">
     <AppLocalePicker
-      class="absolute text-white top-4 right-4 enter-x xl:text-gray-600"
+      class="absolute text-white top-5 right-4 enter-x xl:text-gray-600 text-lg"
       :showText="false"
       v-if="!sessionTimeout && showLocale"
     />
+    <AppDarkModeToggle class="absolute top-4 right-8 enter-x" />
     <span class="-enter-x xl:hidden">
       <AppLogo :alwaysShowTitle="true" />
     </span>
@@ -46,7 +47,7 @@
 </template>
 <script lang="ts" setup>
   import { computed } from 'vue';
-  import { AppLocalePicker, AppLogo } from '/@/components/Application';
+  import { AppLocalePicker, AppLogo, AppDarkModeToggle } from '/@/components/Application';
   import LoginForm from './LoginForm.vue';
   import ForgetPasswordForm from './ForgetPasswordForm.vue';
   import RegisterFormByEmail from './RegisterFormByEmail.vue';
@@ -113,12 +114,15 @@
   .@{prefix-cls} {
     min-height: 100%;
     overflow: hidden;
+    background-color: #fff;
+    color: @text-color;
 
     @media (max-width: @screen-xl) {
       background-color: #293146;
 
       .@{prefix-cls}-form {
         background-color: #fff;
+        color: @text-color;
       }
     }
 

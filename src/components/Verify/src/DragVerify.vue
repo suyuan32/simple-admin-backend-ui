@@ -294,6 +294,7 @@
     border: 1px solid #ddd;
     border-radius: @radius;
     background-color: rgb(238 238 238);
+    color: rgb(80 80 80);
     text-align: center;
 
     &-bar {
