@@ -6,7 +6,7 @@
 </template>
 <script lang="ts">
   import { computed, defineComponent } from 'vue';
-  import Icon from '@/components/Icon/Icon.vue';
+  import { Icon } from '@/components/Icon';
   import { useI18n } from '/@/hooks/web/useI18n';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { contentProps } from '../props';
