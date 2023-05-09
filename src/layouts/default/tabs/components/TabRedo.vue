@@ -10,7 +10,7 @@
   import { useTabs } from '/@/hooks/web/useTabs';
   import { useAppStore } from '/@/store/modules/app';
   import { ThemeEnum } from '/@/enums/appEnum';
-  import Icon from '@/components/Icon/Icon.vue';
+  import { Icon } from '@/components/Icon';
 
   export default defineComponent({
     name: 'TabRedo',

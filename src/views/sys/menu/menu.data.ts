@@ -1,7 +1,7 @@
 import { BasicColumn, FormSchema } from '/@/components/Table';
 import { h } from 'vue';
 import { Tag } from 'ant-design-vue';
-import Icon from '@/components/Icon/Icon.vue';
+import { Icon } from '@/components/Icon';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { formatToDateTime } from '/@/utils/dateUtil';
 import { getMenuList } from '/@/api/sys/menu';

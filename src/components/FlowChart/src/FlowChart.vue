@@ -19,10 +19,11 @@
   import { createFlowChartContext } from './useFlowContext';
   import { toLogicFlowData } from './adpterForTurbo';
   import { useModal, BasicModal } from '/@/components/Modal';
-  import { JsonPreview } from '/@/components/CodeEditor';
+  import 'vue-json-pretty/lib/styles.css';
   import { configDefaultDndPanel } from './config';
   import '@logicflow/core/dist/style/index.css';
   import '@logicflow/extension/lib/style/index.css';
+  import { JsonPreview } from '../../JsonPreview';
 
   export default defineComponent({
     name: 'FlowChart',

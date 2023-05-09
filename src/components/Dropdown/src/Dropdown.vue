@@ -40,7 +40,7 @@
   import type { DropMenu } from './typing';
   import { type Recordable } from '@vben/types';
   import { Dropdown, Menu, Popconfirm } from 'ant-design-vue';
-  import Icon from '@/components/Icon/Icon.vue';
+  import { Icon } from '@/components/Icon';
   import { omit } from 'lodash-es';
   import { isFunction } from '/@/utils/is';
 
