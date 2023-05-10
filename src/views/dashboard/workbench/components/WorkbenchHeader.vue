@@ -2,7 +2,7 @@
   <div class="lg:flex">
     <Avatar :src="userinfo.avatar || headerImg" :size="72" class="!mx-auto !block" />
     <div class="md:ml-6 flex flex-col justify-center md:mt-0 mt-2">
-      <h1 class="md:text-lg text-md"
+      <h1 class="md:text-lg text-md bench-header"
         >{{ t('sys.sys.morning') }}, {{ userinfo.nickname }}, {{ t('sys.sys.niceDay') }}</h1
       >
       <!-- <span class="text-secondary"> 今日晴，20℃ - 32℃！ </span> -->
@@ -35,3 +35,15 @@
   const userStore = useUserStore();
   const userinfo = computed(() => userStore.getUserInfo);
 </script>
+
+<style lang="less" scoped>
+  [data-theme='dark'] {
+    .bench-header {
+      color: white;
+    }
+  }
+
+  .bench-header {
+    color: #262626;
+  }
+</style>
