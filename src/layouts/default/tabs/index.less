@@ -1,7 +1,7 @@
 /* stylelint-disable order/properties-order */
 @prefix-cls: ~'@{namespace}-multiple-tabs';
 
-html[data-theme='dark'] {
+[data-theme='dark'] {
   .@{prefix-cls} {
     z-index: 10;
     height: @multiple-height + 2;
@@ -30,10 +30,10 @@ html[data-theme='dark'] {
         .dark-tabs-tab {
           height: calc(@multiple-height - 2px);
           padding-right: 12px;
-          transition: none;
-          background-color: #262626;
-          color: white;
           line-height: calc(@multiple-height - 2px);
+          color: @white;
+          background-color: #262626;
+          transition: none;
           border: gray 1px solid;
 
           &:hover {
@@ -60,7 +60,29 @@ html[data-theme='dark'] {
           }
 
           svg {
-            fill: @text-color-base;
+            fill: @white;
+          }
+        }
+
+        .dark-tabs-tab:not(.dark-tabs-tab-active) {
+          position: relative;
+          padding-left: 18px;
+          background: #262626;
+          color: @white;
+          border: gray 1px solid;
+          transition: none;
+
+          span {
+            color: @white !important;
+          }
+
+          .ant-tabs-tab-remove {
+            opacity: 1;
+          }
+
+          svg {
+            width: 0.7em;
+            fill: @white;
           }
         }
 
@@ -184,7 +206,7 @@ html[data-theme='light'] {
 
         svg {
           width: 0.7em;
-          fill: @white;
+          fill: @black;
         }
       }
 
