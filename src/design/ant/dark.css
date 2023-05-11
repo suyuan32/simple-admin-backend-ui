@@ -45,7 +45,7 @@ body {
     'Noto Color Emoji';
   font-variant: tabular-nums;
   line-height: 1.5715;
-  background-color: #000;
+  background-color: #fff;
   font-feature-settings: 'tnum';
 }
 [tabindex='-1']:focus {
