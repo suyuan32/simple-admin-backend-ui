@@ -110,7 +110,7 @@ export const formSchema: FormSchema[] = [
     defaultValue: 1,
     componentProps: {
       options: [
-        { label: t('sys.menu.directory'), value: 0 },
+        { label: t('sys.menu.directory'), value: 2 },
         { label: t('sys.menu.menu'), value: 1 },
       ],
     },
@@ -173,7 +173,8 @@ export const formSchema: FormSchema[] = [
     field: 'path',
     label: t('sys.menu.routePath'),
     component: 'Input',
-    ifShow: ({ values }) => isMenu(values.menuType),
+    required: true,
+    // ifShow: ({ values }) => isMenu(values.menuType),
     rules: [{ max: 200 }],
   },
   {
@@ -233,6 +234,7 @@ export const formSchema: FormSchema[] = [
     label: t('sys.menu.isHttpPath'),
     component: 'RadioButtonGroup',
     defaultValue: false,
+    ifShow: ({ values }) => isMenu(values.menuType),
     componentProps: {
       options: [
         { label: t('common.yes'), value: true },
