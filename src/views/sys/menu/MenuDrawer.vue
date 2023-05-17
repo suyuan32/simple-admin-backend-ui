@@ -33,10 +33,10 @@
       const { createMessage } = useMessage();
 
       const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
-        labelWidth: 100,
+        labelWidth: 160,
         schemas: formSchema,
         showActionButtonGroup: false,
-        baseColProps: { lg: 12, md: 24 },
+        baseColProps: { lg: 24, md: 24 },
       });
 
       const [registerDrawer, { setDrawerProps, closeDrawer }] = useDrawerInner(async (data) => {
@@ -63,9 +63,9 @@
         const values = await validate();
         setDrawerProps({ confirmLoading: true });
         // defined the component
-        if (values.isExt === '1') {
+        if (values.isExt === true) {
           values['component'] = 'IFrame';
-        } else if (values.type === 0) {
+        } else if (values.menuType === 2) {
           values['component'] = 'LAYOUT';
         }
 
