@@ -112,22 +112,24 @@
 </template>
 <script lang="ts">
   import type { CropendResult, Cropper } from './typing';
+  import { message, Space, Upload, Avatar, Tooltip } from 'ant-design-vue';
+
+  import file2md5 from 'file2md5';
 
   import { defineComponent, ref } from 'vue';
   import CropperImage from './Cropper.vue';
-  import { Space, Upload, Avatar, Tooltip } from 'ant-design-vue';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { BasicModal, useModalInner } from '/@/components/Modal';
   import { dataURLtoBlob } from '/@/utils/file/base64Conver';
   import { isFunction } from '/@/utils/is';
   import { useI18n } from '/@/hooks/web/useI18n';
 
-  type apiFunParams = { file: Blob; name: string; filename: string };
+  // type apiFunParams = { file: Blob; name: string; filename: string };
 
   const props = {
     circled: { type: Boolean, default: true },
     uploadApi: {
-      type: Function as PropType<(params: apiFunParams) => Promise<any>>,
+      type: Function as PropType<PromiseFn>,
     },
     src: { type: String },
   };
@@ -148,6 +150,7 @@
       const { prefixCls } = useDesign('cropper-am');
       const [register, { closeModal, setModalProps }] = useModalInner();
       const { t } = useI18n();
+      let tempFileMd5 = '';
 
       // Block upload
       function handleBeforeUpload(file: File) {
@@ -180,14 +183,39 @@
         cropper?.value?.[event]?.(arg);
       }
 
+      function blobToFile(blob: Blob, fileName: string): File {
+        // 将 Blob 转换为 File 对象
+        const file = new File([blob], fileName);
+
+        return file;
+      }
+
       async function handleOk() {
         const uploadApi = props.uploadApi;
         if (uploadApi && isFunction(uploadApi)) {
           const blob = dataURLtoBlob(previewSource.value);
           try {
+            message.loading(t('fileManager.preprocessing'));
+            await file2md5(blobToFile(blob, 'avatar.jpg'), { chunkSize: 3 * 1024 * 1024 })
+              .then((data) => {
+                message.success(t('common.successful'));
+                tempFileMd5 = data;
+              })
+              .catch(() => {
+                message.error(t('common.failed'));
+              });
             setModalProps({ confirmLoading: true });
-            const result = await uploadApi({ name: 'file', file: blob, filename });
-            emit('uploadSuccess', { source: previewSource.value, data: result.url });
+            const result = await uploadApi({
+              name: 'file',
+              file: blob,
+              filename: filename,
+              data: {
+                md5: tempFileMd5,
+              },
+            });
+
+            console.log(result);
+            emit('uploadSuccess', { source: previewSource.value, data: result.data.data.url });
             closeModal();
           } finally {
             setModalProps({ confirmLoading: false });

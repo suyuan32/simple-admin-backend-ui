@@ -78,7 +78,7 @@ export function createTableColumns(): BasicColumn[] {
     },
   ];
 }
-export function createActionColumn(handleRemove: Function): BasicColumn {
+export function createActionColumn(handleRemove: Function, handleCopy: Function): BasicColumn {
   return {
     width: 120,
     title: t('component.upload.operating'),
@@ -86,6 +86,11 @@ export function createActionColumn(handleRemove: Function): BasicColumn {
     fixed: false,
     customRender: ({ record }) => {
       const actions: ActionItem[] = [
+        {
+          label: t('fileManager.copyURL'),
+          color: 'success',
+          onClick: handleCopy.bind(null, record),
+        },
         {
           label: t('component.upload.del'),
           color: 'error',

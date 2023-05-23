@@ -11,6 +11,7 @@ export interface fileInfo {
   fileType: string;
   size: number;
   path: string;
+  publicPath: string;
 }
 
 /**

@@ -9,9 +9,20 @@
         autocomplete="off"
         @submit="handleSubmit()"
       >
-        <AFormItem :label="t('sys.user.avatar')" name="avatar">
-          <a-input v-model:value="formdata.avatar"
-        /></AFormItem>
+        <AFormItem :label="t('sys.user.avatar')">
+          <CropperAvatar
+            :uploadApi="uploadApi"
+            :value="avatar"
+            btnText="更换头像"
+            :btnProps="{ preIcon: 'ant-design:cloud-upload-outlined' }"
+            @change="updateAvatar"
+            width="150"
+          />
+        </AFormItem>
+
+        <AFormItem v-show="false" name="avatar">
+          <a-input v-model:value="formdata.avatar" v-show="false" />
+        </AFormItem>
 
         <AFormItem :label="t('sys.user.nickname')" name="nickname" :rules="[{ required: true }]">
           <a-input v-model:value="formdata.nickname"
@@ -66,14 +77,20 @@
   import { PageWrapper } from '/@/components/Page';
   import { ChangePasswordReq, FormData } from './data';
   import { Card, Form, FormItem, message } from 'ant-design-vue';
-  import { reactive } from 'vue';
+  import { computed, reactive } from 'vue';
   import { useI18n } from 'vue-i18n';
   import { changePassword, getUserProfile, updateProfile } from '/@/api/sys/user';
+  import headerImg from '/@/assets/images/header.jpg';
+  import { useUserStore } from '/@/store/modules/user';
+  import { uploadApi } from '/@/api/file/file';
+  import { CropperAvatar } from '/@/components/Cropper';
 
   const ACard = Card;
   const AForm = Form;
   const AFormItem = FormItem;
   const { t } = useI18n();
+  const userStore = useUserStore();
+
   const formdata = reactive<FormData>({
     avatar: '',
     nickname: '',
@@ -114,4 +131,16 @@
     });
     if (result.code === 0) message.success(result.msg, 3);
   }
+
+  function updateAvatar({ _src, data }) {
+    const userinfo = userStore.getUserInfo;
+    userinfo.avatar = data;
+    formdata.avatar = data;
+    userStore.setUserInfo(userinfo);
+  }
+
+  const avatar = computed(() => {
+    const { avatar } = userStore.getUserInfo;
+    return avatar || headerImg;
+  });
 </script>
