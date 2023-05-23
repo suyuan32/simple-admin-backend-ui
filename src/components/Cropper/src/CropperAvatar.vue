@@ -39,6 +39,7 @@
     watch,
     PropType,
   } from 'vue';
+
   import CopperModal from './CopperModal.vue';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useModal } from '/@/components/Modal';
@@ -53,7 +54,7 @@
     showBtn: { type: Boolean, default: true },
     btnProps: { type: Object as PropType<ButtonProps> },
     btnText: { type: String, default: '' },
-    uploadApi: { type: Function as PropType<({ file: Blob, name: string }) => Promise<void>> },
+    uploadApi: { type: Function as PropType<PromiseFn> },
   };
 
   export default defineComponent({

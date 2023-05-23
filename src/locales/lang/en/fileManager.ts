@@ -16,4 +16,8 @@ export default {
   overSizeError: 'The file is over size',
   wrongTypeError: 'The file type is illegal',
   preprocessing: 'File is preprocessing ...',
+  copyURLFailed: 'Copy the file path failed, please copy manually',
+  copyURLSuccess: 'Copy the path successfully',
+  copyURL: 'Copy URL',
+  uploadFirst: 'Please upload the file firstly',
 };

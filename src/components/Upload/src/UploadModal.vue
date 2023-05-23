@@ -62,6 +62,7 @@
   import FileList from './FileList.vue';
   import { useI18n } from '/@/hooks/web/useI18n';
   import file2md5 from 'file2md5';
+  import useClipboard from 'vue-clipboard3';
 
   export default defineComponent({
     components: { BasicModal, Upload, Alert, FileList },
@@ -77,6 +78,9 @@
       const state = reactive<{ fileList: FileItem[] }>({
         fileList: [],
       });
+
+      const { toClipboard } = useClipboard();
+      const { createErrorModal } = useMessage();
 
       //   是否正在上传
       const isUploadingRef = ref(false);
@@ -150,7 +154,7 @@
             tempFileMd5[file.name] = data;
           })
           .catch(() => {
-            // message.error(t('common.failed'));
+            message.error(t('common.failed'));
           });
 
         // 生成图片缩略图
@@ -179,13 +183,25 @@
         emit('delete', record);
       }
 
-      // 预览
-      // function handlePreview(record: FileItem) {
-      //   const { thumbUrl = '' } = record;
-      //   createImgPreview({
-      //     imageList: [thumbUrl],
-      //   });
-      // }
+      async function handleCopy(record: FileItem) {
+        try {
+          if (record.responseData !== undefined) {
+            await toClipboard(record.responseData?.data.url);
+            createMessage.success(t('fileManager.copyURLSuccess'));
+          } else {
+            createErrorModal({
+              title: t('common.failed'),
+              content: t('fileManager.uploadFirst'),
+            });
+          }
+        } catch (e) {
+          console.error(e);
+          createErrorModal({
+            title: t('fileManager.copyURLFailed'),
+            content: record.responseData?.data.url,
+          });
+        }
+      }
 
       async function uploadApiByItem(item: FileItem) {
         const { api } = props;
@@ -306,7 +322,7 @@
 
       return {
         columns: createTableColumns() as any[],
-        actionColumn: createActionColumn(handleRemove) as any,
+        actionColumn: createActionColumn(handleRemove, handleCopy) as any,
         register,
         closeModal,
         getHelpText,

@@ -59,7 +59,7 @@ export const columns: BasicColumn[] = [
   {
     title: t('fileManager.filePath'),
     dataIndex: 'path',
-    width: 200,
+    width: 60,
   },
   {
     title: t('fileManager.fileSize'),

@@ -20,6 +20,10 @@
                 onClick: handleDownload.bind(null, record),
               },
               {
+                icon: 'ant-design:copy-outlined',
+                onClick: handleCopyToClipboard.bind(null, record),
+              },
+              {
                 icon: 'clarity:note-edit-line',
                 onClick: handleEdit.bind(null, record),
               },
@@ -86,6 +90,8 @@
 
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
   import { BasicUpload } from '/@/components/Upload';
+  import useClipboard from 'vue-clipboard3';
+  import { useMessage } from '/@/hooks/web/useMessage';
 
   import { useDrawer } from '/@/components/Drawer';
   import FileDrawer from './FileDrawer.vue';
@@ -99,6 +105,9 @@
     components: { BasicTable, FileDrawer, TableAction, BasicUpload, Image, Modal },
     setup() {
       const { t } = useI18n();
+      const { toClipboard } = useClipboard();
+      const { createErrorModal, createMessage } = useMessage();
+
       const [registerDrawer, { openDrawer }] = useDrawer();
       const [registerTable, { reload }] = useTable({
         title: t('fileManager.fileList'),
@@ -199,6 +208,19 @@
         reload();
       }
 
+      async function handleCopyToClipboard(record: Recordable) {
+        try {
+          await toClipboard(record.publicPath);
+          createMessage.success(t('fileManager.copyURLSuccess'));
+        } catch (e) {
+          console.error(e);
+          createErrorModal({
+            title: t('fileManager.copyURLFailed'),
+            content: record.publicPath,
+          });
+        }
+      }
+
       function handleSuccess() {
         reload();
       }
@@ -229,6 +251,7 @@
         handleDownloadImage,
         handleCloseVideo,
         handleCloseImage,
+        handleCopyToClipboard,
       };
     },
   });

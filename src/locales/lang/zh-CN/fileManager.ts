@@ -16,4 +16,8 @@ export default {
   overSizeError: '文件大小超过规定值',
   wrongTypeError: '文件类型不合法',
   preprocessing: '文件预处理中...',
+  copyURLFailed: '复制文件地址失败，请手动复制',
+  copyURLSuccess: '复制文件地址成功',
+  copyURL: '复制地址',
+  uploadFirst: '请先上传文件',
 };
