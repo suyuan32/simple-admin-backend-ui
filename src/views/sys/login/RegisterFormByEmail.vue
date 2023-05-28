@@ -77,7 +77,7 @@
 <script lang="ts" setup>
   import { reactive, ref, unref, computed } from 'vue';
   import LoginFormTitle from './LoginFormTitle.vue';
-  import { Form, Input, Button, Checkbox, message } from 'ant-design-vue';
+  import { Form, Input, Button, Checkbox } from 'ant-design-vue';
   import { StrengthMeter } from '/@/components/StrengthMeter';
   import { useI18n } from '/@/hooks/web/useI18n';
   import { useLoginState, useFormRules, useFormValid, LoginStateEnum } from './useLogin';
@@ -111,19 +111,15 @@
     const data = await validForm();
     if (!data) return;
     loading.value = true;
-    const result = await register(
-      {
-        password: data.password,
-        username: data.account,
-        captcha: data.captcha,
-        captchaId: data.captchaId,
-        email: data.email,
-      },
-      'message',
-    );
+    const result = await register({
+      password: data.password,
+      username: data.account,
+      captcha: data.captcha,
+      captchaId: data.captchaId,
+      email: data.email,
+    });
 
     if (result.code === 0) {
-      message.success(t('common.successful'));
       setTimeout(() => {
         handleBackLogin();
       }, 2000);

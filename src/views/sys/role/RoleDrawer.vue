@@ -47,7 +47,7 @@
 </template>
 <script lang="ts">
   import { computed, defineComponent, ref, unref, watch } from 'vue';
-  import { message, Tabs, Tree } from 'ant-design-vue';
+  import { Tabs, Tree } from 'ant-design-vue';
   import { BasicForm, useForm } from '/@/components/Form/index';
   import {
     convertApiCheckedKeysToReq,
@@ -220,7 +220,10 @@
             roleId: Number(roleData['id']),
             menuIds: getMenuTree().getCheckedKeys()['checked'] as number[],
           });
-          message.success(t(result.msg));
+          if (result.code === 0) {
+            childrenDrawer.value = false;
+            closeDrawer();
+          }
         } else {
           const apiReqData: ApiAuthorityInfo[] = convertApiCheckedKeysToReq(
             checkedApiKeys.value,
@@ -233,7 +236,6 @@
           });
           if (result.code === 0) {
             childrenDrawer.value = false;
-            message.success(result.msg);
             closeDrawer();
           }
         }
