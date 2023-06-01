@@ -1,7 +1,11 @@
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode } from '/#/axios';
 import { BaseDataResp, BaseListReq, BaseResp, BaseIDsReq, BaseIDReq } from '/@/api/model/baseModel';
-import { DictionaryDetailInfo, DictionaryDetailListResp } from './model/dictionaryDetailModel';
+import {
+  DictionaryDetailInfo,
+  DictionaryDetailListResp,
+  DictionaryNameReq,
+} from './model/dictionaryDetailModel';
 
 enum Api {
   CreateDictionaryDetail = '/sys-api/dictionary_detail/create',
@@ -9,6 +13,7 @@ enum Api {
   GetDictionaryDetailList = '/sys-api/dictionary_detail/list',
   DeleteDictionaryDetail = '/sys-api/dictionary_detail/delete',
   GetDictionaryDetailById = '/sys-api/dictionary_detail',
+  GetDictionaryDetailByDictionaryName = '/sys-api/dict',
 }
 
 /**
@@ -73,6 +78,21 @@ export const deleteDictionaryDetail = (params: BaseIDsReq, mode: ErrorMessageMod
 export const getDictionaryDetailById = (params: BaseIDReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseDataResp<DictionaryDetailInfo>>(
     { url: Api.GetDictionaryDetailById, params: params },
+    {
+      errorMessageMode: mode,
+    },
+  );
+};
+
+/**
+ *  @description: Get dictionary detail By Dictionary name
+ */
+export const GetDictionaryDetailByDictionaryName = (
+  params: DictionaryNameReq,
+  mode: ErrorMessageMode = 'notice',
+) => {
+  return defHttp.get<BaseDataResp<DictionaryDetailInfo>>(
+    { url: Api.GetDictionaryDetailByDictionaryName + '/' + params.name },
     {
       errorMessageMode: mode,
     },
