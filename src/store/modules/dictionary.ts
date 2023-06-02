@@ -34,5 +34,17 @@ export const useDictionaryStore = defineStore({
         }
       }
     },
+
+    // remove the dictionary in storage
+    removeDictionary(name: string) {
+      if (this.data.has(name)) {
+        this.data.delete(name);
+      }
+    },
+
+    // remove all the dictionary in storage
+    clear() {
+      this.data.clear();
+    },
   },
 });
