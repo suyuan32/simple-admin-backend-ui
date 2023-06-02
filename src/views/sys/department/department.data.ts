@@ -4,6 +4,7 @@ import { formatToDateTime } from '/@/utils/dateUtil';
 import { getDepartmentList, updateDepartment } from '/@/api/sys/department';
 import { Switch } from 'ant-design-vue';
 import { h } from 'vue';
+import { ParentIdEnum } from '/@/enums/appEnum';
 
 const { t } = useI18n();
 
@@ -92,7 +93,6 @@ export const formSchema: FormSchema[] = [
     label: t('sys.department.parentId'),
     component: 'ApiTreeSelect',
     required: true,
-    defaultValue: 0,
     componentProps: {
       api: getDepartmentList,
       params: {
@@ -105,10 +105,10 @@ export const formSchema: FormSchema[] = [
       labelField: 'trans',
       valueField: 'id',
       defaultValue: {
-        id: 0,
+        id: ParentIdEnum.DEFAULT,
         parentId: -1,
         label: t('sys.department.firstLevelDepartment'),
-        value: 0,
+        value: ParentIdEnum.DEFAULT,
       },
     },
   },
