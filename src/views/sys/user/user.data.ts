@@ -8,6 +8,7 @@ import { getRoleList } from '/@/api/sys/role';
 import { getDepartmentList } from '/@/api/sys/department';
 import { getPositionList } from '/@/api/sys/position';
 import { updateUser } from '/@/api/sys/user';
+import { ParentIdEnum } from '/@/enums/appEnum';
 
 const { t } = useI18n();
 
@@ -200,7 +201,6 @@ export const formSchema: FormSchema[] = [
     label: t('sys.department.userDepartment'),
     component: 'ApiTreeSelect',
     required: true,
-    defaultValue: 1,
     componentProps: {
       api: getDepartmentList,
       params: {
@@ -212,6 +212,12 @@ export const formSchema: FormSchema[] = [
       resultField: 'data.data',
       labelField: 'trans',
       valueField: 'id',
+      defaultValue: {
+        id: ParentIdEnum.DEFAULT,
+        parentId: -1,
+        label: t('sys.department.firstLevelDepartment'),
+        value: ParentIdEnum.DEFAULT,
+      },
     },
   },
   {

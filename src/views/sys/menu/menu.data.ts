@@ -6,6 +6,7 @@ import { useI18n } from '/@/hooks/web/useI18n';
 import { formatToDateTime } from '/@/utils/dateUtil';
 import { getMenuList } from '/@/api/sys/menu';
 import { ColumnType } from 'ant-design-vue/lib/table';
+import { ParentIdEnum } from '/@/enums/appEnum';
 
 const { t } = useI18n();
 
@@ -134,17 +135,16 @@ export const formSchema: FormSchema[] = [
     label: t('sys.menu.menuParent'),
     component: 'ApiTreeSelect',
     required: true,
-    defaultValue: 1000000,
     componentProps: {
       api: getMenuList,
       resultField: 'data.data',
       labelField: 'trans',
       valueField: 'id',
       defaultValue: {
-        id: 1000000,
+        id: ParentIdEnum.DEFAULT,
         parentId: -1,
         label: t('sys.menu.rootMenu'),
-        value: 1000000,
+        value: ParentIdEnum.DEFAULT,
       },
     },
   },

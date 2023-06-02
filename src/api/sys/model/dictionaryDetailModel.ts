@@ -18,3 +18,10 @@ export interface DictionaryDetailInfo {
  */
 
 export type DictionaryDetailListResp = BaseListResp<DictionaryDetailInfo>;
+
+/**
+ *  @description: Dictionary name request
+ */
+export interface DictionaryNameReq {
+  name: string;
+}
