@@ -38,7 +38,7 @@ export const useDictionaryStore = defineStore({
 
           const dictData: DictionaryData = { data: dataConv.value };
           this.data.set(name, dictData);
-          return result.data;
+          return dictData;
         } else {
           return null;
         }
