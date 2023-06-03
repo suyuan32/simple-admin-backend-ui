@@ -91,7 +91,7 @@ export const GetDictionaryDetailByDictionaryName = (
   params: DictionaryNameReq,
   mode: ErrorMessageMode = 'notice',
 ) => {
-  return defHttp.get<BaseDataResp<DictionaryDetailInfo>>(
+  return defHttp.get<BaseDataResp<DictionaryDetailListResp>>(
     { url: Api.GetDictionaryDetailByDictionaryName + '/' + params.name },
     {
       errorMessageMode: mode,
