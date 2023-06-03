@@ -3,7 +3,6 @@ import { DictionaryDetailInfo } from '/@/api/sys/model/dictionaryDetailModel';
 import { GetDictionaryDetailByDictionaryName } from '/@/api/sys/dictionaryDetail';
 
 interface DictionaryData {
-  name: string;
   data: DictionaryDetailInfo[];
 }
 
@@ -27,7 +26,8 @@ export const useDictionaryStore = defineStore({
       } else {
         const result = await GetDictionaryDetailByDictionaryName({ name: name });
         if (result.code === 0) {
-          this.data[name] = result.data;
+          const dictData: DictionaryData = { data: result.data.data };
+          this.data.set(name, dictData);
           return result.data;
         } else {
           return null;

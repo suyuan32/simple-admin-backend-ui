@@ -57,6 +57,7 @@ export default {
 
     copyBtn: 'Copy',
     clearBtn: 'Clear cache and to the login page',
+    clearDictionaryCache: 'Clear dictionary cache',
 
     drawerTitle: 'Configuration',
 
