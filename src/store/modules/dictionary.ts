@@ -1,9 +1,10 @@
 import { defineStore } from 'pinia';
-import { DictionaryDetailInfo } from '/@/api/sys/model/dictionaryDetailModel';
 import { GetDictionaryDetailByDictionaryName } from '/@/api/sys/dictionaryDetail';
+import { DefaultOptionType } from 'ant-design-vue/lib/select';
+import { ref } from 'vue';
 
 interface DictionaryData {
-  data: DictionaryDetailInfo[];
+  data: DefaultOptionType[];
 }
 
 export const useDictionaryStore = defineStore({
@@ -26,7 +27,16 @@ export const useDictionaryStore = defineStore({
       } else {
         const result = await GetDictionaryDetailByDictionaryName({ name: name });
         if (result.code === 0) {
-          const dictData: DictionaryData = { data: result.data.data };
+          const dataConv = ref<DefaultOptionType[]>([]);
+
+          for (let i = 0; i < result.data.total; i++) {
+            dataConv.value.push({
+              label: result.data.data[i].title,
+              value: result.data.data[i].value,
+            });
+          }
+
+          const dictData: DictionaryData = { data: dataConv.value };
           this.data.set(name, dictData);
           return result.data;
         } else {
