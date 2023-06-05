@@ -10,7 +10,7 @@ const { t } = useI18n();
 export const columns: BasicColumn[] = [
   {
     title: 'UUID',
-    dataIndex: 'uuid',
+    dataIndex: 'id',
     width: 200,
   },
   {
