@@ -51,9 +51,8 @@ Simple Admin UI 是基于 vue-vben-admin 二次开发的为 Simple Admin 专门�
 
 ## 文档
 
-[文档](https://suyuan32.github.io/simple-admin-core/)
+[文档](https://vben.ryansu.pro/)
 
-- vue-vben-admin [文档地址](https://vvbin.cn/doc-next/)
 - ant-design-vue [地址](https://antdv.com/components/overview)
 
 ## 准备
