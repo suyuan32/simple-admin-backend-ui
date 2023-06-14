@@ -52,7 +52,7 @@ export default {
   delete: 'Delete',
   // notification
   deleteConfirm: 'Confirm the deletion?',
-  operateSucess: 'Successful operation',
+  operateSuccess: 'Successful operation',
   operateFailed: 'The operation failed',
   updateSuccess: 'Update successfully',
   updateFailed: 'Update failed',
