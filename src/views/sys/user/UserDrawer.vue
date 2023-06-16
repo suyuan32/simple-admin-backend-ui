@@ -55,11 +55,7 @@
       async function handleSubmit() {
         const values = await validate();
         setDrawerProps({ confirmLoading: true });
-        if (unref(isUpdate)) {
-          if (values['password'] === undefined) {
-            values['password'] = '';
-          }
-        } else {
+        if (!unref(isUpdate)) {
           if (values['password'] === undefined) {
             createMessage.warning(t('sys.login.passwordPlaceholder'));
             setDrawerProps({ confirmLoading: false });
