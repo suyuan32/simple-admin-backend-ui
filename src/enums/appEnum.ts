@@ -57,5 +57,5 @@ export enum RouterTransitionEnum {
 }
 
 export enum ParentIdEnum {
-  DEFAULT = 100000,
+  DEFAULT = 1000000,
 }
