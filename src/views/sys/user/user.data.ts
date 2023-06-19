@@ -177,7 +177,6 @@ export const formSchema: FormSchema[] = [
     field: 'password',
     label: t('sys.login.password'),
     component: 'Input',
-    rules: [{ min: 6 }],
   },
   {
     field: 'roleIds',

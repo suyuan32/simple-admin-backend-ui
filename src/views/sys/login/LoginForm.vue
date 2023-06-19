@@ -158,8 +158,8 @@
         username: data.account,
         captcha: data.captcha,
         captchaId: data.captchaId,
-        mode: 'none',
         goHome: false,
+        mode: 'notice',
       })
       .then(() => {
         loading.value = false;
