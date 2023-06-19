@@ -8,7 +8,6 @@ import { getRoleList } from '/@/api/sys/role';
 import { getDepartmentList } from '/@/api/sys/department';
 import { getPositionList } from '/@/api/sys/position';
 import { updateUser } from '/@/api/sys/user';
-import { ParentIdEnum } from '/@/enums/appEnum';
 
 const { t } = useI18n();
 
@@ -178,7 +177,6 @@ export const formSchema: FormSchema[] = [
     field: 'password',
     label: t('sys.login.password'),
     component: 'Input',
-    rules: [{ min: 6 }],
   },
   {
     field: 'roleIds',
@@ -212,12 +210,6 @@ export const formSchema: FormSchema[] = [
       resultField: 'data.data',
       labelField: 'trans',
       valueField: 'id',
-      defaultValue: {
-        id: ParentIdEnum.DEFAULT,
-        parentId: -1,
-        label: t('sys.department.firstLevelDepartment'),
-        value: ParentIdEnum.DEFAULT,
-      },
     },
   },
   {
