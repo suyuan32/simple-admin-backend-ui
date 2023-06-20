@@ -1,6 +1,17 @@
 <template>
   <div>
     <BasicTable @register="registerTable">
+      <template #tableTitle>
+        <Button
+          type="primary"
+          danger
+          preIcon="ant-design:delete-outlined"
+          v-if="showDeleteButton"
+          @click="handleBatchDelete()"
+        >
+          {{ t('common.delete') }}
+        </Button>
+      </template>
       <template #toolbar>
         <BasicUpload
           :maxSize="1000"
@@ -85,7 +96,7 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, ref } from 'vue';
+  import { createVNode, defineComponent, ref } from 'vue';
   import { Image, Modal } from 'ant-design-vue';
 
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
@@ -99,14 +110,26 @@
 
   import { columns, searchFormSchema } from './file.data';
   import { deleteFile, downloadFile, getFileList, uploadApi } from '../../api/file/file';
+  import { ExclamationCircleOutlined } from '@ant-design/icons-vue/lib/icons';
+  import { Button } from '/@/components/Button';
 
   export default defineComponent({
     name: 'FileManagement',
-    components: { BasicTable, FileDrawer, TableAction, BasicUpload, Image, Modal },
+    components: {
+      BasicTable,
+      FileDrawer,
+      Button,
+      TableAction,
+      BasicUpload,
+      Image,
+      Modal,
+    },
     setup() {
       const { t } = useI18n();
       const { toClipboard } = useClipboard();
       const { createErrorModal, createMessage } = useMessage();
+      const showDeleteButton = ref<boolean>(false);
+      const selectedIds = ref<number[] | string[]>();
 
       const [registerDrawer, { openDrawer }] = useDrawer();
       const [registerTable, { reload }] = useTable({
@@ -126,6 +149,14 @@
           title: t('common.action'),
           dataIndex: 'action',
           fixed: undefined,
+        },
+        rowKey: 'id',
+        rowSelection: {
+          type: 'checkbox',
+          onChange: (selectedRowKeys, _selectedRows) => {
+            selectedIds.value = selectedRowKeys as number[];
+            showDeleteButton.value = selectedRowKeys.length > 0;
+          },
         },
       });
       // image and video control
@@ -204,8 +235,25 @@
       }
 
       async function handleDelete(record: Recordable) {
-        await deleteFile({ id: record.id });
+        await deleteFile({ ids: [record.id] });
         reload();
+      }
+
+      async function handleBatchDelete() {
+        Modal.confirm({
+          title: t('common.deleteConfirm'),
+          icon: createVNode(ExclamationCircleOutlined),
+          async onOk() {
+            const ids = selectedIds.value as number[];
+            const result = await deleteFile({ ids: ids });
+            if (result.code === 0) {
+              await reload();
+            }
+          },
+          onCancel() {
+            console.log('Cancel');
+          },
+        });
       }
 
       async function handleCopyToClipboard(record: Recordable) {
@@ -252,6 +300,8 @@
         handleCloseVideo,
         handleCloseImage,
         handleCopyToClipboard,
+        handleBatchDelete,
+        showDeleteButton,
       };
     },
   });

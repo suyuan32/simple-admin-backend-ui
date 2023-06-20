@@ -7,8 +7,13 @@
       <Col :span="19">
         <BasicTable @register="registerTable" :searchInfo="searchInfo">
           <template #tableTitle>
-            <Button type="primary" danger v-if="showDeleteButton" @click="handleBatchDelete()">
-              <template #icon><DeleteOutlined /></template>
+            <Button
+              type="primary"
+              danger
+              preIcon="ant-design:delete-outlined"
+              v-if="showDeleteButton"
+              @click="handleBatchDelete()"
+            >
               {{ t('common.delete') }}
             </Button>
           </template>
@@ -46,9 +51,10 @@
 </template>
 <script lang="ts">
   import { createVNode, defineComponent, reactive, ref } from 'vue';
-  import { Button, Modal } from 'ant-design-vue';
-  import { ExclamationCircleOutlined, DeleteOutlined } from '@ant-design/icons-vue/lib/icons';
+  import { Modal } from 'ant-design-vue';
+  import { ExclamationCircleOutlined } from '@ant-design/icons-vue/lib/icons';
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import { Button } from '/@/components/Button';
   import RankTree from './RankTree.vue';
 
   import { useDrawer } from '/@/components/Drawer';
@@ -72,7 +78,6 @@
       Row,
       Col,
       RankTree,
-      DeleteOutlined,
     },
     setup() {
       const { t } = useI18n();
