@@ -143,6 +143,7 @@
         useSearchForm: true,
         showTableSetting: true,
         bordered: true,
+        clickToRowSelect: false,
         showIndexColumn: false,
         actionColumn: {
           width: 50,

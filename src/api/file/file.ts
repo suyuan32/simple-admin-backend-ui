@@ -11,6 +11,7 @@ enum Api {
   UpdateFileInfo = '/fms-api/file/update',
   SetFileStatus = '/fms-api/file/status',
   DownloadFile = '/fms-api/file/download',
+  DeleteFile = '/fms-api/file/delete',
 }
 
 /**
@@ -55,9 +56,9 @@ export const UpdateFileInfo = (params: updateFileInfoReq, mode: ErrorMessageMode
  *  author: Ryan Su
  *  @description: delete api
  */
-export const deleteFile = (params: BaseIDsReq, mode: ErrorMessageMode = 'modal') => {
-  return defHttp.delete<BaseResp>(
-    { url: Api.UpdateFileInfo, params: params },
+export const deleteFile = (params: BaseIDsReq, mode: ErrorMessageMode = 'notice') => {
+  return defHttp.post<BaseResp>(
+    { url: Api.DeleteFile, params: params },
     {
       errorMessageMode: mode,
       successMessageMode: mode,
