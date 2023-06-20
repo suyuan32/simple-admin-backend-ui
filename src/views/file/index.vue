@@ -143,6 +143,7 @@
         useSearchForm: true,
         showTableSetting: true,
         bordered: true,
+        clickToRowSelect: false,
         showIndexColumn: false,
         actionColumn: {
           width: 50,
@@ -244,7 +245,7 @@
           title: t('common.deleteConfirm'),
           icon: createVNode(ExclamationCircleOutlined),
           async onOk() {
-            const ids = selectedIds.value as number[];
+            const ids = selectedIds.value as string[];
             const result = await deleteFile({ ids: ids });
             if (result.code === 0) {
               await reload();

@@ -1,7 +1,7 @@
 import { UploadApiResp } from '/@/api/sys/model/uploadModel';
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode, UploadFileParams } from '/#/axios';
-import { BaseDataResp, BaseIDsReq, BaseListReq, BaseResp } from '../model/baseModel';
+import { BaseDataResp, BaseListReq, BaseResp, BaseUUIDsReq } from '../model/baseModel';
 import { FileListResp, updateFileInfoReq } from './model/fileModel';
 import { AxiosProgressEvent } from 'axios';
 
@@ -11,6 +11,7 @@ enum Api {
   UpdateFileInfo = '/fms-api/file/update',
   SetFileStatus = '/fms-api/file/status',
   DownloadFile = '/fms-api/file/download',
+  DeleteFile = '/fms-api/file/delete',
 }
 
 /**
@@ -53,11 +54,11 @@ export const UpdateFileInfo = (params: updateFileInfoReq, mode: ErrorMessageMode
 
 /**
  *  author: Ryan Su
- *  @description: delete api
+ *  @description: delete files
  */
-export const deleteFile = (params: BaseIDsReq, mode: ErrorMessageMode = 'modal') => {
-  return defHttp.delete<BaseResp>(
-    { url: Api.UpdateFileInfo, params: params },
+export const deleteFile = (params: BaseUUIDsReq, mode: ErrorMessageMode = 'notice') => {
+  return defHttp.post<BaseResp>(
+    { url: Api.DeleteFile, params: params },
     {
       errorMessageMode: mode,
       successMessageMode: mode,
@@ -69,7 +70,7 @@ export const deleteFile = (params: BaseIDsReq, mode: ErrorMessageMode = 'modal')
  *  author: Ryan Su
  *  @description: set file's status
  */
-export const setFileStatus = (id: number, status: number, mode: ErrorMessageMode = 'notice') =>
+export const setFileStatus = (id: string, status: number, mode: ErrorMessageMode = 'notice') =>
   defHttp.post(
     { url: Api.SetFileStatus, params: { id, status } },
     {

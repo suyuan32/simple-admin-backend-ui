@@ -56,7 +56,7 @@
           const values = await validate();
           setDrawerProps({ confirmLoading: true });
           let params: updateFileInfoReq = {
-            id: Number(values['id']),
+            id: values['id'],
             name: values['name'],
           };
           await UpdateFileInfo(params);
