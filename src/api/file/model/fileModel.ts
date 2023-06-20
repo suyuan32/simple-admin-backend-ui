@@ -5,7 +5,7 @@ import { BaseListResp } from '../../model/baseModel';
  *  @description: file info response
  */
 export interface fileInfo {
-  id: number;
+  id: string;
   createdAt?: number;
   name: string;
   fileType: string;
@@ -26,7 +26,7 @@ export type FileListResp = BaseListResp<fileInfo>;
  *  @description: change status request
  */
 export interface changeStatusReq {
-  id: number;
+  id: string;
   status: boolean;
 }
 
@@ -35,6 +35,6 @@ export interface changeStatusReq {
  *  @description: update file info request
  */
 export interface updateFileInfoReq {
-  id: number;
+  id: string;
   name: string;
 }
