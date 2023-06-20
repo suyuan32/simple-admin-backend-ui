@@ -20,4 +20,7 @@ export default {
   copyURLSuccess: 'Copy the path successfully',
   copyURL: 'Copy URL',
   uploadFirst: 'Please upload the file firstly',
+
+  addFile: 'Add File',
+  editFile: 'Edit File',
 };

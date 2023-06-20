@@ -2,8 +2,13 @@
   <div>
     <BasicTable @register="registerTable" :searchInfo="searchInfo">
       <template #tableTitle>
-        <Button type="primary" danger v-if="showDeleteButton" @click="handleBatchDelete()">
-          <template #icon><DeleteOutlined /></template>
+        <Button
+          type="primary"
+          danger
+          preIcon="ant-design:delete-outlined"
+          v-if="showDeleteButton"
+          @click="handleBatchDelete()"
+        >
           {{ t('common.delete') }}
         </Button>
       </template>
@@ -39,9 +44,10 @@
 </template>
 <script lang="ts">
   import { createVNode, defineComponent, reactive, ref, unref } from 'vue';
-  import { Button, Modal } from 'ant-design-vue';
-  import { ExclamationCircleOutlined, DeleteOutlined } from '@ant-design/icons-vue/lib/icons';
+  import { Modal } from 'ant-design-vue';
+  import { ExclamationCircleOutlined } from '@ant-design/icons-vue/lib/icons';
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import { Button } from '/@/components/Button';
 
   import { useDrawer } from '/@/components/Drawer';
   import DictionaryDetailDrawer from './DictionaryDetailDrawer.vue';
@@ -53,7 +59,7 @@
 
   export default defineComponent({
     name: 'DictionaryDetailManagement',
-    components: { BasicTable, DictionaryDetailDrawer, TableAction, Button, DeleteOutlined },
+    components: { BasicTable, DictionaryDetailDrawer, TableAction, Button },
     setup() {
       const { t } = useI18n();
       const selectedIds = ref<number[] | string[]>();

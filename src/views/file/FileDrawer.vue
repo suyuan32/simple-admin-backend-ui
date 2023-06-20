@@ -48,7 +48,7 @@
       });
 
       const getTitle = computed(() =>
-        !unref(isUpdate) ? t('sys.apis.addApi') : t('sys.apis.editApi'),
+        !unref(isUpdate) ? t('fileManager.addFile') : t('fileManager.editFile'),
       );
 
       async function handleSubmit() {

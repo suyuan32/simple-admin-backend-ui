@@ -1,14 +1,14 @@
 import { UploadApiResp } from '/@/api/sys/model/uploadModel';
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode, UploadFileParams } from '/#/axios';
-import { BaseDataResp, BaseIDReq, BaseListReq, BaseResp } from '../model/baseModel';
+import { BaseDataResp, BaseIDsReq, BaseListReq, BaseResp } from '../model/baseModel';
 import { FileListResp, updateFileInfoReq } from './model/fileModel';
 import { AxiosProgressEvent } from 'axios';
 
 enum Api {
   uploadFile = '/fms-api/upload',
   GetFileList = '/fms-api/file/list',
-  UpdateFileInfo = '/fms-api/file',
+  UpdateFileInfo = '/fms-api/file/update',
   SetFileStatus = '/fms-api/file/status',
   DownloadFile = '/fms-api/file/download',
 }
@@ -55,7 +55,7 @@ export const UpdateFileInfo = (params: updateFileInfoReq, mode: ErrorMessageMode
  *  author: Ryan Su
  *  @description: delete api
  */
-export const deleteFile = (params: BaseIDReq, mode: ErrorMessageMode = 'modal') => {
+export const deleteFile = (params: BaseIDsReq, mode: ErrorMessageMode = 'modal') => {
   return defHttp.delete<BaseResp>(
     { url: Api.UpdateFileInfo, params: params },
     {

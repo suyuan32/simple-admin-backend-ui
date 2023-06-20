@@ -20,4 +20,7 @@ export default {
   copyURLSuccess: '复制文件地址成功',
   copyURL: '复制地址',
   uploadFirst: '请先上传文件',
+
+  addFile: '添加文件',
+  editFile: '编辑文件',
 };
