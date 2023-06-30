@@ -31,6 +31,15 @@
                     onClick: handleEdit.bind(null, record),
                   },
                   {
+                    icon: 'bx:log-out-circle',
+                    color: 'error',
+                    popConfirm: {
+                      title: t('sys.user.forceLoggingOut') + '?',
+                      placement: 'left',
+                      confirm: handleLogout.bind(null, record),
+                    },
+                  },
+                  {
                     icon: 'ant-design:delete-outlined',
                     color: 'error',
                     popConfirm: {
@@ -66,6 +75,7 @@
   import { PageWrapper } from '/@/components/Page';
   import Row from 'ant-design-vue/es/grid/Row';
   import Col from 'ant-design-vue/es/grid/Col';
+  import { logout } from '/@/api/member/token';
 
   export default defineComponent({
     name: 'MemberManagement',
@@ -152,6 +162,12 @@
         });
       }
 
+      async function handleLogout(record: Recordable) {
+        const result = await logout(record.id);
+
+        if (result.code === 0) await reload();
+      }
+
       async function handleSuccess() {
         await reload();
       }
@@ -171,6 +187,7 @@
         handleSuccess,
         handleBatchDelete,
         handleSelect,
+        handleLogout,
         showDeleteButton,
         searchInfo,
       };

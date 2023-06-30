@@ -12,17 +12,17 @@ export const columns: BasicColumn[] = [
   {
     title: t('sys.login.username'),
     dataIndex: 'username',
-    width: 100,
+    width: 50,
   },
   {
     title: t('sys.user.nickname'),
     dataIndex: 'nickname',
-    width: 100,
+    width: 50,
   },
   {
     title: t('common.status'),
     dataIndex: 'status',
-    width: 50,
+    width: 30,
     customRender: ({ record }) => {
       if (!Reflect.has(record, 'pendingStatus')) {
         record.pendingStatus = false;
@@ -49,7 +49,7 @@ export const columns: BasicColumn[] = [
   {
     title: t('common.createTime'),
     dataIndex: 'createdAt',
-    width: 70,
+    width: 40,
     customRender: ({ record }) => {
       return formatToDateTime(record.createdAt);
     },

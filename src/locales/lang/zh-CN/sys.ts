@@ -239,6 +239,7 @@ export default {
     callback: '回调接口',
     // action
     addProvider: '添加第三方',
+    editProvider: '编辑第三方',
   },
   token: {
     // noun

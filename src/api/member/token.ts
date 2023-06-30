@@ -7,15 +7,15 @@ import {
   BaseUUIDsReq,
   BaseUUIDReq,
 } from '/@/api/model/baseModel';
-import { TokenInfo, TokenListResp } from './model/tokenModel';
+import { TokenInfo, TokenListResp } from '../sys/model/tokenModel';
 
 enum Api {
-  CreateToken = '/sys-api/token/create',
-  UpdateToken = '/sys-api/token/update',
-  GetTokenList = '/sys-api/token/list',
-  DeleteToken = '/sys-api/token/delete',
-  GetTokenById = '/sys-api/token',
-  Logout = '/sys-api/token/logout',
+  CreateToken = '/mms-api/token/create',
+  UpdateToken = '/mms-api/token/update',
+  GetTokenList = '/mms-api/token/list',
+  DeleteToken = '/mms-api/token/delete',
+  GetTokenById = '/mms-api/token',
+  Logout = '/mms-api/token/logout',
 }
 
 /**

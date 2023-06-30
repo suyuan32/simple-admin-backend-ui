@@ -25,7 +25,7 @@ export const columns: BasicColumn[] = [
   {
     title: t('sys.login.email'),
     dataIndex: 'email',
-    width: 80,
+    width: 50,
   },
   {
     title: t('common.status'),
@@ -63,7 +63,7 @@ export const columns: BasicColumn[] = [
   {
     title: t('common.createTime'),
     dataIndex: 'createdAt',
-    width: 50,
+    width: 40,
     customRender: ({ record }) => {
       return formatToDateTime(record.createdAt);
     },
