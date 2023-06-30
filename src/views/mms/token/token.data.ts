@@ -1,7 +1,7 @@
 import { BasicColumn, FormSchema } from '/@/components/Table';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { formatToDateTime } from '/@/utils/dateUtil';
-import { updateToken } from '/@/api/sys/token';
+import { updateToken } from '/@/api/member/token';
 import { Switch } from 'ant-design-vue';
 import { h } from 'vue';
 

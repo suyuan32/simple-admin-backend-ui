@@ -245,6 +245,7 @@ export default {
     callback: 'Callback interface',
     // action
     addProvider: 'Add Provider',
+    editProvider: 'Edit Provider',
   },
   token: {
     // noun
@@ -288,20 +289,6 @@ export default {
     editMemberRank: 'Edit Rank',
     memberRankList: 'Rank List',
     code: 'Rank Code',
-  },
-  oauthProvider: {
-    name: 'Name',
-    clientId: 'ClientId',
-    clientSecret: 'ClientSecret',
-    redirectUrl: 'RedirectUrl',
-    scopes: 'Scopes',
-    authUrl: 'AuthUrl',
-    tokenUrl: 'TokenUrl',
-    authStyle: 'AuthStyle',
-    infoUrl: 'InfoUrl',
-    addOauthProvider: 'Add OauthProvider',
-    editOauthProvider: 'Edit OauthProvider',
-    oauthProviderList: 'OauthProvider List',
   },
   task: {
     status: 'Status',

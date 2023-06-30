@@ -13,14 +13,14 @@
 <script lang="ts">
   import { defineComponent, ref, computed, unref } from 'vue';
   import { BasicForm, useForm } from '/@/components/Form/index';
-  import { formSchema } from './oauthProvider.data';
+  import { formSchema } from './oauth.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
 
-  import { createOauthProvider, updateOauthProvider } from '/@/api/sys/oauthProvider';
+  import { createOauthProvider, updateOauthProvider } from '/@/api/member/oauthProvider';
 
   export default defineComponent({
-    name: 'OauthProviderDrawer',
+    name: 'OauthDrawer',
     components: { BasicDrawer, BasicForm },
     emits: ['success', 'register'],
     setup(_, { emit }) {
@@ -48,9 +48,7 @@
       });
 
       const getTitle = computed(() =>
-        !unref(isUpdate)
-          ? t('sys.oauthProvider.addOauthProvider')
-          : t('sys.oauthProvider.editOauthProvider'),
+        !unref(isUpdate) ? t('sys.oauth.addProvider') : t('sys.oauth.editProvider'),
       );
 
       async function handleSubmit() {

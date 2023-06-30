@@ -48,7 +48,7 @@
       });
 
       const getTitle = computed(() =>
-        !unref(isUpdate) ? t('sys.apis.addApi') : t('sys.apis.editApi'),
+        !unref(isUpdate) ? t('sys.oauth.addProvider') : t('sys.oauth.editProvider'),
       );
 
       async function handleSubmit() {
