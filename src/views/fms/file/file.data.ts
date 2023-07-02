@@ -1,6 +1,6 @@
 import { Switch } from 'ant-design-vue';
 import { h } from 'vue';
-import { setFileStatus } from '../../api/file/file';
+import { setFileStatus } from '../../../api/file/file';
 import { BasicColumn, FormSchema } from '/@/components/Table';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { formatToDateTime } from '/@/utils/dateUtil';
