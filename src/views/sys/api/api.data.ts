@@ -67,8 +67,10 @@ export const searchFormSchema: FormSchema[] = [
         { label: 'POST', value: 'POST' },
         { label: 'DELETE', value: 'DELETE' },
         { label: 'PUT', value: 'PUT' },
+        { label: 'PATCH', value: 'PATCH' },
       ],
     },
+    colProps: { span: 4 },
   },
 ];
 
@@ -111,6 +113,7 @@ export const formSchema: FormSchema[] = [
         { label: 'POST', value: 'POST' },
         { label: 'DELETE', value: 'DELETE' },
         { label: 'PUT', value: 'PUT' },
+        { label: 'PATCH', value: 'PATCH' },
       ],
     },
   },
