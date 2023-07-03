@@ -82,7 +82,7 @@
   import { changePassword, getUserProfile, updateProfile } from '/@/api/sys/user';
   import headerImg from '/@/assets/images/header.jpg';
   import { useUserStore } from '/@/store/modules/user';
-  import { uploadApi } from '/@/api/file/file';
+  import { uploadApi } from '/@/api/fms/file';
   import { CropperAvatar } from '/@/components/Cropper';
 
   const ACard = Card;
