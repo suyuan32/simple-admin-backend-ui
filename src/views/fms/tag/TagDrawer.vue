@@ -13,14 +13,14 @@
 <script lang="ts">
   import { defineComponent, ref, computed, unref } from 'vue';
   import { BasicForm, useForm } from '/@/components/Form/index';
-  import { formSchema } from './file.data';
+  import { formSchema } from './tag.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
-  import { updateFileInfoReq } from '/@/api/file/model/fileModel';
-  import { UpdateFileInfo } from '../../api/file/file';
+
+  import { createTag, updateTag } from '/@/api/fms/tag';
 
   export default defineComponent({
-    name: 'FileDrawer',
+    name: 'TagDrawer',
     components: { BasicDrawer, BasicForm },
     emits: ['success', 'register'],
     setup(_, { emit }) {
@@ -48,23 +48,19 @@
       });
 
       const getTitle = computed(() =>
-        !unref(isUpdate) ? t('fileManager.addFile') : t('fileManager.editFile'),
+        !unref(isUpdate) ? t('fms.tag.addTag') : t('fms.tag.editTag'),
       );
 
       async function handleSubmit() {
-        try {
-          const values = await validate();
-          setDrawerProps({ confirmLoading: true });
-          let params: updateFileInfoReq = {
-            id: values['id'],
-            name: values['name'],
-          };
-          await UpdateFileInfo(params);
+        const values = await validate();
+        setDrawerProps({ confirmLoading: true });
+        values['id'] = unref(isUpdate) ? Number(values['id']) : 0;
+        let result = unref(isUpdate) ? await updateTag(values) : await createTag(values);
+        if (result.code === 0) {
           closeDrawer();
           emit('success');
-        } finally {
-          setDrawerProps({ confirmLoading: false });
         }
+        setDrawerProps({ confirmLoading: false });
       }
 
       return {

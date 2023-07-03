@@ -87,7 +87,7 @@ export function createActionColumn(handleRemove: Function, handleCopy: Function)
     customRender: ({ record }) => {
       const actions: ActionItem[] = [
         {
-          label: t('fileManager.copyURL'),
+          label: t('fms.file.copyURL'),
           color: 'success',
           onClick: handleCopy.bind(null, record),
         },

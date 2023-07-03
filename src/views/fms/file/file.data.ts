@@ -1,31 +1,32 @@
 import { Switch } from 'ant-design-vue';
 import { h } from 'vue';
-import { setFileStatus } from '../../api/file/file';
+import { setFileStatus } from '/@/api/fms/file';
 import { BasicColumn, FormSchema } from '/@/components/Table';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { formatToDateTime } from '/@/utils/dateUtil';
+import { getTagList } from '/@/api/fms/tag';
 
 const { t } = useI18n();
 
 export const columns: BasicColumn[] = [
   {
-    title: t('fileManager.fileName'),
+    title: t('fms.file.fileName'),
     dataIndex: 'name',
     width: 100,
   },
   {
-    title: t('fileManager.fileType'),
+    title: t('fms.file.fileType'),
     dataIndex: 'fileType',
     width: 30,
     customRender: ({ record }) => {
       if (record.fileType === 'video') {
-        return t('fileManager.video');
+        return t('fms.file.video');
       } else if (record.fileType === 'audio') {
-        return t('fileManager.audio');
+        return t('fms.file.audio');
       } else if (record.fileType === 'image') {
-        return t('fileManager.image');
+        return t('fms.file.image');
       } else {
-        return t('fileManager.other');
+        return t('fms.file.other');
       }
     },
   },
@@ -39,8 +40,8 @@ export const columns: BasicColumn[] = [
       }
       return h(Switch, {
         checked: record.status === 1,
-        checkedChildren: t('fileManager.public'),
-        unCheckedChildren: t('fileManager.private'),
+        checkedChildren: t('fms.file.public'),
+        unCheckedChildren: t('fms.file.private'),
         loading: record.pendingStatus,
         onChange(checked, _) {
           record.pendingStatus = true;
@@ -57,12 +58,12 @@ export const columns: BasicColumn[] = [
     },
   },
   {
-    title: t('fileManager.filePath'),
+    title: t('fms.file.filePath'),
     dataIndex: 'path',
     width: 60,
   },
   {
-    title: t('fileManager.fileSize'),
+    title: t('fms.file.fileSize'),
     dataIndex: 'size',
     width: 50,
     customRender: ({ record }) => {
@@ -88,23 +89,23 @@ export const columns: BasicColumn[] = [
 export const searchFormSchema: FormSchema[] = [
   {
     field: 'fileType',
-    label: t('fileManager.fileType'),
+    label: t('fms.file.fileType'),
     colProps: { span: 8 },
     component: 'Select',
     defaultValue: 0,
     componentProps: {
       options: [
         { label: t('common.all'), value: 0 },
-        { label: t('fileManager.other'), value: 1 },
-        { label: t('fileManager.image'), value: 2 },
-        { label: t('fileManager.video'), value: 3 },
-        { label: t('fileManager.audio'), value: 4 },
+        { label: t('fms.file.other'), value: 1 },
+        { label: t('fms.file.image'), value: 2 },
+        { label: t('fms.file.video'), value: 3 },
+        { label: t('fms.file.audio'), value: 4 },
       ],
     },
   },
   {
     field: 'fileName',
-    label: t('fileManager.fileName'),
+    label: t('fms.file.fileName'),
     defaultValue: '',
     component: 'Input',
     colProps: { span: 8 },
@@ -114,6 +115,23 @@ export const searchFormSchema: FormSchema[] = [
     label: t('common.createTime'),
     defaultValue: [new Date(new Date().getTime() - 365 * 24 * 60 * 60 * 1000), new Date()],
     component: 'RangePicker',
+    colProps: { span: 8 },
+  },
+  {
+    field: 'tagIds',
+    label: t('fms.tag.tag'),
+    component: 'ApiMultipleSelect',
+    componentProps: {
+      api: getTagList,
+      params: {
+        page: 1,
+        pageSize: 1000,
+        status: 1,
+      },
+      resultField: 'data.data',
+      labelField: 'name',
+      valueField: 'id',
+    },
     colProps: { span: 8 },
   },
 ];
@@ -127,8 +145,24 @@ export const formSchema: FormSchema[] = [
   },
   {
     field: 'name',
-    label: t('fileManager.fileName'),
+    label: t('fms.file.fileName'),
     required: true,
     component: 'Input',
+  },
+  {
+    field: 'tagIds',
+    label: t('fms.tag.tag'),
+    component: 'ApiMultipleSelect',
+    componentProps: {
+      api: getTagList,
+      params: {
+        page: 1,
+        pageSize: 1000,
+        name: '',
+      },
+      resultField: 'data.data',
+      labelField: 'name',
+      valueField: 'id',
+    },
   },
 ];

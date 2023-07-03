@@ -63,7 +63,7 @@
       <template #footer>
         <a-button key="back" @click="handleCloseVideo"> {{ t('common.closeText') }} </a-button>
         <a-button key="download" type="primary" @click="handleDownloadVideo">{{
-          t('fileManager.download')
+          t('fms.file.download')
         }}</a-button>
       </template>
       <video width="1280" height="720" controls>
@@ -80,7 +80,7 @@
       <template #footer>
         <a-button key="back" @click="handleCloseImage"> {{ t('common.closeText') }} </a-button>
         <a-button key="download" type="primary" @click="handleDownloadImage">{{
-          t('fileManager.download')
+          t('fms.file.download')
         }}</a-button>
       </template>
       <Image
@@ -109,7 +109,7 @@
   import { useI18n } from 'vue-i18n';
 
   import { columns, searchFormSchema } from './file.data';
-  import { deleteFile, downloadFile, getFileList, uploadApi } from '../../api/file/file';
+  import { deleteFile, downloadFile, getFileList, uploadApi } from '/@/api/fms/file';
   import { ExclamationCircleOutlined } from '@ant-design/icons-vue/lib/icons';
   import { Button } from '/@/components/Button';
 
@@ -133,7 +133,7 @@
 
       const [registerDrawer, { openDrawer }] = useDrawer();
       const [registerTable, { reload }] = useTable({
-        title: t('fileManager.fileList'),
+        title: t('fms.file.fileList'),
         api: getFileList,
         columns,
         formConfig: {
@@ -260,11 +260,11 @@
       async function handleCopyToClipboard(record: Recordable) {
         try {
           await toClipboard(record.publicPath);
-          createMessage.success(t('fileManager.copyURLSuccess'));
+          createMessage.success(t('fms.file.copyURLSuccess'));
         } catch (e) {
           console.error(e);
           createErrorModal({
-            title: t('fileManager.copyURLFailed'),
+            title: t('fms.file.copyURLFailed'),
             content: record.publicPath,
           });
         }

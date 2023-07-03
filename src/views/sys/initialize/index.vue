@@ -43,7 +43,7 @@
   import { ref } from 'vue';
   // api
   import { initializeJobDatabase, initialzeCoreDatabase } from '/@/api/sys/initialize';
-  import { initializeFileDatabase } from '/@/api/file/initialize';
+  import { initializeFileDatabase } from '/@/api/fms/initialize';
   import { initializeMMSDatabase } from '/@/api/member/initialize';
 
   const { t } = useI18n();
