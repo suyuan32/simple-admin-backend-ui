@@ -195,7 +195,7 @@
         if (uploadApi && isFunction(uploadApi)) {
           const blob = dataURLtoBlob(previewSource.value);
           try {
-            message.loading(t('fileManager.preprocessing'));
+            message.loading(t('fms.file.preprocessing'));
             await file2md5(blobToFile(blob, 'avatar.jpg'), { chunkSize: 3 * 1024 * 1024 })
               .then((data) => {
                 message.success(t('common.successful'));

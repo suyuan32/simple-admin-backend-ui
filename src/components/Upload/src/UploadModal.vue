@@ -147,7 +147,7 @@
         };
 
         // 计算md5
-        message.loading(t('fileManager.preprocessing'));
+        message.loading(t('fms.file.preprocessing'));
         file2md5(file, { chunkSize: 3 * 1024 * 1024 })
           .then((data) => {
             message.success(t('common.successful'));
@@ -187,17 +187,17 @@
         try {
           if (record.responseData !== undefined) {
             await toClipboard(record.responseData?.data.url);
-            createMessage.success(t('fileManager.copyURLSuccess'));
+            createMessage.success(t('fms.file.copyURLSuccess'));
           } else {
             createErrorModal({
               title: t('common.failed'),
-              content: t('fileManager.uploadFirst'),
+              content: t('fms.file.uploadFirst'),
             });
           }
         } catch (e) {
           console.error(e);
           createErrorModal({
-            title: t('fileManager.copyURLFailed'),
+            title: t('fms.file.copyURLFailed'),
             content: record.responseData?.data.url,
           });
         }

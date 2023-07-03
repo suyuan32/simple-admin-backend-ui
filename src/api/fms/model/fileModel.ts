@@ -12,6 +12,7 @@ export interface fileInfo {
   size: number;
   path: string;
   publicPath: string;
+  tagIds: number[];
 }
 
 /**
@@ -37,4 +38,5 @@ export interface changeStatusReq {
 export interface updateFileInfoReq {
   id: string;
   name: string;
+  tagIds: number[];
 }

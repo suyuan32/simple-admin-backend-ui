@@ -88,7 +88,6 @@ export const formSchema: FormSchema[] = [
     field: 'remark',
     label: t('fms.tag.remark'),
     component: 'Input',
-    required: true,
   },
   {
     field: 'status',

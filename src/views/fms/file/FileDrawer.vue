@@ -16,8 +16,7 @@
   import { formSchema } from './file.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
-  import { updateFileInfoReq } from '/@/api/file/model/fileModel';
-  import { UpdateFileInfo } from '../../api/file/file';
+  import { UpdateFileInfo } from '/@/api/fms/file';
 
   export default defineComponent({
     name: 'FileDrawer',
@@ -48,18 +47,14 @@
       });
 
       const getTitle = computed(() =>
-        !unref(isUpdate) ? t('fileManager.addFile') : t('fileManager.editFile'),
+        !unref(isUpdate) ? t('fms.file.addFile') : t('fms.file.editFile'),
       );
 
       async function handleSubmit() {
         try {
           const values = await validate();
           setDrawerProps({ confirmLoading: true });
-          let params: updateFileInfoReq = {
-            id: values['id'],
-            name: values['name'],
-          };
-          await UpdateFileInfo(params);
+          await UpdateFileInfo(values);
           closeDrawer();
           emit('success');
         } finally {
