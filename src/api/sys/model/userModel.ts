@@ -88,7 +88,22 @@ export interface GetUserInfoModel {
   roles?: string[];
 }
 
-export interface CaptchaResp {
-  captchaId: string;
-  imgPath: string;
+/**
+ * @description: Reset password by email request
+ */
+
+export interface ResetByEmailInfo {
+  email: string;
+  captcha: string;
+  password: string;
+}
+
+/**
+ * @description: Reset password by sms request
+ */
+
+export interface ResetBySmsInfo {
+  phoneNumber: string;
+  captcha: string;
+  password: string;
 }

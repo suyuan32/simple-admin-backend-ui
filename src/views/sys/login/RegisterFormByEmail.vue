@@ -81,7 +81,8 @@
   import { StrengthMeter } from '/@/components/StrengthMeter';
   import { useI18n } from '/@/hooks/web/useI18n';
   import { useLoginState, useFormRules, useFormValid, LoginStateEnum } from './useLogin';
-  import { getCaptcha, register } from '/@/api/sys/user';
+  import { register } from '/@/api/sys/user';
+  import { getCaptcha } from '/@/api/sys/captcha';
 
   const FormItem = Form.Item;
   const InputPassword = Input.Password;

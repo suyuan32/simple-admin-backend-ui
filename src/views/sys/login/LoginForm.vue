@@ -68,13 +68,13 @@
         {{ t('sys.login.loginButton') }}
       </Button>
     </FormItem>
-    <ARow class="enter-x">
-      <ACol :md="8" :xs="24">
+    <ARow class="enter-x" :gutter="5">
+      <ACol :md="6" :xs="24">
         <Button block @click="setLoginState(LoginStateEnum.MOBILE)">
           {{ t('sys.login.mobileSignInFormTitle') }}
         </Button>
       </ACol>
-      <ACol :md="8" :xs="24" class="!my-2 !md:my-0 xs:mx-0 md:mx-2">
+      <ACol :md="6" :xs="24">
         <Button block @click="setLoginState(LoginStateEnum.QR_CODE)">
           {{ t('sys.login.qrSignInFormTitle') }}
         </Button>
@@ -82,6 +82,11 @@
       <ACol :md="6" :xs="24">
         <Button block @click="setLoginState(LoginStateEnum.REGISTER_BY_EMAIL)">
           {{ t('sys.login.registerButton') }}
+        </Button>
+      </ACol>
+      <ACol :md="6" :xs="24">
+        <Button block @click="setLoginState(LoginStateEnum.RESET_PASSWORD)">
+          {{ t('sys.login.forgetFormTitle') }}
         </Button>
       </ACol>
     </ARow>
@@ -115,7 +120,7 @@
   import { useUserStore } from '/@/store/modules/user';
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
   import { useDesign } from '/@/hooks/web/useDesign';
-  import { getCaptcha } from '/@/api/sys/user';
+  import { getCaptcha } from '/@/api/sys/captcha';
   import { useGo } from '/@/hooks/web/usePage';
   import { PageEnum } from '/@/enums/pageEnum';
   import { oauthLogin } from '/@/api/sys/oauthProvider';

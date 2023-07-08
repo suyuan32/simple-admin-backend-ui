@@ -4,12 +4,13 @@ import {
   LoginReq,
   LoginResp,
   GetUserInfoModel,
-  CaptchaResp,
   RegisterReq,
   UserListResp,
   UserInfo,
   UserProfile,
   ChangePasswordReq,
+  ResetByEmailInfo,
+  ResetBySmsInfo,
 } from './model/userModel';
 import { BaseDataResp, BaseListReq, BaseResp, BaseUUIDReq, BaseUUIDsReq } from '../model/baseModel';
 
@@ -24,9 +25,10 @@ enum Api {
   Logout = '/sys-api/user/logout',
   GetUserInfo = '/sys-api/user/info',
   GetPermCode = '/sys-api/user/perm',
-  GetCaptcha = '/sys-api/captcha',
   Profile = '/sys-api/user/profile',
   ChangePassword = '/sys-api/user/change_password',
+  ResetPasswordByEmail = '/sys-api/user/reset_password_by_email',
+  ResetPasswordBySms = '/sys-api/user/reset_password_by_sms',
 }
 
 /**
@@ -124,20 +126,6 @@ export function register(params: RegisterReq, mode: ErrorMessageMode = 'notice')
 }
 
 /**
- * @description: Get captcha api
- */
-export function getCaptcha(mode: ErrorMessageMode = 'notice') {
-  return defHttp.get<BaseDataResp<CaptchaResp>>(
-    {
-      url: Api.GetCaptcha,
-    },
-    {
-      errorMessageMode: mode,
-    },
-  );
-}
-
-/**
  * @description: Get user's basic info
  */
 
@@ -184,5 +172,29 @@ export function changePassword(params: ChangePasswordReq) {
   return defHttp.post<BaseResp>(
     { url: Api.ChangePassword, params },
     { errorMessageMode: 'message' },
+  );
+}
+
+/**
+ *  author: Ryan Su
+ *  @description: reset user password by email
+ */
+
+export function resetPasswordByEmail(params: ResetByEmailInfo, mode: ErrorMessageMode = 'notice') {
+  return defHttp.post<BaseResp>(
+    { url: Api.ResetPasswordByEmail, params },
+    { errorMessageMode: mode, successMessageMode: mode },
+  );
+}
+
+/**
+ *  author: Ryan Su
+ *  @description: reset user password by email
+ */
+
+export function resetPasswordBySms(params: ResetBySmsInfo, mode: ErrorMessageMode = 'notice') {
+  return defHttp.post<BaseResp>(
+    { url: Api.ResetPasswordBySms, params },
+    { errorMessageMode: mode, successMessageMode: mode },
   );
 }
