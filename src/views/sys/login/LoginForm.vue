@@ -69,22 +69,22 @@
       </Button>
     </FormItem>
     <ARow class="enter-x" :gutter="5">
-      <ACol :md="6" :xs="24">
+      <!-- <ACol :md="6" :xs="24">
         <Button block @click="setLoginState(LoginStateEnum.MOBILE)">
           {{ t('sys.login.mobileSignInFormTitle') }}
         </Button>
-      </ACol>
-      <ACol :md="6" :xs="24">
+      </ACol> -->
+      <ACol :md="8" :xs="24">
         <Button block @click="setLoginState(LoginStateEnum.QR_CODE)">
           {{ t('sys.login.qrSignInFormTitle') }}
         </Button>
       </ACol>
-      <ACol :md="6" :xs="24">
+      <ACol :md="8" :xs="24">
         <Button block @click="setLoginState(LoginStateEnum.REGISTER_BY_EMAIL)">
           {{ t('sys.login.registerButton') }}
         </Button>
       </ACol>
-      <ACol :md="6" :xs="24">
+      <ACol :md="8" :xs="24">
         <Button block @click="setLoginState(LoginStateEnum.RESET_PASSWORD)">
           {{ t('sys.login.forgetFormTitle') }}
         </Button>
@@ -95,10 +95,10 @@
 
     <div class="flex justify-evenly enter-x" :class="`${prefixCls}-sign-in-way`">
       <GithubFilled @click="oauthLoginHandler('github')" />
-      <WechatFilled @click="oauthLoginHandler('wechat')" />
-      <AlipayCircleFilled @click="oauthLoginHandler('alipay')" />
+      <!-- <WechatFilled @click="oauthLoginHandler('wechat')" />
+      <AlipayCircleFilled @click="oauthLoginHandler('alipay')" /> -->
       <GoogleCircleFilled @click="oauthLoginHandler('google')" />
-      <TwitterCircleFilled @click="oauthLoginHandler('twitter')" />
+      <!-- <TwitterCircleFilled @click="oauthLoginHandler('twitter')" /> -->
     </div>
   </Form>
 </template>
@@ -106,13 +106,7 @@
   import { reactive, ref, unref, computed } from 'vue';
 
   import { Form, Input, Row, Col, Button, Divider } from 'ant-design-vue';
-  import {
-    GithubFilled,
-    WechatFilled,
-    AlipayCircleFilled,
-    GoogleCircleFilled,
-    TwitterCircleFilled,
-  } from '@ant-design/icons-vue';
+  import { GithubFilled, GoogleCircleFilled } from '@ant-design/icons-vue';
   import LoginFormTitle from './LoginFormTitle.vue';
 
   import { useI18n } from '/@/hooks/web/useI18n';
