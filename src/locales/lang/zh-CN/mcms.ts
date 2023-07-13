@@ -49,4 +49,13 @@ export default {
     subject: '标题',
     content: '内容',
   },
+  sms: {
+    phoneNumber: '电话号码',
+    params: '参数',
+    templateId: '模板 ID',
+    signName: '签名',
+    sendSms: '发送短信',
+    paramsHelp: '使用逗号隔开',
+    templateIdHelp: '若模板ID为空,则使用默认配置,且无需配置签名和服务商',
+  },
 };

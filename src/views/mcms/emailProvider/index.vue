@@ -131,6 +131,7 @@
         baseColProps: { span: 24 },
         schemas: formSchema,
         showActionButtonGroup: false,
+        labelAlign: 'right',
       });
 
       function handleOpenLogModal(record: Recordable) {

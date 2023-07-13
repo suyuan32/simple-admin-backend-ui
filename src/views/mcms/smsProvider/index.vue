@@ -13,6 +13,9 @@
         </Button>
       </template>
       <template #toolbar>
+        <a-button type="success" @click="handleOpenSenderModal">
+          {{ t('mcms.sms.sendSms') }}
+        </a-button>
         <a-button type="primary" @click="handleCreate">
           {{ t('mcms.smsProvider.addSmsProvider') }}
         </a-button>
@@ -45,6 +48,13 @@
     </BasicTable>
     <SmsProviderDrawer @register="registerDrawer" @success="handleSuccess" />
     <LogModal @register="registerModal" :defaultFullscreen="true" />
+    <BasicModal
+      v-model:visible="showSenderModal"
+      :title="t('mcms.sms.sendSms')"
+      @ok="handleSendSms"
+    >
+      <BasicForm @register="registerForm" />
+    </BasicModal>
   </div>
 </template>
 <script lang="ts">
@@ -62,14 +72,28 @@
   import { getSmsProviderList, deleteSmsProvider } from '/@/api/mcms/smsProvider';
   import LogModal from './LogModal.vue';
   import { useModal } from '/@/components/Modal/src/hooks/useModal';
+  import { useForm } from '/@/components/Form/src/hooks/useForm';
+  import { formSchema } from './sms.data';
+  import { sendSms } from '/@/api/mcms/messageSender';
+  import { BasicModal } from '/@/components/Modal';
+  import { BasicForm } from '/@/components/Form';
 
   export default defineComponent({
     name: 'SmsProviderManagement',
-    components: { BasicTable, SmsProviderDrawer, TableAction, Button, LogModal },
+    components: {
+      BasicTable,
+      SmsProviderDrawer,
+      TableAction,
+      Button,
+      LogModal,
+      BasicModal,
+      BasicForm,
+    },
     setup() {
       const { t } = useI18n();
       const selectedIds = ref<number[] | string[]>();
       const showDeleteButton = ref<boolean>(false);
+      const showSenderModal = ref<boolean>(false);
 
       const [registerDrawer, { openDrawer }] = useDrawer();
       const [registerTable, { reload }] = useTable({
@@ -102,6 +126,14 @@
       });
 
       const [registerModal, { openModal }] = useModal();
+
+      const [registerForm, { validate }] = useForm({
+        labelWidth: 140,
+        labelAlign: 'right',
+        baseColProps: { span: 24 },
+        schemas: formSchema,
+        showActionButtonGroup: false,
+      });
 
       function handleOpenLogModal(record: Recordable) {
         openModal(true, { record });
@@ -148,6 +180,15 @@
         await reload();
       }
 
+      function handleOpenSenderModal() {
+        showSenderModal.value = true;
+      }
+
+      async function handleSendSms() {
+        const values = await validate();
+        await sendSms(values);
+      }
+
       return {
         t,
         registerTable,
@@ -160,6 +201,10 @@
         showDeleteButton,
         registerModal,
         handleOpenLogModal,
+        showSenderModal,
+        handleOpenSenderModal,
+        registerForm,
+        handleSendSms,
       };
     },
   });

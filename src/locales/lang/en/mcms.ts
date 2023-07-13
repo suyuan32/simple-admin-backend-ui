@@ -49,4 +49,14 @@ export default {
     subject: 'Title',
     content: 'Content',
   },
+  sms: {
+    phoneNumber: 'Phone Number',
+    params: 'Parameters',
+    templateId: 'Template ID',
+    signName: 'Signature',
+    sendSms: 'Send SMS',
+    paramsHelp: 'separated by commas',
+    templateIdHelp:
+      'If the template ID is empty, it will use default configuration. Signatures and service providers also do not need to be set',
+  },
 };
