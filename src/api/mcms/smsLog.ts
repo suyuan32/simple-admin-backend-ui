@@ -1,6 +1,12 @@
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode } from '/#/axios';
-import { BaseDataResp, BaseListReq, BaseResp, BaseUUIDsReq, BaseUUIDReq } from '/@/api/model/baseModel';
+import {
+  BaseDataResp,
+  BaseListReq,
+  BaseResp,
+  BaseUUIDsReq,
+  BaseUUIDReq,
+} from '/@/api/model/baseModel';
 import { SmsLogInfo, SmsLogListResp } from './model/smsLogModel';
 
 enum Api {

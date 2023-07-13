@@ -43,4 +43,10 @@ export default {
     editEmailLog: 'Edit Email Log',
     emailLogList: 'Email Log List',
   },
+  email: {
+    sendEmail: 'Send Email',
+    targetAddress: 'Receiver',
+    subject: 'Title',
+    content: 'Content',
+  },
 };

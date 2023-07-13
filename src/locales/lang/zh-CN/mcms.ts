@@ -43,4 +43,10 @@ export default {
     editEmailLog: '编辑邮件日志',
     emailLogList: '邮件日志列表',
   },
+  email: {
+    sendEmail: '发送邮件',
+    targetAddress: '收件人邮箱',
+    subject: '标题',
+    content: '内容',
+  },
 };
