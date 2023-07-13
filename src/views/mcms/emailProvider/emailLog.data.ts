@@ -76,44 +76,18 @@ export const searchFormSchema: FormSchema[] = [
     component: 'Input',
     colProps: { span: 8 },
   },
-];
-
-export const formSchema: FormSchema[] = [
-  {
-    field: 'id',
-    label: 'ID',
-    component: 'Input',
-    show: false,
-  },
-
-  {
-    field: 'target',
-    label: t('mcms.emailLog.target'),
-    component: 'Input',
-    required: true,
-  },
-  {
-    field: 'subject',
-    label: t('mcms.emailLog.subject'),
-    component: 'Input',
-    required: true,
-  },
-  {
-    field: 'content',
-    label: t('mcms.emailLog.content'),
-    component: 'Input',
-    required: true,
-  },
   {
     field: 'sendStatus',
     label: t('mcms.emailLog.sendStatus'),
-    component: 'InputNumber',
-    required: true,
-  },
-  {
-    field: 'provider',
-    label: t('mcms.emailLog.provider'),
-    component: 'Input',
-    required: true,
+    component: 'Select',
+    colProps: { span: 8 },
+    defaultValue: 0,
+    componentProps: {
+      options: [
+        { label: t('common.all'), value: 0 },
+        { label: t('common.successful'), value: 1 },
+        { label: t('common.failed'), value: 2 },
+      ],
+    },
   },
 ];

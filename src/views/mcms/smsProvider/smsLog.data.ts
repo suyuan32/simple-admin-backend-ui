@@ -71,6 +71,20 @@ export const searchFormSchema: FormSchema[] = [
     component: 'Input',
     colProps: { span: 8 },
   },
+  {
+    field: 'sendStatus',
+    label: t('mcms.emailLog.sendStatus'),
+    component: 'Select',
+    colProps: { span: 8 },
+    defaultValue: 0,
+    componentProps: {
+      options: [
+        { label: t('common.all'), value: 0 },
+        { label: t('common.successful'), value: 1 },
+        { label: t('common.failed'), value: 2 },
+      ],
+    },
+  },
 ];
 
 export const formSchema: FormSchema[] = [
