@@ -12,6 +12,7 @@ export interface ApiInfo {
   description: string;
   group: string;
   method: string;
+  isRequired: boolean;
 }
 
 /**

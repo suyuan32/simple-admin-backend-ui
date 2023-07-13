@@ -8,6 +8,7 @@ import { ApiInfo } from '/@/api/sys/model/apiModel';
 import { ApiAuthorityInfo } from '/@/api/sys/model/authorityModel';
 import { formatToDateTime } from '/@/utils/dateUtil';
 import { updateRole } from '/@/api/sys/role';
+import { union } from 'lodash-es';
 
 const { t } = useI18n();
 
@@ -158,6 +159,7 @@ export function convertApiTreeData(params: ApiInfo[]): DataNode[] {
         apiTmp.children?.push({
           title: t(params[i].trans),
           key: params[i].id,
+          disableCheckbox: params[i].isRequired,
         });
       }
     }
@@ -208,12 +210,21 @@ export function convertApiCheckedKeysToReq(checked: number[], data: ApiInfo[]): 
 
 export function convertApiToCheckedKeys(checked: ApiAuthorityInfo[], data: ApiInfo[]): number[] {
   const dataMap = new Map();
-  const result: number[] = [];
+  const authorityApis: number[] = [];
+  const requiredAPIs: number[] = [];
+  data.forEach(function (value, _key) {
+    if (value.isRequired == true) {
+      requiredAPIs.push(value.id);
+    }
+  });
+
   for (let i = 0; i < data.length; i++) {
     dataMap.set(data[i].path + data[i].method, data[i].id);
   }
   for (let i = 0; i < checked.length; i++) {
-    result.push(dataMap.get(checked[i].path + checked[i].method));
+    authorityApis.push(dataMap.get(checked[i].path + checked[i].method));
   }
+
+  const result = union(authorityApis, requiredAPIs);
   return result;
 }

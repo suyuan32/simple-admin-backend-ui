@@ -1,6 +1,8 @@
+import { h } from 'vue';
 import { BasicColumn, FormSchema } from '/@/components/Table';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { formatToDateTime } from '/@/utils/dateUtil';
+import { Tag } from 'ant-design-vue/lib/components';
 
 const { t } = useI18n();
 
@@ -24,6 +26,26 @@ export const columns: BasicColumn[] = [
     title: t('sys.apis.method'),
     dataIndex: 'method',
     width: 50,
+  },
+  {
+    title: t('common.required'),
+    dataIndex: 'isRequired',
+    width: 30,
+    customRender: ({ record }) => {
+      let resultText = '';
+      if (record.isRequired === true) {
+        resultText = t('common.yes');
+      } else {
+        resultText = t('common.no');
+      }
+      return h(
+        Tag,
+        {
+          color: record.isRequired === true ? 'green' : 'red',
+        },
+        resultText,
+      );
+    },
   },
   {
     title: t('common.createTime'),
@@ -114,6 +136,18 @@ export const formSchema: FormSchema[] = [
         { label: 'DELETE', value: 'DELETE' },
         { label: 'PUT', value: 'PUT' },
         { label: 'PATCH', value: 'PATCH' },
+      ],
+    },
+  },
+  {
+    field: 'isRequired',
+    label: t('common.required'),
+    component: 'RadioButtonGroup',
+    defaultValue: false,
+    componentProps: {
+      options: [
+        { label: t('common.yes'), value: true },
+        { label: t('common.no'), value: false },
       ],
     },
   },
