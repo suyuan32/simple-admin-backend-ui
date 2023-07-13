@@ -1,6 +1,6 @@
 <template>
   <PageWrapper :title="t('sys.init.initTitle')" :content-full-height="true" class="bg">
-    <ARow :gutter="16">
+    <ARow :gutter="[16, 16]">
       <ACol :span="6">
         <ACard :title="t('sys.init.initCoreDatabase')" :hoverable="true">
           <p><a href="https://github.com/suyuan32/simple-admin-core">Core Github</a></p>
@@ -33,6 +33,14 @@
           </a-button>
         </ACard>
       </ACol>
+      <ACol :span="6">
+        <ACard :title="t('sys.init.initMcmsDatabase')" :hoverable="true">
+          <p><a href="https://github.com/suyuan32/simple-admin-message-center">Mcms Github</a></p>
+          <a-button type="primary" :loading="mcmsInitButtonLoading" @click="initMcmsDatabase">
+            {{ t('common.start') }}
+          </a-button>
+        </ACard>
+      </ACol>
     </ARow>
   </PageWrapper>
 </template>
@@ -42,7 +50,11 @@
   import { useI18n } from 'vue-i18n';
   import { ref } from 'vue';
   // api
-  import { initializeJobDatabase, initialzeCoreDatabase } from '/@/api/sys/initialize';
+  import {
+    initializeJobDatabase,
+    initializeMcmsDatabase,
+    initialzeCoreDatabase,
+  } from '/@/api/sys/initialize';
   import { initializeFileDatabase } from '/@/api/fms/initialize';
   import { initializeMMSDatabase } from '/@/api/member/initialize';
 
@@ -54,6 +66,7 @@
   const fileInitButtonLoading = ref<boolean>(false);
   const mmsInitButtonLoading = ref<boolean>(false);
   const jobInitButtonLoading = ref<boolean>(false);
+  const mcmsInitButtonLoading = ref<boolean>(false);
 
   async function initCoreDatabase() {
     coreInitButtonLoading.value = true;
@@ -89,6 +102,15 @@
       message.success(result.msg, 3);
     }
     jobInitButtonLoading.value = false;
+  }
+
+  async function initMcmsDatabase() {
+    mcmsInitButtonLoading.value = true;
+    const result = await initializeMcmsDatabase();
+    if (result.code === 0) {
+      message.success(result.msg, 3);
+    }
+    mcmsInitButtonLoading.value = false;
   }
 </script>
 
