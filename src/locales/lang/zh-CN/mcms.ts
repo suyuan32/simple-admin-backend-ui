@@ -24,4 +24,23 @@ export default {
     editSmsProvider: '编辑短信服务',
     smsProviderList: '短信服务列表',
   },
+  smsLog: {
+    phoneNumber: '电话号码',
+    content: '内容',
+    sendStatus: '状态',
+    provider: '服务商',
+    addSmsLog: '添加短信日志',
+    editSmsLog: '编辑短信日志',
+    smsLogList: '短信日志列表',
+  },
+  emailLog: {
+    target: '收件人邮箱',
+    subject: '标题',
+    content: '内容',
+    sendStatus: '发送状态',
+    provider: '服务商',
+    addEmailLog: '添加邮件日志',
+    editEmailLog: '编辑邮件日志',
+    emailLogList: '邮件日志列表',
+  },
 };

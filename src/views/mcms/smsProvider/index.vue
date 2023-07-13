@@ -3,11 +3,11 @@
     <BasicTable @register="registerTable">
       <template #tableTitle>
         <Button
-                type="primary"
-                danger
-                preIcon="ant-design:delete-outlined"
-                v-if="showDeleteButton"
-                @click="handleBatchDelete()"
+          type="primary"
+          danger
+          preIcon="ant-design:delete-outlined"
+          v-if="showDeleteButton"
+          @click="handleBatchDelete()"
         >
           {{ t('common.delete') }}
         </Button>
@@ -26,6 +26,10 @@
                 onClick: handleEdit.bind(null, record),
               },
               {
+                icon: 'ic:round-library-books',
+                onClick: handleOpenLogModal.bind(null, record),
+              },
+              {
                 icon: 'ant-design:delete-outlined',
                 color: 'error',
                 popConfirm: {
@@ -40,6 +44,7 @@
       </template>
     </BasicTable>
     <SmsProviderDrawer @register="registerDrawer" @success="handleSuccess" />
+    <LogModal @register="registerModal" :defaultFullscreen="true" />
   </div>
 </template>
 <script lang="ts">
@@ -55,10 +60,12 @@
 
   import { columns, searchFormSchema } from './smsProvider.data';
   import { getSmsProviderList, deleteSmsProvider } from '/@/api/mcms/smsProvider';
+  import LogModal from './LogModal.vue';
+  import { useModal } from '/@/components/Modal/src/hooks/useModal';
 
   export default defineComponent({
     name: 'SmsProviderManagement',
-    components: { BasicTable, SmsProviderDrawer, TableAction, Button },
+    components: { BasicTable, SmsProviderDrawer, TableAction, Button, LogModal },
     setup() {
       const { t } = useI18n();
       const selectedIds = ref<number[] | string[]>();
@@ -93,6 +100,12 @@
           },
         },
       });
+
+      const [registerModal, { openModal }] = useModal();
+
+      function handleOpenLogModal(record: Recordable) {
+        openModal(true, { record });
+      }
 
       function handleCreate() {
         openDrawer(true, {
@@ -145,6 +158,8 @@
         handleSuccess,
         handleBatchDelete,
         showDeleteButton,
+        registerModal,
+        handleOpenLogModal,
       };
     },
   });

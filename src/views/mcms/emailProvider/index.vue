@@ -26,6 +26,10 @@
                 onClick: handleEdit.bind(null, record),
               },
               {
+                icon: 'ic:round-library-books',
+                onClick: handleOpenLogModal.bind(null, record),
+              },
+              {
                 icon: 'ant-design:delete-outlined',
                 color: 'error',
                 popConfirm: {
@@ -40,6 +44,7 @@
       </template>
     </BasicTable>
     <EmailProviderDrawer @register="registerDrawer" @success="handleSuccess" />
+    <LogModal @register="registerModal" :defaultFullscreen="true" />
   </div>
 </template>
 <script lang="ts">
@@ -55,10 +60,12 @@
 
   import { columns, searchFormSchema } from './emailProvider.data';
   import { getEmailProviderList, deleteEmailProvider } from '/@/api/mcms/emailProvider';
+  import { useModal } from '/@/components/Modal/src/hooks/useModal';
+  import LogModal from './LogModal.vue';
 
   export default defineComponent({
     name: 'EmailProviderManagement',
-    components: { BasicTable, EmailProviderDrawer, TableAction, Button },
+    components: { BasicTable, EmailProviderDrawer, TableAction, Button, LogModal },
     setup() {
       const { t } = useI18n();
       const selectedIds = ref<number[] | string[]>();
@@ -93,6 +100,12 @@
           },
         },
       });
+
+      const [registerModal, { openModal }] = useModal();
+
+      function handleOpenLogModal(record: Recordable) {
+        openModal(true, { record });
+      }
 
       function handleCreate() {
         openDrawer(true, {
@@ -146,6 +159,8 @@
         handleBatchDelete,
         showDeleteButton,
         reload,
+        registerModal,
+        handleOpenLogModal,
       };
     },
   });
