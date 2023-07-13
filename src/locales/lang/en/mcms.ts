@@ -1,0 +1,27 @@
+export default {
+  emailProvider: {
+    name: 'Provider Name',
+    authType: 'Authority Type',
+    emailAddr: 'Email Address',
+    password: 'Password',
+    hostName: 'Host Name',
+    identify: 'Identify',
+    secret: 'Secret',
+    port: 'Port',
+    tls: 'TLS',
+    isDefault: 'Default Provider',
+    addEmailProvider: 'Add Email Provider',
+    editEmailProvider: 'Edit Email Provider',
+    emailProviderList: 'Email Provider List',
+  },
+  smsProvider: {
+    name: 'Provider Name',
+    secretId: 'SecretId',
+    secretKey: 'SecretKey',
+    region: 'Region',
+    isDefault: 'Default Provider',
+    addSmsProvider: 'Add Sms Provider',
+    editSmsProvider: 'Edit Sms Provider',
+    smsProviderList: 'Sms Provider List',
+  },
+};

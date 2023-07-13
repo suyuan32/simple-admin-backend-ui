@@ -1,0 +1,27 @@
+export default {
+  emailProvider: {
+    name: '邮件服务名称',
+    authType: '认证方式',
+    emailAddr: '邮箱地址',
+    password: '密码',
+    hostName: '服务器地址',
+    identify: '身份信息',
+    secret: '密钥信息',
+    port: '端口',
+    tls: 'TLS加密',
+    isDefault: '是否为默认服务',
+    addEmailProvider: '添加邮件服务',
+    editEmailProvider: '编辑邮件服务',
+    emailProviderList: '邮件服务列表',
+  },
+  smsProvider: {
+    name: '短信服务名称',
+    secretId: '密钥ID',
+    secretKey: '密钥Key',
+    region: '地区',
+    isDefault: '是否为默认服务',
+    addSmsProvider: '添加短信服务',
+    editSmsProvider: '编辑短信服务',
+    smsProviderList: '短信服务列表',
+  },
+};
