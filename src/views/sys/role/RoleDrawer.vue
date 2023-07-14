@@ -149,7 +149,7 @@
           const roleId = await validate();
           const checkedData = await getApiAuthority({ id: Number(roleId['id']) });
           if (checkedData.data.data === null) {
-            checkedApiKeys.value = [];
+            checkedApiKeys.value = convertApiToCheckedKeys([], apiData.data.data);
           } else {
             checkedApiKeys.value = convertApiToCheckedKeys(
               checkedData.data.data,

@@ -16,22 +16,22 @@ export const columns: BasicColumn[] = [
   {
     title: t('sys.role.roleName'),
     dataIndex: 'trans',
-    width: 200,
+    width: 50,
   },
   {
     title: t('sys.role.roleValue'),
     dataIndex: 'code',
-    width: 180,
+    width: 20,
   },
   {
     title: t('common.sort'),
     dataIndex: 'sort',
-    width: 50,
+    width: 20,
   },
   {
     title: t('common.status'),
     dataIndex: 'status',
-    width: 120,
+    width: 50,
     customRender: ({ record }) => {
       if (!Reflect.has(record, 'pendingStatus')) {
         record.pendingStatus = false;
@@ -62,16 +62,17 @@ export const columns: BasicColumn[] = [
     },
   },
   {
+    title: t('common.remark'),
+    dataIndex: 'remark',
+    width: 50,
+  },
+  {
     title: t('common.createTime'),
     dataIndex: 'createdAt',
-    width: 180,
+    width: 50,
     customRender: ({ record }) => {
       return formatToDateTime(record.createdAt);
     },
-  },
-  {
-    title: t('common.remark'),
-    dataIndex: 'remark',
   },
 ];
 
