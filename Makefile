@@ -1,4 +1,4 @@
-VERSION=$(shell git describe --tags --always)
+VERSION=v1.0.14
 
 .PHONY: docker
 docker: # Compile and build the docker | 编译并构建 docker 镜像
