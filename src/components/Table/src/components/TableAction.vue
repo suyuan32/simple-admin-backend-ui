@@ -199,4 +199,24 @@
       }
     }
   }
+
+  [data-theme='dark'] {
+    .@{prefix-cls} {
+      .ant-btn-error:not(.ant-btn-link, .is-disabled) {
+        border-width: 0;
+        background-color: #a61d24;
+        color: @white;
+
+        &:hover,
+        &:focus {
+          background-color: #bf444a;
+          color: @white;
+        }
+
+        &:active {
+          background-color: #bf444a;
+        }
+      }
+    }
+  }
 </style>
