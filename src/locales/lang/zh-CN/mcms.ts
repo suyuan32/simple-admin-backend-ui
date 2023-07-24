@@ -24,6 +24,7 @@ export default {
     editSmsProvider: '编辑短信服务',
     smsProviderList: '短信服务列表',
     tencent: '腾讯云',
+    aliyun: '阿里云',
   },
   smsLog: {
     phoneNumber: '电话号码',

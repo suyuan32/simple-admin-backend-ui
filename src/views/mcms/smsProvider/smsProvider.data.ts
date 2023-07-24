@@ -59,7 +59,10 @@ export const searchFormSchema: FormSchema[] = [
     component: 'Select',
     colProps: { span: 8 },
     componentProps: {
-      options: [{ label: t('mcms.smsProvider.tencent'), value: 'tencent' }],
+      options: [
+        { label: t('mcms.smsProvider.tencent'), value: 'tencent' },
+        { label: t('mcms.smsProvider.aliyun'), value: 'aliyun' },
+      ],
     },
   },
 ];
@@ -78,7 +81,10 @@ export const formSchema: FormSchema[] = [
     component: 'Select',
     required: true,
     componentProps: {
-      options: [{ label: t('mcms.smsProvider.tencent'), value: 'tencent' }],
+      options: [
+        { label: t('mcms.smsProvider.tencent'), value: 'tencent' },
+        { label: t('mcms.smsProvider.aliyun'), value: 'aliyun' },
+      ],
     },
   },
   {
