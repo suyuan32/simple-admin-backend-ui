@@ -12,12 +12,12 @@ export const columns: BasicColumn[] = [
   {
     title: t('mcms.smsProvider.name'),
     dataIndex: 'name',
-    width: 100,
+    width: 50,
   },
   {
     title: t('mcms.smsProvider.isDefault'),
     dataIndex: 'isDefault',
-    width: 100,
+    width: 20,
     customRender: ({ record }) => {
       if (!Reflect.has(record, 'pendingStatus')) {
         record.pendingStatus = false;
@@ -45,7 +45,7 @@ export const columns: BasicColumn[] = [
   {
     title: t('common.createTime'),
     dataIndex: 'createdAt',
-    width: 70,
+    width: 30,
     customRender: ({ record }) => {
       return formatToDateTime(record.createdAt);
     },
