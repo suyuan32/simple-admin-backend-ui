@@ -142,6 +142,9 @@ export default {
     editMenu: '编辑菜单',
     addMenuParam: '新增参数',
     editMenuParam: '编辑参数',
+    // help
+    componentHelp: '目录为 LAYOUT, 内嵌页面使用 Iframe, 普通页面则为页面路径',
+    pathHelp: '所有菜单包括目录都需要设置路径',
   },
   role: {
     // noun
