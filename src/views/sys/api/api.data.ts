@@ -10,27 +10,27 @@ export const columns: BasicColumn[] = [
   {
     title: t('sys.apis.path'),
     dataIndex: 'path',
-    width: 200,
+    width: 50,
   },
   {
     title: t('sys.apis.group'),
     dataIndex: 'group',
-    width: 50,
+    width: 20,
   },
   {
     title: t('sys.apis.description'),
     dataIndex: 'trans',
-    width: 200,
+    width: 80,
   },
   {
     title: t('sys.apis.method'),
     dataIndex: 'method',
-    width: 50,
+    width: 20,
   },
   {
     title: t('common.required'),
     dataIndex: 'isRequired',
-    width: 30,
+    width: 10,
     customRender: ({ record }) => {
       let resultText = '';
       if (record.isRequired === true) {
@@ -50,7 +50,7 @@ export const columns: BasicColumn[] = [
   {
     title: t('common.createTime'),
     dataIndex: 'createdAt',
-    width: 70,
+    width: 30,
     customRender: ({ record }) => {
       return formatToDateTime(record.createdAt);
     },
