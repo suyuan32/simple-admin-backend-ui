@@ -56,8 +56,11 @@ export const searchFormSchema: FormSchema[] = [
   {
     field: 'name',
     label: t('mcms.smsProvider.name'),
-    component: 'Input',
+    component: 'Select',
     colProps: { span: 8 },
+    componentProps: {
+      options: [{ label: t('mcms.smsProvider.tencent'), value: 'tencent' }],
+    },
   },
 ];
 
@@ -72,8 +75,11 @@ export const formSchema: FormSchema[] = [
   {
     field: 'name',
     label: t('mcms.smsProvider.name'),
-    component: 'Input',
+    component: 'Select',
     required: true,
+    componentProps: {
+      options: [{ label: t('mcms.smsProvider.tencent'), value: 'tencent' }],
+    },
   },
   {
     field: 'secretId',

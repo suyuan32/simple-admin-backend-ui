@@ -23,6 +23,7 @@ export default {
     addSmsProvider: '添加短信服务',
     editSmsProvider: '编辑短信服务',
     smsProviderList: '短信服务列表',
+    tencent: '腾讯云',
   },
   smsLog: {
     phoneNumber: '电话号码',

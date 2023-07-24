@@ -174,7 +174,7 @@ export const formSchema: FormSchema[] = [
     label: t('sys.menu.routePath'),
     component: 'Input',
     required: true,
-    // ifShow: ({ values }) => isMenu(values.menuType),
+    helpMessage: t('sys.menu.pathHelp'),
     rules: [{ max: 200 }],
   },
   {
@@ -183,6 +183,7 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
     required: true,
     rules: [{ max: 100 }],
+    helpMessage: t('sys.menu.componentHelp'),
     ifShow: ({ values }) => isMenu(values.menuType),
   },
   {
