@@ -209,12 +209,12 @@
 
         &:hover,
         &:focus {
-          background-color: #bf444a;
+          background-color: #8b1118;
           color: @white;
         }
 
         &:active {
-          background-color: #bf444a;
+          background-color: #8b1118;
         }
       }
     }

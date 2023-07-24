@@ -12,12 +12,12 @@ export const columns: BasicColumn[] = [
   {
     title: t('mcms.smsProvider.name'),
     dataIndex: 'name',
-    width: 100,
+    width: 50,
   },
   {
     title: t('mcms.smsProvider.isDefault'),
     dataIndex: 'isDefault',
-    width: 100,
+    width: 20,
     customRender: ({ record }) => {
       if (!Reflect.has(record, 'pendingStatus')) {
         record.pendingStatus = false;
@@ -45,7 +45,7 @@ export const columns: BasicColumn[] = [
   {
     title: t('common.createTime'),
     dataIndex: 'createdAt',
-    width: 70,
+    width: 30,
     customRender: ({ record }) => {
       return formatToDateTime(record.createdAt);
     },
@@ -59,7 +59,10 @@ export const searchFormSchema: FormSchema[] = [
     component: 'Select',
     colProps: { span: 8 },
     componentProps: {
-      options: [{ label: t('mcms.smsProvider.tencent'), value: 'tencent' }],
+      options: [
+        { label: t('mcms.smsProvider.tencent'), value: 'tencent' },
+        { label: t('mcms.smsProvider.aliyun'), value: 'aliyun' },
+      ],
     },
   },
 ];
@@ -78,7 +81,10 @@ export const formSchema: FormSchema[] = [
     component: 'Select',
     required: true,
     componentProps: {
-      options: [{ label: t('mcms.smsProvider.tencent'), value: 'tencent' }],
+      options: [
+        { label: t('mcms.smsProvider.tencent'), value: 'tencent' },
+        { label: t('mcms.smsProvider.aliyun'), value: 'aliyun' },
+      ],
     },
   },
   {

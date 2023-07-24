@@ -1,4 +1,3 @@
-import { getSmsProviderList } from '/@/api/mcms/smsProvider';
 import { FormSchema } from '/@/components/Table';
 import { useI18n } from '/@/hooks/web/useI18n';
 
@@ -36,16 +35,12 @@ export const formSchema: FormSchema[] = [
   {
     field: 'provider',
     label: t('mcms.emailLog.provider'),
-    component: 'ApiSelect',
+    component: 'Select',
     componentProps: {
-      api: getSmsProviderList,
-      params: {
-        page: 1,
-        pageSize: 1000,
-      },
-      resultField: 'data.data',
-      labelField: 'name',
-      valueField: 'name',
+      options: [
+        { label: t('mcms.smsProvider.tencent'), value: 'tencent' },
+        { label: t('mcms.smsProvider.aliyun'), value: 'aliyun' },
+      ],
     },
   },
 ];
