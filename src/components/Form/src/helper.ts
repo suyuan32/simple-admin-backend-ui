@@ -23,7 +23,6 @@ export function createPlaceholderMessage(component: ComponentType) {
     component.includes('Radio') ||
     component.includes('Switch')
   ) {
-    // return `请选择${label}`;
     return t('common.chooseText');
   }
   return '';
@@ -79,9 +78,13 @@ export const NO_AUTO_LINK_COMPONENTS: ComponentType[] = [
   'ApiTransfer',
   'ApiTree',
   'ApiSelect',
+  'ApiMultipleSelect',
   'ApiTreeSelect',
   'ApiRadioGroup',
   'ApiCascader',
   'AutoComplete',
   'RadioButtonGroup',
 ];
+
+// TODO 部分组件使用 required 会出现错误，暂时屏蔽
+export const NO_REQUIRED_COMPONENT: ComponentType[] = ['ApiSelect', 'ApiMultipleSelect'];

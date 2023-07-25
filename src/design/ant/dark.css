@@ -16354,7 +16354,7 @@ textarea.dark-input-number-affix-wrapper {
   transition: all 0.3s;
   /* stylelint-disable-next-line selector-no-vendor-prefix */
   display: inline-block;
-  width: 90px;
+  /* width: 90px; */
   margin: 0;
   padding: 0;
   border: 1px solid #434343;

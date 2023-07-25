@@ -70,7 +70,7 @@
       const { t } = useI18n();
 
       // Embedded in the form, just use the hook binding to perform form verification
-      const [state] = useRuleFormItem(props, 'value', 'change', emitData) as number[] | string[];
+      const [state] = useRuleFormItem(props, 'value', 'change', emitData);
 
       const getOptions = computed(() => {
         const { labelField, valueField, numberToString } = props;
@@ -93,7 +93,7 @@
       });
 
       watch(
-        () => state.toString,
+        () => state.value,
         (v) => {
           emit('update:value', v);
         },

@@ -23,6 +23,8 @@ export default {
     addSmsProvider: 'Add Sms Provider',
     editSmsProvider: 'Edit Sms Provider',
     smsProviderList: 'Sms Provider List',
+    tencent: 'Tencent Cloud',
+    aliyun: 'Alibaba Cloud',
   },
   smsLog: {
     phoneNumber: 'Phone Number',
