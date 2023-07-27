@@ -145,6 +145,7 @@
         if (unref(fullScreenRef)) {
           return omit(attr, ['height', 'title']);
         }
+
         return omit(attr, 'title');
       });
 

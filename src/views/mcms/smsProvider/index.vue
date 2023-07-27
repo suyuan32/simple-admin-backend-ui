@@ -128,9 +128,9 @@
       const [registerModal, { openModal }] = useModal();
 
       const [registerForm, { validate }] = useForm({
-        labelWidth: 140,
+        labelWidth: 100,
         labelAlign: 'right',
-        baseColProps: { span: 24 },
+        baseColProps: { span: 18 },
         schemas: formSchema,
         showActionButtonGroup: false,
       });
