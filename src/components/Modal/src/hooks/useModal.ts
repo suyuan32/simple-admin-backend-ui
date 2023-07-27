@@ -4,6 +4,7 @@ import type {
   ModalProps,
   ReturnMethods,
   UseModalInnerReturnType,
+  RegisterFn,
 } from '../typing';
 import {
   ref,
@@ -97,7 +98,7 @@ export function useModal(): UseModalReturnType {
       getInstance()?.setModalProps({ visible: false });
     },
   };
-  return [register, methods];
+  return [register as RegisterFn, methods];
 }
 
 export const useModalInner = (callbackFn?: Fn): UseModalInnerReturnType => {
@@ -133,7 +134,7 @@ export const useModalInner = (callbackFn?: Fn): UseModalInnerReturnType => {
   });
 
   return [
-    register,
+    register as RegisterFn,
     {
       changeLoading: (loading = true) => {
         getInstance()?.setModalProps({ loading });
