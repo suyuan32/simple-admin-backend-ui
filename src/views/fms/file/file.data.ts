@@ -12,12 +12,12 @@ export const columns: BasicColumn[] = [
   {
     title: t('fms.file.fileName'),
     dataIndex: 'name',
-    width: 100,
+    width: 50,
   },
   {
     title: t('fms.file.fileType'),
     dataIndex: 'fileType',
-    width: 30,
+    width: 20,
     customRender: ({ record }) => {
       if (record.fileType === 'video') {
         return t('fms.file.video');
@@ -33,7 +33,7 @@ export const columns: BasicColumn[] = [
   {
     title: t('common.status'),
     dataIndex: 'status',
-    width: 40,
+    width: 20,
     customRender: ({ record }) => {
       if (!Reflect.has(record, 'pendingStatus')) {
         record.pendingStatus = false;
@@ -60,12 +60,12 @@ export const columns: BasicColumn[] = [
   {
     title: t('fms.file.filePath'),
     dataIndex: 'path',
-    width: 60,
+    width: 40,
   },
   {
     title: t('fms.file.fileSize'),
     dataIndex: 'size',
-    width: 50,
+    width: 20,
     customRender: ({ record }) => {
       if (record.size > 1073741824) {
         return (record.size / 1073741824).toFixed(2) + 'GB';
@@ -79,7 +79,7 @@ export const columns: BasicColumn[] = [
   {
     title: t('common.createTime'),
     dataIndex: 'createdAt',
-    width: 70,
+    width: 30,
     customRender: ({ record }) => {
       return formatToDateTime(record.createdAt);
     },
