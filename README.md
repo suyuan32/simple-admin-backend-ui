@@ -9,6 +9,8 @@
 
 Simple Admin UI 是基于 vue-vben-admin 二次开发的为 Simple Admin 专门开发的后台管理界面，基于 Vue3 和 TypeScript 开发， 提供后台错误统一处理，国际化等功能，本项目完全免费，可用于学习和商用
 
+## 中文文档地址 [点击查看](https://vben.ryansu.pro/zh/)
+
 ## 特性
 
 - **最新技术栈**：使用 Vue3/vite2 等前端前沿技术开发
