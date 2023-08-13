@@ -150,7 +150,7 @@ export default {
     editMenuParam: 'Edit Parameter',
     // help
     componentHelp:
-      'The directory is "LAYOUT", embedded pages use "Iframe", and regular pages use the page path.',
+      'The directory is "LAYOUT", embedded pages use "IFrame", and regular pages use the page path.',
     pathHelp: 'All menus including directories must set the path.',
   },
   role: {
