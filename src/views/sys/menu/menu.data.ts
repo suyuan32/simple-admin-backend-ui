@@ -231,19 +231,6 @@ export const formSchema: FormSchema[] = [
     },
   },
   {
-    field: 'isExt',
-    label: t('sys.menu.isHttpPath'),
-    component: 'RadioButtonGroup',
-    defaultValue: false,
-    ifShow: ({ values }) => isMenu(values.menuType),
-    componentProps: {
-      options: [
-        { label: t('common.yes'), value: true },
-        { label: t('common.no'), value: false },
-      ],
-    },
-  },
-  {
     field: 'ignoreKeepAlive',
     label: t('sys.menu.isKeepAlive'),
     component: 'RadioButtonGroup',

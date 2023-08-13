@@ -62,12 +62,6 @@
       async function handleSubmit() {
         const values = await validate();
         setDrawerProps({ confirmLoading: true });
-        // defined the component
-        if (values.isExt === true) {
-          values['component'] = 'IFrame';
-        } else if (values.menuType === 2) {
-          values['component'] = 'LAYOUT';
-        }
 
         values['parentId'] = values['parentId'] ? Number(values['parentId']) : 0;
 
