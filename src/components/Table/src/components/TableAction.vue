@@ -204,17 +204,17 @@
     .@{prefix-cls} {
       .ant-btn-error:not(.ant-btn-link, .is-disabled) {
         border-width: 0;
-        background-color: #a61d24;
-        color: @white;
+        background-color: rgb(0 0 0 / 0%);
+        color: #e2262f;
 
         &:hover,
         &:focus {
-          background-color: #8b1118;
-          color: @white;
+          background-color: rgb(0 0 0 / 0%);
+          color: #8b1118;
         }
 
         &:active {
-          background-color: #8b1118;
+          background-color: rgb(0 0 0 / 0%);
         }
       }
     }
