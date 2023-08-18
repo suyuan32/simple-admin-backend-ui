@@ -25,6 +25,7 @@ export default {
     smsProviderList: '短信服务列表',
     tencent: '腾讯云',
     aliyun: '阿里云',
+    uni: '合一短信',
   },
   smsLog: {
     phoneNumber: '电话号码',

@@ -25,6 +25,7 @@ export default {
     smsProviderList: 'Sms Provider List',
     tencent: 'Tencent Cloud',
     aliyun: 'Alibaba Cloud',
+    uni: 'Uni SMS',
   },
   smsLog: {
     phoneNumber: 'Phone Number',
