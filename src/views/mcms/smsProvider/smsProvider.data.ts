@@ -62,6 +62,7 @@ export const searchFormSchema: FormSchema[] = [
       options: [
         { label: t('mcms.smsProvider.tencent'), value: 'tencent' },
         { label: t('mcms.smsProvider.aliyun'), value: 'aliyun' },
+        { label: t('mcms.smsProvider.uni'), value: 'uni' },
       ],
     },
   },
@@ -84,6 +85,7 @@ export const formSchema: FormSchema[] = [
       options: [
         { label: t('mcms.smsProvider.tencent'), value: 'tencent' },
         { label: t('mcms.smsProvider.aliyun'), value: 'aliyun' },
+        { label: t('mcms.smsProvider.uni'), value: 'uni' },
       ],
     },
   },
