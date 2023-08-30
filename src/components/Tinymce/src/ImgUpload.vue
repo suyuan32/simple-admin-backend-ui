@@ -62,7 +62,6 @@
 
       function handleChange(info: Recordable) {
         const file = info.file;
-        console.log(file);
         const status = file?.status;
         const url = file?.response?.data?.url;
         const name = file?.name;
