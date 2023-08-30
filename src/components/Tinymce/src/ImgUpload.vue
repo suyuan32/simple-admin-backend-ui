@@ -5,6 +5,7 @@
       multiple
       @change="handleChange"
       :action="uploadUrl"
+      :headers="headerData"
       :showUploadList="false"
       accept=".jpg,.jpeg,.gif,.png,.webp"
     >
@@ -12,7 +13,7 @@
         type="primary"
         shape="round"
         preIcon="material-symbols:image-sharp"
-        iconSize="14"
+        :iconSize="14"
         v-bind="{ ...getButtonProps }"
       >
         {{ t('component.upload.imgUpload') }}
@@ -27,6 +28,7 @@
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useGlobSetting } from '/@/hooks/setting';
   import { useI18n } from '/@/hooks/web/useI18n';
+  import { useUserStore } from '/@/store/modules/user';
 
   export default defineComponent({
     name: 'TinymceImageUpload',
@@ -45,6 +47,7 @@
       let uploading = false;
 
       const { uploadUrl } = useGlobSetting();
+      const userStore = useUserStore();
       const { t } = useI18n();
       const { prefixCls } = useDesign('tinymce-img-upload');
 
@@ -55,10 +58,13 @@
         };
       });
 
+      const headerData = { Authorization: userStore.getToken };
+
       function handleChange(info: Recordable) {
         const file = info.file;
+        console.log(file);
         const status = file?.status;
-        const url = file?.response?.url;
+        const url = file?.response?.data?.url;
         const name = file?.name;
 
         if (status === 'uploading') {
@@ -79,6 +85,7 @@
         prefixCls,
         handleChange,
         uploadUrl,
+        headerData,
         t,
         getButtonProps,
       };
