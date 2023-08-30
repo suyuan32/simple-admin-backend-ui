@@ -1,13 +1,21 @@
-import { presetTypography, presetUno } from 'unocss';
+import {
+  presetAttributify,
+  presetIcons,
+  presetTypography,
+  presetUno,
+  presetWebFonts,
+  transformerDirectives,
+  transformerVariantGroup,
+} from 'unocss';
 import UnoCSS from 'unocss/vite';
 import { type UserConfig } from 'vite';
 
-const commonConfig: UserConfig = {
+const commonConfig: (mode: string) => UserConfig = (mode) => ({
   server: {
     host: true,
   },
   esbuild: {
-    drop: ['console', 'debugger'],
+    drop: mode === 'production' ? ['console', 'debugger'] : [],
   },
   build: {
     reportCompressedSize: false,
@@ -19,9 +27,20 @@ const commonConfig: UserConfig = {
   },
   plugins: [
     UnoCSS({
-      presets: [presetUno(), presetTypography()],
+      presets: [
+        presetUno(),
+        presetAttributify(),
+        presetIcons(),
+        presetTypography(),
+        presetWebFonts({
+          fonts: {
+            // ...
+          },
+        }),
+      ],
+      transformers: [transformerDirectives(), transformerVariantGroup()],
     }),
   ],
-};
+});
 
 export { commonConfig };
