@@ -1,14 +1,14 @@
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode } from '/#/axios';
 import { BaseDataResp, BaseListReq, BaseResp, BaseIDsReq, BaseIDReq } from '/@/api/model/baseModel';
-import { TagInfo, TagListResp } from './model/tagModel';
+import { TagInfo, TagListResp } from './model/fileTagModel';
 
 enum Api {
-  CreateTag = '/fms-api/tag/create',
-  UpdateTag = '/fms-api/tag/update',
-  GetTagList = '/fms-api/tag/list',
-  DeleteTag = '/fms-api/tag/delete',
-  GetTagById = '/fms-api/tag',
+  CreateTag = '/fms-api/file_tag/create',
+  UpdateTag = '/fms-api/file_tag/update',
+  GetTagList = '/fms-api/file_tag/list',
+  DeleteTag = '/fms-api/file_tag/delete',
+  GetTagById = '/fms-api/file_tag',
 }
 
 /**

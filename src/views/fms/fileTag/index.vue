@@ -54,7 +54,7 @@
   import { useI18n } from 'vue-i18n';
 
   import { columns, searchFormSchema } from './tag.data';
-  import { getTagList, deleteTag } from '/@/api/fms/tag';
+  import { getTagList, deleteTag } from '/@/api/fms/fileTag';
 
   export default defineComponent({
     name: 'TagManagement',

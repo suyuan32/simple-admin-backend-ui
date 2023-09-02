@@ -17,7 +17,7 @@
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
 
-  import { createTag, updateTag } from '/@/api/fms/tag';
+  import { createTag, updateTag } from '/@/api/fms/fileTag';
 
   export default defineComponent({
     name: 'TagDrawer',
