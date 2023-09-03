@@ -13,12 +13,22 @@
         </Button>
       </template>
       <template #toolbar>
+        <span>{{ t('fms.cloudFile.providerId') }}</span>
+        <ApiSelect
+          v-bind:api="getStorageProviderList"
+          :params="{ page: 1, pageSize: 1000 }"
+          result-field="data.data"
+          label-field="name"
+          value-field="name"
+          class="w-32"
+          v-model:value="providerName"
+        />
         <BasicUpload
           :maxSize="1000"
           :maxNumber="10"
           @change="handleChange"
           :api="uploadApi"
-          :upload-params="{ provider: 'tencent-1' }"
+          :upload-params="providerParams"
           class="my-5"
           :accept="['image/*', 'video/*', 'audio/*']"
         />
@@ -97,7 +107,7 @@
   </div>
 </template>
 <script lang="ts">
-  import { createVNode, defineComponent, ref } from 'vue';
+  import { computed, createVNode, defineComponent, ref } from 'vue';
   import { Image, Modal } from 'ant-design-vue';
 
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
@@ -113,6 +123,8 @@
   import { deleteCloudFile, getCloudFileList, uploadApi } from '/@/api/fms/cloudFile';
   import { ExclamationCircleOutlined } from '@ant-design/icons-vue/lib/icons';
   import { Button } from '/@/components/Button';
+  import { ApiSelect } from '/@/components/Form';
+  import { getStorageProviderList } from '/@/api/fms/storageProvider';
 
   export default defineComponent({
     name: 'CloudFileManagement',
@@ -124,6 +136,7 @@
       BasicUpload,
       Image,
       Modal,
+      ApiSelect,
     },
     setup() {
       const { t } = useI18n();
@@ -131,6 +144,13 @@
       const { createErrorModal, createMessage } = useMessage();
       const showDeleteButton = ref<boolean>(false);
       const selectedIds = ref<number[] | string[]>();
+      const providerName = ref<string>('');
+
+      const providerParams = computed(() => {
+        return {
+          provider: providerName.value,
+        };
+      });
 
       const [registerDrawer, { openDrawer }] = useDrawer();
       const [registerTable, { reload }] = useTable({
@@ -280,6 +300,8 @@
         handleEdit,
         handleDelete,
         handleSuccess,
+        providerName,
+        providerParams,
         handleDownload,
         handleChange: (list: string[]) => {
           // createMessage.info(`已上传文件${JSON.stringify(list)}`);
@@ -301,6 +323,7 @@
         handleCopyToClipboard,
         handleBatchDelete,
         showDeleteButton,
+        getStorageProviderList,
       };
     },
   });

@@ -121,7 +121,7 @@ export const formSchema: FormSchema[] = [
     componentProps: {
       options: [
         { label: t('mcms.smsProvider.tencent'), value: 'tencent' },
-        { label: t('mcms.smsProvider.aliyun'), value: 'aliyun' },
+        // { label: t('mcms.smsProvider.aliyun'), value: 'aliyun' },
       ],
     },
     required: true,
