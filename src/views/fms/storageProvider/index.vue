@@ -3,18 +3,18 @@
     <BasicTable @register="registerTable">
       <template #tableTitle>
         <Button
-          type="primary"
-          danger
-          preIcon="ant-design:delete-outlined"
-          v-if="showDeleteButton"
-          @click="handleBatchDelete()"
+                type="primary"
+                danger
+                preIcon="ant-design:delete-outlined"
+                v-if="showDeleteButton"
+                @click="handleBatchDelete()"
         >
           {{ t('common.delete') }}
         </Button>
       </template>
       <template #toolbar>
         <a-button type="primary" @click="handleCreate">
-          {{ t('fms.tag.addTag') }}
+          {{ t('fms.storageProvider.addStorageProvider') }}
         </a-button>
       </template>
       <template #bodyCell="{ column, record }">
@@ -39,7 +39,7 @@
         </template>
       </template>
     </BasicTable>
-    <TagDrawer @register="registerDrawer" @success="handleSuccess" />
+    <StorageProviderDrawer @register="registerDrawer" @success="handleSuccess" />
   </div>
 </template>
 <script lang="ts">
@@ -50,15 +50,15 @@
   import { Button } from '/@/components/Button';
 
   import { useDrawer } from '/@/components/Drawer';
-  import TagDrawer from './TagDrawer.vue';
+  import StorageProviderDrawer from './StorageProviderDrawer.vue';
   import { useI18n } from 'vue-i18n';
 
-  import { columns, searchFormSchema } from './tag.data';
-  import { getTagList, deleteTag } from '/@/api/fms/tag';
+  import { columns, searchFormSchema } from './storageProvider.data';
+  import { getStorageProviderList, deleteStorageProvider } from '/@/api/fms/storageProvider';
 
   export default defineComponent({
-    name: 'TagManagement',
-    components: { BasicTable, TagDrawer, TableAction, Button },
+    name: 'StorageProviderManagement',
+    components: { BasicTable, StorageProviderDrawer, TableAction, Button },
     setup() {
       const { t } = useI18n();
       const selectedIds = ref<number[] | string[]>();
@@ -66,8 +66,8 @@
 
       const [registerDrawer, { openDrawer }] = useDrawer();
       const [registerTable, { reload }] = useTable({
-        title: t('fms.tag.tagList'),
-        api: getTagList,
+        title: t('fms.storageProvider.storageProviderList'),
+        api: getStorageProviderList,
         columns,
         formConfig: {
           labelWidth: 120,
@@ -108,7 +108,7 @@
       }
 
       async function handleDelete(record: Recordable) {
-        const result = await deleteTag({ ids: [record.id] });
+        const result = await deleteStorageProvider({ ids: [record.id] });
         if (result.code === 0) {
           await reload();
         }
@@ -119,7 +119,7 @@
           title: t('common.deleteConfirm'),
           icon: createVNode(ExclamationCircleOutlined),
           async onOk() {
-            const result = await deleteTag({ ids: selectedIds.value as number[] });
+            const result = await deleteStorageProvider({ ids: selectedIds.value as number[] });
             if (result.code === 0) {
               showDeleteButton.value = false;
               await reload();

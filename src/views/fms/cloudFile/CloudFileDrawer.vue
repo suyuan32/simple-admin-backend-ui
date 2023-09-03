@@ -13,14 +13,14 @@
 <script lang="ts">
   import { defineComponent, ref, computed, unref } from 'vue';
   import { BasicForm, useForm } from '/@/components/Form/index';
-  import { formSchema } from './tag.data';
+  import { formSchema } from './cloudFile.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
 
-  import { createTag, updateTag } from '/@/api/fms/tag';
+  import { createCloudFile, updateCloudFile } from '/@/api/fms/cloudFile';
 
   export default defineComponent({
-    name: 'TagDrawer',
+    name: 'CloudFileDrawer',
     components: { BasicDrawer, BasicForm },
     emits: ['success', 'register'],
     setup(_, { emit }) {
@@ -28,7 +28,7 @@
       const { t } = useI18n();
 
       const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
-        labelWidth: 90,
+        labelWidth: 100,
         baseColProps: { span: 24 },
         schemas: formSchema,
         showActionButtonGroup: false,
@@ -48,14 +48,16 @@
       });
 
       const getTitle = computed(() =>
-        !unref(isUpdate) ? t('fms.tag.addTag') : t('fms.tag.editTag'),
+        !unref(isUpdate) ? t('fms.cloudFile.addCloudFile') : t('fms.cloudFile.editCloudFile'),
       );
 
       async function handleSubmit() {
         const values = await validate();
         setDrawerProps({ confirmLoading: true });
-        values['id'] = unref(isUpdate) ? Number(values['id']) : 0;
-        let result = unref(isUpdate) ? await updateTag(values) : await createTag(values);
+        values['id'] = unref(isUpdate) ? values['id'] : '';
+        let result = unref(isUpdate)
+          ? await updateCloudFile(values)
+          : await createCloudFile(values);
         if (result.code === 0) {
           closeDrawer();
           emit('success');
