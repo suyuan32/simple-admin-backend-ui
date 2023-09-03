@@ -5,6 +5,7 @@ import { updateCloudFile } from '/@/api/fms/cloudFile';
 import { Switch } from 'ant-design-vue';
 import { h } from 'vue';
 import { getStorageProviderList } from '/@/api/fms/storageProvider';
+import { getCloudFileTagList } from '/@/api/fms/cloudFileTag';
 const { t } = useI18n();
 
 export const columns: BasicColumn[] = [
@@ -88,10 +89,55 @@ export const searchFormSchema: FormSchema[] = [
     colProps: { span: 8 },
   },
   {
-    field: 'userId',
-    label: t('fms.cloudFile.userId'),
-    component: 'Input',
+    field: 'providerId',
+    label: t('fms.cloudFile.providerId'),
+    component: 'ApiSelect',
+    required: true,
+    defaultValue: 1,
+    componentProps: {
+      api: getStorageProviderList,
+      params: {
+        page: 1,
+        pageSize: 1000,
+      },
+      resultField: 'data.data',
+      labelField: 'name',
+      valueField: 'id',
+    },
     colProps: { span: 8 },
+  },
+  {
+    field: 'tagIds',
+    label: t('fms.tag.tag'),
+    component: 'ApiMultipleSelect',
+    componentProps: {
+      api: getCloudFileTagList,
+      params: {
+        page: 1,
+        pageSize: 1000,
+        name: '',
+      },
+      resultField: 'data.data',
+      labelField: 'name',
+      valueField: 'id',
+    },
+    colProps: { span: 8 },
+  },
+  {
+    field: 'fileType',
+    label: t('fms.file.fileType'),
+    colProps: { span: 8 },
+    component: 'Select',
+    defaultValue: 0,
+    componentProps: {
+      options: [
+        { label: t('common.all'), value: 0 },
+        { label: t('fms.file.other'), value: 1 },
+        { label: t('fms.file.image'), value: 2 },
+        { label: t('fms.file.video'), value: 3 },
+        { label: t('fms.file.audio'), value: 4 },
+      ],
+    },
   },
 ];
 
@@ -144,6 +190,22 @@ export const formSchema: FormSchema[] = [
       params: {
         page: 1,
         pageSize: 1000,
+      },
+      resultField: 'data.data',
+      labelField: 'name',
+      valueField: 'id',
+    },
+  },
+  {
+    field: 'tagIds',
+    label: t('fms.tag.tag'),
+    component: 'ApiMultipleSelect',
+    componentProps: {
+      api: getCloudFileTagList,
+      params: {
+        page: 1,
+        pageSize: 1000,
+        name: '',
       },
       resultField: 'data.data',
       labelField: 'name',

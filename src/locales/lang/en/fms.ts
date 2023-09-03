@@ -54,7 +54,7 @@ export default {
   cloudFile: {
     state: 'State',
     name: 'Name',
-    url: 'Url',
+    url: 'URL',
     size: 'Size',
     fileType: 'File Type',
     userId: 'User ID',
