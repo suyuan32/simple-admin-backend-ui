@@ -89,4 +89,23 @@
       margin-left: 1px;
     }
   }
+
+  [data-theme='dark'] {
+    .@{prefix-cls} {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      min-height: 100%;
+      background-color: @content-bg;
+
+      > .ant-layout {
+        min-height: 100%;
+      }
+
+      &-main {
+        width: 100%;
+        margin-left: 1px;
+      }
+    }
+  }
 </style>

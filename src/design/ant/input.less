@@ -1,3 +1,4 @@
+/* stylelint-disable order/properties-order */
 @import (reference) '../color.less';
 
 // input
@@ -22,6 +23,32 @@
   padding: 0 !important;
 
   textarea.ant-input {
+    padding: 4px;
+  }
+}
+
+// dark
+.dark-input {
+  &-number,
+  &-number-group-wrapper {
+    min-width: 110px;
+    width: 100% !important;
+    max-width: 100%;
+  }
+}
+
+.dark-input-affix-wrapper .dark-input-suffix {
+  right: 9px;
+}
+
+.dark-input-clear-icon {
+  margin-right: 5px;
+}
+
+.dark-input-affix-wrapper-textarea-with-clear-btn {
+  padding: 0 !important;
+
+  textarea.dark-input {
     padding: 4px;
   }
 }

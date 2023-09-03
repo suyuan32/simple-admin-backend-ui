@@ -1,3 +1,4 @@
+/* stylelint-disable order/properties-order */
 @header-trigger-prefix-cls: ~'@{namespace}-layout-header-trigger';
 @header-prefix-cls: ~'@{namespace}-layout-header';
 @breadcrumb-prefix-cls: ~'@{namespace}-layout-breadcrumb';
@@ -166,8 +167,8 @@
 
   &--dark {
     background-color: @header-dark-bg-color !important;
-    // border-bottom: 1px solid @border-color-base;
-    border-left: 1px solid @border-color-base;
+    border-bottom: 1px solid #262626;
+    border-left: 1px solid @border-color-dark;
     .@{header-prefix-cls}-logo {
       &:hover {
         background-color: @header-dark-bg-hover-color;
