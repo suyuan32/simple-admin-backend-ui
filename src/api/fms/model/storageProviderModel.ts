@@ -13,6 +13,7 @@ export interface StorageProviderInfo {
   providerName?: string;
   secretId?: string;
   secretKey?: string;
+  folder?: string;
   region?: string;
   isDefault?: boolean;
 }

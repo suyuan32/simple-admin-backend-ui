@@ -41,11 +41,15 @@ export default {
     providerName: 'Provider Name',
     secretId: 'Secret ID',
     secretKey: 'Secret Key',
+    folder: 'Folder in cloud',
     region: 'Region',
     isDefault: 'Is Default',
     addStorageProvider: 'Add Storage Provider',
     editStorageProvider: 'Edit Storage Provider',
     storageProviderList: 'Storage Provider List',
+    // help message
+    nameHelpMessage: 'Make sure that prefix with provider type, such as "tencent-" , "aliyun-"',
+    folderHelpMessage: 'Sub folder in cloud, can be empty. Prefix with "/", such as "/test"',
   },
   cloudFile: {
     state: 'State',
@@ -58,5 +62,13 @@ export default {
     addCloudFile: 'Add Cloud File',
     editCloudFile: 'Edit Cloud File',
     cloudFileList: 'Cloud File List',
+  },
+  cloudFileTag: {
+    status: 'Status',
+    name: 'Name',
+    remark: 'Remark',
+    addCloudFileTag: "Add Cloud File's Tag",
+    editCloudFileTag: "Edit Cloud File's Tag",
+    cloudFileTagList: "Cloud File's Tag List",
   },
 };

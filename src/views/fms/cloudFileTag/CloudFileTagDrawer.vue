@@ -13,14 +13,14 @@
 <script lang="ts">
   import { defineComponent, ref, computed, unref } from 'vue';
   import { BasicForm, useForm } from '/@/components/Form/index';
-  import { formSchema } from './storageProvider.data';
+  import { formSchema } from './cloudFileTag.data';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { useI18n } from 'vue-i18n';
 
-  import { createStorageProvider, updateStorageProvider } from '/@/api/fms/storageProvider';
+  import { createCloudFileTag, updateCloudFileTag } from '/@/api/fms/cloudFileTag';
 
   export default defineComponent({
-    name: 'StorageProviderDrawer',
+    name: 'CloudFileTagDrawer',
     components: { BasicDrawer, BasicForm },
     emits: ['success', 'register'],
     setup(_, { emit }) {
@@ -28,7 +28,7 @@
       const { t } = useI18n();
 
       const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
-        labelWidth: 110,
+        labelWidth: 90,
         baseColProps: { span: 24 },
         schemas: formSchema,
         showActionButtonGroup: false,
@@ -49,8 +49,8 @@
 
       const getTitle = computed(() =>
         !unref(isUpdate)
-          ? t('fms.storageProvider.addStorageProvider')
-          : t('fms.storageProvider.editStorageProvider'),
+          ? t('fms.cloudFileTag.addCloudFileTag')
+          : t('fms.cloudFileTag.editCloudFileTag'),
       );
 
       async function handleSubmit() {
@@ -58,8 +58,8 @@
         setDrawerProps({ confirmLoading: true });
         values['id'] = unref(isUpdate) ? Number(values['id']) : 0;
         let result = unref(isUpdate)
-          ? await updateStorageProvider(values)
-          : await createStorageProvider(values);
+          ? await updateCloudFileTag(values)
+          : await createCloudFileTag(values);
         if (result.code === 0) {
           closeDrawer();
           emit('success');

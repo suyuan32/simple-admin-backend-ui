@@ -41,11 +41,15 @@ export default {
     providerName: '提供商名称',
     secretId: 'Secret Id',
     secretKey: 'Secret Key',
+    folder: '云服务文件夹',
     region: '地区',
     isDefault: '是否为默认',
     addStorageProvider: '添加云存储提供商',
     editStorageProvider: '编辑云存储提供商',
     storageProviderList: '云存储提供商列表',
+    // help message
+    nameHelpMessage: '注意名称必须由提供商开头如 tencent- , aliyun-',
+    folderHelpMessage: '云服务的子文件夹, 可为空, 以 / 开头, 如 /test',
   },
   cloudFile: {
     state: '状态',
@@ -58,5 +62,13 @@ export default {
     addCloudFile: '添加云文件',
     editCloudFile: '编辑云文件',
     cloudFileList: '云文件列表',
+  },
+  cloudFileTag: {
+    status: '状态',
+    name: '标签名称',
+    remark: '备注',
+    addCloudFileTag: '添加云文件标签',
+    editCloudFileTag: '编辑云文件标签',
+    cloudFileTagList: '云文件标签列表',
   },
 };

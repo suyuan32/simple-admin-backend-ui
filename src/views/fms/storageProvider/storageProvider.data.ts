@@ -4,23 +4,47 @@ import { formatToDateTime } from '/@/utils/dateUtil';
 import { updateStorageProvider } from '/@/api/fms/storageProvider';
 import { Switch } from 'ant-design-vue';
 import { h } from 'vue';
+import { useRedo } from '/@/hooks/web/usePage';
 const { t } = useI18n();
 
 export const columns: BasicColumn[] = [
   {
     title: t('fms.storageProvider.name'),
     dataIndex: 'name',
-    width: 100,
+    width: 50,
   },
   {
     title: t('fms.storageProvider.isDefault'),
     dataIndex: 'isDefault',
-    width: 100,
+    width: 20,
+    customRender: ({ record }) => {
+      if (!Reflect.has(record, 'pendingStatus')) {
+        record.pendingStatus = false;
+      }
+      return h(Switch, {
+        checked: record.isDefault === true,
+        checkedChildren: t('common.yes'),
+        unCheckedChildren: t('common.no'),
+        loading: record.pendingStatus,
+        onChange(checked, _) {
+          record.pendingStatus = true;
+          updateStorageProvider({ id: record.id, isDefault: checked as boolean })
+            .then(() => {
+              record.isDefault = checked;
+              const redo = useRedo();
+              redo();
+            })
+            .finally(() => {
+              record.pendingStatus = false;
+            });
+        },
+      });
+    },
   },
   {
     title: t('common.status'),
     dataIndex: 'state',
-    width: 50,
+    width: 20,
     customRender: ({ record }) => {
       if (!Reflect.has(record, 'pendingStatus')) {
         record.pendingStatus = false;
@@ -47,7 +71,7 @@ export const columns: BasicColumn[] = [
   {
     title: t('common.createTime'),
     dataIndex: 'createdAt',
-    width: 70,
+    width: 30,
     customRender: ({ record }) => {
       return formatToDateTime(record.createdAt);
     },
@@ -82,6 +106,7 @@ export const formSchema: FormSchema[] = [
     label: t('fms.storageProvider.name'),
     component: 'Input',
     required: true,
+    helpMessage: t('fms.storageProvider.nameHelpMessage'),
   },
   {
     field: 'bucket',
@@ -92,7 +117,13 @@ export const formSchema: FormSchema[] = [
   {
     field: 'providerName',
     label: t('fms.storageProvider.providerName'),
-    component: 'Input',
+    component: 'Select',
+    componentProps: {
+      options: [
+        { label: t('mcms.smsProvider.tencent'), value: 'tencent' },
+        { label: t('mcms.smsProvider.aliyun'), value: 'aliyun' },
+      ],
+    },
     required: true,
   },
   {
@@ -106,6 +137,12 @@ export const formSchema: FormSchema[] = [
     label: t('fms.storageProvider.secretKey'),
     component: 'Input',
     required: true,
+  },
+  {
+    field: 'folder',
+    label: t('fms.storageProvider.folder'),
+    component: 'Input',
+    helpMessage: t('fms.storageProvider.folderHelpMessage'),
   },
   {
     field: 'region',

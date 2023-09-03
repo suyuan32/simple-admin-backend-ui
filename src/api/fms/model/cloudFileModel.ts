@@ -14,6 +14,7 @@ export interface CloudFileInfo {
   fileType?: number;
   userId?: string;
   providerId?: number;
+  tagIds?: number[];
 }
 
 /**
