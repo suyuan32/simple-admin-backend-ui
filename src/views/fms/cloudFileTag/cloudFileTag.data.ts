@@ -4,6 +4,7 @@ import { formatToDateTime } from '/@/utils/dateUtil';
 import { updateCloudFileTag } from '/@/api/fms/cloudFileTag';
 import { Switch } from 'ant-design-vue';
 import { h } from 'vue';
+
 const { t } = useI18n();
 
 export const columns: BasicColumn[] = [
@@ -87,7 +88,6 @@ export const formSchema: FormSchema[] = [
     field: 'remark',
     label: t('fms.cloudFileTag.remark'),
     component: 'Input',
-    required: true,
   },
   {
     field: 'status',
