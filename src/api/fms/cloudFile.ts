@@ -93,6 +93,7 @@ export function uploadApi(
     {
       url: Api.uploadFile,
       onUploadProgress,
+      timeout: 300 * 1000,
     },
     params,
   );

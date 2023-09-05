@@ -150,5 +150,6 @@ export const formSchema: FormSchema[] = [
         { label: t('common.no'), value: false },
       ],
     },
+    helpMessage: t('sys.apis.isRequiredHelpMessage'),
   },
 ];

@@ -6,6 +6,7 @@ import { Switch } from 'ant-design-vue';
 import { h } from 'vue';
 import { getStorageProviderList } from '/@/api/fms/storageProvider';
 import { getCloudFileTagList } from '/@/api/fms/cloudFileTag';
+
 const { t } = useI18n();
 
 export const columns: BasicColumn[] = [
@@ -92,8 +93,6 @@ export const searchFormSchema: FormSchema[] = [
     field: 'providerId',
     label: t('fms.cloudFile.providerId'),
     component: 'ApiSelect',
-    required: true,
-    defaultValue: 1,
     componentProps: {
       api: getStorageProviderList,
       params: {

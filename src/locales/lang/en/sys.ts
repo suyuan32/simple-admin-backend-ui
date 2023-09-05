@@ -180,6 +180,9 @@ export default {
     // action
     addApi: 'Add API',
     editApi: 'Edit API',
+    // help message
+    isRequiredHelpMessage:
+      'Whether it is a necessary API, if it is a necessary API, it must be selected during authorization management, and cancellation is not allowed',
   },
   authority: {
     authorityManagement: 'Authorization Management',
