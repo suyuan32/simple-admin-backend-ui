@@ -43,6 +43,7 @@ export default {
     secretKey: 'Secret Key',
     folder: 'Folder in cloud',
     region: 'Region',
+    endpoint: 'Endpoint',
     isDefault: 'Is Default',
     addStorageProvider: 'Add Storage Provider',
     editStorageProvider: 'Edit Storage Provider',

@@ -10,7 +10,7 @@ export interface StorageProviderInfo {
   state?: boolean;
   name?: string;
   bucket?: string;
-  providerName?: string;
+  endpoint?: string;
   secretId?: string;
   secretKey?: string;
   folder?: string;

@@ -5,6 +5,7 @@ import { updateStorageProvider } from '/@/api/fms/storageProvider';
 import { Switch } from 'ant-design-vue';
 import { h } from 'vue';
 import { useRedo } from '/@/hooks/web/usePage';
+
 const { t } = useI18n();
 
 export const columns: BasicColumn[] = [
@@ -85,12 +86,6 @@ export const searchFormSchema: FormSchema[] = [
     component: 'Input',
     colProps: { span: 8 },
   },
-  {
-    field: 'providerName',
-    label: t('fms.storageProvider.providerName'),
-    component: 'Input',
-    colProps: { span: 8 },
-  },
 ];
 
 export const formSchema: FormSchema[] = [
@@ -100,7 +95,6 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
     show: false,
   },
-
   {
     field: 'name',
     label: t('fms.storageProvider.name'),
@@ -115,18 +109,6 @@ export const formSchema: FormSchema[] = [
     required: true,
   },
   {
-    field: 'providerName',
-    label: t('fms.storageProvider.providerName'),
-    component: 'Select',
-    componentProps: {
-      options: [
-        { label: t('mcms.smsProvider.tencent'), value: 'tencent' },
-        // { label: t('mcms.smsProvider.aliyun'), value: 'aliyun' },
-      ],
-    },
-    required: true,
-  },
-  {
     field: 'secretId',
     label: t('fms.storageProvider.secretId'),
     component: 'Input',
@@ -135,6 +117,12 @@ export const formSchema: FormSchema[] = [
   {
     field: 'secretKey',
     label: t('fms.storageProvider.secretKey'),
+    component: 'Input',
+    required: true,
+  },
+  {
+    field: 'endpoint',
+    label: t('fms.storageProvider.endpoint'),
     component: 'Input',
     required: true,
   },

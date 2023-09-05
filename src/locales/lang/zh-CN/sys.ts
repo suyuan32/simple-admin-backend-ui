@@ -173,6 +173,8 @@ export default {
     // action
     addApi: '添加API',
     editApi: '编辑API',
+    // help message
+    isRequiredHelpMessage: '是否为必要API,如果是必要API,则在权限管理时为必选,不允许取消',
   },
   authority: {
     authorityManagement: '权限管理',
