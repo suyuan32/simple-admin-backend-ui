@@ -47,6 +47,7 @@ export default {
     addStorageProvider: '添加云存储提供商',
     editStorageProvider: '编辑云存储提供商',
     storageProviderList: '云存储提供商列表',
+    endpoint: '服务器地址',
     // help message
     nameHelpMessage: '注意名称必须由提供商开头如 tencent- , aliyun-',
     folderHelpMessage: '云服务的子文件夹, 可为空, 以 / 开头, 如 /test',

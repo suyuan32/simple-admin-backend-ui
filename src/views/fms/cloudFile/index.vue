@@ -15,7 +15,7 @@
       <template #toolbar>
         <span>{{ t('fms.cloudFile.providerId') }}</span>
         <ApiSelect
-          v-bind:api="getStorageProviderList"
+          :api="getStorageProviderList"
           :params="{ page: 1, pageSize: 1000 }"
           result-field="data.data"
           label-field="name"
