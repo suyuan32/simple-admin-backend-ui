@@ -77,6 +77,26 @@ export interface RegisterReq {
 }
 
 /**
+ * @description: Register by email interface parameters
+ */
+export interface RegisterByEmailReq {
+  username: string;
+  password: string;
+  email: string;
+  captcha: string;
+}
+
+/**
+ * @description: Register by sms interface parameters
+ */
+export interface RegisterBySmsReq {
+  username: string;
+  password: string;
+  phoneNumber: string;
+  captcha: string;
+}
+
+/**
  * @description: Login interface return value
  */
 export interface LoginResp {

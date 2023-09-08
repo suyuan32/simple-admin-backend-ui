@@ -100,7 +100,7 @@
         </Button>
       </ACol>
       <ACol :md="8" :xs="24">
-        <Button block @click="setLoginState(LoginStateEnum.REGISTER_BY_EMAIL)">
+        <Button block @click="setLoginState(LoginStateEnum.REGISTER)">
           {{ t('sys.login.registerButton') }}
         </Button>
       </ACol>
@@ -215,7 +215,6 @@
           go(PageEnum.BASE_HOME);
         })
         .catch(() => {
-          getCaptchaData();
           loading.value = false;
         });
     } else if (formData.msgType === 'sms') {
@@ -231,7 +230,6 @@
           go(PageEnum.BASE_HOME);
         })
         .catch(() => {
-          getCaptchaData();
           loading.value = false;
         });
     }

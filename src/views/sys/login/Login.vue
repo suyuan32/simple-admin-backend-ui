@@ -35,9 +35,8 @@
           >
             <LoginForm />
             <ForgetPasswordForm />
-            <RegisterForm />
             <QrCodeForm />
-            <RegisterFormByEmail />
+            <RegisterForm />
           </div>
         </div>
       </div>
@@ -49,7 +48,6 @@
   import { AppLocalePicker, AppLogo, AppDarkModeToggle } from '/@/components/Application';
   import LoginForm from './LoginForm.vue';
   import ForgetPasswordForm from './ForgetPasswordForm.vue';
-  import RegisterFormByEmail from './RegisterFormByEmail.vue';
   import RegisterForm from './RegisterForm.vue';
   import QrCodeForm from './QrCodeForm.vue';
   import { useGlobSetting } from '/@/hooks/setting';

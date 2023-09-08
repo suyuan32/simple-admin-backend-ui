@@ -13,6 +13,8 @@ import {
   ResetBySmsInfo,
   LoginByEmailReq,
   LoginBySmsReq,
+  RegisterByEmailReq,
+  RegisterBySmsReq,
 } from './model/userModel';
 import { BaseDataResp, BaseListReq, BaseResp, BaseUUIDReq, BaseUUIDsReq } from '../model/baseModel';
 
@@ -26,6 +28,8 @@ enum Api {
   LoginByEmail = '/sys-api/user/login_by_email',
   LoginBySms = '/sys-api/user/login_by_sms',
   Register = '/sys-api/user/register',
+  RegisterByEmail = '/sys-api/user/register_by_email',
+  RegisterBySms = '/sys-api/user/register_by_sms',
   Logout = '/sys-api/user/logout',
   GetUserInfo = '/sys-api/user/info',
   GetPermCode = '/sys-api/user/perm',
@@ -152,6 +156,38 @@ export function register(params: RegisterReq, mode: ErrorMessageMode = 'notice')
   return defHttp.post<BaseResp>(
     {
       url: Api.Register,
+      params,
+    },
+    {
+      errorMessageMode: mode,
+      successMessageMode: mode,
+    },
+  );
+}
+
+/**
+ * @description: User register by email api
+ */
+export function registerByEmail(params: RegisterByEmailReq, mode: ErrorMessageMode = 'notice') {
+  return defHttp.post<BaseResp>(
+    {
+      url: Api.RegisterByEmail,
+      params,
+    },
+    {
+      errorMessageMode: mode,
+      successMessageMode: mode,
+    },
+  );
+}
+
+/**
+ * @description: User register by Sms api
+ */
+export function registerBySms(params: RegisterBySmsReq, mode: ErrorMessageMode = 'notice') {
+  return defHttp.post<BaseResp>(
+    {
+      url: Api.RegisterBySms,
       params,
     },
     {
