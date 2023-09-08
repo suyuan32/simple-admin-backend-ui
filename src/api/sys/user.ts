@@ -11,6 +11,8 @@ import {
   ChangePasswordReq,
   ResetByEmailInfo,
   ResetBySmsInfo,
+  LoginByEmailReq,
+  LoginBySmsReq,
 } from './model/userModel';
 import { BaseDataResp, BaseListReq, BaseResp, BaseUUIDReq, BaseUUIDsReq } from '../model/baseModel';
 
@@ -21,6 +23,8 @@ enum Api {
   DeleteUser = '/sys-api/user/delete',
   GetUserById = '/sys-api/user',
   Login = '/sys-api/user/login',
+  LoginByEmail = '/sys-api/user/login_by_email',
+  LoginBySms = '/sys-api/user/login_by_sms',
   Register = '/sys-api/user/register',
   Logout = '/sys-api/user/logout',
   GetUserInfo = '/sys-api/user/info',
@@ -100,6 +104,38 @@ export function login(params: LoginReq, mode: ErrorMessageMode = 'notice') {
   return defHttp.post<BaseDataResp<LoginResp>>(
     {
       url: Api.Login,
+      params,
+    },
+    {
+      errorMessageMode: mode,
+      successMessageMode: mode,
+    },
+  );
+}
+
+/**
+ * @description: User login by email api
+ */
+export function loginByEmail(params: LoginByEmailReq, mode: ErrorMessageMode = 'notice') {
+  return defHttp.post<BaseDataResp<LoginResp>>(
+    {
+      url: Api.LoginByEmail,
+      params,
+    },
+    {
+      errorMessageMode: mode,
+      successMessageMode: mode,
+    },
+  );
+}
+
+/**
+ * @description: User login by sms api
+ */
+export function loginBySms(params: LoginBySmsReq, mode: ErrorMessageMode = 'notice') {
+  return defHttp.post<BaseDataResp<LoginResp>>(
+    {
+      url: Api.LoginBySms,
       params,
     },
     {

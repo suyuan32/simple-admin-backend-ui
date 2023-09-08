@@ -36,7 +36,6 @@
             <LoginForm />
             <ForgetPasswordForm />
             <RegisterForm />
-            <MobileForm />
             <QrCodeForm />
             <RegisterFormByEmail />
           </div>
@@ -52,7 +51,6 @@
   import ForgetPasswordForm from './ForgetPasswordForm.vue';
   import RegisterFormByEmail from './RegisterFormByEmail.vue';
   import RegisterForm from './RegisterForm.vue';
-  import MobileForm from './MobileForm.vue';
   import QrCodeForm from './QrCodeForm.vue';
   import { useGlobSetting } from '/@/hooks/setting';
   import { useI18n } from '/@/hooks/web/useI18n';

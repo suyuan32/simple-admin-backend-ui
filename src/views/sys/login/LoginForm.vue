@@ -8,7 +8,38 @@
     v-show="getShow"
     @keypress.enter="handleLogin"
   >
-    <FormItem name="account" class="enter-x" :rules="[{ required: true, max: 30 }]">
+    <div class="pt-4 pb-4">
+      <ARadioGroup v-model:value="formData.msgType" button-style="solid" size="large">
+        <ARadioButton value="captcha"> {{ t('sys.login.captcha') }} </ARadioButton>
+        <ARadioButton value="email"> {{ t('sys.login.email') }} </ARadioButton>
+        <ARadioButton value="sms"> {{ t('sys.login.mobile') }} </ARadioButton>
+      </ARadioGroup>
+    </div>
+
+    <FormItem v-if="formData.msgType !== 'captcha'" name="target" class="enter-x">
+      <Input
+        size="large"
+        v-model:value="formData.target"
+        v-model:placeholder="emailOrPhonePlaceholder"
+      />
+    </FormItem>
+
+    <FormItem v-if="formData.msgType !== 'captcha'" name="captchaVerified" class="enter-x">
+      <CountdownInput
+        size="large"
+        v-model:value="formData.captchaVerified"
+        :count="60"
+        :placeholder="t('sys.login.captcha')"
+        :send-code-api="handleSendCaptcha"
+      />
+    </FormItem>
+
+    <FormItem
+      name="account"
+      v-if="formData.msgType === 'captcha'"
+      class="enter-x"
+      :rules="[{ required: true, max: 30 }]"
+    >
       <Input
         size="large"
         v-model:value="formData.account"
@@ -16,7 +47,13 @@
         class="fix-auto-fill"
       />
     </FormItem>
-    <FormItem name="password" class="enter-x" :rules="[{ required: true, min: 6, max: 30 }]">
+
+    <FormItem
+      name="password"
+      class="enter-x"
+      v-if="formData.msgType === 'captcha'"
+      :rules="[{ required: true, min: 6, max: 30 }]"
+    >
       <InputPassword
         size="large"
         visibilityToggle
@@ -25,7 +62,12 @@
       />
     </FormItem>
 
-    <FormItem name="captcha" class="enter-x" :rules="[{ required: true, len: 5 }]">
+    <FormItem
+      name="captcha"
+      v-if="formData.msgType === 'captcha'"
+      class="enter-x"
+      :rules="[{ required: true, len: 5 }]"
+    >
       <Input
         size="large"
         v-model:value="formData.captcha"
@@ -46,34 +88,12 @@
       <Input :value="formData.captchaId" />
     </FormItem>
 
-    <!-- <ARow class="enter-x">
-      <ACol :span="12">
-        <FormItem>
-          <Checkbox v-model:checked="rememberMe" size="small">
-            {{ t('sys.login.rememberMe') }}
-          </Checkbox>
-        </FormItem>
-      </ACol>
-      <ACol :span="12">
-        <FormItem :style="{ 'text-align': 'right' }">
-          <Button type="link" size="small" @click="setLoginState(LoginStateEnum.RESET_PASSWORD)">
-            {{ t('sys.login.forgetPassword') }}
-          </Button>
-        </FormItem>
-      </ACol>
-    </ARow> -->
-
     <FormItem class="enter-x">
       <Button type="primary" size="large" block @click="handleLogin" :loading="loading">
         {{ t('sys.login.loginButton') }}
       </Button>
     </FormItem>
     <ARow class="enter-x" :gutter="5">
-      <!-- <ACol :md="6" :xs="24">
-        <Button block @click="setLoginState(LoginStateEnum.MOBILE)">
-          {{ t('sys.login.mobileSignInFormTitle') }}
-        </Button>
-      </ACol> -->
       <ACol :md="8" :xs="24">
         <Button block @click="setLoginState(LoginStateEnum.QR_CODE)">
           {{ t('sys.login.qrSignInFormTitle') }}
@@ -105,7 +125,7 @@
 <script lang="ts" setup>
   import { reactive, ref, unref, computed } from 'vue';
 
-  import { Form, Input, Row, Col, Button, Divider } from 'ant-design-vue';
+  import { Form, Input, Row, Col, Button, Divider, RadioGroup, RadioButton } from 'ant-design-vue';
   import { GithubFilled, GoogleCircleFilled } from '@ant-design/icons-vue';
   import LoginFormTitle from './LoginFormTitle.vue';
 
@@ -114,15 +134,18 @@
   import { useUserStore } from '/@/store/modules/user';
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
   import { useDesign } from '/@/hooks/web/useDesign';
-  import { getCaptcha } from '/@/api/sys/captcha';
+  import { getCaptcha, getEmailCaptcha, getSmsCaptcha } from '/@/api/sys/captcha';
   import { useGo } from '/@/hooks/web/usePage';
   import { PageEnum } from '/@/enums/pageEnum';
   import { oauthLogin } from '/@/api/sys/oauthProvider';
+  import { CountdownInput } from '/@/components/CountDown';
 
   const ACol = Col;
   const ARow = Row;
   const FormItem = Form.Item;
   const InputPassword = Input.Password;
+  const ARadioGroup = RadioGroup;
+  const ARadioButton = RadioButton;
   const go = useGo();
   const { t } = useI18n();
   const { prefixCls } = useDesign('login');
@@ -133,14 +156,24 @@
 
   const formRef = ref();
   const loading = ref(false);
-  // const rememberMe = ref(false);
+
+  const emailOrPhonePlaceholder = computed(() => {
+    if (formData.msgType === 'email') {
+      return t('sys.login.emailPlaceholder');
+    } else {
+      return t('sys.login.mobilePlaceholder');
+    }
+  });
 
   const formData = reactive({
+    msgType: 'captcha',
     account: '',
     password: '',
     captcha: '',
     captchaId: '',
     imgPath: '',
+    target: '',
+    captchaVerified: '',
   });
 
   const { validForm } = useFormValid(formRef);
@@ -151,23 +184,57 @@
     const data = await validForm();
     if (!data) return;
     loading.value = true;
-    userStore
-      .login({
-        password: data.password,
-        username: data.account,
-        captcha: data.captcha,
-        captchaId: data.captchaId,
-        goHome: false,
-        mode: 'notice',
-      })
-      .then(() => {
-        loading.value = false;
-        go(PageEnum.BASE_HOME);
-      })
-      .catch(() => {
-        getCaptchaData();
-        loading.value = false;
-      });
+    if (formData.msgType === 'captcha') {
+      userStore
+        .login({
+          password: data.password,
+          username: data.account,
+          captcha: data.captcha,
+          captchaId: data.captchaId,
+          goHome: false,
+          mode: 'notice',
+        })
+        .then(() => {
+          loading.value = false;
+          go(PageEnum.BASE_HOME);
+        })
+        .catch(() => {
+          getCaptchaData();
+          loading.value = false;
+        });
+    } else if (formData.msgType === 'email') {
+      userStore
+        .loginByEmail({
+          captcha: data.captchaVerified,
+          email: data.target,
+          goHome: false,
+          mode: 'notice',
+        })
+        .then(() => {
+          loading.value = false;
+          go(PageEnum.BASE_HOME);
+        })
+        .catch(() => {
+          getCaptchaData();
+          loading.value = false;
+        });
+    } else if (formData.msgType === 'sms') {
+      userStore
+        .loginBySms({
+          captcha: data.captchaVerified,
+          phoneNumber: data.target,
+          goHome: false,
+          mode: 'notice',
+        })
+        .then(() => {
+          loading.value = false;
+          go(PageEnum.BASE_HOME);
+        })
+        .catch(() => {
+          getCaptchaData();
+          loading.value = false;
+        });
+    }
   }
 
   // get captcha
@@ -176,6 +243,24 @@
     if (captcha.code === 0) {
       formData.captchaId = captcha.data.captchaId;
       formData.imgPath = captcha.data.imgPath;
+    }
+  }
+
+  async function handleSendCaptcha(): Promise<boolean> {
+    if (formData.msgType == 'email') {
+      const result = await getEmailCaptcha({ email: formData.target });
+      if (result.code == 0) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      const result = await getSmsCaptcha({ phoneNumber: formData.target });
+      if (result.code == 0) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 

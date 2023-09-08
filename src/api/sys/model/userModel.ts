@@ -50,6 +50,22 @@ export interface LoginReq {
 }
 
 /**
+ * @description: Login by email interface parameters
+ */
+export interface LoginByEmailReq {
+  email: string;
+  captcha: string;
+}
+
+/**
+ * @description: Login by sms interface parameters
+ */
+export interface LoginBySmsReq {
+  phoneNumber: string;
+  captcha: string;
+}
+
+/**
  * @description: Register interface parameters
  */
 export interface RegisterReq {
@@ -66,6 +82,7 @@ export interface RegisterReq {
 export interface LoginResp {
   userId: string | number;
   token: string;
+  expire?: number;
 }
 
 /**
