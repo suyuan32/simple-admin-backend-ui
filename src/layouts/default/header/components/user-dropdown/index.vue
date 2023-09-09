@@ -6,6 +6,9 @@
         <span :class="`${prefixCls}__name  `" class="truncate">
           {{ getUserInfo.nickname }}
         </span>
+        <span class="ml-4"
+          ><Tag v-for="role in roleTag" :key="role" color="blue">{{ role }}</Tag></span
+        >
       </span>
     </span>
 
@@ -41,7 +44,7 @@
 </template>
 <script lang="ts">
   // components
-  import { Dropdown, Menu } from 'ant-design-vue';
+  import { Dropdown, Menu, Tag } from 'ant-design-vue';
   import type { MenuInfo } from 'ant-design-vue/lib/menu/src/interface';
 
   import { defineComponent, computed } from 'vue';
@@ -68,6 +71,7 @@
     components: {
       Dropdown,
       Menu,
+      Tag,
       MenuItem: createAsyncComponent(() => import('./DropMenuItem.vue')),
       MenuDivider: Menu.Divider,
       LockAction: createAsyncComponent(() => import('../lock/LockModal.vue')),
@@ -85,6 +89,11 @@
       const getUserInfo = computed(() => {
         const { nickname = '', avatar, desc } = userStore.getUserInfo || {};
         return { nickname, avatar: avatar || headerImg, desc };
+      });
+
+      const roleTag = computed(() => {
+        let roleData = userStore.getRoleName;
+        return roleData.length > 3 ? roleData.slice(0, 3) : roleData;
       });
 
       const [register, { openModal }] = useModal();
@@ -133,6 +142,7 @@
         getShowDoc,
         register,
         getUseLockPage,
+        roleTag,
       };
     },
   });
