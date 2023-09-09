@@ -220,8 +220,7 @@ export default {
     navigation: 'Navigation',
     info: 'System Information',
     // notification
-    morning: 'Good morning',
-    niceDay: 'have a nice day!',
+    welcome: 'Welcome to use Simple Admin',
   },
   dictionary: {
     // noun

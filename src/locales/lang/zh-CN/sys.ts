@@ -212,8 +212,7 @@ export default {
     navigation: '快捷导航',
     info: '系统信息',
     // notification
-    morning: '早安',
-    niceDay: '开始您一天的工作吧！',
+    welcome: '欢迎使用 Simple Admin',
   },
   dictionary: {
     // noun
