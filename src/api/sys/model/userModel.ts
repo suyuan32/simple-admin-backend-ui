@@ -123,6 +123,8 @@ export interface GetUserInfoModel {
   homePath: string;
   // 用户角色
   roles?: string[];
+  // 用户角色名称
+  roleName: string[];
 }
 
 /**
