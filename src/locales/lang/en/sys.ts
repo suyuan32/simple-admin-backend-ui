@@ -203,6 +203,7 @@ export default {
     editUser: 'Edit User',
     changePassword: 'Change Password',
     forceLoggingOut: 'Force logging out',
+    changeAvatar: 'Change Avatar',
   },
   init: {
     // noun

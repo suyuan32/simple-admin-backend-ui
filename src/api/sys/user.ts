@@ -231,8 +231,11 @@ export function getUserProfile() {
  *  author: Ryan Su
  *  @description: update user profile
  */
-export function updateProfile(params: UserProfile) {
-  return defHttp.post<BaseResp>({ url: Api.Profile, params }, { errorMessageMode: 'message' });
+export function updateProfile(params: UserProfile, mode: ErrorMessageMode = 'message') {
+  return defHttp.post<BaseResp>(
+    { url: Api.Profile, params },
+    { errorMessageMode: mode, successMessageMode: mode },
+  );
 }
 
 /**
