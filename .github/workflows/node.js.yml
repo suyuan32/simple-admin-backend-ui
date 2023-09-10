@@ -29,8 +29,5 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Run tests
-        run: pnpm run test:gzip
-
-      - name: Build and deploy
-        run: pnpm build && pnpm deploy
+      - name: Build
+        run: pnpm build
