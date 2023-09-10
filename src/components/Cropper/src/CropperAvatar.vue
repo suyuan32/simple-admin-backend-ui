@@ -55,6 +55,7 @@
     btnProps: { type: Object as PropType<ButtonProps> },
     btnText: { type: String, default: '' },
     uploadApi: { type: Function as PropType<PromiseFn> },
+    formValueType: { type: String },
   };
 
   export default defineComponent({
@@ -94,7 +95,11 @@
 
       function handleUploadSuccess({ source, data }) {
         sourceValue.value = source;
-        emit('change', { source, data });
+        if (props.formValueType === 'base64') {
+          emit('change', { source, data });
+        } else {
+          emit('change', data);
+        }
         createMessage.success(t('component.cropper.uploadSuccess'));
       }
 

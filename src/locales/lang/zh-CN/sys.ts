@@ -195,6 +195,7 @@ export default {
     editUser: '编辑用户',
     changePassword: '修改密码',
     forceLoggingOut: '强制登出',
+    changeAvatar: '更换头像',
   },
   init: {
     // noun
