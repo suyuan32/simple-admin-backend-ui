@@ -13,7 +13,7 @@
           <CropperAvatar
             :uploadApi="uploadApi"
             :value="avatar"
-            btnText="更换头像"
+            :btnText="t('sys.user.changeAvatar')"
             :btnProps="{ preIcon: 'ant-design:cloud-upload-outlined' }"
             @change="updateAvatar"
             width="150"
@@ -132,7 +132,7 @@
     if (result.code === 0) message.success(result.msg, 3);
   }
 
-  function updateAvatar({ _src, data }) {
+  function updateAvatar(data) {
     const userinfo = userStore.getUserInfo;
     userinfo.avatar = data;
     formdata.avatar = data;

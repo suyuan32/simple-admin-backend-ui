@@ -195,6 +195,7 @@ export default {
     editUser: '编辑用户',
     changePassword: '修改密码',
     forceLoggingOut: '强制登出',
+    changeAvatar: '更换头像',
   },
   init: {
     // noun
@@ -212,8 +213,7 @@ export default {
     navigation: '快捷导航',
     info: '系统信息',
     // notification
-    morning: '早安',
-    niceDay: '开始您一天的工作吧！',
+    welcome: '欢迎使用 Simple Admin',
   },
   dictionary: {
     // noun

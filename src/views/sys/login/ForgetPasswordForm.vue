@@ -122,6 +122,8 @@
       return;
     }
 
+    loading.value = true;
+
     if (formData.msgType == 'email') {
       const result = await resetPasswordByEmail({
         email: formData.target,
@@ -130,6 +132,7 @@
       });
 
       if (result.code == 0) {
+        loading.value = false;
         handleBackLogin();
       }
     } else {
@@ -140,6 +143,7 @@
       });
 
       if (result.code == 0) {
+        loading.value = false;
         handleBackLogin();
       }
     }

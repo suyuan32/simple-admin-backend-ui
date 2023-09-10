@@ -50,6 +50,22 @@ export interface LoginReq {
 }
 
 /**
+ * @description: Login by email interface parameters
+ */
+export interface LoginByEmailReq {
+  email: string;
+  captcha: string;
+}
+
+/**
+ * @description: Login by sms interface parameters
+ */
+export interface LoginBySmsReq {
+  phoneNumber: string;
+  captcha: string;
+}
+
+/**
  * @description: Register interface parameters
  */
 export interface RegisterReq {
@@ -61,11 +77,32 @@ export interface RegisterReq {
 }
 
 /**
+ * @description: Register by email interface parameters
+ */
+export interface RegisterByEmailReq {
+  username: string;
+  password: string;
+  email: string;
+  captcha: string;
+}
+
+/**
+ * @description: Register by sms interface parameters
+ */
+export interface RegisterBySmsReq {
+  username: string;
+  password: string;
+  phoneNumber: string;
+  captcha: string;
+}
+
+/**
  * @description: Login interface return value
  */
 export interface LoginResp {
   userId: string | number;
   token: string;
+  expire?: number;
 }
 
 /**
@@ -86,6 +123,8 @@ export interface GetUserInfoModel {
   homePath: string;
   // 用户角色
   roles?: string[];
+  // 用户角色名称
+  roleName: string[];
 }
 
 /**

@@ -49,7 +49,7 @@ export default {
     editStorageProvider: 'Edit Storage Provider',
     storageProviderList: 'Storage Provider List',
     // help message
-    nameHelpMessage: 'Make sure that prefix with provider type, such as "tencent-" , "aliyun-"',
+    nameHelpMessage: 'Recommend that prefix with provider type, such as "tencent-" , "aliyun-"',
     folderHelpMessage: 'Sub folder in cloud, can be empty. Prefix with "/", such as "/test"',
   },
   cloudFile: {

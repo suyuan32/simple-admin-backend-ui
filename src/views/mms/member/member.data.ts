@@ -5,6 +5,7 @@ import { Switch } from 'ant-design-vue';
 import { h } from 'vue';
 import { getMemberRankList } from '../../../api/member/memberRank';
 import { updateMember } from '../../../api/member/member';
+import { uploadApi } from '/@/api/fms/file';
 
 const { t } = useI18n();
 
@@ -90,7 +91,18 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
     show: false,
   },
-
+  {
+    field: 'avatar',
+    label: t('sys.user.avatar'),
+    defaultValue: '',
+    component: 'CropperAvatar',
+    show: true,
+    componentProps: {
+      uploadApi: uploadApi,
+      btnText: t('sys.user.changeAvatar'),
+      width: 100,
+    },
+  },
   {
     field: 'username',
     label: t('sys.login.username'),
@@ -135,11 +147,6 @@ export const formSchema: FormSchema[] = [
     label: t('sys.login.email'),
     component: 'Input',
     required: true,
-  },
-  {
-    field: 'avatar',
-    label: t('sys.user.avatar'),
-    component: 'Input',
   },
   {
     field: 'status',

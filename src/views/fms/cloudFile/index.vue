@@ -32,6 +32,9 @@
           class="my-5"
           :accept="['image/*', 'video/*', 'audio/*']"
         />
+        <a-button type="primary" @click="handleCreate">
+          {{ t('fms.cloudFile.addCloudFile') }}
+        </a-button>
       </template>
       <template #bodyCell="{ column, record }">
         <template v-if="column.key === 'action'">

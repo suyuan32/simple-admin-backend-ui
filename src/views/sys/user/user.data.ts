@@ -8,6 +8,7 @@ import { getRoleList } from '/@/api/sys/role';
 import { getDepartmentList } from '/@/api/sys/department';
 import { getPositionList } from '/@/api/sys/position';
 import { updateUser } from '/@/api/sys/user';
+import { uploadApi } from '/@/api/fms/file';
 
 const { t } = useI18n();
 
@@ -122,8 +123,13 @@ export const formSchema: FormSchema[] = [
     field: 'avatar',
     label: t('sys.user.avatar'),
     defaultValue: '',
-    component: 'Input',
-    show: false,
+    component: 'CropperAvatar',
+    show: true,
+    componentProps: {
+      uploadApi: uploadApi,
+      btnText: t('sys.user.changeAvatar'),
+      width: 100,
+    },
   },
   {
     field: 'id',

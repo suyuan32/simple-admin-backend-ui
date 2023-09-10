@@ -169,8 +169,16 @@ export const formSchema: FormSchema[] = [
   {
     field: 'fileType',
     label: t('fms.cloudFile.fileType'),
-    component: 'InputNumber',
+    component: 'Select',
     required: true,
+    componentProps: {
+      options: [
+        { label: t('fms.file.other'), value: 1 },
+        { label: t('fms.file.image'), value: 2 },
+        { label: t('fms.file.video'), value: 3 },
+        { label: t('fms.file.audio'), value: 4 },
+      ],
+    },
   },
   {
     field: 'userId',
@@ -183,7 +191,6 @@ export const formSchema: FormSchema[] = [
     label: t('fms.cloudFile.providerId'),
     component: 'ApiSelect',
     required: true,
-    defaultValue: 1,
     componentProps: {
       api: getStorageProviderList,
       params: {
