@@ -2,7 +2,7 @@
 @import 'easing';
 @import 'breakpoint';
 
-@namespace: vben;
+@name-space: vben;
 
 // tabs
 @multiple-height: 30px;
@@ -33,7 +33,7 @@
 @page-footer-z-index: 99;
 
 .bem(@n; @content) {
-  @{namespace}-@{n} {
+  @{name-space}-@{n} {
     @content();
   }
 }

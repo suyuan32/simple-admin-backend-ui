@@ -57,7 +57,7 @@
 </script>
 
 <style lang="less" scoped>
-  @prefix-cls: ~'@{namespace}-setting-switch-item';
+  @prefix-cls: ~'@{name-space}-setting-switch-item';
 
   [data-theme='dark'] {
     .@{prefix-cls} {

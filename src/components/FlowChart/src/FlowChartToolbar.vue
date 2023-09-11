@@ -133,7 +133,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-flow-chart-toolbar';
+  @prefix-cls: ~'@{name-space}-flow-chart-toolbar';
 
   [data-theme='dark'] {
     // .lf-dnd {

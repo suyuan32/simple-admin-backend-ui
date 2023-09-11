@@ -88,7 +88,7 @@
 </script>
 
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-collapse-container';
+  @prefix-cls: ~'@{name-space}-collapse-container';
 
   [data-theme='dark'] {
     .@{prefix-cls} {
