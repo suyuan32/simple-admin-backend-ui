@@ -106,7 +106,7 @@
   });
 </script>
 <style lang="less" scoped>
-  @prefix-cls: ~'@{namespace}-layout-multiple-header';
+  @prefix-cls: ~'@{name-space}-layout-multiple-header';
 
   .@{prefix-cls} {
     flex: 0 0 auto;

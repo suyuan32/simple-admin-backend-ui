@@ -405,7 +405,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-basic-column-setting';
+  @prefix-cls: ~'@{name-space}-basic-column-setting';
 
   .table-column-drag-icon {
     margin: 0 5px;

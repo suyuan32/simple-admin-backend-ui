@@ -65,7 +65,7 @@
 </script>
 
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-basic-drawer-footer';
+  @prefix-cls: ~'@{name-space}-basic-drawer-footer';
 
   @footer-height: 60px;
 

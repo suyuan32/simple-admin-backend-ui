@@ -148,7 +148,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-basic-table-action';
+  @prefix-cls: ~'@{name-space}-basic-table-action';
 
   .@{prefix-cls} {
     display: flex;

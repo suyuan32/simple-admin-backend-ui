@@ -104,3 +104,6 @@ dist
 
 # vscode private configuration file
 .vscode/redis.json
+
+# webstorm idea
+.idea

@@ -361,7 +361,7 @@
 <style lang="less">
   @border-color: #cecece4d;
 
-  @prefix-cls: ~'@{namespace}-basic-table';
+  @prefix-cls: ~'@{name-space}-basic-table';
 
   [data-theme='dark'] {
     .@{prefix-cls} {

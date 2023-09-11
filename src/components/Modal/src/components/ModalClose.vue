@@ -63,7 +63,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-basic-modal-close';
+  @prefix-cls: ~'@{name-space}-basic-modal-close';
   .@{prefix-cls} {
     display: flex;
     align-items: center;

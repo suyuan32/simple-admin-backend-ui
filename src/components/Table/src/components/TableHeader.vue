@@ -64,7 +64,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-basic-table-header';
+  @prefix-cls: ~'@{name-space}-basic-table-header';
 
   .@{prefix-cls} {
     &__toolbar {

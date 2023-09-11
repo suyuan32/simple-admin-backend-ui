@@ -32,7 +32,7 @@
   }
 </script>
 <style lang="less" scoped>
-  @prefix-cls: ~'@{namespace}-dark-switch';
+  @prefix-cls: ~'@{name-space}-dark-switch';
 
   html[data-theme='dark'] {
     .@{prefix-cls} {

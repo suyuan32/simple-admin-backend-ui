@@ -133,7 +133,7 @@
   }
 </script>
 <style lang="less" scoped>
-  @prefix-cls: ~'@{namespace}-lock-page';
+  @prefix-cls: ~'@{name-space}-lock-page';
 
   .@{prefix-cls} {
     z-index: @lock-page-z-index;
