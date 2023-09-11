@@ -172,8 +172,8 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-layout-menu';
-  @logo-prefix-cls: ~'@{namespace}-app-logo';
+  @prefix-cls: ~'@{name-space}-layout-menu';
+  @logo-prefix-cls: ~'@{name-space}-app-logo';
 
   .@{prefix-cls} {
     &-logo {

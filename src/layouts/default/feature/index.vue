@@ -59,7 +59,7 @@
 </template>
 
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-setting-drawer-feature';
+  @prefix-cls: ~'@{name-space}-setting-drawer-feature';
 
   .@{prefix-cls} {
     display: flex;

@@ -71,7 +71,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-default-layout';
+  @prefix-cls: ~'@{name-space}-default-layout';
 
   .@{prefix-cls} {
     display: flex;

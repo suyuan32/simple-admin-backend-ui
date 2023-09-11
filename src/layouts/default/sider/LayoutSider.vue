@@ -132,7 +132,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-layout-sideBar';
+  @prefix-cls: ~'@{name-space}-layout-sideBar';
 
   .@{prefix-cls} {
     z-index: @layout-sider-fixed-z-index;

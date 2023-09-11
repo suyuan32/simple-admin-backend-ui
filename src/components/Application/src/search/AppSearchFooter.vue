@@ -19,7 +19,7 @@
   const { t } = useI18n();
 </script>
 <style lang="less" scoped>
-  @prefix-cls: ~'@{namespace}-app-search-footer';
+  @prefix-cls: ~'@{name-space}-app-search-footer';
 
   .@{prefix-cls} {
     display: flex;
