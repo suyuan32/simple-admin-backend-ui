@@ -18,7 +18,7 @@ function getKey(namespace: string | undefined, key: string) {
   if (key.startsWith(namespace)) {
     return key;
   }
-  return `${name-space}.${key}`;
+  return `${namespace}.${key}`;
 }
 
 export function useI18n(namespace?: string): {
