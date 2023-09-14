@@ -25,7 +25,10 @@ export const getStorageProviderList = (params: BaseListReq, mode: ErrorMessageMo
 /**
  *  @description: Create a new storage provider
  */
-export const createStorageProvider = (params: StorageProviderInfo, mode: ErrorMessageMode = 'notice') => {
+export const createStorageProvider = (
+  params: StorageProviderInfo,
+  mode: ErrorMessageMode = 'notice',
+) => {
   return defHttp.post<BaseResp>(
     { url: Api.CreateStorageProvider, params: params },
     {
@@ -38,7 +41,10 @@ export const createStorageProvider = (params: StorageProviderInfo, mode: ErrorMe
 /**
  *  @description: Update the storage provider
  */
-export const updateStorageProvider = (params: StorageProviderInfo, mode: ErrorMessageMode = 'notice') => {
+export const updateStorageProvider = (
+  params: StorageProviderInfo,
+  mode: ErrorMessageMode = 'notice',
+) => {
   return defHttp.post<BaseResp>(
     { url: Api.UpdateStorageProvider, params: params },
     {

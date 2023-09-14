@@ -40,6 +40,7 @@
   import { useDesign } from '/@/hooks/web/useDesign';
 
   import DragBar from './DragBar.vue';
+
   export default defineComponent({
     name: 'LayoutSideBar',
     components: { Sider: Layout.Sider, LayoutMenu, DragBar, LayoutTrigger },

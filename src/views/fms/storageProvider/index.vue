@@ -3,11 +3,11 @@
     <BasicTable @register="registerTable">
       <template #tableTitle>
         <Button
-                type="primary"
-                danger
-                preIcon="ant-design:delete-outlined"
-                v-if="showDeleteButton"
-                @click="handleBatchDelete()"
+          type="primary"
+          danger
+          preIcon="ant-design:delete-outlined"
+          v-if="showDeleteButton"
+          @click="handleBatchDelete()"
         >
           {{ t('common.delete') }}
         </Button>
