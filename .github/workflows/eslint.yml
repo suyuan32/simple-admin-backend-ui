@@ -34,6 +34,9 @@ jobs:
           npm install -g eslint
           npm install -g  @microsoft/eslint-formatter-sarif
 
+      - name: Install dependencies
+        run: pnpm install
+
       - name: Run ESLint
         run: |
           pnpm lint
