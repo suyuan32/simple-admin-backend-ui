@@ -179,7 +179,7 @@
         });
       }
 
-      function handleSelect(deptId = '') {
+      function handleSelect(deptId) {
         searchInfo.departmentId = deptId;
         reload();
       }

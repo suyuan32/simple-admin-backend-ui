@@ -172,7 +172,7 @@
         await reload();
       }
 
-      function handleSelect(rankId = '') {
+      function handleSelect(rankId) {
         searchInfo.rankId = rankId;
         reload();
       }
