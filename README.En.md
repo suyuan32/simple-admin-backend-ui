@@ -41,7 +41,7 @@ Simple Admin UI is a modern UI for Simple Admin. It is based on vue-vben-admin a
 
 ### Online preview
 
-[Online Preview](http://101.132.124.135/#/dashboard) Account: admin Password: simple-admin
+[Online Preview](http://101.132.124.135:8080/) Account: admin Password: simple-admin
 
 #### Read Only, cannot register and modify
 
