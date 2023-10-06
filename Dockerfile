@@ -1,4 +1,4 @@
-FROM nginx:1.23.4-alpine
+FROM nginx:1.25.2-alpine
 
 COPY dist/ /usr/share/nginx/html/
 COPY deploy/default.conf /etc/nginx/conf.d/
