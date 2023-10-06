@@ -1,0 +1,42 @@
+name: ESLint
+
+on:
+  push:
+    branches: ['master', 'dev']
+  pull_request:
+    branches: ['master', 'dev']
+  schedule:
+    - cron: '0 0 * * Mon'
+
+jobs:
+  eslint:
+    name: Run eslint scanning
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install pnpm
+        run: npm install -g pnpm
+
+      - name: Install ESLint
+        run: |
+          npm install -g eslint
+          npm install -g  @microsoft/eslint-formatter-sarif
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run ESLint
+        run: |
+          pnpm lint

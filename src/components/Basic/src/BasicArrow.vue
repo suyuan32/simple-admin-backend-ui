@@ -48,7 +48,7 @@
   });
 </script>
 <style lang="less" scoped>
-  @prefix-cls: ~'@{namespace}-basic-arrow';
+  @prefix-cls: ~'@{name-space}-basic-arrow';
 
   .@{prefix-cls} {
     display: inline-block;

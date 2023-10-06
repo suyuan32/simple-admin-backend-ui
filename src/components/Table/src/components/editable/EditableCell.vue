@@ -217,7 +217,7 @@
           }
           if (isFunction(editRule)) {
             const res = await editRule(currentValue, record as Recordable);
-            if (!!res) {
+            if (res) {
               ruleMessage.value = res;
               ruleVisible.value = true;
               return false;
@@ -447,7 +447,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-editable-cell';
+  @prefix-cls: ~'@{name-space}-editable-cell';
 
   .edit-cell-align-left {
     text-align: left;

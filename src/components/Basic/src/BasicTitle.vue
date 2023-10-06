@@ -40,7 +40,7 @@
   ]);
 </script>
 <style lang="less" scoped>
-  @prefix-cls: ~'@{namespace}-basic-title';
+  @prefix-cls: ~'@{name-space}-basic-title';
 
   [data-theme='dark'] {
     .@{prefix-cls} {

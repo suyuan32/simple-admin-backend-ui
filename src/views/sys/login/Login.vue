@@ -69,9 +69,9 @@
   const title = computed(() => globSetting?.title ?? '');
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-login';
-  @logo-prefix-cls: ~'@{namespace}-app-logo';
-  @countdown-prefix-cls: ~'@{namespace}-countdown-input';
+  @prefix-cls: ~'@{name-space}-login';
+  @logo-prefix-cls: ~'@{name-space}-app-logo';
+  @countdown-prefix-cls: ~'@{name-space}-countdown-input';
   @dark-bg: #293146;
 
   html[data-theme='dark'] {

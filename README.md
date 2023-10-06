@@ -43,7 +43,7 @@ Simple Admin UI 是基于 vue-vben-admin 二次开发的为 Simple Admin 专门�
 
 ### 在线预览
 
-[在线预览](http://101.132.124.135/#/dashboard) 账号 admin 密码 simple-admin
+[在线预览](http://101.132.124.135:8080/) 账号 admin 密码 simple-admin
 
 #### 只读，不可修改和注册
 

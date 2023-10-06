@@ -12,3 +12,5 @@ export enum PageEnum {
   // oauth callback page
   OAUTH_CALLBACK = '/oauth/login/callback',
 }
+
+export const PageWrapperFixedHeightKey = 'PageWrapperFixedHeight';

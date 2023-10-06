@@ -13,6 +13,7 @@
   import { useFullscreen } from '@vueuse/core';
 
   import { FullscreenExitOutlined, FullscreenOutlined } from '@ant-design/icons-vue';
+
   export default defineComponent({
     name: 'FullScreen',
     components: { FullscreenExitOutlined, FullscreenOutlined, Tooltip },
@@ -21,12 +22,7 @@
       const { t } = useI18n();
       const { toggle, isFullscreen } = useFullscreen();
       // 重新检查全屏状态
-      isFullscreen.value = !!(
-        document.fullscreenElement ||
-        document.webkitFullscreenElement ||
-        document.mozFullScreenElement ||
-        document.msFullscreenElement
-      );
+      isFullscreen.value = !!document.fullscreenElement;
 
       const getTitle = computed(() => {
         return unref(isFullscreen)

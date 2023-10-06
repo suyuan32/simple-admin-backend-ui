@@ -11,6 +11,7 @@
   import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent';
 
   import SessionTimeoutLogin from '/@/views/sys/login/SessionTimeoutLogin.vue';
+
   export default defineComponent({
     name: 'LayoutFeatures',
     components: {
@@ -59,7 +60,7 @@
 </template>
 
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-setting-drawer-feature';
+  @prefix-cls: ~'@{name-space}-setting-drawer-feature';
 
   .@{prefix-cls} {
     display: flex;

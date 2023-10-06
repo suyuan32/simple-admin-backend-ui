@@ -5,7 +5,7 @@ export default {
     toNavigate: 'to navigate',
   },
   countdown: {
-    normalText: 'Get SMS code',
+    normalText: 'Get code',
     sendText: 'Reacquire in {0}s',
   },
   cropper: {

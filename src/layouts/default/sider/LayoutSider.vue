@@ -40,6 +40,7 @@
   import { useDesign } from '/@/hooks/web/useDesign';
 
   import DragBar from './DragBar.vue';
+
   export default defineComponent({
     name: 'LayoutSideBar',
     components: { Sider: Layout.Sider, LayoutMenu, DragBar, LayoutTrigger },
@@ -132,7 +133,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{namespace}-layout-sideBar';
+  @prefix-cls: ~'@{name-space}-layout-sideBar';
 
   .@{prefix-cls} {
     z-index: @layout-sider-fixed-z-index;

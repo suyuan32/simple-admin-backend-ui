@@ -199,8 +199,8 @@
 <style lang="less">
   @header-height: 60px;
   @detail-header-height: 40px;
-  @prefix-cls: ~'@{namespace}-basic-drawer';
-  @prefix-cls-detail: ~'@{namespace}-basic-drawer__detail';
+  @prefix-cls: ~'@{name-space}-basic-drawer';
+  @prefix-cls-detail: ~'@{name-space}-basic-drawer__detail';
 
   [data-theme='dark'] {
     .@{prefix-cls} {

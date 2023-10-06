@@ -1,4 +1,4 @@
-import { createProdMockServer  } from 'vite-plugin-mock/dist/client';
+import { createProdMockServer } from 'vite-plugin-mock/dist/client';
 
 const modules: Record<string, any> = import.meta.glob('./**/*.ts', {
   import: 'default',
