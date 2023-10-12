@@ -206,6 +206,12 @@ export default {
     initMMSDatabase: '会员服务(MMS)数据库初始化（可选）',
     initJobDatabase: '定时任务服务数据库初始化（可选）',
     initMcmsDatabase: '消息中心服务数据库初始化（可选）',
+    initCustom: '自助初始化',
+    initUrl: '初始化域名或 IP 地址',
+    initPort: '初始化端口',
+    initService: '初始化服务名',
+    initRedirect: '您将跳转到 <URL>:<Port>/<Service>/init/database',
+    initOptional: '可选',
   },
   sys: {
     version: '系统版本',

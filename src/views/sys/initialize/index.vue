@@ -42,10 +42,35 @@
         </ACard>
       </ACol>
     </ARow>
+    <Divider />
+    <ARow>
+      <ACol :span="12">
+        <ACard :title="t('sys.init.initCustom')" :hoverable="true">
+          <p>{{ t('sys.init.initUrl') }}</p>
+          <p>
+            <Input v-model:value="customInitUrl" />
+          </p>
+          <p>{{ t('sys.init.initPort') }}</p>
+          <p>
+            <Input v-model:value="customInitPort" />
+          </p>
+          <p>{{ t('sys.init.initService') }}</p>
+          <p>
+            <Input v-model:value="customInitService" :placeholder="t('sys.init.initOptional')" />
+          </p>
+          <p>{{ t('sys.init.initRedirect') }}</p>
+          <p
+            ><a-button type="primary" :loading="mcmsInitButtonLoading" @click="initCustomDatabase">
+              {{ t('common.start') }}
+            </a-button></p
+          >
+        </ACard>
+      </ACol>
+    </ARow>
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-  import { Col, Row, Card, message } from 'ant-design-vue';
+  import { Col, Row, Card, message, Input, Divider } from 'ant-design-vue';
   import { PageWrapper } from '/@/components/Page';
   import { useI18n } from 'vue-i18n';
   import { ref } from 'vue';
@@ -67,6 +92,17 @@
   const mmsInitButtonLoading = ref<boolean>(false);
   const jobInitButtonLoading = ref<boolean>(false);
   const mcmsInitButtonLoading = ref<boolean>(false);
+  const customInitUrl = ref<string>('http://localhost');
+  const customInitPort = ref<string>('9100');
+  const customInitService = ref<string>('');
+
+  async function initCustomDatabase() {
+    const serviceName: string = customInitService.value == '' ? '' : '/' + customInitService.value;
+    window.open(
+      customInitUrl.value + ':' + customInitPort.value + serviceName + '/init/database',
+      '_blank',
+    );
+  }
 
   async function initCoreDatabase() {
     coreInitButtonLoading.value = true;
