@@ -214,6 +214,12 @@ export default {
     initMMSDatabase: 'Initialize member management service database (optional)',
     initJobDatabase: 'Initialize scheduled task management service database (optional)',
     initMcmsDatabase: 'Initialize message center management service database (optional)',
+    initCustom: 'Custom Initialization',
+    initUrl: 'Initialization URL',
+    initPort: 'Initialization Port',
+    initService: 'Initialization Service',
+    initRedirect: 'You will be redirected to <URL>:<Port>/<Service>/init/database',
+    initOptional: 'Optional',
   },
   sys: {
     version: 'Version',
