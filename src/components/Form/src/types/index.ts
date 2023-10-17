@@ -117,4 +117,5 @@ export type ComponentType =
   | 'Divider'
   | 'ApiTransfer'
   | 'DictionarySelect'
-  | 'CropperAvatar';
+  | 'CropperAvatar'
+  | 'Tinymce';
