@@ -217,6 +217,9 @@
             rule.required = false;
           }
           if (component) {
+            if (!Reflect.has(rule, 'type')) {
+              rule.type = component === 'InputNumber' ? 'number' : 'string';
+            }
             rule.message = rule.message || defaultMsg;
 
             if (component.includes('Input') || component.includes('Textarea')) {
