@@ -54,7 +54,7 @@
     </BasicTable>
     <FileDrawer @register="registerDrawer" @success="handleSuccess" />
     <Modal
-      v-model:visible="videoVisible"
+      v-model:open="videoVisible"
       :title="videoTitle"
       width="80%"
       wrap-class-name="full-modal"
@@ -71,7 +71,7 @@
       </video>
     </Modal>
     <Modal
-      v-model:visible="imageVisible"
+      v-model:open="ageVisible"
       :title="imageTitle"
       width="50%"
       wrap-class-name="full-modal"
