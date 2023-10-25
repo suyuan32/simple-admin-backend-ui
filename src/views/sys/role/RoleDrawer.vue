@@ -30,6 +30,7 @@
             :height="600"
             :treeData="treeMenuData"
             :checkStrictly="true"
+            :noPadding="true"
             ref="treeMenuRef"
           />
         </ATabPane>
