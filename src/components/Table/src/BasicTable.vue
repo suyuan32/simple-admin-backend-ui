@@ -21,6 +21,7 @@
       v-bind="getBindValues"
       :rowClassName="getRowClassName"
       v-show="getEmptyDataIsShowTable"
+      @resizeColumn="setColumnWidth"
       @change="handleTableChange"
     >
       <template #[item]="data" v-for="item in Object.keys($slots)" :key="item">
@@ -193,6 +194,7 @@
         setColumns,
         getColumnsRef,
         getCacheColumns,
+        setColumnWidth,
       } = useColumns(getProps, getPaginationInfo);
 
       const { getScrollRef, redoHeight } = useTableScroll(
@@ -354,6 +356,7 @@
         getFormSlotKeys,
         getWrapperClass,
         columns: getViewColumns,
+        setColumnWidth,
       };
     },
   });
