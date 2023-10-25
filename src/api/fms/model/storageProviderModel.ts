@@ -4,7 +4,7 @@ import { BaseListResp } from '/@/api/model/baseModel';
  *  @description: StorageProvider info response
  */
 export interface StorageProviderInfo {
-  id: number;
+  id?: number;
   createdAt?: number;
   updatedAt?: number;
   state?: boolean;

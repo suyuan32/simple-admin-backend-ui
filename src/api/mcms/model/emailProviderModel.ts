@@ -4,7 +4,7 @@ import { BaseListResp } from '/@/api/model/baseModel';
  *  @description: EmailProvider info response
  */
 export interface EmailProviderInfo {
-  id: number;
+  id?: number;
   createdAt?: number;
   updatedAt?: number;
   name?: string;
