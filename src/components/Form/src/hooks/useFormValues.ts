@@ -1,9 +1,9 @@
-import { isArray, isFunction, isObject, isString, isNullOrUnDef } from '/@/utils/is';
+import { isArray, isFunction, isNotEmpty, isObject, isString, isNullOrUnDef } from '/@/utils/is';
 import { dateUtil } from '/@/utils/dateUtil';
 import { unref } from 'vue';
 import type { Ref, ComputedRef } from 'vue';
-import type { FormProps, FormSchema } from '../types/form';
-import { cloneDeep, set } from 'lodash-es';
+import type { FormProps, FormSchemaInner as FormSchema } from '../types/form';
+import { cloneDeep, get, set, unset } from 'lodash-es';
 
 interface UseFormValuesContext {
   defaultValueRef: Ref<any>;
@@ -106,18 +106,22 @@ export function useFormValues({
         continue;
       }
       // If the value to be converted is empty, remove the field
-      if (!values[field]) {
-        Reflect.deleteProperty(values, field);
+      if (!get(values, field)) {
+        unset(values, field);
         continue;
       }
 
-      const [startTime, endTime]: string[] = values[field];
+      const [startTime, endTime]: string[] = get(values, field);
 
       const [startTimeFormat, endTimeFormat] = Array.isArray(format) ? format : [format, format];
 
-      values[startTimeKey] = formatTime(startTime, startTimeFormat);
-      values[endTimeKey] = formatTime(endTime, endTimeFormat);
-      Reflect.deleteProperty(values, field);
+      if (isNotEmpty(startTime)) {
+        set(values, startTimeKey, formatTime(startTime, startTimeFormat));
+      }
+      if (isNotEmpty(endTime)) {
+        set(values, endTimeKey, formatTime(endTime, endTimeFormat));
+      }
+      unset(values, field);
     }
 
     return values;
@@ -136,7 +140,16 @@ export function useFormValues({
     const schemas = unref(getSchema);
     const obj: Recordable = {};
     schemas.forEach((item) => {
-      const { defaultValue } = item;
+      const { defaultValue, defaultValueObj } = item;
+      const fieldKeys = Object.keys(defaultValueObj || {});
+      if (fieldKeys.length) {
+        fieldKeys.map((field) => {
+          obj[field] = defaultValueObj![field];
+          if (formModel[field] === undefined) {
+            formModel[field] = defaultValueObj![field];
+          }
+        });
+      }
       if (!isNullOrUnDef(defaultValue)) {
         obj[item.field] = defaultValue;
 
