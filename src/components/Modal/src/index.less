@@ -28,7 +28,7 @@
   }
 }
 
-.vben-basic-modal .ant-modal {
+.vben-basic-modal-wrap .ant-modal {
   width: 520px;
   padding-bottom: 0;
 
@@ -79,9 +79,8 @@
   &-close {
     width: auto !important;
     outline: none;
-    background: #fff !important;
+    background: transparent !important;
     font-weight: normal;
-    outline: none;
   }
 
   &-close-x {
@@ -143,7 +142,7 @@
   }
 }
 
-.dark-modal {
+.vben-basic-modal-wrap .dark-modal {
   width: 520px;
   padding-bottom: 0;
 
@@ -191,8 +190,10 @@
   }
 
   &-close {
-    font-weight: normal;
+    width: auto !important;
     outline: none;
+    background: transparent !important;
+    font-weight: normal;
   }
 
   &-close-x {

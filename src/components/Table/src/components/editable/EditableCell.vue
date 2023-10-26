@@ -476,9 +476,9 @@
   .edit-cell-rule-popover {
     .ant-popover-inner-content {
       padding: 4px 8px;
-      color: @error-color;
       // border: 1px solid @error-color;
       border-radius: 2px;
+      color: @error-color;
     }
   }
   .@{prefix-cls} {
@@ -506,20 +506,20 @@
 
     .ellipsis-cell {
       .cell-content {
-        overflow-wrap: break-word;
-        word-break: break-word;
         overflow: hidden;
-        white-space: nowrap;
         text-overflow: ellipsis;
+        word-break: break-word;
+        white-space: nowrap;
+        overflow-wrap: break-word;
       }
     }
 
     &__normal {
       &-icon {
+        display: none;
         position: absolute;
         top: 4px;
         right: 0;
-        display: none;
         width: 20px;
         cursor: pointer;
       }

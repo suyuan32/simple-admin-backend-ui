@@ -1,7 +1,7 @@
 import { resolve } from 'node:path';
 
 import { generate } from '@ant-design/colors';
-import   theme   from 'ant-design-vue/lib/theme';
+import theme from 'ant-design-vue/lib/theme';
 import convertLegacyToken from 'ant-design-vue/lib/theme/convertLegacyToken';
 
 const { defaultAlgorithm, defaultSeed } = theme;
