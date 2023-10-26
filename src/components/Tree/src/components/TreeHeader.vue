@@ -1,5 +1,5 @@
 <template>
-  <div :class="classData">
+  <div :class="bem()" class="flex px-2 py-1.5 items-center">
     <slot name="headerTitle" v-if="slots.headerTitle"></slot>
     <BasicTitle :helpMessage="helpMessage" v-if="!slots.headerTitle && title">
       {{ title }}
@@ -33,46 +33,25 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { computed, ref, watch, useSlots } from 'vue';
-  import { Dropdown, Menu, MenuItem, MenuDivider, InputSearch } from 'ant-design-vue';
-  import { Icon } from '@/components/Icon';
+  import { type PropType, computed, ref, watch, useSlots } from 'vue';
+  import {
+    Dropdown,
+    Menu,
+    MenuItem,
+    MenuDivider,
+    InputSearch,
+    type MenuProps,
+  } from 'ant-design-vue';
+  import Icon from '@/components/Icon/Icon.vue';
   import { BasicTitle } from '/@/components/Basic';
   import { useI18n } from '/@/hooks/web/useI18n';
   import { useDebounceFn } from '@vueuse/core';
   import { createBEM } from '/@/utils/bem';
   import { ToolbarEnum } from '../types/tree';
-  import { MenuInfo } from 'ant-design-vue/lib/menu/src/interface';
-  import { useAppStore } from '/@/store/modules/app';
-  import { ThemeEnum } from '/@/enums/appEnum';
-
-  const classData = ref<string>();
 
   const searchValue = ref('');
 
   const [bem] = createBEM('tree-header');
-
-  const bgColor = ref<string>();
-
-  const appStore = useAppStore();
-
-  const changePrefix = function (value: string) {
-    if (value === ThemeEnum.DARK) {
-      bgColor.value = ' bg-dark-800 ';
-    } else {
-      bgColor.value = ' bg-white ';
-    }
-
-    classData.value = 'flex px-2 py-1.5 items-center' + bgColor.value + bem().toString();
-  };
-
-  changePrefix(appStore.getDarkMode);
-
-  watch(
-    () => appStore.getDarkMode,
-    (value, _oldValue) => {
-      changePrefix(value);
-    },
-  );
 
   const props = defineProps({
     helpMessage: {
@@ -150,8 +129,7 @@
       : defaultToolbarList;
   });
 
-  function handleMenuClick(e: MenuInfo) {
-    const { key } = e;
+  const handleMenuClick: MenuProps['onClick'] = ({ key }) => {
     switch (key) {
       case ToolbarEnum.SELECT_ALL:
         props.checkAll?.(true);
@@ -172,7 +150,7 @@
         emit('strictly-change', true);
         break;
     }
-  }
+  };
 
   function emitChange(value?: string): void {
     emit('search', value);
