@@ -121,10 +121,10 @@
       height: calc(100% - @header-height);
     }
 
-    &.dark-layout-sider {
+    &.ant-layout-sider-dark {
       background-color: @sider-dark-bg-color;
 
-      .dark-layout-sider-trigger {
+      .ant-layout-sider-trigger {
         background-color: @trigger-dark-bg-color;
         color: darken(@white, 25%);
 
@@ -135,16 +135,16 @@
       }
     }
 
-    &:not(.dark-layout-sider) {
+    &:not(.ant-layout-sider-dark) {
       // box-shadow: 2px 0 8px 0 rgba(29, 35, 41, 0.05);
 
-      .dark-layout-sider-trigger {
+      .ant-layout-sider-trigger {
         border-top: 1px solid @border-color-light;
         color: @text-color-base;
       }
     }
 
-    .dark-layout-sider-zero-width-trigger {
+    .ant-layout-sider-zero-width-trigger {
       z-index: 10;
       top: 40%;
     }
