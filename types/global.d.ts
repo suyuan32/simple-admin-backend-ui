@@ -22,6 +22,12 @@ declare global {
   //   __APP__: App<Element>;
   // }
 
+  interface Document {
+    mozFullScreenElement?: Element;
+    msFullscreenElement?: Element;
+    webkitFullscreenElement?: Element;
+  }
+
   // vue
   declare type PropType<T> = VuePropType<T>;
   declare type VueNode = VNodeChild | JSX.Element;
