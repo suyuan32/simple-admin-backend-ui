@@ -4,7 +4,7 @@ import { BaseListResp } from '/@/api/model/baseModel';
  *  @description: Tag info response
  */
 export interface TagInfo {
-  id: number;
+  id?: number;
   createdAt?: number;
   updatedAt?: number;
   status?: number;

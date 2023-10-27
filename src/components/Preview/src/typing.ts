@@ -6,8 +6,8 @@ export interface Options {
   defaultWidth?: number;
   maskClosable?: boolean;
   rememberState?: boolean;
-  onImgLoad?: ({ index: number, url: string, dom: HTMLImageElement }) => void;
-  onImgError?: ({ index: number, url: string, dom: HTMLImageElement }) => void;
+  onImgLoad?: (params: { index: number; url: string; dom: HTMLImageElement }) => void;
+  onImgError?: (params: { index: number; url: string; dom: HTMLImageElement }) => void;
 }
 
 export interface Props {
@@ -41,7 +41,7 @@ export interface ImageProps {
     | boolean
     | {
         visible?: boolean;
-        onVisibleChange?: (visible: boolean, prevVisible: boolean) => void;
+        onOpenChange?: (visible: boolean, prevVisible: boolean) => void;
         getContainer: string | HTMLElement | (() => HTMLElement);
       };
 }

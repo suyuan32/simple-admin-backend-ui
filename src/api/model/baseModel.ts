@@ -20,7 +20,7 @@ export interface BaseResp {
 }
 
 export interface BaseIDReq {
-  id: number;
+  id?: number;
 }
 
 export interface BaseIDsReq {

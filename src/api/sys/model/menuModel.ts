@@ -26,7 +26,7 @@ export interface MenuPageResp {
  *  @description: the items for menu list table
  */
 export interface MenuInfo {
-  id: number;
+  id?: number;
   type?: number;
   trans?: string;
   parentId?: number;

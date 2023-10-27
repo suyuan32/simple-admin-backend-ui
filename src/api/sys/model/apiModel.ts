@@ -4,7 +4,7 @@ import { BaseListResp } from '/@/api/model/baseModel';
  *  @description: Api info response
  */
 export interface ApiInfo {
-  id: number;
+  id?: number;
   createdAt?: number;
   updatedAt?: number;
   trans: string;

@@ -136,6 +136,11 @@ export const treeProps = buildProps({
     default: false,
   },
   treeWrapperClassName: String,
+  //  是否去除 wrapper padding
+  noPadding: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 export type TreeProps = ExtractPropTypes<typeof treeProps>;

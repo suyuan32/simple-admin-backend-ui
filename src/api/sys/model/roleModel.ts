@@ -4,7 +4,7 @@ import { BaseListResp } from '/@/api/model/baseModel';
  *  @description: Role info response
  */
 export interface RoleInfo {
-  id: number;
+  id?: number;
   createdAt?: number;
   updatedAt?: number;
   status?: number;

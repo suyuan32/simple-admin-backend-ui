@@ -3,9 +3,6 @@
     <template #[item]="data" v-for="item in Object.keys($slots)">
       <slot :name="item" v-bind="data || {}"></slot>
     </template>
-    <template #suffixIcon v-if="loading">
-      <LoadingOutlined spin />
-    </template>
   </ATree>
 </template>
 
@@ -16,12 +13,11 @@
   import { isArray, isFunction } from '/@/utils/is';
   import { get } from 'lodash-es';
   import { propTypes } from '/@/utils/propTypes';
-  import { LoadingOutlined } from '@ant-design/icons-vue';
   import type { DataNode } from 'ant-design-vue/lib/vc-tree/interface';
 
   export default defineComponent({
     name: 'ApiTree',
-    components: { ATree: Tree, LoadingOutlined },
+    components: { ATree: Tree },
     props: {
       api: { type: Function as PropType<(arg?: Recordable<any>) => Promise<Recordable<any>>> },
       params: { type: Object },
@@ -83,7 +79,7 @@
         if (!isArray(result)) {
           result = get(result, props.resultField);
         }
-        treeData.value = (result as DataNode[]) || [];
+        treeData.value = (result as (Recordable & { key: string | number })[]) || [];
         isFirstLoaded.value = true;
         emit('options-change', treeData.value);
       }

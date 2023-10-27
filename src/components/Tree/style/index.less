@@ -36,7 +36,7 @@
 
   &__actions {
     position: absolute;
-    //top: 2px;
+    // top: 20px;
     right: 3px;
     display: flex;
   }
@@ -48,5 +48,13 @@
 
   &-header {
     border-bottom: 1px solid @border-color-base;
+  }
+}
+
+[data-theme='dark'] {
+  .@{tree-prefix-cls} {
+    &-header {
+      border-bottom: 1px solid @border-color-dark;
+    }
   }
 }

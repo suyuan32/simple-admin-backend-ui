@@ -34,7 +34,7 @@
       | boolean
       | {
           visible?: boolean;
-          onVisibleChange?: (visible: boolean, prevVisible: boolean) => void;
+          onOpenChange?: (visible: boolean, prevVisible: boolean) => void;
           getContainer: string | HTMLElement | (() => HTMLElement);
         };
   }

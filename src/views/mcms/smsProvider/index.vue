@@ -48,11 +48,7 @@
     </BasicTable>
     <SmsProviderDrawer @register="registerDrawer" @success="handleSuccess" />
     <LogModal @register="registerModal" :defaultFullscreen="true" />
-    <BasicModal
-      v-model:visible="showSenderModal"
-      :title="t('mcms.sms.sendSms')"
-      @ok="handleSendSms"
-    >
+    <BasicModal v-model:open="showSenderModal" :title="t('mcms.sms.sendSms')" @ok="handleSendSms">
       <BasicForm @register="registerForm" />
     </BasicModal>
   </div>

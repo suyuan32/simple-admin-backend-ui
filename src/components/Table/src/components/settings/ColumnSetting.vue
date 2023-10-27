@@ -479,4 +479,24 @@
       }
     }
   }
+
+  [data-theme='dark'] {
+    .@{prefix-cls} {
+      &__fixed-left,
+      &__fixed-right {
+        color: rgb(255 255 255);
+        cursor: pointer;
+
+        &.active,
+        &:hover {
+          color: @primary-color;
+        }
+
+        &.disabled {
+          color: @disabled-color;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
 </style>
