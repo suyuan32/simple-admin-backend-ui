@@ -378,7 +378,7 @@
           width: 100%;
           margin-bottom: 16px;
           padding: 12px 10px 6px;
-          border-radius: 2px;
+          border-radius: 8px;
           background-color: #141414;
         }
       }
@@ -390,7 +390,7 @@
       .dark-table-wrapper {
         height: 100%;
         padding: 6px;
-        border-radius: 2px;
+        border-radius: 8px;
         background-color: #141414;
       }
     }
