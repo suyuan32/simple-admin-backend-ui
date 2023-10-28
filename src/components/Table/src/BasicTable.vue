@@ -366,36 +366,6 @@
 
   @prefix-cls: ~'@{name-space}-basic-table';
 
-  [data-theme='dark'] {
-    .@{prefix-cls} {
-      max-width: 100%;
-      height: 100%;
-
-      &-form-container {
-        padding: 16px;
-
-        .dark-form {
-          width: 100%;
-          margin-bottom: 16px;
-          padding: 12px 10px 6px;
-          border-radius: 8px;
-          background-color: #141414;
-        }
-      }
-
-      .dark-tag {
-        margin-right: 0;
-      }
-
-      .dark-table-wrapper {
-        height: 100%;
-        padding: 6px;
-        border-radius: 8px;
-        background-color: #141414;
-      }
-    }
-  }
-
   .@{prefix-cls} {
     max-width: 100%;
     height: 100%;
@@ -410,16 +380,27 @@
         border-radius: 2px;
         background-color: @component-background;
       }
-    }
 
-    .ant-tag {
-      margin-right: 0;
+      .dark-form {
+        width: 100%;
+        margin-bottom: 16px;
+        padding: 12px 10px 6px;
+        border-radius: 8px;
+        background-color: #141414;
+      }
     }
 
     .ant-table-wrapper {
       padding: 6px;
       border-radius: 2px;
       background-color: @component-background;
+    }
+
+    .dark-table-wrapper {
+      height: 100%;
+      padding: 6px;
+      border-radius: 8px;
+      background-color: #141414;
     }
   }
 </style>
