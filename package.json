@@ -1,6 +1,6 @@
 {
   "name": "simple-admin",
-  "version": "1.1.6",
+  "version": "1.2.0",
   "homepage": "https://github.com/suyuan32/simple-admin-backend-ui",
   "bugs": {
     "url": "https://github.com/suyuan32/simple-admin-backend-ui/issues"
@@ -105,7 +105,7 @@
     "vue": "^3.3.7",
     "vue-clipboard3": "^2.0.0",
     "vue-codemirror6": "^1.1.27",
-    "vue-i18n": "^9.6.0",
+    "vue-i18n": "^9.6.1",
     "vue-json-pretty": "^2.2.4",
     "vue-router": "^4.2.5",
     "vue-types": "^5.1.1",
@@ -117,7 +117,7 @@
   "devDependencies": {
     "@commitlint/cli": "^17.8.1",
     "@commitlint/config-conventional": "^17.8.1",
-    "@iconify/json": "^2.2.133",
+    "@iconify/json": "^2.2.134",
     "@purge-icons/generated": "^0.9.0",
     "@types/codemirror": "^5.60.12",
     "@types/crypto-js": "^4.1.3",
