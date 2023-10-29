@@ -27,7 +27,6 @@
         <ATabPane key="1" :tab="t('sys.authority.menuAuthority')">
           <BasicTree
             checkable
-            :height="600"
             :treeData="treeMenuData"
             :checkStrictly="true"
             :noPadding="true"
@@ -38,7 +37,6 @@
           <ATree
             v-model:checked-keys="checkedApiKeys"
             checkable
-            :height="600"
             :tree-data="treeApiData"
           />
         </ATabPane>
