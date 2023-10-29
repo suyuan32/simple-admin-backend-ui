@@ -7,7 +7,7 @@
           danger
           preIcon="ant-design:delete-outlined"
           v-if="showDeleteButton"
-          @click="handleBatchDelete()"
+          @click="handleBatchDelete"
         >
           {{ t('common.delete') }}
         </Button>

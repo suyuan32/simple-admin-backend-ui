@@ -7,7 +7,7 @@
           danger
           preIcon="ant-design:delete-outlined"
           v-if="showDeleteButton"
-          @click="handleBatchDelete()"
+          @click="handleBatchDelete"
         >
           {{ t('common.delete') }}
         </Button>
@@ -71,7 +71,7 @@
       </video>
     </Modal>
     <Modal
-      v-model:open="ageVisible"
+      v-model:open="imageVisible"
       :title="imageTitle"
       width="50%"
       wrap-class-name="full-modal"
