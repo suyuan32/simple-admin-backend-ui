@@ -7,7 +7,7 @@
           danger
           preIcon="ant-design:delete-outlined"
           v-if="showDeleteButton"
-          @click="handleBatchDelete()"
+          @click="handleBatchDelete"
         >
           {{ t('common.delete') }}
         </Button>
@@ -49,7 +49,7 @@
     <EmailProviderDrawer @register="registerDrawer" @success="handleSuccess" />
     <LogModal @register="registerModal" :defaultFullscreen="true" />
     <BasicModal
-      v-model:visible="showSenderModal"
+      v-model:open="showSenderModal"
       :title="t('mcms.email.sendEmail')"
       @ok="handleSendEmail"
     >
@@ -76,6 +76,7 @@
   import { BasicForm, useForm } from '/@/components/Form';
   import { formSchema } from './email.data';
   import { sendEmail } from '/@/api/mcms/messageSender';
+  import { SendEmailReq } from '/@/api/mcms/model/messageModel';
 
   export default defineComponent({
     name: 'EmailProviderManagement',
@@ -185,7 +186,7 @@
 
       async function handleSendEmail() {
         const values = await validate();
-        await sendEmail(values);
+        await sendEmail(values as SendEmailReq);
       }
 
       return {

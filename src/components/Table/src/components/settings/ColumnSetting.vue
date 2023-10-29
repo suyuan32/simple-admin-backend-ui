@@ -6,7 +6,7 @@
     <Popover
       placement="bottomLeft"
       trigger="click"
-      @visible-change="handleVisibleChange"
+      @open-change="handleVisibleChange"
       :overlayClassName="`${prefixCls}__cloumn-list`"
       :getPopupContainer="getPopupContainer"
     >
@@ -462,20 +462,84 @@
       }
 
       .ant-popover-inner-content {
-        // max-height: 360px;
         padding-right: 0;
         padding-left: 0;
-        // overflow: auto;
       }
 
       .ant-checkbox-group {
         width: 100%;
         min-width: 260px;
-        // flex-wrap: wrap;
       }
 
       .scrollbar {
         height: 220px;
+      }
+    }
+  }
+
+  [data-theme='dark'] {
+    .@{prefix-cls} {
+      &__popover-title {
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      &__check-item {
+        display: flex;
+        align-items: center;
+        min-width: 100%;
+        padding: 4px 16px 8px 0;
+
+        .dark-checkbox-wrapper {
+          width: 100%;
+
+          &:hover {
+            color: @primary-color;
+          }
+        }
+      }
+
+      &__fixed-left,
+      &__fixed-right {
+        color: rgb(255 255 255);
+        cursor: pointer;
+
+        &.active,
+        &:hover {
+          color: @primary-color;
+        }
+
+        &.disabled {
+          color: @disabled-color;
+          cursor: not-allowed;
+        }
+      }
+
+      &__fixed-right {
+        transform: rotate(180deg);
+      }
+
+      &__cloumn-list {
+        svg {
+          width: 1em !important;
+          height: 1em !important;
+        }
+
+        .dark-popover-inner-content {
+          padding-right: 0;
+          padding-left: 0;
+        }
+
+        .dark-checkbox-group {
+          width: 100%;
+          min-width: 260px;
+        }
+
+        .scrollbar {
+          height: 220px;
+        }
       }
     }
   }

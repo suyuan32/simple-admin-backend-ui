@@ -4,7 +4,7 @@ import { BaseListResp } from '/@/api/model/baseModel';
  *  @description: MemberRank info response
  */
 export interface MemberRankInfo {
-  id: number;
+  id?: number;
   createdAt?: number;
   updatedAt?: number;
   name?: string;

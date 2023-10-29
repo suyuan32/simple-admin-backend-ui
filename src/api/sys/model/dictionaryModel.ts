@@ -4,7 +4,7 @@ import { BaseListResp } from '/@/api/model/baseModel';
  *  @description: Dictionary info response
  */
 export interface DictionaryInfo {
-  id: number;
+  id?: number;
   createdAt?: number;
   updatedAt?: number;
   title?: string;

@@ -1,5 +1,5 @@
 <template>
-  <ScrollContainer ref="wrapperRef">
+  <ScrollContainer ref="wrapperRef" :scrollHeight="realHeight">
     <div ref="spinRef" :style="spinStyle" v-loading="loading" :loading-tip="loadingTip">
       <slot></slot>
     </div>
@@ -32,7 +32,7 @@
     minHeight: { type: Number, default: 200 },
     height: { type: Number },
     footerOffset: { type: Number, default: 0 },
-    visible: { type: Boolean },
+    open: { type: Boolean },
     fullScreen: { type: Boolean },
     loadingTip: { type: String },
   };
@@ -49,7 +49,7 @@
       const realHeightRef = ref(0);
       const minRealHeightRef = ref(0);
 
-      let realHeight = 0;
+      const realHeight = ref(0);
 
       let stopElResizeFn: AnyFunction = () => {};
 
@@ -112,8 +112,8 @@
 
       async function setModalHeight() {
         // 解决在弹窗关闭的时候监听还存在,导致再次打开弹窗没有高度
-        // 加上这个,就必须在使用的时候传递父级的visible
-        if (!props.visible) return;
+        // 加上这个,就必须在使用的时候传递父级的open
+        if (!props.open) return;
         const wrapperRefDom = unref(wrapperRef);
         if (!wrapperRefDom) return;
 
@@ -145,7 +145,7 @@
           if (!spinEl) return;
           await nextTick();
           // if (!realHeight) {
-          realHeight = spinEl.scrollHeight;
+          realHeight.value = spinEl.scrollHeight;
           // }
 
           if (props.fullScreen) {
@@ -154,9 +154,9 @@
           } else {
             realHeightRef.value = props.height
               ? props.height
-              : realHeight > maxHeight
+              : realHeight.value > maxHeight
               ? maxHeight
-              : realHeight;
+              : realHeight.value;
           }
           emit('height-change', unref(realHeightRef));
         } catch (error) {
@@ -164,7 +164,7 @@
         }
       }
 
-      return { wrapperRef, spinRef, spinStyle, scrollTop, setModalHeight };
+      return { wrapperRef, spinRef, spinStyle, scrollTop, setModalHeight, realHeight };
     },
   });
 </script>

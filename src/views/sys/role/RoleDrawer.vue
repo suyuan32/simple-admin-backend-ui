@@ -15,7 +15,7 @@
     </template>
     <BasicForm @register="registerForm" />
     <BasicDrawer
-      v-model:visible="childrenDrawer"
+      v-model:open="childrenDrawer"
       :title="t('sys.authority.authorityManagement')"
       width="320"
       showFooter
@@ -30,6 +30,7 @@
             :height="600"
             :treeData="treeMenuData"
             :checkStrictly="true"
+            :noPadding="true"
             ref="treeMenuRef"
           />
         </ATabPane>
@@ -122,11 +123,11 @@
             valueField: 'id',
             labelField: 'trans',
           });
-
           const roleId = await validate();
           const checkedData = await getMenuAuthority({ id: Number(roleId['id']) });
           getMenuTree().setCheckedKeys(checkedData.data.menuIds);
           getMenuTree().expandAll(true);
+          console.log(checkedData);
         } catch (error) {
           console.log(error);
         }

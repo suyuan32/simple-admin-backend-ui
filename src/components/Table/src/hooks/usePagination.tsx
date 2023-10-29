@@ -14,9 +14,9 @@ interface ItemRender {
 
 function itemRender({ page, type, originalElement }: ItemRender) {
   if (type === 'prev') {
-    return page === 0 ? null : <LeftOutlined />;
+    return page === 0 ? null : <LeftOutlined style="padding-top: 5px"/>;
   } else if (type === 'next') {
-    return page === 1 ? null : <RightOutlined />;
+    return page === 1 ? null : <RightOutlined style="padding-top: 5px"/>;
   }
   return originalElement;
 }
@@ -48,7 +48,6 @@ export function usePagination(refProps: ComputedRef<BasicTableProps>) {
 
     return {
       current: 1,
-      pageSize: PAGE_SIZE,
       size: 'small',
       defaultPageSize: PAGE_SIZE,
       showTotal: (total) => t('component.table.total', { total }),

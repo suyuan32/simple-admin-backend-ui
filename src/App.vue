@@ -1,5 +1,5 @@
 <template>
-  <ConfigProvider :locale="getAntdLocale" :prefix-cls="cssPrefix">
+  <ConfigProvider :locale="getAntdLocale" :prefix-cls="cssPrefix" :theme="isDark ? darkTheme : {}">
     <AppProvider>
       <RouterView />
     </AppProvider>
@@ -16,6 +16,7 @@
   import { ref, watch } from 'vue';
   import { useAppStore } from './store/modules/app';
   import { CssPrefixEnum } from './enums/appEnum';
+  import { useDarkModeTheme } from '@/hooks/setting/useDarkModeTheme';
 
   // support Multi-language
   const { getAntdLocale } = useLocale();
@@ -33,6 +34,8 @@
   };
 
   changePrefix(appStore.getDarkMode);
+
+  const { isDark, darkTheme } = useDarkModeTheme();
 
   watch(
     () => appStore.getDarkMode,

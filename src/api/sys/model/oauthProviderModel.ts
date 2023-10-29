@@ -4,7 +4,7 @@ import { BaseDataResp, BaseListResp } from '/@/api/model/baseModel';
  *  @description: OauthProvider info response
  */
 export interface OauthProviderInfo {
-  id: number;
+  id?: number;
   createdAt?: number;
   updatedAt?: number;
   name?: string;

@@ -53,4 +53,17 @@
       width: 126px !important;
     }
   }
+
+  [data-theme='dark'] {
+    .@{prefix-cls} {
+      display: flex;
+      justify-content: space-between;
+      margin: 16px 0;
+      color: white;
+
+      &-input-number {
+        width: 126px !important;
+      }
+    }
+  }
 </style>
