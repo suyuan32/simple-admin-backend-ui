@@ -60,7 +60,7 @@
           </p>
           <p>{{ t('sys.init.initRedirect') }}</p>
           <p
-            ><a-button type="primary" :loading="mcmsInitButtonLoading" @click="initCustomDatabase">
+            ><a-button type="primary" :loading="customInitButtonLoading" @click="initCustomDatabase">
               {{ t('common.start') }}
             </a-button></p
           >
@@ -92,16 +92,19 @@
   const mmsInitButtonLoading = ref<boolean>(false);
   const jobInitButtonLoading = ref<boolean>(false);
   const mcmsInitButtonLoading = ref<boolean>(false);
+  const customInitButtonLoading = ref<boolean>(false);
   const customInitUrl = ref<string>('http://localhost');
   const customInitPort = ref<string>('9100');
   const customInitService = ref<string>('');
 
   async function initCustomDatabase() {
     const serviceName: string = customInitService.value == '' ? '' : '/' + customInitService.value;
+    customInitButtonLoading.value = true;
     window.open(
       customInitUrl.value + ':' + customInitPort.value + serviceName + '/init/database',
       '_blank',
     );
+    customInitButtonLoading.value = false;
   }
 
   async function initCoreDatabase() {
