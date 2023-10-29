@@ -9,7 +9,7 @@
   >
     <BasicTable @register="registerTable" :searchInfo="searchInfo" class="tableHeight">
       <template #tableTitle>
-        <Button type="primary" danger v-if="showDeleteButton" @click="handleBatchDelete()">
+        <Button type="primary" danger v-if="showDeleteButton" @click="handleBatchDelete">
           <template #icon><DeleteOutlined /></template>
           {{ t('common.delete') }}
         </Button>
