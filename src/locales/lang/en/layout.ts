@@ -106,7 +106,7 @@ export default {
     notAutoScreenLock: 'Not auto lock',
 
     fixedHeader: 'Fixed header',
-    fixedSideBar: 'Fixed Sidebar',
+    fixedSideBar: 'Fixed sidebar',
 
     mixSidebarTrigger: 'Mixed menu trigger',
     triggerHover: 'Hover',
