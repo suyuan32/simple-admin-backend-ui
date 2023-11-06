@@ -1,6 +1,6 @@
 <template>
   <Select
-    @dropdown-visible-change="handleFetch"
+    @dropdownVisibleChange="handleFetch"
     v-bind="$attrs"
     @change="handleChange"
     :options="getOptions"

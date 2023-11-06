@@ -1,5 +1,5 @@
 <template>
-  <a-tree-select v-bind="getAttrs" @change="handleChange">
+  <a-tree-select v-bind="getAttrs" @change="handleChange" @dropdownVisibleChange="fetch">
     <template #[item]="data" v-for="item in Object.keys($slots)">
       <slot :name="item" v-bind="data || {}"></slot>
     </template>
@@ -95,7 +95,7 @@
         isFirstLoaded.value = true;
         emit('options-change', treeData.value);
       }
-      return { getAttrs, loading, handleChange };
+      return { getAttrs, loading, handleChange, fetch };
     },
   });
 </script>
