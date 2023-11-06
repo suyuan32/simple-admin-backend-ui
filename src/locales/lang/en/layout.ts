@@ -7,22 +7,22 @@ export default {
     profile: 'Profile',
 
     tooltipErrorLog: 'Error log',
-    tooltipLock: 'Lock screen',
+    tooltipLock: 'Lock Screen',
     tooltipNotify: 'Notification',
 
     tooltipEntryFull: 'Full Screen',
     tooltipExitFull: 'Exit Full Screen',
 
     // lock
-    lockScreenPassword: 'Lock screen password',
-    lockScreen: 'Lock screen',
+    lockScreenPassword: 'Lock Screen With Password',
+    lockScreen: 'Lock Screen',
     lockScreenBtn: 'Locking',
 
     home: 'Home',
   },
   multipleTab: {
-    reload: 'Refresh current',
-    close: 'Close current',
+    reload: 'Refresh Current',
+    close: 'Close Current',
     closeLeft: 'Close Left',
     closeRight: 'Close Right',
     closeOther: 'Close Other',
@@ -37,13 +37,13 @@ export default {
     topMenuAlignRight: 'Center',
     topMenuAlignCenter: 'Right',
     // menu trigger
-    menuTriggerNone: 'Not Show',
+    menuTriggerNone: 'Not show',
     menuTriggerBottom: 'Bottom',
     menuTriggerTop: 'Top',
     // menu type
     menuTypeSidebar: 'Left menu mode',
     menuTypeMixSidebar: 'Left menu mixed mode',
-    menuTypeMix: 'Top Menu Mix mode',
+    menuTypeMix: 'Top menu mixed mode',
     menuTypeTopMenu: 'Top menu mode',
 
     on: 'On',
@@ -57,7 +57,7 @@ export default {
 
     copyBtn: 'Copy',
     clearBtn: 'Clear cache and to the login page',
-    clearDictionaryCache: 'Clear dictionary caches',
+    clearDictionaryCache: 'Clear dictionary cache',
 
     drawerTitle: 'Configuration',
 
