@@ -57,23 +57,23 @@ export default {
 
     copyBtn: 'Copy',
     clearBtn: 'Clear cache and to the login page',
-    clearDictionaryCache: 'Clear dictionary cache',
+    clearDictionaryCache: 'Clear dictionary caches',
 
     drawerTitle: 'Configuration',
 
-    darkMode: 'Dark mode',
-    navMode: 'Navigation mode',
-    interfaceFunction: 'Interface function',
-    interfaceDisplay: 'Interface display',
+    darkMode: 'Dark Mode',
+    navMode: 'Navigation Mode',
+    interfaceFunction: 'Interface Function',
+    interfaceDisplay: 'Interface Display',
     animation: 'Animation',
     splitMenu: 'Split menu',
     closeMixSidebarOnChange: 'Switch page to close menu',
 
-    sysTheme: 'System theme',
-    headerTheme: 'Header theme',
-    sidebarTheme: 'Menu theme',
+    sysTheme: 'System Theme',
+    headerTheme: 'Header Theme',
+    sidebarTheme: 'Menu Theme',
 
-    menuDrag: 'Drag Sidebar',
+    menuDrag: 'Drag sidebar',
     menuSearch: 'Menu search',
     menuAccordion: 'Sidebar accordion',
     menuCollapse: 'Collapse menu',
@@ -84,7 +84,7 @@ export default {
     expandedMenuWidth: 'Expanded menu width',
 
     breadcrumb: 'Breadcrumbs',
-    breadcrumbIcon: 'Breadcrumbs Icon',
+    breadcrumbIcon: 'Breadcrumbs icon',
     tabs: 'Tabs',
     tabDetail: 'Tab Detail',
     tabsQuickBtn: 'Tabs quick button',
@@ -95,10 +95,10 @@ export default {
     footer: 'Footer',
     fullContent: 'Full content',
     grayMode: 'Gray mode',
-    colorWeak: 'Color Weak Mode',
+    colorWeak: 'Color weak mode',
 
     progress: 'Progress',
-    switchLoading: 'Switch Loading',
+    switchLoading: 'Switch loading',
     switchAnimation: 'Switch animation',
     animationType: 'Animation type',
 
@@ -108,7 +108,7 @@ export default {
     fixedHeader: 'Fixed header',
     fixedSideBar: 'Fixed Sidebar',
 
-    mixSidebarTrigger: 'Mixed menu Trigger',
+    mixSidebarTrigger: 'Mixed menu trigger',
     triggerHover: 'Hover',
     triggerClick: 'Click',
 
