@@ -39,7 +39,7 @@ export const getFileList = (params: BaseListReq, mode: ErrorMessageMode = 'notic
     { url: Api.GetFileList, params }, 
     {
       errorMessageMode: mode,
-      successMessageMode: mode,
+      successMessageMode: 'none',
     },
   );
 };
