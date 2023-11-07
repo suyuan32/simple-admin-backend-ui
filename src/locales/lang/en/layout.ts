@@ -7,22 +7,22 @@ export default {
     profile: 'Profile',
 
     tooltipErrorLog: 'Error log',
-    tooltipLock: 'Lock screen',
+    tooltipLock: 'Lock Screen',
     tooltipNotify: 'Notification',
 
     tooltipEntryFull: 'Full Screen',
     tooltipExitFull: 'Exit Full Screen',
 
     // lock
-    lockScreenPassword: 'Lock screen password',
-    lockScreen: 'Lock screen',
+    lockScreenPassword: 'Lock Screen With Password',
+    lockScreen: 'Lock Screen',
     lockScreenBtn: 'Locking',
 
     home: 'Home',
   },
   multipleTab: {
-    reload: 'Refresh current',
-    close: 'Close current',
+    reload: 'Refresh Current',
+    close: 'Close Current',
     closeLeft: 'Close Left',
     closeRight: 'Close Right',
     closeOther: 'Close Other',
@@ -37,13 +37,13 @@ export default {
     topMenuAlignRight: 'Center',
     topMenuAlignCenter: 'Right',
     // menu trigger
-    menuTriggerNone: 'Not Show',
+    menuTriggerNone: 'Not show',
     menuTriggerBottom: 'Bottom',
     menuTriggerTop: 'Top',
     // menu type
     menuTypeSidebar: 'Left menu mode',
     menuTypeMixSidebar: 'Left menu mixed mode',
-    menuTypeMix: 'Top Menu Mix mode',
+    menuTypeMix: 'Top menu mixed mode',
     menuTypeTopMenu: 'Top menu mode',
 
     on: 'On',
@@ -61,19 +61,19 @@ export default {
 
     drawerTitle: 'Configuration',
 
-    darkMode: 'Dark mode',
-    navMode: 'Navigation mode',
-    interfaceFunction: 'Interface function',
-    interfaceDisplay: 'Interface display',
+    darkMode: 'Dark Mode',
+    navMode: 'Navigation Mode',
+    interfaceFunction: 'Interface Function',
+    interfaceDisplay: 'Interface Display',
     animation: 'Animation',
     splitMenu: 'Split menu',
     closeMixSidebarOnChange: 'Switch page to close menu',
 
-    sysTheme: 'System theme',
-    headerTheme: 'Header theme',
-    sidebarTheme: 'Menu theme',
+    sysTheme: 'System Theme',
+    headerTheme: 'Header Theme',
+    sidebarTheme: 'Menu Theme',
 
-    menuDrag: 'Drag Sidebar',
+    menuDrag: 'Drag sidebar',
     menuSearch: 'Menu search',
     menuAccordion: 'Sidebar accordion',
     menuCollapse: 'Collapse menu',
@@ -84,7 +84,7 @@ export default {
     expandedMenuWidth: 'Expanded menu width',
 
     breadcrumb: 'Breadcrumbs',
-    breadcrumbIcon: 'Breadcrumbs Icon',
+    breadcrumbIcon: 'Breadcrumbs icon',
     tabs: 'Tabs',
     tabDetail: 'Tab Detail',
     tabsQuickBtn: 'Tabs quick button',
@@ -95,10 +95,10 @@ export default {
     footer: 'Footer',
     fullContent: 'Full content',
     grayMode: 'Gray mode',
-    colorWeak: 'Color Weak Mode',
+    colorWeak: 'Color weak mode',
 
     progress: 'Progress',
-    switchLoading: 'Switch Loading',
+    switchLoading: 'Switch loading',
     switchAnimation: 'Switch animation',
     animationType: 'Animation type',
 
@@ -106,9 +106,9 @@ export default {
     notAutoScreenLock: 'Not auto lock',
 
     fixedHeader: 'Fixed header',
-    fixedSideBar: 'Fixed Sidebar',
+    fixedSideBar: 'Fixed sidebar',
 
-    mixSidebarTrigger: 'Mixed menu Trigger',
+    mixSidebarTrigger: 'Mixed menu trigger',
     triggerHover: 'Hover',
     triggerClick: 'Click',
 

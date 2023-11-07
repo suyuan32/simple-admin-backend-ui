@@ -204,16 +204,19 @@ export function registerBySms(params: RegisterBySmsReq, mode: ErrorMessageMode =
 export function getUserInfo() {
   return defHttp.get<BaseDataResp<GetUserInfoModel>>(
     { url: Api.GetUserInfo },
-    { errorMessageMode: 'none' },
+    { errorMessageMode: 'notice' },
   );
 }
 
 export function getPermCode() {
-  return defHttp.get<BaseDataResp<string[]>>({ url: Api.GetPermCode });
+  return defHttp.get<BaseDataResp<string[]>>(
+    { url: Api.GetPermCode },
+    { errorMessageMode: 'notice' },
+  );
 }
 
 export function doLogout() {
-  return defHttp.get({ url: Api.Logout });
+  return defHttp.get({ url: Api.Logout }, { errorMessageMode: 'notice' });
 }
 
 /**
@@ -223,7 +226,7 @@ export function doLogout() {
 export function getUserProfile() {
   return defHttp.get<BaseDataResp<UserProfile>>(
     { url: Api.Profile },
-    { errorMessageMode: 'message' },
+    { errorMessageMode: 'notice' },
   );
 }
 
@@ -231,7 +234,7 @@ export function getUserProfile() {
  *  author: Ryan Su
  *  @description: update user profile
  */
-export function updateProfile(params: UserProfile, mode: ErrorMessageMode = 'message') {
+export function updateProfile(params: UserProfile, mode: ErrorMessageMode = 'notice') {
   return defHttp.post<BaseResp>(
     { url: Api.Profile, params },
     { errorMessageMode: mode, successMessageMode: mode },
@@ -246,7 +249,7 @@ export function updateProfile(params: UserProfile, mode: ErrorMessageMode = 'mes
 export function changePassword(params: ChangePasswordReq) {
   return defHttp.post<BaseResp>(
     { url: Api.ChangePassword, params },
-    { errorMessageMode: 'message' },
+    { errorMessageMode: 'notice' },
   );
 }
 

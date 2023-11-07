@@ -111,7 +111,7 @@ export const formSchema: FormSchema[] = [
     defaultValue: 1,
     componentProps: {
       options: [
-        { label: t('sys.menu.directory'), value: 2 },
+        { label: t('sys.menu.directory'), value: 0 },
         { label: t('sys.menu.menu'), value: 1 },
       ],
     },
