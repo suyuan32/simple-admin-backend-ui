@@ -165,21 +165,21 @@ export default {
   },
   apis: {
     // noun
-    apiList: 'API列表',
+    apiList: '接口列表',
     path: '路径',
     description: '描述',
     method: '方法',
     group: '分组',
     // action
-    addApi: '添加API',
-    editApi: '编辑API',
+    addApi: '添加接口',
+    editApi: '编辑接口',
     // help message
-    isRequiredHelpMessage: '是否为必要API,如果是必要API,则在权限管理时为必选,不允许取消',
+    isRequiredHelpMessage: '是否为必要接口,如果是必要接口,则在权限管理时为必选,不允许取消',
   },
   authority: {
     authorityManagement: '权限管理',
     menuAuthority: '菜单',
-    apiAuthority: 'API',
+    apiAuthority: '接口',
   },
   user: {
     // noun

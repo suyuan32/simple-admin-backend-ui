@@ -34,8 +34,14 @@ export function uploadApi(
  * @description: Get file list
  */
 
-export const getFileList = (params: BaseListReq) => {
-  return defHttp.post<BaseDataResp<FileListResp>>({ url: Api.GetFileList, params });
+export const getFileList = (params: BaseListReq, mode: ErrorMessageMode = 'notice') => {
+  return defHttp.post<BaseDataResp<FileListResp>>(
+    { url: Api.GetFileList, params }, 
+    {
+      errorMessageMode: mode,
+      successMessageMode: 'none',
+    },
+  );
 };
 
 /**
