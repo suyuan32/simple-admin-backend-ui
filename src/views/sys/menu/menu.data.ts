@@ -175,7 +175,7 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
     required: true,
     helpMessage: t('sys.menu.pathHelp'),
-    rules: [{ max: 200 }],
+    rules: [{ pattern: /^(\/[0-9A-Za-z_-]+)*$/gm, message: t('common.wrongFormat') }],
   },
   {
     field: 'component',
