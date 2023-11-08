@@ -69,5 +69,6 @@ export default {
   notAllowDeleteAdminData: "Disallow deletion of administrator's data",
   notAllowChangeStatus: 'Disallow modification of status',
   notAllowSameAsParentId: 'The parent ID cannot be the same as its own ID',
+  wrongFormat: 'Wrong format',
   required: 'Required',
 };
