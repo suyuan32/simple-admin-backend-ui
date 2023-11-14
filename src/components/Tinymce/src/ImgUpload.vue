@@ -11,8 +11,8 @@
     >
       <a-button
         type="primary"
-        shape="round"
         preIcon="material-symbols:image-sharp"
+        class="mt-1"
         :iconSize="14"
         v-bind="{ ...getButtonProps }"
       >

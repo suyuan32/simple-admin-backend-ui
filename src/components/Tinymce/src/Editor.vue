@@ -136,7 +136,10 @@
 
       const langName = computed(() => {
         const lang = useLocale().getLocale.value;
-        return ['zh_CN', 'en'].includes(lang) ? lang : 'zh_CN';
+        if (lang === 'zh_CN') {
+          return 'zh-Hans'
+        }
+        return lang
       });
 
       const initOptions = computed((): RawEditorOptions => {

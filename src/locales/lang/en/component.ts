@@ -89,7 +89,7 @@ export default {
   upload: {
     save: 'Save',
     upload: 'Upload',
-    imgUpload: 'ImageUpload',
+    imgUpload: 'Image Upload',
     uploaded: 'Uploaded',
 
     operating: 'Operating',
