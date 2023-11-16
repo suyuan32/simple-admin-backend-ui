@@ -36,6 +36,7 @@
   import { useUploadType } from '../hooks/useUpload';
   import { uploadContainerProps } from '../props';
   import { isImgTypeByName } from '../helper';
+import { computed } from 'vue';
 
   const emit = defineEmits(['change', 'update:value', 'delete']);
   const props = defineProps({
@@ -75,10 +76,29 @@
           } else {
             return;
           }
-        }) as UploadProps['fileList'][number];
+        }) as UploadProps["fileList"][number];
       }
     },
   );
+
+  const responseData = computed(() => {
+    if (props.maxNumber > 1) {
+      let result: string[] = [];
+        if (fileList.value !== undefined) 
+        for (let i = 0; i < fileList.value?.length; i++) {
+          if (fileList.value[i].response !== undefined) {
+              result.push((fileList.value[i].response as any).url)
+          }
+        }
+      return result
+    } else {
+      if (fileList.value !== undefined) 
+        if (fileList.value[0].response !== undefined) {
+             return (fileList.value[0].response as any).url
+        }
+      return ''
+    }
+  })
 
   function getBase64(file: File) {
     return new Promise((resolve, reject) => {
@@ -102,7 +122,7 @@
     if (fileList.value) {
       const index = fileList.value.findIndex((item: any) => item.uuid === file.uuid);
       index !== -1 && fileList.value.splice(index, 1);
-      emit('change', fileList.value);
+      emit('change', responseData);
       emit('delete', file);
     }
   };
@@ -146,8 +166,8 @@
         name: props.name,
         filename: props.filename,
       });
-      info.onSuccess!(res.data);
-      emit('change', fileList.value);
+      info.onSuccess!(res.data.data);
+      emit('change', responseData);
     } catch (e: any) {
       console.log(e);
       info.onError!(e);

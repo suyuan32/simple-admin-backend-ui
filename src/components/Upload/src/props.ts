@@ -4,6 +4,7 @@ import { FileBasicColumn } from './types/typing';
 import type { Options } from 'sortablejs';
 
 import { Merge } from '/@/utils/types';
+import { propTypes } from '/@/utils/propTypes';
 
 type SortableOptions = Merge<
   Omit<Options, 'onEnd'>,
@@ -73,7 +74,7 @@ export const basicProps = {
 
 export const uploadContainerProps = {
   value: {
-    type: Array as PropType<string[]>,
+    type: [Array as PropType<string[]>, String],
     default: () => [],
   },
   ...basicProps,
