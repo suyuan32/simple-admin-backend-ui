@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes, Ref } from 'vue';
 import type { TreeDataItem } from 'ant-design-vue/es/tree/Tree';
 
 import { buildProps } from '/@/utils/props';
@@ -134,6 +134,7 @@ export const treeProps = buildProps({
     default: false,
   },
   treeWrapperClassName: String,
+  noPadding: Boolean,
 });
 
 export type TreeProps = ExtractPropTypes<typeof treeProps>;

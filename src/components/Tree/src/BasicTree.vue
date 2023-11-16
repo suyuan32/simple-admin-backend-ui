@@ -441,7 +441,7 @@
             paddingTop: '1rem',
             paddingRight: '1rem',
           };
-}
+        }
         return (
           <div class={[bem(), 'h-full', attrs.class]}>
             {showTitle && (

@@ -34,11 +34,7 @@
           />
         </ATabPane>
         <ATabPane key="2" :tab="t('sys.authority.apiAuthority')">
-          <ATree
-            v-model:checked-keys="checkedApiKeys"
-            checkable
-            :tree-data="treeApiData"
-          />
+          <ATree v-model:checked-keys="checkedApiKeys" checkable :tree-data="treeApiData" />
         </ATabPane>
       </ATabs>
     </BasicDrawer>
