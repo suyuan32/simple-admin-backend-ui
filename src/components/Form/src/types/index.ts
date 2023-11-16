@@ -118,4 +118,5 @@ export type ComponentType =
   | 'ApiTransfer'
   | 'DictionarySelect'
   | 'CropperAvatar'
-  | 'Tinymce';
+  | 'Tinymce'
+  | 'ImageUpload';

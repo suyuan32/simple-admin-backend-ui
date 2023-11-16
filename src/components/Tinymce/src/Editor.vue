@@ -134,9 +134,16 @@
         return appStore.getDarkMode === 'light' ? 'oxide' : 'oxide-dark';
       });
 
+      const contentCssName = computed(() => {
+        return appStore.getDarkMode === 'light' ? 'default' : 'dark';
+      });
+
       const langName = computed(() => {
         const lang = useLocale().getLocale.value;
-        return ['zh_CN', 'en'].includes(lang) ? lang : 'zh_CN';
+        if (lang === 'zh_CN') {
+          return 'zh-Hans'
+        }
+        return lang
       });
 
       const initOptions = computed((): RawEditorOptions => {
@@ -159,7 +166,7 @@
           model_url: publicPath + 'resource/tinymce/models/dom/model.min.js',
           skin_url: publicPath + 'resource/tinymce/skins/ui/' + skinName.value,
           content_css:
-            publicPath + 'resource/tinymce/skins/ui/' + skinName.value + '/content.min.css',
+            publicPath + 'resource/tinymce/skins/content/' + contentCssName.value + '/content.min.css',
           ...options,
           setup: (editor: Editor) => {
             editorRef.value = editor;
