@@ -76,7 +76,7 @@
   import { useMenuItem } from './useMenu';
   import { useSimpleRootMenuContext } from './useSimpleMenuContext';
   import { CollapseTransition } from '/@/components/Transition';
-    import  Icon  from '@/components/Icon/Icon.vue';
+  import Icon from '@/components/Icon/Icon.vue';
   import { Popover } from 'ant-design-vue';
   import { isBoolean, isObject } from '/@/utils/is';
   import { mitt } from '/@/utils/mitt';
@@ -136,7 +136,6 @@
         return [
           `${prefixCls}-submenu`,
           {
-            [`${prefixCls}-item-active`]: state.active,
             [`${prefixCls}-opened`]: state.opened,
             [`${prefixCls}-submenu-disabled`]: props.disabled,
             [`${prefixCls}-submenu-has-parent-submenu`]: unref(getParentSubMenu),

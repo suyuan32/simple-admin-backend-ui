@@ -34,8 +34,6 @@
   import { treeEmits, treeProps } from './types/tree';
   import { createBEM } from '/@/utils/bem';
   import type { TreeProps } from 'ant-design-vue/es/tree/Tree';
-  import { useAppStore } from '/@/store/modules/app';
-  import { ThemeEnum } from '/@/enums/appEnum';
 
   export default defineComponent({
     name: 'BasicTree',
@@ -322,6 +320,7 @@
       });
 
       const instance: TreeActionType = {
+        getTreeData: () => treeDataRef,
         setExpandedKeys,
         getExpandedKeys,
         setSelectedKeys,
@@ -428,27 +427,6 @@
 
       expose(instance);
 
-      const bgColor = ref<string>();
-
-      const appStore = useAppStore();
-
-      const changePrefix = function (value: string) {
-        if (value === ThemeEnum.DARK) {
-          bgColor.value = unref(props.treeWrapperClassName) + ' bg-dark-850 rounded-lg';
-        } else {
-          bgColor.value = unref(props.treeWrapperClassName) + ' bg-white rounded-lg';
-        }
-      };
-
-      changePrefix(appStore.getDarkMode);
-
-      watch(
-        () => appStore.getDarkMode,
-        (value, _oldValue) => {
-          changePrefix(value);
-        },
-      );
-
       return () => {
         const { title, helpMessage, toolbar, search, checkable, noPadding } = props;
         const showTitle = title || toolbar || search || slots.headerTitle;
@@ -463,9 +441,9 @@
             paddingTop: '1rem',
             paddingRight: '1rem',
           };
-        }
+}
         return (
-          <div class={[bem(), 'h-full', attrs.class, unref(bgColor)]}>
+          <div class={[bem(), 'h-full', attrs.class]}>
             {showTitle && (
               <TreeHeader
                 checkable={checkable}
@@ -482,7 +460,11 @@
                 {extendSlots(slots)}
               </TreeHeader>
             )}
-            <Spin wrapperClassName={unref(bgColor)} spinning={unref(props.loading)} tip="加载中...">
+            <Spin
+              wrapperClassName={unref(props.treeWrapperClassName)}
+              spinning={unref(props.loading)}
+              tip="加载中..."
+            >
               <ScrollContainer style={scrollStyle} v-show={!unref(getNotFound)}>
                 <Tree {...unref(getBindValues)} showIcon={false} treeData={treeData.value}>
                   {extendSlots(slots, ['title'])}
@@ -500,9 +482,3 @@
     },
   });
 </script>
-
-<style scoped>
-  .bg-dark-850 {
-    background-color: #141414 !important;
-  }
-</style>

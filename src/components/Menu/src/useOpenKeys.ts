@@ -1,12 +1,11 @@
 import { MenuModeEnum } from '/@/enums/menuEnum';
 import type { Menu as MenuType } from '/@/router/types';
-import type { MenuState } from './types';
+import type { MenuState, Key } from './types';
 import { computed, Ref, toRaw, unref } from 'vue';
 import { useTimeoutFn } from '@vben/hooks';
 import { uniq } from 'lodash-es';
 import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
 import { getAllParentPath } from '/@/router/helper/menuHelper';
-import { Key } from 'ant-design-vue/lib/_util/type';
 
 export function useOpenKeys(
   menuState: MenuState,
@@ -60,7 +59,7 @@ export function useOpenKeys(
     } else {
       // const menuList = toRaw(menus.value);
       // getAllParentPath(menuList, path);
-      const rootSubMenuKeys: string[] = [];
+      const rootSubMenuKeys: Key[] = [];
       for (const { children, path } of unref(menus)) {
         if (children && children.length > 0) {
           rootSubMenuKeys.push(path);

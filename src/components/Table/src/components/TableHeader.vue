@@ -40,7 +40,7 @@
     },
     props: {
       title: {
-        type: [Function, String] as PropType<string | ((data: Recordable) => string)>,
+        type: [Function, String] as PropType<string | ((data) => string)>,
       },
       tableSetting: {
         type: Object as PropType<TableSetting>,
@@ -64,7 +64,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{name-space}-basic-table-header';
+  @prefix-cls: ~'@{namespace}-basic-table-header';
 
   .@{prefix-cls} {
     &__toolbar {

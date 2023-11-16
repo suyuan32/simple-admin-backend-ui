@@ -2,7 +2,6 @@ import type { ExtractPropTypes } from 'vue';
 import type { TreeDataItem } from 'ant-design-vue/es/tree/Tree';
 
 import { buildProps } from '/@/utils/props';
-import { DataNode } from 'ant-design-vue/lib/vc-tree/interface';
 
 export enum ToolbarEnum {
   SELECT_ALL,
@@ -47,7 +46,7 @@ export const treeProps = buildProps({
   },
 
   renderIcon: {
-    type: Function as PropType<(params: Recordable) => string>,
+    type: Function as PropType<(...params: any[]) => string>,
   },
 
   helpMessage: {
@@ -92,7 +91,6 @@ export const treeProps = buildProps({
 
   expandedKeys: {
     type: Array as PropType<KeyType[]>,
-    default: () => [],
   },
 
   selectedKeys: {
@@ -101,12 +99,12 @@ export const treeProps = buildProps({
   },
 
   checkedKeys: {
-    type: Array as PropType<CheckKeys>,
+    type: [Array, Object] as PropType<CheckKeys>,
     default: () => [],
   },
 
   beforeRightClick: {
-    type: Function as PropType<(...arg: any) => ContextMenuItem[] | ContextMenuOptions>,
+    type: Function as PropType<(...arg: any) => Promise<ContextMenuItem[] | ContextMenuOptions>>,
     default: undefined,
   },
 
@@ -136,11 +134,6 @@ export const treeProps = buildProps({
     default: false,
   },
   treeWrapperClassName: String,
-  //  是否去除 wrapper padding
-  noPadding: {
-    type: Boolean,
-    default: false,
-  },
 });
 
 export type TreeProps = ExtractPropTypes<typeof treeProps>;
@@ -172,12 +165,13 @@ export interface TreeActionItem {
 
 export interface InsertNodeParams {
   parentKey: string | null;
-  node: TreeDataItem;
+  node?: TreeDataItem;
   list?: TreeDataItem[];
   push?: 'push' | 'unshift';
 }
 
 export interface TreeActionType {
+  getTreeData: () => Ref<TreeDataItem[]>;
   checkAll: (checkAll: boolean) => void;
   expandAll: (expandAll: boolean) => void;
   setExpandedKeys: (keys: KeyType[]) => void;
@@ -189,8 +183,8 @@ export interface TreeActionType {
   filterByLevel: (level: number) => void;
   insertNodeByKey: (opt: InsertNodeParams) => void;
   insertNodesByKey: (opt: InsertNodeParams) => void;
-  deleteNodeByKey: (key: string) => void;
-  updateNodeByKey: (key: string, node: DataNode, list?: DataNode[] | undefined) => void;
+  deleteNodeByKey: (key: string, list?: TreeDataItem[]) => void;
+  updateNodeByKey: (key: string, node: Omit<TreeDataItem, 'key'>) => void;
   setSearchValue: (value: string) => void;
   getSearchValue: () => string;
   getSelectedNode: (

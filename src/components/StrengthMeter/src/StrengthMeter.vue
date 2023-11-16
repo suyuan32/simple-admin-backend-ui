@@ -73,7 +73,7 @@
   });
 </script>
 <style lang="less" scoped>
-  @prefix-cls: ~'@{name-space}-strength-meter';
+  @prefix-cls: ~'@{namespace}-strength-meter';
 
   .@{prefix-cls} {
     &-bar {

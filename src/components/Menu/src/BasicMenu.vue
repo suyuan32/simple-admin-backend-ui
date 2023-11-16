@@ -20,7 +20,7 @@
 <script lang="ts">
   import type { MenuState } from './types';
   import { computed, defineComponent, unref, reactive, watch, toRefs, ref } from 'vue';
-  import { Menu } from 'ant-design-vue';
+  import { Menu, MenuProps } from 'ant-design-vue';
   import BasicSubMenuItem from './components/BasicSubMenuItem.vue';
   import { MenuModeEnum, MenuTypeEnum } from '/@/enums/menuEnum';
   import { useOpenKeys } from './useOpenKeys';
@@ -33,7 +33,6 @@
   import { getCurrentParentPath } from '/@/router/menus';
   import { listenerRouteChange } from '/@/logics/mitt/routeChange';
   import { getAllParentPath } from '/@/router/helper/menuHelper';
-  import { MenuInfo } from 'ant-design-vue/lib/menu/src/interface';
 
   export default defineComponent({
     name: 'BasicMenu',
@@ -118,17 +117,17 @@
           },
         );
 
-      async function handleMenuClick(info: MenuInfo) {
+      const handleMenuClick: MenuProps['onClick'] = async ({ key }) => {
         const { beforeClickFn } = props;
         if (beforeClickFn && isFunction(beforeClickFn)) {
-          const flag = await beforeClickFn(info.key);
+          const flag = await beforeClickFn(key);
           if (!flag) return;
         }
-        emit('menuClick', info.key);
+        emit('menuClick', key);
 
         isClickGo.value = true;
-        menuState.selectedKeys = [info.key];
-      }
+        menuState.selectedKeys = [key];
+      };
 
       async function handleMenuChange(route?: RouteLocationNormalizedLoaded) {
         if (unref(isClickGo)) {

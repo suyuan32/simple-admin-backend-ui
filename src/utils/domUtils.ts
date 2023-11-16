@@ -158,14 +158,14 @@ export function off(
 export function once(el: HTMLElement, event: string, fn: EventListener): void {
   const listener = function (this: any, ...args: unknown[]) {
     if (fn) {
-      fn.apply(this, args as [Event]);
+      fn.apply(this, args as [evt: Event]);
     }
     off(el, event, listener);
   };
   on(el, event, listener);
 }
 
-export function useRafThrottle<T extends typeof FunctionArgs>(fn: T): T {
+export function useRafThrottle<T extends FunctionArgs>(fn: T): T {
   let locked = false;
   // @ts-ignore
   return function (...args: any[]) {

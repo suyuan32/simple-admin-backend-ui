@@ -176,35 +176,8 @@
     },
   );
 </script>
-
 <style lang="less">
-  @prefix-cls: ~'@{name-space}-page-wrapper';
-
-  [data-theme='dark'] {
-    .@{prefix-cls} {
-      position: relative;
-
-      .@{prefix-cls}-content {
-        margin: 16px;
-      }
-
-      .ant-page-header {
-        &:empty {
-          padding: 0;
-        }
-      }
-
-      &-content-bg {
-        background-color: #262626;
-      }
-
-      &--dense {
-        .@{prefix-cls}-content {
-          margin: 0;
-        }
-      }
-    }
-  }
+  @prefix-cls: ~'@{namespace}-page-wrapper';
 
   .@{prefix-cls} {
     position: relative;

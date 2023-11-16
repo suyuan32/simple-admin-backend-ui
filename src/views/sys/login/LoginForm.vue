@@ -9,10 +9,10 @@
     @keypress.enter="handleLogin"
   >
     <div class="pt-4 pb-4">
-      <ARadioGroup v-model:value="formData.msgType" button-style="solid" size="large">
-        <ARadioButton value="captcha"> {{ t('sys.login.captcha') }} </ARadioButton>
-        <ARadioButton value="email"> {{ t('sys.login.email') }} </ARadioButton>
-        <ARadioButton value="sms"> {{ t('sys.login.mobile') }} </ARadioButton>
+      <ARadioGroup v-model:value="formData.msgType" button-style="solid" size="large" >
+        <ARadioButton class="bg-transparent" value="captcha"> {{ t('sys.login.captcha') }} </ARadioButton>
+        <ARadioButton class="bg-transparent" value="email"> {{ t('sys.login.email') }} </ARadioButton>
+        <ARadioButton class="bg-transparent" value="sms"> {{ t('sys.login.mobile') }} </ARadioButton>
       </ARadioGroup>
     </div>
 
@@ -59,6 +59,7 @@
         visibilityToggle
         v-model:value="formData.password"
         :placeholder="t('sys.login.password')"
+        class="fix-auto-fill"
       />
     </FormItem>
 
@@ -73,13 +74,16 @@
         v-model:value="formData.captcha"
         :placeholder="t('sys.login.captcha')"
         class="fix-auto-fill"
+        style="background-color: #232A3B;"
       >
         <template #suffix>
-          <img
-            :src="formData.imgPath"
-            class="absolute right-0 h-full cursor-pointer"
-            @click="getCaptchaData()"
-          />
+            <img
+              :src="formData.imgPath"
+              :width="120"
+              :height="40"
+              @click="getCaptchaData()"
+              class="rounded"
+            />
         </template>
       </Input>
     </FormItem>
@@ -272,9 +276,3 @@
     if (result.code === 0) window.open(result.data.URL);
   }
 </script>
-
-<style scoped>
-  .captcha .ant-input {
-    width: '10px';
-  }
-</style>

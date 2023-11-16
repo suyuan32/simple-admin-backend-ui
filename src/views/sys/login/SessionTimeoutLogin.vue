@@ -41,7 +41,7 @@
   });
 </script>
 <style lang="less" scoped>
-  @prefix-cls: ~'@{name-space}-st-login';
+  @prefix-cls: ~'@{namespace}-st-login';
 
   .@{prefix-cls} {
     position: fixed;

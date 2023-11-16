@@ -32,38 +32,11 @@
   }
 </script>
 <style lang="less" scoped>
-  @prefix-cls: ~'@{name-space}-dark-switch';
+  @prefix-cls: ~'@{namespace}-dark-switch';
 
   html[data-theme='dark'] {
     .@{prefix-cls} {
-      display: flex;
-      position: relative;
-      align-items: center;
-      justify-content: space-between;
-      width: 50px;
-      height: 26px;
-      margin-left: auto;
-      padding: 0 6px;
-      border-radius: 30px;
-      background-color: #fff;
-      cursor: pointer;
-
-      &-inner {
-        position: absolute;
-        z-index: 1;
-        width: 18px;
-        height: 18px;
-        transition: transform 0.5s, background-color 0.5s;
-        border-radius: 50%;
-        background-color: #151515;
-        will-change: transform;
-      }
-
-      &--dark {
-        .@{prefix-cls}-inner {
-          transform: translateX(calc(100% + 2px));
-        }
-      }
+      border: 1px solid rgb(196 188 188);
     }
   }
 

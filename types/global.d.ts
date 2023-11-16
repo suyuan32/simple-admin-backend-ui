@@ -22,6 +22,7 @@ declare global {
   //   __APP__: App<Element>;
   // }
 
+  // fix FullScreen type error
   interface Document {
     mozFullScreenElement?: Element;
     msFullscreenElement?: Element;
