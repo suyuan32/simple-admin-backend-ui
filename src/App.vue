@@ -1,5 +1,5 @@
 <template>
-  <ConfigProvider :locale="getAntdLocale" :prefix-cls="cssPrefix" :theme="isDark ? darkTheme : {}">
+  <ConfigProvider :locale="getAntdLocale" :theme="themeConfig">
     <AppProvider>
       <RouterView />
     </AppProvider>
@@ -7,50 +7,34 @@
 </template>
 
 <script lang="ts" setup>
+  import { AppProvider } from '@/components/Application';
+  import { useTitle } from '@/hooks/web/useTitle';
+  import { useLocale } from '@/locales/useLocale';
   import { ConfigProvider } from 'ant-design-vue';
-  import { AppProvider } from '/@/components/Application';
-  import { useTitle } from '/@/hooks/web/useTitle';
-  import { useLocale } from '/@/locales/useLocale';
 
-  import 'dayjs/locale/zh-cn';
-  import { ref, watch } from 'vue';
-  import { useAppStore } from './store/modules/app';
-  import { CssPrefixEnum } from './enums/appEnum';
   import { useDarkModeTheme } from '@/hooks/setting/useDarkModeTheme';
+  import 'dayjs/locale/zh-cn';
+  import { computed } from 'vue';
 
   // support Multi-language
   const { getAntdLocale } = useLocale();
 
-  const cssPrefix = ref<string>();
-
-  const appStore = useAppStore();
-
-  const changePrefix = function (value: string) {
-    if (value === CssPrefixEnum.DARK) {
-      cssPrefix.value = CssPrefixEnum.DARK;
-    } else {
-      cssPrefix.value = CssPrefixEnum.DEFAULT;
-    }
-  };
-
-  changePrefix(appStore.getDarkMode);
-
   const { isDark, darkTheme } = useDarkModeTheme();
 
-  watch(
-    () => appStore.getDarkMode,
-    (value, _oldValue) => {
-      changePrefix(value);
-    },
+  const themeConfig = computed(() =>
+    Object.assign(
+      {
+        token: {
+          colorPrimary: '#1677ff',
+          colorSuccess: '#55D187',
+          colorWarning: '#EFBD47',
+          colorError: '#ED6F6F',
+          colorInfo: '#0960bd',
+        },
+      },
+      isDark.value ? darkTheme : {},
+    ),
   );
-
-  ConfigProvider.config({
-    prefixCls: cssPrefix.value,
-    // theme: {
-    //   primaryColor: '#262626',
-    // },
-  });
-
   // Listening to page changes and dynamically changing site titles
   useTitle();
 </script>

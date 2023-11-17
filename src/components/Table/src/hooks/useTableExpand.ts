@@ -2,14 +2,13 @@ import type { ComputedRef, Ref } from 'vue';
 import type { BasicTableProps } from '../types/table';
 import { computed, unref, ref, toRaw } from 'vue';
 import { ROW_KEY } from '../const';
-import { Key } from 'ant-design-vue/lib/vc-table/interface';
 
 export function useTableExpand(
   propsRef: ComputedRef<BasicTableProps>,
   tableData: Ref<Recordable[]>,
   emit: EmitType,
 ) {
-  const expandedRowKeys = ref<Key[]>([]);
+  const expandedRowKeys = ref<(string | number)[]>([]);
 
   const getAutoCreateKey = computed(() => {
     return unref(propsRef).autoCreateKey && !unref(propsRef).rowKey;
@@ -26,7 +25,7 @@ export function useTableExpand(
 
     return {
       expandedRowKeys: unref(expandedRowKeys),
-      onExpandedRowsChange: (keys: Key[]) => {
+      onExpandedRowsChange: (keys: string[]) => {
         expandedRowKeys.value = keys;
         emit('expanded-rows-change', keys);
       },
@@ -38,7 +37,7 @@ export function useTableExpand(
     expandedRowKeys.value = keys;
   }
 
-  function expandRows(keys: Key[]) {
+  function expandRows(keys: (string | number)[]) {
     // use row ID expands the specified table row
     const { isTreeTable } = unref(propsRef);
     if (!isTreeTable) return;

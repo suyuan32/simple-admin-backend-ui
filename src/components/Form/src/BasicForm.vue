@@ -320,7 +320,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{name-space}-basic-form';
+  @prefix-cls: ~'@{namespace}-basic-form';
 
   .@{prefix-cls} {
     .ant-form-item {
@@ -328,13 +328,13 @@
         margin: 0 6px 0 2px;
       }
 
-      &-with-help {
-        margin-bottom: 0;
-      }
+      // &-with-help {
+      //   margin-bottom: 0;
+      // }
 
-      &:not(.ant-form-item-with-help) {
-        margin-bottom: 20px;
-      }
+      // &:not(.ant-form-item-with-help) {
+      //   margin-bottom: 20px;
+      // }
 
       &.suffix-item {
         .ant-form-item-children {

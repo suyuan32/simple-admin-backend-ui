@@ -1,44 +1,23 @@
+/* stylelint-disable media-feature-range-notation */
 .fullscreen-modal {
   overflow: hidden;
 
   .ant-modal {
-    top: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    left: 0 !important;
+    inset: 0 !important;
     width: 100% !important;
     height: 100%;
 
     &-content {
       height: 100%;
-    }
-
-    &-footer {
-      margin-top: -1rem;
     }
   }
 
-  .dark-modal {
-    top: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100%;
-
-    &-content {
-      height: 100%;
-    }
-
-    &-footer {
-      margin-top: -1rem;
-    }
+  .ant-modal-footer {
+    margin-top: 0;
   }
 }
 
-
-
-.vben-basic-modal-wrap .ant-modal {
+.ant-modal {
   width: 520px;
   padding-bottom: 0;
 
@@ -73,20 +52,26 @@
 
   &-header {
     padding: 16px;
+    border-bottom: 1px solid @border-color-base;
   }
 
   &-content {
-    padding: 12px 8px !important;
+    padding: 0 !important;
     box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
   }
 
   &-footer {
+    padding: 10px 16px;
+    border-top: 1px solid @border-color-base;
+
     button + button {
       margin-left: 10px;
     }
   }
 
   &-close {
+    top: 0 !important;
+    right: 0 !important;
     width: auto !important;
     outline: none;
     background: transparent !important;
@@ -97,13 +82,11 @@
     display: inline-block;
     width: 96px;
     height: 56px;
-    line-height: 56px;
+    line-height: 56px !important;
   }
 
   &-confirm-body {
     .ant-modal-confirm-content {
-      // color: #fff;
-
       > * {
         color: @text-color-help-dark;
       }
@@ -136,131 +119,21 @@
 .ant-modal-confirm .ant-modal-body {
   padding: 24px !important;
 }
+
 @media screen and (max-height: 600px) {
   .ant-modal {
     top: 60px;
   }
 }
+
 @media screen and (max-height: 540px) {
   .ant-modal {
     top: 30px;
   }
 }
+
 @media screen and (max-height: 480px) {
   .ant-modal {
-    top: 10px;
-  }
-}
-
-.vben-basic-modal-wrap .dark-modal {
-  width: 520px;
-  padding-bottom: 0;
-
-  .dark-modal-body > .scrollbar {
-    padding: 14px;
-  }
-
-  &-title {
-    font-size: 16px;
-    font-weight: bold;
-
-    .base-title {
-      cursor: move !important;
-    }
-  }
-
-  .dark-modal-body {
-    padding: 0;
-
-    > .scrollbar > .scrollbar__bar.is-horizontal {
-      display: none;
-    }
-  }
-
-  &-large {
-    top: 60px;
-
-    &--mini {
-      top: 16px;
-    }
-  }
-
-  &-header {
-    padding: 16px;
-  }
-
-  &-content {
-    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
-  }
-
-  &-footer {
-    button + button {
-      margin-left: 10px;
-    }
-  }
-
-  &-close {
-    width: auto !important;
-    outline: none;
-    background: transparent !important;
-    font-weight: normal;
-  }
-
-  &-close-x {
-    display: inline-block;
-    width: 96px;
-    height: 56px;
-    line-height: 56px;
-  }
-
-  &-confirm-body {
-    .dark-modal-confirm-content {
-      // color: #fff;
-
-      > * {
-        color: @text-color-help-dark;
-      }
-    }
-  }
-
-  &-confirm-confirm.error .dark-modal-confirm-body > .darkicon {
-    color: @error-color;
-  }
-
-  &-confirm-btns {
-    .dark-btn:last-child {
-      margin-right: 0;
-    }
-  }
-
-  &-confirm-info {
-    .dark-modal-confirm-body > .darkicon {
-      color: @warning-color;
-    }
-  }
-
-  &-confirm-confirm.success {
-    .dark-modal-confirm-body > .darkicon {
-      color: @success-color;
-    }
-  }
-}
-
-.dark-modal-confirm .dark-modal-body {
-  padding: 24px !important;
-}
-@media screen and (max-height: 600px) {
-  .dark-modal {
-    top: 60px;
-  }
-}
-@media screen and (max-height: 540px) {
-  .dark-modal {
-    top: 30px;
-  }
-}
-@media screen and (max-height: 480px) {
-  .dark-modal {
     top: 10px;
   }
 }

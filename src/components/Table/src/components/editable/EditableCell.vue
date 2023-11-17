@@ -447,7 +447,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{name-space}-editable-cell';
+  @prefix-cls: ~'@{namespace}-editable-cell';
 
   .edit-cell-align-left {
     text-align: left;

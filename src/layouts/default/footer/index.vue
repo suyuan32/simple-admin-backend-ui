@@ -62,7 +62,7 @@
   });
 </script>
 <style lang="less" scoped>
-  @prefix-cls: ~'@{name-space}-layout-footer';
+  @prefix-cls: ~'@{namespace}-layout-footer';
 
   @normal-color: rgba(0, 0, 0, 0.45);
 

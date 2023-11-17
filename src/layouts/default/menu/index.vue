@@ -15,7 +15,7 @@
   import { useSplitMenu } from './useLayoutMenu';
   import { openWindow } from '/@/utils';
   import { propTypes } from '/@/utils/propTypes';
-  import { isUrl } from '/@/utils/is';
+  import { isHttpUrl } from '/@/utils/is';
   import { useRootSetting } from '/@/hooks/setting/useRootSetting';
   import { useAppInject } from '/@/hooks/web/useAppInject';
   import { useDesign } from '/@/hooks/web/useDesign';
@@ -119,7 +119,7 @@
        * @param menu
        */
       async function beforeMenuClickFn(path: string) {
-        if (!isUrl(path)) {
+        if (!isHttpUrl(path)) {
           return true;
         }
         openWindow(path);
@@ -140,6 +140,7 @@
 
       function renderMenu() {
         const { menus, ...menuProps } = unref(getCommonProps);
+        // console.log(menus);
         if (!menus || !menus.length) return null;
         return !props.isHorizontal ? (
           <SimpleMenu {...menuProps} isSplitMenu={unref(getSplit)} items={menus} />
@@ -171,8 +172,8 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{name-space}-layout-menu';
-  @logo-prefix-cls: ~'@{name-space}-app-logo';
+  @prefix-cls: ~'@{namespace}-layout-menu';
+  @logo-prefix-cls: ~'@{namespace}-app-logo';
 
   .@{prefix-cls} {
     &-logo {

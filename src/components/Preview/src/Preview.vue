@@ -80,7 +80,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{name-space}-image-preview';
+  @prefix-cls: ~'@{namespace}-image-preview';
 
   .@{prefix-cls} {
     .ant-image {

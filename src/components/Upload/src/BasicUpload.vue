@@ -22,6 +22,8 @@
     <UploadModal
       v-bind="bindValue"
       :previewFileList="fileList"
+      :fileListOpenDrag="fileListOpenDrag"
+      :fileListDragOptions="fileListDragOptions"
       @register="registerUploadModal"
       @change="handleChange"
       @delete="handleDelete"
@@ -37,7 +39,8 @@
 </template>
 <script lang="ts">
   import { defineComponent, ref, watch, unref, computed } from 'vue';
-    import  Icon  from '@/components/Icon/Icon.vue';
+  import { Recordable } from '@vben/types';
+  import Icon from '@/components/Icon/Icon.vue';
   import { Tooltip, Space } from 'ant-design-vue';
   import { useModal } from '/@/components/Modal';
   import { uploadContainerProps } from './props';
@@ -96,7 +99,7 @@
         emit('change', fileList.value);
       }
 
-      function handleDelete(record: Recordable) {
+      function handleDelete(record: Recordable<any>) {
         emit('delete', record);
       }
 

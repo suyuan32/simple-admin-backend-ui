@@ -67,12 +67,14 @@
         const { password = '' } = await validate<{
           password: string;
         }>();
+
         closeModal();
 
         lockStore.setLockInfo({
           isLock: true,
           pwd: password,
         });
+
         await resetFields();
       };
 
@@ -94,7 +96,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{name-space}-header-lock-modal';
+  @prefix-cls: ~'@{namespace}-header-lock-modal';
 
   .@{prefix-cls} {
     &__entry {

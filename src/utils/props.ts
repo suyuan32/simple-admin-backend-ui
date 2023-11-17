@@ -129,9 +129,7 @@ export function buildProp<
 
   return {
     type:
-      typeof type === 'object' &&
-      Object.getOwnPropertySymbols(type).includes(wrapperKey) &&
-      type !== null
+      typeof type === 'object' && Object.getOwnPropertySymbols(type).includes(wrapperKey) && type
         ? type[wrapperKey]
         : type,
     required: !!required,

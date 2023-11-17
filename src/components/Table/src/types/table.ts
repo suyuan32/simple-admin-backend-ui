@@ -2,17 +2,15 @@ import type { VNodeChild } from 'vue';
 import type { PaginationProps } from './pagination';
 import type { FormProps } from '/@/components/Form';
 import type {
-  FilterValue,
   TableRowSelection as ITableRowSelection,
   Key,
-  SorterResult,
 } from 'ant-design-vue/lib/table/interface';
+
 import type { ColumnProps } from 'ant-design-vue/lib/table';
 
 import { ComponentType } from './componentType';
 import { VueNode } from '/@/utils/propTypes';
 import { RoleEnum } from '/@/enums/roleEnum';
-import { DefaultRecordType } from 'ant-design-vue/lib/vc-table/interface';
 
 export declare type SortOrder = 'ascend' | 'descend';
 
@@ -66,12 +64,12 @@ export interface TableCustomRecord<T = Recordable> {
   index?: number;
 }
 
-// export interface SorterResult {
-//   column: ColumnProps;
-//   order: SortOrder;
-//   field: string;
-//   columnKey: string;
-// }
+export interface SorterResult {
+  column: ColumnProps;
+  order: SortOrder;
+  field: string;
+  columnKey: string;
+}
 
 export interface FetchParams {
   searchInfo?: Recordable;
@@ -94,20 +92,17 @@ export interface TableActionType {
   getSelectRows: <T = Recordable>() => T[];
   clearSelectedRowKeys: () => void;
   expandAll: () => void;
-  expandRows: (keys: Key[]) => void;
+  expandRows: (keys: (string | number)[]) => void;
   collapseAll: () => void;
   scrollTo: (pos: string) => void; // pos: id | "top" | "bottom"
   getSelectRowKeys: () => Key[];
   deleteSelectRowByKey: (key: string) => void;
   setPagination: (info: Partial<PaginationProps>) => void;
   setTableData: <T = Recordable>(values: T[]) => void;
-  updateTableDataRecord: (rowKey: Key, record: Recordable) => Recordable | void;
-  deleteTableDataRecord: (rowKey: Key | Key[]) => void;
-  insertTableDataRecord: (
-    record: Recordable<any> | Recordable<any>[],
-    index?: number | undefined,
-  ) => Recordable[];
-  findTableDataRecord: (rowKey: Key) => Recordable | void;
+  updateTableDataRecord: (rowKey: string | number, record: Recordable) => Recordable | void;
+  deleteTableDataRecord: (rowKey: string | number | string[] | number[]) => void;
+  insertTableDataRecord: (record: Recordable | Recordable[], index?: number) => Recordable[] | void;
+  findTableDataRecord: (rowKey: string | number) => Recordable | void;
   getColumns: (opt?: GetColumnsParams) => BasicColumn[];
   setColumns: (columns: BasicColumn[] | string[]) => void;
   getDataSource: <T = Recordable>() => T[];
@@ -121,10 +116,11 @@ export interface TableActionType {
   getRowSelection: () => TableRowSelection<Recordable>;
   getCacheColumns: () => BasicColumn[];
   emit?: EmitType;
-  updateTableData: (index: number, key: Key, value: any) => Recordable;
+  updateTableData: (index: number, key: string, value: any) => Recordable;
   setShowPagination: (show: boolean) => Promise<void>;
   getShowPagination: () => boolean;
   setCacheColumnsByField?: (dataIndex: string | undefined, value: BasicColumn) => void;
+  setCacheColumns?: (columns: BasicColumn[]) => void;
 }
 
 export interface FetchSetting {
@@ -138,12 +134,6 @@ export interface FetchSetting {
   totalField: string;
 }
 
-export interface TreeConfig {
-  id: string;
-  parentId: string;
-  childrenField?: string;
-}
-
 export interface TableSetting {
   redo?: boolean;
   size?: boolean;
@@ -155,11 +145,10 @@ export interface BasicTableProps<T = any> {
   // 点击行选中
   clickToRowSelect?: boolean;
   isTreeTable?: boolean;
-  treeConfig?: TreeConfig;
   // 自定义排序方法
-  sortFn?: (sortInfo: SorterResult<DefaultRecordType> | SorterResult<DefaultRecordType>[]) => any;
+  sortFn?: (sortInfo: SorterResult) => any;
   // 排序方法
-  filterFn?: (data: Record<string, FilterValue | null>) => any;
+  filterFn?: (data: Partial<Recordable<string[]>>) => any;
   // 取消表格的默认padding
   inset?: boolean;
   // 显示表格设置
@@ -218,7 +207,7 @@ export interface BasicTableProps<T = any> {
   // 在分页改变的时候清空选项
   clearSelectOnPageChange?: boolean;
   //
-  rowKey?: Key | ((record: Recordable) => string);
+  rowKey?: string | ((record: Recordable) => string);
   // 数据
   dataSource?: Recordable[];
   // 标题右侧提示
@@ -254,15 +243,15 @@ export interface BasicTableProps<T = any> {
 
   /**
    * Initial expanded row keys
-   * @type Key[]
+   * @type string[]
    */
-  defaultExpandedRowKeys?: Key[];
+  defaultExpandedRowKeys?: string[];
 
   /**
    * Current expanded row keys
    * @type string[]
    */
-  expandedRowKeys?: Key[];
+  expandedRowKeys?: string[];
 
   /**
    * Expanded container render for each row
@@ -326,7 +315,7 @@ export interface BasicTableProps<T = any> {
    * you need to add style .ant-table td { white-space: nowrap; }.
    * @type object
    */
-  scroll?: { x?: number | true; y?: number };
+  scroll?: { x?: number | string | true; y?: number | string };
 
   /**
    * Whether to show table header
@@ -445,11 +434,13 @@ export interface BasicColumn extends ColumnProps<Recordable> {
 
   slots?: Recordable;
 
+  // 自定义header渲染
+  customHeaderRender?: (column: BasicColumn) => string | VNodeChild | JSX.Element;
   // Whether to hide the column by default, it can be displayed in the column configuration
   defaultHidden?: boolean;
 
   // Help text for table column header
-  helpMessage?: string | string[];
+  helpMessage?: string | string[] | VNodeChild | JSX.Element;
 
   format?: CellFormat;
 
@@ -460,11 +451,11 @@ export interface BasicColumn extends ColumnProps<Recordable> {
   editComponent?: ComponentType;
   editComponentProps?:
     | ((opt: {
-        text: string | number | boolean | Recordable;
-        record: Recordable;
-        column: BasicColumn;
-        index: number;
-      }) => Recordable)
+    text: string | number | boolean | Recordable;
+    record: Recordable;
+    column: BasicColumn;
+    index: number;
+  }) => Recordable)
     | Recordable;
   editRule?: boolean | ((text: string, record: Recordable) => Promise<string>);
   editValueMap?: (value: any) => string;

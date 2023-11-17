@@ -104,7 +104,7 @@
   const getTrigger = h(LayoutTrigger);
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{name-space}-layout-sideBar';
+  @prefix-cls: ~'@{namespace}-layout-sideBar';
 
   .@{prefix-cls} {
     z-index: @layout-sider-fixed-z-index;

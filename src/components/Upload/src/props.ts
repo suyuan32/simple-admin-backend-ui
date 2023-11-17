@@ -73,7 +73,7 @@ export const basicProps = {
 
 export const uploadContainerProps = {
   value: {
-    type: Array as PropType<string[]>,
+    type: [Array as PropType<string[]>, String],
     default: () => [],
   },
   ...basicProps,

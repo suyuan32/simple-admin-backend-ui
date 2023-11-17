@@ -96,7 +96,7 @@ export const formSchema: FormSchema[] = [
     defaultValue: 0,
     component: 'InputNumber',
     required: true,
-    rules: [{ type: 'number', max: 10000 }],
+    rules: [{ min: 1, max: 10000, type: 'number' }],
   },
   {
     field: 'code',
@@ -159,7 +159,7 @@ export function convertApiTreeData(params: ApiInfo[]): DataNode[] {
       if (params[i].group == k) {
         apiTmp.children?.push({
           title: t(params[i].trans),
-          key: params[i].id,
+          key: params[i].id as number,
           disableCheckbox: params[i].isRequired,
         });
       }
@@ -184,7 +184,8 @@ export function convertApiCheckedKeysToReq(checked: number[], data: ApiInfo[]): 
   }
   // sort data
   data.sort(function (a, b) {
-    return a.id - b.id;
+    if (a.id !== undefined && b.id !== undefined) return a.id - b.id;
+    return 1;
   });
   pureDigit.sort(function (a, b) {
     return a - b;
@@ -215,7 +216,7 @@ export function convertApiToCheckedKeys(checked: ApiAuthorityInfo[], data: ApiIn
   const requiredAPIs: number[] = [];
   data.forEach(function (value, _key) {
     if (value.isRequired == true) {
-      requiredAPIs.push(value.id);
+      requiredAPIs.push(value.id as number);
     }
   });
 

@@ -9,4 +9,4 @@ node_modules
 public
 .npmrc
 
-internal/**/dist
+*-lock.yaml

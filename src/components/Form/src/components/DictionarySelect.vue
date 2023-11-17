@@ -23,7 +23,7 @@
 <script lang="ts">
   import { defineComponent, ref, watch } from 'vue';
   import { Select } from 'ant-design-vue';
-  import { useAttrs } from '/@/hooks/core/useAttrs';
+  import { useAttrs } from '@vben/hooks';
   import { LoadingOutlined } from '@ant-design/icons-vue';
   import { useI18n } from '/@/hooks/web/useI18n';
   import { propTypes } from '/@/utils/propTypes';
