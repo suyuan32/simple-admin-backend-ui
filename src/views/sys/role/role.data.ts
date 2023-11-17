@@ -96,7 +96,7 @@ export const formSchema: FormSchema[] = [
     defaultValue: 0,
     component: 'InputNumber',
     required: true,
-    rules: [{ max: 10000 }],
+    rules: [{ min: 1, max: 10000, type: 'number' }],
   },
   {
     field: 'code',

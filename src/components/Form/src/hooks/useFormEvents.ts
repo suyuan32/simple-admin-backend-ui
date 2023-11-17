@@ -337,6 +337,7 @@ export function useFormEvents({
 
   async function validateFields(nameList?: NamePath[] | undefined) {
     const values = await unref(formElRef)?.validateFields(nameList);
+    // console.log('validate');
     return handleFormValues(values);
   }
 

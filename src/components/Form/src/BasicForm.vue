@@ -112,7 +112,7 @@
       });
 
       const getBindValue = computed(
-        () => ({ ...attrs, ...props, ...unref(getProps) }) as AntFormProps,
+        () => ({ ...attrs, ...props, ...unref(getProps) } as AntFormProps),
       );
 
       const getSchema = computed((): FormSchema[] => {
@@ -311,7 +311,7 @@
         getFormClass,
         getFormActionBindProps: computed(
           () =>
-            ({ ...getProps.value, ...advanceState }) as InstanceType<typeof FormAction>['$props'],
+            ({ ...getProps.value, ...advanceState } as InstanceType<typeof FormAction>['$props']),
         ),
         fieldsIsAdvancedMap,
         ...formActionType,
