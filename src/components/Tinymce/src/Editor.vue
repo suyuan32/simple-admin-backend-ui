@@ -141,9 +141,9 @@
       const langName = computed(() => {
         const lang = useLocale().getLocale.value;
         if (lang === 'zh_CN') {
-          return 'zh-Hans'
+          return 'zh-Hans';
         }
-        return lang
+        return lang;
       });
 
       const initOptions = computed((): RawEditorOptions => {
@@ -163,10 +163,14 @@
           object_resizing: false,
           auto_focus: true,
           skin: skinName.value,
+          promotion: false,
           model_url: publicPath + 'resource/tinymce/models/dom/model.min.js',
           skin_url: publicPath + 'resource/tinymce/skins/ui/' + skinName.value,
           content_css:
-            publicPath + 'resource/tinymce/skins/content/' + contentCssName.value + '/content.min.css',
+            publicPath +
+            'resource/tinymce/skins/content/' +
+            contentCssName.value +
+            '/content.min.css',
           ...options,
           setup: (editor: Editor) => {
             editorRef.value = editor;
