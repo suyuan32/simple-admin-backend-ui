@@ -9,10 +9,16 @@
     @keypress.enter="handleLogin"
   >
     <div class="pt-4 pb-4">
-      <ARadioGroup v-model:value="formData.msgType" button-style="solid" size="large" >
-        <ARadioButton class="bg-transparent" value="captcha"> {{ t('sys.login.captcha') }} </ARadioButton>
-        <ARadioButton class="bg-transparent" value="email"> {{ t('sys.login.email') }} </ARadioButton>
-        <ARadioButton class="bg-transparent" value="sms"> {{ t('sys.login.mobile') }} </ARadioButton>
+      <ARadioGroup v-model:value="formData.msgType" button-style="solid" size="large">
+        <ARadioButton class="bg-transparent" value="captcha">
+          {{ t('sys.login.captcha') }}
+        </ARadioButton>
+        <ARadioButton class="bg-transparent" value="email">
+          {{ t('sys.login.email') }}
+        </ARadioButton>
+        <ARadioButton class="bg-transparent" value="sms">
+          {{ t('sys.login.mobile') }}
+        </ARadioButton>
       </ARadioGroup>
     </div>
 
@@ -73,17 +79,17 @@
         size="large"
         v-model:value="formData.captcha"
         :placeholder="t('sys.login.captcha')"
-        class="fix-auto-fill"
-        style="background-color: #232A3B;"
+        class="fix-auto-fill bg-transparent"
       >
         <template #suffix>
-            <img
-              :src="formData.imgPath"
-              :width="120"
-              :height="40"
-              @click="getCaptchaData()"
-              class="rounded"
-            />
+          <Image
+            :src="formData.imgPath"
+            :width="120"
+            :height="40"
+            :preview="false"
+            @click="getCaptchaData"
+            class="rounded"
+          />
         </template>
       </Input>
     </FormItem>
@@ -129,7 +135,17 @@
 <script lang="ts" setup>
   import { reactive, ref, unref, computed } from 'vue';
 
-  import { Form, Input, Row, Col, Button, Divider, RadioGroup, RadioButton } from 'ant-design-vue';
+  import {
+    Form,
+    Input,
+    Row,
+    Col,
+    Button,
+    Divider,
+    RadioGroup,
+    RadioButton,
+    Image,
+  } from 'ant-design-vue';
   import { GithubFilled, GoogleCircleFilled } from '@ant-design/icons-vue';
   import LoginFormTitle from './LoginFormTitle.vue';
 

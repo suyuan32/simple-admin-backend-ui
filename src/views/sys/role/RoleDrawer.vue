@@ -117,11 +117,10 @@
             valueField: 'id',
             labelField: 'trans',
           });
-          const roleId = await validate();
+          const roleId = await getFieldsValue();
           const checkedData = await getMenuAuthority({ id: Number(roleId['id']) });
           getMenuTree().setCheckedKeys(checkedData.data.menuIds);
           getMenuTree().expandAll(true);
-          console.log(checkedData);
         } catch (error) {
           console.log(error);
         }
@@ -141,7 +140,7 @@
           for (const key in dataConv) {
             treeApiData.value.push(dataConv[key]);
           }
-          const roleId = await validate();
+          const roleId = await getFieldsValue();
           const checkedData = await getApiAuthority({ id: Number(roleId['id']) });
           if (checkedData.data.data === null) {
             checkedApiKeys.value = convertApiToCheckedKeys([], apiData.data.data);
@@ -163,7 +162,7 @@
         }
       });
 
-      const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
+      const [registerForm, { resetFields, setFieldsValue, validate, getFieldsValue }] = useForm({
         labelWidth: 90,
         baseColProps: { span: 24 },
         schemas: formSchema,
@@ -210,7 +209,7 @@
       // handle authorization submit
       async function handleAuthorizationSubmit() {
         if (activeKey.value === '1') {
-          const roleData = await validate();
+          const roleData = await getFieldsValue();
           const result = await createOrUpdateMenuAuthority({
             roleId: Number(roleData['id']),
             menuIds: getMenuTree().getCheckedKeys()['checked'] as number[],
@@ -224,7 +223,7 @@
             checkedApiKeys.value,
             tempApiList.data.data,
           );
-          const roleData = await validate();
+          const roleData = await getFieldsValue();
           const result = await createOrUpdateApiAuthority({
             roleId: Number(roleData['id']),
             data: apiReqData,
