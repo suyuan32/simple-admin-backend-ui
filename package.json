@@ -80,7 +80,6 @@
     "@zxcvbn-ts/core": "^2.2.1",
     "ant-design-vue": "^4.0.7",
     "axios": "^1.6.2",
-    "axios-retry": "^3.9.1",
     "codemirror": "^6.0.1",
     "cropperjs": "^1.6.1",
     "crypto-js": "^4.2.0",
