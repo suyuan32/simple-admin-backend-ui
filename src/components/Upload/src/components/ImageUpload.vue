@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts" setup name="ImageUpload">
-  import { ref, toRefs, watch } from 'vue';
+  import { ref, toRefs, watch, computed } from 'vue';
   import { PlusOutlined } from '@ant-design/icons-vue';
   import { Upload, Modal } from 'ant-design-vue';
   import type { UploadProps } from 'ant-design-vue';
@@ -36,7 +36,6 @@
   import { useUploadType } from '../hooks/useUpload';
   import { uploadContainerProps } from '../props';
   import { isImgTypeByName } from '../helper';
-import { computed } from 'vue';
 
   const emit = defineEmits(['change', 'update:value', 'delete']);
   const props = defineProps({
@@ -62,6 +61,7 @@ import { computed } from 'vue';
   watch(
     () => props.value,
     (v) => {
+      console.log(v);
       if (v && isArray(v)) {
         fileList.value = v.map((item, i) => {
           if (item && isString(item)) {
@@ -76,7 +76,16 @@ import { computed } from 'vue';
           } else {
             return;
           }
-        }) as UploadProps["fileList"][number];
+        }) as UploadProps['fileList'][number];
+      } else {
+        fileList.value = [
+          {
+            uid: '-1',
+            name: 'file',
+            status: 'done',
+            url: v,
+          },
+        ];
       }
     },
   );
@@ -84,21 +93,21 @@ import { computed } from 'vue';
   const responseData = computed(() => {
     if (props.maxNumber > 1) {
       let result: string[] = [];
-        if (fileList.value !== undefined) 
+      if (fileList.value !== undefined)
         for (let i = 0; i < fileList.value?.length; i++) {
           if (fileList.value[i].response !== undefined) {
-              result.push((fileList.value[i].response as any).url)
+            result.push((fileList.value[i].response as any).url);
           }
         }
-      return result
+      return result;
     } else {
-      if (fileList.value !== undefined) 
+      if (fileList.value !== undefined)
         if (fileList.value[0].response !== undefined) {
-             return (fileList.value[0].response as any).url
+          return (fileList.value[0].response as any).url;
         }
-      return ''
+      return '';
     }
-  })
+  });
 
   function getBase64(file: File) {
     return new Promise((resolve, reject) => {
