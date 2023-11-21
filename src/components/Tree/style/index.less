@@ -1,4 +1,4 @@
-@tree-prefix-cls: ~'@{name-space}-tree';
+@tree-prefix-cls: ~'@{namespace}-tree';
 
 .@{tree-prefix-cls} {
   background-color: @component-background;
@@ -17,8 +17,8 @@
   }
 
   &__title {
-    position: relative;
     display: flex;
+    position: relative;
     align-items: center;
     width: 100%;
     padding-right: 10px;
@@ -35,25 +35,18 @@
   }
 
   &__actions {
-    position: absolute;
-    right: 3px;
     display: flex;
+    position: absolute;
+    //top: 2px;
+    right: 3px;
   }
 
   &__action {
-    margin-left: 4px;
     visibility: hidden;
+    margin-left: 4px;
   }
 
   &-header {
     border-bottom: 1px solid @border-color-base;
-  }
-}
-
-[data-theme='dark'] {
-  .@{tree-prefix-cls} {
-    &-header {
-      border-bottom: 1px solid @border-color-dark;
-    }
   }
 }

@@ -40,41 +40,7 @@
   ]);
 </script>
 <style lang="less" scoped>
-  @prefix-cls: ~'@{name-space}-basic-title';
-
-  [data-theme='dark'] {
-    .@{prefix-cls} {
-      display: flex;
-      position: relative;
-      padding-left: 7px;
-      color: white;
-      font-size: 16px;
-      font-weight: 500;
-      line-height: 24px;
-      cursor: pointer;
-      user-select: none;
-
-      &-normal {
-        font-size: 14px;
-        font-weight: 500;
-      }
-
-      &-show-span::before {
-        content: '';
-        position: absolute;
-        top: 4px;
-        left: 0;
-        width: 3px;
-        height: 16px;
-        margin-right: 4px;
-        background-color: @primary-color;
-      }
-
-      &-help {
-        margin-left: 10px;
-      }
-    }
-  }
+  @prefix-cls: ~'@{namespace}-basic-title';
 
   .@{prefix-cls} {
     display: flex;

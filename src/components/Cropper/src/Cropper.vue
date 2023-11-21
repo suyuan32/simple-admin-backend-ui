@@ -175,7 +175,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{name-space}-cropper-image';
+  @prefix-cls: ~'@{namespace}-cropper-image';
 
   .@{prefix-cls} {
     &--circled {

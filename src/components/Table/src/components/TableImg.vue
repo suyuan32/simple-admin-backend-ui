@@ -72,7 +72,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{name-space}-basic-table-img';
+  @prefix-cls: ~'@{namespace}-basic-table-img';
 
   .@{prefix-cls} {
     .ant-image {
@@ -86,6 +86,9 @@
 
     .img-div {
       display: inline-grid;
+      > .ant-image:nth-of-type(n + 2) {
+        display: none;
+      }
     }
   }
 </style>

@@ -104,7 +104,7 @@
   });
 </script>
 <style lang="less" scoped>
-  @prefix-cls: ~'@{name-space}-setting-footer';
+  @prefix-cls: ~'@{namespace}-setting-footer';
 
   .@{prefix-cls} {
     display: flex;

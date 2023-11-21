@@ -11,8 +11,8 @@
     >
       <a-button
         type="primary"
-        shape="round"
         preIcon="material-symbols:image-sharp"
+        class="mt-1"
         :iconSize="14"
         v-bind="{ ...getButtonProps }"
       >
@@ -92,7 +92,7 @@
   });
 </script>
 <style lang="less" scoped>
-  @prefix-cls: ~'@{name-space}-tinymce-img-upload';
+  @prefix-cls: ~'@{namespace}-tinymce-img-upload';
 
   .@{prefix-cls} {
     position: absolute;

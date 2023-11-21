@@ -4,7 +4,7 @@ import { unref } from 'vue';
 import { isFunction } from '/@/utils/is';
 
 export function useTableStyle(propsRef: ComputedRef<BasicTableProps>, prefixCls: string) {
-  function getRowClassName(record: TableCustomRecord<any>, index: number) {
+  function getRowClassName(record: TableCustomRecord, index: number) {
     const { striped, rowClassName } = unref(propsRef);
     const classNames: string[] = [];
     if (striped) {

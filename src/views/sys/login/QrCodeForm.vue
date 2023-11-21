@@ -2,7 +2,7 @@
   <template v-if="getShow">
     <LoginFormTitle class="enter-x" />
     <div class="enter-x min-w-64 min-h-64">
-      <QrCode
+      <QRCode
         :value="qrCodeUrl"
         class="enter-x flex justify-center xl:justify-start"
         :width="280"
@@ -17,12 +17,11 @@
 <script lang="ts" setup>
   import { computed, unref } from 'vue';
   import LoginFormTitle from './LoginFormTitle.vue';
-  import { Button, Divider } from 'ant-design-vue';
-  import { QrCode } from '/@/components/Qrcode/index';
+  import { Button, Divider, QRCode } from 'ant-design-vue';
   import { useI18n } from '/@/hooks/web/useI18n';
   import { useLoginState, LoginStateEnum } from './useLogin';
 
-  const qrCodeUrl = 'https://vvbin.cn/next/login';
+  const qrCodeUrl = 'https://doc.ryansu.tech';
 
   const { t } = useI18n();
   const { handleBackLogin, getLoginState } = useLoginState();

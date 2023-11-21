@@ -3,8 +3,7 @@ import { defineStore } from 'pinia';
 import { store } from '/@/store';
 import { RoleEnum } from '/@/enums/roleEnum';
 import { PageEnum } from '/@/enums/pageEnum';
-import { ROLES_KEY, ROLES_NAME_KEY, TOKEN_KEY, USER_INFO_KEY } from '/@/enums/cacheEnum';
-import { getAuthCache, setAuthCache } from '/@/utils/auth';
+import { TOKEN_KEY, USER_INFO_KEY } from '/@/enums/cacheEnum';
 import {
   GetUserInfoModel,
   LoginByEmailReq,
@@ -20,10 +19,11 @@ import { RouteRecordRaw } from 'vue-router';
 import { PAGE_NOT_FOUND_ROUTE } from '/@/router/routes/basic';
 import { isArray } from '/@/utils/is';
 import { h } from 'vue';
+import { setAuthCache } from '/@/utils/auth';
 
 interface UserState {
-  userInfo: Nullable<GetUserInfoModel>;
-  token?: string;
+  userInfo: GetUserInfoModel;
+  token: string;
   roleList: RoleEnum[];
   roleName: string[];
   sessionTimeout?: boolean;
@@ -34,9 +34,16 @@ export const useUserStore = defineStore({
   id: 'app-user',
   state: (): UserState => ({
     // user info
-    userInfo: null,
+    userInfo: {
+      userId: '',
+      username: '',
+      nickname: '',
+      avatar: '',
+      homePath: '',
+      roleName: [],
+    },
     // token
-    token: undefined,
+    token: '',
     // roleList
     roleList: [],
     // role name
@@ -48,16 +55,16 @@ export const useUserStore = defineStore({
   }),
   getters: {
     getUserInfo(): GetUserInfoModel {
-      return this.userInfo || getAuthCache<GetUserInfoModel>(USER_INFO_KEY) || {};
+      return this.userInfo;
     },
     getToken(): string {
-      return this.token || getAuthCache<string>(TOKEN_KEY);
+      return this.token;
     },
     getRoleList(): RoleEnum[] {
-      return this.roleList.length > 0 ? this.roleList : getAuthCache<RoleEnum[]>(ROLES_KEY);
+      return this.roleList;
     },
     getRoleName(): string[] {
-      return this.roleName.length > 0 ? this.roleName : getAuthCache<string[]>(ROLES_NAME_KEY);
+      return this.roleName;
     },
     getSessionTimeout(): boolean {
       return !!this.sessionTimeout;
@@ -68,27 +75,31 @@ export const useUserStore = defineStore({
   },
   actions: {
     setToken(info: string | undefined) {
-      this.token = info ? info : ''; // for null or undefined value
+      this.token = info ? info : '';
       setAuthCache(TOKEN_KEY, info);
     },
     setRoleList(roleList: RoleEnum[]) {
       this.roleList = roleList;
-      setAuthCache(ROLES_KEY, roleList);
     },
     setRoleName(roleName: string[]) {
       this.roleName = roleName;
-      setAuthCache(ROLES_NAME_KEY, roleName);
     },
-    setUserInfo(info: GetUserInfoModel | null) {
+    setUserInfo(info: GetUserInfoModel) {
       this.userInfo = info;
       this.lastUpdateTime = new Date().getTime();
-      setAuthCache(USER_INFO_KEY, info);
     },
     setSessionTimeout(flag: boolean) {
       this.sessionTimeout = flag;
     },
     resetState() {
-      this.userInfo = null;
+      this.userInfo = {
+        userId: '',
+        username: '',
+        nickname: '',
+        avatar: '',
+        homePath: '',
+        roleName: [],
+      };
       this.token = '';
       this.roleList = [];
       this.roleName = [];
@@ -218,7 +229,14 @@ export const useUserStore = defineStore({
       }
       this.setToken(undefined);
       this.setSessionTimeout(false);
-      this.setUserInfo(null);
+      this.setUserInfo({
+        userId: '',
+        username: '',
+        nickname: '',
+        avatar: '',
+        homePath: '',
+        roleName: [],
+      });
       goLogin && router.push(PageEnum.BASE_LOGIN);
     },
 
@@ -237,6 +255,9 @@ export const useUserStore = defineStore({
         },
       });
     },
+  },
+  persist: {
+    key: USER_INFO_KEY,
   },
 });
 

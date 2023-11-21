@@ -14,7 +14,7 @@
   import type { CSSProperties } from 'vue';
   import { ref, unref, computed } from 'vue';
   import { Spin } from 'ant-design-vue';
-  import { useWindowSizeFn } from '/@/hooks/event/useWindowSizeFn';
+  import { useWindowSizeFn } from '@vben/hooks';
   import { propTypes } from '/@/utils/propTypes';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { useLayoutHeight } from '/@/layouts/default/content/useContentViewHeight';
@@ -26,11 +26,11 @@
   const loading = ref(true);
   const topRef = ref(50);
   const heightRef = ref(window.innerHeight);
-  const frameRef = ref<HTMLIFrameElement>();
+  const frameRef = ref<HTMLFrameElement>();
   const { headerHeightRef } = useLayoutHeight();
 
   const { prefixCls } = useDesign('iframe-page');
-  useWindowSizeFn<void>(calcHeight, 150, { immediate: true });
+  useWindowSizeFn(calcHeight, { wait: 150, immediate: true });
 
   const getWrapStyle = computed((): CSSProperties => {
     return {
@@ -56,7 +56,7 @@
   }
 </script>
 <style lang="less" scoped>
-  @prefix-cls: ~'@{name-space}-iframe-page';
+  @prefix-cls: ~'@{namespace}-iframe-page';
 
   .@{prefix-cls} {
     .ant-spin-nested-loading {

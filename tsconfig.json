@@ -3,14 +3,14 @@
   "extends": "@vben/ts-config/vue-app.json",
   "compilerOptions": {
     "baseUrl": ".",
-    "types": ["vite/client", "unplugin-vue-define-options/macros-global"],
+    "declaration": false,
+    "types": ["vite/client"],
     "paths": {
       "/@/*": ["src/*"],
       "/#/*": ["types/*"],
       "@/*": ["src/*"],
       "#/*": ["types/*"]
-    },
-    "declaration": false
+    }
   },
   "include": [
     "tests/**/*.ts",

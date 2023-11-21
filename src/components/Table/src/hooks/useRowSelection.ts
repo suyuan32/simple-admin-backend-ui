@@ -30,8 +30,8 @@ export function useRowSelection(
   });
 
   watch(
-    () => unref(propsRef).rowSelection?.selectedRowKeys as Key[],
-    (v: Key[]) => {
+    () => unref(propsRef).rowSelection?.selectedRowKeys,
+    (v?: Key[]) => {
       setSelectedRowKeys(v);
     },
   );
@@ -63,8 +63,8 @@ export function useRowSelection(
     return unref(getAutoCreateKey) ? ROW_KEY : rowKey;
   });
 
-  function setSelectedRowKeys(rowKeys: Key[]) {
-    selectedRowKeysRef.value = rowKeys;
+  function setSelectedRowKeys(rowKeys?: Key[]) {
+    selectedRowKeysRef.value = rowKeys || [];
     const allSelectedRows = findNodeAll(
       toRaw(unref(tableData)).concat(toRaw(unref(selectedRowRef))),
       (item) => rowKeys?.includes(item[unref(getRowKey) as string]),

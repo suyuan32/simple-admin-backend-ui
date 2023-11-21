@@ -17,7 +17,7 @@
         />
       </div>
       <Dropdown @click.prevent v-if="toolbar">
-        <Icon icon="ion:ellipsis-vertical" class="dropdown-icon-color" />
+        <Icon icon="ion:ellipsis-vertical" />
         <template #overlay>
           <Menu @click="handleMenuClick">
             <template v-for="item in toolbarList" :key="item.value">
@@ -174,15 +174,3 @@
     },
   );
 </script>
-
-<style lang="less" scoped>
-  .dropdown-icon-color {
-    color: black;
-  }
-
-  [data-theme='dark'] {
-    .dropdown-icon-color {
-      color: white;
-    }
-  }
-</style>

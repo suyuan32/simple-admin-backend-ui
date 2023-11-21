@@ -7,6 +7,7 @@
     :selectedKeys="selectedKeys"
     :targetKeys="getTargetKeys"
     :showSearch="showSearch"
+    :disabled="disabled"
     @change="handleChange"
   />
 </template>
@@ -73,9 +74,9 @@
         }, [] as TransferItem[]);
       });
       const getTargetKeys = computed<string[]>(() => {
-        // if (unref(_targetKeys).length > 0) {
-        //   return unref(_targetKeys);
-        // }
+        /* if (unref(_targetKeys).length > 0) {
+          return unref(_targetKeys);
+        } */
         if (Array.isArray(props.value)) {
           return props.value;
         }

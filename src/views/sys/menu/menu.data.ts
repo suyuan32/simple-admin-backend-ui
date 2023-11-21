@@ -1,7 +1,7 @@
 import { BasicColumn, FormSchema } from '/@/components/Table';
 import { h } from 'vue';
 import { Tag } from 'ant-design-vue';
-import { Icon } from '@/components/Icon';
+import Icon from '@/components/Icon/Icon.vue';
 import { useI18n } from '/@/hooks/web/useI18n';
 import { formatToDateTime } from '/@/utils/dateUtil';
 import { getMenuList } from '/@/api/sys/menu';
@@ -175,7 +175,7 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
     required: true,
     helpMessage: t('sys.menu.pathHelp'),
-    rules: [{ max: 200 }],
+    rules: [{ pattern: /^(\/[0-9A-Za-z_-]+)*$/gm, message: t('common.wrongFormat') }],
   },
   {
     field: 'component',
@@ -309,19 +309,6 @@ export const formSchema: FormSchema[] = [
   {
     field: 'affix',
     label: t('sys.menu.affix'),
-    component: 'RadioButtonGroup',
-    defaultValue: false,
-    componentProps: {
-      options: [
-        { label: t('common.yes'), value: true },
-        { label: t('common.no'), value: false },
-      ],
-    },
-    ifShow: ({ values }) => isMenu(values.menuType),
-  },
-  {
-    field: 'hideTab',
-    label: t('sys.menu.hideTab'),
     component: 'RadioButtonGroup',
     defaultValue: false,
     componentProps: {

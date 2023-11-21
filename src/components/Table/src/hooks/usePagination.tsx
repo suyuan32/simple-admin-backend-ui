@@ -14,9 +14,9 @@ interface ItemRender {
 
 function itemRender({ page, type, originalElement }: ItemRender) {
   if (type === 'prev') {
-    return page === 0 ? null : <LeftOutlined style="padding-top: 5px"/>;
+    return page === 0 ? null : <LeftOutlined />;
   } else if (type === 'next') {
-    return page === 1 ? null : <RightOutlined style="padding-top: 5px"/>;
+    return page === 1 ? null : <RightOutlined />;
   }
   return originalElement;
 }

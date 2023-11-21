@@ -12,6 +12,8 @@
 
   import SessionTimeoutLogin from '/@/views/sys/login/SessionTimeoutLogin.vue';
 
+  import { useMultipleTabSetting } from '/@/hooks/setting/useMultipleTabSetting';
+
   export default defineComponent({
     name: 'LayoutFeatures',
     components: {
@@ -41,12 +43,16 @@
         return settingButtonPosition === SettingButtonPositionEnum.FIXED;
       });
 
+      const { getShowMultipleTab } = useMultipleTabSetting();
+
       return {
         getTarget: () => document.body,
         getUseOpenBackTop,
         getIsFixedSettingDrawer,
         prefixCls,
         getIsSessionTimeout,
+        getShowMultipleTab,
+        getFullContent,
       };
     },
   });
@@ -55,12 +61,15 @@
 <template>
   <LayoutLockPage />
   <BackTop v-if="getUseOpenBackTop" :target="getTarget" />
-  <SettingDrawer v-if="getIsFixedSettingDrawer" :class="prefixCls" />
+  <SettingDrawer
+    v-if="getIsFixedSettingDrawer && (!getShowMultipleTab || getFullContent)"
+    :class="prefixCls"
+  />
   <SessionTimeoutLogin v-if="getIsSessionTimeout" />
 </template>
 
 <style lang="less">
-  @prefix-cls: ~'@{name-space}-setting-drawer-feature';
+  @prefix-cls: ~'@{namespace}-setting-drawer-feature';
 
   .@{prefix-cls} {
     display: flex;

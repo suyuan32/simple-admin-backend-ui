@@ -16,7 +16,7 @@
     subTitle: string;
     btnText?: string;
     icon?: string;
-    handler?: Fn;
+    handler?: any;
     status?: string;
   }
 
@@ -131,7 +131,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{name-space}-app-exception-page';
+  @prefix-cls: ~'@{namespace}-app-exception-page';
 
   .@{prefix-cls} {
     display: flex;

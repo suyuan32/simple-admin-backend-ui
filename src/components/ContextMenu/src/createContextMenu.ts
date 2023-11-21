@@ -51,7 +51,7 @@ export const createContextMenu = function (options: CreateContextOptions) {
         try {
           dom && body.removeChild(dom);
         } catch (error) {
-          /* empty */
+          //
         }
       });
       body.removeEventListener('click', handleClick);

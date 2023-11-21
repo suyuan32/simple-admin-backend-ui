@@ -38,7 +38,7 @@
   });
 </script>
 <style lang="less">
-  @prefix-cls: ~'@{name-space}-countdown-input';
+  @prefix-cls: ~'@{namespace}-countdown-input';
 
   .@{prefix-cls} {
     .ant-input-group-addon {

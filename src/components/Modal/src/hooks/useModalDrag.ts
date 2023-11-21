@@ -1,6 +1,5 @@
-import { Ref, ref, unref, watchEffect } from 'vue';
+import { Ref, unref, watchEffect } from 'vue';
 import { useTimeoutFn } from '@vben/hooks';
-import { useRootSetting } from '/@/hooks/setting/useRootSetting';
 
 export interface UseModalDragMoveContext {
   draggable: Ref<boolean>;
@@ -14,18 +13,9 @@ export function useModalDragMove(context: UseModalDragMoveContext) {
   };
   const drag = (wrap: any) => {
     if (!wrap) return;
-
-    const { getDarkMode } = useRootSetting();
-
-    const classPrefix = ref<string>('.ant');
-
-    if (getDarkMode.value == 'dark') {
-      classPrefix.value = '.dark';
-    }
-
     wrap.setAttribute('data-drag', unref(context.draggable));
-    const dialogHeaderEl = wrap.querySelector(classPrefix.value + '-modal-header');
-    const dragDom = wrap.querySelector(classPrefix.value + '-modal');
+    const dialogHeaderEl = wrap.querySelector('.ant-modal-header');
+    const dragDom = wrap.querySelector('.ant-modal');
 
     if (!dialogHeaderEl || !dragDom || !unref(context.draggable)) return;
 
@@ -36,9 +26,8 @@ export function useModalDragMove(context: UseModalDragMoveContext) {
       // 鼠标按下，计算当前元素距离可视区的距离
       const disX = e.clientX;
       const disY = e.clientY;
-
       const screenWidth = document.body.clientWidth; // body当前宽度
-      const screenHeight = window.innerHeight;
+      const screenHeight = document.documentElement.clientHeight; // 可见区域高度(应为body高度，可某些环境下无法获取)
 
       const dragDomWidth = dragDom.offsetWidth; // 对话框宽度
       const dragDomheight = dragDom.offsetHeight; // 对话框高度
@@ -75,7 +64,7 @@ export function useModalDragMove(context: UseModalDragMoveContext) {
           left = maxDragDomLeft;
         }
 
-        if (-top >= minDragDomTop) {
+        if (-top > minDragDomTop) {
           top = -minDragDomTop;
         } else if (top > maxDragDomTop) {
           top = maxDragDomTop;
@@ -93,16 +82,7 @@ export function useModalDragMove(context: UseModalDragMoveContext) {
   };
 
   const handleDrag = () => {
-    const { getDarkMode } = useRootSetting();
-
-    const classPrefix = ref<string>('.ant');
-
-    if (getDarkMode.value == 'dark') {
-      classPrefix.value = '.dark';
-    }
-
-    const dragWraps = document.querySelectorAll(classPrefix.value + '-modal-wrap');
-
+    const dragWraps = document.querySelectorAll('.ant-modal-wrap');
     for (const wrap of Array.from(dragWraps)) {
       if (!wrap) continue;
       const display = getStyle(wrap, 'display');

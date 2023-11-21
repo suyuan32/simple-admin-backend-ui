@@ -61,7 +61,7 @@
   import { computed, unref, ref, watch, nextTick } from 'vue';
   import { SearchOutlined } from '@ant-design/icons-vue';
   import AppSearchFooter from './AppSearchFooter.vue';
-  import { Icon } from '@/components/Icon';
+  import Icon from '@/components/Icon/Icon.vue';
   // @ts-ignore
   import vClickOutside from '/@/directives/clickOutside';
   import { useDesign } from '/@/hooks/web/useDesign';
@@ -114,8 +114,8 @@
   }
 </script>
 <style lang="less" scoped>
-  @prefix-cls: ~'@{name-space}-app-search-modal';
-  @footer-prefix-cls: ~'@{name-space}-app-search-footer';
+  @prefix-cls: ~'@{namespace}-app-search-modal';
+  @footer-prefix-cls: ~'@{namespace}-app-search-footer';
   .@{prefix-cls} {
     display: flex;
     position: fixed;
@@ -229,7 +229,6 @@
         padding-left: 14px;
         border-radius: 4px;
         background-color: @component-background;
-        box-shadow: 0 1px 3px 0 #d4d9e1;
         color: @text-color-base;
         font-size: 14px;
         cursor: pointer;

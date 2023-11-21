@@ -50,7 +50,7 @@
   });
 </script>
 <style lang="less" scoped>
-  @prefix-cls: ~'@{name-space}-svg-icon';
+  @prefix-cls: ~'@{namespace}-svg-icon';
 
   .@{prefix-cls} {
     display: inline-block;

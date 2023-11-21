@@ -89,7 +89,7 @@ export default {
   upload: {
     save: 'Save',
     upload: 'Upload',
-    imgUpload: 'ImageUpload',
+    imgUpload: 'Image Upload',
     uploaded: 'Uploaded',
 
     operating: 'Operating',
@@ -118,6 +118,7 @@ export default {
     uploading: 'Uploading',
     uploadWait: 'Please wait for the file upload to finish',
     reUploadFailed: 'Re-upload failed files',
+    pending: 'Pending',
   },
   verify: {
     error: 'verification failed！',

@@ -3,6 +3,7 @@
 @import 'public.less';
 @import 'ant/index.less';
 @import './theme.less';
+@import './entry.css';
 
 input:-webkit-autofill {
   box-shadow: 0 0 0 1000px white inset !important;
@@ -30,17 +31,13 @@ body {
   }
 
   &.gray-mode {
+    filter: grayscale(100%);
     filter: progid:dximagetransform.microsoft.basicimage(grayscale=1);
   }
 }
 
-a {
-  &:focus,
-  &:active {
-    outline: none;
-  }
-}
-
+a:focus,
+a:active,
 button,
 div,
 svg,

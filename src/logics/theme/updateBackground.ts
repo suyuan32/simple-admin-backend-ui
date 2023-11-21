@@ -20,11 +20,12 @@ export function updateHeaderBgColor(color?: string) {
   const darkMode = appStore.getDarkMode === ThemeEnum.DARK;
   if (!color) {
     if (darkMode) {
-      color = '#141414';
+      color = '#151515';
     } else {
       color = appStore.getHeaderSetting.bgColor;
     }
   }
+
   // bg color
   setCssVar(HEADER_BG_COLOR_VAR, color);
 
@@ -54,7 +55,7 @@ export function updateSidebarBgColor(color?: string) {
   const darkMode = appStore.getDarkMode === ThemeEnum.DARK;
   if (!color) {
     if (darkMode) {
-      color = '#141414';
+      color = '#212121';
     } else {
       color = appStore.getMenuSetting.bgColor;
     }

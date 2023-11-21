@@ -1,209 +1,30 @@
-/* stylelint-disable order/properties-order */
-@prefix-cls: ~'@{name-space}-multiple-tabs';
-
-[data-theme='dark'] {
-  .@{prefix-cls} {
-    z-index: 10;
-    height: @multiple-height + 2;
-    border-bottom: 1px solid @border-color-dark;
-    background-color: #262626;
-    line-height: @multiple-height + 2;
-
-    .dark-tabs-tab {
-      border-bottom: 1px solid @border-color-dark;
-      background-color: #262626;
-    }
-
-    .dark-tabs.dark-tabs-card {
-      .dark-tabs-nav {
-        height: @multiple-height;
-        margin: 0;
-        padding-top: 2px;
-        background-color: #262626;
-        box-shadow: none;
-
-        .dark-tabs-nav-container {
-          height: @multiple-height;
-          padding-top: 2px;
-        }
-
-        .dark-tabs-tab {
-          height: calc(@multiple-height - 2px);
-          padding-right: 12px;
-          line-height: calc(@multiple-height - 2px);
-          color: @white;
-          background-color: #262626;
-          transition: none;
-          border: gray 1px solid;
-
-          &:hover {
-            .dark-tabs-tab-remove {
-              opacity: 1;
-            }
-          }
-
-          .dark-tabs-tab-remove {
-            width: 8px;
-            height: 28px;
-            font-size: 12px;
-            color: inherit;
-            opacity: 0;
-            transition: none;
-            margin-left: 2px;
-            margin-right: -4px;
-
-            &:hover {
-              svg {
-                width: 0.8em;
-              }
-            }
-          }
-
-          svg {
-            fill: @white;
-          }
-        }
-
-        .dark-tabs-tab:not(.dark-tabs-tab-active) {
-          position: relative;
-          padding-left: 18px;
-          background: #262626;
-          color: @white;
-          border: gray 1px solid;
-          transition: none;
-
-          span {
-            color: @white !important;
-          }
-
-          .ant-tabs-tab-remove {
-            opacity: 1;
-          }
-
-          svg {
-            width: 0.7em;
-            fill: @white;
-          }
-        }
-
-        .dark-tabs-tab-active {
-          position: relative;
-          padding-left: 18px;
-          transition: none;
-          border: 0;
-          background: @primary-color;
-
-          span {
-            color: @white !important;
-          }
-
-          .dark-tabs-tab-remove {
-            opacity: 1;
-          }
-
-          svg {
-            width: 0.7em;
-            fill: @white;
-          }
-        }
-      }
-    }
-
-    .dark-tabs-nav > div:nth-child(1) {
-      padding: 0 6px;
-
-      .dark-tabs-tab {
-        margin-right: 3px !important;
-      }
-    }
-
-    &-content {
-      &__extra-quick,
-      &__extra-redo,
-      &__extra-fold {
-        display: inline-block;
-        width: 36px;
-        height: @multiple-height;
-        line-height: @multiple-height;
-        color: @text-color-secondary;
-        text-align: center;
-        cursor: pointer;
-        border-left: 1px solid @border-color-dark;
-  
-        &:hover {
-          color: @text-color-base;
-        }
-  
-        span[role='img'] {
-          transform: rotate(90deg);
-        }
-      }
-  
-      &__extra-redo {
-        span[role='img'] {
-          transform: rotate(0deg);
-        }
-      }
-  
-      &__info {
-        display: inline-block;
-        width: 100%;
-        height: @multiple-height - 2;
-        padding-left: 0;
-        margin-left: -10px;
-        font-size: 12px;
-        cursor: pointer;
-        user-select: none;
-      }
-    }
-  }
-}
+@prefix-cls: ~'@{namespace}-multiple-tabs';
+@prefix-cls-default-layout: ~'@{namespace}-default-layout';
 
 html[data-theme='light'] {
   .@{prefix-cls} {
     .ant-tabs-tab:not(.ant-tabs-tab-active) {
       border: 1px solid #d9d9d9 !important;
     }
+  }
+}
 
-    &-content {
-      &__extra-quick,
-      &__extra-redo,
-      &__extra-fold {
-        display: inline-block;
-        width: 36px;
-        height: @multiple-height;
-        line-height: @multiple-height;
-        color: @text-color-secondary;
-        text-align: center;
-        cursor: pointer;
-        border-left: 1px solid @border-color-base;
-  
-        &:hover {
-          color: @text-color-base;
-        }
-  
-        span[role='img'] {
-          transform: rotate(90deg);
-        }
-      }
-  
-      &__extra-redo {
-        span[role='img'] {
-          transform: rotate(0deg);
-        }
-      }
-  
-      &__info {
-        display: inline-block;
-        width: 100%;
-        height: @multiple-height - 2;
-        padding-left: 0;
-        margin-left: -10px;
-        font-size: 12px;
-        cursor: pointer;
-        user-select: none;
+.@{prefix-cls-default-layout}-out {
+  &.ant-layout-auto-collapse-tabs {
+    .@{prefix-cls} {
+      margin-top: -(@multiple-height + 2);
+      opacity: 0.1;
+
+      &:hover,
+      &--hover {
+        margin-top: 0;
+        transition-delay: 0s;
+        opacity: 1;
       }
     }
+  }
+  .@{prefix-cls} {
+    transition: margin 0.2s ease-in-out 0.6s, opacity 0.2s ease-in-out 0.6s;
   }
 }
 
@@ -220,11 +41,11 @@ html[data-theme='light'] {
 
   .ant-tabs.ant-tabs-card {
     .ant-tabs-nav {
-      padding-top: 2px;
       height: @multiple-height;
       margin: 0;
-      background-color: @component-background;
+      padding-top: 2px;
       border: 0;
+      background-color: @component-background;
       box-shadow: none;
 
       .ant-tabs-nav-container {
@@ -235,10 +56,10 @@ html[data-theme='light'] {
       .ant-tabs-tab {
         height: calc(@multiple-height - 2px);
         padding-right: 12px;
-        line-height: calc(@multiple-height - 2px);
-        color: @text-color-base;
-        background-color: @component-background;
         transition: none;
+        background-color: @component-background;
+        color: @text-color-base;
+        line-height: calc(@multiple-height - 2px);
 
         &:hover {
           .ant-tabs-tab-remove {
@@ -249,12 +70,12 @@ html[data-theme='light'] {
         .ant-tabs-tab-remove {
           width: 8px;
           height: 28px;
-          font-size: 12px;
-          color: inherit;
-          opacity: 0;
-          transition: none;
-          margin-left: 2px;
           margin-right: -4px;
+          margin-left: 2px;
+          transition: none;
+          opacity: 0;
+          color: inherit;
+          font-size: 12px;
 
           &:hover {
             svg {
@@ -263,39 +84,29 @@ html[data-theme='light'] {
           }
         }
 
+        // > div {
+        //   display: flex;
+        //   justify-content: center;
+        //   align-items: center;
+        // }
+
         svg {
           fill: @text-color-base;
         }
       }
 
       .ant-tabs-tab:not(.ant-tabs-tab-active) {
-        position: relative;
-        padding-left: 18px;
-        background: white;
-        color: black;
-        border: 0;
-        transition: none;
-
-        span {
-          color: black !important;
-        }
-
-        .ant-tabs-tab-remove {
-          opacity: 1;
-        }
-
-        svg {
-          width: 0.7em;
-          fill: @black;
+        &:hover {
+          color: @primary-color;
         }
       }
 
       .ant-tabs-tab-active {
         position: relative;
         padding-left: 18px;
-        background: @primary-color;
-        border: 0;
         transition: none;
+        border: 0;
+        background: @primary-color;
 
         span {
           color: @white !important;
@@ -338,6 +149,46 @@ html[data-theme='light'] {
   &--hide-close {
     .ant-tabs-tab-remove {
       opacity: 0 !important;
+    }
+  }
+
+  &-content {
+    &__extra-quick,
+    &__extra-redo,
+    &__extra-fold {
+      display: inline-block;
+      width: 36px;
+      height: @multiple-height;
+      border-left: 1px solid @border-color-base;
+      color: @text-color-secondary;
+      line-height: @multiple-height;
+      text-align: center;
+      cursor: pointer;
+
+      &:hover {
+        color: @text-color-base;
+      }
+
+      span[role='img'] {
+        transform: rotate(90deg);
+      }
+    }
+
+    &__extra-redo {
+      span[role='img'] {
+        transform: rotate(0deg);
+      }
+    }
+
+    &__info {
+      display: inline-block;
+      width: 100%;
+      height: @multiple-height - 2;
+      margin-left: -10px;
+      padding-left: 0;
+      font-size: 12px;
+      cursor: pointer;
+      user-select: none;
     }
   }
 }

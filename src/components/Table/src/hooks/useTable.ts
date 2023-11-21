@@ -7,7 +7,7 @@ import { getDynamicProps } from '/@/utils';
 import { ref, onUnmounted, unref, watch, toRaw } from 'vue';
 import { isProdMode } from '/@/utils/env';
 import { error } from '/@/utils/log';
-import { Key } from 'ant-design-vue/lib/table/interface';
+import type { Key } from 'ant-design-vue/lib/table/interface';
 
 type Props = Partial<DynamicProps<BasicTableProps>>;
 

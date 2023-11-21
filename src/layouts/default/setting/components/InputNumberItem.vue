@@ -42,7 +42,7 @@
   });
 </script>
 <style lang="less" scoped>
-  @prefix-cls: ~'@{name-space}-setting-input-number-item';
+  @prefix-cls: ~'@{namespace}-setting-input-number-item';
 
   .@{prefix-cls} {
     display: flex;

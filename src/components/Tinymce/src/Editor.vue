@@ -62,7 +62,7 @@
   import { toolbar, plugins } from './tinymce';
   import { buildShortUUID } from '/@/utils/uuid';
   import { bindHandlers } from './helper';
-  import { onMountedOrActivated } from '/@/hooks/core/onMountedOrActivated';
+  import { onMountedOrActivated } from '@vben/hooks';
   import { useDesign } from '/@/hooks/web/useDesign';
   import { isNumber } from '/@/utils/is';
   import { useLocale } from '/@/locales/useLocale';
@@ -134,9 +134,16 @@
         return appStore.getDarkMode === 'light' ? 'oxide' : 'oxide-dark';
       });
 
+      const contentCssName = computed(() => {
+        return appStore.getDarkMode === 'light' ? 'default' : 'dark';
+      });
+
       const langName = computed(() => {
         const lang = useLocale().getLocale.value;
-        return ['zh_CN', 'en'].includes(lang) ? lang : 'zh_CN';
+        if (lang === 'zh_CN') {
+          return 'zh-Hans';
+        }
+        return lang;
       });
 
       const initOptions = computed((): RawEditorOptions => {
@@ -156,10 +163,14 @@
           object_resizing: false,
           auto_focus: true,
           skin: skinName.value,
+          promotion: false,
           model_url: publicPath + 'resource/tinymce/models/dom/model.min.js',
           skin_url: publicPath + 'resource/tinymce/skins/ui/' + skinName.value,
           content_css:
-            publicPath + 'resource/tinymce/skins/ui/' + skinName.value + '/content.min.css',
+            publicPath +
+            'resource/tinymce/skins/content/' +
+            contentCssName.value +
+            '/content.min.css',
           ...options,
           setup: (editor: Editor) => {
             editorRef.value = editor;
@@ -328,7 +339,7 @@
 <style lang="less" scoped></style>
 
 <style lang="less">
-  @prefix-cls: ~'@{name-space}-tinymce-container';
+  @prefix-cls: ~'@{namespace}-tinymce-container';
 
   .@{prefix-cls} {
     position: relative;

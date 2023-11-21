@@ -4,9 +4,15 @@
     <Form class="p-4 enter-x" :model="formData" :rules="getFormRules" ref="formRef">
       <div class="pt-4 pb-4">
         <ARadioGroup v-model:value="formData.msgType" button-style="solid" size="large">
-          <ARadioButton value="captcha"> {{ t('sys.login.captcha') }} </ARadioButton>
-          <ARadioButton value="email"> {{ t('sys.login.email') }} </ARadioButton>
-          <ARadioButton value="sms"> {{ t('sys.login.mobile') }} </ARadioButton>
+          <ARadioButton class="bg-transparent" value="captcha">
+            {{ t('sys.login.captcha') }}
+          </ARadioButton>
+          <ARadioButton class="bg-transparent" value="email">
+            {{ t('sys.login.email') }}
+          </ARadioButton>
+          <ARadioButton class="bg-transparent" value="sms">
+            {{ t('sys.login.mobile') }}
+          </ARadioButton>
         </ARadioGroup>
       </div>
 
@@ -70,12 +76,20 @@
         class="enter-x"
         :rules="[{ required: true, len: 5 }]"
       >
-        <Input size="large" v-model:value="formData.captcha" :placeholder="t('sys.login.captcha')">
+        <Input
+          size="large"
+          v-model:value="formData.captcha"
+          :placeholder="t('sys.login.captcha')"
+          class="fix-auto-fill bg-transparent"
+        >
           <template #suffix>
-            <img
+            <Image
               :src="formData.imgPath"
-              class="absolute right-0 h-full cursor-pointer"
-              @click="getCaptchaData()"
+              :width="120"
+              :height="40"
+              :preview="false"
+              @click="getCaptchaData"
+              class="rounded"
             />
           </template>
         </Input>
@@ -87,7 +101,7 @@
 
       <FormItem class="enter-x" name="policy">
         <!-- No logic, you need to deal with it yourself -->
-        <Checkbox v-model:checked="formData.policy" size="small">
+        <Checkbox v-model:checked="formData.policy" class="bg-transparent" size="small">
           {{ t('sys.login.policy') }}
         </Checkbox>
       </FormItem>
@@ -111,7 +125,7 @@
 <script lang="ts" setup>
   import { reactive, ref, unref, computed } from 'vue';
   import LoginFormTitle from './LoginFormTitle.vue';
-  import { Form, Input, Button, Checkbox, RadioGroup, RadioButton } from 'ant-design-vue';
+  import { Form, Input, Button, Checkbox, RadioGroup, RadioButton, Image } from 'ant-design-vue';
   import { StrengthMeter } from '/@/components/StrengthMeter';
   import { useI18n } from '/@/hooks/web/useI18n';
   import { useLoginState, useFormRules, useFormValid, LoginStateEnum } from './useLogin';
