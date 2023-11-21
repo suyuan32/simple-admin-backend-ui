@@ -274,7 +274,7 @@
         }
       }
 
-      const formActionType: Partial<FormActionType> = {
+      const formActionType = {
         getFieldsValue,
         setFieldsValue,
         resetFields,

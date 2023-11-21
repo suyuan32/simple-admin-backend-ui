@@ -118,6 +118,7 @@ export default {
     uploading: 'Uploading',
     uploadWait: 'Please wait for the file upload to finish',
     reUploadFailed: 'Re-upload failed files',
+    pending: 'Pending',
   },
   verify: {
     error: 'verification failed！',

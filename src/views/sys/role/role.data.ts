@@ -24,11 +24,6 @@ export const columns: BasicColumn[] = [
     width: 20,
   },
   {
-    title: t('common.sort'),
-    dataIndex: 'sort',
-    width: 20,
-  },
-  {
     title: t('common.status'),
     dataIndex: 'status',
     width: 50,
@@ -96,7 +91,6 @@ export const formSchema: FormSchema[] = [
     defaultValue: 0,
     component: 'InputNumber',
     required: true,
-    rules: [{ min: 1, max: 10000, type: 'number' }],
   },
   {
     field: 'code',
