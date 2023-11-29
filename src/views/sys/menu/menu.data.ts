@@ -214,19 +214,21 @@ export const formSchema: FormSchema[] = [
   {
     field: 'sort',
     label: t('sys.menu.order'),
-    defaultValue: 0,
     component: 'InputNumber',
     required: true,
-    rules: [{ type: 'number', max: 1000 }],
+    componentProps:{
+      max: 10000,
+    },
     colProps: { lg: 12, md: 12, sm: 12 },
   },
   {
     field: 'dynamicLevel',
     label: t('sys.menu.dynamicLevel'),
-    defaultValue: 20,
     component: 'InputNumber',
     required: true,
-    rules: [{ type: 'number', max: 30 }],
+    componentProps:{
+      max: 20,
+    },
     colProps: { lg: 12, md: 12, sm: 12 },
   },
   {

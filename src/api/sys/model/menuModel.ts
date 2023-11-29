@@ -56,6 +56,33 @@ interface Meta {
   realPath?: string;
 }
 
+export interface MenuInfoPlain {
+  id?: number;
+  type?: number;
+  trans?: string;
+  parentId?: number;
+  path?: string;
+  name?: string;
+  redirect?: string;
+  component?: string;
+  sort?: number;
+  disabled?: boolean;
+  createdAt?: number;
+  updatedAt?: number;
+  title?: string;
+  icon?: string;
+  hideMenu?: boolean;
+  hideBreadcrumb?: boolean;
+  ignoreKeepAlive?: boolean;
+  hideTab?: boolean;
+  frameSrc?: string;
+  carryParam?: boolean;
+  hideChildrenInMenu?: boolean;
+  affix?: boolean;
+  dynamicLevel?: number;
+  realPath?: string;
+}
+
 /**
  *  author: ryan
  *  @description: menu list response model
