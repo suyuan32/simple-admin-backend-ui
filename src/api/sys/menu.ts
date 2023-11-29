@@ -1,7 +1,7 @@
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode } from '/#/axios';
 import { BaseDataResp, BaseResp, BaseIDReq } from '/@/api/model/baseModel';
-import { MenuInfo, MenuInfoPlain, MenuListResp, RoleMenuResp } from './model/menuModel';
+import { MenuInfoPlain, MenuPlainListResp, RoleMenuResp } from './model/menuModel';
 
 enum Api {
   CreateMenu = '/sys-api/menu/create',
@@ -25,7 +25,7 @@ export const getMenuListByRole = () => {
  */
 
 export const getMenuList = (mode: ErrorMessageMode = 'notice') => {
-  return defHttp.get<BaseDataResp<MenuListResp>>(
+  return defHttp.get<BaseDataResp<MenuPlainListResp>>(
     { url: Api.GetMenuList },
     { errorMessageMode: mode },
   );
@@ -74,7 +74,7 @@ export const deleteMenu = (params: BaseIDReq, mode: ErrorMessageMode = 'notice')
  *  @description: Get menu By ID
  */
 export const getMenuById = (params: BaseIDReq, mode: ErrorMessageMode = 'notice') => {
-  return defHttp.post<BaseDataResp<MenuInfo>>(
+  return defHttp.post<BaseDataResp<MenuInfoPlain>>(
     { url: Api.GetMenuById, params: params },
     {
       errorMessageMode: mode,
