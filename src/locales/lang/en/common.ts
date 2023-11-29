@@ -50,6 +50,7 @@ export default {
   start: 'Start',
   stop: 'Stop',
   delete: 'Delete',
+  submit: 'Submit',
   // notification
   deleteConfirm: 'Confirm the deletion?',
   operateSuccess: 'Successful operation',
