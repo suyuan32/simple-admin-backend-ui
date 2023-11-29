@@ -171,7 +171,7 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
     required: true,
     helpMessage: t('sys.menu.pathHelp'),
-    rules: [{ pattern: /^(\/[0-9A-Za-z_-]+)*$/gm, message: t('common.wrongFormat') }],
+    rules: [{ pattern: /^(\/(\:)?[0-9A-Za-z_-]+)*$/gm, message: t('common.wrongFormat') }],
     colProps: { lg: 24, md: 24, sm: 24 },
   },
   {
@@ -179,9 +179,9 @@ export const formSchema: FormSchema[] = [
     label: t('sys.menu.componentPath'),
     component: 'Input',
     required: true,
-    rules: [{ max: 100 }],
     helpMessage: t('sys.menu.componentHelp'),
     ifShow: ({ values }) => isMenu(values.menuType),
+    rules: [{ pattern: /^(\/[0-9A-Za-z_-]+)*$/gm, message: t('common.wrongFormat') }],
     colProps: { lg: 24, md: 24, sm: 24 },
   },
   {
