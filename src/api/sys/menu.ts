@@ -1,7 +1,7 @@
 import { defHttp } from '/@/utils/http/axios';
 import { ErrorMessageMode } from '/#/axios';
 import { BaseDataResp, BaseResp, BaseIDReq } from '/@/api/model/baseModel';
-import { MenuInfo, MenuListResp, RoleMenuResp } from './model/menuModel';
+import { MenuInfo, MenuInfoPlain, MenuListResp, RoleMenuResp } from './model/menuModel';
 
 enum Api {
   CreateMenu = '/sys-api/menu/create',
@@ -34,7 +34,7 @@ export const getMenuList = (mode: ErrorMessageMode = 'notice') => {
 /**
  *  @description: Create a new menu
  */
-export const createMenu = (params: MenuInfo, mode: ErrorMessageMode = 'notice') => {
+export const createMenu = (params: MenuInfoPlain, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.CreateMenu, params: params },
     {
@@ -47,7 +47,7 @@ export const createMenu = (params: MenuInfo, mode: ErrorMessageMode = 'notice') 
 /**
  *  @description: Update the menu
  */
-export const updateMenu = (params: MenuInfo, mode: ErrorMessageMode = 'notice') => {
+export const updateMenu = (params: MenuInfoPlain, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseResp>(
     { url: Api.UpdateMenu, params: params },
     {
