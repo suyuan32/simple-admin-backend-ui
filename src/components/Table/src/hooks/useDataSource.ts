@@ -17,13 +17,6 @@ import { isFunction, isBoolean, isObject } from '/@/utils/is';
 import { get, cloneDeep, merge } from 'lodash-es';
 import { FETCH_SETTING, ROW_KEY, PAGE_SIZE } from '../const';
 import { array2tree } from '@axolo/tree-array';
-import {
-  FilterValue,
-  Key,
-  SorterResult,
-  TablePaginationConfig,
-} from 'ant-design-vue/lib/table/interface';
-import { DefaultRecordType } from 'ant-design-vue/lib/vc-table/interface';
 
 interface ActionType {
   getPaginationInfo: ComputedRef<boolean | PaginationProps>;
