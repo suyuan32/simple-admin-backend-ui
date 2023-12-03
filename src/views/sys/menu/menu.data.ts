@@ -58,8 +58,8 @@ export const columns: BasicColumn[] = [
     },
   },
   {
-    title: t('sys.menu.component'),
-    dataIndex: 'component',
+    title: t('sys.menu.routePath'),
+    dataIndex: 'path',
     width: 200,
   },
   {
