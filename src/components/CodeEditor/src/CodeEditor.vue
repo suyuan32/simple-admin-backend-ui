@@ -1,19 +1,25 @@
 <template>
   <div class="h-full">
-    <CodeMirrorEditor
-      :value="getValue"
+    <Codemirror
+      v-model:model-value="inputValue"
       @change="handleValueChange"
-      :mode="mode"
-      :readonly="readonly"
-      :bordered="bordered"
+      :extensions="extensions"
+      :autofocus="true"
+      :indent-with-tab="true"
+      :tab-size="2"
     />
   </div>
 </template>
 <script lang="ts" setup>
-  import { computed } from 'vue';
-  import CodeMirrorEditor from './codemirror/CodeMirror.vue';
-  import { isString } from '/@/utils/is';
+  import { PropType, ref } from 'vue';
+  import { Codemirror } from 'vue-codemirror';
   import { MODE } from './typing';
+  // import isString from 'lodash-es/isString';
+  import { useAppStore } from '/@/store/modules/app';
+  import { githubLight, githubDark } from '@uiw/codemirror-theme-github';
+  import { StreamLanguage } from '@codemirror/language';
+  import { yaml } from '@codemirror/legacy-modes/mode/yaml';
+  import { json } from '@codemirror/lang-json';
 
   const props = defineProps({
     value: { type: [Object, String] as PropType<Record<string, any> | string> },
@@ -25,31 +31,39 @@
         return Object.values(MODE).includes(value);
       },
     },
-    readonly: { type: Boolean },
     autoFormat: { type: Boolean, default: true },
-    bordered: { type: Boolean, default: false },
   });
+
+  const inputValue = ref<string>('');
+  inputValue.value = props.value as string;
 
   const emit = defineEmits(['change', 'update:value', 'format-error']);
 
-  const getValue = computed(() => {
-    const { value, mode, autoFormat } = props;
-    if (!autoFormat || mode !== MODE.JSON) {
-      return value as string;
-    }
-    let result = value;
-    if (isString(value)) {
-      try {
-        result = JSON.parse(value);
-      } catch (e) {
-        emit('format-error', value);
-        return value as string;
-      }
-    }
-    return JSON.stringify(result, null, 2);
-  });
+  const appStore = useAppStore();
 
-  function handleValueChange(v) {
+  const darkMode = appStore.getDarkMode;
+  let extensions: any = [];
+
+  if (darkMode === 'dark') {
+    extensions.push(githubDark);
+  } else {
+    extensions.push(githubLight);
+  }
+
+  switch (props.mode) {
+    case MODE.YAML: {
+      extensions.push(StreamLanguage.define(yaml));
+      break;
+    }
+    case MODE.JSON: {
+      extensions.push(json());
+    }
+  }
+
+  function handleValueChange(v: string) {
+    if (props.mode == MODE.JSON) {
+      v = v.replace(/(\r\n|\n|\r)/gm, '');
+    }
     emit('update:value', v);
     emit('change', v);
   }

@@ -119,4 +119,5 @@ export type ComponentType =
   | 'DictionarySelect'
   | 'CropperAvatar'
   | 'Tinymce'
-  | 'ImageUpload';
+  | 'ImageUpload'
+  | 'CodeEditor';
