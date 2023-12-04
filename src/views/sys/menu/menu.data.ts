@@ -171,6 +171,7 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
     required: true,
     helpMessage: t('sys.menu.pathHelp'),
+    // eslint-disable-next-line no-useless-escape
     rules: [{ pattern: /^(\/(\:)?[0-9A-Za-z_-]+)*$/gm, message: t('common.wrongFormat') }],
     colProps: { lg: 24, md: 24, sm: 24 },
   },
@@ -216,7 +217,7 @@ export const formSchema: FormSchema[] = [
     label: t('sys.menu.order'),
     component: 'InputNumber',
     required: true,
-    componentProps:{
+    componentProps: {
       max: 10000,
     },
     colProps: { lg: 12, md: 12, sm: 12 },
@@ -226,7 +227,7 @@ export const formSchema: FormSchema[] = [
     label: t('sys.menu.dynamicLevel'),
     component: 'InputNumber',
     required: true,
-    componentProps:{
+    componentProps: {
       max: 20,
     },
     colProps: { lg: 12, md: 12, sm: 12 },

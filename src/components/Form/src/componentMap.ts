@@ -36,6 +36,7 @@ import { IconPicker } from '/@/components/Icon';
 import { CountdownInput } from '/@/components/CountDown';
 import { CropperAvatar } from '../../Cropper';
 import { Tinymce } from '../../Tinymce';
+import { CodeEditor } from '/@/components/CodeEditor';
 
 const componentMap = new Map<ComponentType, Component>();
 
@@ -80,6 +81,7 @@ componentMap.set('ImageUpload', ImageUpload);
 componentMap.set('Divider', Divider);
 componentMap.set('CropperAvatar', CropperAvatar);
 componentMap.set('Tinymce', Tinymce);
+componentMap.set('CodeEditor', CodeEditor);
 
 export function add(compName: ComponentType, component: Component) {
   componentMap.set(compName, component);
