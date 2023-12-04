@@ -51,7 +51,7 @@ Simple Admin UI is a modern UI for Simple Admin. It is based on vue-vben-admin a
 
 ## Documentation
 
-[Simple Admin Documentation](https://vben.ryansu.pro/)
+[Simple Admin Documentation](https://vben.ryansu.tech/)
 
 - ant-design-vue [Document](https://antdv.com/components/overview)
 

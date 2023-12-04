@@ -21,11 +21,7 @@ export interface MenuPageResp {
   data: RouteItem[];
 }
 
-/**
- *  author: ryan
- *  @description: the items for menu list table
- */
-export interface MenuInfo {
+export interface MenuInfoPlain {
   id?: number;
   type?: number;
   trans?: string;
@@ -36,12 +32,8 @@ export interface MenuInfo {
   component?: string;
   sort?: number;
   disabled?: boolean;
-  meta: Meta;
   createdAt?: number;
   updatedAt?: number;
-}
-
-interface Meta {
   title?: string;
   icon?: string;
   hideMenu?: boolean;
@@ -60,7 +52,7 @@ interface Meta {
  *  author: ryan
  *  @description: menu list response model
  */
-export type MenuListResp = BaseListResp<MenuInfo>;
+export type MenuPlainListResp = BaseListResp<MenuInfoPlain>;
 
 /**
  * @description: Get menu return value

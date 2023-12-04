@@ -28,8 +28,9 @@
       const { t } = useI18n();
 
       const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
-        labelWidth: 90,
+        labelWidth: 160,
         baseColProps: { span: 24 },
+        layout: 'vertical',
         schemas: formSchema,
         showActionButtonGroup: false,
       });

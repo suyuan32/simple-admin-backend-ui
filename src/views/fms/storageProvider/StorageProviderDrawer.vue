@@ -30,6 +30,7 @@
       const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
         labelWidth: 110,
         baseColProps: { span: 24 },
+        layout: 'vertical',
         schemas: formSchema,
         showActionButtonGroup: false,
       });
