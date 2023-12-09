@@ -11,10 +11,9 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { PropType, ref } from 'vue';
+  import { PropType, ref, onBeforeUpdate } from 'vue';
   import { Codemirror } from 'vue-codemirror';
   import { MODE } from './typing';
-  // import isString from 'lodash-es/isString';
   import { useAppStore } from '/@/store/modules/app';
   import { githubLight, githubDark } from '@uiw/codemirror-theme-github';
   import { StreamLanguage } from '@codemirror/language';
@@ -35,7 +34,10 @@
   });
 
   const inputValue = ref<string>('');
-  inputValue.value = props.value as string;
+
+  onBeforeUpdate(() => {
+    inputValue.value = props.value as string;
+  })
 
   const emit = defineEmits(['change', 'update:value', 'format-error']);
 
