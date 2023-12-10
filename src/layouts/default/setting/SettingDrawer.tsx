@@ -413,12 +413,12 @@ export default defineComponent({
         {renderHeaderTheme()}
         <Divider>{() => t('layout.setting.sidebarTheme')}</Divider>
         {renderSiderTheme()}
-        <Divider>{() => t('layout.setting.interfaceFunction')}</Divider>
-        {renderFeatures()}
+        {/* <Divider>{() => t('layout.setting.interfaceFunction')}</Divider>
+        {renderFeatures()} */}
         <Divider>{() => t('layout.setting.interfaceDisplay')}</Divider>
         {renderContent()}
-        <Divider>{() => t('layout.setting.animation')}</Divider>
-        {renderTransition()}
+        {/* <Divider>{() => t('layout.setting.animation')}</Divider>
+        {renderTransition()} */}
         <Divider />
         <SettingFooter />
       </BasicDrawer>
