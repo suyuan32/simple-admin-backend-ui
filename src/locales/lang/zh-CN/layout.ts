@@ -56,6 +56,7 @@ export default {
     resetSuccess: '重置成功！',
 
     copyBtn: '拷贝',
+    copyToken: '复制登录令牌',
     clearBtn: '清空缓存并返回登录页',
     clearDictionaryCache: '清空字典缓存',
 
