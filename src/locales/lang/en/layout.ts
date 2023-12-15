@@ -56,6 +56,7 @@ export default {
     resetSuccess: 'Successfully reset!',
 
     copyBtn: 'Copy',
+    copyToken: 'Copy Log In Token',
     clearBtn: 'Clear cache and to the login page',
     clearDictionaryCache: 'Clear dictionary cache',
 

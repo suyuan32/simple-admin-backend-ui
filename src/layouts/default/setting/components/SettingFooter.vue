@@ -10,6 +10,11 @@
       {{ t('common.resetText') }}
     </a-button>
 
+    <a-button type="primary" block @click="handleCopyToken" class="mb-3">
+      <CopyOutlined class="mr-2" />
+      {{ t('layout.setting.copyToken') }}
+    </a-button>
+
     <a-button color="error" block @click="handleClearDictionaryCache" class="mb-3">
       <RedoOutlined class="mr-2" />
       {{ t('layout.setting.clearDictionaryCache') }}
@@ -61,6 +66,11 @@
           content: t('layout.setting.operatingContent'),
         });
       }
+
+      function handleCopyToken() {
+        copyText(userStore.token);
+      }
+
       function handleResetSetting() {
         try {
           appStore.setProjectConfig(defaultSetting);
@@ -99,6 +109,7 @@
         handleResetSetting,
         handleClearAndRedo,
         handleClearDictionaryCache,
+        handleCopyToken
       };
     },
   });
