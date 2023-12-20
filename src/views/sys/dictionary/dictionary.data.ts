@@ -14,6 +14,11 @@ export const columns: BasicColumn[] = [
     width: 100,
   },
   {
+    title: t('sys.dictionary.name'),
+    dataIndex: 'name',
+    width: 100
+  },
+  {
     title: t('common.status'),
     dataIndex: 'status',
     width: 50,
