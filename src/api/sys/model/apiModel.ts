@@ -7,12 +7,13 @@ export interface ApiInfo {
   id?: number;
   createdAt?: number;
   updatedAt?: number;
-  trans: string;
+  trans?: string;
   path: string;
-  description: string;
+  description?: string;
   group: string;
   method: string;
   isRequired: boolean;
+  serviceName: string;
 }
 
 /**

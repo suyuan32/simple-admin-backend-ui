@@ -8,7 +8,7 @@ import { ApiInfo } from '/@/api/sys/model/apiModel';
 import { ApiAuthorityInfo } from '/@/api/sys/model/authorityModel';
 import { formatToDateTime } from '/@/utils/dateUtil';
 import { updateRole } from '/@/api/sys/role';
-import { union } from 'lodash-es';
+import { cloneDeep, union } from 'lodash-es';
 
 const { t } = useI18n();
 
@@ -132,14 +132,17 @@ export const formSchema: FormSchema[] = [
  */
 
 export function convertApiTreeData(params: ApiInfo[]): DataNode[] {
+  const finalData: DataNode[] = []
   const apiData: DataNode[] = [];
   if (params.length === 0) {
     return apiData;
   }
 
-  const apiMap = new Map<string, boolean>();
+  const apiMap = new Map<string, string>();
+  const serviceMap = new Map<string, boolean>();
   for (let i = 0; i < params.length; i++) {
-    apiMap.set(params[i].group, true);
+    apiMap.set(params[i].group, params[i].serviceName);    
+    serviceMap.set(params[i].serviceName, true);
   }
 
   for (const k of apiMap.keys()) {
@@ -152,7 +155,7 @@ export function convertApiTreeData(params: ApiInfo[]): DataNode[] {
     for (let i = 0; i < params.length; i++) {
       if (params[i].group == k) {
         apiTmp.children?.push({
-          title: t(params[i].trans),
+          title: params[i].trans,
           key: params[i].id as number,
           disableCheckbox: params[i].isRequired,
         });
@@ -161,7 +164,24 @@ export function convertApiTreeData(params: ApiInfo[]): DataNode[] {
 
     apiData.push(apiTmp);
   }
-  return apiData;
+  
+  for (const k1 of serviceMap.keys()) {
+    const svcTmp: DataNode = {
+      title: k1,
+      key: k1,
+      children: [],
+    };
+
+    for (let i = 0; i < apiData.length; i++) {
+      if (apiMap.get(apiData[i].title) === k1) {
+        svcTmp.children?.push(cloneDeep(apiData[i]));
+      }
+    }
+
+    finalData.push(svcTmp);
+  }
+
+  return finalData;
 }
 
 /**
@@ -176,6 +196,7 @@ export function convertApiCheckedKeysToReq(checked: number[], data: ApiInfo[]): 
       pureDigit.push(checked[i]);
     }
   }
+
   // sort data
   data.sort(function (a, b) {
     if (a.id !== undefined && b.id !== undefined) return a.id - b.id;
