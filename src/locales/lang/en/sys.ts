@@ -177,6 +177,7 @@ export default {
     description: 'Description',
     method: 'Method',
     group: 'Group',
+    serviceName: 'Service Name',
     // action
     addApi: 'Add API',
     editApi: 'Edit API',

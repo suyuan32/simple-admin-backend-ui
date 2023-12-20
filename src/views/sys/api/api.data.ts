@@ -18,6 +18,11 @@ export const columns: BasicColumn[] = [
     width: 20,
   },
   {
+    title: t('sys.apis.serviceName'),
+    dataIndex: 'serviceName',
+    width: 20,
+  },
+  {
     title: t('sys.apis.description'),
     dataIndex: 'trans',
     width: 80,
@@ -66,6 +71,13 @@ export const searchFormSchema: FormSchema[] = [
     rules: [{ max: 200 }],
   },
   {
+    field: 'serviceName',
+    label: t('sys.apis.serviceName'),
+    component: 'Input',
+    colProps: { span: 8 },
+    rules: [{ max: 20 }],
+  },
+  {
     field: 'group',
     label: t('sys.apis.group'),
     component: 'Input',
@@ -109,6 +121,12 @@ export const formSchema: FormSchema[] = [
     required: true,
     component: 'Input',
     rules: [{ max: 200 }],
+  },
+  {
+    field: 'serviceName',
+    label: t('sys.apis.serviceName'),
+    component: 'Input',
+    rules: [{ max: 20 }],
   },
   {
     field: 'group',
