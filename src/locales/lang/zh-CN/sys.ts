@@ -170,6 +170,7 @@ export default {
     description: '描述',
     method: '方法',
     group: '分组',
+    serviceName: '所属服务',
     // action
     addApi: '添加接口',
     editApi: '编辑接口',
