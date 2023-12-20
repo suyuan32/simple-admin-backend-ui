@@ -8,12 +8,12 @@ export interface ApiInfo {
   createdAt?: number;
   updatedAt?: number;
   trans?: string;
-  path?: string;
+  path: string;
   description?: string;
-  group?: string;
-  method?: string;
-  isRequired?: boolean;
-  serviceName?: string;
+  group: string;
+  method: string;
+  isRequired: boolean;
+  serviceName: string;
 }
 
 /**
