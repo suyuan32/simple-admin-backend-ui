@@ -20,7 +20,7 @@ export default {
     // Number of pages that can be selected
     pageSizeOptions: ['10', '50', '80', '100'],
     // Default display quantity on one page
-    defaultPageSize: 10,
+    defaultPageSize: 50,
     // Default Size
     defaultSize: 'middle',
     // Custom general sort function
