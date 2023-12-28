@@ -14,6 +14,11 @@ export const columns: BasicColumn[] = [
     width: 80,
   },
   {
+    title: t('sys.login.username'),
+    dataIndex: 'username',
+    width: 50,
+  },
+  {
     title: 'Token',
     dataIndex: 'token',
     width: 50,
