@@ -30,6 +30,7 @@ import ApiTreeSelect from './components/ApiTreeSelect.vue';
 import ApiCascader from './components/ApiCascader.vue';
 import ApiTransfer from './components/ApiTransfer.vue';
 import DictionarySelect from './components/DictionarySelect.vue';
+import SimpleTimePicker from './components/SimpleTimePicker.vue';
 import { BasicUpload, ImageUpload } from '/@/components/Upload';
 import { StrengthMeter } from '/@/components/StrengthMeter';
 import { IconPicker } from '/@/components/Icon';
@@ -82,6 +83,7 @@ componentMap.set('Divider', Divider);
 componentMap.set('CropperAvatar', CropperAvatar);
 componentMap.set('Tinymce', Tinymce);
 componentMap.set('CodeEditor', CodeEditor);
+componentMap.set('SimpleTimePicker', SimpleTimePicker);
 
 export function add(compName: ComponentType, component: Component) {
   componentMap.set(compName, component);
