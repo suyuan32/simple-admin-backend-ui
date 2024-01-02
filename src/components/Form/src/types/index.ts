@@ -120,4 +120,5 @@ export type ComponentType =
   | 'CropperAvatar'
   | 'Tinymce'
   | 'ImageUpload'
-  | 'CodeEditor';
+  | 'CodeEditor'
+  | 'SimpleTimePicker';
