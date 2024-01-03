@@ -29,6 +29,7 @@
     inheritAttrs: false,
     props: {
       timeMode: propTypes.string.def('datetime'),
+      valueFormat: propTypes.string.def('unixmilli'),
       value: [Number],
     },
     emits: ['options-change', 'change', 'update:value'],
@@ -52,8 +53,15 @@
       watch(
         () => state.value,
         (v) => {
-          dateVal.value = dayjs(v)
-          timeVal.value = dayjs(v)
+          if (props.valueFormat === 'unixmilli') {
+            dateVal.value = dayjs(v)
+            timeVal.value = dayjs(v)
+          } else {
+            if (v !== undefined) {
+              dateVal.value = dayjs.unix(v)
+              timeVal.value = dayjs.unix(v)
+            }
+          }
           emit('update:value', v);
         },
       );
@@ -71,7 +79,11 @@
           dateTime = dateTime.hour(0).minute(0).second(0).millisecond(0)
         }
 
-        state.value = dateTime.valueOf();
+        if (props.valueFormat === 'unixmilli') {
+          state.value = dateTime.valueOf();
+        } else {
+          state.value = dateTime.unix();
+        }
       }
 
       return { state, attrs, showTimePicker, t, handleChange, dateVal, timeVal };
