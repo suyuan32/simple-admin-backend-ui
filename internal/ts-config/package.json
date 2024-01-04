@@ -19,7 +19,7 @@
     "node-server.json"
   ],
   "dependencies": {
-    "@types/node": "^18.19.4",
+    "@types/node": "^18.19.3",
     "unplugin-vue-define-options": "^1.4.1",
     "vite": "^4.5.1"
   }
