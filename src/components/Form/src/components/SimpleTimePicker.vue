@@ -1,11 +1,12 @@
 <template>
     <DatePicker
+    allow-clear
     v-model:value="dateVal"
     @change="handleChange"
   ></DatePicker>
 
   <FormItemRest>
-    <TimePicker v-if="showTimePicker" class="ml-4" v-model:value="timeVal"  @change="handleChange"></TimePicker>
+    <TimePicker v-if="showTimePicker" class="ml-4" v-model:value="timeVal"  @change="handleChange" allow-clear></TimePicker>
   </FormItemRest>
 </template>
 <script lang="ts">
@@ -63,6 +64,7 @@
             }
           }
           emit('update:value', v);
+          emit('change', v)
         },
       );
 
