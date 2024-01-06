@@ -37,6 +37,9 @@ export default defineApplicationConfig({
           rewrite: (path) => path.replace(new RegExp(`^/mms-api`), ''),
         },
       },
+      warmup: {
+        clientFiles: ['./index.html', './src/{views,components}/*'],
+      },
     },
   },
 });
