@@ -30,7 +30,7 @@
     "stub": "pnpm unbuild --stub"
   },
   "devDependencies": {
-    "postcss": "^8.4.32",
+    "postcss": "^8.4.33",
     "postcss-html": "^1.5.0",
     "postcss-less": "^6.0.0",
     "postcss-scss": "^4.0.9",
