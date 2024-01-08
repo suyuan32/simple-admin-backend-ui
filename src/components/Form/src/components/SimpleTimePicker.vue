@@ -54,37 +54,43 @@
       watch(
         () => state.value,
         (v) => {
-          if (props.valueFormat === 'unixmilli') {
-            dateVal.value = dayjs(v)
-            timeVal.value = dayjs(v)
-          } else {
-            if (v !== undefined) {
-              dateVal.value = dayjs.unix(v)
-              timeVal.value = dayjs.unix(v)
+          if (v !== null && v != undefined ) {
+            if (props.valueFormat === 'unixmilli') {
+              dateVal.value = dayjs(v)
+              timeVal.value = dayjs(v)
+            } else {
+              if (v !== undefined) {
+                dateVal.value = dayjs.unix(v)
+                timeVal.value = dayjs.unix(v)
+              }
             }
           }
           emit('update:value', v);
-          emit('change', v)
+          emit('change', v);
         },
       );
 
-      function handleChange() {
-        let dateTime = dayjs();
-        if (dateVal.value != undefined) {
-          dateTime = dateVal.value?.clone();
-        } 
-        if (props.timeMode === 'datetime') {
-          if (timeVal.value != undefined) {
-            dateTime = dateTime.hour(timeVal.value.hour()).minute(timeVal.value.minute()).second(timeVal.value.second()).millisecond(0)
+      function handleChange(v) {
+        if (v !== null) {
+          let dateTime = dayjs();
+          if (dateVal.value != undefined) {
+            dateTime = dateVal.value?.clone();
+          } 
+          if (props.timeMode === 'datetime') {
+            if (timeVal.value != undefined) {
+              dateTime = dateTime.hour(timeVal.value.hour()).minute(timeVal.value.minute()).second(timeVal.value.second()).millisecond(0)
+            }
+          } else {
+            dateTime = dateTime.hour(0).minute(0).second(0).millisecond(0)
+          }
+
+          if (props.valueFormat === 'unixmilli') {
+            state.value = dateTime.valueOf();
+          } else {
+            state.value = dateTime.unix();
           }
         } else {
-          dateTime = dateTime.hour(0).minute(0).second(0).millisecond(0)
-        }
-
-        if (props.valueFormat === 'unixmilli') {
-          state.value = dateTime.valueOf();
-        } else {
-          state.value = dateTime.unix();
+          state.value = undefined
         }
       }
 
