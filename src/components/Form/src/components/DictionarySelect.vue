@@ -1,10 +1,5 @@
 <template>
-  <Select
-    v-bind="$attrs"
-    @change="handleChange"
-    :options="options"
-    v-model:value="state"
-  >
+  <Select v-bind="$attrs" @change="handleChange" :options="options" v-model:value="state">
     <template #[item]="data" v-for="item in Object.keys($slots)">
       <slot :name="item" v-bind="data || {}"></slot>
     </template>
@@ -29,7 +24,6 @@
   import { useDictionaryStore } from '/@/store/modules/dictionary';
   import { DefaultOptionType } from 'ant-design-vue/lib/select';
   import { useRuleFormItem } from '/@/hooks/component/useFormItem';
-  import { GetDictionaryDetailByDictionaryName } from '/@/api/sys/dictionaryDetail';
 
   export default defineComponent({
     name: 'DictionarySelect',
@@ -41,7 +35,7 @@
     props: {
       dictionaryName: propTypes.string.def(''),
       value: [String, Number],
-      cache: propTypes.bool.def(true)
+      cache: propTypes.bool.def(true),
     },
     emits: ['options-change', 'change', 'update:value'],
     setup(props, { emit }) {
@@ -54,9 +48,9 @@
       // Embedded in the form, just use the hook binding to perform form verification
       const [state] = useRuleFormItem(props, 'value', 'change', emitData);
 
-      onMounted(()=>{
-        handleFetch()
-      })      
+      onMounted(() => {
+        handleFetch();
+      });
 
       watch(
         () => state.value,
@@ -67,35 +61,17 @@
 
       async function handleFetch() {
         loading.value = true;
-        if (props.cache) {
-          const dictStore = useDictionaryStore();
-          const dictData = await dictStore.getDictionary(props.dictionaryName);
-          if (dictData != null) {
-            options.value = dictData.data;
-          }
-        } else {
-          const result = await GetDictionaryDetailByDictionaryName({ name: props.dictionaryName });
-          if (result.code === 0) {
-            const dataConv = ref<DefaultOptionType[]>([]);
-
-            for (let i = 0; i < result.data.total; i++) {
-              dataConv.value.push({
-                label: result.data.data[i].title,
-                value: result.data.data[i].value,
-              });
-            }
-
-            options.value = dataConv.value
-          } else {
-            options.value = undefined
-          }
+        const dictStore = useDictionaryStore();
+        const dictData = await dictStore.getDictionary(props.dictionaryName, props.cache);
+        if (dictData != null) {
+          options.value = dictData.data;
         }
         loading.value = false;
       }
 
       function handleChange(_, ...args) {
         emitData.value = args;
-        emit('change', args)
+        emit('change', args);
       }
 
       return { state, attrs, loading, t, options, handleFetch, handleChange };
