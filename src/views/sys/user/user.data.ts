@@ -152,7 +152,7 @@ export const formSchema: FormSchema[] = [
     rules: [{ max: 40 }],
   },
   {
-    field: 'desc',
+    field: 'description',
     label: t('sys.user.description'),
     required: false,
     component: 'Input',
