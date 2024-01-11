@@ -82,7 +82,7 @@ export const searchFormSchema: FormSchema[] = [
     label: t('sys.apis.group'),
     component: 'Input',
     colProps: { span: 8 },
-    rules: [{ max: 20 }],
+    rules: [{ max: 80 }],
   },
   {
     field: 'description',
@@ -133,7 +133,7 @@ export const formSchema: FormSchema[] = [
     label: t('sys.apis.group'),
     required: true,
     component: 'Input',
-    rules: [{ max: 20 }],
+    rules: [{ max: 80 }],
   },
   {
     field: 'description',
