@@ -80,12 +80,13 @@
       cursor: zoom-in;
 
       img {
-        border-radius: 2px;
+        border-radius: 6px;
       }
     }
 
     .img-div {
       display: inline-grid;
+
       > .ant-image:nth-of-type(n + 2) {
         display: none;
       }

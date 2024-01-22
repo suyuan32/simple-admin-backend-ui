@@ -384,7 +384,7 @@ export default defineComponent({
       width: 100%;
       margin-bottom: 16px;
       padding: 12px 10px 6px;
-      border-radius: 2px;
+      border-radius: 6px;
       background-color: @component-background;
     }
   }
@@ -397,7 +397,7 @@ export default defineComponent({
 
   .ant-table-wrapper {
     padding: 6px;
-    border-radius: 2px;
+    border-radius: 6px;
     background-color: @component-background;
 
     .ant-table-title {
