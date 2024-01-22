@@ -126,6 +126,7 @@ export const formSchema: FormSchema[] = [
     field: 'serviceName',
     label: t('sys.apis.serviceName'),
     component: 'Input',
+    helpMessage: t('sys.apis.serviceNameHelpMessage'),
     rules: [{ max: 20 }],
   },
   {

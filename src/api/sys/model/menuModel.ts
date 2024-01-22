@@ -46,6 +46,7 @@ export interface MenuInfoPlain {
   affix?: boolean;
   dynamicLevel?: number;
   realPath?: string;
+  serviceName?: string;
 }
 
 /**
