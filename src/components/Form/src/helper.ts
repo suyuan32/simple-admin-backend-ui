@@ -97,3 +97,9 @@ export const NO_AUTO_LINK_COMPONENTS: ComponentType[] = [
   'ImageUpload',
   'SimpleTimePicker'
 ];
+
+export const simpleComponents = ['Divider', 'BasicTitle'];
+
+export function isIncludeSimpleComponents(component?: ComponentType) {
+  return simpleComponents.includes(component || '');
+}
