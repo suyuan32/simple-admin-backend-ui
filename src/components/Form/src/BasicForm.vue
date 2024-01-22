@@ -219,7 +219,7 @@
       );
 
       watch(
-        () => unref(getProps).schemas,
+        () => props.schemas,
         (schemas) => {
           resetSchema(schemas ?? []);
         },
