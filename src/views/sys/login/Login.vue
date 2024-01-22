@@ -103,15 +103,8 @@
       }
     }
 
-    input.fix-auto-fill,
-    .fix-auto-fill input {
-      -webkit-text-fill-color: #c9d1d9 !important;
-      box-shadow: inherit !important;
-    }
-
     .ant-divider-inner-text {
       color: @text-color-secondary;
-      font-size: 12px;
     }
   }
 
