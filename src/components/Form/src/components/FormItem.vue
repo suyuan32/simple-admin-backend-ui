@@ -12,11 +12,12 @@
   import type { TableActionType } from '/@/components/Table';
   import { Col, Divider, Form } from 'ant-design-vue';
   import { componentMap } from '../componentMap';
-  import { BasicHelp } from '/@/components/Basic';
+  import { BasicHelp, BasicTitle } from '/@/components/Basic';
   import { isBoolean, isFunction, isNull } from '/@/utils/is';
   import { getSlot } from '/@/utils/helper/tsxHelper';
   import {
     createPlaceholderMessage,
+    isIncludeSimpleComponents,
     NO_AUTO_LINK_COMPONENTS,
     setComponentRuleType,
   } from '../helper';
@@ -89,7 +90,7 @@
         if (isFunction(componentProps)) {
           componentProps = componentProps({ schema, tableAction, formModel, formActionType }) ?? {};
         }
-        if (schema.component === 'Divider') {
+        if (isIncludeSimpleComponents(schema.component)) {
           componentProps = Object.assign(
             { type: 'horizontal' },
             {
@@ -204,7 +205,10 @@
          */
         if (getRequired) {
           if (!rules || rules.length === 0) {
-            rules = [{ required: getRequired, validator }];
+            const trigger = NO_AUTO_LINK_COMPONENTS.includes(component || 'Input')
+              ? 'blur'
+              : 'change';
+            rules = [{ required: getRequired, validator, trigger }];
           } else {
             const requiredIndex: number = rules.findIndex((rule) => Reflect.has(rule, 'required'));
 
@@ -345,6 +349,17 @@
             <Col span={24}>
               <Divider {...unref(getComponentsProps)}>{renderLabelHelpMessage()}</Divider>
             </Col>
+          );
+        } else if (component === 'BasicTitle') {
+          return (
+            <Form.Item
+              labelCol={labelCol}
+              wrapperCol={wrapperCol}
+              name={field}
+              class={{ 'suffix-item': !!suffix }}
+            >
+              <BasicTitle {...unref(getComponentsProps)}>{renderLabelHelpMessage()}</BasicTitle>
+            </Form.Item>
           );
         } else {
           const getContent = () => {

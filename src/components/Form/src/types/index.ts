@@ -121,4 +121,6 @@ export type ComponentType =
   | 'Tinymce'
   | 'ImageUpload'
   | 'CodeEditor'
-  | 'SimpleTimePicker';
+  | 'SimpleTimePicker'
+  | 'BasicTitle'
+  | 'Transfer';

@@ -176,6 +176,7 @@ export default {
     editApi: '编辑接口',
     // help message
     isRequiredHelpMessage: '是否为必要接口,如果是必要接口,则在权限管理时为必选,不允许取消',
+    serviceNameHelpMessage: '默认是 Other, 填入服务名称如 Core, Fms'
   },
   authority: {
     authorityManagement: '权限管理',

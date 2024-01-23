@@ -4,7 +4,7 @@ import type { NamePath } from 'ant-design-vue/lib/form/interface';
 import { unref, toRaw, nextTick } from 'vue';
 import { isArray, isFunction, isObject, isString, isDef, isNil } from '/@/utils/is';
 import { deepMerge } from '/@/utils';
-import { dateItemType, handleInputNumberValue, defaultValueComponents } from '../helper';
+import { dateItemType, handleInputNumberValue, defaultValueComponents, isIncludeSimpleComponents } from '../helper';
 import { dateUtil } from '/@/utils/dateUtil';
 import { cloneDeep, set, uniqBy, get } from 'lodash-es';
 import { error } from '/@/utils/log';
@@ -242,7 +242,8 @@ export function useFormEvents({
     }
 
     const hasField = updateData.every(
-      (item) => item.component === 'Divider' || (Reflect.has(item, 'field') && item.field),
+      (item) =>
+        isIncludeSimpleComponents(item.component) || (Reflect.has(item, 'field') && item.field),
     );
 
     if (!hasField) {
@@ -264,7 +265,8 @@ export function useFormEvents({
     }
 
     const hasField = updateData.every(
-      (item) => item.component === 'Divider' || (Reflect.has(item, 'field') && item.field),
+      (item) =>
+        isIncludeSimpleComponents(item.component) || (Reflect.has(item, 'field') && item.field),
     );
 
     if (!hasField) {
@@ -306,7 +308,7 @@ export function useFormEvents({
     const currentFieldsValue = getFieldsValue();
     schemas.forEach((item) => {
       if (
-        item.component != 'Divider' &&
+        !isIncludeSimpleComponents(item.component) &&
         Reflect.has(item, 'field') &&
         item.field &&
         !isNil(item.defaultValue) &&

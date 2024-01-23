@@ -477,7 +477,7 @@
     .ant-popover-inner-content {
       padding: 4px 8px;
       // border: 1px solid @error-color;
-      border-radius: 2px;
+      border-radius: 6px;
       color: @error-color;
     }
   }

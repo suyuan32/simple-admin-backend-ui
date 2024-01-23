@@ -184,6 +184,7 @@ export default {
     // help message
     isRequiredHelpMessage:
       'Whether it is a necessary API, if it is a necessary API, it must be selected during authorization management, and cancellation is not allowed',
+    serviceNameHelpMessage: 'The default is Other, fill in the service name such as Core, Fms',
   },
   authority: {
     authorityManagement: 'Authorization Management',

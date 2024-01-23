@@ -96,10 +96,9 @@
       function handleClearDictionaryCache() {
         const dictStore = useDictionaryStore();
         dictStore.clear();
-        if (dictStore.getDataSize === 0) {
-          createMessage.success(t('layout.setting.operatingTitle'));
-          location.reload();
-        }
+
+        createMessage.success(t('layout.setting.operatingTitle'));
+        location.reload();
       }
 
       return {
