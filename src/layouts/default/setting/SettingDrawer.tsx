@@ -89,7 +89,7 @@ export default defineComponent({
       getShowSearch,
     } = useHeaderSetting();
 
-    const { getShowMultipleTab, getShowQuick, getShowRedo, getShowFold } = useMultipleTabSetting();
+    // const { getShowMultipleTab, getShowQuick, getShowRedo, getShowFold } = useMultipleTabSetting();
 
     const getShowMenuRef = computed(() => {
       return unref(getShowMenu) && !unref(getIsHorizontal);
@@ -281,7 +281,7 @@ export default defineComponent({
     function renderContent() {
       return (
         <>
-          <SwitchItem
+          {/* <SwitchItem
             title={t('layout.setting.breadcrumb')}
             event={HandlerEnum.SHOW_BREADCRUMB}
             def={unref(getShowBreadCrumb)}
@@ -343,7 +343,7 @@ export default defineComponent({
             title={t('layout.setting.footer')}
             event={HandlerEnum.SHOW_FOOTER}
             def={unref(getShowFooter)}
-          />
+          /> */}
           <SwitchItem
             title={t('layout.setting.fullContent')}
             event={HandlerEnum.FULL_CONTENT}

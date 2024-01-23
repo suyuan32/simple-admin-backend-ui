@@ -58,6 +58,11 @@ export const columns: BasicColumn[] = [
     },
   },
   {
+    title: t('sys.apis.serviceName'),
+    dataIndex: 'serviceName',
+    width: 100,
+  },
+  {
     title: t('sys.menu.routePath'),
     dataIndex: 'path',
     width: 200,
@@ -164,6 +169,15 @@ export const formSchema: FormSchema[] = [
     component: 'IconPicker',
     required: true,
     colProps: { lg: 12, md: 12, sm: 12 },
+  },
+  {
+    field: 'serviceName',
+    label: t('sys.apis.serviceName'),
+    component: 'Input',
+    defaultValue: '',
+    rules: [{ max: 50 }],
+    colProps: { lg: 24, md: 24, sm: 24 },
+    helpMessage: t('sys.apis.serviceNameHelpMessage')
   },
   {
     field: 'path',

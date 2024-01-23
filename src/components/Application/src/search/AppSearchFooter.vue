@@ -42,7 +42,7 @@
       height: 18px;
       margin-right: 0.4em;
       padding-bottom: 2px;
-      border-radius: 2px;
+      border-radius: 6px;
       background-color: linear-gradient(-225deg, #d5dbe4, #f8f8f8);
 
       &:nth-child(2),

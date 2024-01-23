@@ -66,7 +66,7 @@
       width: 20px;
       height: 20px;
       border: 1px solid #ddd;
-      border-radius: 2px;
+      border-radius: 6px;
       cursor: pointer;
 
       svg {

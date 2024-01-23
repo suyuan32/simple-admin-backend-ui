@@ -19,6 +19,7 @@ import {
   Slider,
   Rate,
   Divider,
+  Transfer,
 } from 'ant-design-vue';
 
 import ApiRadioGroup from './components/ApiRadioGroup.vue';
@@ -29,6 +30,7 @@ import ApiTree from './components/ApiTree.vue';
 import ApiTreeSelect from './components/ApiTreeSelect.vue';
 import ApiCascader from './components/ApiCascader.vue';
 import ApiTransfer from './components/ApiTransfer.vue';
+import { BasicTitle } from '@/components/Basic';
 import DictionarySelect from './components/DictionarySelect.vue';
 import SimpleTimePicker from './components/SimpleTimePicker.vue';
 import { BasicUpload, ImageUpload } from '/@/components/Upload';
@@ -66,6 +68,8 @@ componentMap.set('Cascader', Cascader);
 componentMap.set('Slider', Slider);
 componentMap.set('Rate', Rate);
 componentMap.set('ApiTransfer', ApiTransfer);
+componentMap.set('Transfer', Transfer);
+componentMap.set('BasicTitle', BasicTitle);
 componentMap.set('DictionarySelect', DictionarySelect);
 
 componentMap.set('DatePicker', DatePicker);
