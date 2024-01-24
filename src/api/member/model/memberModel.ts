@@ -15,6 +15,7 @@ export interface MemberInfo {
   mobile?: string;
   email?: string;
   avatar?: string;
+  expiredAt?: number;
 }
 
 /**

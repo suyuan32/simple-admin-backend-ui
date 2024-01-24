@@ -287,6 +287,7 @@ export default {
     addMember: '添加会员',
     editMember: '编辑会员',
     memberList: '会员列表',
+    expiredAt: '到期时间'
   },
   memberRank: {
     name: '等级名称',

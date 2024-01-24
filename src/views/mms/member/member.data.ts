@@ -138,6 +138,14 @@ export const formSchema: FormSchema[] = [
     },
   },
   {
+    field: 'expiredAt',
+    label: t('sys.member.expiredAt'),
+    component: 'SimpleTimePicker',
+    componentProps: {
+      timeMode: 'date'
+    }
+  },
+  {
     field: 'mobile',
     label: t('sys.login.mobile'),
     component: 'Input',
