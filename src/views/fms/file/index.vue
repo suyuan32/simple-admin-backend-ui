@@ -28,10 +28,12 @@
             :actions="[
               {
                 icon: 'ant-design:cloud-download-outlined',
+                tooltip: t('fms.file.download'),
                 onClick: handleDownload.bind(null, record),
               },
               {
                 icon: 'ant-design:copy-outlined',
+                tooltip: t('fms.file.copyURL'),
                 onClick: handleCopyToClipboard.bind(null, record),
               },
               {

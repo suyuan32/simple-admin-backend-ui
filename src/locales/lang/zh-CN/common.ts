@@ -72,4 +72,5 @@ export default {
   notAllowSameAsParentId: '父级ID不能和自身ID相同',
   wrongFormat: '格式错误',
   required: '必须',
+  viewLog: '查看日志',
 };
