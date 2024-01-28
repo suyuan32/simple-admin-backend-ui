@@ -72,4 +72,5 @@ export default {
   notAllowSameAsParentId: 'The parent ID cannot be the same as its own ID',
   wrongFormat: 'Wrong format',
   required: 'Required',
+  viewLog: 'View logs',
 };
