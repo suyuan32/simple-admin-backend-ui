@@ -111,13 +111,6 @@ export const searchFormSchema: FormSchema[] = [
     colProps: { span: 8 },
   },
   {
-    field: 'period',
-    label: t('common.createTime'),
-    defaultValue: [new Date(new Date().getTime() - 365 * 24 * 60 * 60 * 1000), new Date()],
-    component: 'RangePicker',
-    colProps: { span: 8 },
-  },
-  {
     field: 'tagIds',
     label: t('fms.tag.tag'),
     component: 'ApiMultipleSelect',
@@ -132,6 +125,12 @@ export const searchFormSchema: FormSchema[] = [
       labelField: 'name',
       valueField: 'id',
     },
+    colProps: { span: 8 },
+  },
+  {
+    field: 'period',
+    label: t('common.createTime'),
+    component: 'RangePicker',
     colProps: { span: 8 },
   },
 ];
