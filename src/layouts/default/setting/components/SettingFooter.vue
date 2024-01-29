@@ -1,14 +1,14 @@
 <template>
   <div :class="prefixCls">
-    <a-button type="primary" block @click="handleCopy">
+    <!-- <a-button type="primary" block @click="handleCopy">
       <CopyOutlined class="mr-2" />
       {{ t('layout.setting.copyBtn') }}
-    </a-button>
+    </a-button> -->
 
-    <a-button color="warning" block @click="handleResetSetting" class="my-3">
+    <!-- <a-button color="warning" block @click="handleResetSetting" class="my-3">
       <RedoOutlined class="mr-2" />
       {{ t('common.resetText') }}
-    </a-button>
+    </a-button> -->
 
     <a-button type="primary" block @click="handleCopyToken" class="mb-3">
       <CopyOutlined class="mr-2" />
@@ -27,7 +27,7 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, unref } from 'vue';
+  import { defineComponent } from 'vue';
 
   import { CopyOutlined, RedoOutlined } from '@ant-design/icons-vue';
 
@@ -41,10 +41,10 @@
   import { useMessage } from '/@/hooks/web/useMessage';
   import { copyText } from '/@/utils/copyTextToClipboard';
 
-  import { updateColorWeak } from '/@/logics/theme/updateColorWeak';
-  import { updateGrayMode } from '/@/logics/theme/updateGrayMode';
-  import defaultSetting from '/@/settings/projectSetting';
-  import { updateSidebarBgColor } from '/@/logics/theme/updateBackground';
+  // import { updateColorWeak } from '/@/logics/theme/updateColorWeak';
+  // import { updateGrayMode } from '/@/logics/theme/updateGrayMode';
+  // import defaultSetting from '/@/settings/projectSetting';
+  // import { updateSidebarBgColor } from '/@/logics/theme/updateBackground';
   import { useDictionaryStore } from '/@/store/modules/dictionary';
 
   export default defineComponent({
@@ -54,35 +54,35 @@
       const permissionStore = usePermissionStore();
       const { prefixCls } = useDesign('setting-footer');
       const { t } = useI18n();
-      const { createSuccessModal, createMessage } = useMessage();
+      const { createMessage } = useMessage();
       const tabStore = useMultipleTabStore();
       const userStore = useUserStore();
       const appStore = useAppStore();
 
-      function handleCopy() {
-        copyText(JSON.stringify(unref(appStore.getProjectConfig), null, 2), null);
-        createSuccessModal({
-          title: t('layout.setting.operatingTitle'),
-          content: t('layout.setting.operatingContent'),
-        });
-      }
+      // function handleCopy() {
+      //   copyText(JSON.stringify(unref(appStore.getProjectConfig), null, 2), null);
+      //   createSuccessModal({
+      //     title: t('layout.setting.operatingTitle'),
+      //     content: t('layout.setting.operatingContent'),
+      //   });
+      // }
 
       function handleCopyToken() {
         copyText(userStore.token);
       }
 
-      function handleResetSetting() {
-        try {
-          appStore.setProjectConfig(defaultSetting);
-          const { colorWeak, grayMode } = defaultSetting;
-          updateSidebarBgColor();
-          updateColorWeak(colorWeak);
-          updateGrayMode(grayMode);
-          createMessage.success(t('layout.setting.resetSuccess'));
-        } catch (error: any) {
-          createMessage.error(error);
-        }
-      }
+      // function handleResetSetting() {
+      //   try {
+      //     appStore.setProjectConfig(defaultSetting);
+      //     const { colorWeak, grayMode } = defaultSetting;
+      //     updateSidebarBgColor();
+      //     updateColorWeak(colorWeak);
+      //     updateGrayMode(grayMode);
+      //     createMessage.success(t('layout.setting.resetSuccess'));
+      //   } catch (error: any) {
+      //     createMessage.error(error);
+      //   }
+      // }
 
       function handleClearAndRedo() {
         localStorage.clear();
@@ -104,8 +104,8 @@
       return {
         prefixCls,
         t,
-        handleCopy,
-        handleResetSetting,
+        // handleCopy,
+        // handleResetSetting,
         handleClearAndRedo,
         handleClearDictionaryCache,
         handleCopyToken
