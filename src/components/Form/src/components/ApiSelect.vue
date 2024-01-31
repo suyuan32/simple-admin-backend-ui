@@ -5,6 +5,8 @@
     @change="handleChange"
     :options="getOptions"
     v-model:value="state"
+    :show-search="isSearch"
+    @search="searchFetch"
   >
     <template #[item]="data" v-for="item in Object.keys($slots)">
       <slot :name="item" v-bind="data || {}"></slot>
@@ -60,6 +62,9 @@
         type: Array<OptionsItem>,
         default: [],
       },
+      // search
+      isSearch: propTypes.bool.def(false),
+      seachField: propTypes.string,
     },
     emits: ['options-change', 'change', 'update:value'],
     setup(props, { emit }) {
@@ -70,6 +75,7 @@
       const emitData = ref<OptionsItem[]>([]);
       const attrs = useAttrs();
       const { t } = useI18n();
+      const isSearch = props.isSearch;
 
       // Embedded in the form, just use the hook binding to perform form verification
       const [state] = useRuleFormItem(props, 'value', 'change', emitData);
@@ -112,7 +118,43 @@
         options.value = [];
         try {
           loading.value = true;
+
           const res = await api(props.params);
+          isFirstLoaded.value = true;
+          if (Array.isArray(res)) {
+            options.value = res;
+            emitChange();
+            return;
+          }
+          if (props.resultField) {
+            options.value = get(res, props.resultField) || [];
+          }
+          emitChange();
+        } catch (error) {
+          console.warn(error);
+        } finally {
+          loading.value = false;
+          // reset status
+          isFirstLoaded.value = false;
+        }
+      }
+
+      async function searchFetch(value: string) {
+        const api = props.api;
+        if (!api || !isFunction(api) || loading.value) return;
+        options.value = [];
+        try {
+          loading.value = true;
+
+          let searchParam: any = {};
+
+          if (props.seachField.length == 0) {
+            throw "the searchFeild cannot be empty"
+          }
+
+          searchParam[props.seachField] = value;
+
+          const res = await api(searchParam);
           isFirstLoaded.value = true;
           if (Array.isArray(res)) {
             options.value = res;
@@ -151,7 +193,7 @@
         emit('change', args)
       }
 
-      return { state, attrs, getOptions, loading, t, handleFetch, handleChange };
+      return { state, attrs, getOptions, loading, t, handleFetch, handleChange, isSearch, searchFetch };
     },
   });
 </script>
