@@ -6,7 +6,9 @@
     :options="getOptions"
     v-model:value="state"
     :show-search="isSearch"
-    @search="searchFetch"
+    @search="searchFun"
+    :show-arrow="false"
+    :filter-option="false"
   >
     <template #[item]="data" v-for="item in Object.keys($slots)">
       <slot :name="item" v-bind="data || {}"></slot>
@@ -64,7 +66,7 @@
       },
       // search
       isSearch: propTypes.bool.def(false),
-      seachField: propTypes.string,
+      searchField: propTypes.string,
     },
     emits: ['options-change', 'change', 'update:value'],
     setup(props, { emit }) {
@@ -76,6 +78,11 @@
       const attrs = useAttrs();
       const { t } = useI18n();
       const isSearch = props.isSearch;
+      const searchFun = ref<any>();
+      
+      if (isSearch) {
+        searchFun.value = searchFetch
+      }
 
       // Embedded in the form, just use the hook binding to perform form verification
       const [state] = useRuleFormItem(props, 'value', 'change', emitData);
@@ -94,6 +101,7 @@
           }
           return prev;
         }, [] as OptionsItem[]);
+
         return data.length > 0 ? data : props.options;
       });
 
@@ -107,7 +115,9 @@
       watch(
         () => props.params,
         () => {
-          !unref(isFirstLoaded) && fetch();
+          if (isSearch == false) {
+            !unref(isFirstLoaded) && fetch();
+          }
         },
         { deep: true, immediate: props.immediate },
       );
@@ -148,14 +158,14 @@
 
           let searchParam: any = {};
 
-          if (props.seachField.length == 0) {
-            throw "the searchFeild cannot be empty"
+          if (props.searchField != undefined) {
+            searchParam[props.searchField] = value;
           }
 
-          searchParam[props.seachField] = value;
+          searchParam['page'] = 1
+          searchParam['pageSize'] = 10
 
           const res = await api(searchParam);
-          isFirstLoaded.value = true;
           if (Array.isArray(res)) {
             options.value = res;
             emitChange();
@@ -164,18 +174,17 @@
           if (props.resultField) {
             options.value = get(res, props.resultField) || [];
           }
+
           emitChange();
         } catch (error) {
           console.warn(error);
         } finally {
           loading.value = false;
-          // reset status
-          isFirstLoaded.value = false;
         }
       }
 
       async function handleFetch(visible: boolean) {
-        if (visible) {
+        if (visible && !isSearch) {
           if (props.alwaysLoad) {
             await fetch();
           } else if (!props.immediate && !unref(isFirstLoaded)) {
@@ -193,7 +202,7 @@
         emit('change', args)
       }
 
-      return { state, attrs, getOptions, loading, t, handleFetch, handleChange, isSearch, searchFetch };
+      return { state, attrs, getOptions, loading, t, handleFetch, handleChange, isSearch, searchFun };
     },
   });
 </script>
