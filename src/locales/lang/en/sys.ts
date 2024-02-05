@@ -296,6 +296,7 @@ export default {
     addMember: 'Add Member',
     editMember: 'Edit Member',
     memberList: 'Member List',
+    expiredAt: 'Expired Time'
   },
   memberRank: {
     name: 'Rank Name',

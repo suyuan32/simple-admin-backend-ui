@@ -5,6 +5,10 @@
     @change="handleChange"
     :options="getOptions"
     v-model:value="state"
+    :show-search="isSearch"
+    @search="searchFun"
+    :show-arrow="false"
+    :filter-option="false"
   >
     <template #[item]="data" v-for="item in Object.keys($slots)">
       <slot :name="item" v-bind="data || {}"></slot>
@@ -60,6 +64,9 @@
         type: Array<OptionsItem>,
         default: [],
       },
+      // search
+      isSearch: propTypes.bool.def(false),
+      searchField: propTypes.string,
     },
     emits: ['options-change', 'change', 'update:value'],
     setup(props, { emit }) {
@@ -70,6 +77,12 @@
       const emitData = ref<OptionsItem[]>([]);
       const attrs = useAttrs();
       const { t } = useI18n();
+      const isSearch = props.isSearch;
+      const searchFun = ref<any>();
+      
+      if (isSearch) {
+        searchFun.value = searchFetch
+      }
 
       // Embedded in the form, just use the hook binding to perform form verification
       const [state] = useRuleFormItem(props, 'value', 'change', emitData);
@@ -88,6 +101,7 @@
           }
           return prev;
         }, [] as OptionsItem[]);
+
         return data.length > 0 ? data : props.options;
       });
 
@@ -101,7 +115,9 @@
       watch(
         () => props.params,
         () => {
-          !unref(isFirstLoaded) && fetch();
+          if (isSearch == false) {
+            !unref(isFirstLoaded) && fetch();
+          }
         },
         { deep: true, immediate: props.immediate },
       );
@@ -112,6 +128,7 @@
         options.value = [];
         try {
           loading.value = true;
+
           const res = await api(props.params);
           isFirstLoaded.value = true;
           if (Array.isArray(res)) {
@@ -132,8 +149,42 @@
         }
       }
 
+      async function searchFetch(value: string) {
+        const api = props.api;
+        if (!api || !isFunction(api) || loading.value) return;
+        options.value = [];
+        try {
+          loading.value = true;
+
+          let searchParam: any = {};
+
+          if (props.searchField != undefined) {
+            searchParam[props.searchField] = value;
+          }
+
+          searchParam['page'] = 1
+          searchParam['pageSize'] = 10
+
+          const res = await api(searchParam);
+          if (Array.isArray(res)) {
+            options.value = res;
+            emitChange();
+            return;
+          }
+          if (props.resultField) {
+            options.value = get(res, props.resultField) || [];
+          }
+
+          emitChange();
+        } catch (error) {
+          console.warn(error);
+        } finally {
+          loading.value = false;
+        }
+      }
+
       async function handleFetch(visible: boolean) {
-        if (visible) {
+        if (visible && !isSearch) {
           if (props.alwaysLoad) {
             await fetch();
           } else if (!props.immediate && !unref(isFirstLoaded)) {
@@ -151,7 +202,7 @@
         emit('change', args)
       }
 
-      return { state, attrs, getOptions, loading, t, handleFetch, handleChange };
+      return { state, attrs, getOptions, loading, t, handleFetch, handleChange, isSearch, searchFun };
     },
   });
 </script>

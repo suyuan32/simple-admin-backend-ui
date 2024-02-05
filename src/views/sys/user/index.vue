@@ -31,6 +31,7 @@
                   {
                     icon: 'bx:log-out-circle',
                     color: 'error',
+                    tooltip: t('sys.user.forceLoggingOut'),
                     popConfirm: {
                       title: t('sys.user.forceLoggingOut') + '?',
                       placement: 'left',

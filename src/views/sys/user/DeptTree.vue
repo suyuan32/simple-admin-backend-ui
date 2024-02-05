@@ -1,5 +1,5 @@
 <template>
-  <div class="m-4 mr-0 overflow-hidden">
+  <div class="m-4 mr-0 overflow-hidden rounded-md">
     <BasicTree
       :title="t('sys.department.departmentList')"
       toolbar

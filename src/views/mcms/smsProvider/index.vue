@@ -30,6 +30,7 @@
               },
               {
                 icon: 'ic:round-library-books',
+                tooltip: t('common.viewLog'),
                 onClick: handleOpenLogModal.bind(null, record),
               },
               {
