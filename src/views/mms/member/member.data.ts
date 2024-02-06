@@ -35,7 +35,7 @@ export const columns: BasicColumn[] = [
         loading: record.pendingStatus,
         onChange(checked, _) {
           record.pendingStatus = true;
-          const newStatus = checked ? 1 : 0;
+          const newStatus = checked ? 1 : 2;
           updateMember({ id: record.id, status: newStatus })
             .then(() => {
               record.status = newStatus;
