@@ -91,6 +91,9 @@ export default {
     mobilePlaceholder: '请输入手机号码',
     policyPlaceholder: '勾选后才能注册',
     diffPwd: '两次输入密码不一致',
+    accountMaxLength: '账号最长为30位',
+    passwordLength: '密码长度为6-30位',
+    captchaRequired: '请输入5位验证码',
 
     username: '用户名',
     password: '密码',
@@ -176,7 +179,7 @@ export default {
     editApi: '编辑接口',
     // help message
     isRequiredHelpMessage: '是否为必要接口,如果是必要接口,则在权限管理时为必选,不允许取消',
-    serviceNameHelpMessage: '默认是 Other, 填入服务名称如 Core, Fms'
+    serviceNameHelpMessage: '默认是 Other, 填入服务名称如 Core, Fms',
   },
   authority: {
     authorityManagement: '权限管理',
@@ -287,7 +290,7 @@ export default {
     addMember: '添加会员',
     editMember: '编辑会员',
     memberList: '会员列表',
-    expiredAt: '到期时间'
+    expiredAt: '到期时间',
   },
   memberRank: {
     name: '等级名称',
