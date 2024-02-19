@@ -16,7 +16,14 @@
         </ARadioGroup>
       </div>
 
-      <FormItem name="account" class="enter-x" :rules="[{ required: true, max: 30 }]">
+      <FormItem
+        name="account"
+        class="enter-x"
+        :rules="[
+          { required: true, message: t('sys.login.accountPlaceholder') },
+          { max: 30, message: t('sys.login.accountMaxLength') },
+        ]"
+      >
         <Input
           class="fix-auto-fill"
           size="large"
@@ -35,7 +42,14 @@
         />
       </FormItem>
 
-      <FormItem name="password" class="enter-x" :rules="[{ required: true, min: 6, max: 30 }]">
+      <FormItem
+        name="password"
+        class="enter-x"
+        :rules="[
+          { required: true, message: t('sys.login.passwordPlaceholder') },
+          { min: 6, max: 30, message: t('sys.login.passwordLength') },
+        ]"
+      >
         <StrengthMeter
           size="large"
           v-model:value="formData.password"
@@ -43,7 +57,14 @@
         />
       </FormItem>
 
-      <FormItem name="confirmPassword" class="enter-x">
+      <FormItem
+        name="confirmPassword"
+        class="enter-x"
+        :rules="[
+          { required: true, message: t('sys.login.passwordPlaceholder') },
+          { min: 6, max: 30, message: t('sys.login.passwordLength') },
+        ]"
+      >
         <InputPassword
           size="large"
           visibilityToggle
@@ -74,7 +95,7 @@
         v-if="formData.msgType === 'captcha'"
         name="captcha"
         class="enter-x"
-        :rules="[{ required: true, len: 5 }]"
+        :rules="[{ required: true, len: 5, message: t('sys.login.captchaRequired') }]"
       >
         <Input
           size="large"
