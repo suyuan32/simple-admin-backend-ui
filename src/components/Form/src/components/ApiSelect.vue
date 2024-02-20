@@ -79,9 +79,9 @@
       const { t } = useI18n();
       const isSearch = props.isSearch;
       const searchFun = ref<any>();
-      
+
       if (isSearch) {
-        searchFun.value = searchFetch
+        searchFun.value = searchFetch;
       }
 
       // Embedded in the form, just use the hook binding to perform form verification
@@ -162,8 +162,8 @@
             searchParam[props.searchField] = value;
           }
 
-          searchParam['page'] = 1
-          searchParam['pageSize'] = 10
+          searchParam['page'] = 1;
+          searchParam['pageSize'] = 10;
 
           const res = await api(searchParam);
           if (Array.isArray(res)) {
@@ -199,10 +199,20 @@
 
       function handleChange(_, ...args) {
         emitData.value = args;
-        emit('change', args)
+        emit('change', args);
       }
 
-      return { state, attrs, getOptions, loading, t, handleFetch, handleChange, isSearch, searchFun };
+      return {
+        state,
+        attrs,
+        getOptions,
+        loading,
+        t,
+        handleFetch,
+        handleChange,
+        isSearch,
+        searchFun,
+      };
     },
   });
 </script>
