@@ -184,4 +184,9 @@ export interface ComponentProps {
   Transfer: ExtractPropTypes<(typeof import('ant-design-vue/es/transfer'))['default']>;
   CropperAvatar: CustomComponents['CropperAvatar'];
   BasicTitle: CustomComponents['BasicTitle'];
+  ApiMultipleSelect: CustomComponents['ApiMultipleSelect'];
+  DictionarySelect: CustomComponents['DictionarySelect'];
+  CodeEditor: CustomComponents['CodeEditor'];
+  Tinymce: CustomComponents['Tinymce'];
+  SimpleTimePicker: CustomComponents['SimpleTimePicker'];
 }

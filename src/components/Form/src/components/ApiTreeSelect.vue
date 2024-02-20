@@ -22,7 +22,7 @@
     name: 'ApiTreeSelect',
     components: { ATreeSelect: TreeSelect, LoadingOutlined },
     props: {
-      api: { type: Function as PropType<(arg?: Recordable) => Promise<Recordable>> },
+      api: { type: Function as Function as PropType<(arg?: any) => Promise<any>> },
       params: { type: Object },
       immediate: { type: Boolean, default: true },
       resultField: propTypes.string.def(''),
