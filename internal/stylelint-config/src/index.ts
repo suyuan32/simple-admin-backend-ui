@@ -1,57 +1,92 @@
 export default {
-  extends: ['@vben'],
-  plugins: ['simple-import-sort'],
+  extends: ['stylelint-config-standard', 'stylelint-config-property-sort-order-smacss'],
+  plugins: ['stylelint-order', 'stylelint-prettier'],
+  // customSyntax: 'postcss-html',
+  overrides: [
+    {
+      files: ['**/*.(css|html|vue)'],
+      customSyntax: 'postcss-html',
+    },
+    {
+      files: ['*.less', '**/*.less'],
+      customSyntax: 'postcss-less',
+      extends: ['stylelint-config-standard', 'stylelint-config-recommended-vue'],
+    },
+    {
+      files: ['*.scss', '**/*.scss'],
+      customSyntax: 'postcss-scss',
+      extends: ['stylelint-config-standard-scss', 'stylelint-config-recommended-vue/scss'],
+      rule: {
+        'scss/percent-placeholder-pattern': null,
+      },
+    },
+  ],
   rules: {
-    'simple-import-sort/imports': 'error',
-    'simple-import-sort/exports': 'error',
-
-    '@typescript-eslint/ban-ts-comment': [
-      'error',
+    'prettier/prettier': true,
+    'media-feature-range-notation': null,
+    'selector-not-notation': null,
+    'import-notation': null,
+    'function-no-unknown': null,
+    'selector-class-pattern': null,
+    'selector-pseudo-class-no-unknown': [
+      true,
       {
-        'ts-expect-error': 'allow-with-description',
-        'ts-ignore': 'allow-with-description',
-        'ts-nocheck': 'allow-with-description',
-        'ts-check': false,
+        ignorePseudoClasses: ['global', 'deep'],
       },
     ],
-
-    /**
-     * 【强制】关键字前后有一个空格
-     * @link https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/keyword-spacing.md
-     */
-    'keyword-spacing': 'off',
-    '@typescript-eslint/keyword-spacing': [
-      'error',
+    'selector-pseudo-element-no-unknown': [
+      true,
       {
-        before: true,
-        after: true,
-        overrides: {
-          return: { after: true },
-          throw: { after: true },
-          case: { after: true },
+        ignorePseudoElements: ['v-deep'],
+      },
+    ],
+    'at-rule-no-unknown': [
+      true,
+      {
+        ignoreAtRules: [
+          'tailwind',
+          'apply',
+          'variants',
+          'responsive',
+          'screen',
+          'function',
+          'if',
+          'each',
+          'include',
+          'mixin',
+          'extend',
+        ],
+      },
+    ],
+    'no-empty-source': null,
+    'named-grid-areas-no-invalid': null,
+    'no-descending-specificity': null,
+    'font-family-no-missing-generic-family-keyword': null,
+    'rule-empty-line-before': [
+      'always',
+      {
+        ignore: ['after-comment', 'first-nested'],
+      },
+    ],
+    'unit-no-unknown': [true, { ignoreUnits: ['rpx'] }],
+    'order/order': [
+      [
+        'dollar-variables',
+        'custom-properties',
+        'at-rules',
+        'declarations',
+        {
+          type: 'at-rule',
+          name: 'supports',
         },
-      },
+        {
+          type: 'at-rule',
+          name: 'media',
+        },
+        'rules',
+      ],
+      { severity: 'error' },
     ],
-
-    /**
-     * 禁止出现空函数，普通函数（非 async/await/generator）、箭头函数、类上的方法除外
-     * @link https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-empty-function.md
-     */
-    'no-empty-function': 'off',
-    '@typescript-eslint/no-empty-function': [
-      'error',
-      {
-        allow: ['arrowFunctions', 'functions', 'methods'],
-      },
-    ],
-
-    /**
-     * 优先使用 interface 而不是 type 定义对象类型
-     * @link https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/consistent-type-definitions.md
-     */
-    '@typescript-eslint/consistent-type-definitions': ['warn', 'interface'],
-
-    'vue/attributes-order': 'error',
-    'vue/require-default-prop': 'error',
   },
+  ignoreFiles: ['**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts'],
 };
