@@ -45,7 +45,7 @@
       value: [Array, Object, String, Number],
       numberToString: propTypes.bool,
       api: {
-        type: Function as PropType<(arg?: Recordable) => Promise<OptionsItem[]>>,
+        type: Function as Function as PropType<(arg?: any) => Promise<any>>,
         default: null,
       },
       // api params
