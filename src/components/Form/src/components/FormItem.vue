@@ -9,12 +9,12 @@
     type FormSchemaInner as FormSchema,
   } from '../types/form';
   import type { Rule as ValidationRule } from 'ant-design-vue/lib/form/interface';
-  import type { TableActionType } from '/@/components/Table';
+  import type { TableActionType } from '@/components/Table';
   import { Col, Divider, Form } from 'ant-design-vue';
   import { componentMap } from '../componentMap';
-  import { BasicHelp, BasicTitle } from '/@/components/Basic';
-  import { isBoolean, isFunction, isNull } from '/@/utils/is';
-  import { getSlot } from '/@/utils/helper/tsxHelper';
+  import { BasicHelp, BasicTitle } from '@/components/Basic';
+  import { isBoolean, isFunction, isNull } from '@/utils/is';
+  import { getSlot } from '@/utils/helper/tsxHelper';
   import {
     createPlaceholderMessage,
     isIncludeSimpleComponents,
@@ -23,7 +23,7 @@
   } from '../helper';
   import { cloneDeep, upperFirst } from 'lodash-es';
   import { useItemLabelWidth } from '../hooks/useLabelWidth';
-  import { useI18n } from '/@/hooks/web/useI18n';
+  import { useI18n } from '@/hooks/web/useI18n';
 
   export default defineComponent({
     name: 'BasicFormItem',
@@ -117,6 +117,21 @@
         return disabled;
       });
 
+      const getReadonly = computed(() => {
+        const { readonly: globReadonly } = props.formProps;
+        const { dynamicReadonly } = props.schema;
+        const { readonly: itemReadonly = false } = unref(getComponentsProps);
+
+        let readonly = globReadonly || itemReadonly;
+        if (isBoolean(dynamicReadonly)) {
+          readonly = dynamicReadonly;
+        }
+        if (isFunction(dynamicReadonly)) {
+          readonly = dynamicReadonly(unref(getValues));
+        }
+        return readonly;
+      });
+
       function getShow(): { isShow: boolean; isIfShow: boolean } {
         const { show, ifShow } = props.schema;
         const { showAdvancedButton } = props.formProps;
@@ -144,7 +159,6 @@
         isShow = isShow && itemIsAdvanced;
         return { isShow, isIfShow };
       }
-
       function handleRules(): ValidationRule[] {
         const {
           rules: defRules = [],
@@ -154,7 +168,6 @@
           dynamicRules,
           required,
         } = props.schema;
-
         if (isFunction(dynamicRules)) {
           return dynamicRules(unref(getValues)) as ValidationRule[];
         }
@@ -165,7 +178,7 @@
         const joinLabel = Reflect.has(props.schema, 'rulesMessageJoinLabel')
           ? rulesMessageJoinLabel
           : globalRulesMessageJoinLabel;
-        const assertLabel = joinLabel ? label : '';
+        const assertLabel = joinLabel ? (isFunction(label) ? '' : label) : '';
         const defaultMsg = component
           ? createPlaceholderMessage(component) + assertLabel
           : assertLabel;
@@ -195,7 +208,6 @@
           }
           return Promise.resolve();
         }
-
         const getRequired = isFunction(required) ? required(unref(getValues)) : required;
 
         /*
@@ -284,6 +296,7 @@
           size,
           ...unref(getComponentsProps),
           disabled: unref(getDisable),
+          readonly: unref(getReadonly),
         };
 
         const isCreatePlaceholder = !propsData.disabled && autoSetPlaceHolder;
@@ -309,7 +322,12 @@
           return <Comp {...compAttr} />;
         }
         const compSlot = isFunction(renderComponentContent)
-          ? { ...renderComponentContent(unref(getValues), { disabled: unref(getDisable) }) }
+          ? {
+              ...renderComponentContent(unref(getValues), {
+                disabled: unref(getDisable),
+                readonly: unref(getReadonly),
+              }),
+            }
           : {
               default: () => renderComponentContent,
             };
@@ -318,12 +336,13 @@
 
       function renderLabelHelpMessage() {
         const { label, helpMessage, helpComponentProps, subLabel } = props.schema;
+        const getLabel = isFunction(label) ? label(unref(getValues)) : label;
         const renderLabel = subLabel ? (
           <span>
-            {label} <span class="text-secondary">{subLabel}</span>
+            {getLabel} <span class="text-secondary">{subLabel}</span>
           </span>
         ) : (
-          label
+          getLabel
         );
         const getHelpMessage = isFunction(helpMessage)
           ? helpMessage(unref(getValues))
@@ -343,7 +362,7 @@
         const { itemProps, slot, render, field, suffix, component } = props.schema;
         const { labelCol, wrapperCol } = unref(itemLabelWidthProp);
         const { colon } = props.formProps;
-        const opts = { disabled: unref(getDisable) };
+        const opts = { disabled: unref(getDisable), readonly: unref(getReadonly) };
         if (component === 'Divider') {
           return (
             <Col span={24}>
@@ -366,8 +385,8 @@
             return slot
               ? getSlot(slots, slot, unref(getValues), opts)
               : render
-              ? render(unref(getValues), opts)
-              : renderComponent();
+                ? render(unref(getValues), opts)
+                : renderComponent();
           };
 
           const showSuffix = !!suffix;
@@ -404,7 +423,7 @@
 
       return () => {
         const { colProps = {}, colSlot, renderColContent, component, slot } = props.schema;
-        if (!component || (!componentMap.has(component) && !slot)) {
+        if (!((component && componentMap.has(component)) || slot)) {
           return null;
         }
 
@@ -412,14 +431,14 @@
         const realColProps = { ...baseColProps, ...colProps };
         const { isIfShow, isShow } = getShow();
         const values = unref(getValues);
-        const opts = { disabled: unref(getDisable) };
+        const opts = { disabled: unref(getDisable), readonly: unref(getReadonly) };
 
         const getContent = () => {
           return colSlot
             ? getSlot(slots, colSlot, values, opts)
             : renderColContent
-            ? renderColContent(values, opts)
-            : renderItem();
+              ? renderColContent(values, opts)
+              : renderItem();
         };
 
         return (

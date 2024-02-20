@@ -177,7 +177,7 @@ export const formSchema: FormSchema[] = [
     defaultValue: '',
     rules: [{ max: 50 }],
     colProps: { lg: 24, md: 24, sm: 24 },
-    helpMessage: t('sys.apis.serviceNameHelpMessage')
+    helpMessage: t('sys.apis.serviceNameHelpMessage'),
   },
   {
     field: 'path',

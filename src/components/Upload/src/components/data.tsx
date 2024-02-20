@@ -70,7 +70,7 @@ export function createTableColumns(): FileBasicColumn[] {
     },
   ];
 }
-export function createActionColumn(handleRemove: Function): FileBasicColumn {
+export function createActionColumn(handleRemove: Function, handleCopy: Function): FileBasicColumn {
   return {
     width: 120,
     title: t('component.upload.operating'),
@@ -82,6 +82,11 @@ export function createActionColumn(handleRemove: Function): FileBasicColumn {
           label: t('component.upload.del'),
           color: 'error',
           onClick: handleRemove.bind(null, record),
+        },
+        {
+          label: t('fms.file.copyURL'),
+          color: 'error',
+          onClick: handleCopy.bind(null, record),
         },
       ];
       return <TableAction actions={actions} outside={true} />;

@@ -132,7 +132,7 @@ export const formSchema: FormSchema[] = [
  */
 
 export function convertApiTreeData(params: ApiInfo[]): DataNode[] {
-  const finalData: DataNode[] = []
+  const finalData: DataNode[] = [];
   const apiData: DataNode[] = [];
   if (params.length === 0) {
     return apiData;
@@ -141,7 +141,7 @@ export function convertApiTreeData(params: ApiInfo[]): DataNode[] {
   const apiMap = new Map<string, string>();
   const serviceMap = new Map<string, boolean>();
   for (let i = 0; i < params.length; i++) {
-    apiMap.set(params[i].group, params[i].serviceName);    
+    apiMap.set(params[i].group, params[i].serviceName);
     serviceMap.set(params[i].serviceName, true);
   }
 
@@ -164,7 +164,7 @@ export function convertApiTreeData(params: ApiInfo[]): DataNode[] {
 
     apiData.push(apiTmp);
   }
-  
+
   for (const k1 of serviceMap.keys()) {
     const svcTmp: DataNode = {
       title: k1,

@@ -26,7 +26,6 @@ export default {
   ],
   rules: {
     'no-unused-vars': 'off',
-    'no-undef': 'off',
     'no-case-declarations': 'off',
     'no-use-before-define': 'off',
     'space-before-function-paren': 'off',

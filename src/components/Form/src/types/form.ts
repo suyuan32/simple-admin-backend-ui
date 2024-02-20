@@ -1,9 +1,9 @@
 import type { NamePath, RuleObject } from 'ant-design-vue/lib/form/interface';
 import type { VNode, CSSProperties } from 'vue';
-import type { ButtonProps as AntdButtonProps } from '/@/components/Button';
+import type { ButtonProps as AntdButtonProps } from '@/components/Button';
 import type { FormItem } from './formItem';
-import type { ColEx, ComponentType } from './index';
-import type { TableActionType } from '/@/components/Table/src/types/table';
+import type { ColEx, ComponentType, ComponentProps } from './';
+import type { TableActionType } from '@/components/Table/src/types/table';
 import type { RowProps } from 'ant-design-vue/lib/grid/Row';
 
 export type FieldMapToTime = [string, [string, string], (string | [string, string])?][];
@@ -85,6 +85,8 @@ export interface FormProps {
   size?: 'default' | 'small' | 'large';
   // Whether to disable
   disabled?: boolean;
+  // Whether to readonly
+  readonly?: boolean;
   // Time interval fields are mapped into multiple
   fieldMapToTime?: FieldMapToTime;
   // Placeholder is set automatically
@@ -128,7 +130,7 @@ export type RenderOpts = {
   [key: string]: any;
 };
 
-interface BaseFormSchema {
+interface BaseFormSchema<T extends ComponentType = any> {
   // Field name
   field: string;
   // Extra Fields name[]
@@ -138,7 +140,7 @@ interface BaseFormSchema {
   // Variable name bound to v-model Default value
   valueField?: string;
   // Label name
-  label?: string | VNode;
+  label?: string | VNode | ((renderCallbackParams: RenderCallbackParams) => string | VNode);
   // Auxiliary text
   subLabel?: string;
   // Help text on the right side of the text
@@ -159,8 +161,8 @@ interface BaseFormSchema {
         tableAction: TableActionType;
         formActionType: FormActionType;
         formModel: Recordable;
-      }) => Recordable)
-    | object;
+      }) => ComponentProps[T])
+    | ComponentProps[T];
   // Required
   required?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean);
 
@@ -218,19 +220,25 @@ interface BaseFormSchema {
 
   dynamicDisabled?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean);
 
+  dynamicReadonly?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean);
+
   dynamicRules?: (renderCallbackParams: RenderCallbackParams) => Rule[];
 }
-export interface ComponentFormSchema extends BaseFormSchema {
+export interface ComponentFormSchema<T extends ComponentType = any> extends BaseFormSchema<T> {
   // render component
-  component: ComponentType;
+  component: T;
 }
 
 export interface SlotFormSchema extends BaseFormSchema {
-  // Custom slot, in from-item
+  // Custom slot, in form-item
   slot: string;
 }
 
-export type FormSchema = ComponentFormSchema | SlotFormSchema;
+type ComponentFormSchemaType<T extends ComponentType = ComponentType> = T extends any
+  ? ComponentFormSchema<T>
+  : never;
+
+export type FormSchema = ComponentFormSchemaType | SlotFormSchema;
 
 export type FormSchemaInner = Partial<ComponentFormSchema> &
   Partial<SlotFormSchema> &

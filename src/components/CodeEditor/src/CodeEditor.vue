@@ -37,7 +37,7 @@
 
   onBeforeUpdate(() => {
     inputValue.value = props.value as string;
-  })
+  });
 
   const emit = defineEmits(['change', 'update:value', 'format-error']);
 

@@ -5,7 +5,7 @@
     @change="handleChange"
     :options="getOptions"
     v-model:value="state"
-    :show-search="isSearch"
+    :show-search="useSearch"
     @search="searchFun"
     :show-arrow="false"
     :filter-option="false"
@@ -77,11 +77,11 @@
       const emitData = ref<OptionsItem[]>([]);
       const attrs = useAttrs();
       const { t } = useI18n();
-      const isSearch = props.isSearch;
+      const useSearch = props.isSearch;
       const searchFun = ref<any>();
-      
-      if (isSearch) {
-        searchFun.value = searchFetch
+
+      if (useSearch) {
+        searchFun.value = searchFetch;
       }
 
       // Embedded in the form, just use the hook binding to perform form verification
@@ -115,7 +115,7 @@
       watch(
         () => props.params,
         () => {
-          if (isSearch == false) {
+          if (useSearch == false) {
             !unref(isFirstLoaded) && fetch();
           }
         },
@@ -162,8 +162,8 @@
             searchParam[props.searchField] = value;
           }
 
-          searchParam['page'] = 1
-          searchParam['pageSize'] = 10
+          searchParam['page'] = 1;
+          searchParam['pageSize'] = 10;
 
           const res = await api(searchParam);
           if (Array.isArray(res)) {
@@ -184,7 +184,7 @@
       }
 
       async function handleFetch(visible: boolean) {
-        if (visible && !isSearch) {
+        if (visible && !useSearch) {
           if (props.alwaysLoad) {
             await fetch();
           } else if (!props.immediate && !unref(isFirstLoaded)) {
@@ -199,10 +199,20 @@
 
       function handleChange(_, ...args) {
         emitData.value = args;
-        emit('change', args)
+        emit('change', args);
       }
 
-      return { state, attrs, getOptions, loading, t, handleFetch, handleChange, isSearch, searchFun };
+      return {
+        state,
+        attrs,
+        getOptions,
+        loading,
+        t,
+        handleFetch,
+        handleChange,
+        useSearch,
+        searchFun,
+      };
     },
   });
 </script>

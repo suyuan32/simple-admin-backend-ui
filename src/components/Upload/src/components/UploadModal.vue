@@ -129,8 +129,8 @@
         return isUploadingRef.value
           ? t('component.upload.uploading')
           : someError
-          ? t('component.upload.reUploadFailed')
-          : t('component.upload.startUpload');
+            ? t('component.upload.reUploadFailed')
+            : t('component.upload.startUpload');
       });
 
       // 上传前校验
@@ -261,7 +261,7 @@
       // 点击开始上传
       async function handleStartUpload() {
         const { maxNumber } = props;
-        if ((fileListRef.value.length + props.previewFileList?.length ?? 0) > maxNumber) {
+        if (fileListRef.value.length + props.previewFileList?.length > maxNumber) {
           return createMessage.warning(t('component.upload.maxNumber', [maxNumber]));
         }
         try {

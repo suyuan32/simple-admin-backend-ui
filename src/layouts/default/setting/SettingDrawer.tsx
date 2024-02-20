@@ -1,4 +1,4 @@
-import { defineComponent, computed, unref } from 'vue';
+import { defineComponent, unref } from 'vue';
 import { BasicDrawer } from '/@/components/Drawer/index';
 import { Divider } from 'ant-design-vue';
 import {
@@ -63,7 +63,7 @@ export default defineComponent({
 
     const {
       getIsHorizontal,
-      getShowMenu,
+      // getShowMenu,
       getMenuType,
       // getTrigger,
       // getCollapsedShowTitle,
