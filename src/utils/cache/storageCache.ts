@@ -10,13 +10,13 @@ export interface CreateStorageParams extends EncryptionParams {
 }
 // TODO 移除此文件夹下全部代码
 export const createStorage = ({
-                                prefixKey = '',
-                                storage = sessionStorage,
-                                key = cacheCipher.key,
-                                iv = cacheCipher.iv,
-                                timeout = null,
-                                hasEncrypt = true,
-                              }: Partial<CreateStorageParams> = {}) => {
+  prefixKey = '',
+  storage = sessionStorage,
+  key = cacheCipher.key,
+  iv = cacheCipher.iv,
+  timeout = null,
+  hasEncrypt = true,
+}: Partial<CreateStorageParams> = {}) => {
   if (hasEncrypt && [key.length, iv.length].some((item) => item !== 16)) {
     throw new Error('When hasEncrypt is true, the key or iv must be 16 bits!');
   }

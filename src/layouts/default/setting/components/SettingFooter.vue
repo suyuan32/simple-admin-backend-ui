@@ -108,7 +108,7 @@
         // handleResetSetting,
         handleClearAndRedo,
         handleClearDictionaryCache,
-        handleCopyToken
+        handleCopyToken,
       };
     },
   });

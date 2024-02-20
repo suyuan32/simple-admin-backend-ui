@@ -5,7 +5,7 @@
     @change="handleChange"
     :options="getOptions"
     v-model:value="state"
-    :show-search="isSearch"
+    :show-search="useSearch"
     @search="searchFun"
     :show-arrow="false"
     :filter-option="false"
@@ -77,10 +77,10 @@
       const emitData = ref<OptionsItem[]>([]);
       const attrs = useAttrs();
       const { t } = useI18n();
-      const isSearch = props.isSearch;
+      const useSearch = props.isSearch;
       const searchFun = ref<any>();
 
-      if (isSearch) {
+      if (useSearch) {
         searchFun.value = searchFetch;
       }
 
@@ -115,7 +115,7 @@
       watch(
         () => props.params,
         () => {
-          if (isSearch == false) {
+          if (useSearch == false) {
             !unref(isFirstLoaded) && fetch();
           }
         },
@@ -184,7 +184,7 @@
       }
 
       async function handleFetch(visible: boolean) {
-        if (visible && !isSearch) {
+        if (visible && !useSearch) {
           if (props.alwaysLoad) {
             await fetch();
           } else if (!props.immediate && !unref(isFirstLoaded)) {
@@ -210,7 +210,7 @@
         t,
         handleFetch,
         handleChange,
-        isSearch,
+        useSearch,
         searchFun,
       };
     },

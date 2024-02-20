@@ -58,7 +58,9 @@
       z-index: 1;
       width: 18px;
       height: 18px;
-      transition: transform 0.5s, background-color 0.5s;
+      transition:
+        transform 0.5s,
+        background-color 0.5s;
       border-radius: 50%;
       background-color: #fff;
       will-change: transform;

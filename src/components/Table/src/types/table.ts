@@ -451,11 +451,11 @@ export interface BasicColumn extends ColumnProps<Recordable> {
   editComponent?: ComponentType;
   editComponentProps?:
     | ((opt: {
-    text: string | number | boolean | Recordable;
-    record: Recordable;
-    column: BasicColumn;
-    index: number;
-  }) => Recordable)
+        text: string | number | boolean | Recordable;
+        record: Recordable;
+        column: BasicColumn;
+        index: number;
+      }) => Recordable)
     | Recordable;
   editRule?: boolean | ((text: string, record: Recordable) => Promise<string>);
   editValueMap?: (value: any) => string;

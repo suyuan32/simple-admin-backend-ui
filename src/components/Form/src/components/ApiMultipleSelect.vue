@@ -1,6 +1,6 @@
 <template>
   <Select
-    @dropdownVisibleChange="handleFetch"
+    @dropdown-visible-change="handleFetch"
     v-bind="$attrs"
     @change="handleChange"
     :options="getOptions"
@@ -147,7 +147,7 @@
 
       function handleChange(_, ...args) {
         emitData.value = args;
-        emit('change', args)
+        emit('change', args);
       }
 
       return { state, attrs, getOptions, loading, t, handleFetch, handleChange };

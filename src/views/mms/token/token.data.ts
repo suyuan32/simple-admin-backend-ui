@@ -12,7 +12,7 @@ export const columns: BasicColumn[] = [
     title: 'UUID',
     dataIndex: 'id',
     width: 80,
-  },  
+  },
   {
     title: t('sys.login.username'),
     dataIndex: 'username',

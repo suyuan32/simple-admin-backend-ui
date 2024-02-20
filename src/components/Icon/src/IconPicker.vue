@@ -88,7 +88,7 @@
   import { useI18n } from '/@/hooks/web/useI18n';
   import svgIcons from 'virtual:svg-icons-names';
   import { copyText } from '/@/utils/copyTextToClipboard';
-  
+
   const AInput = Input;
   const APopover = Popover;
   const APagination = Pagination;
@@ -179,7 +179,7 @@
       currentList.value = icons;
       return;
     }
-    currentSelect.value = value
+    currentSelect.value = value;
     currentList.value = icons.filter((item) => item.includes(value));
   }
 </script>

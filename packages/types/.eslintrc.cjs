@@ -1,4 +1,4 @@
 module.exports = {
   root: true,
-  extends: ['prettier'],
+  extends: ['@vben/eslint-config/strict'],
 };

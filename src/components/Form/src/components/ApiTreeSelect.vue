@@ -1,5 +1,5 @@
 <template>
-  <a-tree-select v-bind="getAttrs" @change="handleChange" @dropdownVisibleChange="fetch">
+  <a-tree-select v-bind="getAttrs" @change="handleChange" @dropdown-visible-change="fetch">
     <template #[item]="data" v-for="item in Object.keys($slots)">
       <slot :name="item" v-bind="data || {}"></slot>
     </template>

@@ -112,7 +112,7 @@
       });
 
       const getBindValue = computed(
-        () => ({ ...attrs, ...props, ...unref(getProps) } as AntFormProps),
+        () => ({ ...attrs, ...props, ...unref(getProps) }) as AntFormProps,
       );
 
       const getSchema = computed((): FormSchema[] => {
@@ -147,7 +147,9 @@
         }
         if (unref(getProps).showAdvancedButton) {
           return cloneDeep(
-            schemas.filter((schema) => !isIncludeSimpleComponents(schema.component)) as FormSchema[],
+            schemas.filter(
+              (schema) => !isIncludeSimpleComponents(schema.component),
+            ) as FormSchema[],
           );
         } else {
           return cloneDeep(schemas as FormSchema[]);
@@ -311,7 +313,7 @@
         getFormClass,
         getFormActionBindProps: computed(
           () =>
-            ({ ...getProps.value, ...advanceState } as InstanceType<typeof FormAction>['$props']),
+            ({ ...getProps.value, ...advanceState }) as InstanceType<typeof FormAction>['$props'],
         ),
         fieldsIsAdvancedMap,
         ...formActionType,

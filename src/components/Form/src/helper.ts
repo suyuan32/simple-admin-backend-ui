@@ -95,7 +95,7 @@ export const NO_AUTO_LINK_COMPONENTS: ComponentType[] = [
   'AutoComplete',
   'RadioButtonGroup',
   'ImageUpload',
-  'SimpleTimePicker'
+  'SimpleTimePicker',
 ];
 
 export const simpleComponents = ['Divider', 'BasicTitle'];

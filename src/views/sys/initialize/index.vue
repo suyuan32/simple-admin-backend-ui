@@ -60,7 +60,11 @@
           </p>
           <p>{{ t('sys.init.initRedirect') }}</p>
           <p
-            ><a-button type="primary" :loading="customInitButtonLoading" @click="initCustomDatabase">
+            ><a-button
+              type="primary"
+              :loading="customInitButtonLoading"
+              @click="initCustomDatabase"
+            >
               {{ t('common.start') }}
             </a-button></p
           >
