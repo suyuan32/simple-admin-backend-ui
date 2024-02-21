@@ -11,7 +11,7 @@
 
 <script lang="ts">
   import { defineComponent, ref, unref, nextTick } from 'vue';
-  import { Scrollbar, ScrollbarType } from '/@/components/Scrollbar';
+  import { Scrollbar, ScrollbarType } from '@/components/Scrollbar';
   import { useScrollTo } from '@vben/hooks';
   import { type Nullable } from '@vben/types';
 

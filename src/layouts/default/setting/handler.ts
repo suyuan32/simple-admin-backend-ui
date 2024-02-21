@@ -1,12 +1,14 @@
+import { MenuTypeEnum } from '@/enums/menuEnum';
 import { HandlerEnum } from './enum';
-import { updateHeaderBgColor, updateSidebarBgColor } from '/@/logics/theme/updateBackground';
-import { updateColorWeak } from '/@/logics/theme/updateColorWeak';
-import { updateGrayMode } from '/@/logics/theme/updateGrayMode';
+import { updateHeaderBgColor, updateSidebarBgColor } from '@/logics/theme/updateBackground';
+import { updateColorWeak } from '@/logics/theme/updateColorWeak';
+import { updateGrayMode } from '@/logics/theme/updateGrayMode';
 
-import { useAppStore } from '/@/store/modules/app';
+import { useAppStore } from '@/store/modules/app';
 import { ProjectConfig } from '/#/config';
-import { updateDarkTheme } from '/@/logics/theme/dark';
-import { useRootSetting } from '/@/hooks/setting/useRootSetting';
+import { updateDarkTheme } from '@/logics/theme/dark';
+import { useRootSetting } from '@/hooks/setting/useRootSetting';
+import projectSetting from '@/settings/projectSetting';
 
 export function baseHandler(event: HandlerEnum, value: any) {
   const appStore = useAppStore();
@@ -22,10 +24,15 @@ export function handler(event: HandlerEnum, value: any): DeepPartial<ProjectConf
   const appStore = useAppStore();
 
   const { getThemeColor, getDarkMode } = useRootSetting();
+  const { menuSetting } = projectSetting;
   switch (event) {
     case HandlerEnum.CHANGE_LAYOUT:
       const { mode, type, split } = value;
-      const splitOpt = split === undefined ? { split } : {};
+      const isMixSidebar = type === MenuTypeEnum.MIX;
+      const mixSideSplitOpt =
+        menuSetting.type === MenuTypeEnum.MIX ? { split: menuSetting.split } : { split };
+      const otherSplitOpt = { split: false };
+      const splitOpt = isMixSidebar ? mixSideSplitOpt : otherSplitOpt;
 
       return {
         menuSetting: {

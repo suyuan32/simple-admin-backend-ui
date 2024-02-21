@@ -48,20 +48,20 @@
   import FormAction from './components/FormAction.vue';
 
   import { dateItemType, isIncludeSimpleComponents } from './helper';
-  import { dateUtil } from '/@/utils/dateUtil';
+  import { dateUtil } from '@/utils/dateUtil';
 
-  import { deepMerge } from '/@/utils';
+  import { deepMerge } from '@/utils';
 
   import { useFormValues } from './hooks/useFormValues';
   import useAdvanced from './hooks/useAdvanced';
   import { useFormEvents } from './hooks/useFormEvents';
   import { createFormContext } from './hooks/useFormContext';
   import { useAutoFocus } from './hooks/useAutoFocus';
-  import { useModalContext } from '/@/components/Modal';
+  import { useModalContext } from '@/components/Modal';
   import { useDebounceFn } from '@vueuse/core';
 
   import { basicProps } from './props';
-  import { useDesign } from '/@/hooks/web/useDesign';
+  import { useDesign } from '@/hooks/web/useDesign';
   import { cloneDeep } from 'lodash-es';
 
   export default defineComponent({
@@ -112,7 +112,7 @@
       });
 
       const getBindValue = computed(
-        () => ({ ...attrs, ...props, ...unref(getProps) } as AntFormProps),
+        () => ({ ...attrs, ...props, ...unref(getProps) }) as AntFormProps,
       );
 
       const getSchema = computed((): FormSchema[] => {
@@ -147,7 +147,9 @@
         }
         if (unref(getProps).showAdvancedButton) {
           return cloneDeep(
-            schemas.filter((schema) => !isIncludeSimpleComponents(schema.component)) as FormSchema[],
+            schemas.filter(
+              (schema) => !isIncludeSimpleComponents(schema.component),
+            ) as FormSchema[],
           );
         } else {
           return cloneDeep(schemas as FormSchema[]);
@@ -311,7 +313,7 @@
         getFormClass,
         getFormActionBindProps: computed(
           () =>
-            ({ ...getProps.value, ...advanceState } as InstanceType<typeof FormAction>['$props']),
+            ({ ...getProps.value, ...advanceState }) as InstanceType<typeof FormAction>['$props'],
         ),
         fieldsIsAdvancedMap,
         ...formActionType,

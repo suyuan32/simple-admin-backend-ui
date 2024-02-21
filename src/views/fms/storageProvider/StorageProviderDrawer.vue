@@ -12,12 +12,12 @@
 </template>
 <script lang="ts">
   import { defineComponent, ref, computed, unref } from 'vue';
-  import { BasicForm, useForm } from '/@/components/Form/index';
+  import { BasicForm, useForm } from '@/components/Form/index';
   import { formSchema } from './storageProvider.data';
-  import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
+  import { BasicDrawer, useDrawerInner } from '@/components/Drawer';
   import { useI18n } from 'vue-i18n';
 
-  import { createStorageProvider, updateStorageProvider } from '/@/api/fms/storageProvider';
+  import { createStorageProvider, updateStorageProvider } from '@/api/fms/storageProvider';
 
   export default defineComponent({
     name: 'StorageProviderDrawer',

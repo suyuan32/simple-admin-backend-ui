@@ -1,5 +1,5 @@
-import { UploadApiResp } from '/@/api/sys/model/uploadModel';
-import { defHttp } from '/@/utils/http/axios';
+import { UploadApiResp } from '@/api/sys/model/uploadModel';
+import { defHttp } from '@/utils/http/axios';
 import { ErrorMessageMode, UploadFileParams } from '/#/axios';
 import { BaseDataResp, BaseListReq, BaseResp, BaseUUIDsReq } from '../model/baseModel';
 import { FileListResp, updateFileInfoReq } from './model/fileModel';
@@ -36,7 +36,7 @@ export function uploadApi(
 
 export const getFileList = (params: BaseListReq, mode: ErrorMessageMode = 'notice') => {
   return defHttp.post<BaseDataResp<FileListResp>>(
-    { url: Api.GetFileList, params }, 
+    { url: Api.GetFileList, params },
     {
       errorMessageMode: mode,
       successMessageMode: 'none',

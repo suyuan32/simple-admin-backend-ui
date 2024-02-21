@@ -115,21 +115,21 @@
   import { computed, createVNode, defineComponent, ref } from 'vue';
   import { Image, Modal } from 'ant-design-vue';
 
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
-  import { BasicUpload } from '/@/components/Upload';
+  import { BasicTable, useTable, TableAction } from '@/components/Table';
+  import { BasicUpload } from '@/components/Upload';
   import useClipboard from 'vue-clipboard3';
-  import { useMessage } from '/@/hooks/web/useMessage';
+  import { useMessage } from '@/hooks/web/useMessage';
 
-  import { useDrawer } from '/@/components/Drawer';
+  import { useDrawer } from '@/components/Drawer';
   import CloudFileDrawer from './CloudFileDrawer.vue';
   import { useI18n } from 'vue-i18n';
 
   import { columns, searchFormSchema } from './cloudFile.data';
-  import { deleteCloudFile, getCloudFileList, uploadApi } from '/@/api/fms/cloudFile';
+  import { deleteCloudFile, getCloudFileList, uploadApi } from '@/api/fms/cloudFile';
   import { ExclamationCircleOutlined } from '@ant-design/icons-vue/lib/icons';
-  import { Button } from '/@/components/Button';
-  import { ApiSelect } from '/@/components/Form';
-  import { getStorageProviderList } from '/@/api/fms/storageProvider';
+  import { Button } from '@/components/Button';
+  import { ApiSelect } from '@/components/Form';
+  import { getStorageProviderList } from '@/api/fms/storageProvider';
 
   export default defineComponent({
     name: 'CloudFileManagement',

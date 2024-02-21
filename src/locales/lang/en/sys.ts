@@ -97,6 +97,9 @@ export default {
     mobilePlaceholder: 'Please input mobile',
     policyPlaceholder: 'Register after checking',
     diffPwd: 'The two passwords are inconsistent',
+    accountMaxLength: 'Account length should be up to 30 characters',
+    passwordLength: 'Password length should be between 6 and 30 characters',
+    captchaRequired: 'Please enter a 5-digit captcha',
 
     username: 'Username',
     password: 'Password',
@@ -296,7 +299,7 @@ export default {
     addMember: 'Add Member',
     editMember: 'Edit Member',
     memberList: 'Member List',
-    expiredAt: 'Expired Time'
+    expiredAt: 'Expired Time',
   },
   memberRank: {
     name: 'Rank Name',

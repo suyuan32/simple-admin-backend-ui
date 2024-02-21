@@ -1,10 +1,10 @@
-import { BasicColumn, FormSchema } from '/@/components/Table';
-import { useI18n } from '/@/hooks/web/useI18n';
-import { formatToDateTime } from '/@/utils/dateUtil';
-import { updateDictionaryDetail } from '/@/api/sys/dictionaryDetail';
+import { BasicColumn, FormSchema } from '@/components/Table';
+import { useI18n } from '@/hooks/web/useI18n';
+import { formatToDateTime } from '@/utils/dateUtil';
+import { updateDictionaryDetail } from '@/api/sys/dictionaryDetail';
 import { Switch } from 'ant-design-vue';
 import { h } from 'vue';
-import { getDictionaryList } from '/@/api/sys/dictionary';
+import { getDictionaryList } from '@/api/sys/dictionary';
 
 const { t } = useI18n();
 

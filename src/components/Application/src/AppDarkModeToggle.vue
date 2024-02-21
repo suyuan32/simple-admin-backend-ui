@@ -5,11 +5,11 @@
 </template>
 <script lang="ts" setup>
   import { computed, unref } from 'vue';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { useRootSetting } from '/@/hooks/setting/useRootSetting';
-  import { updateHeaderBgColor, updateSidebarBgColor } from '/@/logics/theme/updateBackground';
-  import { updateDarkTheme } from '/@/logics/theme/dark';
-  import { ThemeEnum } from '/@/enums/appEnum';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { useRootSetting } from '@/hooks/setting/useRootSetting';
+  import { updateHeaderBgColor, updateSidebarBgColor } from '@/logics/theme/updateBackground';
+  import { updateDarkTheme } from '@/logics/theme/dark';
+  import { ThemeEnum } from '@/enums/appEnum';
 
   const { prefixCls } = useDesign('dark-switch');
   const { getDarkMode, setDarkMode, getShowDarkModeToggle } = useRootSetting();
@@ -58,7 +58,9 @@
       z-index: 1;
       width: 18px;
       height: 18px;
-      transition: transform 0.5s, background-color 0.5s;
+      transition:
+        transform 0.5s,
+        background-color 0.5s;
       border-radius: 50%;
       background-color: #fff;
       will-change: transform;

@@ -1,11 +1,11 @@
-import { BasicColumn, FormSchema } from '/@/components/Table';
-import { useI18n } from '/@/hooks/web/useI18n';
-import { formatToDateTime } from '/@/utils/dateUtil';
+import { BasicColumn, FormSchema } from '@/components/Table';
+import { useI18n } from '@/hooks/web/useI18n';
+import { formatToDateTime } from '@/utils/dateUtil';
 import { Switch } from 'ant-design-vue';
 import { h } from 'vue';
 import { getMemberRankList } from '../../../api/member/memberRank';
 import { updateMember } from '../../../api/member/member';
-import { uploadApi } from '/@/api/fms/file';
+import { uploadApi } from '@/api/fms/file';
 
 const { t } = useI18n();
 
@@ -35,7 +35,7 @@ export const columns: BasicColumn[] = [
         loading: record.pendingStatus,
         onChange(checked, _) {
           record.pendingStatus = true;
-          const newStatus = checked ? 1 : 0;
+          const newStatus = checked ? 1 : 2;
           updateMember({ id: record.id, status: newStatus })
             .then(() => {
               record.status = newStatus;
@@ -142,8 +142,8 @@ export const formSchema: FormSchema[] = [
     label: t('sys.member.expiredAt'),
     component: 'SimpleTimePicker',
     componentProps: {
-      timeMode: 'date'
-    }
+      timeMode: 'date',
+    },
   },
   {
     field: 'mobile',

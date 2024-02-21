@@ -32,16 +32,16 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
 
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import { BasicTable, useTable, TableAction } from '@/components/Table';
 
-  import { useDrawer } from '/@/components/Drawer';
+  import { useDrawer } from '@/components/Drawer';
   import RoleDrawer from './RoleDrawer.vue';
   import { useI18n } from 'vue-i18n';
 
   import { columns } from './role.data';
-  import { getRoleList, deleteRole } from '/@/api/sys/role';
-  import { useMessage } from '/@/hooks/web/useMessage';
-  import { PageWrapper } from '/@/components/Page';
+  import { getRoleList, deleteRole } from '@/api/sys/role';
+  import { useMessage } from '@/hooks/web/useMessage';
+  import { PageWrapper } from '@/components/Page';
 
   export default defineComponent({
     name: 'RoleManagement',

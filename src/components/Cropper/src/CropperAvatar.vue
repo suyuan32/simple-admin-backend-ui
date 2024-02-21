@@ -41,12 +41,13 @@
     PropType,
   } from 'vue';
   import CropperModal from './CropperModal.vue';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { useModal } from '/@/components/Modal';
-  import { useMessage } from '/@/hooks/web/useMessage';
-  import { useI18n } from '/@/hooks/web/useI18n';
-  import type { ButtonProps } from '/@/components/Button';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { useModal } from '@/components/Modal';
+  import { useMessage } from '@/hooks/web/useMessage';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import type { ButtonProps } from '@/components/Button';
   import Icon from '@/components/Icon/Icon.vue';
+  import { propTypes } from '@/utils/propTypes';
 
   const props = {
     width: { type: [String, Number], default: '200px' },
@@ -55,9 +56,9 @@
     btnProps: { type: Object as PropType<ButtonProps> },
     btnText: { type: String, default: '' },
     uploadApi: {
-      type: Function as PropType<({ file, name }: { file: Blob; name: string }) => Promise<void>>,
+      type: Function as PropType<PromiseFn>,
     },
-
+    formValueType: propTypes.string.def('base64'),
     size: { type: Number, default: 5 },
   };
 

@@ -1,4 +1,4 @@
-import { BaseDataResp, BaseListResp } from '/@/api/model/baseModel';
+import { BaseDataResp, BaseListResp } from '@/api/model/baseModel';
 
 /**
  *  @description: OauthProvider info response

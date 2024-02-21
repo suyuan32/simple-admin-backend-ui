@@ -14,11 +14,11 @@
 </template>
 <script lang="ts">
   import { defineComponent, onMounted, ref } from 'vue';
-  import { getDepartmentList } from '/@/api/sys/department';
+  import { getDepartmentList } from '@/api/sys/department';
 
-  import { BasicTree, TreeItem } from '/@/components/Tree';
-  import { useI18n } from '/@/hooks/web/useI18n';
-  import { buildDataNode } from '/@/utils/tree';
+  import { BasicTree, TreeItem } from '@/components/Tree';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { buildDataNode } from '@/utils/tree';
 
   export default defineComponent({
     name: 'DeptTree',

@@ -5,7 +5,7 @@
     @change="handleChange"
     :options="getOptions"
     v-model:value="state"
-    :show-search="isSearch"
+    :show-search="useSearch"
     @search="searchFun"
     :show-arrow="false"
     :filter-option="false"
@@ -28,13 +28,13 @@
   import { defineComponent, PropType, ref, computed, unref, watch } from 'vue';
   import { Select } from 'ant-design-vue';
   import type { SelectValue } from 'ant-design-vue/es/select';
-  import { isFunction } from '/@/utils/is';
-  import { useRuleFormItem } from '/@/hooks/component/useFormItem';
+  import { isFunction } from '@/utils/is';
+  import { useRuleFormItem } from '@/hooks/component/useFormItem';
   import { useAttrs } from '@vben/hooks';
   import { get, omit } from 'lodash-es';
   import { LoadingOutlined } from '@ant-design/icons-vue';
-  import { useI18n } from '/@/hooks/web/useI18n';
-  import { propTypes } from '/@/utils/propTypes';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { propTypes } from '@/utils/propTypes';
 
   type OptionsItem = { label?: string; value?: string; disabled?: boolean; [name: string]: any };
 
@@ -49,7 +49,7 @@
       value: { type: [Array, Object, String, Number] as PropType<SelectValue> },
       numberToString: propTypes.bool,
       api: {
-        type: Function as PropType<(arg?: any) => Promise<OptionsItem[]>>,
+        type: Function as PropType<(arg?: any) => Promise<any>>,
         default: null,
       },
       // api params
@@ -77,11 +77,11 @@
       const emitData = ref<OptionsItem[]>([]);
       const attrs = useAttrs();
       const { t } = useI18n();
-      const isSearch = props.isSearch;
+      const useSearch = props.isSearch;
       const searchFun = ref<any>();
-      
-      if (isSearch) {
-        searchFun.value = searchFetch
+
+      if (useSearch) {
+        searchFun.value = searchFetch;
       }
 
       // Embedded in the form, just use the hook binding to perform form verification
@@ -115,7 +115,7 @@
       watch(
         () => props.params,
         () => {
-          if (isSearch == false) {
+          if (useSearch == false) {
             !unref(isFirstLoaded) && fetch();
           }
         },
@@ -162,8 +162,8 @@
             searchParam[props.searchField] = value;
           }
 
-          searchParam['page'] = 1
-          searchParam['pageSize'] = 10
+          searchParam['page'] = 1;
+          searchParam['pageSize'] = 10;
 
           const res = await api(searchParam);
           if (Array.isArray(res)) {
@@ -184,7 +184,7 @@
       }
 
       async function handleFetch(visible: boolean) {
-        if (visible && !isSearch) {
+        if (visible && !useSearch) {
           if (props.alwaysLoad) {
             await fetch();
           } else if (!props.immediate && !unref(isFirstLoaded)) {
@@ -199,10 +199,20 @@
 
       function handleChange(_, ...args) {
         emitData.value = args;
-        emit('change', args)
+        emit('change', args);
       }
 
-      return { state, attrs, getOptions, loading, t, handleFetch, handleChange, isSearch, searchFun };
+      return {
+        state,
+        attrs,
+        getOptions,
+        loading,
+        t,
+        handleFetch,
+        handleChange,
+        useSearch,
+        searchFun,
+      };
     },
   });
 </script>

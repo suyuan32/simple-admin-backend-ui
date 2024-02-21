@@ -1,11 +1,11 @@
-import { BasicColumn, FormSchema } from '/@/components/Table';
-import { useI18n } from '/@/hooks/web/useI18n';
-import { formatToDateTime } from '/@/utils/dateUtil';
-import { updateCloudFile } from '/@/api/fms/cloudFile';
+import { BasicColumn, FormSchema } from '@/components/Table';
+import { useI18n } from '@/hooks/web/useI18n';
+import { formatToDateTime } from '@/utils/dateUtil';
+import { updateCloudFile } from '@/api/fms/cloudFile';
 import { Switch } from 'ant-design-vue';
 import { h } from 'vue';
-import { getStorageProviderList } from '/@/api/fms/storageProvider';
-import { getCloudFileTagList } from '/@/api/fms/cloudFileTag';
+import { getStorageProviderList } from '@/api/fms/storageProvider';
+import { getCloudFileTagList } from '@/api/fms/cloudFileTag';
 
 const { t } = useI18n();
 

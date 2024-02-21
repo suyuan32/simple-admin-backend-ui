@@ -58,22 +58,22 @@
   import { createVNode, defineComponent, ref } from 'vue';
   import { Modal } from 'ant-design-vue';
   import { ExclamationCircleOutlined } from '@ant-design/icons-vue/lib/icons';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
-  import { Button } from '/@/components/Button';
+  import { BasicTable, useTable, TableAction } from '@/components/Table';
+  import { Button } from '@/components/Button';
 
-  import { useDrawer } from '/@/components/Drawer';
+  import { useDrawer } from '@/components/Drawer';
   import SmsProviderDrawer from './SmsProviderDrawer.vue';
   import { useI18n } from 'vue-i18n';
 
   import { columns, searchFormSchema } from './smsProvider.data';
-  import { getSmsProviderList, deleteSmsProvider } from '/@/api/mcms/smsProvider';
+  import { getSmsProviderList, deleteSmsProvider } from '@/api/mcms/smsProvider';
   import LogModal from './LogModal.vue';
-  import { useModal } from '/@/components/Modal/src/hooks/useModal';
-  import { useForm } from '/@/components/Form/src/hooks/useForm';
+  import { useModal } from '@/components/Modal/src/hooks/useModal';
+  import { useForm } from '@/components/Form/src/hooks/useForm';
   import { formSchema } from './sms.data';
-  import { sendSms } from '/@/api/mcms/messageSender';
-  import { BasicModal } from '/@/components/Modal';
-  import { BasicForm } from '/@/components/Form';
+  import { sendSms } from '@/api/mcms/messageSender';
+  import { BasicModal } from '@/components/Modal';
+  import { BasicForm } from '@/components/Form';
 
   export default defineComponent({
     name: 'SmsProviderManagement',

@@ -1,6 +1,6 @@
 import type { VNodeChild } from 'vue';
 import type { PaginationProps } from './pagination';
-import type { FormProps } from '/@/components/Form';
+import type { FormProps } from '@/components/Form';
 import type {
   TableRowSelection as ITableRowSelection,
   Key,
@@ -9,8 +9,8 @@ import type {
 import type { ColumnProps } from 'ant-design-vue/lib/table';
 
 import { ComponentType } from './componentType';
-import { VueNode } from '/@/utils/propTypes';
-import { RoleEnum } from '/@/enums/roleEnum';
+import { VueNode } from '@/utils/propTypes';
+import { RoleEnum } from '@/enums/roleEnum';
 
 export declare type SortOrder = 'ascend' | 'descend';
 
@@ -451,11 +451,11 @@ export interface BasicColumn extends ColumnProps<Recordable> {
   editComponent?: ComponentType;
   editComponentProps?:
     | ((opt: {
-    text: string | number | boolean | Recordable;
-    record: Recordable;
-    column: BasicColumn;
-    index: number;
-  }) => Recordable)
+        text: string | number | boolean | Recordable;
+        record: Recordable;
+        column: BasicColumn;
+        index: number;
+      }) => Recordable)
     | Recordable;
   editRule?: boolean | ((text: string, record: Recordable) => Promise<string>);
   editValueMap?: (value: any) => string;

@@ -12,12 +12,12 @@
 </template>
 <script lang="ts">
   import { defineComponent, ref, computed, unref } from 'vue';
-  import { BasicForm, useForm } from '/@/components/Form/index';
+  import { BasicForm, useForm } from '@/components/Form/index';
   import { formSchema } from './smsProvider.data';
-  import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
+  import { BasicDrawer, useDrawerInner } from '@/components/Drawer';
   import { useI18n } from 'vue-i18n';
 
-  import { createSmsProvider, updateSmsProvider } from '/@/api/mcms/smsProvider';
+  import { createSmsProvider, updateSmsProvider } from '@/api/mcms/smsProvider';
 
   export default defineComponent({
     name: 'SmsProviderDrawer',

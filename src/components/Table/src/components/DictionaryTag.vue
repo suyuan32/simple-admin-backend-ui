@@ -4,9 +4,9 @@
 <script lang="ts">
   import { defineComponent, ref, onMounted } from 'vue';
   import { useAttrs } from '@vben/hooks';
-  import { useI18n } from '/@/hooks/web/useI18n';
-  import { propTypes } from '/@/utils/propTypes';
-  import { useDictionaryStore } from '/@/store/modules/dictionary';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { propTypes } from '@/utils/propTypes';
+  import { useDictionaryStore } from '@/store/modules/dictionary';
   import { DefaultOptionType } from 'ant-design-vue/lib/select';
 
   export default defineComponent({

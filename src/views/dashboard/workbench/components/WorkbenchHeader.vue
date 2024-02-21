@@ -25,8 +25,8 @@
 <script lang="ts" setup>
   import { computed } from 'vue';
   import { Avatar } from 'ant-design-vue';
-  import { useUserStore } from '/@/store/modules/user';
-  import headerImg from '/@/assets/images/header.jpg';
+  import { useUserStore } from '@/store/modules/user';
+  import headerImg from '@/assets/images/header.jpg';
   import { useI18n } from 'vue-i18n';
 
   const { t } = useI18n();

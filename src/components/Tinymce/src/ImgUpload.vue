@@ -25,10 +25,10 @@
   import { defineComponent, computed } from 'vue';
 
   import { Upload } from 'ant-design-vue';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { useGlobSetting } from '/@/hooks/setting';
-  import { useI18n } from '/@/hooks/web/useI18n';
-  import { useUserStore } from '/@/store/modules/user';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { useGlobSetting } from '@/hooks/setting';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { useUserStore } from '@/store/modules/user';
 
   export default defineComponent({
     name: 'TinymceImageUpload',

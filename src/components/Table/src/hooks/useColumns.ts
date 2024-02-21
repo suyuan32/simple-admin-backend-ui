@@ -3,11 +3,11 @@ import type { PaginationProps } from '../types/pagination';
 import type { ComputedRef } from 'vue';
 import { computed, Ref, ref, reactive, toRaw, unref, watch } from 'vue';
 import { renderEditCell } from '../components/editable';
-import { usePermission } from '/@/hooks/web/usePermission';
-import { useI18n } from '/@/hooks/web/useI18n';
-import { isArray, isBoolean, isFunction, isMap, isString } from '/@/utils/is';
+import { usePermission } from '@/hooks/web/usePermission';
+import { useI18n } from '@/hooks/web/useI18n';
+import { isArray, isBoolean, isFunction, isMap, isString } from '@/utils/is';
 import { cloneDeep, isEqual } from 'lodash-es';
-import { formatToDate } from '/@/utils/dateUtil';
+import { formatToDate } from '@/utils/dateUtil';
 import { ACTION_COLUMN_FLAG, DEFAULT_ALIGN, INDEX_COLUMN_FLAG, PAGE_SIZE } from '../const';
 import { ColumnType } from 'ant-design-vue/es/table';
 
@@ -297,9 +297,23 @@ function sortFixedColumn(columns: BasicColumn[]) {
     }
     defColumns.push(column);
   }
-  return [...fixedLeftColumns, ...defColumns, ...fixedRightColumns].filter(
-    (item) => !item.defaultHidden,
-  );
+  // 筛选逻辑
+  const filterFunc = (item) => !item.defaultHidden;
+  // 筛选首层显示列（1级表头）
+  const viewColumns = [...fixedLeftColumns, ...defColumns, ...fixedRightColumns].filter(filterFunc);
+  // 筛选>=2级表头（深度优先）
+  const list = [...viewColumns];
+  while (list.length) {
+    const current = list[0];
+    if (Array.isArray(current.children)) {
+      current.children = current.children.filter(filterFunc);
+      list.shift();
+      list.unshift(...current.children);
+    } else {
+      list.shift();
+    }
+  }
+  return viewColumns;
 }
 
 // format cell

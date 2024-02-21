@@ -44,7 +44,10 @@
       name="account"
       v-if="formData.msgType === 'captcha'"
       class="enter-x"
-      :rules="[{ required: true, max: 30 }]"
+      :rules="[
+        { required: true, message: t('sys.login.accountPlaceholder') },
+        { max: 30, message: t('sys.login.accountMaxLength') },
+      ]"
     >
       <Input
         size="large"
@@ -58,7 +61,10 @@
       name="password"
       class="enter-x"
       v-if="formData.msgType === 'captcha'"
-      :rules="[{ required: true, min: 6, max: 30 }]"
+      :rules="[
+        { required: true, message: t('sys.login.passwordPlaceholder') },
+        { min: 6, max: 30, message: t('sys.login.passwordLength') },
+      ]"
     >
       <InputPassword
         size="large"
@@ -73,7 +79,7 @@
       name="captcha"
       v-if="formData.msgType === 'captcha'"
       class="enter-x"
-      :rules="[{ required: true, len: 5 }]"
+      :rules="[{ required: true, len: 5, message: t('sys.login.captchaRequired') }]"
     >
       <Input
         size="large"
@@ -149,16 +155,16 @@
   import { GithubFilled, GoogleCircleFilled } from '@ant-design/icons-vue';
   import LoginFormTitle from './LoginFormTitle.vue';
 
-  import { useI18n } from '/@/hooks/web/useI18n';
+  import { useI18n } from '@/hooks/web/useI18n';
 
-  import { useUserStore } from '/@/store/modules/user';
+  import { useUserStore } from '@/store/modules/user';
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { getCaptcha, getEmailCaptcha, getSmsCaptcha } from '/@/api/sys/captcha';
-  import { useGo } from '/@/hooks/web/usePage';
-  import { PageEnum } from '/@/enums/pageEnum';
-  import { oauthLogin } from '/@/api/sys/oauthProvider';
-  import { CountdownInput } from '/@/components/CountDown';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { getCaptcha, getEmailCaptcha, getSmsCaptcha } from '@/api/sys/captcha';
+  import { useGo } from '@/hooks/web/usePage';
+  import { PageEnum } from '@/enums/pageEnum';
+  import { oauthLogin } from '@/api/sys/oauthProvider';
+  import { CountdownInput } from '@/components/CountDown';
 
   const ACol = Col;
   const ARow = Row;

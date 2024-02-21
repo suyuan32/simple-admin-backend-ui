@@ -14,7 +14,7 @@
   import { PropType, ref, onBeforeUpdate } from 'vue';
   import { Codemirror } from 'vue-codemirror';
   import { MODE } from './typing';
-  import { useAppStore } from '/@/store/modules/app';
+  import { useAppStore } from '@/store/modules/app';
   import { githubLight, githubDark } from '@uiw/codemirror-theme-github';
   import { StreamLanguage } from '@codemirror/language';
   import { yaml } from '@codemirror/legacy-modes/mode/yaml';
@@ -37,7 +37,7 @@
 
   onBeforeUpdate(() => {
     inputValue.value = props.value as string;
-  })
+  });
 
   const emit = defineEmits(['change', 'update:value', 'format-error']);
 

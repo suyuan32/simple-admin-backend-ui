@@ -17,8 +17,8 @@
   import { useI18n } from 'vue-i18n';
   import { getMemberRankList } from '../../../api/member/memberRank';
 
-  import { BasicTree, TreeItem } from '/@/components/Tree';
-  import { buildDataNode } from '/@/utils/tree';
+  import { BasicTree, TreeItem } from '@/components/Tree';
+  import { buildDataNode } from '@/utils/tree';
 
   export default defineComponent({
     name: 'RankTree',

@@ -16,10 +16,10 @@
 <script lang="ts">
   import type { ExportModalResult } from './typing';
   import { defineComponent } from 'vue';
-  import { BasicModal, useModalInner } from '/@/components/Modal';
-  import { BasicForm, FormSchema, useForm } from '/@/components/Form/index';
+  import { BasicModal, useModalInner } from '@/components/Modal';
+  import { BasicForm, FormSchema, useForm } from '@/components/Form/index';
 
-  import { useI18n } from '/@/hooks/web/useI18n';
+  import { useI18n } from '@/hooks/web/useI18n';
 
   const { t } = useI18n();
 

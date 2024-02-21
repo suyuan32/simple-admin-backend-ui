@@ -1,6 +1,6 @@
-import { defHttp } from '/@/utils/http/axios';
+import { defHttp } from '@/utils/http/axios';
 import { ErrorMessageMode } from '/#/axios';
-import { BaseResp } from '/@/api/model/baseModel';
+import { BaseResp } from '@/api/model/baseModel';
 import { SendEmailReq, SendSmsReq } from './model/messageModel';
 
 enum Api {

@@ -24,11 +24,11 @@
   import { createVNode, defineComponent, reactive, ref } from 'vue';
   import { useI18n } from 'vue-i18n';
   import { columns, searchFormSchema } from './tasklog.data';
-  import { deleteTaskLog, getTaskLogList } from '/@/api/sys/taskLog';
-  import { Button } from '/@/components/Button';
-  import { BasicModal, useModalInner } from '/@/components/Modal';
-  import { BasicTable, useTable } from '/@/components/Table';
-  import { useMessage } from '/@/hooks/web/useMessage';
+  import { deleteTaskLog, getTaskLogList } from '@/api/sys/taskLog';
+  import { Button } from '@/components/Button';
+  import { BasicModal, useModalInner } from '@/components/Modal';
+  import { BasicTable, useTable } from '@/components/Table';
+  import { useMessage } from '@/hooks/web/useMessage';
 
   export default defineComponent({
     components: { BasicModal, BasicTable, DeleteOutlined, Button },

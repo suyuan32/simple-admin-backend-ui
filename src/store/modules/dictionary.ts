@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
-import { GetDictionaryDetailByDictionaryName } from '/@/api/sys/dictionaryDetail';
+import { GetDictionaryDetailByDictionaryName } from '@/api/sys/dictionaryDetail';
 import { DefaultOptionType } from 'ant-design-vue/lib/select';
 import { ref } from 'vue';
-import { DICT_INFO_KEY } from '/@/enums/cacheEnum';
+import { DICT_INFO_KEY } from '@/enums/cacheEnum';
 
 interface DictionaryData {
   data: DefaultOptionType[];
@@ -25,7 +25,7 @@ export const useDictionaryStore = defineStore({
   actions: {
     // Get dictionary info
     async getDictionary(name: string, isCache = true) {
-      let mapData: Map<string, DictionaryData> = new Map(JSON.parse(this.data));
+      const mapData: Map<string, DictionaryData> = new Map(JSON.parse(this.data));
 
       if (isCache && mapData.has(name)) {
         return mapData.get(name);
@@ -52,7 +52,7 @@ export const useDictionaryStore = defineStore({
       }
     },
     async fetchDictionaryData(name: string) {
-      let mapData: Map<string, DictionaryData> = new Map(JSON.parse(this.data));
+      const mapData: Map<string, DictionaryData> = new Map(JSON.parse(this.data));
       const result = await GetDictionaryDetailByDictionaryName({ name });
       if (result.code === 0) {
         const dataConv = ref<DefaultOptionType[]>([]);
@@ -75,7 +75,7 @@ export const useDictionaryStore = defineStore({
 
     // remove the dictionary in storage
     removeDictionary(name: string) {
-      let mapData = new Map(JSON.parse(this.data));
+      const mapData = new Map(JSON.parse(this.data));
       if (mapData.has(name)) {
         mapData.delete(name);
       }
@@ -84,7 +84,7 @@ export const useDictionaryStore = defineStore({
 
     // remove all the dictionary in storage
     clear() {
-      let mapData = new Map();
+      const mapData = new Map();
       this.data = JSON.stringify(Array.from(mapData.entries()));
     },
   },

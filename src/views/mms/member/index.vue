@@ -63,20 +63,20 @@
   import { createVNode, defineComponent, reactive, ref } from 'vue';
   import { Modal } from 'ant-design-vue';
   import { ExclamationCircleOutlined } from '@ant-design/icons-vue/lib/icons';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
-  import { Button } from '/@/components/Button';
+  import { BasicTable, useTable, TableAction } from '@/components/Table';
+  import { Button } from '@/components/Button';
   import RankTree from './RankTree.vue';
 
-  import { useDrawer } from '/@/components/Drawer';
+  import { useDrawer } from '@/components/Drawer';
   import MemberDrawer from './MemberDrawer.vue';
   import { useI18n } from 'vue-i18n';
 
   import { columns, searchFormSchema } from './member.data';
   import { getMemberList, deleteMember } from '../../../api/member/member';
-  import { PageWrapper } from '/@/components/Page';
+  import { PageWrapper } from '@/components/Page';
   import Row from 'ant-design-vue/es/grid/Row';
   import Col from 'ant-design-vue/es/grid/Col';
-  import { logout } from '/@/api/member/token';
+  import { logout } from '@/api/member/token';
 
   export default defineComponent({
     name: 'MemberManagement',

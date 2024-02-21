@@ -12,12 +12,12 @@
 </template>
 <script lang="ts">
   import { defineComponent, ref, computed, unref } from 'vue';
-  import { BasicForm, useForm } from '/@/components/Form/index';
+  import { BasicForm, useForm } from '@/components/Form/index';
   import { formSchema } from './user.data';
-  import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
+  import { BasicDrawer, useDrawerInner } from '@/components/Drawer';
   import { useI18n } from 'vue-i18n';
-  import { createUser, updateUser } from '/@/api/sys/user';
-  import { useMessage } from '/@/hooks/web/useMessage';
+  import { createUser, updateUser } from '@/api/sys/user';
+  import { useMessage } from '@/hooks/web/useMessage';
 
   export default defineComponent({
     name: 'UserDrawer',

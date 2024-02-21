@@ -1,5 +1,5 @@
-import { defineComponent, computed, unref } from 'vue';
-import { BasicDrawer } from '/@/components/Drawer/index';
+import { defineComponent, unref } from 'vue';
+import { BasicDrawer } from '@/components/Drawer/index';
 import { Divider } from 'ant-design-vue';
 import {
   TypePicker,
@@ -10,16 +10,16 @@ import {
   // InputNumberItem,
 } from './components';
 
-import { AppDarkModeToggle } from '/@/components/Application';
+import { AppDarkModeToggle } from '@/components/Application';
 
-// import { MenuTypeEnum, TriggerEnum } from '/@/enums/menuEnum';
+// import { MenuTypeEnum, TriggerEnum } from '@/enums/menuEnum';
 
-import { useRootSetting } from '/@/hooks/setting/useRootSetting';
-import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
-import { useHeaderSetting } from '/@/hooks/setting/useHeaderSetting';
-// import { useMultipleTabSetting } from '/@/hooks/setting/useMultipleTabSetting';
-// import { useTransitionSetting } from '/@/hooks/setting/useTransitionSetting';
-import { useI18n } from '/@/hooks/web/useI18n';
+import { useRootSetting } from '@/hooks/setting/useRootSetting';
+import { useMenuSetting } from '@/hooks/setting/useMenuSetting';
+import { useHeaderSetting } from '@/hooks/setting/useHeaderSetting';
+// import { useMultipleTabSetting } from '@/hooks/setting/useMultipleTabSetting';
+// import { useTransitionSetting } from '@/hooks/setting/useTransitionSetting';
+import { useI18n } from '@/hooks/web/useI18n';
 
 import { baseHandler } from './handler';
 
@@ -37,7 +37,7 @@ import {
   HEADER_PRESET_BG_COLOR_LIST,
   SIDE_BAR_BG_COLOR_LIST,
   // APP_PRESET_COLOR_LIST,
-} from '/@/settings/designSetting';
+} from '@/settings/designSetting';
 
 const { t } = useI18n();
 
@@ -63,7 +63,7 @@ export default defineComponent({
 
     const {
       getIsHorizontal,
-      getShowMenu,
+      // getShowMenu,
       getMenuType,
       // getTrigger,
       // getCollapsedShowTitle,

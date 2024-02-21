@@ -1,5 +1,5 @@
 <template>
-  <a-tree-select v-bind="getAttrs" @change="handleChange" @dropdownVisibleChange="fetch">
+  <a-tree-select v-bind="getAttrs" @change="handleChange" @dropdown-visible-change="fetch">
     <template #[item]="data" v-for="item in Object.keys($slots)">
       <slot :name="item" v-bind="data || {}"></slot>
     </template>
@@ -12,17 +12,17 @@
 <script lang="ts">
   import { computed, defineComponent, watch, ref, onMounted, unref } from 'vue';
   import { TreeSelect } from 'ant-design-vue';
-  import { isArray, isFunction } from '/@/utils/is';
+  import { isArray, isFunction } from '@/utils/is';
   import { get } from 'lodash-es';
-  import { propTypes } from '/@/utils/propTypes';
+  import { propTypes } from '@/utils/propTypes';
   import { LoadingOutlined } from '@ant-design/icons-vue';
-  import { buildTreeNode } from '/@/utils/tree';
+  import { buildTreeNode } from '@/utils/tree';
 
   export default defineComponent({
     name: 'ApiTreeSelect',
     components: { ATreeSelect: TreeSelect, LoadingOutlined },
     props: {
-      api: { type: Function as PropType<(arg?: Recordable) => Promise<Recordable>> },
+      api: { type: Function as Function as PropType<(arg?: any) => Promise<any>> },
       params: { type: Object },
       immediate: { type: Boolean, default: true },
       resultField: propTypes.string.def(''),

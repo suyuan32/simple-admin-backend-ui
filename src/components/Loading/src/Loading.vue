@@ -11,7 +11,7 @@
 <script lang="ts">
   import { PropType, defineComponent } from 'vue';
   import { Spin } from 'ant-design-vue';
-  import { SizeEnum } from '/@/enums/sizeEnum';
+  import { SizeEnum } from '@/enums/sizeEnum';
 
   export default defineComponent({
     name: 'Loading',

@@ -32,15 +32,15 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
 
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import { BasicTable, useTable, TableAction } from '@/components/Table';
   import { useI18n } from 'vue-i18n';
-  import { deleteMenu, getMenuList } from '/@/api/sys/menu';
+  import { deleteMenu, getMenuList } from '@/api/sys/menu';
 
-  import { useDrawer } from '/@/components/Drawer';
+  import { useDrawer } from '@/components/Drawer';
   import MenuDrawer from './MenuDrawer.vue';
 
   import { columns } from './menu.data';
-  import { PageWrapper } from '/@/components/Page';
+  import { PageWrapper } from '@/components/Page';
 
   export default defineComponent({
     name: 'MenuManagement',

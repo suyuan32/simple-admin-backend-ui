@@ -51,22 +51,22 @@
 <script lang="ts">
   import { defineComponent, reactive, ref, toRefs, unref, computed, PropType } from 'vue';
   import { Upload, Alert, message } from 'ant-design-vue';
-  import { BasicModal, useModalInner } from '/@/components/Modal';
-  //   import { BasicTable, useTable } from '/@/components/Table';
+  import { BasicModal, useModalInner } from '@/components/Modal';
+  //   import { BasicTable, useTable } from '@/components/Table';
   // hooks
   import { useUploadType } from '../hooks/useUpload';
-  import { useMessage } from '/@/hooks/web/useMessage';
+  import { useMessage } from '@/hooks/web/useMessage';
   //   types
   import { FileItem, UploadResultStatus } from '../types/typing';
   import { basicProps } from '../props';
   import { createTableColumns, createActionColumn } from './data';
   // utils
   import { checkImgType, getBase64WithFile } from '../helper';
-  import { buildUUID } from '/@/utils/uuid';
-  import { isFunction } from '/@/utils/is';
-  import { warn } from '/@/utils/log';
+  import { buildUUID } from '@/utils/uuid';
+  import { isFunction } from '@/utils/is';
+  import { warn } from '@/utils/log';
   import FileList from './FileList.vue';
-  import { useI18n } from '/@/hooks/web/useI18n';
+  import { useI18n } from '@/hooks/web/useI18n';
   import file2md5 from 'file2md5';
   import useClipboard from 'vue-clipboard3';
 
@@ -129,8 +129,8 @@
         return isUploadingRef.value
           ? t('component.upload.uploading')
           : someError
-          ? t('component.upload.reUploadFailed')
-          : t('component.upload.startUpload');
+            ? t('component.upload.reUploadFailed')
+            : t('component.upload.startUpload');
       });
 
       // 上传前校验
@@ -261,7 +261,7 @@
       // 点击开始上传
       async function handleStartUpload() {
         const { maxNumber } = props;
-        if ((fileListRef.value.length + props.previewFileList?.length ?? 0) > maxNumber) {
+        if (fileListRef.value.length + props.previewFileList?.length > maxNumber) {
           return createMessage.warning(t('component.upload.maxNumber', [maxNumber]));
         }
         try {

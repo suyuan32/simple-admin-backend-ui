@@ -1,7 +1,7 @@
-import { BasicColumn, FormSchema } from '/@/components/Table';
-import { useI18n } from '/@/hooks/web/useI18n';
-import { formatToDateTime } from '/@/utils/dateUtil';
-import { updateToken } from '/@/api/member/token';
+import { BasicColumn, FormSchema } from '@/components/Table';
+import { useI18n } from '@/hooks/web/useI18n';
+import { formatToDateTime } from '@/utils/dateUtil';
+import { updateToken } from '@/api/member/token';
 import { Switch } from 'ant-design-vue';
 import { h } from 'vue';
 
@@ -12,7 +12,7 @@ export const columns: BasicColumn[] = [
     title: 'UUID',
     dataIndex: 'id',
     width: 80,
-  },  
+  },
   {
     title: t('sys.login.username'),
     dataIndex: 'username',

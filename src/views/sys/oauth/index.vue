@@ -32,15 +32,15 @@
 <script lang="ts">
   import { defineComponent } from 'vue';
 
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import { BasicTable, useTable, TableAction } from '@/components/Table';
 
-  import { useDrawer } from '/@/components/Drawer';
+  import { useDrawer } from '@/components/Drawer';
   import OauthDrawer from './OauthDrawer.vue';
   import { useI18n } from 'vue-i18n';
 
   import { columns } from './oauth.data';
-  import { getOauthProviderList, deleteOauthProvider } from '/@/api/sys/oauthProvider';
-  import { PageWrapper } from '/@/components/Page';
+  import { getOauthProviderList, deleteOauthProvider } from '@/api/sys/oauthProvider';
+  import { PageWrapper } from '@/components/Page';
 
   export default defineComponent({
     name: 'OauthManagement',
