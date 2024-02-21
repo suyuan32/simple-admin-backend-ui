@@ -17,8 +17,8 @@
   </div>
 </template>
 <script lang="ts">
-  import { addResizeListener, removeResizeListener } from '/@/utils/event';
-  import componentSetting from '/@/settings/componentSetting';
+  import { addResizeListener, removeResizeListener } from '@/utils/event';
+  import componentSetting from '@/settings/componentSetting';
   import {
     defineComponent,
     ref,
@@ -30,7 +30,7 @@
     watch,
     type PropType,
   } from 'vue';
-  import type { StyleValue } from '/@/utils/types';
+  import type { StyleValue } from '@/utils/types';
   import Bar from './bar';
 
   const { scrollbar } = componentSetting;

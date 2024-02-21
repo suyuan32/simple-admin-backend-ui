@@ -1,10 +1,10 @@
-import { BasicColumn, FormSchema } from '/@/components/Table';
-import { useI18n } from '/@/hooks/web/useI18n';
-import { formatToDateTime } from '/@/utils/dateUtil';
-import { updateStorageProvider } from '/@/api/fms/storageProvider';
+import { BasicColumn, FormSchema } from '@/components/Table';
+import { useI18n } from '@/hooks/web/useI18n';
+import { formatToDateTime } from '@/utils/dateUtil';
+import { updateStorageProvider } from '@/api/fms/storageProvider';
 import { Switch } from 'ant-design-vue';
 import { h } from 'vue';
-import { useRedo } from '/@/hooks/web/usePage';
+import { useRedo } from '@/hooks/web/usePage';
 
 const { t } = useI18n();
 

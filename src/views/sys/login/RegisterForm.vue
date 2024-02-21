@@ -147,12 +147,12 @@
   import { reactive, ref, unref, computed } from 'vue';
   import LoginFormTitle from './LoginFormTitle.vue';
   import { Form, Input, Button, Checkbox, RadioGroup, RadioButton, Image } from 'ant-design-vue';
-  import { StrengthMeter } from '/@/components/StrengthMeter';
-  import { useI18n } from '/@/hooks/web/useI18n';
+  import { StrengthMeter } from '@/components/StrengthMeter';
+  import { useI18n } from '@/hooks/web/useI18n';
   import { useLoginState, useFormRules, useFormValid, LoginStateEnum } from './useLogin';
-  import { register, registerByEmail, registerBySms } from '/@/api/sys/user';
-  import { getCaptcha, getEmailCaptcha, getSmsCaptcha } from '/@/api/sys/captcha';
-  import { CountdownInput } from '/@/components/CountDown';
+  import { register, registerByEmail, registerBySms } from '@/api/sys/user';
+  import { getCaptcha, getEmailCaptcha, getSmsCaptcha } from '@/api/sys/captcha';
+  import { CountdownInput } from '@/components/CountDown';
 
   const FormItem = Form.Item;
   const InputPassword = Input.Password;

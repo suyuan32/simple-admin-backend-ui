@@ -1,7 +1,7 @@
 import { BaseDataResp } from '../model/baseModel';
 import { CaptchaResp, GetEmailCaptchaReq, GetSmsCaptchaReq } from './model/captcha';
 import { ErrorMessageMode } from '/#/axios';
-import { defHttp } from '/@/utils/http/axios';
+import { defHttp } from '@/utils/http/axios';
 
 enum Api {
   GetCaptcha = '/sys-api/captcha',

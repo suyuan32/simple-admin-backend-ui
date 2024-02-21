@@ -43,31 +43,31 @@
 <script lang="ts">
   import { computed, defineComponent, ref, unref, watch } from 'vue';
   import { Tabs, Tree } from 'ant-design-vue';
-  import { BasicForm, useForm } from '/@/components/Form/index';
+  import { BasicForm, useForm } from '@/components/Form/index';
   import {
     convertApiCheckedKeysToReq,
     convertApiToCheckedKeys,
     convertApiTreeData,
     formSchema,
   } from './role.data';
-  import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
+  import { BasicDrawer, useDrawerInner } from '@/components/Drawer';
   import { useI18n } from 'vue-i18n';
 
-  import { ApiAuthorityInfo } from '/@/api/sys/model/authorityModel';
-  import { createRole, updateRole } from '/@/api/sys/role';
-  import { getMenuList } from '/@/api/sys/menu';
+  import { ApiAuthorityInfo } from '@/api/sys/model/authorityModel';
+  import { createRole, updateRole } from '@/api/sys/role';
+  import { getMenuList } from '@/api/sys/menu';
   import {
     createOrUpdateApiAuthority,
     createOrUpdateMenuAuthority,
     getApiAuthority,
     getApiList,
     getMenuAuthority,
-  } from '/@/api/sys/authority';
+  } from '@/api/sys/authority';
   import { DataNode } from 'ant-design-vue/lib/tree';
-  import { BaseDataResp } from '/@/api/model/baseModel';
-  import { ApiListResp } from '/@/api/sys/model/apiModel';
-  import { buildDataNode } from '/@/utils/tree';
-  import { BasicTree, TreeActionType } from '/@/components/Tree';
+  import { BaseDataResp } from '@/api/model/baseModel';
+  import { ApiListResp } from '@/api/sys/model/apiModel';
+  import { buildDataNode } from '@/utils/tree';
+  import { BasicTree, TreeActionType } from '@/components/Tree';
 
   export default defineComponent({
     name: 'RoleDrawer',

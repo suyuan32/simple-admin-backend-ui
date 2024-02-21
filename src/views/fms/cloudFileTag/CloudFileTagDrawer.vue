@@ -12,12 +12,12 @@
 </template>
 <script lang="ts">
   import { defineComponent, ref, computed, unref } from 'vue';
-  import { BasicForm, useForm } from '/@/components/Form/index';
+  import { BasicForm, useForm } from '@/components/Form/index';
   import { formSchema } from './cloudFileTag.data';
-  import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
+  import { BasicDrawer, useDrawerInner } from '@/components/Drawer';
   import { useI18n } from 'vue-i18n';
 
-  import { createCloudFileTag, updateCloudFileTag } from '/@/api/fms/cloudFileTag';
+  import { createCloudFileTag, updateCloudFileTag } from '@/api/fms/cloudFileTag';
 
   export default defineComponent({
     name: 'CloudFileTagDrawer',

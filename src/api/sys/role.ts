@@ -1,6 +1,6 @@
-import { defHttp } from '/@/utils/http/axios';
+import { defHttp } from '@/utils/http/axios';
 import { ErrorMessageMode } from '/#/axios';
-import { BaseDataResp, BaseListReq, BaseResp, BaseIDsReq, BaseIDReq } from '/@/api/model/baseModel';
+import { BaseDataResp, BaseListReq, BaseResp, BaseIDsReq, BaseIDReq } from '@/api/model/baseModel';
 import { RoleInfo, RoleListResp } from './model/roleModel';
 
 enum Api {

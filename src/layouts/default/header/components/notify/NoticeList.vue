@@ -56,12 +56,12 @@
 <script lang="ts">
   import { computed, defineComponent, PropType, ref, watch, unref } from 'vue';
   import { ListItem } from './data';
-  import { useDesign } from '/@/hooks/web/useDesign';
+  import { useDesign } from '@/hooks/web/useDesign';
   import { List, Avatar, Tag, Typography } from 'ant-design-vue';
-  import { isNumber } from '/@/utils/is';
+  import { isNumber } from '@/utils/is';
 
   // types
-  import type { StyleValue } from '/@/utils/types';
+  import type { StyleValue } from '@/utils/types';
   import type { FunctionalComponent } from 'vue';
   import type { ParagraphProps } from 'ant-design-vue/es/typography/Paragraph';
 

@@ -1,25 +1,25 @@
 import type { ErrorMessageMode } from '/#/axios';
 import { defineStore } from 'pinia';
-import { store } from '/@/store';
-import { RoleEnum } from '/@/enums/roleEnum';
-import { PageEnum } from '/@/enums/pageEnum';
-import { TOKEN_KEY, USER_INFO_KEY } from '/@/enums/cacheEnum';
+import { store } from '@/store';
+import { RoleEnum } from '@/enums/roleEnum';
+import { PageEnum } from '@/enums/pageEnum';
+import { TOKEN_KEY, USER_INFO_KEY } from '@/enums/cacheEnum';
 import {
   GetUserInfoModel,
   LoginByEmailReq,
   LoginBySmsReq,
   LoginReq,
-} from '/@/api/sys/model/userModel';
-import { doLogout, getUserInfo, login, loginByEmail, loginBySms } from '/@/api/sys/user';
-import { useI18n } from '/@/hooks/web/useI18n';
-import { useMessage } from '/@/hooks/web/useMessage';
-import { router } from '/@/router';
-import { usePermissionStore } from '/@/store/modules/permission';
+} from '@/api/sys/model/userModel';
+import { doLogout, getUserInfo, login, loginByEmail, loginBySms } from '@/api/sys/user';
+import { useI18n } from '@/hooks/web/useI18n';
+import { useMessage } from '@/hooks/web/useMessage';
+import { router } from '@/router';
+import { usePermissionStore } from '@/store/modules/permission';
 import { RouteRecordRaw } from 'vue-router';
-import { PAGE_NOT_FOUND_ROUTE } from '/@/router/routes/basic';
-import { isArray } from '/@/utils/is';
+import { PAGE_NOT_FOUND_ROUTE } from '@/router/routes/basic';
+import { isArray } from '@/utils/is';
 import { h } from 'vue';
-import { setAuthCache } from '/@/utils/auth';
+import { setAuthCache } from '@/utils/auth';
 
 interface UserState {
   userInfo: GetUserInfoModel;

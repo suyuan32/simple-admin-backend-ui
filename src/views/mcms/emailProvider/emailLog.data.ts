@@ -1,7 +1,7 @@
 import { h } from 'vue';
-import { BasicColumn, FormSchema } from '/@/components/Table';
-import { useI18n } from '/@/hooks/web/useI18n';
-import { formatToDateTime } from '/@/utils/dateUtil';
+import { BasicColumn, FormSchema } from '@/components/Table';
+import { useI18n } from '@/hooks/web/useI18n';
+import { formatToDateTime } from '@/utils/dateUtil';
 import { Tag } from 'ant-design-vue/lib/components';
 
 const { t } = useI18n();

@@ -63,12 +63,12 @@
   import { reactive, ref, computed, unref } from 'vue';
   import LoginFormTitle from './LoginFormTitle.vue';
   import { Form, Input, Button, RadioGroup, RadioButton } from 'ant-design-vue';
-  import { CountdownInput } from '/@/components/CountDown';
-  import { useI18n } from '/@/hooks/web/useI18n';
+  import { CountdownInput } from '@/components/CountDown';
+  import { useI18n } from '@/hooks/web/useI18n';
   import { useLoginState, useFormRules, LoginStateEnum } from './useLogin';
-  import { getEmailCaptcha, getSmsCaptcha } from '/@/api/sys/captcha';
-  import { resetPasswordByEmail, resetPasswordBySms } from '/@/api/sys/user';
-  import { useMessage } from '/@/hooks/web/useMessage';
+  import { getEmailCaptcha, getSmsCaptcha } from '@/api/sys/captcha';
+  import { resetPasswordByEmail, resetPasswordBySms } from '@/api/sys/user';
+  import { useMessage } from '@/hooks/web/useMessage';
 
   const FormItem = Form.Item;
   const ARadioGroup = RadioGroup;

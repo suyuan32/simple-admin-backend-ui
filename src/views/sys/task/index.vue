@@ -51,17 +51,17 @@
   import { createVNode, defineComponent, ref } from 'vue';
   import { Modal } from 'ant-design-vue';
   import { ExclamationCircleOutlined } from '@ant-design/icons-vue/lib/icons';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
-  import { Button } from '/@/components/Button';
+  import { BasicTable, useTable, TableAction } from '@/components/Table';
+  import { Button } from '@/components/Button';
 
-  import { useDrawer } from '/@/components/Drawer';
+  import { useDrawer } from '@/components/Drawer';
   import TaskDrawer from './TaskDrawer.vue';
   import { useI18n } from 'vue-i18n';
 
   import { columns, searchFormSchema } from './task.data';
-  import { getTaskList, deleteTask } from '/@/api/sys/task';
+  import { getTaskList, deleteTask } from '@/api/sys/task';
   import LogModal from './LogModal.vue';
-  import { useModal } from '/@/components/Modal';
+  import { useModal } from '@/components/Modal';
 
   export default defineComponent({
     name: 'TaskManagement',

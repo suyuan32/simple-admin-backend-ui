@@ -11,7 +11,7 @@
   import { defineComponent } from 'vue';
   import { Card, List, ListItem } from 'ant-design-vue';
   import { systemInfoData } from './data';
-  import { useI18n } from '/@/hooks/web/useI18n';
+  import { useI18n } from '@/hooks/web/useI18n';
 
   export default defineComponent({
     components: { Card, List, ListItem },

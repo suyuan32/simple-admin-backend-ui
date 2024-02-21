@@ -12,12 +12,12 @@
 </template>
 <script lang="ts">
   import { defineComponent, ref, computed, unref } from 'vue';
-  import { BasicForm, useForm } from '/@/components/Form/index';
+  import { BasicForm, useForm } from '@/components/Form/index';
   import { formSchema } from './dictionaryDetail.data';
-  import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
+  import { BasicDrawer, useDrawerInner } from '@/components/Drawer';
   import { useI18n } from 'vue-i18n';
 
-  import { createDictionaryDetail, updateDictionaryDetail } from '/@/api/sys/dictionaryDetail';
+  import { createDictionaryDetail, updateDictionaryDetail } from '@/api/sys/dictionaryDetail';
 
   export default defineComponent({
     name: 'DictionaryDetailDrawer',

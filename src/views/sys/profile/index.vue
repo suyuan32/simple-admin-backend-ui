@@ -74,16 +74,16 @@
   </PageWrapper>
 </template>
 <script lang="ts" setup>
-  import { PageWrapper } from '/@/components/Page';
+  import { PageWrapper } from '@/components/Page';
   import { ChangePasswordReq, FormData } from './data';
   import { Card, Form, FormItem, message } from 'ant-design-vue';
   import { computed, reactive } from 'vue';
   import { useI18n } from 'vue-i18n';
-  import { changePassword, getUserProfile, updateProfile } from '/@/api/sys/user';
-  import headerImg from '/@/assets/images/header.jpg';
-  import { useUserStore } from '/@/store/modules/user';
-  import { uploadApi } from '/@/api/fms/file';
-  import { CropperAvatar } from '/@/components/Cropper';
+  import { changePassword, getUserProfile, updateProfile } from '@/api/sys/user';
+  import headerImg from '@/assets/images/header.jpg';
+  import { useUserStore } from '@/store/modules/user';
+  import { uploadApi } from '@/api/fms/file';
+  import { CropperAvatar } from '@/components/Cropper';
 
   const ACard = Card;
   const AForm = Form;

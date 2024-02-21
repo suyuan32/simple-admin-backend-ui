@@ -1,10 +1,10 @@
-import { BasicColumn, FormSchema } from '/@/components/Table';
-import { useI18n } from '/@/hooks/web/useI18n';
-import { formatToDateTime } from '/@/utils/dateUtil';
-import { getDepartmentList, updateDepartment } from '/@/api/sys/department';
+import { BasicColumn, FormSchema } from '@/components/Table';
+import { useI18n } from '@/hooks/web/useI18n';
+import { formatToDateTime } from '@/utils/dateUtil';
+import { getDepartmentList, updateDepartment } from '@/api/sys/department';
 import { Switch } from 'ant-design-vue';
 import { h } from 'vue';
-import { ParentIdEnum } from '/@/enums/appEnum';
+import { ParentIdEnum } from '@/enums/appEnum';
 
 const { t } = useI18n();
 

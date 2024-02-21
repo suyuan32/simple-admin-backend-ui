@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
-import { GetDictionaryDetailByDictionaryName } from '/@/api/sys/dictionaryDetail';
+import { GetDictionaryDetailByDictionaryName } from '@/api/sys/dictionaryDetail';
 import { DefaultOptionType } from 'ant-design-vue/lib/select';
 import { ref } from 'vue';
-import { DICT_INFO_KEY } from '/@/enums/cacheEnum';
+import { DICT_INFO_KEY } from '@/enums/cacheEnum';
 
 interface DictionaryData {
   data: DefaultOptionType[];

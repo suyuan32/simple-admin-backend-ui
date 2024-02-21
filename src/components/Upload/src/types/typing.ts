@@ -1,5 +1,5 @@
-import { BasicColumn } from '/@/components/Table';
-import { UploadApiResp } from '/@/api/sys/model/uploadModel';
+import { BasicColumn } from '@/components/Table';
+import { UploadApiResp } from '@/api/sys/model/uploadModel';
 
 export enum UploadResultStatus {
   SUCCESS = 'success',

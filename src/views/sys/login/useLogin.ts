@@ -1,7 +1,7 @@
 import type { Rule } from 'ant-design-vue/es/form';
 import type { RuleObject } from 'ant-design-vue/lib/form/interface';
 import { ref, computed, unref, Ref } from 'vue';
-import { useI18n } from '/@/hooks/web/useI18n';
+import { useI18n } from '@/hooks/web/useI18n';
 
 export enum LoginStateEnum {
   LOGIN,

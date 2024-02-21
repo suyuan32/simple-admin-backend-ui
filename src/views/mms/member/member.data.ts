@@ -1,11 +1,11 @@
-import { BasicColumn, FormSchema } from '/@/components/Table';
-import { useI18n } from '/@/hooks/web/useI18n';
-import { formatToDateTime } from '/@/utils/dateUtil';
+import { BasicColumn, FormSchema } from '@/components/Table';
+import { useI18n } from '@/hooks/web/useI18n';
+import { formatToDateTime } from '@/utils/dateUtil';
 import { Switch } from 'ant-design-vue';
 import { h } from 'vue';
 import { getMemberRankList } from '../../../api/member/memberRank';
 import { updateMember } from '../../../api/member/member';
-import { uploadApi } from '/@/api/fms/file';
+import { uploadApi } from '@/api/fms/file';
 
 const { t } = useI18n();
 

@@ -75,7 +75,7 @@
 </template>
 <script lang="ts" setup>
   import { Col, Row, Card, message, Input, Divider } from 'ant-design-vue';
-  import { PageWrapper } from '/@/components/Page';
+  import { PageWrapper } from '@/components/Page';
   import { useI18n } from 'vue-i18n';
   import { ref } from 'vue';
   // api
@@ -83,9 +83,9 @@
     initializeJobDatabase,
     initializeMcmsDatabase,
     initialzeCoreDatabase,
-  } from '/@/api/sys/initialize';
-  import { initializeFileDatabase } from '/@/api/fms/initialize';
-  import { initializeMMSDatabase } from '/@/api/member/initialize';
+  } from '@/api/sys/initialize';
+  import { initializeFileDatabase } from '@/api/fms/initialize';
+  import { initializeMMSDatabase } from '@/api/member/initialize';
 
   const { t } = useI18n();
   const ACard = Card;

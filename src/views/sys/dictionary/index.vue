@@ -50,16 +50,16 @@
   import { createVNode, defineComponent, ref } from 'vue';
   import { Modal } from 'ant-design-vue';
   import { ExclamationCircleOutlined } from '@ant-design/icons-vue/lib/icons';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
-  import { Button } from '/@/components/Button';
+  import { BasicTable, useTable, TableAction } from '@/components/Table';
+  import { Button } from '@/components/Button';
 
-  import { useDrawer } from '/@/components/Drawer';
+  import { useDrawer } from '@/components/Drawer';
   import DictionaryDrawer from './DictionaryDrawer.vue';
   import { useI18n } from 'vue-i18n';
 
   import { columns, searchFormSchema } from './dictionary.data';
-  import { getDictionaryList, deleteDictionary } from '/@/api/sys/dictionary';
-  import { useGo } from '/@/hooks/web/usePage';
+  import { getDictionaryList, deleteDictionary } from '@/api/sys/dictionary';
+  import { useGo } from '@/hooks/web/usePage';
 
   export default defineComponent({
     name: 'DictionaryManagement',

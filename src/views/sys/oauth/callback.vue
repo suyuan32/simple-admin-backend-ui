@@ -5,11 +5,11 @@
   import { message } from 'ant-design-vue';
   import { defineComponent, ref } from 'vue';
   import { useRouter } from 'vue-router';
-  import { oauthLoginCallback } from '/@/api/sys/oauthProvider';
-  import { PageEnum } from '/@/enums/pageEnum';
-  import { useI18n } from '/@/hooks/web/useI18n';
-  import { useGo } from '/@/hooks/web/usePage';
-  import { useUserStore } from '/@/store/modules/user';
+  import { oauthLoginCallback } from '@/api/sys/oauthProvider';
+  import { PageEnum } from '@/enums/pageEnum';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { useGo } from '@/hooks/web/usePage';
+  import { useUserStore } from '@/store/modules/user';
 
   export default defineComponent({
     name: 'OauthCallbackPage',

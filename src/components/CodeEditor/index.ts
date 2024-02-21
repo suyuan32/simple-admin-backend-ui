@@ -1,4 +1,4 @@
-import { withInstall } from '/@/utils';
+import { withInstall } from '@/utils';
 import codeEditor from './src/CodeEditor.vue';
 import { MODE } from './src/typing';
 

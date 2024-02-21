@@ -46,15 +46,15 @@
   import { createVNode, defineComponent, ref } from 'vue';
   import { Modal } from 'ant-design-vue';
   import { ExclamationCircleOutlined } from '@ant-design/icons-vue/lib/icons';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
-  import { Button } from '/@/components/Button';
+  import { BasicTable, useTable, TableAction } from '@/components/Table';
+  import { Button } from '@/components/Button';
 
-  import { useDrawer } from '/@/components/Drawer';
+  import { useDrawer } from '@/components/Drawer';
   import CloudFileTagDrawer from './CloudFileTagDrawer.vue';
   import { useI18n } from 'vue-i18n';
 
   import { columns, searchFormSchema } from './cloudFileTag.data';
-  import { getCloudFileTagList, deleteCloudFileTag } from '/@/api/fms/cloudFileTag';
+  import { getCloudFileTagList, deleteCloudFileTag } from '@/api/fms/cloudFileTag';
 
   export default defineComponent({
     name: 'CloudFileTagManagement',

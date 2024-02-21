@@ -130,7 +130,7 @@ interface _CustomComponents {
   DictionarySelect: ExtractPropTypes<
     (typeof import('../components/DictionarySelect.vue'))['default']
   >;
-  CodeEditor: ExtractPropTypes<(typeof import('/@/components/CodeEditor'))['CodeEditor']>;
+  CodeEditor: ExtractPropTypes<(typeof import('@/components/CodeEditor'))['CodeEditor']>;
   Tinymce: ExtractPropTypes<(typeof import('@/components/Tinymce'))['Tinymce']>;
   SimpleTimePicker: ExtractPropTypes<
     (typeof import('../components/SimpleTimePicker.vue'))['default']

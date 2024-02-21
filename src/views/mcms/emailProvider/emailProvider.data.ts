@@ -1,9 +1,9 @@
 import { h } from 'vue';
-import { BasicColumn, FormSchema } from '/@/components/Table';
-import { useI18n } from '/@/hooks/web/useI18n';
-import { formatToDateTime } from '/@/utils/dateUtil';
+import { BasicColumn, FormSchema } from '@/components/Table';
+import { useI18n } from '@/hooks/web/useI18n';
+import { formatToDateTime } from '@/utils/dateUtil';
 import { Switch } from 'ant-design-vue';
-import { updateEmailProvider } from '/@/api/mcms/emailProvider';
+import { updateEmailProvider } from '@/api/mcms/emailProvider';
 
 const { t } = useI18n();
 

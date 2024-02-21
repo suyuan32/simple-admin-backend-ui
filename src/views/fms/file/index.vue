@@ -101,19 +101,19 @@
   import { createVNode, defineComponent, ref } from 'vue';
   import { Image, Modal } from 'ant-design-vue';
 
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
-  import { BasicUpload } from '/@/components/Upload';
+  import { BasicTable, useTable, TableAction } from '@/components/Table';
+  import { BasicUpload } from '@/components/Upload';
   import useClipboard from 'vue-clipboard3';
-  import { useMessage } from '/@/hooks/web/useMessage';
+  import { useMessage } from '@/hooks/web/useMessage';
 
-  import { useDrawer } from '/@/components/Drawer';
+  import { useDrawer } from '@/components/Drawer';
   import FileDrawer from './FileDrawer.vue';
   import { useI18n } from 'vue-i18n';
 
   import { columns, searchFormSchema } from './file.data';
-  import { deleteFile, downloadFile, getFileList, uploadApi } from '/@/api/fms/file';
+  import { deleteFile, downloadFile, getFileList, uploadApi } from '@/api/fms/file';
   import { ExclamationCircleOutlined } from '@ant-design/icons-vue/lib/icons';
-  import { Button } from '/@/components/Button';
+  import { Button } from '@/components/Button';
 
   export default defineComponent({
     name: 'FileManagement',

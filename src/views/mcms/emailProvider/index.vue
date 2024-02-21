@@ -62,22 +62,22 @@
   import { createVNode, defineComponent, ref } from 'vue';
   import { Modal } from 'ant-design-vue';
   import { ExclamationCircleOutlined } from '@ant-design/icons-vue/lib/icons';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
-  import { Button } from '/@/components/Button';
+  import { BasicTable, useTable, TableAction } from '@/components/Table';
+  import { Button } from '@/components/Button';
 
-  import { useDrawer } from '/@/components/Drawer';
+  import { useDrawer } from '@/components/Drawer';
   import EmailProviderDrawer from './EmailProviderDrawer.vue';
   import { useI18n } from 'vue-i18n';
 
   import { columns, searchFormSchema } from './emailProvider.data';
-  import { getEmailProviderList, deleteEmailProvider } from '/@/api/mcms/emailProvider';
-  import { useModal } from '/@/components/Modal/src/hooks/useModal';
+  import { getEmailProviderList, deleteEmailProvider } from '@/api/mcms/emailProvider';
+  import { useModal } from '@/components/Modal/src/hooks/useModal';
   import LogModal from './LogModal.vue';
-  import { BasicModal } from '/@/components/Modal';
-  import { BasicForm, useForm } from '/@/components/Form';
+  import { BasicModal } from '@/components/Modal';
+  import { BasicForm, useForm } from '@/components/Form';
   import { formSchema } from './email.data';
-  import { sendEmail } from '/@/api/mcms/messageSender';
-  import { SendEmailReq } from '/@/api/mcms/model/messageModel';
+  import { sendEmail } from '@/api/mcms/messageSender';
+  import { SendEmailReq } from '@/api/mcms/model/messageModel';
 
   export default defineComponent({
     name: 'EmailProviderManagement',

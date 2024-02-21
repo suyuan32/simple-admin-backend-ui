@@ -2,12 +2,12 @@
   <span :class="getTagClass" v-if="getShowTag">{{ getContent }}</span>
 </template>
 <script lang="ts">
-  import type { Menu } from '/@/router/types';
+  import type { Menu } from '@/router/types';
 
   import { defineComponent, computed } from 'vue';
 
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { propTypes } from '/@/utils/propTypes';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { propTypes } from '@/utils/propTypes';
 
   export default defineComponent({
     name: 'SimpleMenuTag',
