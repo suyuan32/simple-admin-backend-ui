@@ -1,7 +1,7 @@
-import { BasicColumn, FormSchema } from '/@/components/Table';
-import { useI18n } from '/@/hooks/web/useI18n';
-import { formatToDateTime } from '/@/utils/dateUtil';
-import { updateDictionary } from '/@/api/sys/dictionary';
+import { BasicColumn, FormSchema } from '@/components/Table';
+import { useI18n } from '@/hooks/web/useI18n';
+import { formatToDateTime } from '@/utils/dateUtil';
+import { updateDictionary } from '@/api/sys/dictionary';
 import { Switch } from 'ant-design-vue';
 import { h } from 'vue';
 

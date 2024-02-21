@@ -1,5 +1,5 @@
-import { UploadApiResp } from '/@/api/sys/model/uploadModel';
-import { defHttp } from '/@/utils/http/axios';
+import { UploadApiResp } from '@/api/sys/model/uploadModel';
+import { defHttp } from '@/utils/http/axios';
 import { ErrorMessageMode, UploadFileParams } from '/#/axios';
 import { BaseDataResp, BaseListReq, BaseResp, BaseUUIDsReq } from '../model/baseModel';
 import { FileListResp, updateFileInfoReq } from './model/fileModel';

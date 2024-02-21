@@ -24,11 +24,11 @@
   import { createVNode, defineComponent, reactive, ref } from 'vue';
   import { useI18n } from 'vue-i18n';
   import { columns, searchFormSchema } from './emailLog.data';
-  import { Button } from '/@/components/Button';
-  import { BasicModal, useModalInner } from '/@/components/Modal';
-  import { BasicTable, useTable } from '/@/components/Table';
-  import { useMessage } from '/@/hooks/web/useMessage';
-  import { deleteEmailLog, getEmailLogList } from '/@/api/mcms/emailLog';
+  import { Button } from '@/components/Button';
+  import { BasicModal, useModalInner } from '@/components/Modal';
+  import { BasicTable, useTable } from '@/components/Table';
+  import { useMessage } from '@/hooks/web/useMessage';
+  import { deleteEmailLog, getEmailLogList } from '@/api/mcms/emailLog';
 
   export default defineComponent({
     components: { BasicModal, BasicTable, DeleteOutlined, Button },

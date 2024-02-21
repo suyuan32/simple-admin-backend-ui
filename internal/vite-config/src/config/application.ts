@@ -45,7 +45,7 @@ function defineApplicationConfig(defineOptions: DefineOptions = {}) {
             find: 'vue-i18n',
             replacement: 'vue-i18n/dist/vue-i18n.cjs.js',
           },
-          // /@/xxxx => src/xxxx
+          // @/xxxx => src/xxxx
           {
             find: /\/@\//,
             replacement: pathResolve('src') + '/',

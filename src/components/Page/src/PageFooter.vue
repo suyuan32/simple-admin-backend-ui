@@ -10,8 +10,8 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
-  import { useDesign } from '/@/hooks/web/useDesign';
+  import { useMenuSetting } from '@/hooks/setting/useMenuSetting';
+  import { useDesign } from '@/hooks/web/useDesign';
 
   defineOptions({
     name: 'PageFooter',

@@ -1,7 +1,7 @@
-import { BasicColumn, FormSchema } from '/@/components/Table';
-import { useI18n } from '/@/hooks/web/useI18n';
-import { formatToDateTime } from '/@/utils/dateUtil';
-import { updateCloudFileTag } from '/@/api/fms/cloudFileTag';
+import { BasicColumn, FormSchema } from '@/components/Table';
+import { useI18n } from '@/hooks/web/useI18n';
+import { formatToDateTime } from '@/utils/dateUtil';
+import { updateCloudFileTag } from '@/api/fms/cloudFileTag';
 import { Switch } from 'ant-design-vue';
 import { h } from 'vue';
 

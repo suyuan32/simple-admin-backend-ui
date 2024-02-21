@@ -1,13 +1,13 @@
-import { BasicColumn, FormSchema } from '/@/components/Table';
+import { BasicColumn, FormSchema } from '@/components/Table';
 import { h } from 'vue';
 import { Switch } from 'ant-design-vue';
-import { useMessage } from '/@/hooks/web/useMessage';
-import { useI18n } from '/@/hooks/web/useI18n';
+import { useMessage } from '@/hooks/web/useMessage';
+import { useI18n } from '@/hooks/web/useI18n';
 import { DataNode } from 'ant-design-vue/lib/tree';
-import { ApiInfo } from '/@/api/sys/model/apiModel';
-import { ApiAuthorityInfo } from '/@/api/sys/model/authorityModel';
-import { formatToDateTime } from '/@/utils/dateUtil';
-import { updateRole } from '/@/api/sys/role';
+import { ApiInfo } from '@/api/sys/model/apiModel';
+import { ApiAuthorityInfo } from '@/api/sys/model/authorityModel';
+import { formatToDateTime } from '@/utils/dateUtil';
+import { updateRole } from '@/api/sys/role';
 import { cloneDeep, union } from 'lodash-es';
 
 const { t } = useI18n();

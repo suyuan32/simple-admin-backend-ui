@@ -12,12 +12,12 @@
 </template>
 <script lang="ts">
   import { defineComponent, ref, computed, unref } from 'vue';
-  import { BasicForm, useForm } from '/@/components/Form/index';
+  import { BasicForm, useForm } from '@/components/Form/index';
   import { formSchema } from './oauth.data';
-  import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
+  import { BasicDrawer, useDrawerInner } from '@/components/Drawer';
   import { useI18n } from 'vue-i18n';
 
-  import { createOauthProvider, updateOauthProvider } from '/@/api/sys/oauthProvider';
+  import { createOauthProvider, updateOauthProvider } from '@/api/sys/oauthProvider';
 
   export default defineComponent({
     name: 'OauthDrawer',

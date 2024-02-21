@@ -12,8 +12,8 @@
 
 <script lang="ts" setup>
   import AppSearchKeyItem from './AppSearchKeyItem.vue';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { useI18n } from '/@/hooks/web/useI18n';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { useI18n } from '@/hooks/web/useI18n';
 
   const { prefixCls } = useDesign('app-search-footer');
   const { t } = useI18n();

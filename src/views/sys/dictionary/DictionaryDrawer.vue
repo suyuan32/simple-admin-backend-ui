@@ -17,13 +17,13 @@
 </template>
 <script lang="ts">
   import { defineComponent, ref, computed, unref } from 'vue';
-  import { BasicForm, useForm } from '/@/components/Form/index';
+  import { BasicForm, useForm } from '@/components/Form/index';
   import { formSchema } from './dictionary.data';
-  import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
+  import { BasicDrawer, useDrawerInner } from '@/components/Drawer';
   import { useI18n } from 'vue-i18n';
-  import { useGo } from '/@/hooks/web/usePage';
+  import { useGo } from '@/hooks/web/usePage';
 
-  import { createDictionary, updateDictionary } from '/@/api/sys/dictionary';
+  import { createDictionary, updateDictionary } from '@/api/sys/dictionary';
 
   export default defineComponent({
     name: 'DictionaryDrawer',

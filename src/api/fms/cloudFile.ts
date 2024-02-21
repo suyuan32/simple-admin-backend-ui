@@ -1,4 +1,4 @@
-import { defHttp } from '/@/utils/http/axios';
+import { defHttp } from '@/utils/http/axios';
 import { ErrorMessageMode, UploadFileParams } from '/#/axios';
 import {
   BaseDataResp,
@@ -6,7 +6,7 @@ import {
   BaseResp,
   BaseUUIDsReq,
   BaseUUIDReq,
-} from '/@/api/model/baseModel';
+} from '@/api/model/baseModel';
 import { CloudFileInfo, CloudFileListResp } from './model/cloudFileModel';
 import { AxiosProgressEvent } from 'axios';
 import { UploadApiResp } from '../sys/model/uploadModel';

@@ -76,18 +76,18 @@
 </template>
 <script lang="ts" setup>
   import { ref, watchEffect, watch } from 'vue';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { ScrollContainer } from '/@/components/Container';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { ScrollContainer } from '@/components/Container';
   import { Input, Popover, Pagination, Empty } from 'ant-design-vue';
   import Icon from '../Icon.vue';
   import SvgIcon from './SvgIcon.vue';
 
   import iconsData from '../data/icons.data';
-  import { usePagination } from '/@/hooks/web/usePagination';
+  import { usePagination } from '@/hooks/web/usePagination';
   import { useDebounceFn } from '@vueuse/core';
-  import { useI18n } from '/@/hooks/web/useI18n';
+  import { useI18n } from '@/hooks/web/useI18n';
   import svgIcons from 'virtual:svg-icons-names';
-  import { copyText } from '/@/utils/copyTextToClipboard';
+  import { copyText } from '@/utils/copyTextToClipboard';
 
   const AInput = Input;
   const APopover = Popover;

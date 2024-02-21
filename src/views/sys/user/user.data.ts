@@ -1,14 +1,14 @@
-import { BasicColumn, FormSchema } from '/@/components/Table';
-import { useI18n } from '/@/hooks/web/useI18n';
-import { formatToDateTime } from '/@/utils/dateUtil';
+import { BasicColumn, FormSchema } from '@/components/Table';
+import { useI18n } from '@/hooks/web/useI18n';
+import { formatToDateTime } from '@/utils/dateUtil';
 import { h } from 'vue';
 import { Switch } from 'ant-design-vue';
-import { useMessage } from '/@/hooks/web/useMessage';
-import { getRoleList } from '/@/api/sys/role';
-import { getDepartmentList } from '/@/api/sys/department';
-import { getPositionList } from '/@/api/sys/position';
-import { updateUser } from '/@/api/sys/user';
-import { uploadApi } from '/@/api/fms/file';
+import { useMessage } from '@/hooks/web/useMessage';
+import { getRoleList } from '@/api/sys/role';
+import { getDepartmentList } from '@/api/sys/department';
+import { getPositionList } from '@/api/sys/position';
+import { updateUser } from '@/api/sys/user';
+import { uploadApi } from '@/api/fms/file';
 
 const { t } = useI18n();
 

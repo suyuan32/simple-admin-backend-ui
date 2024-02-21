@@ -36,13 +36,13 @@
   import { createVNode, defineComponent, ref } from 'vue';
   import { Modal } from 'ant-design-vue';
   import { ExclamationCircleOutlined } from '@ant-design/icons-vue/lib/icons';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
-  import { Button } from '/@/components/Button';
+  import { BasicTable, useTable, TableAction } from '@/components/Table';
+  import { Button } from '@/components/Button';
 
   import { useI18n } from 'vue-i18n';
 
   import { columns, searchFormSchema } from './token.data';
-  import { getTokenList, deleteToken } from '/@/api/member/token';
+  import { getTokenList, deleteToken } from '@/api/member/token';
 
   export default defineComponent({
     name: 'TokenManagement',

@@ -17,8 +17,8 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import { Modal } from 'ant-design-vue';
-  import { FormSchema } from '/@/components/Form';
-  import { BasicForm, useForm } from '/@/components/Form/index';
+  import { FormSchema } from '@/components/Form';
+  import { BasicForm, useForm } from '@/components/Form/index';
 
   const open = ref<boolean>(true);
   const props = defineProps<{

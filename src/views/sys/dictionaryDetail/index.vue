@@ -46,15 +46,15 @@
   import { createVNode, defineComponent, reactive, ref, unref } from 'vue';
   import { Modal } from 'ant-design-vue';
   import { ExclamationCircleOutlined } from '@ant-design/icons-vue/lib/icons';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
-  import { Button } from '/@/components/Button';
+  import { BasicTable, useTable, TableAction } from '@/components/Table';
+  import { Button } from '@/components/Button';
 
-  import { useDrawer } from '/@/components/Drawer';
+  import { useDrawer } from '@/components/Drawer';
   import DictionaryDetailDrawer from './DictionaryDetailDrawer.vue';
   import { useI18n } from 'vue-i18n';
 
   import { columns, searchFormSchema } from './dictionaryDetail.data';
-  import { getDictionaryDetailList, deleteDictionaryDetail } from '/@/api/sys/dictionaryDetail';
+  import { getDictionaryDetailList, deleteDictionaryDetail } from '@/api/sys/dictionaryDetail';
   import { useRouter } from 'vue-router';
 
   export default defineComponent({

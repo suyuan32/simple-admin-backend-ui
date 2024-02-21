@@ -42,11 +42,11 @@
   import { Recordable } from '@vben/types';
   import Icon from '@/components/Icon/Icon.vue';
   import { Tooltip, Space } from 'ant-design-vue';
-  import { useModal } from '/@/components/Modal';
+  import { useModal } from '@/components/Modal';
   import { uploadContainerProps } from './props';
   import { omit } from 'lodash-es';
-  import { useI18n } from '/@/hooks/web/useI18n';
-  import { isArray } from '/@/utils/is';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { isArray } from '@/utils/is';
   import UploadModal from './components/UploadModal.vue';
   import UploadPreviewModal from './components/UploadPreviewModal.vue';
 

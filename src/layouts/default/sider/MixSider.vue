@@ -84,27 +84,27 @@
   </div>
 </template>
 <script lang="ts">
-  import type { Menu } from '/@/router/types';
+  import type { Menu } from '@/router/types';
   import type { CSSProperties } from 'vue';
   import { computed, defineComponent, onMounted, ref, unref, watch } from 'vue';
   import type { RouteLocationNormalized } from 'vue-router';
-  import { ScrollContainer } from '/@/components/Container';
-  import { SimpleMenu } from '/@/components/SimpleMenu';
+  import { ScrollContainer } from '@/components/Container';
+  import { SimpleMenu } from '@/components/SimpleMenu';
   import Icon from '@/components/Icon/Icon.vue';
-  import { AppLogo } from '/@/components/Application';
-  import { useMenuSetting } from '/@/hooks/setting/useMenuSetting';
-  import { usePermissionStore } from '/@/store/modules/permission';
+  import { AppLogo } from '@/components/Application';
+  import { useMenuSetting } from '@/hooks/setting/useMenuSetting';
+  import { usePermissionStore } from '@/store/modules/permission';
   import { useDragLine } from './useLayoutSider';
-  import { useGlobSetting } from '/@/hooks/setting';
-  import { useDesign } from '/@/hooks/web/useDesign';
-  import { useI18n } from '/@/hooks/web/useI18n';
-  import { useGo } from '/@/hooks/web/usePage';
-  import { SIDE_BAR_MINI_WIDTH, SIDE_BAR_SHOW_TIT_MINI_WIDTH } from '/@/enums/appEnum';
-  import clickOutside from '/@/directives/clickOutside';
-  import { getChildrenMenus, getCurrentParentPath, getShallowMenus } from '/@/router/menus';
-  import { listenerRouteChange } from '/@/logics/mitt/routeChange';
+  import { useGlobSetting } from '@/hooks/setting';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { useI18n } from '@/hooks/web/useI18n';
+  import { useGo } from '@/hooks/web/usePage';
+  import { SIDE_BAR_MINI_WIDTH, SIDE_BAR_SHOW_TIT_MINI_WIDTH } from '@/enums/appEnum';
+  import clickOutside from '@/directives/clickOutside';
+  import { getChildrenMenus, getCurrentParentPath, getShallowMenus } from '@/router/menus';
+  import { listenerRouteChange } from '@/logics/mitt/routeChange';
   import LayoutTrigger from '../trigger/index.vue';
-  import { createAsyncComponent } from '/@/utils/factory/createAsyncComponent';
+  import { createAsyncComponent } from '@/utils/factory/createAsyncComponent';
 
   export default defineComponent({
     name: 'LayoutMixSider',
@@ -115,7 +115,7 @@
       Icon,
       LayoutTrigger,
       SimpleMenuTag: createAsyncComponent(
-        () => import('/@/components/SimpleMenu/src/SimpleMenuTag.vue'),
+        () => import('@/components/SimpleMenu/src/SimpleMenuTag.vue'),
       ),
     },
     directives: {

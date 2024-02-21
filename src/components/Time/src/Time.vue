@@ -3,11 +3,11 @@
 </template>
 <script lang="ts">
   import { defineComponent, ref, watch } from 'vue';
-  import { useI18n } from '/@/hooks/web/useI18n';
+  import { useI18n } from '@/hooks/web/useI18n';
   import { useIntervalFn } from '@vueuse/core';
-  import { formatToDateTime, formatToDate, dateUtil } from '/@/utils/dateUtil';
-  import { isNumber, isObject, isString } from '/@/utils/is';
-  import { propTypes } from '/@/utils/propTypes';
+  import { formatToDateTime, formatToDate, dateUtil } from '@/utils/dateUtil';
+  import { isNumber, isObject, isString } from '@/utils/is';
+  import { propTypes } from '@/utils/propTypes';
 
   const ONE_SECONDS = 1000;
   const ONE_MINUTES = ONE_SECONDS * 60;

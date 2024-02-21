@@ -61,22 +61,22 @@
   import { createVNode, defineComponent, reactive, ref } from 'vue';
   import { Modal } from 'ant-design-vue';
   import { ExclamationCircleOutlined } from '@ant-design/icons-vue/lib/icons';
-  import { BasicTable, useTable, TableAction } from '/@/components/Table';
+  import { BasicTable, useTable, TableAction } from '@/components/Table';
   import DeptTree from './DeptTree.vue';
 
-  import { useDrawer } from '/@/components/Drawer';
+  import { useDrawer } from '@/components/Drawer';
   import UserDrawer from './UserDrawer.vue';
   import { useI18n } from 'vue-i18n';
 
   import { columns, searchFormSchema } from './user.data';
-  import { getUserList, deleteUser } from '/@/api/sys/user';
-  import { useRoleStore } from '/@/store/modules/role';
-  import { logout } from '/@/api/sys/token';
-  import { useMessage } from '/@/hooks/web/useMessage';
+  import { getUserList, deleteUser } from '@/api/sys/user';
+  import { useRoleStore } from '@/store/modules/role';
+  import { logout } from '@/api/sys/token';
+  import { useMessage } from '@/hooks/web/useMessage';
   import Row from 'ant-design-vue/es/grid/Row';
   import Col from 'ant-design-vue/es/grid/Col';
-  import { PageWrapper } from '/@/components/Page';
-  import { Button } from '/@/components/Button';
+  import { PageWrapper } from '@/components/Page';
+  import { Button } from '@/components/Button';
 
   export default defineComponent({
     name: 'UserManagement',

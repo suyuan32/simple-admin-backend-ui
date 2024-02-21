@@ -1,4 +1,4 @@
-import { BaseListResp } from '/@/api/model/baseModel';
+import { BaseListResp } from '@/api/model/baseModel';
 
 /**
  *  @description: Task info response

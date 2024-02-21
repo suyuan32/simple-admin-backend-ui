@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
-import { RoleInfo } from '/@/api/sys/model/roleModel';
-import { getRoleList } from '/@/api/sys/role';
+import { RoleInfo } from '@/api/sys/model/roleModel';
+import { getRoleList } from '@/api/sys/role';
 
 interface RoleState {
   roleInfo: RoleInfo[];

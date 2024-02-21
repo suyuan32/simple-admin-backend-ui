@@ -1,12 +1,12 @@
-import { BasicColumn, FormSchema } from '/@/components/Table';
+import { BasicColumn, FormSchema } from '@/components/Table';
 import { h } from 'vue';
 import { Tag } from 'ant-design-vue';
 import Icon from '@/components/Icon/Icon.vue';
-import { useI18n } from '/@/hooks/web/useI18n';
-import { formatToDateTime } from '/@/utils/dateUtil';
-import { getMenuList } from '/@/api/sys/menu';
+import { useI18n } from '@/hooks/web/useI18n';
+import { formatToDateTime } from '@/utils/dateUtil';
+import { getMenuList } from '@/api/sys/menu';
 import { ColumnType } from 'ant-design-vue/lib/table';
-import { ParentIdEnum } from '/@/enums/appEnum';
+import { ParentIdEnum } from '@/enums/appEnum';
 
 const { t } = useI18n();
 

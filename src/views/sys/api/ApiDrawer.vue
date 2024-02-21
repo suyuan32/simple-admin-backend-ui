@@ -12,11 +12,11 @@
 </template>
 <script lang="ts">
   import { defineComponent, ref, computed, unref } from 'vue';
-  import { BasicForm, useForm } from '/@/components/Form/index';
+  import { BasicForm, useForm } from '@/components/Form/index';
   import { formSchema } from './api.data';
-  import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
+  import { BasicDrawer, useDrawerInner } from '@/components/Drawer';
   import { useI18n } from 'vue-i18n';
-  import { createApi, updateApi } from '/@/api/sys/api';
+  import { createApi, updateApi } from '@/api/sys/api';
 
   export default defineComponent({
     name: 'ApiDrawer',
