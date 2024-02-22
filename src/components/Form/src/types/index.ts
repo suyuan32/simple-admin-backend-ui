@@ -135,6 +135,9 @@ interface _CustomComponents {
   SimpleTimePicker: ExtractPropTypes<
     (typeof import('../components/SimpleTimePicker.vue'))['default']
   >;
+  SimpleRangePicker: ExtractPropTypes<
+    (typeof import('../components/SimpleRangePicker.vue'))['default']
+  >;
 }
 
 type CustomComponents<T = _CustomComponents> = {
@@ -189,4 +192,5 @@ export interface ComponentProps {
   CodeEditor: CustomComponents['CodeEditor'];
   Tinymce: CustomComponents['Tinymce'];
   SimpleTimePicker: CustomComponents['SimpleTimePicker'];
+  SimpleRangePicker: CustomComponents['SimpleRangePicker'];
 }

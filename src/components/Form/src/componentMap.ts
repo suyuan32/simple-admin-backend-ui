@@ -29,6 +29,7 @@ import ApiTreeSelect from './components/ApiTreeSelect.vue';
 import ApiCascader from './components/ApiCascader.vue';
 import ApiTransfer from './components/ApiTransfer.vue';
 import SimpleTimePicker from './components/SimpleTimePicker.vue';
+import SimpleRangePicker from './components/SimpleRangePicker.vue';
 import ApiMultipleSelect from './components/ApiMultipleSelect.vue';
 import DictionarySelect from './components/DictionarySelect.vue';
 import { BasicUpload, ImageUpload } from '@/components/Upload';
@@ -90,6 +91,7 @@ componentMap.set('DictionarySelect', DictionarySelect);
 componentMap.set('CodeEditor', CodeEditor);
 componentMap.set('Tinymce', Tinymce);
 componentMap.set('SimpleTimePicker', SimpleTimePicker);
+componentMap.set('SimpleRangePicker', SimpleRangePicker);
 
 export function add<T extends string, R extends Component>(
   compName: ComponentType | T,
