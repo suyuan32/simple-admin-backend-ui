@@ -48,6 +48,8 @@ export default {
     addStorageProvider: 'Add Storage Provider',
     editStorageProvider: 'Edit Storage Provider',
     storageProviderList: 'Storage Provider List',
+    useCdn: 'Use CDN',
+    cdnUrl: 'CDN URL',
     // help message
     nameHelpMessage: 'Recommend that prefix with provider type, such as "tencent-" , "aliyun-"',
     folderHelpMessage: 'Sub folder in cloud, can be empty. Prefix with "/", such as "/test"',
