@@ -2,6 +2,7 @@ import { BasicColumn } from '@/components/Table';
 import { UploadApiResp } from '@/api/sys/model/uploadModel';
 
 export enum UploadResultStatus {
+  DONE = 'done',
   SUCCESS = 'success',
   ERROR = 'error',
   UPLOADING = 'uploading',
