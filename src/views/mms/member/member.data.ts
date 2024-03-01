@@ -157,15 +157,6 @@ export const formSchema: FormSchema[] = [
     required: true,
   },
   {
-    field: 'email2',
-    label: t('sys.login.email'),
-    component: 'Upload',
-    required: true,
-    componentProps: {
-      api: uploadApi,
-    },
-  },
-  {
     field: 'status',
     label: t('common.status'),
     component: 'RadioButtonGroup',
