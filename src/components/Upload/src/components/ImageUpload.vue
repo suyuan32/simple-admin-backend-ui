@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts" setup name="ImageUpload">
-  import { ref, toRefs, watch, computed } from 'vue';
+  import { ref, toRefs, watch } from 'vue';
   import { PlusOutlined } from '@ant-design/icons-vue';
   import { Upload, Modal } from 'ant-design-vue';
   import type { UploadProps, UploadFile } from 'ant-design-vue';
@@ -36,6 +36,9 @@
   import { useUploadType } from '../hooks/useUpload';
   import { uploadContainerProps } from '../props';
   import { isImgTypeByName } from '../helper';
+  import { UploadResultStatus } from '../types/typing';
+
+  defineOptions({ name: 'ImageUpload' });
 
   const emit = defineEmits(['change', 'update:value', 'delete']);
   const props = defineProps({
@@ -44,6 +47,7 @@
   const { t } = useI18n();
   const { createMessage } = useMessage();
   const { accept, helpText, maxNumber, maxSize } = toRefs(props);
+  const isInnerOperate = ref<boolean>(false);
   const { getStringAccept } = useUploadType({
     acceptRef: accept,
     helpTextRef: helpText,
@@ -61,9 +65,18 @@
   watch(
     () => props.value,
     (v) => {
-      console.log(v);
-      if (v && isArray(v)) {
-        fileList.value = v.map((item, i) => {
+      if (isInnerOperate.value) {
+        isInnerOperate.value = false;
+        return;
+      }
+      if (v) {
+        let value: string[] = [];
+        if (isArray(v)) {
+          value = v;
+        } else {
+          value.push(v);
+        }
+        fileList.value = value.map((item, i) => {
           if (item && isString(item)) {
             return {
               uid: -i + '',
@@ -77,37 +90,18 @@
             return;
           }
         }) as UploadProps['fileList'];
-      } else {
-        fileList.value = [
-          {
-            uid: '-1',
-            name: 'file',
-            status: 'done',
-            url: v,
-          },
-        ];
       }
     },
   );
 
-  const responseData = computed(() => {
-    if (props.maxNumber > 1) {
-      let result: string[] = [];
-      if (fileList.value !== undefined)
-        for (let i = 0; i < fileList.value?.length; i++) {
-          if (fileList.value[i].response !== undefined) {
-            result.push((fileList.value[i].response as any).url);
-          }
-        }
-      return result;
-    } else {
-      if (fileList.value !== undefined)
-        if (fileList.value[0].response !== undefined) {
-          return (fileList.value[0].response as any).url;
-        }
-      return '';
-    }
-  });
+  function getValue() {
+    const list = (fileList.value || [])
+      .filter((item) => item?.status === UploadResultStatus.DONE)
+      .map((item: any) => {
+        return item?.url || item?.response?.url;
+      });
+    return props.multiple ? list : list.length > 0 ? list[0] : '';
+  }
 
   function getBase64<T extends string | ArrayBuffer | null>(file: File) {
     return new Promise<T>((resolve, reject) => {
@@ -125,6 +119,7 @@
       file.preview = await getBase64<string>(file.originFileObj!);
     }
     previewImage.value = file.url || file.preview || '';
+    previewOpen.value = true;
     previewTitle.value =
       file.name || previewImage.value.substring(previewImage.value.lastIndexOf('/') + 1);
   };
@@ -133,7 +128,9 @@
     if (fileList.value) {
       const index = fileList.value.findIndex((item) => item.uid === file.uid);
       index !== -1 && fileList.value.splice(index, 1);
-      emit('change', responseData);
+      const value = getValue();
+      isInnerOperate.value = true;
+      emit('change', value);
       emit('delete', file);
     }
   };
@@ -178,7 +175,9 @@
         filename: props.filename,
       });
       info.onSuccess!(res.data.data);
-      emit('change', responseData);
+      const value = getValue();
+      isInnerOperate.value = true;
+      emit('change', value);
     } catch (e: any) {
       console.log(e);
       info.onError!(e);
