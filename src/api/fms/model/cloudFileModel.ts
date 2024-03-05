@@ -4,7 +4,7 @@ import { BaseListResp } from '@/api/model/baseModel';
  *  @description: CloudFile info response
  */
 export interface CloudFileInfo {
-  id: string;
+  id?: string;
   createdAt?: number;
   updatedAt?: number;
   state?: boolean;

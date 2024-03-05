@@ -4,7 +4,7 @@ import { BaseListResp } from '@/api/model/baseModel';
  *  @description: EmailLog info response
  */
 export interface EmailLogInfo {
-  id: string;
+  id?: string;
   createdAt?: number;
   updatedAt?: number;
   target?: string;
