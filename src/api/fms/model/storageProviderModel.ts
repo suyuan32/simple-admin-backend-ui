@@ -16,6 +16,8 @@ export interface StorageProviderInfo {
   folder?: string;
   region?: string;
   isDefault?: boolean;
+  useCdn?: boolean;
+  cdnUrl?: string;
 }
 
 /**

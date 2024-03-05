@@ -153,15 +153,17 @@
         };
 
         // 计算md5
-        message.loading(t('fms.file.preprocessing'));
-        file2md5(file, { chunkSize: 3 * 1024 * 1024 })
-          .then((data) => {
-            message.success(t('common.successful'));
-            tempFileMd5[file.name] = data;
-          })
-          .catch(() => {
-            message.error(t('common.failed'));
-          });
+        if (props.calculateMd5) {
+          message.loading(t('fms.file.preprocessing'));
+          file2md5(file, { chunkSize: 3 * 1024 * 1024 })
+            .then((data) => {
+              message.success(t('common.successful'));
+              tempFileMd5[file.name] = data;
+            })
+            .catch(() => {
+              message.error(t('common.failed'));
+            });
+        }
 
         // 生成图片缩略图
         if (checkImgType(file)) {

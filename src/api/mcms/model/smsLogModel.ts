@@ -4,7 +4,7 @@ import { BaseListResp } from '@/api/model/baseModel';
  *  @description: SmsLog info response
  */
 export interface SmsLogInfo {
-  id: string;
+  id?: string;
   createdAt?: number;
   updatedAt?: number;
   phoneNumber?: string;

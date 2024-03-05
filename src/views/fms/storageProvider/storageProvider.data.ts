@@ -139,14 +139,32 @@ export const formSchema: FormSchema[] = [
     required: true,
   },
   {
+    field: 'useCdn',
+    label: t('fms.storageProvider.useCdn'),
+    component: 'RadioButtonGroup',
+    defaultValue: false,
+    componentProps: {
+      options: [
+        { label: t('common.on'), value: true },
+        { label: t('common.off'), value: false },
+      ],
+    },
+    required: true,
+  },
+  {
+    field: 'cdnUrl',
+    label: t('fms.storageProvider.cdnUrl'),
+    component: 'Input',
+  },
+  {
     field: 'isDefault',
     label: t('fms.storageProvider.isDefault'),
     component: 'RadioButtonGroup',
     defaultValue: false,
     componentProps: {
       options: [
-        { label: t('common.on'), value: false },
-        { label: t('common.off'), value: true },
+        { label: t('common.on'), value: true },
+        { label: t('common.off'), value: false },
       ],
     },
     required: true,
@@ -162,5 +180,6 @@ export const formSchema: FormSchema[] = [
         { label: t('common.off'), value: false },
       ],
     },
+    required: true,
   },
 ];
