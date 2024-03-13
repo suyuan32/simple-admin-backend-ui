@@ -1,14 +1,14 @@
-VERSION=v1.3.10
+VERSION=v1.3.10-beta
 
 .PHONY: docker
 docker: # Compile and build the docker | 编译并构建 docker 镜像
 	pnpm install
 	pnpm build
-	docker build -f Dockerfile -t ${DOCKER_USERNAME}/backend-ui-docker:${VERSION} .
+	docker build -f Dockerfile -t ${DOCKER_USERNAME}/backend-ui:${VERSION} .
 
 .PHONY: docker-not-build
 docker-not-build: # Build the docker without compiling | 不编译直接构建镜像
-	docker build -f Dockerfile -t ${DOCKER_USERNAME}/backend-ui-docker:${VERSION} .
+	docker build -f Dockerfile -t ${DOCKER_USERNAME}/backend-ui:${VERSION} .
 
 .PHONY: publish-docker
 publish-docker: # Publish the docker | 发布镜像
