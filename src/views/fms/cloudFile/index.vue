@@ -149,7 +149,7 @@
       const { createErrorModal, createMessage } = useMessage();
       const showDeleteButton = ref<boolean>(false);
       const selectedIds = ref<number[] | string[]>();
-      const providerName = ref<string>('');
+      const providerName = ref<string>(t('fms.storageProvider.chooseProvider'));
 
       const providerParams = computed(() => {
         return {
