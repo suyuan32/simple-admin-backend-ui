@@ -214,7 +214,6 @@
               },
             });
 
-            console.log(result);
             emit('uploadSuccess', { source: previewSource.value, data: result.data.data.url });
             closeModal();
           } finally {
