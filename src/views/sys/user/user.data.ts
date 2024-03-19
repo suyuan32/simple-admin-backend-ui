@@ -129,6 +129,7 @@ export const formSchema: FormSchema[] = [
       uploadApi: uploadApi,
       btnText: t('sys.user.changeAvatar'),
       width: 100,
+      formValueType: 'string',
     },
   },
   {
