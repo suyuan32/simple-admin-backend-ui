@@ -8,7 +8,7 @@ import { getRoleList } from '@/api/sys/role';
 import { getDepartmentList } from '@/api/sys/department';
 import { getPositionList } from '@/api/sys/position';
 import { updateUser } from '@/api/sys/user';
-import { uploadApi } from '@/api/fms/file';
+import { uploadApi } from '@/api/fms/cloudFile';
 
 const { t } = useI18n();
 
