@@ -90,7 +90,7 @@ export default {
     tabDetail: 'Tab Detail',
     tabsQuickBtn: 'Tabs quick button',
     tabsRedoBtn: 'Tabs redo button',
-    tabsFoldBtn: 'Tabs flod button',
+    tabsFoldBtn: 'Tabs fold button',
     sidebar: 'Sidebar',
     header: 'Header',
     footer: 'Footer',
