@@ -179,7 +179,7 @@
         });
       }
 
-      async function handleChange(e: any) {
+      async function handleChange(e: any, ...rest: any[]) {
         const component = unref(getComponent);
         if (!e) {
           currentValueRef.value = e;
@@ -193,7 +193,7 @@
           currentValueRef.value = e;
         }
         const onChange = unref(getComponentProps)?.onChangeTemp;
-        if (onChange && isFunction(onChange)) onChange(...arguments);
+        if (onChange && isFunction(onChange)) onChange(e, ...rest);
 
         table.emit?.('edit-change', {
           column: props.column,
