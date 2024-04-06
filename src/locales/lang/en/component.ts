@@ -20,7 +20,7 @@ export default {
     btn_scale_y: 'Flip vertical',
     btn_zoom_in: 'Zoom in',
     btn_zoom_out: 'Zoom out',
-    preview: 'Preivew',
+    preview: 'Preview',
   },
   drawer: {
     loadingText: 'Loading...',
@@ -121,8 +121,8 @@ export default {
     pending: 'Pending',
   },
   verify: {
-    error: 'verification failed！',
-    time: 'The verification is successful and it takes {time} seconds！',
+    error: 'verification failed!',
+    time: 'The verification is successful and it takes {time} seconds!',
     redoTip: 'Click the picture to refresh',
     dragText: 'Hold down the slider and drag',
     successText: 'Verified',

@@ -87,7 +87,7 @@ export function useFormEvents({
       const defaultValueObj = schema?.defaultValueObj;
       const fieldKeys = Object.keys(defaultValueObj || {});
       if (fieldKeys.length) {
-        fieldKeys.map((field) => {
+        fieldKeys.forEach((field) => {
           formModel[field] = defaultValueObj![field];
         });
       }
@@ -192,7 +192,7 @@ export function useFormEvents({
       fieldList = [fields];
     }
     for (const field of fieldList) {
-      _removeSchemaByFeild(field, schemaList);
+      _removeSchemaByField(field, schemaList);
     }
     schemaRef.value = schemaList;
   }
@@ -200,7 +200,7 @@ export function useFormEvents({
   /**
    * @description: Delete based on field name
    */
-  function _removeSchemaByFeild(field: string, schemaList: FormSchema[]): void {
+  function _removeSchemaByField(field: string, schemaList: FormSchema[]): void {
     if (isString(field)) {
       const index = schemaList.findIndex((schema) => schema.field === field);
       if (index !== -1) {

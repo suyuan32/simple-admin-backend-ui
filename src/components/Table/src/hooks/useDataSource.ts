@@ -161,7 +161,7 @@ export function useDataSource(
   }
 
   function deleteTableDataRecord(keyValues: Key | Key[]) {
-    if (!dataSourceRef.value || dataSourceRef.value.length == 0) return;
+    if (!dataSourceRef.value || dataSourceRef.value.length === 0) return;
     const delKeyValues = !Array.isArray(keyValues) ? [keyValues] : keyValues;
 
     function deleteRow(data, keyValue) {
