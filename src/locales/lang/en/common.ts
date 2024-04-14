@@ -51,6 +51,7 @@ export default {
   stop: 'Stop',
   delete: 'Delete',
   submit: 'Submit',
+  audit: 'Under review',
   // notification
   deleteConfirm: 'Confirm the deletion?',
   operateSuccess: 'Successful operation',
