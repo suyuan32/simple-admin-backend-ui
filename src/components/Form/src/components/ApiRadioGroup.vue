@@ -39,7 +39,7 @@
     },
     props: {
       api: {
-        type: Function as PropType<(arg?: any | string) => Promise<OptionsItem[]>>,
+        type: Function as PropType<(arg?: any) => Promise<any>>,
         default: null,
       },
       params: {

@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, watch, ref, unref, watchEffect, PropType } from 'vue';
+  import { computed, defineComponent, watch, ref, unref, PropType, onMounted } from 'vue';
   import { Transfer } from 'ant-design-vue';
   import { isFunction } from '@/utils/is';
   import { get, omit } from 'lodash-es';
@@ -27,13 +27,12 @@
     props: {
       value: { type: Array as PropType<Array<string>> },
       api: {
-        type: Function as PropType<(arg) => Promise<TransferItem[]>>,
+        type: Function as PropType<(arg) => Promise<any>>,
         default: null,
       },
       params: { type: Object },
       dataSource: { type: Array as PropType<Array<TransferItem>> },
       immediate: propTypes.bool.def(true),
-      alwaysLoad: propTypes.bool.def(false),
       afterFetch: { type: Function },
       resultField: propTypes.string.def(''),
       labelField: propTypes.string.def('title'),
@@ -74,9 +73,6 @@
         }, [] as TransferItem[]);
       });
       const getTargetKeys = computed<string[]>(() => {
-        /* if (unref(_targetKeys).length > 0) {
-          return unref(_targetKeys);
-        } */
         if (Array.isArray(props.value)) {
           return props.value;
         }
@@ -93,8 +89,8 @@
         emit('change', keys);
       }
 
-      watchEffect(() => {
-        props.immediate && !props.alwaysLoad && fetch();
+      onMounted(() => {
+        props.immediate && fetch();
       });
 
       watch(

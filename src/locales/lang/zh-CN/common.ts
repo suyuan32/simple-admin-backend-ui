@@ -51,6 +51,7 @@ export default {
   stop: '停止',
   delete: '删除',
   submit: '提交',
+  audit: '审核中',
   // notification
   deleteConfirm: '是否确认删除？',
   operateSuccess: '操作成功',
