@@ -3,7 +3,7 @@ import { defineStore } from 'pinia';
 import { store } from '@/store';
 import { RoleEnum } from '@/enums/roleEnum';
 import { PageEnum } from '@/enums/pageEnum';
-import { TOKEN_KEY, USER_INFO_KEY } from '@/enums/cacheEnum';
+import { USER_INFO_KEY } from '@/enums/cacheEnum';
 import {
   GetUserInfoModel,
   LoginByEmailReq,
@@ -19,7 +19,6 @@ import { RouteRecordRaw } from 'vue-router';
 import { PAGE_NOT_FOUND_ROUTE } from '@/router/routes/basic';
 import { isArray } from '@/utils/is';
 import { h } from 'vue';
-import { setAuthCache } from '@/utils/auth';
 
 interface UserState {
   userInfo: GetUserInfoModel;
@@ -76,7 +75,6 @@ export const useUserStore = defineStore({
   actions: {
     setToken(info: string | undefined) {
       this.token = info ? info : '';
-      setAuthCache(TOKEN_KEY, info);
     },
     setRoleList(roleList: RoleEnum[]) {
       this.roleList = roleList;

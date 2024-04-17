@@ -12,7 +12,6 @@ import { store } from '@/store';
 
 import { ThemeEnum } from '@/enums/appEnum';
 import { APP_DARK_MODE_KEY, PROJ_CFG_KEY, API_ADDRESS } from '@/enums/cacheEnum';
-import { Persistent } from '@/utils/cache/persistent';
 import { darkMode } from '@/settings/designSetting';
 import { resetRouter } from '@/router';
 import { deepMerge } from '@/utils';
@@ -32,7 +31,7 @@ export const useAppStore = defineStore({
   state: (): AppState => ({
     darkMode: undefined,
     pageLoading: false,
-    projectConfig: Persistent.getLocal(PROJ_CFG_KEY),
+    projectConfig: null,
     beforeMiniInfo: {},
   }),
   getters: {
@@ -74,7 +73,6 @@ export const useAppStore = defineStore({
 
     setDarkMode(mode: ThemeEnum): void {
       this.darkMode = mode;
-      localStorage.setItem(APP_DARK_MODE_KEY, mode);
     },
 
     setBeforeMiniInfo(state: BeforeMiniState): void {
@@ -83,16 +81,14 @@ export const useAppStore = defineStore({
 
     setProjectConfig(config: DeepPartial<ProjectConfig>): void {
       this.projectConfig = deepMerge(this.projectConfig || {}, config) as ProjectConfig;
-      Persistent.setLocal(PROJ_CFG_KEY, this.projectConfig);
     },
     setMenuSetting(setting: Partial<MenuSetting>): void {
       this.projectConfig!.menuSetting = deepMerge(this.projectConfig!.menuSetting, setting);
-      Persistent.setLocal(PROJ_CFG_KEY, this.projectConfig);
     },
 
     async resetAllState() {
       resetRouter();
-      Persistent.clearAll();
+      localStorage.removeItem(PROJ_CFG_KEY);
     },
     async setPageLoadingAction(loading: boolean): Promise<void> {
       if (loading) {
@@ -109,6 +105,9 @@ export const useAppStore = defineStore({
     setApiAddress(config: ApiAddress): void {
       localStorage.setItem(API_ADDRESS, JSON.stringify(config));
     },
+  },
+  persist: {
+    key: PROJ_CFG_KEY,
   },
 });
 
