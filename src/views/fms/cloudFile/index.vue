@@ -22,6 +22,7 @@
           value-field="name"
           class="w-32"
           v-model:value="providerName"
+          @options-change="handleOptionsChange"
         />
         <BasicUpload
           :maxSize="1000"
@@ -205,6 +206,15 @@
         });
       }
 
+      function handleOptionsChange(options: Recordable) {
+        for (let i = 0; i < options.length; i++) {
+          if (options[i].isDefault) {
+            providerName.value = options[i].label
+            break
+          }
+        }
+      }
+
       async function handleDownload(record: Recordable) {
         if (record.fileType === 2) {
           imageVisible.value = true;
@@ -307,6 +317,7 @@
         handleSuccess,
         providerName,
         providerParams,
+        handleOptionsChange,
         handleDownload,
         handleChange: (list: string[]) => {
           // createMessage.info(`已上传文件${JSON.stringify(list)}`);
