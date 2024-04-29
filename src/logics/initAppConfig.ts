@@ -3,7 +3,6 @@
  */
 import type { ProjectConfig } from '/#/config';
 
-import { PROJ_CFG_KEY } from '@/enums/cacheEnum';
 import projectSetting from '@/settings/projectSetting';
 
 import { updateDarkTheme } from '@/logics/theme/dark';
@@ -18,13 +17,12 @@ import { getCommonStoragePrefix, getStorageShortName } from '@/utils/env';
 
 import { ThemeEnum } from '@/enums/appEnum';
 import { deepMerge } from '@/utils';
-import { Persistent } from '@/utils/cache/persistent';
 
 // Initial project configuration
 export function initAppConfigStore() {
   const localeStore = useLocaleStore();
   const appStore = useAppStore();
-  let projCfg: ProjectConfig = Persistent.getLocal(PROJ_CFG_KEY) as ProjectConfig;
+  let projCfg: ProjectConfig = appStore.getProjectConfig as ProjectConfig;
   projCfg = deepMerge(projectSetting, projCfg || {});
   const darkMode = appStore.getDarkMode;
   const {
