@@ -284,6 +284,8 @@ export default {
     departmentList: 'Department List',
     firstLevelDepartment: 'First level department',
     userDepartment: 'Department',
+    ancestorsHelpMessage:
+      "List of parent department IDs, separated by commas. The IDs of all parent departments above the current department's parent except the current parent's ID, which is the parentId field",
   },
   position: {
     name: 'Position Name',

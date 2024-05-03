@@ -276,6 +276,8 @@ export default {
     departmentList: '部门列表',
     firstLevelDepartment: '一级部门',
     userDepartment: '所属部门',
+    ancestorsHelpMessage:
+      '父级部门ID列表, 用逗号分隔, 除了当前部门的父级之上的所有父级部门的 ID, 当前父级的 ID 是 parentId 字段',
   },
   position: {
     name: '职位名称',

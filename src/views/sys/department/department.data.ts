@@ -117,6 +117,10 @@ export const formSchema: FormSchema[] = [
     label: t('sys.department.ancestors'),
     component: 'Input',
     rules: [{ max: 200 }],
+    componentProps: {
+      disabled: true,
+    },
+    helpMessage: t('sys.department.ancestorsHelpMessage'),
   },
   {
     field: 'leader',
