@@ -4,12 +4,7 @@ import type { NamePath } from 'ant-design-vue/lib/form/interface';
 import { unref, toRaw, nextTick } from 'vue';
 import { isArray, isFunction, isObject, isString, isDef, isNil } from '@/utils/is';
 import { deepMerge } from '@/utils';
-import {
-  dateItemType,
-  handleInputNumberValue,
-  defaultValueComponents,
-  isIncludeSimpleComponents,
-} from '../helper';
+import { dateItemType, defaultValueComponents, isIncludeSimpleComponents } from '../helper';
 import { dateUtil } from '@/utils/dateUtil';
 import { cloneDeep, set, uniqBy, get } from 'lodash-es';
 import { error } from '@/utils/log';
@@ -121,10 +116,9 @@ export function useFormEvents({
     const validKeys: string[] = [];
     fields.forEach((key) => {
       const schema = unref(getSchema).find((item) => item.field === key);
-      let value = get(values, key);
+      const value = get(values, key);
       const hasKey = Reflect.has(values, key);
 
-      value = handleInputNumberValue(schema?.component, value);
       const { componentProps } = schema || {};
       let _props = componentProps as any;
       if (typeof componentProps === 'function') {
