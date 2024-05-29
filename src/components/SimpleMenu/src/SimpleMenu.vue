@@ -29,8 +29,9 @@
   import { propTypes } from '@/utils/propTypes';
   import { REDIRECT_NAME } from '@/router/constant';
   import { useRouter } from 'vue-router';
-  import { isFunction, isHttpUrl } from '@/utils/is';
+  import { isHttpUrl } from '@/utils/is';
   import { openWindow } from '@/utils';
+  import { isFunction } from 'remeda';
 
   import { useOpenKeys } from './useOpenKeys';
 

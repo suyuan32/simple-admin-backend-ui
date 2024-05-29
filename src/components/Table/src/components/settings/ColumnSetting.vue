@@ -122,9 +122,8 @@
   import { useTableContext } from '../../hooks/useTableContext';
   import { useDesign } from '@/hooks/web/useDesign';
   // import { useSortable } from '@/hooks/web/useSortable';
-  import { isFunction, isNil } from '@/utils/is';
+  import { isFunction, isNullish, clone } from 'remeda';
   import { getPopupContainer as getParentContainer } from '@/utils';
-  import { cloneDeep, omit } from 'lodash-es';
   import Sortablejs from 'sortablejs';
   import type Sortable from 'sortablejs';
 
@@ -160,7 +159,10 @@
       const { t } = useI18n();
       const table = useTableContext();
 
-      const defaultRowSelection = omit(table.getRowSelection(), 'selectedRowKeys');
+      const defaultRowSelection = isNullish(table.getRowSelection())
+        ? undefined
+        : table.getRowSelection();
+
       let inited = false;
       // 是否当前的setColums触发的
       let isSetColumnsFromThis = false;
@@ -206,7 +208,7 @@
         if (isSetPropsFromThis) {
           isSetPropsFromThis = false;
         } else {
-          cacheTableProps = cloneDeep(values);
+          cacheTableProps = clone(values);
         }
         checkIndex.value = !!values.showIndexColumn;
         checkSelect.value = !!values.rowSelection;
@@ -234,7 +236,7 @@
           Array.from(el.children).forEach((item) => el.removeChild(item));
         }
         await nextTick();
-        const columns = isReset ? cloneDeep(cachePlainOptions.value) : getColumns();
+        const columns = isReset ? clone(cachePlainOptions.value) : getColumns();
 
         const checkList = table
           .getColumns({ ignoreAction: true, ignoreIndex: true })
@@ -249,7 +251,7 @@
         plainSortOptions.value = columns;
         // 更新缓存配置
         table.setCacheColumns?.(columns);
-        !isReset && (cachePlainOptions.value = cloneDeep(columns));
+        !isReset && (cachePlainOptions.value = clone(columns));
         state.defaultCheckList = checkList;
         state.checkedList = checkList;
         // 是否列展示全选
@@ -325,11 +327,11 @@
             handle: '.table-column-drag-icon ',
             onEnd: (evt) => {
               const { oldIndex, newIndex } = evt;
-              if (isNil(oldIndex) || isNil(newIndex) || oldIndex === newIndex) {
+              if (isNullish(oldIndex) || isNullish(newIndex) || oldIndex === newIndex) {
                 return;
               }
               // Sort column
-              const columns = cloneDeep(plainSortOptions.value);
+              const columns = clone(plainSortOptions.value);
 
               if (oldIndex > newIndex) {
                 columns.splice(newIndex, 0, columns[oldIndex]);

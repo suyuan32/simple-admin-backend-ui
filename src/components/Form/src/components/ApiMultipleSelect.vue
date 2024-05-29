@@ -24,13 +24,13 @@
 <script lang="ts">
   import { defineComponent, PropType, ref, watchEffect, computed, unref, watch } from 'vue';
   import { Select } from 'ant-design-vue';
-  import { isFunction } from '@/utils/is';
   import { useRuleFormItem } from '@/hooks/component/useFormItem';
   import { useAttrs } from '@vben/hooks';
-  import { get, omit } from 'lodash-es';
   import { LoadingOutlined } from '@ant-design/icons-vue';
   import { useI18n } from '@/hooks/web/useI18n';
   import { propTypes } from '@/utils/propTypes';
+  import { isFunction, omit } from 'remeda';
+  import { get } from '/@/utils/object';
 
   type OptionsItem = { label: string; value: string; disabled?: boolean };
 

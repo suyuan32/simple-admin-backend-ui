@@ -13,12 +13,13 @@ import {
 } from 'vue';
 import { useTimeoutFn } from '@vben/hooks';
 import { buildUUID } from '@/utils/uuid';
-import { isFunction, isBoolean, isObject } from '@/utils/is';
-import { get, cloneDeep, merge } from 'lodash-es';
 import { FETCH_SETTING, ROW_KEY, PAGE_SIZE } from '../const';
 import { parseRowKeyValue } from '../helper';
 import type { Key } from 'ant-design-vue/lib/table/interface';
 import { array2tree } from '@axolo/tree-array';
+import { clone, isBoolean, isFunction, mergeAll } from 'remeda';
+import { isObject } from '/@/utils/is';
+import { get } from '/@/utils/object';
 
 interface ActionType {
   getPaginationInfo: ComputedRef<boolean | PaginationProps>;
@@ -125,7 +126,7 @@ export function useDataSource(
 
       if (firstItem && lastItem) {
         if (!firstItem[ROW_KEY] || !lastItem[ROW_KEY]) {
-          const data = cloneDeep(unref(dataSourceRef));
+          const data = clone(unref(dataSourceRef));
           data.forEach((item) => {
             if (!item[ROW_KEY]) {
               item[ROW_KEY] = buildUUID();
@@ -263,17 +264,17 @@ export function useDataSource(
 
       const { sortInfo = {}, filterInfo } = searchState;
 
-      let params: Recordable = merge(
+      let params: Recordable = mergeAll([
         pageParams,
         useSearchForm ? getFieldsValue() : {},
-        searchInfo,
+        searchInfo ?? {},
         opt?.searchInfo ?? {},
-        defSort,
+        defSort ?? {},
         sortInfo,
         filterInfo,
         opt?.sortInfo ?? {},
         opt?.filterInfo ?? {},
-      );
+      ]);
       if (beforeFetch && isFunction(beforeFetch)) {
         params = (await beforeFetch(params)) || params;
       }
@@ -289,7 +290,7 @@ export function useDataSource(
         rawDataSourceRef.value = tree;
         isArrayResult = Array.isArray(tree);
         resultItems = isArrayResult ? tree : get(tree, listField);
-        resultTotal = isArrayResult ? tree.length : get(tree, totalField);
+        (resultTotal = isArrayResult ? tree.length : tree), get(tree, totalField);
       } else {
         rawDataSourceRef.value = res;
         isArrayResult = Array.isArray(res);

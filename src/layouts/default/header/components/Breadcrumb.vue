@@ -48,7 +48,7 @@
   import { useI18n } from '@/hooks/web/useI18n';
 
   import { propTypes } from '@/utils/propTypes';
-  import { isString } from '@/utils/is';
+  import { isString } from 'remeda';
   import { filter } from '@/utils/helper/treeHelper';
   import { getMenus } from '@/router/menus';
 

@@ -11,9 +11,8 @@
   import clickOutside from '@/directives/clickOutside';
 
   import { propTypes } from '@/utils/propTypes';
-  import { isArray, isBoolean, isFunction, isNumber, isString } from '@/utils/is';
+  import { isArray, isBoolean, isFunction, isNumber, isString, set, pick } from 'remeda';
   import { createPlaceholderMessage } from './helper';
-  import { pick, set } from 'lodash-es';
   import { treeToList } from '@/utils/helper/treeHelper';
   import { Spin } from 'ant-design-vue';
 
@@ -104,7 +103,7 @@
         const { key, dataIndex } = column;
         if (!key && !dataIndex) return;
         const dataKey = (dataIndex || key) as string;
-        set(record, dataKey, value);
+        record = set(record, dataKey, value);
       }
       const getDisable = computed(() => {
         const { editDynamicDisabled } = props.column;

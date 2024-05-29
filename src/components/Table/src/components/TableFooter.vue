@@ -15,8 +15,7 @@
   import type { PropType } from 'vue';
   import { defineComponent, unref, computed, toRaw } from 'vue';
   import { Table } from 'ant-design-vue';
-  import { cloneDeep } from 'lodash-es';
-  import { isFunction } from '@/utils/is';
+  import { clone, isFunction } from 'remeda';
   import type { BasicColumn } from '../types/table';
   import { INDEX_COLUMN_FLAG } from '../const';
   import { propTypes } from '@/utils/propTypes';
@@ -62,7 +61,7 @@
 
       const getColumns = computed(() => {
         const dataSource = unref(getDataSource);
-        const columns: BasicColumn[] = cloneDeep(table.getColumns());
+        const columns: BasicColumn[] = clone(table.getColumns());
         const index = columns.findIndex((item) => item.flag === INDEX_COLUMN_FLAG);
         const hasRowSummary = dataSource.some((item) => Reflect.has(item, SUMMARY_ROW_KEY));
         const hasIndexSummary = dataSource.some((item) => Reflect.has(item, SUMMARY_INDEX_KEY));

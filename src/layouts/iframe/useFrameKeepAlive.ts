@@ -4,11 +4,10 @@ import { computed, toRaw, unref } from 'vue';
 
 import { useMultipleTabStore } from '@/store/modules/multipleTab';
 
-import { uniqBy } from 'lodash-es';
-
 import { useMultipleTabSetting } from '@/hooks/setting/useMultipleTabSetting';
 
 import { useRouter } from 'vue-router';
+import { uniqueBy } from 'remeda';
 
 export function useFrameKeepAlive() {
   const router = useRouter();
@@ -40,7 +39,7 @@ export function useFrameKeepAlive() {
         res.push(...getAllFramePages(children));
       }
     }
-    res = uniqBy(res, 'name');
+    res = uniqueBy(res, (obj) => obj.name);
     return res;
   }
 

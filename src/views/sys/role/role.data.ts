@@ -8,7 +8,7 @@ import { ApiInfo } from '@/api/sys/model/apiModel';
 import { ApiAuthorityInfo } from '@/api/sys/model/authorityModel';
 import { formatToDateTime } from '@/utils/dateUtil';
 import { updateRole } from '@/api/sys/role';
-import { cloneDeep, union } from 'lodash-es';
+import { clone, concat, unique } from 'remeda';
 
 const { t } = useI18n();
 
@@ -174,7 +174,7 @@ export function convertApiTreeData(params: ApiInfo[]): DataNode[] {
 
     for (let i = 0; i < apiData.length; i++) {
       if (apiMap.get(apiData[i].title) === k1) {
-        svcTmp.children?.push(cloneDeep(apiData[i]));
+        svcTmp.children?.push(clone(apiData[i]));
       }
     }
 
@@ -242,6 +242,6 @@ export function convertApiToCheckedKeys(checked: ApiAuthorityInfo[], data: ApiIn
     authorityApis.push(dataMap.get(checked[i].path + checked[i].method));
   }
 
-  const result = union(authorityApis, requiredAPIs);
+  const result = unique(concat(authorityApis, requiredAPIs));
   return result;
 }

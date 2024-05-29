@@ -211,6 +211,7 @@
       async function handleAuthorizationSubmit() {
         if (activeKey.value === '1') {
           const roleData = await getFieldsValue();
+          console.log('roledata', roleData);
           const result = await createOrUpdateMenuAuthority({
             roleId: Number(roleData['id']),
             menuIds: getMenuTree().getCheckedKeys()['checked'] as number[],

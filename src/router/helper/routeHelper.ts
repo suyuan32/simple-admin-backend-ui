@@ -2,9 +2,9 @@ import type { AppRouteModule, AppRouteRecordRaw } from '@/router/types';
 import type { Router, RouteRecordNormalized } from 'vue-router';
 
 import { getParentLayout, LAYOUT, EXCEPTION_COMPONENT } from '@/router/constant';
-import { cloneDeep, omit } from 'lodash-es';
 import { warn } from '@/utils/log';
 import { createRouter, createWebHashHistory } from 'vue-router';
+import { clone, omit } from 'remeda';
 
 export type LayoutMapKey = 'LAYOUT';
 const IFRAME = () => import('@/views/sys/iframe/FrameBlank.vue');
@@ -76,7 +76,7 @@ export function transformObjToRoute<T = AppRouteModule>(routeList: AppRouteModul
       if (component.toUpperCase() === 'LAYOUT') {
         route.component = LayoutMap.get(component.toUpperCase());
       } else {
-        route.children = [cloneDeep(route)];
+        route.children = [clone(route)];
         route.component = LAYOUT;
 
         //某些情况下如果name如果没有值， 多个一级路由菜单会导致页面404
@@ -103,7 +103,7 @@ export function transformObjToRoute<T = AppRouteModule>(routeList: AppRouteModul
  * 将多级路由转换为 2 级路由
  */
 export function flatMultiLevelRoutes(routeModules: AppRouteModule[]) {
-  const modules: AppRouteModule[] = cloneDeep(routeModules);
+  const modules: AppRouteModule[] = clone(routeModules);
 
   for (let index = 0; index < modules.length; index++) {
     const routeModule = modules[index];
@@ -134,8 +134,8 @@ function promoteRouteLevel(routeModule: AppRouteModule) {
   addToChildren(routes, routeModule.children || [], routeModule);
   router = null;
 
-  // omit lodash的函数 对传入的item对象的children进行删除
-  routeModule.children = routeModule.children?.map((item) => omit(item, 'children'));
+  // omit radash的函数 对传入的item对象的children进行删除
+  routeModule.children = routeModule.children?.map((item) => omit(item, ['children']));
 }
 
 // Add all sub-routes to the secondary route

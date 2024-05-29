@@ -1,6 +1,6 @@
 import { DataNode } from 'ant-design-vue/es/vc-tree/interface';
-import { map, pick } from 'lodash-es';
 import { array2tree } from '@axolo/tree-array';
+import { forEachObj, map, pick } from 'remeda';
 
 export interface buildNodeOption {
   labelField: string;
@@ -13,23 +13,25 @@ export interface buildNodeOption {
 
 export function buildDataNode(data: any, options: buildNodeOption): DataNode[] {
   const treeNodeData = map(data, (obj) => {
-    const tmpData = pick(obj, [
+    const tmpData = pick(obj as any, [
       options.labelField,
       options.idKeyField,
       options.valueField,
       options.parentKeyField,
     ]);
-    Object.keys(tmpData).forEach((e) => {
-      if (e === options.labelField) {
-        tmpData['title'] = tmpData[e];
-        delete tmpData[e];
-      } else if (e === options.valueField) {
-        tmpData['key'] = tmpData[e];
-        if (e !== options.idKeyField && e !== options.parentKeyField) {
-          delete tmpData[e];
+
+    forEachObj.indexed(tmpData, (value, key) => {
+      if (key === options.labelField) {
+        tmpData['title'] = value;
+        delete tmpData[key];
+      } else if (key === options.valueField) {
+        tmpData['key'] = tmpData[key];
+        if (key !== options.idKeyField && key !== options.parentKeyField) {
+          delete tmpData[key];
         }
       }
     });
+
     return tmpData;
   });
 
@@ -49,23 +51,25 @@ export function buildDataNode(data: any, options: buildNodeOption): DataNode[] {
 // buildTreeNode returns treeData for tree select from data
 export function buildTreeNode(data: any, options: buildNodeOption): Recordable[] {
   const treeNodeData = map(data, (obj) => {
-    const tmpData = pick(obj, [
+    const tmpData = pick(obj as any, [
       options.labelField,
       options.idKeyField,
       options.valueField,
       options.parentKeyField,
     ]);
-    Object.keys(tmpData).forEach((e) => {
-      if (e === options.labelField) {
-        tmpData['label'] = tmpData[e];
-        delete tmpData[e];
-      } else if (e === options.valueField) {
-        tmpData['value'] = tmpData[e];
-        if (e !== options.idKeyField && e !== options.parentKeyField) {
-          delete tmpData[e];
+
+    forEachObj.indexed(tmpData, (value, key) => {
+      if (key === options.labelField) {
+        tmpData['label'] = value;
+        delete tmpData[key];
+      } else if (key === options.valueField) {
+        tmpData['value'] = tmpData[key];
+        if (key !== options.idKeyField && key !== options.parentKeyField) {
+          delete tmpData[key];
         }
       }
     });
+
     return tmpData;
   });
 

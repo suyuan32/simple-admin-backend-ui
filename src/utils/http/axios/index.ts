@@ -2,7 +2,6 @@
 // The axios configuration can be changed according to the project, just change the file, other files can be left unchanged
 
 import type { AxiosInstance, AxiosResponse } from 'axios';
-import { clone } from 'lodash-es';
 import type { RequestOptions, Result } from '/#/axios';
 import type { AxiosTransform, CreateAxiosOptions } from './axiosTransform';
 import { VAxios } from './Axios';
@@ -10,7 +9,6 @@ import { checkStatus } from './checkStatus';
 import { useGlobSetting } from '@/hooks/setting';
 import { useMessage } from '@/hooks/web/useMessage';
 import { RequestEnum, ContentTypeEnum } from '@/enums/httpEnum';
-import { isString } from '@/utils/is';
 import { setObjToUrlParams, deepMerge } from '@/utils';
 import { useErrorLogStoreWithOut } from '@/store/modules/errorLog';
 import { useI18n } from '@/hooks/web/useI18n';
@@ -18,6 +16,7 @@ import { joinTimestamp, formatRequestDate } from './helper';
 import { AxiosRetry } from '@/utils/http/axios/axiosRetry';
 import { useLocaleStore } from '@/store/modules/locale';
 import { useUserStore } from '/@/store/modules/user';
+import { clone, isString } from 'remeda';
 
 const globSetting = useGlobSetting();
 const urlPrefix = globSetting.urlPrefix;

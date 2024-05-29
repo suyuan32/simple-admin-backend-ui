@@ -1,10 +1,10 @@
 import { AppRouteModule } from '@/router/types';
 import type { MenuModule, Menu, AppRouteRecordRaw } from '@/router/types';
 import { findPath, treeMap } from '@/utils/helper/treeHelper';
-import { cloneDeep } from 'lodash-es';
 import { isHttpUrl } from '@/utils/is';
 import { RouteParams } from 'vue-router';
 import { toRaw } from 'vue';
+import { clone } from 'remeda';
 
 export function getAllParentPath<T = Recordable>(treeData: T[], path: string) {
   const menuList = findPath(treeData, (n) => n.path === path) as Menu[];
@@ -43,8 +43,8 @@ export function transformMenuModule(menuModule: MenuModule): Menu {
 
 // 将路由转换成菜单
 export function transformRouteToMenu(routeModList: AppRouteModule[], routerMapping = false) {
-  // 借助 lodash 深拷贝
-  const cloneRouteModList = cloneDeep(routeModList);
+  // 借助 radash 深拷贝
+  const cloneRouteModList = clone(routeModList);
   const routeList: AppRouteRecordRaw[] = [];
 
   // 对路由项进行修改
@@ -77,7 +77,7 @@ export function transformRouteToMenu(routeModList: AppRouteModule[], routerMappi
   });
   // 路径处理
   joinParentPath(list);
-  return cloneDeep(list);
+  return clone(list);
 }
 
 /**

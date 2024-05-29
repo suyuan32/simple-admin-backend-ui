@@ -11,11 +11,11 @@
     unref,
     toRefs,
   } from 'vue';
-  import { get } from 'lodash-es';
+  import { get } from '@/utils/object';
   import { Descriptions } from 'ant-design-vue';
   import { CollapseContainer } from '@/components/Container/index';
   import { useDesign } from '@/hooks/web/useDesign';
-  import { isFunction } from '@/utils/is';
+  import { isFunction } from 'remeda';
   import { getSlot } from '@/utils/helper/tsxHelper';
   import { useAttrs } from '@vben/hooks';
 

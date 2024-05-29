@@ -1,9 +1,9 @@
 // copy from element-plus
 
 import { warn } from 'vue';
-import { fromPairs, isObject } from 'lodash-es';
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { Mutable } from './types';
+import { fromPairs } from 'remeda';
 
 const wrapperKey = Symbol();
 export type PropWrapper<T> = { [wrapperKey]: T };
@@ -96,7 +96,7 @@ export function buildProp<
   C = never,
 >(option: BuildPropOption<T, D, R, V, C>, key?: string): BuildPropReturn<T, D, R, V, C> {
   // filter native prop type and nested prop, e.g `null`, `undefined` (from `buildProps`)
-  if (!isObject(option) || !!option[propKey]) return option as any;
+  if (typeof option !== 'object' || !!option[propKey]) return option as any;
 
   const { values, required, default: defaultValue, type, validator } = option;
 

@@ -2,12 +2,13 @@ import type { ComputedRef, Ref } from 'vue';
 import type { FormProps, FormSchemaInner as FormSchema, FormActionType } from '../types/form';
 import type { NamePath } from 'ant-design-vue/lib/form/interface';
 import { unref, toRaw, nextTick } from 'vue';
-import { isArray, isFunction, isObject, isString, isNil } from '@/utils/is';
+import { isArray, isObject } from '@/utils/is';
 import { deepMerge } from '@/utils';
 import { dateItemType, defaultValueComponents, isIncludeSimpleComponents } from '../helper';
 import { dateUtil } from '@/utils/dateUtil';
-import { cloneDeep, has, uniqBy, get } from 'lodash-es';
+import { clone, pick, keys, uniqueBy, isString, isNullish, isFunction } from 'remeda';
 import { error } from '@/utils/log';
+import { get } from '/@/utils/object';
 
 interface UseFormActionContext {
   emit: EmitType;
@@ -73,7 +74,7 @@ export function useFormEvents({
     fields.forEach((key) => {
       const schema = unref(getSchema).find((item) => item.field === key);
       const value = get(values, key);
-      const hasKey = has(values, key);
+      const hasKey = keys(values).findIndex((k) => k === key);
       const { componentProps } = schema || {};
       let _props = componentProps as any;
       if (typeof componentProps === 'function') {
@@ -135,7 +136,7 @@ export function useFormEvents({
     nameList.forEach((key: any) => {
       if (keys.includes(key)) {
         validKeys.push(key);
-        unref(formModel)[key] = cloneDeep(unref(get(defaultValueRef.value, key)));
+        unref(formModel)[key] = clone(unref(pick(defaultValueRef.value, key)));
       }
     });
     validateFields(validKeys).catch((_) => {});
@@ -145,7 +146,7 @@ export function useFormEvents({
    * @description: Delete based on field name
    */
   async function removeSchemaByField(fields: string | string[]): Promise<void> {
-    const schemaList: FormSchema[] = cloneDeep(unref(getSchema));
+    const schemaList: FormSchema[] = clone(unref(getSchema));
     if (!fields) {
       return;
     }
@@ -181,7 +182,7 @@ export function useFormEvents({
     prefixField?: string,
     first = false,
   ) {
-    const schemaList: FormSchema[] = cloneDeep(unref(getSchema));
+    const schemaList: FormSchema[] = clone(unref(getSchema));
     const addSchemaIds: string[] = Array.isArray(schema)
       ? schema.map((item) => item.field)
       : [schema.field];
@@ -258,7 +259,9 @@ export function useFormEvents({
     });
     _setDefaultValue(updatedSchema);
 
-    schemaRef.value = uniqBy(schema, 'field');
+    schemaRef.value = uniqueBy(schema, (obj) => {
+      obj.field;
+    });
   }
 
   function _setDefaultValue(data: FormSchema | FormSchema[]) {
@@ -277,8 +280,8 @@ export function useFormEvents({
         !isIncludeSimpleComponents(item.component) &&
         Reflect.has(item, 'field') &&
         item.field &&
-        !isNil(item.defaultValue) &&
-        (!(item.field in currentFieldsValue) || isNil(currentFieldsValue[item.field]))
+        !isNullish(item.defaultValue) &&
+        (!(item.field in currentFieldsValue) || isNullish(currentFieldsValue[item.field]))
       ) {
         obj[item.field] = item.defaultValue;
       }
@@ -390,7 +393,7 @@ function getDefaultValue(
   defaultValueRef: UseFormActionContext['defaultValueRef'],
   key: string,
 ) {
-  let defaultValue = cloneDeep(defaultValueRef.value[key]);
+  let defaultValue = clone(defaultValueRef.value[key]);
   const isInput = checkIsInput(schema);
   if (isInput) {
     return defaultValue || undefined;

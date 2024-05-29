@@ -1,4 +1,5 @@
-import { isObject, isString } from '@/utils/is';
+import { isString } from 'remeda';
+import { isObject } from '../../is';
 
 const DATE_TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 

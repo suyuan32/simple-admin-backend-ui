@@ -209,8 +209,8 @@
       function handleOptionsChange(options: Recordable) {
         for (let i = 0; i < options.length; i++) {
           if (options[i].isDefault) {
-            providerName.value = options[i].label
-            break
+            providerName.value = options[i].label;
+            break;
           }
         }
       }

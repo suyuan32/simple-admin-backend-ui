@@ -1,38 +1,3 @@
-export {
-  isArguments,
-  isArrayBuffer,
-  isArrayLike,
-  isArrayLikeObject,
-  isBuffer,
-  isBoolean,
-  isDate,
-  isElement,
-  isEmpty,
-  isEqual,
-  isEqualWith,
-  isError,
-  isFunction,
-  isFinite,
-  isLength,
-  isMap,
-  isMatch,
-  isMatchWith,
-  isNative,
-  isNil,
-  isNumber,
-  isNull,
-  isObjectLike,
-  isPlainObject,
-  isRegExp,
-  isSafeInteger,
-  isSet,
-  isString,
-  isSymbol,
-  isTypedArray,
-  isUndefined,
-  isWeakMap,
-  isWeakSet,
-} from 'lodash-es';
 const toString = Object.prototype.toString;
 
 export function is(val: unknown, type: string) {
@@ -64,4 +29,8 @@ export const isClient = !isServer;
 export function isHttpUrl(path: string): boolean {
   const reg = /^http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- ./?%&=]*)?/;
   return reg.test(path);
+}
+
+export function upperFirst(str: string): string {
+  return str.charAt(0).toUpperCase() + str.slice(1);
 }
