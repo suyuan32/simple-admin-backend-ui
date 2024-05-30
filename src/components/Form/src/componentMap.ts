@@ -40,6 +40,7 @@ import { BasicTitle } from '@/components/Basic';
 import { CropperAvatar } from '@/components/Cropper';
 import { CodeEditor } from '../../CodeEditor';
 import { Tinymce } from '../../Tinymce';
+import { BasicTree } from '../../Tree';
 
 const componentMap = new Map<ComponentType | string, Component>();
 
@@ -84,6 +85,7 @@ componentMap.set('Divider', Divider);
 componentMap.set('CropperAvatar', CropperAvatar);
 
 componentMap.set('BasicTitle', BasicTitle);
+componentMap.set('BasicTree', BasicTree);
 
 // simple components
 componentMap.set('ApiMultipleSelect', ApiMultipleSelect);

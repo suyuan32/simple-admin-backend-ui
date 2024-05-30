@@ -121,6 +121,9 @@ interface _CustomComponents {
     (typeof import('@/components/Cropper/src/CropperAvatar.vue'))['default']
   >;
   BasicTitle: ExtractPropTypes<(typeof import('@/components/Basic/src/BasicTitle.vue'))['default']>;
+  BasicTree: ExtractPropTypes<
+    (typeof import('@/src/components/Tree/src/BasicTree.vue'))['default']
+  >;
   InputCountDown: ExtractPropTypes<
     (typeof import('@/components/CountDown/src/CountdownInput.vue'))['default']
   >;
@@ -187,6 +190,7 @@ export interface ComponentProps {
   Transfer: ExtractPropTypes<(typeof import('ant-design-vue/es/transfer'))['default']>;
   CropperAvatar: CustomComponents['CropperAvatar'];
   BasicTitle: CustomComponents['BasicTitle'];
+  BasicTree: CustomComponents['BasicTree'];
   ApiMultipleSelect: CustomComponents['ApiMultipleSelect'];
   DictionarySelect: CustomComponents['DictionarySelect'];
   CodeEditor: CustomComponents['CodeEditor'];
