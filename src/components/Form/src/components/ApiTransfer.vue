@@ -15,11 +15,11 @@
 <script lang="ts">
   import { computed, defineComponent, watch, ref, unref, PropType, onMounted } from 'vue';
   import { Transfer } from 'ant-design-vue';
-  import { isFunction } from '@/utils/is';
-  import { get, omit } from 'lodash-es';
   import { propTypes } from '@/utils/propTypes';
   import { useI18n } from '@/hooks/web/useI18n';
   import { TransferDirection, TransferItem } from 'ant-design-vue/lib/transfer';
+  import { isFunction, omit } from 'remeda';
+  import { get } from '/@/utils/object';
 
   export default defineComponent({
     name: 'ApiTransfer',

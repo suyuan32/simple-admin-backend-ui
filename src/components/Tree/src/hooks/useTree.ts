@@ -2,9 +2,9 @@ import type { InsertNodeParams, KeyType, FieldNames, TreeItem } from '../types/t
 import type { Ref, ComputedRef } from 'vue';
 import type { TreeDataItem } from 'ant-design-vue/es/tree/Tree';
 
-import { cloneDeep } from 'lodash-es';
 import { unref } from 'vue';
 import { forEach } from '@/utils/helper/treeHelper';
+import { clone } from 'remeda';
 
 export function useTree(treeDataRef: Ref<TreeDataItem[]>, getFieldNames: ComputedRef<FieldNames>) {
   function getAllKeys(list?: TreeDataItem[]) {
@@ -111,7 +111,7 @@ export function useTree(treeDataRef: Ref<TreeDataItem[]>, getFieldNames: Compute
    * 添加节点
    */
   function insertNodeByKey({ parentKey = null, node, push = 'push' }: InsertNodeParams) {
-    const treeData: any = cloneDeep(unref(treeDataRef));
+    const treeData: any = clone(unref(treeDataRef));
     if (!parentKey) {
       treeData[push](node);
       treeDataRef.value = treeData;
@@ -133,7 +133,7 @@ export function useTree(treeDataRef: Ref<TreeDataItem[]>, getFieldNames: Compute
    * 批量添加节点
    */
   function insertNodesByKey({ parentKey = null, list, push = 'push' }: InsertNodeParams) {
-    const treeData: any = cloneDeep(unref(treeDataRef));
+    const treeData: any = clone(unref(treeDataRef));
     if (!list || list.length < 1) {
       return;
     }

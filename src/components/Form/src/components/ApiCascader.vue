@@ -24,11 +24,11 @@
   import { Cascader } from 'ant-design-vue';
   import type { CascaderProps } from 'ant-design-vue';
   import { propTypes } from '@/utils/propTypes';
-  import { isFunction } from '@/utils/is';
-  import { get, omit } from 'lodash-es';
+  import { isFunction, omit } from 'remeda';
   import { useRuleFormItem } from '@/hooks/component/useFormItem';
   import { LoadingOutlined } from '@ant-design/icons-vue';
   import { useI18n } from '@/hooks/web/useI18n';
+  import { get } from '/@/utils/object';
 
   interface Option {
     value: string;

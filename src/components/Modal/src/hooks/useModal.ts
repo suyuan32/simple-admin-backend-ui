@@ -17,8 +17,7 @@ import {
   computed,
 } from 'vue';
 import { isProdMode } from '@/utils/env';
-import { isFunction } from '@/utils/is';
-import { isEqual } from 'lodash-es';
+import { isFunction, isDeepEqual } from 'remeda';
 import { tryOnUnmounted } from '@vueuse/core';
 import { error } from '@/utils/log';
 
@@ -87,7 +86,7 @@ export function useModal(): UseModalReturnType {
         dataTransfer[id] = toRaw(data);
         return;
       }
-      const equal = isEqual(toRaw(dataTransfer[id]), toRaw(data));
+      const equal = isDeepEqual(toRaw(dataTransfer[id]), toRaw(data));
       if (!equal) {
         dataTransfer[id] = toRaw(data);
       }

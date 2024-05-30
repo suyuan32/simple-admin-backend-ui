@@ -13,9 +13,9 @@ import projectSetting from '@/settings/projectSetting';
 import { PermissionModeEnum } from '@/enums/appEnum';
 import { RoleEnum } from '@/enums/roleEnum';
 
-import { intersection } from 'lodash-es';
 import { isArray } from '@/utils/is';
 import { useMultipleTabStore } from '@/store/modules/multipleTab';
+import { intersection } from 'remeda';
 
 // User permissions related operations
 export function usePermission() {
@@ -69,7 +69,7 @@ export function usePermission() {
       if (!isArray(value)) {
         return userStore.getRoleList?.includes(value as RoleEnum);
       }
-      return (intersection(value, userStore.getRoleList) as RoleEnum[]).length > 0;
+      return (intersection.multiset(value, userStore.getRoleList) as RoleEnum[]).length > 0;
     }
 
     if (PermissionModeEnum.BACK === permMode) {
@@ -80,12 +80,12 @@ export function usePermission() {
         if (splitName) {
           const splitCodes = value.split(splitName);
           return splitName === splits[0]
-            ? intersection(splitCodes, allCodeList).length > 0
-            : intersection(splitCodes, allCodeList).length === splitCodes.length;
+            ? intersection.multiset(splitCodes, allCodeList).length > 0
+            : intersection.multiset(splitCodes, allCodeList).length === splitCodes.length;
         }
         return allCodeList.includes(value);
       }
-      return (intersection(value, allCodeList) as string[]).length > 0;
+      return (intersection.multiset(value, allCodeList) as string[]).length > 0;
     }
     return true;
   }

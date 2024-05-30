@@ -24,8 +24,7 @@
   import { Tree, Spin, Empty } from 'ant-design-vue';
   import { TreeIcon } from './TreeIcon';
   import { ScrollContainer } from '@/components/Container';
-  import { omit, get, difference, cloneDeep } from 'lodash-es';
-  import { isArray, isBoolean, isEmpty, isFunction } from '@/utils/is';
+  import { isArray, isBoolean, isEmpty, isFunction, difference, omit, clone } from 'remeda';
   import { extendSlots, getSlot } from '@/utils/helper/tsxHelper';
   import { filter, treeToList, eachTree } from '@/utils/helper/treeHelper';
   import { useTree } from './hooks/useTree';
@@ -34,6 +33,7 @@
   import { treeEmits, treeProps } from './types/tree';
   import { createBEM } from '@/utils/bem';
   import type { TreeProps } from 'ant-design-vue/es/tree/Tree';
+  import { get } from '/@/utils/object';
 
   export default defineComponent({
     name: 'BasicTree',
@@ -92,7 +92,7 @@
             let currentValue = toRaw(state.checkedKeys) as KeyType[];
             if (isArray(currentValue) && searchState.startSearch) {
               const value = e.node.eventKey;
-              currentValue = difference(currentValue, getChildrenKeys(value));
+              currentValue = difference.multiset(currentValue, getChildrenKeys(value));
               if (e.checked) {
                 currentValue.push(value);
               }
@@ -107,7 +107,7 @@
           },
           onRightClick: handleRightClick,
         };
-        return omit(propsData, 'treeData', 'class') as TreeProps;
+        return omit(propsData, ['treeData']) as TreeProps;
       });
 
       const getTreeData = computed((): TreeItem[] =>
@@ -367,7 +367,7 @@
       }
 
       const treeData = computed(() => {
-        const data = cloneDeep(getTreeData.value);
+        const data = clone(getTreeData.value);
         eachTree(data, (item, _parent) => {
           const searchText = searchState.searchText;
           const { highlight } = unref(props);

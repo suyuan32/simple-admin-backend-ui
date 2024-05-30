@@ -10,9 +10,8 @@ import type { CreateAxiosOptions } from './axiosTransform';
 import axios from 'axios';
 import qs from 'qs';
 import { AxiosCanceler } from './axiosCancel';
-import { isFunction } from '@/utils/is';
-import { cloneDeep } from 'lodash-es';
 import { ContentTypeEnum, RequestEnum } from '@/enums/httpEnum';
+import { clone, isFunction } from 'remeda';
 
 export * from './axiosTransform';
 
@@ -198,7 +197,7 @@ export class VAxios {
   }
 
   request<T = any>(config: AxiosRequestConfig, options?: RequestOptions): Promise<T> {
-    let conf: CreateAxiosOptions = cloneDeep(config);
+    let conf: CreateAxiosOptions = clone(config);
     // cancelToken 如果被深拷贝，会导致最外层无法使用cancel方法来取消请求
     if (config.cancelToken) {
       conf.cancelToken = config.cancelToken;

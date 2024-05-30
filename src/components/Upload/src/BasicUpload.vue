@@ -44,7 +44,6 @@
   import { Tooltip, Space } from 'ant-design-vue';
   import { useModal } from '@/components/Modal';
   import { uploadContainerProps } from './props';
-  import { omit } from 'lodash-es';
   import { useI18n } from '@/hooks/web/useI18n';
   import { isArray } from '@/utils/is';
   import UploadModal from './components/UploadModal.vue';
@@ -74,7 +73,7 @@
 
   const bindValue = computed(() => {
     const value = { ...attrs, ...props };
-    return omit(value, 'onChange');
+    return value;
   });
 
   watch(

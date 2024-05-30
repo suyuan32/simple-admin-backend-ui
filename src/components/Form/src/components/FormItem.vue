@@ -13,7 +13,6 @@
   import { Col, Divider, Form } from 'ant-design-vue';
   import { componentMap } from '../componentMap';
   import { BasicHelp, BasicTitle } from '@/components/Basic';
-  import { isBoolean, isFunction, isNull } from '@/utils/is';
   import { getSlot } from '@/utils/helper/tsxHelper';
   import {
     createPlaceholderMessage,
@@ -21,9 +20,10 @@
     NO_AUTO_LINK_COMPONENTS,
     setComponentRuleType,
   } from '../helper';
-  import { cloneDeep, upperFirst } from 'lodash-es';
   import { useItemLabelWidth } from '../hooks/useLabelWidth';
   import { useI18n } from '@/hooks/web/useI18n';
+  import { isFunction, isBoolean, isNullish, clone, isArray } from 'remeda';
+  import { upperFirst } from '/@/utils/is';
 
   export default defineComponent({
     name: 'BasicFormItem',
@@ -176,7 +176,7 @@
           return dynamicRules(unref(getValues)) as ValidationRule[];
         }
 
-        let rules: ValidationRule[] = cloneDeep(defRules) as ValidationRule[];
+        let rules: ValidationRule[] = clone(defRules) as ValidationRule[];
         const { rulesMessageJoinLabel: globalRulesMessageJoinLabel } = props.formProps;
 
         const joinLabel = Reflect.has(props.schema, 'rulesMessageJoinLabel')
@@ -189,10 +189,10 @@
 
         function validator(rule: any, value: any) {
           const msg = rule.message || defaultMsg;
-          if (value === undefined || isNull(value)) {
+          if (value === undefined || isNullish(value as any)) {
             // 空值
             return Promise.reject(msg);
-          } else if (Array.isArray(value) && value.length === 0) {
+          } else if (isArray(value) && value.length === 0) {
             // 数组类型
             return Promise.reject(msg);
           } else if (typeof value === 'string' && value.trim() === '') {

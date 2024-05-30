@@ -16,9 +16,8 @@ import {
   computed,
 } from 'vue';
 import { isProdMode } from '@/utils/env';
-import { isFunction } from '@/utils/is';
 import { tryOnUnmounted } from '@vueuse/core';
-import { isEqual } from 'lodash-es';
+import { isDeepEqual, isFunction } from 'remeda';
 import { error } from '@/utils/log';
 
 const dataTransferRef = reactive<any>({});
@@ -84,7 +83,7 @@ export function useDrawer(): UseDrawerReturnType {
         dataTransferRef[unref(uid)] = toRaw(data);
         return;
       }
-      const equal = isEqual(toRaw(dataTransferRef[unref(uid)]), toRaw(data));
+      const equal = isDeepEqual(toRaw(dataTransferRef[unref(uid)]), toRaw(data));
       if (!equal) {
         dataTransferRef[unref(uid)] = toRaw(data);
       }

@@ -62,8 +62,8 @@
 
   import { basicProps } from './props';
   import { useDesign } from '@/hooks/web/useDesign';
-  import { cloneDeep } from 'lodash-es';
   import { TableActionType } from '@/components/Table';
+  import { clone } from 'remeda';
 
   defineOptions({ name: 'BasicForm' });
 
@@ -123,7 +123,7 @@
   const getBindValue = computed(() => ({ ...attrs, ...props, ...unref(getProps) }) as AntFormProps);
 
   const getSchema = computed((): FormSchema[] => {
-    const schemas: FormSchema[] = cloneDeep(unref(schemaRef) || (unref(getProps).schemas as any));
+    const schemas: FormSchema[] = clone(unref(schemaRef) || (unref(getProps).schemas as any));
     for (const schema of schemas) {
       const {
         defaultValue,

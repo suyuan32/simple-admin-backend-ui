@@ -6,7 +6,7 @@ import { filter, forEach } from '@/utils/helper/treeHelper';
 import { useScrollTo } from '@vben/hooks';
 import { type AnyFunction } from '@vben/types';
 import { onKeyStroke, useDebounceFn } from '@vueuse/core';
-import { cloneDeep } from 'lodash-es';
+import { clone } from 'remeda';
 import { Ref, nextTick, onBeforeMount, ref, unref } from 'vue';
 
 export interface SearchResult {
@@ -40,7 +40,7 @@ export function useMenuSearch(refs: Ref<HTMLElement[]>, scrollWrap: Ref, emit: A
 
   onBeforeMount(async () => {
     const list = await getMenus();
-    menuList = cloneDeep(list);
+    menuList = clone(list);
     forEach(menuList, (item) => {
       item.name = t(item.meta?.title || item.name);
     });

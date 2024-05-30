@@ -1,3 +1,4 @@
+import { isDeepEqual } from 'remeda';
 import type { UnwrapRef, Ref, WritableComputedRef, DeepReadonly } from 'vue';
 import {
   reactive,
@@ -9,8 +10,6 @@ import {
   toRaw,
   nextTick,
 } from 'vue';
-
-import { isEqual } from 'lodash-es';
 
 export function useRuleFormItem<T extends Recordable, K extends keyof T, V = UnwrapRef<T[K]>>(
   props: T,
@@ -47,7 +46,7 @@ export function useRuleFormItem<T extends Recordable>(
       return innerState.value;
     },
     set(value) {
-      if (isEqual(value, defaultState.value)) return;
+      if (isDeepEqual(value, defaultState.value as any)) return;
 
       innerState.value = value as T[keyof T];
       nextTick(() => {

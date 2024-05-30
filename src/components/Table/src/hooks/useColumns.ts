@@ -5,11 +5,11 @@ import { computed, Ref, ref, reactive, toRaw, unref, watch } from 'vue';
 import { renderEditCell } from '../components/editable';
 import { usePermission } from '@/hooks/web/usePermission';
 import { useI18n } from '@/hooks/web/useI18n';
-import { isArray, isBoolean, isFunction, isMap, isString } from '@/utils/is';
-import { cloneDeep, isEqual } from 'lodash-es';
 import { formatToDate } from '@/utils/dateUtil';
 import { ACTION_COLUMN_FLAG, DEFAULT_ALIGN, INDEX_COLUMN_FLAG, PAGE_SIZE } from '../const';
 import { ColumnType } from 'ant-design-vue/es/table';
+import { clone, isArray, isBoolean, isDeepEqual, isFunction, isString } from 'remeda';
+import isMap from 'xe-utils/isMap';
 
 function handleItem(item: BasicColumn, ellipsis: boolean) {
   const { key, dataIndex, children } = item;
@@ -109,7 +109,7 @@ export function useColumns(
   let cacheColumns = unref(propsRef).columns;
 
   const getColumnsRef = computed(() => {
-    const columns = cloneDeep(unref(columnsRef));
+    const columns = clone(unref(columnsRef));
 
     handleIndexColumn(propsRef, getPaginationRef, columns);
     handleActionColumn(propsRef, columns);
@@ -167,7 +167,7 @@ export function useColumns(
       return reactive(column);
     };
 
-    const columns = cloneDeep(viewColumns);
+    const columns = clone(viewColumns);
     return columns
       .filter((column) => hasPermission(column.auth) && isIfShow(column))
       .map((column) => {
@@ -204,7 +204,7 @@ export function useColumns(
    * @param columnList key｜column
    */
   function setColumns(columnList: Partial<BasicColumn>[] | (string | string[])[]) {
-    const columns = cloneDeep(columnList);
+    const columns = clone(columnList);
     if (!isArray(columns)) return;
 
     if (columns.length <= 0) {
@@ -228,13 +228,20 @@ export function useColumns(
         });
       });
       // Sort according to another array
-      if (!isEqual(cacheKeys, columns)) {
-        newColumns.sort((prev, next) => {
-          return (
-            columnKeys.indexOf(prev.dataIndex?.toString() as string) -
-            columnKeys.indexOf(next.dataIndex?.toString() as string)
-          );
-        });
+      if (cacheKeys !== undefined) {
+        if (
+          !isDeepEqual(
+            cacheKeys,
+            (columns as BasicColumn[]).map((item) => item.dataIndex),
+          )
+        ) {
+          newColumns.sort((prev, next) => {
+            return (
+              columnKeys.indexOf(prev.dataIndex?.toString() as string) -
+              columnKeys.indexOf(next.dataIndex?.toString() as string)
+            );
+          });
+        }
       }
       columnsRef.value = newColumns;
     }

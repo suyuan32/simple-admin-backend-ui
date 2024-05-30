@@ -10,10 +10,11 @@
   import { type Recordable, type AnyFunction } from '@vben/types';
   import { type PropType, computed, defineComponent, watch, ref, onMounted, unref } from 'vue';
   import { Tree } from 'ant-design-vue';
-  import { isArray, isFunction } from '@/utils/is';
-  import { get } from 'lodash-es';
+  import { isArray } from '@/utils/is';
   import { propTypes } from '@/utils/propTypes';
   import type { DataNode } from 'ant-design-vue/lib/vc-tree/interface';
+  import { isFunction } from 'remeda';
+  import { get } from '/@/utils/object';
 
   export default defineComponent({
     name: 'ApiTree',

@@ -3,7 +3,7 @@
     <PageHeader
       :ghost="ghost"
       :title="title"
-      v-bind="omit($attrs, 'class')"
+      v-bind="omit($attrs, ['class'])"
       :style="getHeaderStyle"
       ref="headerRef"
       v-if="getShowHeader"
@@ -39,7 +39,7 @@
   import { useDesign } from '@/hooks/web/useDesign';
   import { propTypes } from '@/utils/propTypes';
   import { PageHeader } from 'ant-design-vue';
-  import { omit } from 'lodash-es';
+  import { omit } from 'remeda';
   import {
     CSSProperties,
     PropType,
@@ -134,7 +134,7 @@
   const getShowFooter = computed(() => slots?.leftFooter || slots?.rightFooter);
 
   const getHeaderSlots = computed(() => {
-    return Object.keys(omit(slots, 'default', 'leftFooter', 'rightFooter', 'headerContent'));
+    return Object.keys(omit(slots, ['default', 'leftFooter', 'rightFooter', 'headerContent']));
   });
 
   const getContentStyle = computed((): CSSProperties => {
