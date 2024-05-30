@@ -78,9 +78,12 @@ export function useForm(props?: Props): UseFormReturnType {
       form.clearValidate(name);
     },
 
-    resetFields: async () => {
-      getForm().then(async (form) => {
-        await form.resetFields();
+    resetFields: () => {
+      return new Promise((resolve) => {
+        getForm().then(async (form) => {
+          await form.resetFields();
+          resolve();
+        });
       });
     },
 
