@@ -135,14 +135,12 @@
             page: 1,
             pageSize: 10000,
           });
-          console.log(apiData);
           tempApiList = apiData;
           const dataConv = convertApiTreeData(apiData.data.data);
           for (const key in dataConv) {
             treeApiData.value.push(dataConv[key]);
           }
           const roleId = await getFieldsValue();
-          console.log('roleId', roleId);
           const checkedData = await getApiAuthority({ id: Number(roleId['id']) });
           if (checkedData.data.data === null) {
             checkedApiKeys.value = convertApiToCheckedKeys([], apiData.data.data);
@@ -213,7 +211,6 @@
       async function handleAuthorizationSubmit() {
         if (activeKey.value === '1') {
           const roleData = await getFieldsValue();
-          console.log('roledata', roleData);
           const result = await createOrUpdateMenuAuthority({
             roleId: Number(roleData['id']),
             menuIds: getMenuTree().getCheckedKeys()['checked'] as number[],
