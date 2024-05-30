@@ -41,7 +41,7 @@ export function createLoading(props?: Partial<LoadingProps>, target?: HTMLElemen
     target.appendChild(vm.el as HTMLElement);
   }
 
-  function destory() {
+  function destroy() {
     container && render(null, container);
     container = vm = null;
   }
@@ -53,7 +53,7 @@ export function createLoading(props?: Partial<LoadingProps>, target?: HTMLElemen
     vm,
     close,
     open,
-    destory,
+    destroy,
     setTip: (tip: string) => {
       data.tip = tip;
     },
