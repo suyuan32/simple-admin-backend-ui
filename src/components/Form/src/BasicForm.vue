@@ -339,9 +339,18 @@
       //   margin-bottom: 20px;
       // }
 
-      &.suffix-item {
+      &.suffix-item,
+      &.prefix-item {
         .ant-form-item-children {
           display: flex;
+        }
+
+        .prefix {
+          display: inline-flex;
+          align-items: center;
+          margin-top: 1px;
+          padding-right: 6px;
+          line-height: 1;
         }
 
         .suffix {
