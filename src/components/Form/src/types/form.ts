@@ -167,7 +167,16 @@ interface BaseFormSchema<T extends ComponentType = any> {
   // Required
   required?: boolean | ((renderCallbackParams: RenderCallbackParams) => boolean);
 
-  suffix?: string | number | ((values: RenderCallbackParams) => string | number);
+  suffix?:
+    | string
+    | number
+    | VNode
+    | ((renderCallbackParams: RenderCallbackParams) => string | VNode | number);
+  prefix?:
+    | string
+    | number
+    | VNode
+    | ((renderCallbackParams: RenderCallbackParams) => string | VNode | number);
 
   // Validation rules
   rules?: Rule[];
