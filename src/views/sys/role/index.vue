@@ -76,6 +76,7 @@
       }
 
       function handleEdit(record: Recordable) {
+        console.log('record', record);
         openDrawer(true, {
           record,
           isUpdate: true,

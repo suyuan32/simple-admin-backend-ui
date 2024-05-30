@@ -4,6 +4,7 @@ import { unref } from 'vue';
 import type { Ref, ComputedRef } from 'vue';
 import type { FormProps, FormSchemaInner as FormSchema } from '../types/form';
 import { isObject } from '/@/utils/is';
+import dayjs from 'dayjs';
 
 interface UseFormValuesContext {
   defaultValueRef: Ref<any>;
@@ -71,8 +72,12 @@ export function useFormValues({
         value = transformDateFunc?.(value);
       }
 
-      if (isArray(value) && value[0]?.format && value[1]?.format) {
-        value = value.map((item) => transformDateFunc?.(item));
+      if (isArray(value)) {
+        if (value.length === 2) {
+          if (dayjs.isDayjs(value[0]) && dayjs.isDayjs(value[1])) {
+            value = value.map((item) => transformDateFunc?.(item));
+          }
+        }
       }
       // Remove spaces
       if (isString(value)) {

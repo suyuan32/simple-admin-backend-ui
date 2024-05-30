@@ -74,7 +74,7 @@ export function useFormEvents({
     fields.forEach((key) => {
       const schema = unref(getSchema).find((item) => item.field === key);
       const value = get(values, key);
-      const hasKey = keys(values).findIndex((k) => k === key);
+      const hasKey = keys(values).includes(key);
       const { componentProps } = schema || {};
       let _props = componentProps as any;
       if (typeof componentProps === 'function') {
