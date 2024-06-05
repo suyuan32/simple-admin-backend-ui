@@ -1,4 +1,4 @@
-VERSION=v1.4.3
+VERSION=v1.4.4
 
 .PHONY: docker
 docker: # Compile and build the docker | 编译并构建 docker 镜像
