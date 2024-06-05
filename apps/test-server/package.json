@@ -24,7 +24,7 @@
     "@types/koa": "^2.15.0",
     "@types/koa-bodyparser": "^5.0.2",
     "@types/koa-router": "^7.4.8",
-    "@types/node": "^20.12.13",
+    "@types/node": "^20.14.1",
     "nodemon": "^2.0.22",
     "pm2": "^5.4.0",
     "rimraf": "^5.0.7",
