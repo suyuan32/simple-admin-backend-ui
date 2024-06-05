@@ -36,7 +36,11 @@
       :height="getWrapperHeight"
       :open="openRef"
       :modalFooterHeight="footer !== undefined && !footer ? 0 : undefined"
-      v-bind="omit(getProps.wrapperProps, ['open', 'height', 'modalFooterHeight'])"
+      v-bind="
+        getProps.wrapperProps
+          ? omit(getProps.wrapperProps as any, ['open', 'height', 'modalFooterHeight'])
+          : {}
+      "
       @ext-height="handleExtHeight"
       @height-change="handleHeightChange"
     >
@@ -141,10 +145,11 @@
         };
         attr['wrapClassName'] =
           `${attr?.['wrapClassName'] || ''} ${unref(getWrapClassName)}` + 'vben-basic-modal-wrap';
+
         if (unref(fullScreenRef)) {
-          return omit(attr, ['height', 'title']);
+          return omit(attr as any, ['height', 'title']);
         }
-        return omit(attr, ['title']);
+        return omit(attr as any, ['title']);
       });
 
       const getWrapperHeight = computed(() => {
