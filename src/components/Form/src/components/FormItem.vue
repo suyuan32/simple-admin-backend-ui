@@ -13,7 +13,6 @@
   import { Col, Divider, Form } from 'ant-design-vue';
   import { componentMap } from '../componentMap';
   import { BasicHelp, BasicTitle } from '@/components/Basic';
-  import { isBoolean, isFunction, isNull } from '@/utils/is';
   import { getSlot } from '@/utils/helper/tsxHelper';
   import {
     createPlaceholderMessage,
@@ -21,9 +20,10 @@
     NO_AUTO_LINK_COMPONENTS,
     setComponentRuleType,
   } from '../helper';
-  import { cloneDeep, upperFirst } from 'lodash-es';
   import { useItemLabelWidth } from '../hooks/useLabelWidth';
   import { useI18n } from '@/hooks/web/useI18n';
+  import { isFunction, isBoolean, isNullish, clone, isArray } from 'remeda';
+  import { upperFirst } from '/@/utils/is';
 
   export default defineComponent({
     name: 'BasicFormItem',
@@ -176,7 +176,7 @@
           return dynamicRules(unref(getValues)) as ValidationRule[];
         }
 
-        let rules: ValidationRule[] = cloneDeep(defRules) as ValidationRule[];
+        let rules: ValidationRule[] = clone(defRules) as ValidationRule[];
         const { rulesMessageJoinLabel: globalRulesMessageJoinLabel } = props.formProps;
 
         const joinLabel = Reflect.has(props.schema, 'rulesMessageJoinLabel')
@@ -189,10 +189,10 @@
 
         function validator(rule: any, value: any) {
           const msg = rule.message || defaultMsg;
-          if (value === undefined || isNull(value)) {
+          if (value === undefined || isNullish(value as any)) {
             // 空值
             return Promise.reject(msg);
-          } else if (Array.isArray(value) && value.length === 0) {
+          } else if (isArray(value) && value.length === 0) {
             // 数组类型
             return Promise.reject(msg);
           } else if (typeof value === 'string' && value.trim() === '') {
@@ -363,7 +363,7 @@
       }
 
       function renderItem() {
-        const { itemProps, slot, render, field, suffix, component } = props.schema;
+        const { itemProps, slot, render, field, suffix, component, prefix } = props.schema;
         const { labelCol, wrapperCol } = unref(itemLabelWidthProp);
         const { colon } = props.formProps;
         const opts = { disabled: unref(getDisable), readonly: unref(getReadonly) };
@@ -379,7 +379,10 @@
               labelCol={labelCol}
               wrapperCol={wrapperCol}
               name={field}
-              class={{ 'suffix-item': !!suffix }}
+              class={{
+                'suffix-item': !!suffix,
+                'prefix-item': !!prefix,
+              }}
             >
               <BasicTitle {...unref(getComponentsProps)}>{renderLabelHelpMessage()}</BasicTitle>
             </Form.Item>
@@ -396,6 +399,9 @@
           const showSuffix = !!suffix;
           const getSuffix = isFunction(suffix) ? suffix(unref(getValues)) : suffix;
 
+          const showPrefix = !!prefix;
+          const getPrefix = isFunction(prefix) ? prefix(unref(getValues)) : prefix;
+
           // TODO 自定义组件验证会出现问题，因此这里框架默认将自定义组件设置手动触发验证，如果其他组件还有此问题请手动设置autoLink=false
           if (component && NO_AUTO_LINK_COMPONENTS.includes(component)) {
             props.schema &&
@@ -409,7 +415,10 @@
             <Form.Item
               name={field}
               colon={colon}
-              class={{ 'suffix-item': showSuffix }}
+              class={{
+                'suffix-item': showSuffix,
+                'prefix-item': showPrefix,
+              }}
               {...(itemProps as Recordable<any>)}
               label={renderLabelHelpMessage()}
               rules={handleRules()}
@@ -417,6 +426,7 @@
               wrapperCol={wrapperCol}
             >
               <div style="display:flex">
+                {showPrefix && <span class="prefix">{getPrefix}</span>}
                 <div style="flex:1;">{getContent()}</div>
                 {showSuffix && <span class="suffix">{getSuffix}</span>}
               </div>

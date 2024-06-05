@@ -1,12 +1,12 @@
 <script lang="tsx">
   import { ref, unref, defineComponent, type PropType, type ExtractPropTypes } from 'vue';
-  import { isNil } from 'lodash-es';
   import { Skeleton } from 'ant-design-vue';
   import { useTimeoutFn } from '@vben/hooks';
   import { CollapseTransition } from '@/components/Transition';
   import CollapseHeader from './CollapseHeader.vue';
   import { triggerWindowResize } from '@/utils/event';
   import { useDesign } from '@/hooks/web/useDesign';
+  import { isNullish } from 'remeda';
 
   const collapseContainerProps = {
     title: { type: String, default: '' },
@@ -46,7 +46,7 @@
       const show = ref(true);
 
       const handleExpand = (val: boolean) => {
-        show.value = isNil(val) ? !show.value : val;
+        show.value = isNullish(val) ? !show.value : val;
         if (props.triggerWindowResize) {
           // 200 milliseconds here is because the expansion has animation,
           useTimeoutFn(triggerWindowResize, 200);

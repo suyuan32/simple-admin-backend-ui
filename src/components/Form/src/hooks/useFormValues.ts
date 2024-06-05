@@ -1,9 +1,10 @@
-import { isArray, isFunction, isEmpty, isObject, isString, isNil } from '@/utils/is';
+import { isArray, isFunction, isEmpty, isString, isNullish, clone, omit, pick, set } from 'remeda';
 import { dateUtil } from '@/utils/dateUtil';
 import { unref } from 'vue';
 import type { Ref, ComputedRef } from 'vue';
 import type { FormProps, FormSchemaInner as FormSchema } from '../types/form';
-import { cloneDeep, get, set, unset } from 'lodash-es';
+import { isObject } from '/@/utils/is';
+import dayjs from 'dayjs';
 
 interface UseFormValuesContext {
   defaultValueRef: Ref<any>;
@@ -23,7 +24,7 @@ function tryDeconstructArray(key: string, value: any, target: Recordable) {
       const keys = match[1].split(',');
       value = Array.isArray(value) ? value : [value];
       keys.forEach((k, index) => {
-        set(target, k.trim(), value[index]);
+        target = set(target, k.trim(), value[index]);
       });
       return true;
     }
@@ -41,7 +42,7 @@ function tryDeconstructObject(key: string, value: any, target: Recordable) {
       const keys = match[1].split(',');
       value = isObject(value) ? value : {};
       keys.forEach((k) => {
-        set(target, k.trim(), value[k.trim()]);
+        target = set(target, k.trim(), value[k.trim()]);
       });
       return true;
     }
@@ -71,8 +72,12 @@ export function useFormValues({
         value = transformDateFunc?.(value);
       }
 
-      if (isArray(value) && value[0]?.format && value[1]?.format) {
-        value = value.map((item) => transformDateFunc?.(item));
+      if (isArray(value)) {
+        if (value.length === 2) {
+          if (dayjs.isDayjs(value[0]) && dayjs.isDayjs(value[1])) {
+            value = value.map((item) => transformDateFunc?.(item));
+          }
+        }
       }
       // Remove spaces
       if (isString(value)) {
@@ -80,9 +85,10 @@ export function useFormValues({
       }
       if (!tryDeconstructArray(key, value, res) && !tryDeconstructObject(key, value, res)) {
         // 没有解构成功的，按原样赋值
-        set(res, key, value);
+        res[key] = value;
       }
     }
+
     return handleRangeTimeValue(res);
   }
 
@@ -101,22 +107,22 @@ export function useFormValues({
         continue;
       }
       // If the value to be converted is empty, remove the field
-      if (!get(values, field)) {
-        unset(values, field);
+      if (isEmpty(pick(values, [field]))) {
+        values = omit(values, [field]);
         continue;
       }
 
-      const [startTime, endTime]: string[] = get(values, field);
+      const [startTime, endTime]: string[] = pick(values, [field]).map((item) => item);
 
       const [startTimeFormat, endTimeFormat] = Array.isArray(format) ? format : [format, format];
 
-      if (!isNil(startTime) && !isEmpty(startTime)) {
-        set(values, startTimeKey, formatTime(startTime, startTimeFormat));
+      if (!isNullish(startTime) && !isEmpty(startTime)) {
+        values = set(values, startTimeKey, formatTime(startTime, startTimeFormat));
       }
-      if (!isNil(endTime) && !isEmpty(endTime)) {
-        set(values, endTimeKey, formatTime(endTime, endTimeFormat));
+      if (!isNullish(endTime) && !isEmpty(endTime)) {
+        values = set(values, endTimeKey, formatTime(endTime, endTimeFormat));
       }
-      unset(values, field);
+      values = omit(values, [field]);
     }
 
     return values;
@@ -135,7 +141,7 @@ export function useFormValues({
     const schemas = unref(getSchema);
     const obj: Recordable = {};
     schemas.forEach((item) => {
-      const { defaultValue, defaultValueObj } = item;
+      const { defaultValue, defaultValueObj, componentProps = {} } = item;
       const fieldKeys = Object.keys(defaultValueObj || {});
       if (fieldKeys.length) {
         fieldKeys.forEach((field) => {
@@ -145,15 +151,21 @@ export function useFormValues({
           }
         });
       }
-      if (!isNil(defaultValue)) {
+      if (!isNullish(defaultValue)) {
         obj[item.field] = defaultValue;
 
         if (formModel[item.field] === undefined) {
           formModel[item.field] = defaultValue;
         }
       }
+      if (!isNullish(componentProps?.defaultValue)) {
+        obj[item.field] = componentProps?.defaultValue;
+        if (formModel[item.field] === undefined) {
+          formModel[item.field] = componentProps?.defaultValue;
+        }
+      }
     });
-    defaultValueRef.value = cloneDeep(obj);
+    defaultValueRef.value = clone(obj);
   }
 
   return { handleFormValues, initDefault };

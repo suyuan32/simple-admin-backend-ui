@@ -1,5 +1,4 @@
-import type { FunctionArgs } from '@vueuse/core';
-import { upperFirst } from 'lodash-es';
+import { FunctionArgs } from '@vueuse/shared';
 
 export interface ViewportOffsetResult {
   left: number;
@@ -177,4 +176,8 @@ export function useRafThrottle<T extends FunctionArgs>(fn: T): T {
       locked = false;
     });
   };
+}
+
+function upperFirst(attr: string) {
+  return attr.charAt(0).toUpperCase() + attr.slice(1);
 }

@@ -25,7 +25,6 @@
   import { MenuModeEnum, MenuTypeEnum } from '@/enums/menuEnum';
   import { useOpenKeys } from './useOpenKeys';
   import { RouteLocationNormalizedLoaded, useRouter } from 'vue-router';
-  import { isFunction } from '@/utils/is';
   import { basicProps } from './props';
   import { useMenuSetting } from '@/hooks/setting/useMenuSetting';
   import { REDIRECT_NAME } from '@/router/constant';
@@ -33,6 +32,7 @@
   import { getCurrentParentPath } from '@/router/menus';
   import { listenerRouteChange } from '@/logics/mitt/routeChange';
   import { getAllParentPath } from '@/router/helper/menuHelper';
+  import { isFunction } from 'remeda';
 
   export default defineComponent({
     name: 'BasicMenu',

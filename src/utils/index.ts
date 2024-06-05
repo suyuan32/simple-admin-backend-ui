@@ -1,9 +1,9 @@
 import type { RouteLocationNormalized, RouteRecordNormalized } from 'vue-router';
 import type { App, Component } from 'vue';
 
-import { intersectionWith, isEqual, mergeWith, unionWith } from 'lodash-es';
 import { unref } from 'vue';
-import { isArray, isObject } from '@/utils/is';
+import { concat, intersection, isArray, keys, unique } from 'remeda';
+import { isObject } from './is';
 
 export const noop = () => {};
 
@@ -58,26 +58,48 @@ export function deepMerge<T extends object | null | undefined, U extends object 
   if (!source) {
     return target as T & U;
   }
-  return mergeWith({}, source, target, (sourceValue, targetValue) => {
+
+  const sourceKeys = keys(source as any);
+  const targetKeys = keys(target as any);
+  const commonKeys = targetKeys.filter((key) => sourceKeys.includes(key));
+  const diffKeys = sourceKeys.filter((key) => !commonKeys.includes(key));
+  let sourceValue: object, targetValue: object;
+
+  commonKeys.forEach((key) => {
+    sourceValue = source[key];
+    targetValue = target[key];
     if (isArray(targetValue) && isArray(sourceValue)) {
       switch (mergeArrays) {
         case 'union':
-          return unionWith(sourceValue, targetValue, isEqual);
+          targetValue = unique(concat(sourceValue, targetValue));
+          break;
         case 'intersection':
-          return intersectionWith(sourceValue, targetValue, isEqual);
+          targetValue = intersection.multiset(sourceValue, targetValue);
+          break;
         case 'concat':
-          return sourceValue.concat(targetValue);
+          targetValue = sourceValue.concat(targetValue);
+          break;
         case 'replace':
-          return targetValue;
+          break;
         default:
           throw new Error(`Unknown merge array strategy: ${mergeArrays as string}`);
       }
     }
+
     if (isObject(targetValue) && isObject(sourceValue)) {
-      return deepMerge(sourceValue, targetValue, mergeArrays);
+      targetValue = deepMerge(sourceValue, targetValue, mergeArrays);
     }
-    return undefined;
+
+    target[key] = targetValue;
   });
+
+  diffKeys.forEach((key) => {
+    target[key] = source[key];
+  });
+
+  // console.log('target after: ', target);
+
+  return target as T & U;
 }
 
 export function openWindow(

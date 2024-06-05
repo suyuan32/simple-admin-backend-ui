@@ -72,9 +72,8 @@
   import { useTableForm } from './hooks/useTableForm';
   import { useDesign } from '@/hooks/web/useDesign';
 
-  import { omit } from 'lodash-es';
+  import { omit, isFunction } from 'remeda';
   import { basicProps } from './props';
-  import { isFunction } from '@/utils/is';
   import { warn } from '@/utils/log';
 
   const events = [

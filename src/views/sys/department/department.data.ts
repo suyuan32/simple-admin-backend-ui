@@ -126,21 +126,18 @@ export const formSchema: FormSchema[] = [
     field: 'leader',
     label: t('sys.department.leader'),
     component: 'Input',
-    required: true,
     rules: [{ max: 20 }],
   },
   {
     field: 'phone',
     label: t('sys.department.phone'),
     component: 'Input',
-    required: true,
     rules: [{ max: 18 }],
   },
   {
     field: 'email',
     label: t('sys.department.email'),
     component: 'Input',
-    required: true,
     rules: [{ max: 70 }],
   },
   {

@@ -78,9 +78,12 @@ export function useForm(props?: Props): UseFormReturnType {
       form.clearValidate(name);
     },
 
-    resetFields: async () => {
-      getForm().then(async (form) => {
-        await form.resetFields();
+    resetFields: () => {
+      return new Promise((resolve) => {
+        getForm().then(async (form) => {
+          await form.resetFields();
+          resolve();
+        });
       });
     },
 
@@ -120,6 +123,9 @@ export function useForm(props?: Props): UseFormReturnType {
     validateFields: async (nameList?: NamePath[]): Promise<Recordable> => {
       const form = await getForm();
       return form.validateFields(nameList);
+    },
+    resetDefaultField: async (nameList?: NamePath[]) => {
+      unref(formRef)?.resetDefaultField(nameList);
     },
   };
 

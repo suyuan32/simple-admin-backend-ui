@@ -78,8 +78,9 @@
   import { CollapseTransition } from '@/components/Transition';
   import Icon from '@/components/Icon/Icon.vue';
   import { Popover } from 'ant-design-vue';
-  import { isBoolean, isObject } from '@/utils/is';
   import { mitt } from '@/utils/mitt';
+  import { isBoolean } from 'remeda';
+  import { isObject } from '/@/utils/is';
 
   const DELAY = 200;
   export default defineComponent({

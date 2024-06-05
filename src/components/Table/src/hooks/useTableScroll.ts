@@ -1,7 +1,6 @@
 import type { BasicTableProps, TableRowSelection, BasicColumn } from '../types/table';
 import { Ref, ComputedRef, ref, computed, unref, nextTick, watch } from 'vue';
 import { getViewportOffset } from '@/utils/domUtils';
-import { isBoolean } from '@/utils/is';
 import { useWindowSizeFn, onMountedOrActivated } from '@vben/hooks';
 import { useModalContext } from '@/components/Modal';
 import { useDebounceFn, promiseTimeout } from '@vueuse/core';
@@ -12,6 +11,7 @@ import {
 } from '@/settings/designSetting';
 
 import { useRootSetting } from '@/hooks/setting/useRootSetting';
+import { isBoolean } from 'remeda';
 
 const { getShowFooter, getFullContent } = useRootSetting();
 

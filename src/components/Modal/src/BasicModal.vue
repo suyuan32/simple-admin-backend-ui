@@ -36,14 +36,14 @@
       :height="getWrapperHeight"
       :open="openRef"
       :modalFooterHeight="footer !== undefined && !footer ? 0 : undefined"
-      v-bind="omit(getProps.wrapperProps, 'open', 'height', 'modalFooterHeight')"
+      v-bind="omit(getProps.wrapperProps, ['open', 'height', 'modalFooterHeight'])"
       @ext-height="handleExtHeight"
       @height-change="handleHeightChange"
     >
       <slot></slot>
     </ModalWrapper>
 
-    <template #[item]="data" v-for="item in Object.keys(omit($slots, 'default'))">
+    <template #[item]="data" v-for="item in Object.keys(omit($slots, ['default']))">
       <slot :name="item" v-bind="data || {}"></slot>
     </template>
   </Modal>
@@ -67,11 +67,10 @@
   import ModalClose from './components/ModalClose.vue';
   import ModalFooter from './components/ModalFooter.vue';
   import ModalHeader from './components/ModalHeader.vue';
-  import { isFunction } from '@/utils/is';
+  import { isFunction, omit } from 'remeda';
   import { deepMerge } from '@/utils';
   import { basicProps } from './props';
   import { useFullScreen } from './hooks/useModalFullScreen';
-  import { omit } from 'lodash-es';
   import { useDesign } from '@/hooks/web/useDesign';
 
   export default defineComponent({
@@ -145,7 +144,7 @@
         if (unref(fullScreenRef)) {
           return omit(attr, ['height', 'title']);
         }
-        return omit(attr, 'title');
+        return omit(attr, ['title']);
       });
 
       const getWrapperHeight = computed(() => {

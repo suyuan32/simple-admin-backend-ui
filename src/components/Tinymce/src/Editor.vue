@@ -64,7 +64,7 @@
   import { bindHandlers } from './helper';
   import { onMountedOrActivated } from '@vben/hooks';
   import { useDesign } from '@/hooks/web/useDesign';
-  import { isNumber } from '@/utils/is';
+  import { isNumber } from 'remeda';
   import { useLocale } from '@/locales/useLocale';
   import { useAppStore } from '@/store/modules/app';
 

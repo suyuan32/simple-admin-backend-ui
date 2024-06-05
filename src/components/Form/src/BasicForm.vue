@@ -62,8 +62,8 @@
 
   import { basicProps } from './props';
   import { useDesign } from '@/hooks/web/useDesign';
-  import { cloneDeep } from 'lodash-es';
   import { TableActionType } from '@/components/Table';
+  import { clone } from 'remeda';
 
   defineOptions({ name: 'BasicForm' });
 
@@ -123,7 +123,7 @@
   const getBindValue = computed(() => ({ ...attrs, ...props, ...unref(getProps) }) as AntFormProps);
 
   const getSchema = computed((): FormSchema[] => {
-    const schemas: FormSchema[] = cloneDeep(unref(schemaRef) || (unref(getProps).schemas as any));
+    const schemas: FormSchema[] = clone(unref(schemaRef) || (unref(getProps).schemas as any));
     for (const schema of schemas) {
       const {
         defaultValue,
@@ -207,6 +207,7 @@
     removeSchemaByField,
     resetFields,
     scrollToField,
+    resetDefaultField,
   } = useFormEvents({
     emit,
     getProps,
@@ -305,6 +306,7 @@
     validate,
     submit: handleSubmit,
     scrollToField: scrollToField,
+    resetDefaultField,
   };
 
   const getFormActionBindProps = computed(
@@ -337,9 +339,18 @@
       //   margin-bottom: 20px;
       // }
 
-      &.suffix-item {
+      &.suffix-item,
+      &.prefix-item {
         .ant-form-item-children {
           display: flex;
+        }
+
+        .prefix {
+          display: inline-flex;
+          align-items: center;
+          margin-top: 1px;
+          padding-right: 6px;
+          line-height: 1;
         }
 
         .suffix {
