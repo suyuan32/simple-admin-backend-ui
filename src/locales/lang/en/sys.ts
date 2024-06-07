@@ -286,6 +286,7 @@ export default {
     userDepartment: 'Department',
     ancestorsHelpMessage:
       "List of parent department IDs, separated by commas. The IDs of all parent departments above the current department's parent except the current parent's ID, which is the parentId field",
+    departmentUndefined: 'You do not belong to any department.',
   },
   position: {
     name: 'Position Name',

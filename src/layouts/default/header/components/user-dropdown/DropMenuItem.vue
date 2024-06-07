@@ -2,7 +2,7 @@
   <Menu.Item :key="itemKey">
     <span class="flex items-center">
       <Icon :icon="icon" class="mr-1" />
-      <span>{{ text }}</span>
+      <span :class="className">{{ text }}</span>
     </span>
   </Menu.Item>
 </template>
@@ -17,6 +17,7 @@
   defineProps({
     text: propTypes.string,
     icon: propTypes.string,
+    className: propTypes.string,
   });
 
   const instance = getCurrentInstance();

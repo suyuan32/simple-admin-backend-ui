@@ -125,6 +125,8 @@ export interface GetUserInfoModel {
   roles?: string[];
   // 用户角色名称
   roleName: string[];
+  // 部门名称
+  departmentName?: string;
 }
 
 /**
