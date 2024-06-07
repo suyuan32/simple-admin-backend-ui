@@ -97,6 +97,7 @@ export const useUserStore = defineStore({
         avatar: '',
         homePath: '',
         roleName: [],
+        departmentName: '',
       };
       this.token = '';
       this.roleList = [];

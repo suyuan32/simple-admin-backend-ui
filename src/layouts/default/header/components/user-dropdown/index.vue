@@ -15,6 +15,16 @@
     <template #overlay>
       <Menu @click="handleMenuClick">
         <MenuItem
+          key="departmentName"
+          :text="
+            userStore.userInfo.departmentName
+              ? userStore.userInfo.departmentName
+              : t('sys.department.departmentUndefined')
+          "
+          icon="fluent:data-treemap-24-regular"
+          className="font-bold"
+        />
+        <MenuItem
           key="profile"
           :text="t('layout.header.profile')"
           icon="ion:document-text-outline"
@@ -63,8 +73,9 @@
 
   import { createAsyncComponent } from '@/utils/factory/createAsyncComponent';
   import { useGo } from '@/hooks/web/usePage';
+  import { useMessage } from '/@/hooks/web/useMessage';
 
-  type MenuEvent = 'logout' | 'doc' | 'lock' | 'profile';
+  type MenuEvent = 'logout' | 'doc' | 'lock' | 'profile' | 'departmentName';
 
   export default defineComponent({
     name: 'UserDropdown',
@@ -85,6 +96,7 @@
       const { getShowDoc, getUseLockPage } = useHeaderSetting();
       const userStore = useUserStore();
       const go = useGo();
+      const { createMessage } = useMessage();
 
       const getUserInfo = computed(() => {
         const { nickname = '', avatar, desc } = userStore.getUserInfo || {};
@@ -117,6 +129,15 @@
         go('/profile');
       }
 
+      // show department tip
+      function handleDepartmentName() {
+        createMessage.info(
+          userStore.userInfo.departmentName
+            ? t('sys.department.userDepartment') + ' : ' + userStore.userInfo.departmentName
+            : t('sys.department.departmentUndefined'),
+        );
+      }
+
       function handleMenuClick(e: MenuInfo) {
         switch (e.key as MenuEvent) {
           case 'logout':
@@ -131,6 +152,9 @@
           case 'profile':
             handleProfile();
             break;
+          case 'departmentName':
+            handleDepartmentName();
+            break;
         }
       }
 
@@ -143,6 +167,7 @@
         register,
         getUseLockPage,
         roleTag,
+        userStore,
       };
     },
   });
