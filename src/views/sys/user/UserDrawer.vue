@@ -28,7 +28,7 @@
       const { t } = useI18n();
       const { createMessage } = useMessage();
 
-      const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
+      const [registerForm, { resetFields, setFieldsValue, validate, updateSchema }] = useForm({
         labelWidth: 160,
         baseColProps: { span: 24 },
         layout: 'vertical',
@@ -41,12 +41,13 @@
         setDrawerProps({ confirmLoading: false });
 
         isUpdate.value = !!data?.isUpdate;
-
         if (unref(isUpdate)) {
           setFieldsValue({
             ...data.record,
           });
         }
+
+        updateSchema({ field: 'password', required: !unref(isUpdate) });
       });
 
       const getTitle = computed(() =>
