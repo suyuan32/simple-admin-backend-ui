@@ -68,6 +68,7 @@
   import { ApiListResp } from '@/api/sys/model/apiModel';
   import { buildDataNode } from '@/utils/tree';
   import { BasicTree, TreeActionType } from '@/components/Tree';
+  import { isArray } from 'remeda';
 
   export default defineComponent({
     name: 'RoleDrawer',
@@ -213,7 +214,9 @@
           const roleData = await getFieldsValue();
           const result = await createOrUpdateMenuAuthority({
             roleId: Number(roleData['id']),
-            menuIds: getMenuTree().getCheckedKeys()['checked'] as number[],
+            menuIds: isArray(getMenuTree().getCheckedKeys())
+              ? (getMenuTree().getCheckedKeys() as number[])
+              : (getMenuTree().getCheckedKeys()['checked'] as number[]),
           });
           if (result.code === 0) {
             childrenDrawer.value = false;
