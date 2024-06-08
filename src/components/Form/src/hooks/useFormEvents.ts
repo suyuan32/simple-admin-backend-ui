@@ -283,9 +283,7 @@ export function useFormEvents({
     });
     _setDefaultValue(updatedSchema);
 
-    schemaRef.value = uniqueBy(schema, (obj) => {
-      obj.field;
-    });
+    schemaRef.value = uniqueBy(schema, (obj) => obj.field);
   }
 
   function _setDefaultValue(data: FormSchema | FormSchema[]) {
