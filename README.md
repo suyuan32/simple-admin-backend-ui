@@ -13,7 +13,7 @@ Simple Admin UI 是基于 vue-vben-admin 二次开发的为 Simple Admin 专门�
 
 ## 特性
 
-- **最新技术栈**：使用 Vue3/vite2 等前端前沿技术开发
+- **最新技术栈**：使用 Vue3/vite5 等前端前沿技术开发
 - **TypeScript**: 应用程序级 JavaScript 的语言
 - **主题**：可配置的主题
 - **国际化**：内置完善的国际化方案
