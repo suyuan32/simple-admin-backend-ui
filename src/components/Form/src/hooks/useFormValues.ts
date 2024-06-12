@@ -157,6 +157,7 @@ export function useFormValues({
         if (formModel[item.field] === undefined) {
           formModel[item.field] = defaultValue;
         }
+        return;
       }
       if (!isNullish(componentProps?.defaultValue)) {
         obj[item.field] = componentProps?.defaultValue;

@@ -161,6 +161,7 @@ export const formSchema: FormSchema[] = [
         value: ParentIdEnum.DEFAULT,
       },
     },
+    defaultValue: ParentIdEnum.DEFAULT,
     colProps: { lg: 12, md: 12, sm: 12 },
   },
   {

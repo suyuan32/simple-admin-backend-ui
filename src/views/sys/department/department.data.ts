@@ -111,6 +111,7 @@ export const formSchema: FormSchema[] = [
         value: ParentIdEnum.DEFAULT,
       },
     },
+    defaultValue: ParentIdEnum.DEFAULT,
   },
   {
     field: 'ancestors',
