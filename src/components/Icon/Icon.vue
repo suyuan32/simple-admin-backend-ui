@@ -7,6 +7,7 @@
     :height="iconHeight"
     :rotate="iconRotate"
     :inline="iconInline"
+    :flip="iconFlip"
   />
 </template>
 <script lang="ts">
@@ -28,13 +29,13 @@
         type: [String, Number] as PropType<string | number>,
         default: 16,
       },
-      spin: propTypes.bool.def(false),
       mode: propTypes.string.def('style'),
       prefix: propTypes.string.def(''),
       width: propTypes.number.def(16),
       height: propTypes.number.def(16),
       rotate: propTypes.number.def(0),
       inline: propTypes.bool.def(true),
+      flip: propTypes.string,
     },
     setup(props) {
       const iconName = ref('');
@@ -45,6 +46,7 @@
       const iconHeight = ref();
       const iconRotate = ref();
       const iconInline = ref(true);
+      const iconFlip = ref();
 
       const update = async () => {
         await nextTick();
@@ -57,6 +59,7 @@
         iconWidth.value = props.width;
         iconRotate.value = props.rotate;
         iconInline.value = props.inline;
+        iconFlip.value = props.flip;
       };
 
       watch(() => props.icon, update, { flush: 'post' });
@@ -72,27 +75,8 @@
         iconHeight,
         iconRotate,
         iconInline,
+        iconFlip,
       };
     },
   });
 </script>
-<style lang="less">
-  .app-iconify {
-    display: inline-block;
-    // vertical-align: middle;
-
-    &-spin {
-      svg {
-        animation: loadingCircle 1s infinite linear;
-      }
-    }
-  }
-
-  span.iconify {
-    display: block;
-    min-width: 1em;
-    min-height: 1em;
-    border-radius: 100%;
-    background-color: @iconify-bg-color;
-  }
-</style>
