@@ -24,7 +24,7 @@
     "build:no-cache": "pnpm store prune && pnpm run build",
     "build:test": "cross-env NODE_OPTIONS=--max-old-space-size=8192 pnpm vite build --mode test",
     "commit": "czg",
-    "dev": "pnpm vite",
+    "dev": "cross-env VITE_CJS_IGNORE_WARNING=true pnpm vite",
     "preinstall": "npx only-allow pnpm",
     "postinstall": "turbo run stub",
     "lint": "turbo run lint",
@@ -34,7 +34,7 @@
     "prepare": "husky",
     "preview": "pnpm run build && vite preview",
     "reinstall": "rimraf pnpm-lock.yaml && rimraf package.lock.json && rimraf node_modules && pnpm run bootstrap",
-    "serve": "pnpm run dev",
+    "serve": "cross-env VITE_CJS_IGNORE_WARNING=true pnpm run dev",
     "test:gzip": "npx http-server dist --cors --gzip -c-1",
     "type:check": "vue-tsc --noEmit --skipLibCheck"
   },
