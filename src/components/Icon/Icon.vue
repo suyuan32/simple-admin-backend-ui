@@ -1,39 +1,23 @@
 <template>
-  <SvgIcon
-    :size="size"
-    :name="getSvgIcon"
-    v-if="isSvgIcon"
-    :class="[$attrs.class, 'anticon']"
-    :spin="spin"
+  <AIcon
+    :icon="iconName"
+    :mode="iconMode"
+    :color="iconColor"
+    :width="iconWidth"
+    :height="iconHeight"
+    :rotate="iconRotate"
+    :inline="iconInline"
   />
-  <span
-    v-else
-    ref="elRef"
-    :class="[$attrs.class, 'app-iconify anticon', spin && 'app-iconify-spin']"
-    :style="getWrapStyle"
-  ></span>
 </template>
 <script lang="ts">
   import type { PropType } from 'vue';
-  import {
-    defineComponent,
-    ref,
-    watch,
-    onMounted,
-    nextTick,
-    unref,
-    computed,
-    CSSProperties,
-  } from 'vue';
-  import SvgIcon from './src/SvgIcon.vue';
-  import Iconify from '@purge-icons/generated';
+  import { defineComponent, ref, onMounted, nextTick, watch } from 'vue';
   import { propTypes } from '@/utils/propTypes';
-  import { isString } from 'remeda';
+  import { Icon, IconifyRenderMode } from '@iconify/vue';
 
-  const SVG_END_WITH_FLAG = '|svg';
   export default defineComponent({
     name: 'Icon',
-    components: { SvgIcon },
+    components: { AIcon: Icon },
     props: {
       // icon name
       icon: propTypes.string,
@@ -45,57 +29,50 @@
         default: 16,
       },
       spin: propTypes.bool.def(false),
+      mode: propTypes.string.def('style'),
       prefix: propTypes.string.def(''),
+      width: propTypes.number.def(16),
+      height: propTypes.number.def(16),
+      rotate: propTypes.number.def(0),
+      inline: propTypes.bool.def(true),
     },
     setup(props) {
-      const elRef = ref(null);
-
-      const isSvgIcon = computed(() => props.icon?.endsWith(SVG_END_WITH_FLAG));
-      const getSvgIcon = computed(() => props.icon.replace(SVG_END_WITH_FLAG, ''));
-      const getIconRef = computed(() => `${props.prefix ? props.prefix + ':' : ''}${props.icon}`);
+      const iconName = ref('');
+      const iconColor = ref('');
+      const iconSize = ref();
+      const iconMode = ref<IconifyRenderMode>('style');
+      const iconWidth = ref();
+      const iconHeight = ref();
+      const iconRotate = ref();
+      const iconInline = ref(true);
 
       const update = async () => {
-        if (unref(isSvgIcon)) return;
-
-        const el: any = unref(elRef);
-        if (!el) return;
-
         await nextTick();
-        const icon = unref(getIconRef);
-        if (!icon) return;
 
-        const svg = Iconify.renderSVG(icon, {});
-        if (svg) {
-          el.textContent = '';
-          el.appendChild(svg);
-        } else {
-          const span = document.createElement('span');
-          span.className = 'iconify';
-          span.dataset.icon = icon;
-          el.textContent = '';
-          el.appendChild(span);
-        }
+        iconName.value = props.icon;
+        iconColor.value = props.color;
+        iconSize.value = props.size;
+        iconMode.value = props.mode as IconifyRenderMode;
+        iconHeight.value = props.height;
+        iconWidth.value = props.width;
+        iconRotate.value = props.rotate;
+        iconInline.value = props.inline;
       };
-
-      const getWrapStyle = computed((): CSSProperties => {
-        const { size, color } = props;
-        let fs = size;
-        if (isString(size)) {
-          fs = parseInt(size, 10);
-        }
-
-        return {
-          fontSize: `${fs}px`,
-          color: color,
-          display: 'inline-flex',
-        };
-      });
 
       watch(() => props.icon, update, { flush: 'post' });
 
       onMounted(update);
 
-      return { elRef, getWrapStyle, isSvgIcon, getSvgIcon };
+      return {
+        iconName,
+        iconColor,
+        iconSize,
+        iconMode,
+        iconWidth,
+        iconHeight,
+        iconRotate,
+        iconInline,
+      };
     },
   });
 </script>
