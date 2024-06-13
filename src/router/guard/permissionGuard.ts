@@ -8,6 +8,7 @@ import { useUserStoreWithOut } from '@/store/modules/user';
 import { PAGE_NOT_FOUND_ROUTE } from '@/router/routes/basic';
 
 import { RootRoute } from '@/router/routes';
+import { PAGE_NOT_FOUND_NAME_CHILDREN } from '../constant';
 
 const LOGIN_PATH = PageEnum.BASE_LOGIN;
 
@@ -62,10 +63,10 @@ export function createPermissionGuard(router: Router) {
         path: LOGIN_PATH,
         replace: true,
       };
-      if (to.path) {
+      if (to.fullPath) {
         redirectData.query = {
           ...redirectData.query,
-          redirect: to.path,
+          redirect: to.fullPath,
         };
       }
       next(redirectData);
@@ -107,7 +108,7 @@ export function createPermissionGuard(router: Router) {
 
     permissionStore.setDynamicAddedRoute(true);
 
-    if (to.name === PAGE_NOT_FOUND_ROUTE.name) {
+    if (to.name === PAGE_NOT_FOUND_ROUTE.name || to.name === PAGE_NOT_FOUND_NAME_CHILDREN) {
       // 动态添加路由后，此处应当重定向到fullPath，否则会加载404页面内容
       next({ path: to.fullPath, replace: true, query: to.query });
     } else {
