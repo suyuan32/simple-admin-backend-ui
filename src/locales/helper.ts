@@ -1,4 +1,4 @@
-import { addProp, clone, keys } from 'remeda';
+import { addProp, keys } from 'remeda';
 import type { LocaleType } from '/#/config';
 
 export const loadLocalePool: LocaleType[] = [];
