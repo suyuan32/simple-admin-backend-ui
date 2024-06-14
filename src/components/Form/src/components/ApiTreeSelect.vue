@@ -38,6 +38,7 @@
       const treeData = ref<Recordable[]>([]);
       const isFirstLoaded = ref<Boolean>(false);
       const loading = ref(false);
+
       const getAttrs = computed(() => {
         return {
           ...(props.api ? { treeData: unref(treeData) } : {}),
@@ -92,8 +93,10 @@
           labelField: props.labelField,
           defaultValue: props.defaultValue,
         });
-        isFirstLoaded.value = true;
+
         emit('options-change', treeData.value);
+
+        isFirstLoaded.value = true;
       }
       return { getAttrs, loading, handleChange, fetch };
     },

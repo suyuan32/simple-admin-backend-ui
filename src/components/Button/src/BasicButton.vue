@@ -4,9 +4,25 @@
       <slot name="icon"></slot>
     </template>
     <template #default="data">
-      <Icon :icon="preIcon" v-if="preIcon" :size="iconSize" />
+      <Icon
+        :icon="preIcon"
+        v-if="preIcon"
+        :size="iconSize"
+        :inline="true"
+        :width="24"
+        :height="18"
+        style="vertical-align: -15%"
+      />
       <slot v-bind="data || {}"></slot>
-      <Icon :icon="postIcon" v-if="postIcon" :size="iconSize" />
+      <Icon
+        :icon="postIcon"
+        v-if="postIcon"
+        :size="iconSize"
+        :inline="true"
+        :width="24"
+        :height="18"
+        style="vertical-align: -15%"
+      />
     </template>
   </Button>
 </template>
