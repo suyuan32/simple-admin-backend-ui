@@ -122,6 +122,7 @@ export function useDataSource(
     () => {
       const dataSource = unref(dataSourceRef);
       if (!dataSource || dataSource.length === 0) {
+        getDataSourceRef.value = [];
         return unref(dataSourceRef);
       }
       if (unref(getAutoCreateKey)) {
