@@ -4,8 +4,12 @@ import { DefaultOptionType } from 'ant-design-vue/lib/select';
 import { ref } from 'vue';
 import { DICT_INFO_KEY } from '@/enums/cacheEnum';
 
+interface DictionaryDataDefaultOptionType extends DefaultOptionType {
+  status?: string | number | null;
+}
+
 interface DictionaryData {
-  data: DefaultOptionType[];
+  data: DictionaryDataDefaultOptionType[];
 }
 
 const requestCache = new Map<
@@ -61,6 +65,7 @@ export const useDictionaryStore = defineStore({
           dataConv.value.push({
             label: result.data.data[i].title,
             value: result.data.data[i].value,
+            status: result.data.data[i].status,
           });
         }
 
