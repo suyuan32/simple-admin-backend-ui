@@ -11,15 +11,38 @@ Simple Admin UI is a modern UI for Simple Admin. It is based on vue-vben-admin a
 
 ## Document [Click here](https://vben.ryansu.tech/)
 
+### Online Preview
+
+#### [Free Edition Online Preview](https://preview.ryansu.tech/)
+
+- Account **admin**
+- Password **simple-admin**
+
+#### [Multi-tenant Edition Online Preview](https://tenant-preview.ryansu.tech/)
+
+- Administrator Tenant Account
+
+  - Enterprise: **admin**
+  - Account: **admin**
+  - Password: **simple-admin**
+
+- Tenant Account
+  - Enterprise: **测试企业**
+  - Account: **admin**
+  - Password: **simple-admin**
+
+> Read-only, cannot be modified or registered
+
 ## Feature
 
-- **State of The Art Development**：Use latest front-end technology development such as Vue3/vite5
-- **TypeScript**: Application-level JavaScript language
-- **Theming**: Configurable themes
-- **International**：Built-in complete internationalization program
-- **Mock Server** Built-in mock data scheme
-- **Authority** Built-in complete dynamic routing permission generation scheme.
-- **Component** Multiple commonly used components are encapsulated twice
+- **Latest technology stack**: Developed based on the latest technologies such as Vue3/vite5
+- **TypeScript**: Uses Typescript language
+- **Theme**: Configurable themes
+- **Internationalization**: Built-in complete internationalization solution
+- **Mock data** Built-in Mock data testing solution
+- **Permission** Supports dynamic routing permissions
+- **Component** Secondary encapsulation of multiple commonly used components
+- **Remeda**: Use remeda as a data processing tool
 
 ## Support functions
 
@@ -37,11 +60,7 @@ Simple Admin UI is a modern UI for Simple Admin. It is based on vue-vben-admin a
 
 [RoadMap](https://github.com/suyuan32/simple-admin-core/issues/63)
 
-### Online preview
-
-[Online Preview](http://101.132.124.135:8080/) Account: admin Password: simple-admin
-
-#### Read Only, cannot register and modify
+### Preview
 
 ![pic](https://i.postimg.cc/qqPNR02x/register-zh-cn.png) ![pic](https://i.postimg.cc/PxczkCr6/dashboard-zh-cn.png)
 
