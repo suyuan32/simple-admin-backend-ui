@@ -113,47 +113,52 @@
 
   async function initCoreDatabase() {
     coreInitButtonLoading.value = true;
-    const result = await initialzeCoreDatabase();
+    const result = await initialzeCoreDatabase().finally(() => {
+      coreInitButtonLoading.value = false;
+    });
     if (result.code === 0) {
       message.success(result.msg, 3);
     }
-    coreInitButtonLoading.value = false;
   }
 
   async function initFileDatabase() {
     fileInitButtonLoading.value = true;
-    const result = await initializeFileDatabase();
+    const result = await initializeFileDatabase().finally(() => {
+      fileInitButtonLoading.value = false;
+    });
     if (result.code === 0) {
       message.success(result.msg, 3);
     }
-    fileInitButtonLoading.value = false;
   }
 
   async function initMMSDatabase() {
     mmsInitButtonLoading.value = true;
-    const result = await initializeMMSDatabase();
+    const result = await initializeMMSDatabase().finally(() => {
+      mmsInitButtonLoading.value = false;
+    });
     if (result.code === 0) {
       message.success(result.msg, 3);
     }
-    mmsInitButtonLoading.value = false;
   }
 
   async function initJobDatabase() {
     jobInitButtonLoading.value = true;
-    const result = await initializeJobDatabase();
+    const result = await initializeJobDatabase().finally(() => {
+      jobInitButtonLoading.value = false;
+    });
     if (result.code === 0) {
       message.success(result.msg, 3);
     }
-    jobInitButtonLoading.value = false;
   }
 
   async function initMcmsDatabase() {
     mcmsInitButtonLoading.value = true;
-    const result = await initializeMcmsDatabase();
+    const result = await initializeMcmsDatabase().finally(() => {
+      mcmsInitButtonLoading.value = false;
+    });
     if (result.code === 0) {
       message.success(result.msg, 3);
     }
-    mcmsInitButtonLoading.value = false;
   }
 </script>
 
