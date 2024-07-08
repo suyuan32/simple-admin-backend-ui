@@ -211,8 +211,6 @@ export const formSchema: FormSchema[] = [
       params: {
         page: 1,
         pageSize: 1000,
-        name: '',
-        leader: '',
       },
       resultField: 'data.data',
       labelField: 'trans',
