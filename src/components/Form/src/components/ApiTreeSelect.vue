@@ -1,5 +1,10 @@
 <template>
-  <a-tree-select v-bind="getAttrs" @change="handleChange" @dropdown-visible-change="fetch">
+  <a-tree-select
+    v-bind="getAttrs"
+    @change="handleChange"
+    @dropdown-visible-change="fetch"
+    :multiple="$props.multiple"
+  >
     <template #[item]="data" v-for="item in Object.keys($slots)">
       <slot :name="item" v-bind="data || {}"></slot>
     </template>
@@ -31,6 +36,7 @@
       idKeyField: propTypes.string.def('id'),
       parentKeyField: propTypes.string.def('parentId'),
       childrenKeyField: propTypes.string.def('children'),
+      multiple: propTypes.bool.def(false),
       defaultValue: { type: Object },
     },
     emits: ['options-change', 'change'],
