@@ -1,22 +1,24 @@
-import { defineComponent, computed, ref } from 'vue';
+import { defineComponent, computed, ref, watch } from 'vue';
 import { BasicTableProps } from './types';
 import { basicProps } from './props';
-import { ignorePropKeys } from './const';
 import { basicEmits } from './emits';
 import XEUtils from 'xe-utils';
-import type {
+import {
   VxeGridInstance,
   VxeGridEventProps,
   GridMethods,
   TableMethods,
   TableEditMethods,
   TableValidatorMethods,
+  VxeUI,
+  VxeGlobalThemeName,
+  VxeGrid,
 } from 'vxe-table';
-import { Grid as VxeGrid } from 'vxe-table';
 
 import { extendSlots } from '@/utils/helper/tsxHelper';
 import { gridComponentMethodKeys } from './methods';
 import { omit } from 'remeda';
+import { useRootSetting } from '@/hooks/setting/useRootSetting';
 
 export default defineComponent({
   name: 'VxeBasicTable',
@@ -25,7 +27,14 @@ export default defineComponent({
   setup(props, { emit, attrs }) {
     const tableElRef = ref<VxeGridInstance>();
     const emitEvents: VxeGridEventProps = {};
-
+    const { getDarkMode } = useRootSetting();
+    watch(
+      () => getDarkMode.value,
+      () => {
+        VxeUI.setTheme(getDarkMode.value as VxeGlobalThemeName);
+      },
+      { immediate: true },
+    );
     const extendTableMethods = (methodKeys) => {
       const funcs: any = {};
       methodKeys.forEach((name) => {
@@ -68,7 +77,7 @@ export default defineComponent({
      * @description: Table 所有属性
      */
     const getBindGridValues = computed(() => {
-      const omitProps = omit(getBindValues.value, ignorePropKeys);
+      const omitProps = omit(getBindValues.value, ['tableClass', 'tableStyle']);
 
       return {
         ...omitProps,
