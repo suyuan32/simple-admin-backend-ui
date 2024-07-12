@@ -146,6 +146,9 @@ importers:
       vuedraggable:
         specifier: ^4.1.0
         version: 4.1.0(vue@3.4.31(typescript@5.5.3))
+      vxe-pc-ui:
+        specifier: ^4.0.62
+        version: 4.0.62
       vxe-table:
         specifier: ^4.7.45
         version: 4.7.45
@@ -7107,8 +7110,8 @@ packages:
     peerDependencies:
       vue: ^3.0.1
 
-  vxe-pc-ui@4.0.51:
-    resolution: {integrity: sha512-h3rMvvbcABq4GIu6AbsIFVR4RhgfM4rMoCpi8gekRPce13kSCVoWNFPiu1rKWSyqePErP6o8fbLgs226KnasZQ==}
+  vxe-pc-ui@4.0.62:
+    resolution: {integrity: sha512-OE3JQ6XBKjwOnX92lGiZ8TtJPr1hkCjaVGIpUtL2OfiCU13LgN6Vw4HBatQbQgvb6v71XhyBZmfaeSbO0hIn9A==}
 
   vxe-table-plugin-export-xlsx@4.0.5:
     resolution: {integrity: sha512-tgscqIVfPSewTU6yVBk7NFjF7safvnzV47b8bUKkWsg/VxTSp6haCqNw3Vy5CuFZtry/5wnOzjgW60CZ+yVeLw==}
@@ -15022,7 +15025,7 @@ snapshots:
       sortablejs: 1.14.0
       vue: 3.4.31(typescript@5.5.3)
 
-  vxe-pc-ui@4.0.51:
+  vxe-pc-ui@4.0.62:
     dependencies:
       '@vxe-ui/core': 1.0.12
 
@@ -15032,7 +15035,7 @@ snapshots:
 
   vxe-table@4.7.45:
     dependencies:
-      vxe-pc-ui: 4.0.51
+      vxe-pc-ui: 4.0.62
 
   w3c-hr-time@1.0.2:
     dependencies:
