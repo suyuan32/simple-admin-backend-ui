@@ -107,6 +107,7 @@ export const columns: BasicColumn[] = [
 ];
 
 const isMenu = (type: Number) => type === 1;
+const isElement = (type: Number) => type === 2;
 
 export const formSchema: FormSchema[] = [
   {
@@ -118,6 +119,7 @@ export const formSchema: FormSchema[] = [
       options: [
         { label: t('sys.menu.directory'), value: 0 },
         { label: t('sys.menu.menu'), value: 1 },
+        { label: t('sys.menu.element'), value: 2 },
       ],
     },
     colProps: { lg: 24, md: 24, sm: 24 },
@@ -134,7 +136,7 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
     required: true,
     rules: [{ max: 50 }],
-    colProps: { lg: 12, md: 12, sm: 12 },
+    colProps: { lg: 11, md: 11, sm: 11 },
   },
   {
     field: 'title',
@@ -142,7 +144,7 @@ export const formSchema: FormSchema[] = [
     component: 'Input',
     required: true,
     rules: [{ max: 50 }],
-    colProps: { lg: 12, md: 12, sm: 12 },
+    colProps: { lg: 11, md: 11, sm: 11, offset: 2 },
   },
   {
     field: 'parentId',
@@ -162,14 +164,15 @@ export const formSchema: FormSchema[] = [
       },
     },
     defaultValue: ParentIdEnum.DEFAULT,
-    colProps: { lg: 12, md: 12, sm: 12 },
+    colProps: { lg: 11, md: 11, sm: 11 },
   },
   {
     field: 'icon',
     label: t('sys.menu.icon'),
     component: 'IconPicker',
     required: true,
-    colProps: { lg: 12, md: 12, sm: 12 },
+    colProps: { lg: 11, md: 11, sm: 11, offset: 2 },
+    ifShow: ({ values }) => !isElement(values.menuType),
   },
   {
     field: 'serviceName',
@@ -189,6 +192,7 @@ export const formSchema: FormSchema[] = [
     // eslint-disable-next-line no-useless-escape
     rules: [{ pattern: /^(\/(\:)?[0-9A-Za-z_-]+)*$/gm, message: t('common.wrongFormat') }],
     colProps: { lg: 24, md: 24, sm: 24 },
+    ifShow: ({ values }) => !isElement(values.menuType),
   },
   {
     field: 'component',
@@ -235,7 +239,15 @@ export const formSchema: FormSchema[] = [
     componentProps: {
       max: 10000,
     },
-    colProps: { lg: 12, md: 12, sm: 12 },
+    colProps: { lg: 11, md: 11, sm: 11 },
+  },
+  {
+    field: 'permission',
+    label: t('sys.menu.permission'),
+    component: 'Input',
+    ifShow: ({ values }) => isElement(values.menuType),
+    colProps: { lg: 11, md: 11, sm: 11, offset: 2 },
+    helpMessage: t('sys.menu.permissionHelp'),
   },
   {
     field: 'dynamicLevel',
@@ -245,7 +257,8 @@ export const formSchema: FormSchema[] = [
     componentProps: {
       max: 20,
     },
-    colProps: { lg: 12, md: 12, sm: 12 },
+    colProps: { lg: 11, md: 11, sm: 11, offset: 2 },
+    ifShow: ({ values }) => !isElement(values.menuType),
   },
   {
     field: 'disabled',
@@ -286,6 +299,7 @@ export const formSchema: FormSchema[] = [
       ],
     },
     colProps: { lg: 12, md: 12, sm: 12 },
+    ifShow: ({ values }) => !isElement(values.menuType),
   },
   {
     field: 'hideBreadcrumb',
@@ -341,6 +355,7 @@ export const formSchema: FormSchema[] = [
       ],
     },
     colProps: { lg: 12, md: 12, sm: 12 },
+    ifShow: ({ values }) => !isElement(values.menuType),
   },
   {
     field: 'affix',

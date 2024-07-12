@@ -146,6 +146,8 @@ export default {
     paramList: 'Parameter List',
     rootMenu: 'Root Menu',
     menuList: 'Menu List',
+    element: 'Page Element',
+    permission: 'Permission Symbol',
     // action
     addMenu: 'Add Menu',
     editMenu: 'Eidt Menu',
@@ -153,8 +155,9 @@ export default {
     editMenuParam: 'Edit Parameter',
     // help
     componentHelp:
-      'The directory is "LAYOUT", embedded pages use "IFrame", and regular pages use the page path.',
-    pathHelp: 'All menus including directories must set the path.',
+      'The directory is "LAYOUT", embedded pages use "IFrame", and regular pages use the page path',
+    pathHelp: 'All menus including directories must set the path',
+    permissionHelp: 'Permission flags are used to control the display and hiding of page elements',
   },
   role: {
     // noun

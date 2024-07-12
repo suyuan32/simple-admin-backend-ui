@@ -140,6 +140,8 @@ export default {
     paramList: '参数列表',
     menuList: '菜单列表',
     rootMenu: '根菜单',
+    element: '页面元素',
+    permission: '权限标识',
     // action
     addMenu: '新增菜单',
     editMenu: '编辑菜单',
@@ -148,6 +150,7 @@ export default {
     // help
     componentHelp: '目录为 LAYOUT, 内嵌页面使用 IFrame, 普通页面则为页面路径',
     pathHelp: '所有菜单包括目录都需要设置路径',
+    permissionHelp: '权限标识用于控制页面元素的显示隐藏',
   },
   role: {
     // noun

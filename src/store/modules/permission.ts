@@ -40,6 +40,8 @@ interface PermissionState {
   backMenuList: Menu[];
   // 菜单列表
   frontMenuList: Menu[];
+  // 页面元素权限
+  elementPermissionList: string[];
 }
 
 export const usePermissionStore = defineStore({
@@ -59,6 +61,7 @@ export const usePermissionStore = defineStore({
     // menu List
     // 菜单列表
     frontMenuList: [],
+    elementPermissionList: [],
   }),
   getters: {
     getPermCodeList(state): string[] | number[] {
@@ -75,6 +78,9 @@ export const usePermissionStore = defineStore({
     },
     getIsDynamicAddedRoute(state): boolean {
       return state.isDynamicAddedRoute;
+    },
+    getElementPermissionList(state): string[] {
+      return state.elementPermissionList;
     },
   },
   actions: {
@@ -224,7 +230,15 @@ export const usePermissionStore = defineStore({
           try {
             await this.changePermissionCode();
             const menus = await getMenuListByRole();
-            const menuTree = array2tree(menus.data.data);
+            const menuTree = array2tree(menus.data.data.filter((item) => item.permission == ''));
+
+            // process element permission
+            menus.data.data.forEach((e) => {
+              if (e.permission && e.permission != '') {
+                this.elementPermissionList.push(e.permission);
+              }
+            });
+
             routeList = menuTree as AppRouteRecordRaw[];
           } catch (error) {
             console.error(error);

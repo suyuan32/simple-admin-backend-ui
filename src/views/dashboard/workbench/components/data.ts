@@ -42,12 +42,6 @@ export const navItems: NavItem[] = [
     color: '#0099ff',
     redirect: '/oauth',
   },
-  // {
-  //   title: 'routes.system.fileManagementTitle',
-  //   icon: 'akar-icons:folder',
-  //   color: '#00d8ff',
-  //   redirect: '/file',
-  // },
 ];
 
 export const systemInfoData = [
