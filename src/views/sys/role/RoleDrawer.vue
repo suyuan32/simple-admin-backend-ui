@@ -17,7 +17,7 @@
     <BasicDrawer
       v-model:open="childrenDrawer"
       :title="t('sys.authority.authorityManagement')"
-      width="320"
+      width="25%"
       showFooter
       :closable="true"
       @ok="handleAuthorizationSubmit"

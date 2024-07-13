@@ -119,6 +119,7 @@
         rowKey: 'id',
         rowSelection: {
           type: 'checkbox',
+          columnWidth: 20,
           onChange: (selectedRowKeys, _selectedRows) => {
             selectedIds.value = selectedRowKeys as string[];
             showDeleteButton.value = selectedRowKeys.length > 0;

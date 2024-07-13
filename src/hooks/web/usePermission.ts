@@ -7,7 +7,6 @@ import { useUserStore } from '@/store/modules/user';
 import { useTabs } from './useTabs';
 
 import { router, resetRouter } from '@/router';
-// import { RootRoute } from '@/router/routes';
 
 import projectSetting from '@/settings/projectSetting';
 import { PermissionModeEnum } from '@/enums/appEnum';
@@ -87,7 +86,48 @@ export function usePermission() {
       }
       return (intersection.multiset(value, allCodeList) as string[]).length > 0;
     }
+
     return true;
+  }
+
+  /**
+   * Determine whether there is permission
+   */
+  function hasElementPermission(
+    value?: string | string[],
+    condition: 'AND' | 'OR' = 'OR',
+  ): boolean {
+    if (!value) {
+      return false;
+    }
+
+    if (condition == 'OR') {
+      if (isArray(value)) {
+        for (const e of value) {
+          if (permissionStore.getElementPermissionList.includes(e)) {
+            return true;
+          }
+        }
+      } else {
+        if (permissionStore.getElementPermissionList.includes(value)) {
+          return true;
+        }
+      }
+    } else {
+      if (isArray(value)) {
+        for (const e of value) {
+          if (!permissionStore.getElementPermissionList.includes(e)) {
+            return false;
+          }
+        }
+      } else {
+        if (permissionStore.getElementPermissionList.includes(value)) {
+          return true;
+        }
+      }
+    }
+
+    return false;
   }
 
   /**
@@ -115,5 +155,5 @@ export function usePermission() {
     resume();
   }
 
-  return { changeRole, hasPermission, togglePermissionMode, refreshMenu };
+  return { changeRole, hasPermission, hasElementPermission, togglePermissionMode, refreshMenu };
 }

@@ -42,15 +42,9 @@ export const navItems: NavItem[] = [
     color: '#0099ff',
     redirect: '/oauth',
   },
-  // {
-  //   title: 'routes.system.fileManagementTitle',
-  //   icon: 'akar-icons:folder',
-  //   color: '#00d8ff',
-  //   redirect: '/file',
-  // },
 ];
 
 export const systemInfoData = [
   ['sys.sys.Name', 'Simple Admin'],
-  ['sys.sys.version', 'V 1.4.10'],
+  ['sys.sys.version', 'V 1.5.10'],
 ];

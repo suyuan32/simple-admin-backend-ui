@@ -43,7 +43,7 @@ export function transformMenuModule(menuModule: MenuModule): Menu {
 
 // 将路由转换成菜单
 export function transformRouteToMenu(routeModList: AppRouteModule[], routerMapping = false) {
-  // 借助 radash 深拷贝
+  // 借助 remeda 深拷贝
   const cloneRouteModList = clone(routeModList);
   const routeList: AppRouteRecordRaw[] = [];
 

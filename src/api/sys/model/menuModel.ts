@@ -10,6 +10,7 @@ export interface RouteItem {
   redirect?: string;
   caseSensitive?: boolean;
   children?: RouteItem[];
+  permission?: string;
 }
 
 /**
@@ -47,6 +48,7 @@ export interface MenuInfoPlain {
   dynamicLevel?: number;
   realPath?: string;
   serviceName?: string;
+  permission?: string;
 }
 
 /**
