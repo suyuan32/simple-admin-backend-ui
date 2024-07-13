@@ -201,7 +201,9 @@ export const formSchema: FormSchema[] = [
     required: true,
     helpMessage: t('sys.menu.componentHelp'),
     ifShow: ({ values }) => isMenu(values.menuType),
-    rules: [{ pattern: /^(\/[0-9A-Za-z_-]+)*$/gm, message: t('common.wrongFormat') }],
+    rules: [
+      { pattern: /^(\/[0-9A-Za-z_-]+)*(LAYOUT|IFrame)?$/gm, message: t('common.wrongFormat') },
+    ],
     colProps: { lg: 24, md: 24, sm: 24 },
   },
   {
