@@ -172,7 +172,6 @@ export const formSchema: FormSchema[] = [
     component: 'IconPicker',
     required: true,
     colProps: { lg: 11, md: 11, sm: 11, offset: 2 },
-    ifShow: ({ values }) => !isElement(values.menuType),
   },
   {
     field: 'serviceName',
