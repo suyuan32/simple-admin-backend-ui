@@ -36,7 +36,7 @@
     "postcss-html": "^1.7.0",
     "postcss-less": "^6.0.0",
     "postcss-scss": "^4.0.9",
-    "prettier": "^3.3.2",
+    "prettier": "^3.3.3",
     "stylelint": "^16.7.0",
     "stylelint-config-property-sort-order-smacss": "^10.0.0",
     "stylelint-config-recommended-scss": "^14.1.0",
@@ -44,6 +44,6 @@
     "stylelint-config-standard": "^36.0.1",
     "stylelint-config-standard-scss": "^13.1.0",
     "stylelint-order": "^6.0.4",
-    "stylelint-prettier": "^5.0.0"
+    "stylelint-prettier": "^5.0.1"
   }
 }
