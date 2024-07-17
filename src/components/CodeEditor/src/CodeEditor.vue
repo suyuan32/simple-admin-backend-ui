@@ -63,9 +63,9 @@
   }
 
   function handleValueChange(v: string) {
-    if (props.mode == MODE.JSON) {
-      v = v.replace(/(\r\n|\n|\r)/gm, '');
-    }
+    // if (props.mode == MODE.JSON) {
+    //   v = v.replace(/(\r\n|\n|\r)/gm, '');
+    // }
     emit('update:value', v);
     emit('change', v);
   }
