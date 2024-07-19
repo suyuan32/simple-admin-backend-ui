@@ -44,6 +44,6 @@
     "stylelint-config-standard": "^36.0.1",
     "stylelint-config-standard-scss": "^13.1.0",
     "stylelint-order": "^6.0.4",
-    "stylelint-prettier": "^5.0.1"
+    "stylelint-prettier": "^5.0.2"
   }
 }
