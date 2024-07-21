@@ -341,4 +341,14 @@ export default {
     editTaskLog: '编辑任务日志',
     taskLogList: '任务日志列表',
   },
+  configuration: {
+    name: '配置名称',
+    key: '配置键名',
+    value: '配置值',
+    category: '配置分类',
+    remark: '备注',
+    addConfiguration: '添加参数配置',
+    editConfiguration: '编辑参数配置',
+    configurationList: '参数配置列表',
+  },
 };
