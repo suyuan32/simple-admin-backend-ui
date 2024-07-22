@@ -57,6 +57,7 @@
   import { useI18n } from '@/hooks/web/useI18n';
   import { useDesign } from '@/hooks/web/useDesign';
   import { useLocaleStore } from '@/store/modules/locale';
+  import { useDynamicConfigStore } from '/@/store/modules/dynamicConfig';
 
   defineProps({
     sessionTimeout: {
@@ -70,6 +71,8 @@
   const localeStore = useLocaleStore();
   const showLocale = localeStore.getShowPicker;
   const title = computed(() => globSetting?.title ?? '');
+  const dynamicConfigStore = useDynamicConfigStore();
+  dynamicConfigStore.getDynamicConfigFromServer();
 </script>
 <style lang="less">
   @prefix-cls: ~'@{namespace}-login';

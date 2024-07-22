@@ -1,6 +1,7 @@
 import type { Router, RouteRecordRaw } from 'vue-router';
 
 import { usePermissionStoreWithOut } from '@/store/modules/permission';
+import { useDynamicConfigStore } from '/@/store/modules/dynamicConfig';
 
 import { PageEnum } from '@/enums/pageEnum';
 import { useUserStoreWithOut } from '@/store/modules/user';
@@ -9,6 +10,7 @@ import { PAGE_NOT_FOUND_ROUTE } from '@/router/routes/basic';
 
 import { RootRoute } from '@/router/routes';
 import { PAGE_NOT_FOUND_NAME_CHILDREN } from '../constant';
+import { useAppStore } from '/@/store/modules/app';
 
 const LOGIN_PATH = PageEnum.BASE_LOGIN;
 
@@ -19,6 +21,9 @@ const whitePathList: PageEnum[] = [LOGIN_PATH];
 export function createPermissionGuard(router: Router) {
   const userStore = useUserStoreWithOut();
   const permissionStore = usePermissionStoreWithOut();
+  const dynamicConfigStore = useDynamicConfigStore();
+  const appStore = useAppStore();
+
   router.beforeEach(async (to, from, next) => {
     if (
       from.path === ROOT_PATH &&
@@ -97,6 +102,11 @@ export function createPermissionGuard(router: Router) {
       next();
       return;
     }
+
+    // init dynamic config
+    dynamicConfigStore.getDynamicConfigFromServer().then(() => {
+      appStore.setProjectConfig({ showSettingButton: dynamicConfigStore.showSettingButton });
+    });
 
     const routes = await permissionStore.buildRoutesAction();
 

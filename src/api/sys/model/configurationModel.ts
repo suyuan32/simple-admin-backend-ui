@@ -21,3 +21,9 @@ export interface ConfigurationInfo {
  */
 
 export type ConfigurationListResp = BaseListResp<ConfigurationInfo>;
+
+export interface ConfigurationListReq {
+  page: number;
+  pageSize: number;
+  category?: string;
+}
