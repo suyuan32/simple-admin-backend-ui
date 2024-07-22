@@ -4,9 +4,10 @@
 -->
 <template>
   <div class="anticon" :class="getAppLogoClass" @click="goHome">
-    <img src="../../../assets/images/logo.png" />
+    <img v-if="dynamicConfigStore.getSystemLogo !== ''" :src="dynamicConfigStore.getSystemLogo" />
+    <img v-if="dynamicConfigStore.getSystemLogo === ''" src="../../../assets/images/logo.png" />
     <div class="ml-2 truncate md:opacity-100" :class="getTitleClass" v-show="showTitle">
-      {{ title }}
+      {{ dynamicConfigStore.getSystemName !== '' ? dynamicConfigStore.getSystemName : title }}
     </div>
   </div>
 </template>
@@ -18,6 +19,7 @@
   import { useDesign } from '@/hooks/web/useDesign';
   import { PageEnum } from '@/enums/pageEnum';
   import { useUserStore } from '@/store/modules/user';
+  import { useDynamicConfigStore } from '@/store/modules/dynamicConfig';
 
   const props = defineProps({
     /**
@@ -39,6 +41,7 @@
   const userStore = useUserStore();
   const { title } = useGlobSetting();
   const go = useGo();
+  const dynamicConfigStore = useDynamicConfigStore();
 
   const getAppLogoClass = computed(() => [
     prefixCls,

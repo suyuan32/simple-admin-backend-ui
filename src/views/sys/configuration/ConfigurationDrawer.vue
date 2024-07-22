@@ -1,0 +1,79 @@
+<template>
+  <BasicDrawer
+    v-bind="$attrs"
+    @register="registerDrawer"
+    showFooter
+    :title="getTitle"
+    width="35%"
+    @ok="handleSubmit"
+  >
+    <BasicForm @register="registerForm" />
+  </BasicDrawer>
+</template>
+<script lang="ts">
+  import { defineComponent, ref, computed, unref } from 'vue';
+  import { BasicForm, useForm } from '@/components/Form/index';
+  import { formSchema } from './configuration.data';
+  import { BasicDrawer, useDrawerInner } from '@/components/Drawer';
+  import { useI18n } from 'vue-i18n';
+
+  import { createConfiguration, updateConfiguration } from '@/api/sys/configuration';
+
+  export default defineComponent({
+    name: 'ConfigurationDrawer',
+    components: { BasicDrawer, BasicForm },
+    emits: ['success', 'register'],
+    setup(_, { emit }) {
+      const isUpdate = ref(true);
+      const { t } = useI18n();
+
+      const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
+        labelWidth: 160,
+        baseColProps: { span: 24 },
+        layout: 'vertical',
+        schemas: formSchema,
+        showActionButtonGroup: false,
+      });
+
+      const [registerDrawer, { setDrawerProps, closeDrawer }] = useDrawerInner(async (data) => {
+        resetFields();
+        setDrawerProps({ confirmLoading: false });
+
+        isUpdate.value = !!data?.isUpdate;
+
+        if (unref(isUpdate)) {
+          setFieldsValue({
+            ...data.record,
+          });
+        }
+      });
+
+      const getTitle = computed(() =>
+        !unref(isUpdate)
+          ? t('sys.configuration.addConfiguration')
+          : t('sys.configuration.editConfiguration'),
+      );
+
+      async function handleSubmit() {
+        const values = await validate();
+        setDrawerProps({ confirmLoading: true });
+        values['id'] = unref(isUpdate) ? Number(values['id']) : 0;
+        let result = unref(isUpdate)
+          ? await updateConfiguration(values)
+          : await createConfiguration(values);
+        if (result.code === 0) {
+          closeDrawer();
+          emit('success');
+        }
+        setDrawerProps({ confirmLoading: false });
+      }
+
+      return {
+        registerDrawer,
+        registerForm,
+        getTitle,
+        handleSubmit,
+      };
+    },
+  });
+</script>

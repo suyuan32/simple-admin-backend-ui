@@ -1,6 +1,6 @@
 export default {
   lang: {
-    shortWeekDays: ['一', '二', '三', '四', '五', '六', '日'],
+    shortWeekDays: ['日', '一', '二', '三', '四', '五', '六'],
     shortMonths: [
       '1月',
       '2月',

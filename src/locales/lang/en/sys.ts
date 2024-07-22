@@ -336,4 +336,14 @@ export default {
     editTaskLog: 'Edit Task Log',
     taskLogList: 'Task Log List',
   },
+  configuration: {
+    name: 'Configuration Name',
+    key: 'Configuration Key',
+    value: 'Configuration Value',
+    category: 'Category',
+    remark: 'Remark',
+    addConfiguration: 'Add Configuration',
+    editConfiguration: 'Edit Configuration',
+    configurationList: 'Configuration List',
+  },
 };
