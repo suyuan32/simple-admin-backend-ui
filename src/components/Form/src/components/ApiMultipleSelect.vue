@@ -6,6 +6,7 @@
     :options="getOptions"
     mode="multiple"
     v-model:value="state"
+    :filter-option="filterOption"
   >
     <template #[item]="data" v-for="item in Object.keys($slots)">
       <slot :name="item" v-bind="data || {}"></slot>
@@ -31,6 +32,7 @@
   import { propTypes } from '@/utils/propTypes';
   import { isFunction, omit } from 'remeda';
   import { get } from '/@/utils/object';
+  import { DefaultOptionType, FilterFunc } from 'ant-design-vue/lib/vc-select/Select';
 
   type OptionsItem = { label: string; value: string; disabled?: boolean };
 
@@ -68,6 +70,16 @@
       const emitData = ref<any[]>([]);
       const attrs = useAttrs();
       const { t } = useI18n();
+      const filterOption = ref<boolean | FilterFunc<DefaultOptionType> | undefined>();
+
+      filterOption.value = (inputValue: string, options?: DefaultOptionType): boolean => {
+        if (options) {
+          if (options.label) {
+            return (options.label as string).includes(inputValue);
+          }
+        }
+        return false;
+      };
 
       // Embedded in the form, just use the hook binding to perform form verification
       const [state] = useRuleFormItem(props, 'value', 'change', emitData);
@@ -150,7 +162,7 @@
         emit('change', args);
       }
 
-      return { state, attrs, getOptions, loading, t, handleFetch, handleChange };
+      return { state, attrs, getOptions, loading, t, handleFetch, handleChange, filterOption };
     },
   });
 </script>
