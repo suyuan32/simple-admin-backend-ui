@@ -7,6 +7,7 @@
     mode="multiple"
     v-model:value="state"
     :filter-option="filterOption"
+    @search="searchFun"
   >
     <template #[item]="data" v-for="item in Object.keys($slots)">
       <slot :name="item" v-bind="data || {}"></slot>
@@ -61,6 +62,9 @@
       valueField: propTypes.string.def('value'),
       immediate: propTypes.bool.def(true),
       alwaysLoad: propTypes.bool.def(false),
+      // search
+      isSearch: propTypes.bool.def(false),
+      searchField: propTypes.string,
     },
     emits: ['options-change', 'change', 'update:value'],
     setup(props, { emit }) {
@@ -70,16 +74,23 @@
       const emitData = ref<any[]>([]);
       const attrs = useAttrs();
       const { t } = useI18n();
+      const useSearch = props.isSearch;
+      const searchFun = ref<any>();
       const filterOption = ref<boolean | FilterFunc<DefaultOptionType> | undefined>();
 
-      filterOption.value = (inputValue: string, options?: DefaultOptionType): boolean => {
-        if (options) {
-          if (options.label) {
-            return (options.label as string).includes(inputValue);
+      if (useSearch) {
+        searchFun.value = searchFetch;
+        filterOption.value = false;
+      } else {
+        filterOption.value = (inputValue: string, options?: DefaultOptionType): boolean => {
+          if (options) {
+            if (options.label) {
+              return (options.label as string).includes(inputValue);
+            }
           }
-        }
-        return false;
-      };
+          return false;
+        };
+      }
 
       // Embedded in the form, just use the hook binding to perform form verification
       const [state] = useRuleFormItem(props, 'value', 'change', emitData);
@@ -142,6 +153,40 @@
         }
       }
 
+      async function searchFetch(value: string) {
+        const api = props.api;
+        if (!api || !isFunction(api) || loading.value) return;
+        options.value = [];
+        try {
+          loading.value = true;
+
+          let searchParam: any = {};
+
+          if (props.searchField != undefined) {
+            searchParam[props.searchField] = value;
+          }
+
+          searchParam['page'] = 1;
+          searchParam['pageSize'] = 10;
+
+          const res = await api(searchParam);
+          if (Array.isArray(res)) {
+            options.value = res;
+            emitChange();
+            return;
+          }
+          if (props.resultField) {
+            options.value = get(res, props.resultField) || [];
+          }
+
+          emitChange();
+        } catch (error) {
+          console.warn(error);
+        } finally {
+          loading.value = false;
+        }
+      }
+
       async function handleFetch(visible) {
         if (visible) {
           if (props.alwaysLoad) {
@@ -162,7 +207,18 @@
         emit('change', args);
       }
 
-      return { state, attrs, getOptions, loading, t, handleFetch, handleChange, filterOption };
+      return {
+        state,
+        attrs,
+        getOptions,
+        loading,
+        t,
+        handleFetch,
+        handleChange,
+        filterOption,
+        useSearch,
+        searchFun,
+      };
     },
   });
 </script>
