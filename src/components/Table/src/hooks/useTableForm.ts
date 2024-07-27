@@ -2,7 +2,7 @@ import type { ComputedRef, Slots } from 'vue';
 import type { BasicTableProps, FetchParams } from '../types/table';
 import { unref, computed } from 'vue';
 import type { FormProps } from '@/components/Form';
-import { isFunction } from 'remeda';
+import { isFunction, mapValues, omitBy } from 'remeda';
 
 export function useTableForm(
   propsRef: ComputedRef<BasicTableProps>,
@@ -35,6 +35,11 @@ export function useTableForm(
 
   function handleSearchInfoChange(info: Recordable) {
     const { handleSearchInfoFn } = unref(propsRef);
+    info = mapValues(info, (val, _) => {
+      if (val === '') {
+        return undefined;
+      }
+    });
     if (handleSearchInfoFn && isFunction(handleSearchInfoFn)) {
       info = handleSearchInfoFn(info) || info;
     }
