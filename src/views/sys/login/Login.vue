@@ -58,6 +58,7 @@
   import { useDesign } from '@/hooks/web/useDesign';
   import { useLocaleStore } from '@/store/modules/locale';
   import { useDynamicConfigStore } from '/@/store/modules/dynamicConfig';
+  import { LocaleType } from '/#/config';
 
   defineProps({
     sessionTimeout: {
@@ -72,7 +73,12 @@
   const showLocale = localeStore.getShowPicker;
   const title = computed(() => globSetting?.title ?? '');
   const dynamicConfigStore = useDynamicConfigStore();
-  dynamicConfigStore.getDynamicConfigFromServer();
+  dynamicConfigStore.getDynamicConfigFromServer().then(() => {
+    localeStore.setLocaleInfo({
+      locale: dynamicConfigStore.defaultLocale as LocaleType,
+      fallback: dynamicConfigStore.defaultLocale as LocaleType,
+    });
+  });
 </script>
 <style lang="less">
   @prefix-cls: ~'@{namespace}-login';
