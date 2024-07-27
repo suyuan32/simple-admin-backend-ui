@@ -105,7 +105,12 @@ export function createPermissionGuard(router: Router) {
 
     // init dynamic config
     dynamicConfigStore.getDynamicConfigFromServer().then(() => {
-      appStore.setProjectConfig({ showSettingButton: dynamicConfigStore.showSettingButton });
+      appStore.setProjectConfig({
+        showSettingButton: dynamicConfigStore.showSettingButton,
+        showBreadCrumb: dynamicConfigStore.showBreadCrumb,
+        headerSetting: { showNotice: dynamicConfigStore.showNotice },
+        menuSetting: { type: dynamicConfigStore.layoutType as any },
+      });
     });
 
     const routes = await permissionStore.buildRoutesAction();

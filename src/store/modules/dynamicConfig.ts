@@ -7,6 +7,9 @@ interface DynamicConfig {
   systemLogo: string;
   showSettingButton: boolean;
   defaultLocale: string;
+  showNotice: boolean;
+  layoutType: 'sidebar' | 'mix-sidebar' | 'mix' | 'top-menu';
+  showBreadCrumb: boolean;
 }
 
 export const useDynamicConfigStore = defineStore('app-dynamic-config', {
@@ -15,6 +18,9 @@ export const useDynamicConfigStore = defineStore('app-dynamic-config', {
     systemLogo: '',
     showSettingButton: true,
     defaultLocale: LOCALE.ZH_CN,
+    showNotice: false,
+    layoutType: 'sidebar',
+    showBreadCrumb: true,
   }),
   getters: {
     getSystemName(): string {
@@ -43,6 +49,22 @@ export const useDynamicConfigStore = defineStore('app-dynamic-config', {
                 break;
               case 'sys.ui.defaultLocale':
                 this.defaultLocale = v.value !== undefined ? v.value : LOCALE.ZH_CN;
+                break;
+              case 'sys.ui.header.showNotice':
+                this.showNotice = v.value !== undefined && v.value === 'true' ? true : false;
+                break;
+              case 'sys.ui.layoutType':
+                this.layoutType =
+                  v.value !== undefined &&
+                  (v.value === 'sidebar' ||
+                    v.value === 'mix-sidebar' ||
+                    v.value === 'mix' ||
+                    v.value === 'top-menu')
+                    ? (v.value as any)
+                    : 'sidebar';
+                break;
+              case 'sys.ui.showBreadCrumb':
+                this.showBreadCrumb = v.value !== undefined && v.value === 'false' ? false : true;
                 break;
             }
           }
