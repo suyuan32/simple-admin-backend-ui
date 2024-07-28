@@ -9,6 +9,7 @@
     @search="searchFun"
     :show-arrow="false"
     :filter-option="filterOption"
+    :option-filter-prop="optionFilterProps"
   >
     <template #[item]="data" v-for="item in Object.keys($slots)">
       <slot :name="item" v-bind="data || {}"></slot>
@@ -68,6 +69,7 @@
       // search
       isSearch: propTypes.bool.def(false),
       searchField: propTypes.string,
+      optionFilterProp: propTypes.string.def('label'),
     },
     emits: ['options-change', 'change', 'update:value'],
     setup(props, { emit }) {
@@ -81,19 +83,14 @@
       const useSearch = props.isSearch;
       const searchFun = ref<any>();
       const filterOption = ref<boolean | FilterFunc<DefaultOptionType> | undefined>();
+      const optionFilterProps = ref<string>();
 
       if (useSearch) {
         searchFun.value = searchFetch;
         filterOption.value = false;
       } else {
-        filterOption.value = (inputValue: string, options?: DefaultOptionType): boolean => {
-          if (options) {
-            if (options.label) {
-              return (options.label as string).includes(inputValue);
-            }
-          }
-          return false;
-        };
+        filterOption.value = true;
+        optionFilterProps.value = props.optionFilterProp;
       }
 
       // Embedded in the form, just use the hook binding to perform form verification
@@ -225,6 +222,7 @@
         useSearch,
         searchFun,
         filterOption,
+        optionFilterProps,
       };
     },
   });
