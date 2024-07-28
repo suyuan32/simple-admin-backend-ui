@@ -65,7 +65,7 @@ export const formSchema: FormSchema[] = [
     label: t('sys.oauth.scope'),
     required: true,
     component: 'Input',
-    rules: [{ max: 50 }],
+    rules: [{ max: 100 }],
   },
   {
     field: 'authUrl',
