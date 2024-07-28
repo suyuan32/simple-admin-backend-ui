@@ -46,5 +46,5 @@ export const navItems: NavItem[] = [
 
 export const systemInfoData = [
   ['sys.sys.Name', 'Simple Admin'],
-  ['sys.sys.version', 'V 1.5.1'],
+  ['sys.sys.version', 'V 1.5.2'],
 ];

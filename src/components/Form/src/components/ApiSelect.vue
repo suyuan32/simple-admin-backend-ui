@@ -5,10 +5,11 @@
     @change="handleChange"
     :options="getOptions"
     v-model:value="state"
-    :show-search="useSearch"
+    :show-search="true"
     @search="searchFun"
     :show-arrow="false"
-    :filter-option="false"
+    :filter-option="filterOption"
+    :option-filter-prop="optionFilterProps"
   >
     <template #[item]="data" v-for="item in Object.keys($slots)">
       <slot :name="item" v-bind="data || {}"></slot>
@@ -35,6 +36,7 @@
   import { propTypes } from '@/utils/propTypes';
   import { isFunction, omit } from 'remeda';
   import { get } from '/@/utils/object';
+  import { DefaultOptionType, FilterFunc } from 'ant-design-vue/lib/vc-select/Select';
 
   type OptionsItem = { label?: string; value?: string; disabled?: boolean; [name: string]: any };
 
@@ -67,6 +69,7 @@
       // search
       isSearch: propTypes.bool.def(false),
       searchField: propTypes.string,
+      optionFilterProp: propTypes.string.def('label'),
     },
     emits: ['options-change', 'change', 'update:value'],
     setup(props, { emit }) {
@@ -79,9 +82,15 @@
       const { t } = useI18n();
       const useSearch = props.isSearch;
       const searchFun = ref<any>();
+      const filterOption = ref<boolean | FilterFunc<DefaultOptionType> | undefined>();
+      const optionFilterProps = ref<string>();
 
       if (useSearch) {
         searchFun.value = searchFetch;
+        filterOption.value = false;
+      } else {
+        filterOption.value = true;
+        optionFilterProps.value = props.optionFilterProp;
       }
 
       // Embedded in the form, just use the hook binding to perform form verification
@@ -212,6 +221,8 @@
         handleChange,
         useSearch,
         searchFun,
+        filterOption,
+        optionFilterProps,
       };
     },
   });

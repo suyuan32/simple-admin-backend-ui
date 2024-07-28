@@ -5,7 +5,10 @@
     @change="handleChange"
     :options="getOptions"
     mode="multiple"
-    v-model:value="state"
+    v-model:value="state as any"
+    :filter-option="filterOption"
+    @search="searchFun"
+    :option-filter-prop="optionFilterProps"
   >
     <template #[item]="data" v-for="item in Object.keys($slots)">
       <slot :name="item" v-bind="data || {}"></slot>
@@ -31,6 +34,7 @@
   import { propTypes } from '@/utils/propTypes';
   import { isFunction, omit } from 'remeda';
   import { get } from '/@/utils/object';
+  import { DefaultOptionType, FilterFunc } from 'ant-design-vue/lib/vc-select/Select';
 
   type OptionsItem = { label: string; value: string; disabled?: boolean };
 
@@ -59,6 +63,10 @@
       valueField: propTypes.string.def('value'),
       immediate: propTypes.bool.def(true),
       alwaysLoad: propTypes.bool.def(false),
+      // search
+      isSearch: propTypes.bool.def(false),
+      searchField: propTypes.string,
+      optionFilterProp: propTypes.string.def('label'),
     },
     emits: ['options-change', 'change', 'update:value'],
     setup(props, { emit }) {
@@ -68,6 +76,18 @@
       const emitData = ref<any[]>([]);
       const attrs = useAttrs();
       const { t } = useI18n();
+      const useSearch = props.isSearch;
+      const searchFun = ref<any>();
+      const filterOption = ref<boolean | FilterFunc<DefaultOptionType> | undefined>();
+      const optionFilterProps = ref<string>();
+
+      if (useSearch) {
+        searchFun.value = searchFetch;
+        filterOption.value = false;
+      } else {
+        filterOption.value = true;
+        optionFilterProps.value = props.optionFilterProp;
+      }
 
       // Embedded in the form, just use the hook binding to perform form verification
       const [state] = useRuleFormItem(props, 'value', 'change', emitData);
@@ -130,6 +150,40 @@
         }
       }
 
+      async function searchFetch(value: string) {
+        const api = props.api;
+        if (!api || !isFunction(api) || loading.value) return;
+        options.value = [];
+        try {
+          loading.value = true;
+
+          let searchParam: any = {};
+
+          if (props.searchField != undefined) {
+            searchParam[props.searchField] = value;
+          }
+
+          searchParam['page'] = 1;
+          searchParam['pageSize'] = 10;
+
+          const res = await api(searchParam);
+          if (Array.isArray(res)) {
+            options.value = res;
+            emitChange();
+            return;
+          }
+          if (props.resultField) {
+            options.value = get(res, props.resultField) || [];
+          }
+
+          emitChange();
+        } catch (error) {
+          console.warn(error);
+        } finally {
+          loading.value = false;
+        }
+      }
+
       async function handleFetch(visible) {
         if (visible) {
           if (props.alwaysLoad) {
@@ -150,7 +204,19 @@
         emit('change', args);
       }
 
-      return { state, attrs, getOptions, loading, t, handleFetch, handleChange };
+      return {
+        state,
+        attrs,
+        getOptions,
+        loading,
+        t,
+        handleFetch,
+        handleChange,
+        filterOption,
+        useSearch,
+        searchFun,
+        optionFilterProps,
+      };
     },
   });
 </script>

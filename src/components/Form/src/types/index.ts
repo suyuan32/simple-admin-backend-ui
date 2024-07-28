@@ -191,7 +191,7 @@ export interface ComponentProps {
   CropperAvatar: CustomComponents['CropperAvatar'];
   BasicTitle: CustomComponents['BasicTitle'];
   BasicTree: CustomComponents['BasicTree'];
-  ApiMultipleSelect: CustomComponents['ApiMultipleSelect'];
+  ApiMultipleSelect: CustomComponents['ApiMultipleSelect'] & ComponentProps['Select'];
   DictionarySelect: CustomComponents['DictionarySelect'];
   CodeEditor: CustomComponents['CodeEditor'];
   Tinymce: CustomComponents['Tinymce'];
