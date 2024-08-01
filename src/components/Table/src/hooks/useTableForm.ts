@@ -39,6 +39,7 @@ export function useTableForm(
       if (val === '') {
         return undefined;
       }
+      return val;
     });
     if (handleSearchInfoFn && isFunction(handleSearchInfoFn)) {
       info = handleSearchInfoFn(info) || info;
