@@ -12,6 +12,7 @@
     class="upload-modal"
     :okButtonProps="getOkButtonProps"
     :cancelButtonProps="{ disabled: isUploadingRef }"
+    :centered="true"
   >
     <template #centerFooter>
       <a-button
