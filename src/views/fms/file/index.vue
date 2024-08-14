@@ -18,6 +18,7 @@
           :maxNumber="10"
           @change="handleChange"
           :api="uploadApi"
+          :multiple="true"
           class="my-5"
           :accept="['image/*', 'video/*', 'audio/*']"
         />

@@ -30,6 +30,7 @@
           @change="handleChange"
           :api="uploadApi"
           :upload-params="providerParams"
+          :multiple="true"
           class="my-5"
           :accept="['image/*', 'video/*', 'audio/*']"
         />
