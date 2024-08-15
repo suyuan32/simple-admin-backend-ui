@@ -299,7 +299,7 @@ export function useDataSource(
         rawDataSourceRef.value = tree;
         isArrayResult = Array.isArray(tree);
         resultItems = isArrayResult ? tree : get(tree, listField);
-        (resultTotal = isArrayResult ? tree.length : tree), get(tree, totalField);
+        resultTotal = isArrayResult ? tree.length : get(tree, totalField);
       } else {
         rawDataSourceRef.value = res;
         isArrayResult = Array.isArray(res);
