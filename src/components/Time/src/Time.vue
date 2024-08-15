@@ -77,7 +77,7 @@
           diff = -diff;
         }
 
-        let resStr = '';
+        let resStr: string;
         let dirStr = isBefore ? t('component.time.before') : t('component.time.after');
 
         if (diff < ONE_SECONDS) {

@@ -28,7 +28,7 @@ export const columns: BasicColumn[] = [
     dataIndex: 'result',
     width: 30,
     customRender: ({ record }) => {
-      let resultText = '';
+      let resultText: string;
       if (record.result === 1) {
         resultText = t('common.successful');
       } else {

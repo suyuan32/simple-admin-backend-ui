@@ -140,7 +140,7 @@
     if (redirect && isString(redirect)) {
       go(redirect);
     } else {
-      let goPath = '';
+      let goPath: string;
       if (route.path) {
         goPath = route.path;
       } else {

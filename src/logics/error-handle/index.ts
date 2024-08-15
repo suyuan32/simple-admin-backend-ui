@@ -90,7 +90,7 @@ export function scriptErrorHandler(
     return false;
   }
   const errorInfo: Partial<ErrorLogInfo> = {};
-  colno = colno || (Event && (Event as any).errorCharacter) || 0;
+  // colno = colno || (Event && (Event as any).errorCharacter) || 0;
   errorInfo.message = event as string;
   if (error?.stack) {
     errorInfo.stack = error.stack;

@@ -138,7 +138,7 @@ export function useTableScroll(
     const { pagination, isCanResizeParent, useSearchForm } = unref(propsRef);
     // Table height from bottom height-custom offset
     let paddingHeight = 30;
-    let bottomIncludeBody = 0;
+    let bottomIncludeBody: number;
     if (unref(wrapRef) && isCanResizeParent) {
       const tablePadding = 12;
       const formMargin = 16;

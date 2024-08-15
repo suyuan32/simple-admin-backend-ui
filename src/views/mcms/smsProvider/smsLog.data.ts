@@ -22,7 +22,7 @@ export const columns: BasicColumn[] = [
     dataIndex: 'sendStatus',
     width: 20,
     customRender: ({ record }) => {
-      let resultText = '';
+      let resultText : string;
       if (record.sendStatus === 1) {
         resultText = t('common.successful');
       } else {
