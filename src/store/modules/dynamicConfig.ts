@@ -48,7 +48,14 @@ export const useDynamicConfigStore = defineStore('app-dynamic-config', {
                 this.showSettingButton = v.value !== undefined && v.value === 'true';
                 break;
               case 'sys.ui.defaultLocale':
-                this.defaultLocale = v.value !== undefined ? v.value : LOCALE.ZH_CN;
+                let localeValue: string = LOCALE.ZH_CN;
+                if (v.value !== undefined) {
+                  if (v.value === LOCALE.ZH_CN || v.value === LOCALE.EN_US) {
+                    localeValue = v.value;
+                  }
+                }
+
+                this.defaultLocale = localeValue;
                 break;
               case 'sys.ui.header.showNotice':
                 this.showNotice = v.value !== undefined && v.value === 'true';
