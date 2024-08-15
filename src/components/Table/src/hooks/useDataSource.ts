@@ -255,11 +255,8 @@ export function useDataSource(
     if (!api || !isFunction(api)) return;
     try {
       setLoading(true);
-      const { pageField, sizeField, listField, totalField } = Object.assign(
-        {},
-        FETCH_SETTING,
-        fetchSetting,
-      );
+      const { pageField, sizeField, listField, totalField, parentField, childrenField } =
+        Object.assign({}, FETCH_SETTING, fetchSetting);
       let pageParams: Recordable = {};
 
       const { current = 1, pageSize = PAGE_SIZE } = unref(getPaginationInfo) as PaginationProps;
@@ -295,7 +292,11 @@ export function useDataSource(
       const result = await api(params);
       const res = result.data;
       if (isTreeTable) {
-        const tree = array2tree(res.data);
+        const tree = array2tree(res.data, {
+          parentKey: parentField !== undefined && parentField !== '' ? parentField : 'parentId',
+          childrenKey:
+            childrenField !== undefined && childrenField !== '' ? childrenField : 'children',
+        });
         rawDataSourceRef.value = tree;
         isArrayResult = Array.isArray(tree);
         resultItems = isArrayResult ? tree : get(tree, listField);
