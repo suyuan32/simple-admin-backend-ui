@@ -8,9 +8,9 @@ class FileController {
     console.log(files);
 
     if (files.length === undefined) {
-      this.service.upload(ctx, files, false);
+      await this.service.upload(ctx, files, false);
     } else {
-      this.service.upload(ctx, files, true);
+      await this.service.upload(ctx, files, true);
     }
   };
 }

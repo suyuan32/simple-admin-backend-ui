@@ -70,7 +70,7 @@ export function useFormEvents({
     nextTick(() => clearValidate());
 
     emit('reset', toRaw(formModel));
-    submitOnReset && handleSubmit();
+    submitOnReset && (await handleSubmit());
   }
   // 获取表单fields
   const getAllFields = () =>

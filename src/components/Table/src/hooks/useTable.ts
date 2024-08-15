@@ -148,7 +148,7 @@ export function useTable(tableProps?: Props): [
       return unref(formRef) as unknown as FormActionType;
     },
     setShowPagination: async (show: boolean) => {
-      getTableInstance().setShowPagination(show);
+      await getTableInstance().setShowPagination(show);
     },
     getShowPagination: () => {
       return toRaw(getTableInstance().getShowPagination());

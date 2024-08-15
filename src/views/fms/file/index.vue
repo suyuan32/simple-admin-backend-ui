@@ -241,7 +241,7 @@
 
       async function handleDelete(record: Recordable) {
         await deleteFile({ ids: [record.id] });
-        reload();
+        await reload();
       }
 
       async function handleBatchDelete() {

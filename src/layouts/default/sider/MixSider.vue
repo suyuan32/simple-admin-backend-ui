@@ -247,7 +247,7 @@
             }
           }
           if (!unref(openMenu)) {
-            setActive();
+            await setActive();
           }
         } else {
           openMenu.value = true;

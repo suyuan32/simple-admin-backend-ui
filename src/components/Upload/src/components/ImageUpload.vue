@@ -23,7 +23,7 @@
   </div>
 </template>
 
-<script lang="ts" setup name="ImageUpload">
+<script lang="ts" setup>
   import { ref, toRefs, watch } from 'vue';
   import { PlusOutlined } from '@ant-design/icons-vue';
   import { Upload, Modal } from 'ant-design-vue';

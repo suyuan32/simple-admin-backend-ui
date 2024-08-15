@@ -33,7 +33,7 @@ export const CellComponent = (
     Popover,
     {
       overlayClassName: 'edit-cell-rule-popover',
-      open: !!popoverVisible,
+      open: popoverVisible,
       ...(getPopupContainer ? { getPopupContainer } : {}),
     },
     {

@@ -18,23 +18,23 @@
   </Menu>
 </template>
 <script lang="ts">
-  import type { MenuState } from './types';
-  import { computed, defineComponent, unref, reactive, watch, toRefs, ref } from 'vue';
-  import { Menu, MenuProps } from 'ant-design-vue';
-  import BasicSubMenuItem from './components/BasicSubMenuItem.vue';
-  import { MenuModeEnum, MenuTypeEnum } from '@/enums/menuEnum';
-  import { useOpenKeys } from './useOpenKeys';
-  import { RouteLocationNormalizedLoaded, useRouter } from 'vue-router';
-  import { basicProps } from './props';
-  import { useMenuSetting } from '@/hooks/setting/useMenuSetting';
-  import { REDIRECT_NAME } from '@/router/constant';
-  import { useDesign } from '@/hooks/web/useDesign';
-  import { getCurrentParentPath } from '@/router/menus';
-  import { listenerRouteChange } from '@/logics/mitt/routeChange';
-  import { getAllParentPath } from '@/router/helper/menuHelper';
-  import { isFunction } from 'remeda';
+import type { MenuState } from "./types";
+import { computed, defineComponent, reactive, ref, toRefs, unref, watch } from "vue";
+import { Menu, MenuProps } from "ant-design-vue";
+import BasicSubMenuItem from "./components/BasicSubMenuItem.vue";
+import { MenuModeEnum, MenuTypeEnum } from "@/enums/menuEnum";
+import { useOpenKeys } from "./useOpenKeys";
+import { RouteLocationNormalizedLoaded, useRouter } from "vue-router";
+import { basicProps } from "./props";
+import { useMenuSetting } from "@/hooks/setting/useMenuSetting";
+import { REDIRECT_NAME } from "@/router/constant";
+import { useDesign } from "@/hooks/web/useDesign";
+import { getCurrentParentPath } from "@/router/menus";
+import { listenerRouteChange } from "@/logics/mitt/routeChange";
+import { getAllParentPath } from "@/router/helper/menuHelper";
+import { isFunction } from "remeda";
 
-  export default defineComponent({
+export default defineComponent({
     name: 'BasicMenu',
     components: {
       Menu,
@@ -137,14 +137,13 @@
         const path =
           (route || unref(currentRoute)).meta?.currentActiveMenu ||
           (route || unref(currentRoute)).path;
-        setOpenKeys(path);
+        await setOpenKeys(path);
         if (unref(currentActiveMenu)) return;
         if (props.isHorizontal && unref(getSplit)) {
           const parentPath = await getCurrentParentPath(path);
           menuState.selectedKeys = [parentPath];
         } else {
-          const parentPaths = await getAllParentPath(props.items, path);
-          menuState.selectedKeys = parentPaths;
+          menuState.selectedKeys = getAllParentPath(props.items, path);
         }
       }
 

@@ -36,7 +36,7 @@
       });
 
       const [registerDrawer, { setDrawerProps, closeDrawer }] = useDrawerInner(async (data) => {
-        resetFields();
+        await resetFields();
         setDrawerProps({ confirmLoading: false });
 
         isUpdate.value = !!data?.isUpdate;
@@ -44,11 +44,11 @@
         console.log(dictionaryId);
 
         if (unref(isUpdate)) {
-          setFieldsValue({
+          await setFieldsValue({
             ...data.record,
           });
         } else {
-          setFieldsValue({
+          await setFieldsValue({
             dictionaryId: dictionaryId,
           });
         }

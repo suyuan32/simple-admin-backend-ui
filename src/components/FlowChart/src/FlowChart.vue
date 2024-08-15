@@ -121,7 +121,7 @@
         });
         const lf = unref(lfInstance)!;
         lf?.setDefaultEdgeType('line');
-        onRender();
+        await onRender();
         lf?.setPatternItems(props.patternItems || configDefaultDndPanel(lf));
       }
 

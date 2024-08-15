@@ -123,10 +123,7 @@
         return !!name;
       }
       const { title, hideBreadcrumb, hideMenu } = meta;
-      if (!title || hideBreadcrumb || hideMenu) {
-        return false;
-      }
-      return true;
+      return !(!title || hideBreadcrumb || hideMenu);
     }).filter((item) => !item.meta?.hideBreadcrumb);
   }
 

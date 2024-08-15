@@ -230,7 +230,7 @@ export function convertApiToCheckedKeys(checked: ApiAuthorityInfo[], data: ApiIn
   const authorityApis: number[] = [];
   const requiredAPIs: number[] = [];
   data.forEach(function (value, _key) {
-    if (value.isRequired == true) {
+    if (value.isRequired) {
       requiredAPIs.push(value.id as number);
     }
   });

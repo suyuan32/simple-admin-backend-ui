@@ -96,7 +96,7 @@
       );
 
       watchEffect(() => {
-        state.isPassing = !!props.value;
+        state.isPassing = props.value;
       });
 
       function getEventPageX(e: MouseEvent | TouchEvent) {

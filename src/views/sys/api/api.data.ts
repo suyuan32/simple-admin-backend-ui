@@ -104,7 +104,7 @@ export const searchFormSchema: FormSchema[] = [
         { label: 'PATCH', value: 'PATCH' },
       ],
     },
-    colProps: { span: 4 },
+    colProps: { span: 8 },
   },
 ];
 

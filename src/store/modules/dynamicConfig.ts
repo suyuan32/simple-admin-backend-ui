@@ -45,13 +45,13 @@ export const useDynamicConfigStore = defineStore('app-dynamic-config', {
                 this.systemLogo = v.value !== undefined ? v.value : '';
                 break;
               case 'sys.ui.showSettingButton':
-                this.showSettingButton = v.value !== undefined && v.value === 'true' ? true : false;
+                this.showSettingButton = v.value !== undefined && v.value === 'true';
                 break;
               case 'sys.ui.defaultLocale':
                 this.defaultLocale = v.value !== undefined ? v.value : LOCALE.ZH_CN;
                 break;
               case 'sys.ui.header.showNotice':
-                this.showNotice = v.value !== undefined && v.value === 'true' ? true : false;
+                this.showNotice = v.value !== undefined && v.value === 'true';
                 break;
               case 'sys.ui.layoutType':
                 this.layoutType =
@@ -64,7 +64,7 @@ export const useDynamicConfigStore = defineStore('app-dynamic-config', {
                     : 'sidebar';
                 break;
               case 'sys.ui.showBreadCrumb':
-                this.showBreadCrumb = v.value !== undefined && v.value === 'false' ? false : true;
+                this.showBreadCrumb = !(v.value !== undefined && v.value === 'false');
                 break;
             }
           }

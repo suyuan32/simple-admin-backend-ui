@@ -232,7 +232,7 @@
           (node) => {
             const result = filterFn
               ? filterFn(searchValue, node, unref(getFieldNames))
-              : node[titleField]?.includes(searchValue) ?? false;
+              : (node[titleField]?.includes(searchValue) ?? false);
             if (result) {
               matchedKeys.push(node[keyField]);
             }

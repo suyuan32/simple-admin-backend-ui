@@ -272,7 +272,7 @@
 
       async function handleDelete(record: Recordable) {
         await deleteCloudFile({ ids: [record.id] });
-        reload();
+        await reload();
       }
 
       async function handleBatchDelete() {
