@@ -3,7 +3,7 @@
 import { warn } from 'vue';
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { Mutable } from './types';
-import { fromPairs } from 'remeda';
+import { fromEntries } from 'remeda';
 
 const wrapperKey = Symbol();
 export type PropWrapper<T> = { [wrapperKey]: T };
@@ -155,7 +155,7 @@ export const buildProps = <
 >(
   props: O,
 ) =>
-  fromPairs(
+  fromEntries(
     Object.entries(props).map(([key, option]) => [key, buildProp(option as any, key)]),
   ) as unknown as {
     [K in keyof O]: O[K] extends { [propKey]: boolean }

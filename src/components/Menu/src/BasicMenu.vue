@@ -18,23 +18,23 @@
   </Menu>
 </template>
 <script lang="ts">
-import type { MenuState } from "./types";
-import { computed, defineComponent, reactive, ref, toRefs, unref, watch } from "vue";
-import { Menu, MenuProps } from "ant-design-vue";
-import BasicSubMenuItem from "./components/BasicSubMenuItem.vue";
-import { MenuModeEnum, MenuTypeEnum } from "@/enums/menuEnum";
-import { useOpenKeys } from "./useOpenKeys";
-import { RouteLocationNormalizedLoaded, useRouter } from "vue-router";
-import { basicProps } from "./props";
-import { useMenuSetting } from "@/hooks/setting/useMenuSetting";
-import { REDIRECT_NAME } from "@/router/constant";
-import { useDesign } from "@/hooks/web/useDesign";
-import { getCurrentParentPath } from "@/router/menus";
-import { listenerRouteChange } from "@/logics/mitt/routeChange";
-import { getAllParentPath } from "@/router/helper/menuHelper";
-import { isFunction } from "remeda";
+  import type { MenuState } from './types';
+  import { computed, defineComponent, reactive, ref, toRefs, unref, watch } from 'vue';
+  import { Menu, MenuProps } from 'ant-design-vue';
+  import BasicSubMenuItem from './components/BasicSubMenuItem.vue';
+  import { MenuModeEnum, MenuTypeEnum } from '@/enums/menuEnum';
+  import { useOpenKeys } from './useOpenKeys';
+  import { RouteLocationNormalizedLoaded, useRouter } from 'vue-router';
+  import { basicProps } from './props';
+  import { useMenuSetting } from '@/hooks/setting/useMenuSetting';
+  import { REDIRECT_NAME } from '@/router/constant';
+  import { useDesign } from '@/hooks/web/useDesign';
+  import { getCurrentParentPath } from '@/router/menus';
+  import { listenerRouteChange } from '@/logics/mitt/routeChange';
+  import { getAllParentPath } from '@/router/helper/menuHelper';
+  import { isFunction } from 'remeda';
 
-export default defineComponent({
+  export default defineComponent({
     name: 'BasicMenu',
     components: {
       Menu,
