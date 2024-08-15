@@ -357,22 +357,22 @@
               class={`${prefixCls}__controller-item`}
               onClick={() => scaleFunc(-getScaleStep.value)}
             >
-              <img src={unScaleSvg} />
+              <img src={unScaleSvg} alt="svg icon" />
             </div>
             <div
               class={`${prefixCls}__controller-item`}
               onClick={() => scaleFunc(getScaleStep.value)}
             >
-              <img src={scaleSvg} />
+              <img src={scaleSvg} alt="svg icon" />
             </div>
             <div class={`${prefixCls}__controller-item`} onClick={resume}>
-              <img src={resumeSvg} />
+              <img src={resumeSvg} alt="svg icon" />
             </div>
             <div class={`${prefixCls}__controller-item`} onClick={() => rotateFunc(-90)}>
-              <img src={unRotateSvg} />
+              <img src={unRotateSvg} alt="svg icon" />
             </div>
             <div class={`${prefixCls}__controller-item`} onClick={() => rotateFunc(90)}>
-              <img src={rotateSvg} />
+              <img src={rotateSvg} alt="svg icon" />
             </div>
           </div>
         );

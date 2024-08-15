@@ -62,7 +62,7 @@
     }
 
     &.inset {
-      line-height: 0px;
+      line-height: 0;
     }
 
     &.up {

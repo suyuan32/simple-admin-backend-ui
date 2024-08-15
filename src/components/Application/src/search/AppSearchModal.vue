@@ -207,15 +207,13 @@
       width: 100%;
       height: 100px;
       color: rgb(150 159 175);
-      font-size: 0.9;
+      font-size: 0.9rem;
     }
 
     &-list {
       max-height: 472px;
-      margin: 0 auto;
-      margin-top: 14px;
-      padding: 0 14px;
-      padding-bottom: 20px;
+      margin: 14px auto 0;
+      padding: 0 14px 20px;
       overflow: auto;
 
       &__item {

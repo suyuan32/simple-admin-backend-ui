@@ -32,6 +32,7 @@
         >
           <SimpleMenuTag :item="item" collapseParent dot />
           <img
+            alt="image"
             v-if="item.img"
             :src="item.img"
             :class="[`${prefixCls}-module__icon`, getCollapsed ? 'w-16px h-16px' : 'w-20px h-20px']"
@@ -71,7 +72,7 @@
         <SimpleMenu
           :items="childrenMenus"
           :theme="getMenuTheme"
-          mixSider
+          :mixSider="true"
           @menu-click="handleMenuClick"
         />
       </ScrollContainer>
