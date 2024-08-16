@@ -1,16 +1,14 @@
-import { createProdMockServer } from 'vite-plugin-mock/dist/client';
+import { createProdMockServer } from 'vite-plugin-mock/client';
 
-const modules: Record<string, any> = import.meta.glob('./**/*.ts', {
-  import: 'default',
-  eager: true,
-});
+const modules = import.meta.glob('./**/*.ts', { eager: true });
 
-const mockModules = Object.keys(modules).reduce((pre, key) => {
-  if (!key.includes('/_')) {
-    pre.push(...modules[key]);
+const mockModules: any[] = [];
+Object.keys(modules).forEach((key) => {
+  if (key.includes('/_')) {
+    return;
   }
-  return pre;
-}, [] as any[]);
+  mockModules.push(...(modules as Recordable)[key].default);
+});
 
 /**
  * Used in a production environment. Need to manually import all modules
