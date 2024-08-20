@@ -123,10 +123,7 @@
         return !!name;
       }
       const { title, hideBreadcrumb, hideMenu } = meta;
-      if (!title || hideBreadcrumb || hideMenu) {
-        return false;
-      }
-      return true;
+      return !(!title || hideBreadcrumb || hideMenu);
     }).filter((item) => !item.meta?.hideBreadcrumb);
   }
 
@@ -143,7 +140,7 @@
     if (redirect && isString(redirect)) {
       go(redirect);
     } else {
-      let goPath = '';
+      let goPath: string;
       if (route.path) {
         goPath = route.path;
       } else {

@@ -259,23 +259,23 @@
 
     &-cropper {
       height: 300px;
-      background: #eee;
-      background-image: linear-gradient(
-          45deg,
-          rgb(0 0 0 / 25%) 25%,
-          transparent 0,
-          transparent 75%,
-          rgb(0 0 0 / 25%) 0
-        ),
+      background:
+        #eee
+          linear-gradient(
+            45deg,
+            rgb(0 0 0 / 25%) 25%,
+            transparent 0,
+            transparent 75%,
+            rgb(0 0 0 / 25%) 0
+          ),
         linear-gradient(
-          45deg,
-          rgb(0 0 0 / 25%) 25%,
-          transparent 0,
-          transparent 75%,
-          rgb(0 0 0 / 25%) 0
-        );
-      background-position:
-        0 0,
+            45deg,
+            rgb(0 0 0 / 25%) 25%,
+            transparent 0,
+            transparent 75%,
+            rgb(0 0 0 / 25%) 0
+          )
+          0 0,
         12px 12px;
       background-size: 24px 24px;
     }

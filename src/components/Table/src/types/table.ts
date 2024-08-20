@@ -132,6 +132,10 @@ export interface FetchSetting {
   listField: string;
   // 请求结果总数字段  支持 a.b.c
   totalField: string;
+  // 父级字段
+  parentField: string;
+  // 子级字段
+  childrenField: string;
 }
 
 export interface TableSetting {

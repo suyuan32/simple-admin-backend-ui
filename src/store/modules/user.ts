@@ -236,7 +236,7 @@ export const useUserStore = defineStore({
         homePath: '',
         roleName: [],
       });
-      goLogin && router.push(PageEnum.BASE_LOGIN);
+      goLogin && (await router.push(PageEnum.BASE_LOGIN));
     },
 
     /**

@@ -52,10 +52,14 @@
 
       return () => {
         const { columns, actionColumn, dataSource } = props;
-        const columnList = [...columns, actionColumn];
+        let columnList: FileBasicColumn[];
+        columnList = (
+          actionColumn ? [...columns, actionColumn] : [...columns]
+        ) as FileBasicColumn[];
+
         return (
           // x scrollbar
-          <div class="overflow-x-auto">
+          <div class="overflow-x-auto" style="min-height: 400px">
             <table class="file-table">
               <colgroup>
                 {columnList.map((item) => {

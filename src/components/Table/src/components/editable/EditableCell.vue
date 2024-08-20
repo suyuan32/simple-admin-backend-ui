@@ -164,7 +164,7 @@
       watchEffect(() => {
         const { editable } = props.column;
         if (isBoolean(editable) || isBoolean(unref(getRowEditable))) {
-          isEdit.value = !!editable || unref(getRowEditable);
+          isEdit.value = editable || unref(getRowEditable);
         }
       });
 
@@ -199,7 +199,7 @@
           value: unref(currentValueRef),
           record: toRaw(props.record),
         });
-        handleSubmitRule();
+        await handleSubmitRule();
       }
 
       async function handleSubmitRule() {
@@ -283,7 +283,7 @@
         if (props.column?.editRow) {
           return;
         }
-        handleSubmit();
+        await handleSubmit();
       }
 
       function handleSubmitClick() {

@@ -30,8 +30,8 @@
     "lint": "pnpm eslint ."
   },
   "dependencies": {
-    "@vueuse/core": "^10.11.0",
-    "vue": "^3.4.35"
+    "@vueuse/core": "^10.11.1",
+    "vue": "^3.4.38"
   },
   "devDependencies": {
     "@vben/types": "workspace:*"

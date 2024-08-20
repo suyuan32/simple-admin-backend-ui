@@ -90,14 +90,14 @@ export function scriptErrorHandler(
     return false;
   }
   const errorInfo: Partial<ErrorLogInfo> = {};
-  colno = colno || (window.event && (window.event as any).errorCharacter) || 0;
+  // colno = colno || (Event && (Event as any).errorCharacter) || 0;
   errorInfo.message = event as string;
   if (error?.stack) {
     errorInfo.stack = error.stack;
   } else {
     errorInfo.stack = '';
   }
-  const name = source ? source.substr(source.lastIndexOf('/') + 1) : 'script';
+  const name = source ? source.substring(source.lastIndexOf('/') + 1) : 'script';
   const errorLogStore = useErrorLogStoreWithOut();
   errorLogStore.addErrorLogInfo({
     type: ErrorTypeEnum.SCRIPT,
@@ -140,7 +140,7 @@ function registerResourceErrorHandler() {
   window.addEventListener(
     'error',
     function (e: Event) {
-      const target = e.target ? e.target : (e.srcElement as any);
+      const target = e.target as any;
       const errorLogStore = useErrorLogStoreWithOut();
       errorLogStore.addErrorLogInfo({
         type: ErrorTypeEnum.RESOURCE,

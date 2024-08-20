@@ -42,11 +42,7 @@
       const timeVal = ref<dayjs.Dayjs>();
       const showTimePicker = ref<boolean>();
 
-      if (props.timeMode === 'datetime') {
-        showTimePicker.value = true;
-      } else {
-        showTimePicker.value = false;
-      }
+      showTimePicker.value = props.timeMode === 'datetime';
 
       // Embedded in the form, just use the hook binding to perform form verification
       const [state] = useRuleFormItem(props, 'value', 'change', emitData);
@@ -59,10 +55,8 @@
               dateVal.value = dayjs(v);
               timeVal.value = dayjs(v);
             } else {
-              if (v !== undefined) {
-                dateVal.value = dayjs.unix(v);
-                timeVal.value = dayjs.unix(v);
-              }
+              dateVal.value = dayjs.unix(v);
+              timeVal.value = dayjs.unix(v);
             }
           }
           emit('update:value', v);

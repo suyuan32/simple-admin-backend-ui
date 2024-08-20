@@ -12,6 +12,7 @@
     class="upload-modal"
     :okButtonProps="getOkButtonProps"
     :cancelButtonProps="{ disabled: isUploadingRef }"
+    :centered="true"
   >
     <template #centerFooter>
       <a-button
@@ -65,6 +66,7 @@
   import { buildUUID } from '@/utils/uuid';
   import { isFunction } from 'remeda';
   import { warn } from '@/utils/log';
+  import { get } from '@/utils/object';
   import FileList from './FileList.vue';
   import { useI18n } from '@/hooks/web/useI18n';
   import file2md5 from 'file2md5';
@@ -305,7 +307,7 @@
         for (const item of fileListRef.value) {
           const { status, responseData } = item;
           if (status === UploadResultStatus.SUCCESS && responseData) {
-            fileList.push(responseData.data.url);
+            fileList.push(get(responseData, props.resultField));
           }
         }
         // 存在一个上传成功的即可保存

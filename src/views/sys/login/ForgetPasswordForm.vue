@@ -102,18 +102,10 @@
   async function handleSendCaptcha(): Promise<boolean> {
     if (formData.msgType == 'email') {
       const result = await getEmailCaptcha({ email: formData.target });
-      if (result.code == 0) {
-        return true;
-      } else {
-        return false;
-      }
+      return result.code == 0;
     } else {
       const result = await getSmsCaptcha({ phoneNumber: formData.target });
-      if (result.code == 0) {
-        return true;
-      } else {
-        return false;
-      }
+      return result.code == 0;
     }
   }
 

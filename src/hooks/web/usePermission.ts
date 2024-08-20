@@ -50,7 +50,7 @@ export function usePermission() {
       router.addRoute(route as unknown as RouteRecordRaw);
     });
     permissionStore.setLastBuildMenuTime();
-    closeAll();
+    await closeAll();
   }
 
   /**
@@ -152,7 +152,7 @@ export function usePermission() {
    * refresh menu data
    */
   async function refreshMenu() {
-    resume();
+    await resume();
   }
 
   return { changeRole, hasPermission, hasElementPermission, togglePermissionMode, refreshMenu };

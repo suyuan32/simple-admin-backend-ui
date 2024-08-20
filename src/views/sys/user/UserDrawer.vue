@@ -37,17 +37,17 @@
       });
 
       const [registerDrawer, { setDrawerProps, closeDrawer }] = useDrawerInner(async (data) => {
-        resetFields();
+        await resetFields();
         setDrawerProps({ confirmLoading: false });
 
         isUpdate.value = !!data?.isUpdate;
         if (unref(isUpdate)) {
-          setFieldsValue({
+          await setFieldsValue({
             ...data.record,
           });
         }
 
-        updateSchema({ field: 'password', required: !unref(isUpdate) });
+        await updateSchema({ field: 'password', required: !unref(isUpdate) });
       });
 
       const getTitle = computed(() =>

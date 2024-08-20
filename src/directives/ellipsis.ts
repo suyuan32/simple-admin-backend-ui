@@ -32,7 +32,7 @@ const Ellipsis: ObjectDirective = {
     el.style.width = `${width}px`;
     if (arg === 'multiple') {
       el.style.webkitLineClamp = `${line}`;
-      el.style.webkitBoxOrient = 'vertical';
+      el.style.flexDirection = 'column';
     }
   },
 };

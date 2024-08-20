@@ -111,7 +111,7 @@
         const { disabled: globDisabled } = props.formProps;
         const { dynamicDisabled } = props.schema;
         const { disabled: itemDisabled = false } = unref(getComponentsProps);
-        let disabled = !!globDisabled || itemDisabled;
+        let disabled = globDisabled || itemDisabled;
         if (isBoolean(dynamicDisabled)) {
           disabled = dynamicDisabled;
         }

@@ -69,6 +69,12 @@ export const basicProps = {
     type: Object as PropType<SortableOptions>,
     default: () => ({}),
   },
+
+  resultField: {
+    type: String as PropType<string>,
+    default: 'data.url',
+  },
+
   calculateMd5: {
     type: Boolean as PropType<boolean>,
     default: false,

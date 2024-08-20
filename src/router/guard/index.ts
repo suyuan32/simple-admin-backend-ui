@@ -60,7 +60,7 @@ function createPageLoadingGuard(router: Router) {
     }
 
     if (unref(getOpenPageLoading)) {
-      appStore.setPageLoadingAction(true);
+      await appStore.setPageLoadingAction(true);
       return true;
     }
 

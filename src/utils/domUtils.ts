@@ -91,8 +91,8 @@ export function getViewportOffset(element: Element): ViewportOffsetResult {
   const docClientLeft = doc.clientLeft;
   const docClientTop = doc.clientTop;
 
-  const pageXOffset = window.pageXOffset;
-  const pageYOffset = window.pageYOffset;
+  const pageXOffset = window.scrollX;
+  const pageYOffset = window.scrollY;
 
   const box = getBoundingClientRect(element);
 

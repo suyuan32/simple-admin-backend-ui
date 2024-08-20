@@ -31,8 +31,7 @@
         if (!tag) return false;
 
         const { dot, content } = tag;
-        if (!dot && !content) return false;
-        return true;
+        return !(!dot && !content);
       });
 
       const getContent = computed(() => {

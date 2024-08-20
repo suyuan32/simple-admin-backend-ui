@@ -211,7 +211,7 @@
         }, 2000);
         loading.value = false;
       } else {
-        getCaptchaData();
+        await getCaptchaData();
         loading.value = false;
       }
     } else if (formData.msgType === 'email') {
@@ -252,18 +252,10 @@
   async function handleSendCaptcha(): Promise<boolean> {
     if (formData.msgType == 'email') {
       const result = await getEmailCaptcha({ email: formData.target });
-      if (result.code == 0) {
-        return true;
-      } else {
-        return false;
-      }
+      return result.code == 0;
     } else {
       const result = await getSmsCaptcha({ phoneNumber: formData.target });
-      if (result.code == 0) {
-        return true;
-      } else {
-        return false;
-      }
+      return result.code == 0;
     }
   }
 

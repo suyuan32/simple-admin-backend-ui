@@ -135,7 +135,7 @@
               if (getField && !toRefs(_data).hasOwnProperty(field)) {
                 return isFunction(render) ? render('', _data) : '';
               }
-              return isFunction(render) ? render(getField, _data) : getField ?? '';
+              return isFunction(render) ? render(getField, _data) : (getField ?? '');
             };
 
             const width = contentMinWidth;

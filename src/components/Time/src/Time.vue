@@ -6,7 +6,8 @@
   import { useI18n } from '@/hooks/web/useI18n';
   import { useIntervalFn } from '@vueuse/core';
   import { formatToDateTime, formatToDate, dateUtil } from '@/utils/dateUtil';
-  import { isNumber, isObject, isString } from '@/utils/is';
+  import { isObject } from '@/utils/is';
+  import { isNumber, isString } from 'remeda';
   import { propTypes } from '@/utils/propTypes';
 
   const ONE_SECONDS = 1000;
@@ -76,7 +77,7 @@
           diff = -diff;
         }
 
-        let resStr = '';
+        let resStr: string;
         let dirStr = isBefore ? t('component.time.before') : t('component.time.after');
 
         if (diff < ONE_SECONDS) {

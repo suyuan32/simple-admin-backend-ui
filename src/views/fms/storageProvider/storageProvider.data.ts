@@ -57,7 +57,7 @@ export const columns: BasicColumn[] = [
         loading: record.pendingStatus,
         onChange(checked, _) {
           record.pendingStatus = true;
-          const newState = checked ? true : false;
+          const newState = !!checked;
           updateStorageProvider({ id: record.id, state: newState })
             .then(() => {
               record.state = newState;

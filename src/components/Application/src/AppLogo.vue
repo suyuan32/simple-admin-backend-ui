@@ -4,8 +4,16 @@
 -->
 <template>
   <div class="anticon" :class="getAppLogoClass" @click="goHome">
-    <img v-if="dynamicConfigStore.getSystemLogo !== ''" :src="dynamicConfigStore.getSystemLogo" />
-    <img v-if="dynamicConfigStore.getSystemLogo === ''" src="../../../assets/images/logo.png" />
+    <img
+      v-if="dynamicConfigStore.getSystemLogo !== ''"
+      :src="dynamicConfigStore.getSystemLogo"
+      alt="logo"
+    />
+    <img
+      v-if="dynamicConfigStore.getSystemLogo === ''"
+      src="../../../assets/images/logo.png"
+      alt="logo"
+    />
     <div class="ml-2 truncate md:opacity-100" :class="getTitleClass" v-show="showTitle">
       {{ dynamicConfigStore.getSystemName !== '' ? dynamicConfigStore.getSystemName : title }}
     </div>
