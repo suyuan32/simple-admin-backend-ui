@@ -1,6 +1,6 @@
 {
   "name": "simple-admin",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "homepage": "https://github.com/suyuan32/simple-admin-backend-ui",
   "bugs": {
     "url": "https://github.com/suyuan32/simple-admin-backend-ui/issues"
@@ -109,7 +109,7 @@
     "vue": "^3.4.38",
     "vue-clipboard3": "^2.0.0",
     "vue-codemirror": "^6.1.1",
-    "vue-i18n": "^9.13.1",
+    "vue-i18n": "^9.14.0",
     "vue-json-pretty": "^2.4.0",
     "vue-router": "^4.4.3",
     "vue-types": "^5.1.3",
