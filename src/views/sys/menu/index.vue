@@ -29,9 +29,7 @@
     <MenuDrawer @register="registerDrawer" @success="handleSuccess" />
   </PageWrapper>
 </template>
-<script lang="ts">
-  import { defineComponent } from 'vue';
-
+<script lang="ts" setup>
   import { BasicTable, useTable, TableAction } from '@/components/Table';
   import { useI18n } from 'vue-i18n';
   import { deleteMenu, getMenuList } from '@/api/sys/menu';
@@ -42,68 +40,52 @@
   import { columns } from './menu.data';
   import { PageWrapper } from '@/components/Page';
 
-  export default defineComponent({
-    name: 'MenuManagement',
-    components: { BasicTable, MenuDrawer, TableAction, PageWrapper },
-    setup() {
-      const { t } = useI18n();
-      const [registerDrawer, { openDrawer }] = useDrawer();
-      const [registerTable, { reload }] = useTable({
-        title: t('sys.menu.menuList'),
-        api: getMenuList,
-        columns,
-        formConfig: {
-          labelWidth: 120,
-        },
-        isTreeTable: true,
-        pagination: false,
-        striped: false,
-        useSearchForm: false,
-        showTableSetting: true,
-        bordered: true,
-        showIndexColumn: false,
-        canResize: false,
-        actionColumn: {
-          width: 80,
-          title: t('common.action'),
-          dataIndex: 'action',
-          fixed: undefined,
-        },
-      });
-
-      function handleCreate() {
-        openDrawer(true, {
-          isUpdate: false,
-        });
-      }
-
-      function handleEdit(record: Recordable) {
-        openDrawer(true, {
-          record,
-          isUpdate: true,
-        });
-      }
-
-      async function handleDelete(record: Recordable) {
-        const result = await deleteMenu({ id: record.id }, 'notice');
-        if (result.code === 0) {
-          await reload();
-        }
-      }
-
-      async function handleSuccess() {
-        await reload();
-      }
-
-      return {
-        t,
-        registerTable,
-        registerDrawer,
-        handleCreate,
-        handleEdit,
-        handleDelete,
-        handleSuccess,
-      };
+  const { t } = useI18n();
+  const [registerDrawer, { openDrawer }] = useDrawer();
+  const [registerTable, { reload }] = useTable({
+    title: t('sys.menu.menuList'),
+    api: getMenuList,
+    columns,
+    formConfig: {
+      labelWidth: 120,
+    },
+    isTreeTable: true,
+    pagination: false,
+    striped: false,
+    useSearchForm: false,
+    showTableSetting: true,
+    bordered: true,
+    showIndexColumn: false,
+    canResize: false,
+    actionColumn: {
+      width: 80,
+      title: t('common.action'),
+      dataIndex: 'action',
+      fixed: undefined,
     },
   });
+
+  function handleCreate() {
+    openDrawer(true, {
+      isUpdate: false,
+    });
+  }
+
+  function handleEdit(record: Recordable) {
+    openDrawer(true, {
+      record,
+      isUpdate: true,
+    });
+  }
+
+  async function handleDelete(record: Recordable) {
+    const result = await deleteMenu({ id: record.id }, 'notice');
+    if (result.code === 0) {
+      await reload();
+    }
+  }
+
+  async function handleSuccess() {
+    await reload();
+  }
 </script>

@@ -57,8 +57,8 @@
     <UserDrawer @register="registerDrawer" @success="handleSuccess" />
   </PageWrapper>
 </template>
-<script lang="ts">
-  import { createVNode, defineComponent, reactive, ref } from 'vue';
+<script lang="ts" setup>
+  import { createVNode, reactive, ref } from 'vue';
   import { Modal } from 'ant-design-vue';
   import { ExclamationCircleOutlined } from '@ant-design/icons-vue/lib/icons';
   import { BasicTable, useTable, TableAction } from '@/components/Table';
@@ -78,138 +78,108 @@
   import { PageWrapper } from '@/components/Page';
   import { Button } from '@/components/Button';
 
-  export default defineComponent({
-    name: 'UserManagement',
-    components: {
-      BasicTable,
-      UserDrawer,
-      TableAction,
-      PageWrapper,
-      Button,
-      Row,
-      Col,
-      DeptTree,
+  const { t } = useI18n();
+  const { createMessage } = useMessage();
+  const selectedIds = ref<number[] | string[]>();
+  const showDeleteButton = ref<boolean>(false);
+  const searchInfo = reactive<Recordable>({});
+
+  const [registerDrawer, { openDrawer }] = useDrawer();
+  const roleStoreData = useRoleStore();
+
+  // get role data
+  roleStoreData.getRoleInfoFromServer();
+
+  const [registerTable, { reload, getSelectRows }] = useTable({
+    title: t('sys.user.userList'),
+    api: getUserList,
+    columns,
+    formConfig: {
+      labelWidth: 120,
+      schemas: searchFormSchema,
     },
-    setup() {
-      const { t } = useI18n();
-      const { createMessage } = useMessage();
-      const selectedIds = ref<number[] | string[]>();
-      const showDeleteButton = ref<boolean>(false);
-      const searchInfo = reactive<Recordable>({});
+    useSearchForm: true,
+    showTableSetting: true,
+    bordered: true,
+    showIndexColumn: false,
+    clickToRowSelect: false,
+    actionColumn: {
+      width: 30,
+      title: t('common.action'),
+      dataIndex: 'action',
+      fixed: undefined,
+    },
+    rowKey: 'id',
+    rowSelection: {
+      type: 'checkbox',
+      columnWidth: 20,
+      onChange: (selectedRowKeys, _selectedRows) => {
+        selectedIds.value = selectedRowKeys as string[];
+        showDeleteButton.value = selectedRowKeys.length > 0;
+      },
+    },
+  });
 
-      const [registerDrawer, { openDrawer }] = useDrawer();
-      const roleStoreData = useRoleStore();
+  function handleCreate() {
+    openDrawer(true, {
+      isUpdate: false,
+    });
+  }
 
-      // get role data
-      roleStoreData.getRoleInfoFromServer();
+  function handleEdit(record: Recordable) {
+    openDrawer(true, {
+      record,
+      isUpdate: true,
+    });
+  }
 
-      const [registerTable, { reload, getSelectRows }] = useTable({
-        title: t('sys.user.userList'),
-        api: getUserList,
-        columns,
-        formConfig: {
-          labelWidth: 120,
-          schemas: searchFormSchema,
-        },
-        useSearchForm: true,
-        showTableSetting: true,
-        bordered: true,
-        showIndexColumn: false,
-        clickToRowSelect: false,
-        actionColumn: {
-          width: 30,
-          title: t('common.action'),
-          dataIndex: 'action',
-          fixed: undefined,
-        },
-        rowKey: 'id',
-        rowSelection: {
-          type: 'checkbox',
-          columnWidth: 20,
-          onChange: (selectedRowKeys, _selectedRows) => {
-            selectedIds.value = selectedRowKeys as string[];
-            showDeleteButton.value = selectedRowKeys.length > 0;
-          },
-        },
-      });
+  async function handleDelete(record: Recordable) {
+    if (record.nickname === 'admin') {
+      createMessage.warn(t('common.notAllowDeleteAdminData'));
+      return;
+    }
 
-      function handleCreate() {
-        openDrawer(true, {
-          isUpdate: false,
-        });
-      }
+    const result = await deleteUser({ ids: [record.id] });
+    if (result.code === 0) {
+      await reload();
+    }
+  }
 
-      function handleEdit(record: Recordable) {
-        openDrawer(true, {
-          record,
-          isUpdate: true,
-        });
-      }
-
-      async function handleDelete(record: Recordable) {
-        if (record.nickname === 'admin') {
+  async function handleBatchDelete() {
+    Modal.confirm({
+      title: t('common.deleteConfirm'),
+      icon: createVNode(ExclamationCircleOutlined),
+      async onOk() {
+        const ids = selectedIds.value as string[];
+        const rowData = getSelectRows();
+        if (rowData.filter((row) => row.nickname === 'admin').length > 0) {
           createMessage.warn(t('common.notAllowDeleteAdminData'));
           return;
         }
 
-        const result = await deleteUser({ ids: [record.id] });
+        const result = await deleteUser({ ids: ids });
         if (result.code === 0) {
           await reload();
         }
-      }
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+  }
 
-      async function handleBatchDelete() {
-        Modal.confirm({
-          title: t('common.deleteConfirm'),
-          icon: createVNode(ExclamationCircleOutlined),
-          async onOk() {
-            const ids = selectedIds.value as string[];
-            const rowData = getSelectRows();
-            if (rowData.filter((row) => row.nickname === 'admin').length > 0) {
-              createMessage.warn(t('common.notAllowDeleteAdminData'));
-              return;
-            }
+  function handleSelect(deptId) {
+    searchInfo.departmentId = deptId;
+    reload();
+  }
 
-            const result = await deleteUser({ ids: ids });
-            if (result.code === 0) {
-              await reload();
-            }
-          },
-          onCancel() {
-            console.log('Cancel');
-          },
-        });
-      }
+  async function handleLogout(record: Recordable) {
+    const result = await logout(record.id);
 
-      function handleSelect(deptId) {
-        searchInfo.departmentId = deptId;
-        reload();
-      }
+    if (result.code === 0) await reload();
+  }
 
-      async function handleLogout(record: Recordable) {
-        const result = await logout(record.id);
-
-        if (result.code === 0) await reload();
-      }
-
-      async function handleSuccess() {
-        await reload();
-      }
-
-      return {
-        t,
-        registerTable,
-        registerDrawer,
-        handleCreate,
-        handleEdit,
-        handleLogout,
-        handleDelete,
-        handleSuccess,
-        handleBatchDelete,
-        handleSelect,
-        showDeleteButton,
-        searchInfo,
-      };
-    },
-  });
+  async function handleSuccess() {
+    await reload();
+  }
 </script>

@@ -42,8 +42,8 @@
     <DictionaryDetailDrawer @register="registerDrawer" @success="handleSuccess" />
   </div>
 </template>
-<script lang="ts">
-  import { createVNode, defineComponent, reactive, ref, unref } from 'vue';
+<script lang="ts" setup>
+  import { createVNode, reactive, ref, unref } from 'vue';
   import { Modal } from 'ant-design-vue';
   import { ExclamationCircleOutlined } from '@ant-design/icons-vue/lib/icons';
   import { BasicTable, useTable, TableAction } from '@/components/Table';
@@ -57,106 +57,87 @@
   import { getDictionaryDetailList, deleteDictionaryDetail } from '@/api/sys/dictionaryDetail';
   import { useRouter } from 'vue-router';
 
-  export default defineComponent({
-    name: 'DictionaryDetailManagement',
-    components: { BasicTable, DictionaryDetailDrawer, TableAction, Button },
-    setup() {
-      const { t } = useI18n();
-      const selectedIds = ref<number[] | string[]>();
-      const showDeleteButton = ref<boolean>(false);
-      const { currentRoute } = useRouter();
-      const searchInfo = reactive<Recordable>({
-        dictionaryId: Number(unref(currentRoute).params.dictionaryId),
-      });
+  const { t } = useI18n();
+  const selectedIds = ref<number[] | string[]>();
+  const showDeleteButton = ref<boolean>(false);
+  const { currentRoute } = useRouter();
+  const searchInfo = reactive<Recordable>({
+    dictionaryId: Number(unref(currentRoute).params.dictionaryId),
+  });
 
-      const [registerDrawer, { openDrawer }] = useDrawer();
-      const [registerTable, { reload }] = useTable({
-        title: t('sys.dictionary.dictionaryDetailList'),
-        api: getDictionaryDetailList,
-        columns,
-        formConfig: {
-          labelWidth: 120,
-          schemas: searchFormSchema,
-        },
-        useSearchForm: true,
-        showTableSetting: true,
-        bordered: true,
-        showIndexColumn: false,
-        clickToRowSelect: false,
-        actionColumn: {
-          width: 30,
-          title: t('common.action'),
-          dataIndex: 'action',
-          fixed: undefined,
-        },
-        rowKey: 'id',
-        rowSelection: {
-          type: 'checkbox',
-          columnWidth: 20,
-          onChange: (selectedRowKeys, _selectedRows) => {
-            selectedIds.value = selectedRowKeys as number[];
-            showDeleteButton.value = selectedRowKeys.length > 0;
-          },
-        },
-      });
-
-      function handleCreate() {
-        openDrawer(true, {
-          dictionaryId: Number(unref(currentRoute).params.dictionaryId),
-          isUpdate: false,
-        });
-      }
-
-      function handleEdit(record: Recordable) {
-        openDrawer(true, {
-          record,
-          isUpdate: true,
-        });
-      }
-
-      async function handleDelete(record: Recordable) {
-        const result = await deleteDictionaryDetail({ ids: [record.id] });
-        if (result.code === 0) {
-          await reload();
-        }
-      }
-
-      async function handleBatchDelete() {
-        Modal.confirm({
-          title: t('common.deleteConfirm'),
-          icon: createVNode(ExclamationCircleOutlined),
-          async onOk() {
-            const result = await deleteDictionaryDetail(
-              { ids: selectedIds.value as number[] },
-              'modal',
-            );
-            if (result.code === 0) {
-              showDeleteButton.value = false;
-              await reload();
-            }
-          },
-          onCancel() {
-            console.log('Cancel');
-          },
-        });
-      }
-
-      async function handleSuccess() {
-        await reload();
-      }
-
-      return {
-        t,
-        registerTable,
-        registerDrawer,
-        handleCreate,
-        handleEdit,
-        handleDelete,
-        handleSuccess,
-        handleBatchDelete,
-        showDeleteButton,
-        searchInfo,
-      };
+  const [registerDrawer, { openDrawer }] = useDrawer();
+  const [registerTable, { reload }] = useTable({
+    title: t('sys.dictionary.dictionaryDetailList'),
+    api: getDictionaryDetailList,
+    columns,
+    formConfig: {
+      labelWidth: 120,
+      schemas: searchFormSchema,
+    },
+    useSearchForm: true,
+    showTableSetting: true,
+    bordered: true,
+    showIndexColumn: false,
+    clickToRowSelect: false,
+    actionColumn: {
+      width: 30,
+      title: t('common.action'),
+      dataIndex: 'action',
+      fixed: undefined,
+    },
+    rowKey: 'id',
+    rowSelection: {
+      type: 'checkbox',
+      columnWidth: 20,
+      onChange: (selectedRowKeys, _selectedRows) => {
+        selectedIds.value = selectedRowKeys as number[];
+        showDeleteButton.value = selectedRowKeys.length > 0;
+      },
     },
   });
+
+  function handleCreate() {
+    openDrawer(true, {
+      dictionaryId: Number(unref(currentRoute).params.dictionaryId),
+      isUpdate: false,
+    });
+  }
+
+  function handleEdit(record: Recordable) {
+    openDrawer(true, {
+      record,
+      isUpdate: true,
+    });
+  }
+
+  async function handleDelete(record: Recordable) {
+    const result = await deleteDictionaryDetail({ ids: [record.id] });
+    if (result.code === 0) {
+      await reload();
+    }
+  }
+
+  async function handleBatchDelete() {
+    Modal.confirm({
+      title: t('common.deleteConfirm'),
+      icon: createVNode(ExclamationCircleOutlined),
+      async onOk() {
+        const result = await deleteDictionaryDetail(
+          { ids: selectedIds.value as number[] },
+          'modal',
+        );
+        if (result.code === 0) {
+          showDeleteButton.value = false;
+          await reload();
+        }
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+  }
+
+  async function handleSuccess() {
+    await reload();
+  }
 </script>

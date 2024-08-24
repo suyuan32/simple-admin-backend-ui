@@ -10,8 +10,8 @@
     <BasicForm @register="registerForm" />
   </BasicDrawer>
 </template>
-<script lang="ts">
-  import { defineComponent, ref, computed, unref } from 'vue';
+<script lang="ts" setup>
+  import { ref, computed, unref } from 'vue';
   import { BasicForm, useForm } from '@/components/Form/index';
   import { formSchema } from './oauth.data';
   import { BasicDrawer, useDrawerInner } from '@/components/Drawer';
@@ -19,59 +19,47 @@
 
   import { createOauthProvider, updateOauthProvider } from '@/api/member/oauthProvider';
 
-  export default defineComponent({
-    name: 'OauthDrawer',
-    components: { BasicDrawer, BasicForm },
-    emits: ['success', 'register'],
-    setup(_, { emit }) {
-      const isUpdate = ref(true);
-      const { t } = useI18n();
+  const emit = defineEmits(['success', 'register']);
 
-      const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
-        labelWidth: 160,
-        baseColProps: { span: 24 },
-        layout: 'vertical',
-        schemas: formSchema,
-        showActionButtonGroup: false,
-      });
+  const isUpdate = ref(true);
+  const { t } = useI18n();
 
-      const [registerDrawer, { setDrawerProps, closeDrawer }] = useDrawerInner(async (data) => {
-        await resetFields();
-        setDrawerProps({ confirmLoading: false });
-
-        isUpdate.value = !!data?.isUpdate;
-
-        if (unref(isUpdate)) {
-          await setFieldsValue({
-            ...data.record,
-          });
-        }
-      });
-
-      const getTitle = computed(() =>
-        !unref(isUpdate) ? t('sys.oauth.addProvider') : t('sys.oauth.editProvider'),
-      );
-
-      async function handleSubmit() {
-        const values = await validate();
-        setDrawerProps({ confirmLoading: true });
-        values['id'] = unref(isUpdate) ? Number(values['id']) : 0;
-        let result = unref(isUpdate)
-          ? await updateOauthProvider(values)
-          : await createOauthProvider(values);
-        if (result.code === 0) {
-          closeDrawer();
-          emit('success');
-        }
-        setDrawerProps({ confirmLoading: false });
-      }
-
-      return {
-        registerDrawer,
-        registerForm,
-        getTitle,
-        handleSubmit,
-      };
-    },
+  const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
+    labelWidth: 160,
+    baseColProps: { span: 24 },
+    layout: 'vertical',
+    schemas: formSchema,
+    showActionButtonGroup: false,
   });
+
+  const [registerDrawer, { setDrawerProps, closeDrawer }] = useDrawerInner(async (data) => {
+    await resetFields();
+    setDrawerProps({ confirmLoading: false });
+
+    isUpdate.value = !!data?.isUpdate;
+
+    if (unref(isUpdate)) {
+      await setFieldsValue({
+        ...data.record,
+      });
+    }
+  });
+
+  const getTitle = computed(() =>
+    !unref(isUpdate) ? t('sys.oauth.addProvider') : t('sys.oauth.editProvider'),
+  );
+
+  async function handleSubmit() {
+    const values = await validate();
+    setDrawerProps({ confirmLoading: true });
+    values['id'] = unref(isUpdate) ? Number(values['id']) : 0;
+    let result = unref(isUpdate)
+      ? await updateOauthProvider(values)
+      : await createOauthProvider(values);
+    if (result.code === 0) {
+      closeDrawer();
+      emit('success');
+    }
+    setDrawerProps({ confirmLoading: false });
+  }
 </script>

@@ -27,7 +27,6 @@
         <BasicUpload
           :maxSize="1000"
           :maxNumber="10"
-          @change="handleChange"
           :api="uploadApi"
           :upload-params="providerParams"
           :multiple="true"
@@ -113,8 +112,8 @@
     </Modal>
   </div>
 </template>
-<script lang="ts">
-  import { computed, createVNode, defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+  import { computed, createVNode, ref } from 'vue';
   import { Image, Modal } from 'ant-design-vue';
 
   import { BasicTable, useTable, TableAction } from '@/components/Table';
@@ -133,216 +132,166 @@
   import { ApiSelect } from '@/components/Form';
   import { getStorageProviderList } from '@/api/fms/storageProvider';
 
-  export default defineComponent({
-    name: 'CloudFileManagement',
-    components: {
-      BasicTable,
-      CloudFileDrawer,
-      Button,
-      TableAction,
-      BasicUpload,
-      Image,
-      Modal,
-      ApiSelect,
+  const { t } = useI18n();
+  const { toClipboard } = useClipboard();
+  const { createErrorModal, createMessage } = useMessage();
+  const showDeleteButton = ref<boolean>(false);
+  const selectedIds = ref<number[] | string[]>();
+  const providerName = ref<string>(t('fms.storageProvider.chooseProvider'));
+
+  const providerParams = computed(() => {
+    return {
+      provider: providerName.value,
+    };
+  });
+
+  const [registerDrawer, { openDrawer }] = useDrawer();
+  const [registerTable, { reload }] = useTable({
+    title: t('fms.file.fileList'),
+    api: getCloudFileList,
+    columns,
+    formConfig: {
+      labelWidth: 140,
+      schemas: searchFormSchema,
     },
-    setup() {
-      const { t } = useI18n();
-      const { toClipboard } = useClipboard();
-      const { createErrorModal, createMessage } = useMessage();
-      const showDeleteButton = ref<boolean>(false);
-      const selectedIds = ref<number[] | string[]>();
-      const providerName = ref<string>(t('fms.storageProvider.chooseProvider'));
-
-      const providerParams = computed(() => {
-        return {
-          provider: providerName.value,
-        };
-      });
-
-      const [registerDrawer, { openDrawer }] = useDrawer();
-      const [registerTable, { reload }] = useTable({
-        title: t('fms.file.fileList'),
-        api: getCloudFileList,
-        columns,
-        formConfig: {
-          labelWidth: 140,
-          schemas: searchFormSchema,
-        },
-        useSearchForm: true,
-        showTableSetting: true,
-        bordered: true,
-        clickToRowSelect: false,
-        showIndexColumn: false,
-        actionColumn: {
-          width: 50,
-          title: t('common.action'),
-          dataIndex: 'action',
-          fixed: undefined,
-        },
-        rowKey: 'id',
-        rowSelection: {
-          type: 'checkbox',
-          columnWidth: 20,
-          onChange: (selectedRowKeys, _selectedRows) => {
-            selectedIds.value = selectedRowKeys as number[];
-            showDeleteButton.value = selectedRowKeys.length > 0;
-          },
-        },
-      });
-      // image and video control
-      const visible = ref<boolean>(false);
-      const videoVisible = ref<boolean>(false);
-      const imageVisible = ref<boolean>(false);
-      const setVisible = (value): void => {
-        visible.value = value;
-      };
-      const imagePath = ref<string>('');
-      const videoPath = ref<string>('');
-      const videoTitle = ref<string>('');
-      const imageTitle = ref<string>('');
-      const currentFileName = ref<string>('');
-
-      function handleCreate() {
-        openDrawer(true, {
-          isUpdate: false,
-        });
-      }
-
-      function handleOptionsChange(options: Recordable) {
-        for (let i = 0; i < options.length; i++) {
-          if (options[i].isDefault) {
-            providerName.value = options[i].label;
-            break;
-          }
-        }
-      }
-
-      async function handleDownload(record: Recordable) {
-        if (record.fileType === 2) {
-          imageVisible.value = true;
-          imagePath.value = record.url;
-        } else if (record.fileType === 3) {
-          videoVisible.value = true;
-          videoPath.value = record.url;
-          videoTitle.value = record.name;
-        } else {
-          const link = document.createElement('a');
-          link.href = record.url;
-          link.download = currentFileName.value;
-          link.click();
-          link.remove();
-          URL.revokeObjectURL(link.href);
-        }
-      }
-
-      function handleDownloadVideo() {
-        const link = document.createElement('a');
-        link.href = videoPath.value;
-        link.download = currentFileName.value;
-        link.click();
-        link.remove();
-        URL.revokeObjectURL(link.href);
-        handleCloseVideo();
-      }
-
-      function handleDownloadImage() {
-        const link = document.createElement('a');
-        link.href = imagePath.value;
-        link.download = currentFileName.value;
-        link.click();
-        link.remove();
-        URL.revokeObjectURL(link.href);
-        handleCloseImage();
-      }
-
-      function handleCloseVideo() {
-        videoVisible.value = false;
-      }
-
-      function handleCloseImage() {
-        imageVisible.value = false;
-      }
-
-      function handleEdit(record: Recordable) {
-        openDrawer(true, {
-          record,
-          isUpdate: true,
-        });
-      }
-
-      async function handleDelete(record: Recordable) {
-        await deleteCloudFile({ ids: [record.id] });
-        await reload();
-      }
-
-      async function handleBatchDelete() {
-        Modal.confirm({
-          title: t('common.deleteConfirm'),
-          icon: createVNode(ExclamationCircleOutlined),
-          async onOk() {
-            const ids = selectedIds.value as string[];
-            const result = await deleteCloudFile({ ids: ids });
-            if (result.code === 0) {
-              await reload();
-            }
-          },
-          onCancel() {
-            console.log('Cancel');
-          },
-        });
-      }
-
-      async function handleCopyToClipboard(record: Recordable) {
-        try {
-          await toClipboard(record.url);
-          createMessage.success(t('fms.file.copyURLSuccess'));
-        } catch (e) {
-          console.error(e);
-          createErrorModal({
-            title: t('fms.file.copyURLFailed'),
-            content: record.publicPath,
-          });
-        }
-      }
-
-      function handleSuccess() {
-        reload();
-      }
-
-      return {
-        t,
-        registerTable,
-        registerDrawer,
-        handleCreate,
-        handleEdit,
-        handleDelete,
-        handleSuccess,
-        providerName,
-        providerParams,
-        handleOptionsChange,
-        handleDownload,
-        handleChange: (list: string[]) => {
-          // createMessage.info(`已上传文件${JSON.stringify(list)}`);
-          console.log(list);
-        },
-        uploadApi,
-        visible,
-        videoVisible,
-        imageVisible,
-        setVisible,
-        imagePath,
-        videoPath,
-        videoTitle,
-        imageTitle,
-        handleDownloadVideo,
-        handleDownloadImage,
-        handleCloseVideo,
-        handleCloseImage,
-        handleCopyToClipboard,
-        handleBatchDelete,
-        showDeleteButton,
-        getStorageProviderList,
-      };
+    useSearchForm: true,
+    showTableSetting: true,
+    bordered: true,
+    clickToRowSelect: false,
+    showIndexColumn: false,
+    actionColumn: {
+      width: 50,
+      title: t('common.action'),
+      dataIndex: 'action',
+      fixed: undefined,
+    },
+    rowKey: 'id',
+    rowSelection: {
+      type: 'checkbox',
+      columnWidth: 20,
+      onChange: (selectedRowKeys, _selectedRows) => {
+        selectedIds.value = selectedRowKeys as number[];
+        showDeleteButton.value = selectedRowKeys.length > 0;
+      },
     },
   });
+  // image and video control
+  const visible = ref<boolean>(false);
+  const videoVisible = ref<boolean>(false);
+  const imageVisible = ref<boolean>(false);
+  const setVisible = (value): void => {
+    visible.value = value;
+  };
+  const imagePath = ref<string>('');
+  const videoPath = ref<string>('');
+  const videoTitle = ref<string>('');
+  const imageTitle = ref<string>('');
+  const currentFileName = ref<string>('');
+
+  function handleCreate() {
+    openDrawer(true, {
+      isUpdate: false,
+    });
+  }
+
+  function handleOptionsChange(options: Recordable) {
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].isDefault) {
+        providerName.value = options[i].label;
+        break;
+      }
+    }
+  }
+
+  async function handleDownload(record: Recordable) {
+    if (record.fileType === 2) {
+      imageVisible.value = true;
+      imagePath.value = record.url;
+    } else if (record.fileType === 3) {
+      videoVisible.value = true;
+      videoPath.value = record.url;
+      videoTitle.value = record.name;
+    } else {
+      const link = document.createElement('a');
+      link.href = record.url;
+      link.download = currentFileName.value;
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(link.href);
+    }
+  }
+
+  function handleDownloadVideo() {
+    const link = document.createElement('a');
+    link.href = videoPath.value;
+    link.download = currentFileName.value;
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(link.href);
+    handleCloseVideo();
+  }
+
+  function handleDownloadImage() {
+    const link = document.createElement('a');
+    link.href = imagePath.value;
+    link.download = currentFileName.value;
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(link.href);
+    handleCloseImage();
+  }
+
+  function handleCloseVideo() {
+    videoVisible.value = false;
+  }
+
+  function handleCloseImage() {
+    imageVisible.value = false;
+  }
+
+  function handleEdit(record: Recordable) {
+    openDrawer(true, {
+      record,
+      isUpdate: true,
+    });
+  }
+
+  async function handleDelete(record: Recordable) {
+    await deleteCloudFile({ ids: [record.id] });
+    await reload();
+  }
+
+  async function handleBatchDelete() {
+    Modal.confirm({
+      title: t('common.deleteConfirm'),
+      icon: createVNode(ExclamationCircleOutlined),
+      async onOk() {
+        const ids = selectedIds.value as string[];
+        const result = await deleteCloudFile({ ids: ids });
+        if (result.code === 0) {
+          await reload();
+        }
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+  }
+
+  async function handleCopyToClipboard(record: Recordable) {
+    try {
+      await toClipboard(record.url);
+      createMessage.success(t('fms.file.copyURLSuccess'));
+    } catch (e) {
+      console.error(e);
+      createErrorModal({
+        title: t('fms.file.copyURLFailed'),
+        content: record.publicPath,
+      });
+    }
+  }
+
+  function handleSuccess() {
+    reload();
+  }
 </script>
