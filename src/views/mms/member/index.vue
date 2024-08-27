@@ -59,8 +59,8 @@
     <MemberDrawer @register="registerDrawer" @success="handleSuccess" />
   </PageWrapper>
 </template>
-<script lang="ts">
-  import { createVNode, defineComponent, reactive, ref } from 'vue';
+<script lang="ts" setup>
+  import { createVNode, reactive, ref } from 'vue';
   import { Modal } from 'ant-design-vue';
   import { ExclamationCircleOutlined } from '@ant-design/icons-vue/lib/icons';
   import { BasicTable, useTable, TableAction } from '@/components/Table';
@@ -78,121 +78,91 @@
   import Col from 'ant-design-vue/es/grid/Col';
   import { logout } from '@/api/member/token';
 
-  export default defineComponent({
-    name: 'MemberManagement',
-    components: {
-      BasicTable,
-      MemberDrawer,
-      TableAction,
-      Button,
-      PageWrapper,
-      Row,
-      Col,
-      RankTree,
+  const { t } = useI18n();
+  const selectedIds = ref<number[] | string[]>();
+  const searchInfo = reactive<Recordable>({});
+  const showDeleteButton = ref<boolean>(false);
+
+  const [registerDrawer, { openDrawer }] = useDrawer();
+  const [registerTable, { reload }] = useTable({
+    title: t('sys.member.memberList'),
+    api: getMemberList,
+    columns,
+    formConfig: {
+      labelWidth: 120,
+      schemas: searchFormSchema,
     },
-    setup() {
-      const { t } = useI18n();
-      const selectedIds = ref<number[] | string[]>();
-      const searchInfo = reactive<Recordable>({});
-      const showDeleteButton = ref<boolean>(false);
-
-      const [registerDrawer, { openDrawer }] = useDrawer();
-      const [registerTable, { reload }] = useTable({
-        title: t('sys.member.memberList'),
-        api: getMemberList,
-        columns,
-        formConfig: {
-          labelWidth: 120,
-          schemas: searchFormSchema,
-        },
-        useSearchForm: true,
-        showTableSetting: true,
-        bordered: true,
-        showIndexColumn: false,
-        clickToRowSelect: false,
-        actionColumn: {
-          width: 30,
-          title: t('common.action'),
-          dataIndex: 'action',
-          fixed: undefined,
-        },
-        rowKey: 'id',
-        rowSelection: {
-          type: 'checkbox',
-          columnWidth: 20,
-          onChange: (selectedRowKeys, _selectedRows) => {
-            selectedIds.value = selectedRowKeys as string[];
-            showDeleteButton.value = selectedRowKeys.length > 0;
-          },
-        },
-      });
-
-      function handleCreate() {
-        openDrawer(true, {
-          isUpdate: false,
-        });
-      }
-
-      function handleEdit(record: Recordable) {
-        openDrawer(true, {
-          record,
-          isUpdate: true,
-        });
-      }
-
-      async function handleDelete(record: Recordable) {
-        const result = await deleteMember({ ids: [record.id] });
-        if (result.code === 0) {
-          await reload();
-        }
-      }
-
-      async function handleBatchDelete() {
-        Modal.confirm({
-          title: t('common.deleteConfirm'),
-          icon: createVNode(ExclamationCircleOutlined),
-          async onOk() {
-            const result = await deleteMember({ ids: selectedIds.value as string[] });
-            if (result.code === 0) {
-              showDeleteButton.value = false;
-              await reload();
-            }
-          },
-          onCancel() {
-            console.log('Cancel');
-          },
-        });
-      }
-
-      async function handleLogout(record: Recordable) {
-        const result = await logout(record.id);
-
-        if (result.code === 0) await reload();
-      }
-
-      async function handleSuccess() {
-        await reload();
-      }
-
-      function handleSelect(rankId) {
-        searchInfo.rankId = rankId;
-        reload();
-      }
-
-      return {
-        t,
-        registerTable,
-        registerDrawer,
-        handleCreate,
-        handleEdit,
-        handleDelete,
-        handleSuccess,
-        handleBatchDelete,
-        handleSelect,
-        handleLogout,
-        showDeleteButton,
-        searchInfo,
-      };
+    useSearchForm: true,
+    showTableSetting: true,
+    bordered: true,
+    showIndexColumn: false,
+    clickToRowSelect: false,
+    actionColumn: {
+      width: 30,
+      title: t('common.action'),
+      dataIndex: 'action',
+      fixed: undefined,
+    },
+    rowKey: 'id',
+    rowSelection: {
+      type: 'checkbox',
+      columnWidth: 20,
+      onChange: (selectedRowKeys, _selectedRows) => {
+        selectedIds.value = selectedRowKeys as string[];
+        showDeleteButton.value = selectedRowKeys.length > 0;
+      },
     },
   });
+
+  function handleCreate() {
+    openDrawer(true, {
+      isUpdate: false,
+    });
+  }
+
+  function handleEdit(record: Recordable) {
+    openDrawer(true, {
+      record,
+      isUpdate: true,
+    });
+  }
+
+  async function handleDelete(record: Recordable) {
+    const result = await deleteMember({ ids: [record.id] });
+    if (result.code === 0) {
+      await reload();
+    }
+  }
+
+  async function handleBatchDelete() {
+    Modal.confirm({
+      title: t('common.deleteConfirm'),
+      icon: createVNode(ExclamationCircleOutlined),
+      async onOk() {
+        const result = await deleteMember({ ids: selectedIds.value as string[] });
+        if (result.code === 0) {
+          showDeleteButton.value = false;
+          await reload();
+        }
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+  }
+
+  async function handleLogout(record: Recordable) {
+    const result = await logout(record.id);
+
+    if (result.code === 0) await reload();
+  }
+
+  async function handleSuccess() {
+    await reload();
+  }
+
+  function handleSelect(rankId) {
+    searchInfo.rankId = rankId;
+    reload();
+  }
 </script>

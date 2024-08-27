@@ -12,44 +12,37 @@
     />
   </div>
 </template>
-<script lang="ts">
-  import { defineComponent, onMounted, ref } from 'vue';
+<script lang="ts" setup>
+  import { onMounted, ref } from 'vue';
   import { useI18n } from 'vue-i18n';
   import { getMemberRankList } from '../../../api/member/memberRank';
 
   import { BasicTree, TreeItem } from '@/components/Tree';
   import { buildDataNode } from '@/utils/tree';
 
-  export default defineComponent({
-    name: 'RankTree',
-    components: { BasicTree },
+  const emit = defineEmits(['select']);
 
-    emits: ['select'],
-    setup(_, { emit }) {
-      const treeData = ref<TreeItem[]>([]);
-      const { t } = useI18n();
+  const treeData = ref<TreeItem[]>([]);
+  const { t } = useI18n();
 
-      async function fetch() {
-        const deptData = await getMemberRankList({ page: 1, pageSize: 1000 });
-        const data = buildDataNode(deptData.data.data, {
-          labelField: 'trans',
-          valueField: 'id',
-          idKeyField: 'id',
-          childrenKeyField: 'children',
-          parentKeyField: 'parentId',
-        }) as TreeItem[];
+  async function fetch() {
+    const deptData = await getMemberRankList({ page: 1, pageSize: 1000 });
+    const data = buildDataNode(deptData.data.data, {
+      labelField: 'trans',
+      valueField: 'id',
+      idKeyField: 'id',
+      childrenKeyField: 'children',
+      parentKeyField: 'parentId',
+    }) as TreeItem[];
 
-        treeData.value = data;
-      }
+    treeData.value = data;
+  }
 
-      function handleSelect(keys) {
-        emit('select', keys[0]);
-      }
+  function handleSelect(keys) {
+    emit('select', keys[0]);
+  }
 
-      onMounted(() => {
-        fetch();
-      });
-      return { treeData, handleSelect, t };
-    },
+  onMounted(() => {
+    fetch();
   });
 </script>

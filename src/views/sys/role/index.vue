@@ -29,9 +29,7 @@
     <RoleDrawer @register="registerDrawer" @success="handleSuccess" />
   </PageWrapper>
 </template>
-<script lang="ts">
-  import { defineComponent } from 'vue';
-
+<script lang="ts" setup>
   import { BasicTable, useTable, TableAction } from '@/components/Table';
 
   import { useDrawer } from '@/components/Drawer';
@@ -43,69 +41,53 @@
   import { useMessage } from '@/hooks/web/useMessage';
   import { PageWrapper } from '@/components/Page';
 
-  export default defineComponent({
-    name: 'RoleManagement',
-    components: { BasicTable, RoleDrawer, TableAction, PageWrapper },
-    setup() {
-      const { t } = useI18n();
-      const { createMessage } = useMessage();
-      const [registerDrawer, { openDrawer }] = useDrawer();
-      const [registerTable, { reload }] = useTable({
-        title: t('sys.role.roleList'),
-        api: getRoleList,
-        columns,
-        formConfig: {
-          labelWidth: 120,
-        },
-        useSearchForm: false,
-        showTableSetting: true,
-        bordered: true,
-        showIndexColumn: false,
-        actionColumn: {
-          width: 80,
-          title: t('common.action'),
-          dataIndex: 'action',
-          fixed: undefined,
-        },
-      });
-
-      function handleCreate() {
-        openDrawer(true, {
-          isUpdate: false,
-        });
-      }
-
-      function handleEdit(record: Recordable) {
-        openDrawer(true, {
-          record,
-          isUpdate: true,
-        });
-      }
-
-      async function handleDelete(record: Recordable) {
-        if (record.id === 1) {
-          createMessage.warn(t('common.notAllowDeleteAdminData'));
-          return;
-        }
-        const result = await deleteRole({ ids: [record.id] });
-        if (result.code === 0) {
-          await reload();
-        }
-      }
-
-      async function handleSuccess() {
-        await reload();
-      }
-
-      return {
-        t,
-        registerTable,
-        registerDrawer,
-        handleCreate,
-        handleEdit,
-        handleDelete,
-        handleSuccess,
-      };
+  const { t } = useI18n();
+  const { createMessage } = useMessage();
+  const [registerDrawer, { openDrawer }] = useDrawer();
+  const [registerTable, { reload }] = useTable({
+    title: t('sys.role.roleList'),
+    api: getRoleList,
+    columns,
+    formConfig: {
+      labelWidth: 120,
+    },
+    useSearchForm: false,
+    showTableSetting: true,
+    bordered: true,
+    showIndexColumn: false,
+    actionColumn: {
+      width: 80,
+      title: t('common.action'),
+      dataIndex: 'action',
+      fixed: undefined,
     },
   });
+
+  function handleCreate() {
+    openDrawer(true, {
+      isUpdate: false,
+    });
+  }
+
+  function handleEdit(record: Recordable) {
+    openDrawer(true, {
+      record,
+      isUpdate: true,
+    });
+  }
+
+  async function handleDelete(record: Recordable) {
+    if (record.id === 1) {
+      createMessage.warn(t('common.notAllowDeleteAdminData'));
+      return;
+    }
+    const result = await deleteRole({ ids: [record.id] });
+    if (result.code === 0) {
+      await reload();
+    }
+  }
+
+  async function handleSuccess() {
+    await reload();
+  }
 </script>

@@ -47,8 +47,8 @@
     <LogModal @register="registerModal" :defaultFullscreen="true" />
   </div>
 </template>
-<script lang="ts">
-  import { createVNode, defineComponent, ref } from 'vue';
+<script lang="ts" setup>
+  import { createVNode, ref } from 'vue';
   import { Modal } from 'ant-design-vue';
   import { ExclamationCircleOutlined } from '@ant-design/icons-vue/lib/icons';
   import { BasicTable, useTable, TableAction } from '@/components/Table';
@@ -63,105 +63,85 @@
   import LogModal from './LogModal.vue';
   import { useModal } from '@/components/Modal';
 
-  export default defineComponent({
-    name: 'TaskManagement',
-    components: { BasicTable, TaskDrawer, TableAction, Button, LogModal },
-    setup() {
-      const { t } = useI18n();
-      const selectedIds = ref<number[] | string[]>();
-      const showDeleteButton = ref<boolean>(false);
+  const { t } = useI18n();
+  const selectedIds = ref<number[] | string[]>();
+  const showDeleteButton = ref<boolean>(false);
 
-      const [registerDrawer, { openDrawer }] = useDrawer();
-      const [registerTable, { reload }] = useTable({
-        title: t('sys.task.taskList'),
-        api: getTaskList,
-        columns,
-        formConfig: {
-          labelWidth: 120,
-          schemas: searchFormSchema,
-        },
-        useSearchForm: true,
-        showTableSetting: true,
-        bordered: true,
-        showIndexColumn: false,
-        clickToRowSelect: false,
-        actionColumn: {
-          width: 60,
-          title: t('common.action'),
-          dataIndex: 'action',
-          fixed: undefined,
-        },
-        rowKey: 'id',
-        rowSelection: {
-          type: 'checkbox',
-          columnWidth: 20,
-          onChange: (selectedRowKeys, _selectedRows) => {
-            selectedIds.value = selectedRowKeys as number[];
-            showDeleteButton.value = selectedRowKeys.length > 0;
-          },
-        },
-      });
-
-      const [registerModal, { openModal }] = useModal();
-
-      function handleOpenLogModal(record: Recordable) {
-        openModal(true, { record });
-      }
-
-      function handleCreate() {
-        openDrawer(true, {
-          isUpdate: false,
-        });
-      }
-
-      function handleEdit(record: Recordable) {
-        openDrawer(true, {
-          record,
-          isUpdate: true,
-        });
-      }
-
-      async function handleDelete(record: Recordable) {
-        const result = await deleteTask({ ids: [record.id] });
-        if (result.code === 0) {
-          await reload();
-        }
-      }
-
-      async function handleBatchDelete() {
-        Modal.confirm({
-          title: t('common.deleteConfirm'),
-          icon: createVNode(ExclamationCircleOutlined),
-          async onOk() {
-            const result = await deleteTask({ ids: selectedIds.value as number[] });
-            if (result.code === 0) {
-              showDeleteButton.value = false;
-              await reload();
-            }
-          },
-          onCancel() {
-            console.log('Cancel');
-          },
-        });
-      }
-
-      async function handleSuccess() {
-        await reload();
-      }
-
-      return {
-        t,
-        registerTable,
-        registerDrawer,
-        registerModal,
-        handleOpenLogModal,
-        handleCreate,
-        handleEdit,
-        handleDelete,
-        handleSuccess,
-        handleBatchDelete,
-        showDeleteButton,
-      };
+  const [registerDrawer, { openDrawer }] = useDrawer();
+  const [registerTable, { reload }] = useTable({
+    title: t('sys.task.taskList'),
+    api: getTaskList,
+    columns,
+    formConfig: {
+      labelWidth: 120,
+      schemas: searchFormSchema,
+    },
+    useSearchForm: true,
+    showTableSetting: true,
+    bordered: true,
+    showIndexColumn: false,
+    clickToRowSelect: false,
+    actionColumn: {
+      width: 60,
+      title: t('common.action'),
+      dataIndex: 'action',
+      fixed: undefined,
+    },
+    rowKey: 'id',
+    rowSelection: {
+      type: 'checkbox',
+      columnWidth: 20,
+      onChange: (selectedRowKeys, _selectedRows) => {
+        selectedIds.value = selectedRowKeys as number[];
+        showDeleteButton.value = selectedRowKeys.length > 0;
+      },
     },
   });
+
+  const [registerModal, { openModal }] = useModal();
+
+  function handleOpenLogModal(record: Recordable) {
+    openModal(true, { record });
+  }
+
+  function handleCreate() {
+    openDrawer(true, {
+      isUpdate: false,
+    });
+  }
+
+  function handleEdit(record: Recordable) {
+    openDrawer(true, {
+      record,
+      isUpdate: true,
+    });
+  }
+
+  async function handleDelete(record: Recordable) {
+    const result = await deleteTask({ ids: [record.id] });
+    if (result.code === 0) {
+      await reload();
+    }
+  }
+
+  async function handleBatchDelete() {
+    Modal.confirm({
+      title: t('common.deleteConfirm'),
+      icon: createVNode(ExclamationCircleOutlined),
+      async onOk() {
+        const result = await deleteTask({ ids: selectedIds.value as number[] });
+        if (result.code === 0) {
+          showDeleteButton.value = false;
+          await reload();
+        }
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+  }
+
+  async function handleSuccess() {
+    await reload();
+  }
 </script>
