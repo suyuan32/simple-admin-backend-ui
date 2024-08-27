@@ -134,8 +134,8 @@
 
   function updateAvatar(data) {
     const userinfo = userStore.getUserInfo;
-    userinfo.avatar = data;
-    formdata.avatar = data;
+    userinfo.avatar = data.data;
+    formdata.avatar = data.data;
     userStore.setUserInfo(userinfo);
   }
 
