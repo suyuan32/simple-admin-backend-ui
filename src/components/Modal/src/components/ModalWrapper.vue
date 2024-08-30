@@ -1,6 +1,6 @@
 <template>
   <ScrollContainer ref="wrapperRef" :scrollHeight="realHeight">
-    <div ref="spinRef" :style="spinStyle" v-loading="loading" :loading-tip="loadingTip">
+    <div ref="spinRef" :style="spinStyle" v-loading="props.loading" :loading-tip="props.loadingTip">
       <slot></slot>
     </div>
   </ScrollContainer>
@@ -151,4 +151,9 @@
       console.log(error);
     }
   }
+
+  defineExpose({
+    scrollTop,
+    setModalHeight,
+  });
 </script>

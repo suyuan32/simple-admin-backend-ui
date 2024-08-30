@@ -7,6 +7,7 @@
     :canFullscreen="false"
     @ok="handleOk"
     :okText="t('component.cropper.okText')"
+    centered
   >
     <div :class="prefixCls">
       <div :class="`${prefixCls}-left`">
