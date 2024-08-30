@@ -1,5 +1,5 @@
 <template>
-  <Select v-bind="$attrs" @change="handleChange" :options="options" v-model:value="state">
+  <Select v-bind="attrs" @change="handleChange" :options="options" v-model:value="state">
     <template #[item]="data" v-for="item in Object.keys($slots)">
       <slot :name="item" v-bind="data || {}"></slot>
     </template>
@@ -14,8 +14,8 @@
     </template>
   </Select>
 </template>
-<script lang="ts">
-  import { defineComponent, ref, watch, onMounted } from 'vue';
+<script lang="ts" setup>
+  import { ref, watch, onMounted } from 'vue';
   import { Select } from 'ant-design-vue';
   import { useAttrs } from '@vben/hooks';
   import { LoadingOutlined } from '@ant-design/icons-vue';
@@ -25,58 +25,48 @@
   import { DefaultOptionType } from 'ant-design-vue/lib/select';
   import { useRuleFormItem } from '@/hooks/component/useFormItem';
 
-  export default defineComponent({
-    name: 'DictionarySelect',
-    components: {
-      Select,
-      LoadingOutlined,
-    },
-    inheritAttrs: false,
-    props: {
-      dictionaryName: propTypes.string.def(''),
-      value: [String, Number],
-      cache: propTypes.bool.def(true),
-    },
-    emits: ['options-change', 'change', 'update:value'],
-    setup(props, { emit }) {
-      const loading = ref(false);
-      const emitData = ref<any[]>([]);
-      const attrs = useAttrs();
-      const { t } = useI18n();
-      const options = ref<DefaultOptionType[]>();
-
-      // Embedded in the form, just use the hook binding to perform form verification
-      const [state] = useRuleFormItem(props, 'value', 'change', emitData);
-
-      onMounted(() => {
-        handleFetch();
-      });
-
-      watch(
-        () => state.value,
-        (v) => {
-          emit('update:value', v);
-        },
-      );
-
-      async function handleFetch() {
-        loading.value = true;
-        const dictStore = useDictionaryStore();
-        const dictData = await dictStore.getDictionary(props.dictionaryName, props.cache);
-        if (dictData != null) {
-          options.value = dictData.data.filter((el) => {
-            return el.status == 1;
-          });
-        }
-        loading.value = false;
-      }
-
-      function handleChange(_, ...args) {
-        emitData.value = args;
-        emit('change', args);
-      }
-
-      return { state, attrs, loading, t, options, handleFetch, handleChange };
-    },
+  const props = defineProps({
+    dictionaryName: propTypes.string.def(''),
+    value: [String, Number],
+    cache: propTypes.bool.def(true),
   });
+
+  const emit = defineEmits(['options-change', 'change', 'update:value']);
+
+  const loading = ref(false);
+  const emitData = ref<any[]>([]);
+  const attrs = useAttrs();
+  const { t } = useI18n();
+  const options = ref<DefaultOptionType[]>();
+
+  // Embedded in the form, just use the hook binding to perform form verification
+  const [state] = useRuleFormItem(props, 'value', 'change', emitData);
+
+  onMounted(() => {
+    handleFetch();
+  });
+
+  watch(
+    () => state.value,
+    (v) => {
+      emit('update:value', v);
+    },
+  );
+
+  async function handleFetch() {
+    loading.value = true;
+    const dictStore = useDictionaryStore();
+    const dictData = await dictStore.getDictionary(props.dictionaryName, props.cache);
+    if (dictData != null) {
+      options.value = dictData.data.filter((el) => {
+        return el.status == 1;
+      });
+    }
+    loading.value = false;
+  }
+
+  function handleChange(_, ...args) {
+    emitData.value = args;
+    emit('change', args);
+  }
 </script>
