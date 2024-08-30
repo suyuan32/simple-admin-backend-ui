@@ -5,6 +5,7 @@
   import { useModalContext } from '@/components/Modal/src/hooks/useModalContext';
   import { defineComponent, CSSProperties, watch, nextTick, ref, onMounted } from 'vue';
   import { isFunction } from 'remeda';
+  import { FileBasicColumn } from '../types/typing';
 
   export default defineComponent({
     name: 'FileList',
