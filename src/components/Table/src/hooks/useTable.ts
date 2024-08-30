@@ -124,10 +124,12 @@ export function useTable(tableProps?: Props): [
       return toRaw(getTableInstance().getSize());
     },
     updateTableData: (index: number, key: Key, value: any) => {
-      return getTableInstance().updateTableData(index, key, value);
+      return getTableInstance().updateTableData(index, key as string, value);
     },
     deleteTableDataRecord: (rowKey: Key | Key[]) => {
-      return getTableInstance().deleteTableDataRecord(rowKey);
+      return getTableInstance().deleteTableDataRecord(
+        rowKey as string | number | string[] | number[],
+      );
     },
     insertTableDataRecord: (record: Recordable | Recordable[], index?: number) => {
       return getTableInstance().insertTableDataRecord(record, index);

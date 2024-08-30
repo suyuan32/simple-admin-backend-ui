@@ -321,9 +321,6 @@
   defineExpose(tableAction);
 
   emit('register', tableAction, formActions);
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const columns = getViewColumns;
 </script>
 <style lang="less">
   @border-color: #cecece4d;
