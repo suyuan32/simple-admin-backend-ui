@@ -1,15 +1,5 @@
 <template>
   <div :class="prefixCls">
-    <!-- <a-button type="primary" block @click="handleCopy">
-      <CopyOutlined class="mr-2" />
-      {{ t('layout.setting.copyBtn') }}
-    </a-button> -->
-
-    <!-- <a-button color="warning" block @click="handleResetSetting" class="my-3">
-      <RedoOutlined class="mr-2" />
-      {{ t('common.resetText') }}
-    </a-button> -->
-
     <a-button type="primary" block @click="handleCopyToken" class="mb-3">
       <CopyOutlined class="mr-2" />
       {{ t('layout.setting.copyToken') }}
@@ -26,9 +16,7 @@
     </a-button>
   </div>
 </template>
-<script lang="ts">
-  import { defineComponent } from 'vue';
-
+<script lang="ts" setup>
   import { CopyOutlined, RedoOutlined } from '@ant-design/icons-vue';
 
   import { useAppStore } from '@/store/modules/app';
@@ -41,77 +29,36 @@
   import { useMessage } from '@/hooks/web/useMessage';
   import { copyText } from '@/utils/copyTextToClipboard';
 
-  // import { updateColorWeak } from '@/logics/theme/updateColorWeak';
-  // import { updateGrayMode } from '@/logics/theme/updateGrayMode';
-  // import defaultSetting from '@/settings/projectSetting';
-  // import { updateSidebarBgColor } from '@/logics/theme/updateBackground';
   import { useDictionaryStore } from '@/store/modules/dictionary';
 
-  export default defineComponent({
-    name: 'SettingFooter',
-    components: { CopyOutlined, RedoOutlined },
-    setup() {
-      const permissionStore = usePermissionStore();
-      const { prefixCls } = useDesign('setting-footer');
-      const { t } = useI18n();
-      const { createMessage } = useMessage();
-      const tabStore = useMultipleTabStore();
-      const userStore = useUserStore();
-      const appStore = useAppStore();
+  const permissionStore = usePermissionStore();
+  const { prefixCls } = useDesign('setting-footer');
+  const { t } = useI18n();
+  const { createMessage } = useMessage();
+  const tabStore = useMultipleTabStore();
+  const userStore = useUserStore();
+  const appStore = useAppStore();
 
-      // function handleCopy() {
-      //   copyText(JSON.stringify(unref(appStore.getProjectConfig), null, 2), null);
-      //   createSuccessModal({
-      //     title: t('layout.setting.operatingTitle'),
-      //     content: t('layout.setting.operatingContent'),
-      //   });
-      // }
+  function handleCopyToken() {
+    copyText(userStore.token);
+  }
 
-      function handleCopyToken() {
-        copyText(userStore.token);
-      }
+  function handleClearAndRedo() {
+    localStorage.clear();
+    appStore.resetAllState();
+    permissionStore.resetState();
+    tabStore.resetState();
+    userStore.resetState();
+    location.reload();
+  }
 
-      // function handleResetSetting() {
-      //   try {
-      //     appStore.setProjectConfig(defaultSetting);
-      //     const { colorWeak, grayMode } = defaultSetting;
-      //     updateSidebarBgColor();
-      //     updateColorWeak(colorWeak);
-      //     updateGrayMode(grayMode);
-      //     createMessage.success(t('layout.setting.resetSuccess'));
-      //   } catch (error: any) {
-      //     createMessage.error(error);
-      //   }
-      // }
+  function handleClearDictionaryCache() {
+    const dictStore = useDictionaryStore();
+    dictStore.clear();
 
-      function handleClearAndRedo() {
-        localStorage.clear();
-        appStore.resetAllState();
-        permissionStore.resetState();
-        tabStore.resetState();
-        userStore.resetState();
-        location.reload();
-      }
-
-      function handleClearDictionaryCache() {
-        const dictStore = useDictionaryStore();
-        dictStore.clear();
-
-        createMessage.success(t('layout.setting.operatingTitle'));
-        location.reload();
-      }
-
-      return {
-        prefixCls,
-        t,
-        // handleCopy,
-        // handleResetSetting,
-        handleClearAndRedo,
-        handleClearDictionaryCache,
-        handleCopyToken,
-      };
-    },
-  });
+    createMessage.success(t('layout.setting.operatingTitle'));
+    location.reload();
+  }
 </script>
 <style lang="less" scoped>
   @prefix-cls: ~'@{namespace}-setting-footer';

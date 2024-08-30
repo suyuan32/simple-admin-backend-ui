@@ -6,35 +6,22 @@
     </span>
   </Tooltip>
 </template>
-<script lang="ts">
-  import { defineComponent, computed, unref } from 'vue';
+<script lang="ts" setup>
+  import { computed, unref } from 'vue';
   import { Tooltip } from 'ant-design-vue';
   import { useI18n } from '@/hooks/web/useI18n';
   import { useFullscreen } from '@vueuse/core';
 
   import { FullscreenExitOutlined, FullscreenOutlined } from '@ant-design/icons-vue';
 
-  export default defineComponent({
-    name: 'FullScreen',
-    components: { FullscreenExitOutlined, FullscreenOutlined, Tooltip },
+  const { t } = useI18n();
+  const { toggle, isFullscreen } = useFullscreen();
+  // 重新检查全屏状态
+  isFullscreen.value = !!document.fullscreenElement;
 
-    setup() {
-      const { t } = useI18n();
-      const { toggle, isFullscreen } = useFullscreen();
-      // 重新检查全屏状态
-      isFullscreen.value = !!document.fullscreenElement;
-
-      const getTitle = computed(() => {
-        return unref(isFullscreen)
-          ? t('layout.header.tooltipExitFull')
-          : t('layout.header.tooltipEntryFull');
-      });
-
-      return {
-        getTitle,
-        isFullscreen,
-        toggle,
-      };
-    },
+  const getTitle = computed(() => {
+    return unref(isFullscreen)
+      ? t('layout.header.tooltipExitFull')
+      : t('layout.header.tooltipEntryFull');
   });
 </script>
