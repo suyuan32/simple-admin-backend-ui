@@ -1,11 +1,11 @@
 <template>
   <Menu
-    :selectedKeys="selectedKeys"
-    :defaultSelectedKeys="defaultSelectedKeys"
-    :mode="mode"
+    :selectedKeys="menuState.selectedKeys"
+    :defaultSelectedKeys="menuState.defaultSelectedKeys"
+    :mode="props.mode"
     :openKeys="getOpenKeys"
-    :inlineIndent="inlineIndent"
-    :theme="theme"
+    :inlineIndent="props.inlineIndent"
+    :theme="props.theme"
     @open-change="handleOpenChange"
     :class="getMenuClass"
     @click="handleMenuClick"
@@ -13,7 +13,7 @@
     v-bind="getInlineCollapseOptions"
   >
     <template v-for="item in items" :key="item.path">
-      <BasicSubMenuItem :item="item" :theme="theme" :isHorizontal="isHorizontal" />
+      <BasicSubMenuItem :item="item" :theme="props.theme" :isHorizontal="props.isHorizontal" />
     </template>
   </Menu>
 </template>
