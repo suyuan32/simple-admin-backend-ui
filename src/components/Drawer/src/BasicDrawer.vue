@@ -1,10 +1,10 @@
 <template>
   <Drawer :class="prefixCls" @close="onClose" v-bind="getBindValues">
-    <template #title v-if="!$slots.title">
+    <template #title v-if="!slots.title">
       <DrawerHeader
         :title="getMergeProps.title"
-        :isDetail="isDetail"
-        :showDetailBack="showDetailBack"
+        :isDetail="props.isDetail"
+        :showDetailBack="props.showDetailBack"
         @close="onClose"
       >
         <template #titleToolbar>
@@ -23,22 +23,22 @@
     <ScrollContainer
       :style="getScrollContentStyle"
       v-loading="getLoading"
-      :loading-tip="loadingText || t('common.loadingText')"
+      :loading-tip="props.loadingText || t('common.loadingText')"
     >
       <slot></slot>
     </ScrollContainer>
     <DrawerFooter v-bind="getProps" @close="onClose" @ok="handleOk" :height="getFooterHeight">
-      <template #[item]="data" v-for="item in Object.keys($slots)">
+      <template #[item]="data" v-for="item in Object.keys(slots)">
         <slot :name="item" v-bind="data || {}"></slot>
       </template>
     </DrawerFooter>
   </Drawer>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import type { DrawerInstance, DrawerProps } from './typing';
-  import type { CSSProperties } from 'vue';
   import {
-    defineComponent,
+    CSSProperties,
+    useSlots,
     ref,
     computed,
     watch,
@@ -58,143 +58,126 @@
   import { useAttrs } from '@vben/hooks';
   import { isFunction, isNumber } from 'remeda';
 
-  export default defineComponent({
-    components: { Drawer, ScrollContainer, DrawerFooter, DrawerHeader },
-    inheritAttrs: false,
-    props: basicProps,
-    emits: ['open-change', 'ok', 'close', 'register'],
-    setup(props, { emit }) {
-      const openRef = ref(false);
-      const attrs = useAttrs();
-      const propsRef = ref<Partial<DrawerProps | null>>(null);
+  defineOptions({ inheritAttrs: false });
 
-      const { t } = useI18n();
-      const { prefixVar, prefixCls } = useDesign('basic-drawer');
+  const emit = defineEmits(['open-change', 'ok', 'close', 'register']);
+  const props = defineProps(basicProps);
+  const slots = useSlots();
 
-      const drawerInstance: DrawerInstance = {
-        setDrawerProps: setDrawerProps as any,
-        emitOpen: undefined,
-      };
+  const openRef = ref(false);
+  const attrs = useAttrs();
+  const propsRef = ref<Partial<DrawerProps | null>>(null);
 
-      const instance = getCurrentInstance();
+  const { t } = useI18n();
+  const { prefixVar, prefixCls } = useDesign('basic-drawer');
 
-      instance && emit('register', drawerInstance, instance.uid);
+  const drawerInstance: DrawerInstance = {
+    setDrawerProps: setDrawerProps as any,
+    emitOpen: undefined,
+  };
 
-      const getMergeProps = computed((): DrawerProps => {
-        return deepMerge(unref(propsRef), toRaw(props)) as any;
-      });
+  const instance = getCurrentInstance();
 
-      const getProps = computed((): DrawerProps => {
-        const opt = {
-          placement: 'right',
-          ...unref(attrs),
-          ...unref(getMergeProps),
-          open: unref(openRef),
-        };
-        opt.title = undefined;
-        const { isDetail, width, wrapClassName, getContainer } = opt;
-        if (isDetail) {
-          if (!width) {
-            opt.width = '100%';
-          }
-          const detailCls = `${prefixCls}__detail`;
-          opt.class = wrapClassName ? `${wrapClassName} ${detailCls}` : detailCls;
+  instance && emit('register', drawerInstance, instance.uid);
 
-          if (!getContainer) {
-            // TODO type error?
-            opt.getContainer = `.${prefixVar}-layout-content` as any;
-          }
-        }
-        return opt as DrawerProps;
-      });
-
-      const getBindValues = computed((): DrawerProps => {
-        return {
-          ...attrs,
-          ...unref(getProps),
-        };
-      });
-
-      // Custom implementation of the bottom button,
-      const getFooterHeight = computed(() => {
-        const { footerHeight, showFooter } = unref(getProps);
-        if (showFooter && footerHeight) {
-          return isNumber(footerHeight)
-            ? `${footerHeight}px`
-            : `${footerHeight.replace('px', '')}px`;
-        }
-        return `0px`;
-      });
-
-      const getScrollContentStyle = computed((): CSSProperties => {
-        const footerHeight = unref(getFooterHeight);
-        return {
-          position: 'relative',
-          height: `calc(100% - ${footerHeight})`,
-        };
-      });
-
-      const getLoading = computed(() => {
-        return !!unref(getProps)?.loading;
-      });
-
-      watch(
-        () => props.open,
-        (newVal, oldVal) => {
-          if (newVal !== oldVal) openRef.value = newVal;
-        },
-        { deep: true },
-      );
-
-      watch(
-        () => openRef.value,
-        (open) => {
-          nextTick(() => {
-            emit('open-change', open);
-            instance && drawerInstance.emitOpen?.(open, instance.uid);
-          });
-        },
-      );
-
-      // Cancel event
-      async function onClose(e) {
-        const { closeFunc } = unref(getProps);
-        emit('close', e);
-        if (closeFunc && isFunction(closeFunc)) {
-          const res = await closeFunc();
-          openRef.value = !res;
-          return;
-        }
-        openRef.value = false;
-      }
-
-      function setDrawerProps(props: Partial<DrawerProps>): void {
-        // Keep the last setDrawerProps
-        propsRef.value = deepMerge(unref(propsRef) || ({} as any), props);
-
-        if (Reflect.has(props, 'open')) {
-          openRef.value = !!props.open;
-        }
-      }
-
-      function handleOk() {
-        emit('ok');
-      }
-
-      return {
-        onClose,
-        t,
-        prefixCls,
-        getMergeProps: getMergeProps as any,
-        getScrollContentStyle,
-        getProps: getProps as any,
-        getLoading,
-        getBindValues,
-        getFooterHeight,
-        handleOk,
-      };
-    },
+  const getMergeProps = computed((): DrawerProps => {
+    return deepMerge(unref(propsRef), toRaw(props)) as any;
   });
+
+  const getProps = computed((): DrawerProps => {
+    const opt = {
+      placement: 'right',
+      ...unref(attrs),
+      ...unref(getMergeProps),
+      open: unref(openRef),
+    };
+    opt.title = undefined;
+    const { isDetail, width, wrapClassName, getContainer } = opt;
+    if (isDetail) {
+      if (!width) {
+        opt.width = '100%';
+      }
+      const detailCls = `${prefixCls}__detail`;
+      opt.class = wrapClassName ? `${wrapClassName} ${detailCls}` : detailCls;
+
+      if (!getContainer) {
+        // TODO type error?
+        opt.getContainer = `.${prefixVar}-layout-content` as any;
+      }
+    }
+    return opt as DrawerProps;
+  });
+
+  const getBindValues = computed((): DrawerProps => {
+    return {
+      ...attrs,
+      ...unref(getProps),
+    };
+  });
+
+  // Custom implementation of the bottom button,
+  const getFooterHeight = computed(() => {
+    const { footerHeight, showFooter } = unref(getProps);
+    if (showFooter && footerHeight) {
+      return isNumber(footerHeight) ? `${footerHeight}px` : `${footerHeight.replace('px', '')}px`;
+    }
+    return `0px`;
+  });
+
+  const getScrollContentStyle = computed((): CSSProperties => {
+    const footerHeight = unref(getFooterHeight);
+    return {
+      position: 'relative',
+      height: `calc(100% - ${footerHeight})`,
+    };
+  });
+
+  const getLoading = computed(() => {
+    return !!unref(getProps)?.loading;
+  });
+
+  watch(
+    () => props.open,
+    (newVal, oldVal) => {
+      if (newVal !== oldVal) openRef.value = newVal;
+    },
+    { deep: true },
+  );
+
+  watch(
+    () => openRef.value,
+    (open) => {
+      nextTick(() => {
+        emit('open-change', open);
+        instance && drawerInstance.emitOpen?.(open, instance.uid);
+      });
+    },
+  );
+
+  // Cancel event
+  async function onClose(e) {
+    const { closeFunc } = unref(getProps);
+    emit('close', e);
+    if (closeFunc && isFunction(closeFunc)) {
+      const res = await closeFunc();
+      openRef.value = !res;
+      return;
+    }
+    openRef.value = false;
+  }
+
+  function setDrawerProps(props: Partial<DrawerProps>): void {
+    // Keep the last setDrawerProps
+    propsRef.value = deepMerge(unref(propsRef) || ({} as any), props);
+
+    if (Reflect.has(props, 'open')) {
+      openRef.value = !!props.open;
+    }
+  }
+
+  function handleOk() {
+    emit('ok');
+  }
 </script>
 <style lang="less">
   @header-height: 60px;
