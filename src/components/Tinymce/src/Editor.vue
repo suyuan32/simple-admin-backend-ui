@@ -18,7 +18,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   import type { Editor, RawEditorOptions } from 'tinymce';
   import tinymce from 'tinymce/tinymce';
   import 'tinymce/themes/silver';
@@ -49,7 +49,6 @@
   import 'tinymce/plugins/image';
 
   import {
-    defineComponent,
     computed,
     nextTick,
     ref,
@@ -57,6 +56,7 @@
     watch,
     onDeactivated,
     onBeforeUnmount,
+    useAttrs,
   } from 'vue';
   import ImgUpload from './ImgUpload.vue';
   import { toolbar, plugins } from './tinymce';
@@ -68,7 +68,8 @@
   import { useLocale } from '@/locales/useLocale';
   import { useAppStore } from '@/store/modules/app';
 
-  const tinymceProps = {
+  defineOptions({ inheritAttrs: false });
+  const props = defineProps({
     options: {
       type: Object as PropType<Partial<RawEditorOptions>>,
       default: () => ({}),
@@ -102,238 +103,215 @@
       type: Boolean,
       default: true,
     },
-  };
-
-  export default defineComponent({
-    name: 'Tinymce',
-    components: { ImgUpload },
-    inheritAttrs: false,
-    props: tinymceProps,
-    emits: ['change', 'update:modelValue', 'inited', 'init-error'],
-    setup(props, { emit, attrs }) {
-      const editorRef = ref<Nullable<Editor>>(null);
-      const fullscreen = ref(false);
-      const tinymceId = ref<string>(buildShortUUID('tiny-vue'));
-      const elRef = ref<Nullable<HTMLElement>>(null);
-
-      const { prefixCls } = useDesign('tinymce-container');
-
-      const appStore = useAppStore();
-
-      const tinymceContent = computed(() => props.modelValue);
-
-      const containerWidth = computed(() => {
-        const width = props.width;
-        if (isNumber(width)) {
-          return `${width}px`;
-        }
-        return width;
-      });
-
-      const skinName = computed(() => {
-        return appStore.getDarkMode === 'light' ? 'oxide' : 'oxide-dark';
-      });
-
-      const contentCssName = computed(() => {
-        return appStore.getDarkMode === 'light' ? 'default' : 'dark';
-      });
-
-      const langName = computed(() => {
-        const lang = useLocale().getLocale.value;
-        if (lang === 'zh_CN') {
-          return 'zh-Hans';
-        }
-        return lang;
-      });
-
-      const initOptions = computed((): RawEditorOptions => {
-        const { height, options, toolbar, plugins } = props;
-        const publicPath = import.meta.env.VITE_PUBLIC_PATH || '/';
-        return {
-          selector: `#${unref(tinymceId)}`,
-          height: height,
-          toolbar,
-          menubar: 'file edit insert view format table',
-          plugins,
-          language_url: publicPath + 'resource/tinymce/langs/' + langName.value + '.js',
-          language: langName.value,
-          branding: false,
-          default_link_target: '_blank',
-          link_title: false,
-          object_resizing: false,
-          auto_focus: true,
-          skin: skinName.value,
-          promotion: false,
-          model_url: publicPath + 'resource/tinymce/models/dom/model.min.js',
-          skin_url: publicPath + 'resource/tinymce/skins/ui/' + skinName.value,
-          content_css:
-            publicPath +
-            'resource/tinymce/skins/content/' +
-            contentCssName.value +
-            '/content.min.css',
-          ...options,
-          setup: (editor: Editor) => {
-            editorRef.value = editor;
-            editor.on('init', (e) => initSetup(e));
-          },
-        };
-      });
-
-      const disabled = computed(() => {
-        const { options } = props;
-        const getdDisabled = options && Reflect.get(options, 'readonly');
-        const editor = unref(editorRef);
-        if (editor) {
-          editor.mode.set(getdDisabled ? 'readonly' : 'design');
-        }
-        return getdDisabled ?? false;
-      });
-
-      watch(
-        () => attrs.disabled,
-        () => {
-          const editor = unref(editorRef);
-          if (!editor) {
-            return;
-          }
-          editor.mode.set(attrs.disabled ? 'readonly' : 'design');
-        },
-      );
-
-      onMountedOrActivated(() => {
-        if (!initOptions.value.inline) {
-          tinymceId.value = buildShortUUID('tiny-vue');
-        }
-        nextTick(() => {
-          setTimeout(() => {
-            initEditor();
-          }, 30);
-        });
-      });
-
-      onBeforeUnmount(() => {
-        destory();
-      });
-
-      onDeactivated(() => {
-        destory();
-      });
-
-      function destory() {
-        if (tinymce !== null) {
-          tinymce?.remove?.(unref(initOptions).selector!);
-        }
-      }
-
-      function initEditor() {
-        const el = unref(elRef);
-        if (el) {
-          el.style.visibility = '';
-        }
-        tinymce
-          .init(unref(initOptions))
-          .then((editor) => {
-            emit('inited', editor);
-          })
-          .catch((err) => {
-            emit('init-error', err);
-          });
-      }
-
-      function initSetup(e) {
-        const editor = unref(editorRef);
-        if (!editor) {
-          return;
-        }
-        const value = props.modelValue || '';
-
-        editor.setContent(value);
-        bindModelHandlers(editor);
-        bindHandlers(e, attrs, unref(editorRef));
-      }
-
-      function setValue(editor: Recordable, val?: string, prevVal?: string) {
-        if (
-          editor &&
-          typeof val === 'string' &&
-          val !== prevVal &&
-          val !== editor.getContent({ format: attrs.outputFormat })
-        ) {
-          editor.setContent(val);
-        }
-      }
-
-      function bindModelHandlers(editor: any) {
-        const modelEvents = attrs.modelEvents ? attrs.modelEvents : null;
-        const normalizedEvents = Array.isArray(modelEvents) ? modelEvents.join(' ') : modelEvents;
-
-        watch(
-          () => props.modelValue as string,
-          (val, prevVal) => {
-            setValue(editor, val, prevVal);
-          },
-        );
-
-        watch(
-          () => props.value as string,
-          (val, prevVal) => {
-            setValue(editor, val, prevVal);
-          },
-          {
-            immediate: true,
-          },
-        );
-
-        editor.on(normalizedEvents ? normalizedEvents : 'change keyup undo redo', () => {
-          const content = editor.getContent({ format: attrs.outputFormat });
-          emit('update:modelValue', content);
-          emit('change', content);
-        });
-
-        editor.on('FullscreenStateChanged', (e) => {
-          fullscreen.value = e.state;
-        });
-      }
-
-      function handleImageUploading(name: string) {
-        const editor = unref(editorRef);
-        if (!editor) {
-          return;
-        }
-        editor.execCommand('mceInsertContent', false, getUploadingImgName(name));
-        const content = editor?.getContent() ?? '';
-        setValue(editor, content);
-      }
-
-      function handleDone(name: string, url: string) {
-        const editor = unref(editorRef);
-        if (!editor) {
-          return;
-        }
-        const content = editor?.getContent() ?? '';
-        const val = content?.replace(getUploadingImgName(name), `<img src="${url}"/>`) ?? '';
-        setValue(editor, val);
-      }
-
-      function getUploadingImgName(name: string) {
-        return `[uploading:${name}]`;
-      }
-
-      return {
-        prefixCls,
-        containerWidth,
-        initOptions,
-        tinymceContent,
-        elRef,
-        tinymceId,
-        handleImageUploading,
-        handleDone,
-        editorRef,
-        fullscreen,
-        disabled,
-      };
-    },
   });
+  const emit = defineEmits(['change', 'update:modelValue', 'inited', 'init-error']);
+
+  const attrs = useAttrs();
+
+  const editorRef = ref<Nullable<Editor>>(null);
+  const fullscreen = ref(false);
+  const tinymceId = ref<string>(buildShortUUID('tiny-vue'));
+  const elRef = ref<Nullable<HTMLElement>>(null);
+
+  const { prefixCls } = useDesign('tinymce-container');
+
+  const appStore = useAppStore();
+
+  const tinymceContent = computed(() => props.modelValue);
+
+  const containerWidth = computed(() => {
+    const width = props.width;
+    if (isNumber(width)) {
+      return `${width}px`;
+    }
+    return width;
+  });
+
+  const skinName = computed(() => {
+    return appStore.getDarkMode === 'light' ? 'oxide' : 'oxide-dark';
+  });
+
+  const contentCssName = computed(() => {
+    return appStore.getDarkMode === 'light' ? 'default' : 'dark';
+  });
+
+  const langName = computed(() => {
+    const lang = useLocale().getLocale.value;
+    if (lang === 'zh_CN') {
+      return 'zh-Hans';
+    }
+    return lang;
+  });
+
+  const initOptions = computed((): RawEditorOptions => {
+    const { height, options, toolbar, plugins } = props;
+    const publicPath = import.meta.env.VITE_PUBLIC_PATH || '/';
+    return {
+      selector: `#${unref(tinymceId)}`,
+      height: height,
+      toolbar,
+      menubar: 'file edit insert view format table',
+      plugins,
+      language_url: publicPath + 'resource/tinymce/langs/' + langName.value + '.js',
+      language: langName.value,
+      branding: false,
+      default_link_target: '_blank',
+      link_title: false,
+      object_resizing: false,
+      auto_focus: true,
+      skin: skinName.value,
+      promotion: false,
+      model_url: publicPath + 'resource/tinymce/models/dom/model.min.js',
+      skin_url: publicPath + 'resource/tinymce/skins/ui/' + skinName.value,
+      content_css:
+        publicPath + 'resource/tinymce/skins/content/' + contentCssName.value + '/content.min.css',
+      ...options,
+      setup: (editor: Editor) => {
+        editorRef.value = editor;
+        editor.on('init', (e) => initSetup(e));
+      },
+    };
+  });
+
+  const disabled = computed(() => {
+    const { options } = props;
+    const getdDisabled = options && Reflect.get(options, 'readonly');
+    const editor = unref(editorRef);
+    if (editor) {
+      editor.mode.set(getdDisabled ? 'readonly' : 'design');
+    }
+    return getdDisabled ?? false;
+  });
+
+  watch(
+    () => attrs.disabled,
+    () => {
+      const editor = unref(editorRef);
+      if (!editor) {
+        return;
+      }
+      editor.mode.set(attrs.disabled ? 'readonly' : 'design');
+    },
+  );
+
+  onMountedOrActivated(() => {
+    if (!initOptions.value.inline) {
+      tinymceId.value = buildShortUUID('tiny-vue');
+    }
+    nextTick(() => {
+      setTimeout(() => {
+        initEditor();
+      }, 30);
+    });
+  });
+
+  onBeforeUnmount(() => {
+    destory();
+  });
+
+  onDeactivated(() => {
+    destory();
+  });
+
+  function destory() {
+    if (tinymce !== null) {
+      tinymce?.remove?.(unref(initOptions).selector!);
+    }
+  }
+
+  function initEditor() {
+    const el = unref(elRef);
+    if (el) {
+      el.style.visibility = '';
+    }
+    tinymce
+      .init(unref(initOptions))
+      .then((editor) => {
+        emit('inited', editor);
+      })
+      .catch((err) => {
+        emit('init-error', err);
+      });
+  }
+
+  function initSetup(e) {
+    const editor = unref(editorRef);
+    if (!editor) {
+      return;
+    }
+    const value = props.modelValue || '';
+
+    editor.setContent(value);
+    bindModelHandlers(editor);
+    bindHandlers(e, attrs, unref(editorRef));
+  }
+
+  function setValue(editor: Recordable, val?: string, prevVal?: string) {
+    if (
+      editor &&
+      typeof val === 'string' &&
+      val !== prevVal &&
+      val !== editor.getContent({ format: attrs.outputFormat })
+    ) {
+      editor.setContent(val);
+    }
+  }
+
+  function bindModelHandlers(editor: any) {
+    const modelEvents = attrs.modelEvents ? attrs.modelEvents : null;
+    const normalizedEvents = Array.isArray(modelEvents) ? modelEvents.join(' ') : modelEvents;
+
+    watch(
+      () => props.modelValue as string,
+      (val, prevVal) => {
+        setValue(editor, val, prevVal);
+      },
+    );
+
+    watch(
+      () => props.value as string,
+      (val, prevVal) => {
+        setValue(editor, val, prevVal);
+      },
+      {
+        immediate: true,
+      },
+    );
+
+    editor.on(normalizedEvents ? normalizedEvents : 'change keyup undo redo', () => {
+      const content = editor.getContent({ format: attrs.outputFormat });
+      emit('update:modelValue', content);
+      emit('change', content);
+    });
+
+    editor.on('FullscreenStateChanged', (e) => {
+      fullscreen.value = e.state;
+    });
+  }
+
+  function handleImageUploading(name: string) {
+    const editor = unref(editorRef);
+    if (!editor) {
+      return;
+    }
+    editor.execCommand('mceInsertContent', false, getUploadingImgName(name));
+    const content = editor?.getContent() ?? '';
+    setValue(editor, content);
+  }
+
+  function handleDone(name: string, url: string) {
+    const editor = unref(editorRef);
+    if (!editor) {
+      return;
+    }
+    const content = editor?.getContent() ?? '';
+    const val = content?.replace(getUploadingImgName(name), `<img src="${url}"/>`) ?? '';
+    setValue(editor, val);
+  }
+
+  function getUploadingImgName(name: string) {
+    return `[uploading:${name}]`;
+  }
 </script>
 
 <style lang="less" scoped></style>
