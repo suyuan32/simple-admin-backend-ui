@@ -4,6 +4,7 @@
     :title="t('component.excel.exportModalTitle')"
     @ok="handleOk"
     @register="registerModal"
+    centered
   >
     <BasicForm
       :labelWidth="100"
@@ -13,9 +14,8 @@
     />
   </BasicModal>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   import type { ExportModalResult } from './typing';
-  import { defineComponent } from 'vue';
   import { BasicModal, useModalInner } from '@/components/Modal';
   import { BasicForm, FormSchema, useForm } from '@/components/Form/index';
 
@@ -62,30 +62,19 @@
       },
     },
   ];
-  export default defineComponent({
-    components: { BasicModal, BasicForm },
-    emits: ['success', 'register'],
-    setup(_, { emit }) {
-      const [registerForm, { validate }] = useForm();
-      const [registerModal, { closeModal }] = useModalInner();
 
-      const handleOk = async () => {
-        const res = await validate<ExportModalResult>();
-        const { filename, bookType } = res;
-        emit('success', {
-          filename: `${filename.split('.').shift()}.${bookType}`,
-          bookType,
-        });
-        closeModal();
-      };
+  const emit = defineEmits(['success', 'register']);
 
-      return {
-        schemas,
-        handleOk,
-        registerForm,
-        registerModal,
-        t,
-      };
-    },
-  });
+  const [registerForm, { validate }] = useForm();
+  const [registerModal, { closeModal }] = useModalInner();
+
+  const handleOk = async () => {
+    const res = await validate<ExportModalResult>();
+    const { filename, bookType } = res;
+    emit('success', {
+      filename: `${filename.split('.').shift()}.${bookType}`,
+      bookType,
+    });
+    closeModal();
+  };
 </script>
