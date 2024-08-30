@@ -13,7 +13,7 @@
       <template v-for="item in getTabsState" :key="item.query ? item.fullPath : item.path">
         <TabPane :closable="!(item && item.meta && item.meta.affix)">
           <template #tab>
-            <TabContent :tabItem="item" />
+            <TabContent :tabItem="item" :icon="item.meta.icon ? item.meta.icon : ''" />
           </template>
         </TabPane>
       </template>

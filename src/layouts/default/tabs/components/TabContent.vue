@@ -7,6 +7,7 @@
     @menu-event="handleMenuEvent"
   >
     <div :class="`${prefixCls}__info`" @contextmenu="handleContext" v-if="getIsTabs">
+      <Icon :icon="props.icon" v-if="props.icon !== ''" :inline="true" :width="20" :height="13" />
       <span class="ml-1">{{ getTitle }}</span>
     </div>
     <span :class="`${prefixCls}__extra-quick`" v-else @click="handleContext">
@@ -34,6 +35,10 @@
       default: null,
     },
     isExtra: Boolean,
+    icon: {
+      type: String,
+      default: '',
+    },
   });
 
   const { prefixCls } = useDesign('multiple-tabs-content');
