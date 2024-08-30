@@ -1,41 +1,33 @@
 <template>
   <div>
     <slot name="insertFooter"></slot>
-    <a-button v-bind="cancelButtonProps" @click="handleCancel" v-if="showCancelBtn">
-      {{ cancelText }}
+    <a-button v-bind="props.cancelButtonProps" @click="handleCancel" v-if="props.showCancelBtn">
+      {{ props.cancelText }}
     </a-button>
     <slot name="centerFooter"></slot>
     <a-button
-      :type="okType"
+      :type="props.okType"
       @click="handleOk"
-      :loading="confirmLoading"
-      v-bind="okButtonProps"
-      v-if="showOkBtn"
+      :loading="props.confirmLoading"
+      v-bind="props.okButtonProps"
+      v-if="props.showOkBtn"
     >
-      {{ okText }}
+      {{ props.okText }}
     </a-button>
     <slot name="appendFooter"></slot>
   </div>
 </template>
-<script lang="ts">
-  import { defineComponent } from 'vue';
-
+<script lang="ts" setup>
   import { basicProps } from '../props';
 
-  export default defineComponent({
-    name: 'BasicModalFooter',
-    props: basicProps,
-    emits: ['ok', 'cancel'],
-    setup(_, { emit }) {
-      function handleOk(e: Event) {
-        emit('ok', e);
-      }
+  const props = defineProps(basicProps);
+  const emit = defineEmits(['ok', 'cancel']);
 
-      function handleCancel(e: Event) {
-        emit('cancel', e);
-      }
+  function handleOk(e: Event) {
+    emit('ok', e);
+  }
 
-      return { handleOk, handleCancel };
-    },
-  });
+  function handleCancel(e: Event) {
+    emit('cancel', e);
+  }
 </script>
