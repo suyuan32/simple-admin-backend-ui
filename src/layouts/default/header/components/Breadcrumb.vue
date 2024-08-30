@@ -3,7 +3,12 @@
     <Breadcrumb>
       <template v-for="routeItem in routes" :key="routeItem.name">
         <BreadcrumbItem>
-          <Icon :icon="getIcon(routeItem)" v-if="getShowBreadCrumbIcon && getIcon(routeItem)" />
+          <Icon
+            :icon="getIcon(routeItem)"
+            v-if="getShowBreadCrumbIcon && getIcon(routeItem)"
+            :inline="true"
+            :width="32"
+          />
           <span v-if="!hasRedirect(routes, routeItem)">
             {{ t((routeItem.meta.title || routeItem.name) as string) }}
           </span>
@@ -17,6 +22,8 @@
                   <Icon
                     :icon="getIcon(childItem)"
                     v-if="getShowBreadCrumbIcon && getIcon(childItem)"
+                    :inline="true"
+                    :width="32"
                   />
                   <span v-if="!hasRedirect(routes, childItem)">
                     {{ t((childItem.meta?.title || childItem.name) as string) }}
@@ -181,10 +188,6 @@
 
         a {
           color: rgb(0 0 0 / 65%);
-
-          &:hover {
-            color: @primary-color;
-          }
         }
       }
 
@@ -199,10 +202,6 @@
 
         a {
           color: rgb(255 255 255 / 80%);
-
-          &:hover {
-            color: @white;
-          }
         }
       }
 

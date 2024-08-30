@@ -108,6 +108,7 @@ export function createPermissionGuard(router: Router) {
       appStore.setProjectConfig({
         showSettingButton: dynamicConfigStore.showSettingButton,
         showBreadCrumb: dynamicConfigStore.showBreadCrumb,
+        showBreadCrumbIcon: dynamicConfigStore.showBreadCrumb,
         headerSetting: { showNotice: dynamicConfigStore.showNotice },
         menuSetting: { type: dynamicConfigStore.layoutType as any },
       });
