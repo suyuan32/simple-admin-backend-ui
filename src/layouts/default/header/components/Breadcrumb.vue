@@ -7,7 +7,8 @@
             :icon="getIcon(routeItem)"
             v-if="getShowBreadCrumbIcon && getIcon(routeItem)"
             :inline="true"
-            :width="32"
+            :width="24"
+            :height="14"
           />
           <span v-if="!hasRedirect(routes, routeItem)">
             {{ t((routeItem.meta.title || routeItem.name) as string) }}
@@ -23,7 +24,8 @@
                     :icon="getIcon(childItem)"
                     v-if="getShowBreadCrumbIcon && getIcon(childItem)"
                     :inline="true"
-                    :width="32"
+                    :width="24"
+                    :height="14"
                   />
                   <span v-if="!hasRedirect(routes, childItem)">
                     {{ t((childItem.meta?.title || childItem.name) as string) }}
