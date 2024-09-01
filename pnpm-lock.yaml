@@ -146,15 +146,6 @@ importers:
       vuedraggable:
         specifier: ^4.1.0
         version: 4.1.0(vue@3.4.38(typescript@5.5.4))
-      vxe-pc-ui:
-        specifier: ^4.1.15
-        version: 4.1.15
-      vxe-table:
-        specifier: ^4.7.75
-        version: 4.7.75
-      vxe-table-plugin-export-xlsx:
-        specifier: ^4.0.5
-        version: 4.0.5(vxe-table@4.7.75)
       xe-utils:
         specifier: ^3.5.30
         version: 3.5.30
@@ -2016,9 +2007,6 @@ packages:
   '@vueuse/shared@10.11.1':
     resolution: {integrity: sha512-LHpC8711VFZlDaYUXEBbFBCQ7GS3dVU9mjOhhMhXP6txTV4EhYQg/KGnQuvt/sPAtoUKq7VVUnL6mVtFoL42sA==}
 
-  '@vxe-ui/core@4.0.4':
-    resolution: {integrity: sha512-op14m26U/FofZRVIxL57XKQkYMLbFW4k3PnKtpwdMMm7kRb0uEYhnObFLg+UXH9AIKKsEEab6vbm/E0WtAJ0Vg==}
-
   '@zxcvbn-ts/core@3.0.4':
     resolution: {integrity: sha512-aQeiT0F09FuJaAqNrxynlAwZ2mW/1MdXakKWNmGM1Qp/VaY6CnB/GfnMS2T8gB2231Esp1/maCWd8vTG4OuShw==}
 
@@ -2933,9 +2921,6 @@ packages:
 
   dom-serializer@2.0.0:
     resolution: {integrity: sha512-wIkAryiqt/nV5EQKqQpo3SToSOV9J0DnbJqwK7Wv/Trc92zIAYZ4FlMu+JPFW1DfGFt81ZTCGgDEabffXeLyJg==}
-
-  dom-zindex@1.0.5:
-    resolution: {integrity: sha512-fvtsFOawZEkt6/SE67eu5IY+Iid8bHAHoYMnRzk4y3ZycAtZJvx7JqE0c0T5GXfxSXw0XKyYDI9K5VkDpovc6A==}
 
   domelementtype@1.3.1:
     resolution: {integrity: sha512-BSKB+TSpMpFI/HOxCNr1O8aMOTZ8hT3pM3GQ0w/mWRmkhEDSFJkkyzz4XQsBV44BChwGkrDfMyjVD0eA2aFV3w==}
@@ -6455,17 +6440,6 @@ packages:
     peerDependencies:
       vue: ^3.0.1
 
-  vxe-pc-ui@4.1.15:
-    resolution: {integrity: sha512-5f0BYxunC7zlA5c1/7rz/FtWGBECgkickdkgjLkghT/mGYKoIN31maL4EUJiH8MZMRQuaspfWkwBmcZQ4uCAWA==}
-
-  vxe-table-plugin-export-xlsx@4.0.5:
-    resolution: {integrity: sha512-tgscqIVfPSewTU6yVBk7NFjF7safvnzV47b8bUKkWsg/VxTSp6haCqNw3Vy5CuFZtry/5wnOzjgW60CZ+yVeLw==}
-    peerDependencies:
-      vxe-table: ^4.5.0
-
-  vxe-table@4.7.75:
-    resolution: {integrity: sha512-VeahYeDQCGyl0zAU5nXiRXwmaeigigBRU20iIHmG87a88bypn+pffVSV0lizzHUJheJpp5Go1vgRApES0aloGw==}
-
   w3c-hr-time@1.0.2:
     resolution: {integrity: sha512-z8P5DvDNjKDoFIHK7q8r8lackT6l+jo/Ye3HOle7l9nICP9lf1Ci25fy9vHd0JOWewkIFzXIEig3TdKT7JQ5fQ==}
     deprecated: Use your platform's native performance.now() and performance.timeOrigin.
@@ -8505,11 +8479,6 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@vxe-ui/core@4.0.4':
-    dependencies:
-      dom-zindex: 1.0.5
-      xe-utils: 3.5.30
-
   '@zxcvbn-ts/core@3.0.4':
     dependencies:
       fastest-levenshtein: 1.0.16
@@ -9518,8 +9487,6 @@ snapshots:
       domelementtype: 2.3.0
       domhandler: 5.0.3
       entities: 4.5.0
-
-  dom-zindex@1.0.5: {}
 
   domelementtype@1.3.1: {}
 
@@ -13593,18 +13560,6 @@ snapshots:
     dependencies:
       sortablejs: 1.14.0
       vue: 3.4.38(typescript@5.5.4)
-
-  vxe-pc-ui@4.1.15:
-    dependencies:
-      '@vxe-ui/core': 4.0.4
-
-  vxe-table-plugin-export-xlsx@4.0.5(vxe-table@4.7.75):
-    dependencies:
-      vxe-table: 4.7.75
-
-  vxe-table@4.7.75:
-    dependencies:
-      vxe-pc-ui: 4.1.15
 
   w3c-hr-time@1.0.2:
     dependencies:
