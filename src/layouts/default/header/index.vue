@@ -41,6 +41,8 @@
 
       <FullScreen v-if="getShowFullScreen" :class="`${prefixCls}-action__item fullscreen-item`" />
 
+      <ThemeIcon />
+
       <AppLocalePicker
         v-if="getShowLocalePicker"
         :reload="true"
@@ -73,6 +75,7 @@
   import LayoutMenu from '../menu/index.vue';
   import LayoutTrigger from '../trigger/index.vue';
   import { ErrorAction, FullScreen, LayoutBreadcrumb, Notify, UserDropDown } from './components';
+  import ThemeIcon from '@/layouts/default/header/components/themeChange/ThemeIcon.vue';
 
   const SettingDrawer = createAsyncComponent(() => import('@/layouts/default/setting/index.vue'), {
     loading: true,
