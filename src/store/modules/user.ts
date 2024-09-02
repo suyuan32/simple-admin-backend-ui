@@ -17,7 +17,7 @@ import { router } from '@/router';
 import { usePermissionStore } from '@/store/modules/permission';
 import { RouteRecordRaw } from 'vue-router';
 import { PAGE_NOT_FOUND_ROUTE } from '@/router/routes/basic';
-import { isArray } from '@/utils/is';
+import { isArray } from 'remeda';
 import { h } from 'vue';
 
 interface UserState {

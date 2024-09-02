@@ -2,8 +2,7 @@ import type { RouteLocationNormalized, RouteRecordNormalized } from 'vue-router'
 import type { App, Component } from 'vue';
 
 import { unref } from 'vue';
-import { concat, intersection, isArray, keys, unique } from 'remeda';
-import { isObject } from './is';
+import { concat, intersection, isArray, keys, unique, isObjectType } from 'remeda';
 
 export const noop = () => {};
 
@@ -86,7 +85,7 @@ export function deepMerge<T extends object | null | undefined, U extends object 
       }
     }
 
-    if (isObject(targetValue) && isObject(sourceValue)) {
+    if (isObjectType(targetValue) && isObjectType(sourceValue)) {
       targetValue = deepMerge(sourceValue, targetValue, mergeArrays);
     }
 

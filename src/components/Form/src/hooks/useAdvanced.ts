@@ -4,8 +4,7 @@ import { ComputedRef, getCurrentInstance, Ref, shallowReactive, computed, unref,
 import type { FormProps, FormSchemaInner as FormSchema } from '../types/form';
 import { useBreakpoint } from '@/hooks/event/useBreakpoint';
 import { useDebounceFn } from '@vueuse/core';
-import { isBoolean, isFunction, isNumber } from 'remeda';
-import { isObject } from '/@/utils/is';
+import { isBoolean, isFunction, isNumber, isObjectType } from 'remeda';
 
 const BASIC_COL_LEN = 24;
 
@@ -40,7 +39,7 @@ export default function ({
     if (isNumber(emptySpan)) {
       return emptySpan;
     }
-    if (isObject(emptySpan)) {
+    if (isObjectType(emptySpan)) {
       const { span = 0 } = emptySpan;
       const screen = unref(screenRef) as string;
 

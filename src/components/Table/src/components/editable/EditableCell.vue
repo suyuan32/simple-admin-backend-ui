@@ -336,9 +336,11 @@
       function initCbs(cbs: 'submitCbs' | 'validCbs' | 'cancelCbs', handle) {
         if (props.record) {
           /* eslint-disable  */
-          isArray(props.record[cbs])
-            ? props.record[cbs]?.push(handle)
-            : (props.record[cbs] = [handle]);
+          if (isArray(props.record[cbs])) {
+            (props.record[cbs] as any)?.push(handle)
+          } else {
+            props.record[cbs] = [handle];
+          }
         }
       }
 

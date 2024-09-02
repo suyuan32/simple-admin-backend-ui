@@ -3,7 +3,7 @@ import type { BasicColumn } from '@/components/Table/src/types/table';
 import { h, Ref, toRaw } from 'vue';
 
 import EditableCell from './EditableCell.vue';
-import { isArray } from '@/utils/is';
+import { isArray } from 'remeda';
 
 interface Params {
   text: string;
@@ -15,7 +15,7 @@ export function renderEditCell(column: BasicColumn) {
   return ({ text: value, record, index }: Params) => {
     toRaw(record).onValid = async () => {
       if (isArray(record?.validCbs)) {
-        const validFns = (record?.validCbs || []).map((fn) => fn());
+        const validFns = (record?.validCbs || []).map((fn) => (fn as any)());
         const res = await Promise.all(validFns);
         return res.every((item) => !!item);
       } else {

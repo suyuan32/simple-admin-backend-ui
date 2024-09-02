@@ -1,9 +1,19 @@
-import { isArray, isFunction, isEmpty, isString, isNullish, clone, omit, pick, set } from 'remeda';
+import {
+  isArray,
+  isFunction,
+  isEmpty,
+  isString,
+  isNullish,
+  clone,
+  omit,
+  pick,
+  set,
+  isObjectType,
+} from 'remeda';
 import { dateUtil } from '@/utils/dateUtil';
 import { unref } from 'vue';
 import type { Ref, ComputedRef } from 'vue';
 import type { FormProps, FormSchemaInner as FormSchema } from '../types/form';
-import { isObject } from '/@/utils/is';
 import dayjs from 'dayjs';
 
 interface UseFormValuesContext {
@@ -40,7 +50,7 @@ function tryDeconstructObject(key: string, value: any, target: Recordable) {
     const match = key.match(pattern);
     if (match && match[1]) {
       const keys = match[1].split(',');
-      value = isObject(value) ? value : {};
+      value = isObjectType(value) ? value : {};
       keys.forEach((k) => {
         target = set(target, k.trim(), value[k.trim()]);
       });
@@ -57,7 +67,7 @@ export function useFormValues({
 }: UseFormValuesContext) {
   // Processing form values
   function handleFormValues(values: Recordable) {
-    if (!isObject(values)) {
+    if (!isObjectType(values)) {
       return {};
     }
     const res: Recordable = {};
@@ -68,7 +78,7 @@ export function useFormValues({
         continue;
       }
       const transformDateFunc = unref(getProps).transformDateFunc;
-      if (isObject(value)) {
+      if (isObjectType(value)) {
         value = transformDateFunc?.(value);
       }
 

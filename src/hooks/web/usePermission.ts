@@ -12,9 +12,8 @@ import projectSetting from '@/settings/projectSetting';
 import { PermissionModeEnum } from '@/enums/appEnum';
 import { RoleEnum } from '@/enums/roleEnum';
 
-import { isArray } from '@/utils/is';
 import { useMultipleTabStore } from '@/store/modules/multipleTab';
-import { intersection } from 'remeda';
+import { intersection, isArray } from 'remeda';
 
 // User permissions related operations
 export function usePermission() {

@@ -1,5 +1,4 @@
-import { isString } from 'remeda';
-import { isObject } from '../../is';
+import { isString, isObjectType } from 'remeda';
 
 const DATE_TIME_FORMAT = 'YYYY-MM-DD HH:mm:ss';
 
@@ -42,7 +41,7 @@ export function formatRequestDate(params: Recordable) {
         }
       }
     }
-    if (isObject(params[key])) {
+    if (isObjectType(params[key])) {
       formatRequestDate(params[key]);
     }
   }

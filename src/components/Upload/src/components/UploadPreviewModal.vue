@@ -19,7 +19,7 @@
   import { downloadByUrl } from '@/utils/file/download';
   import { createPreviewColumns, createPreviewActionColumn } from './data';
   import { useI18n } from '@/hooks/web/useI18n';
-  import { isArray } from '@/utils/is';
+  import { isArray } from 'remeda';
 
   export default defineComponent({
     components: { BasicModal, FileList },

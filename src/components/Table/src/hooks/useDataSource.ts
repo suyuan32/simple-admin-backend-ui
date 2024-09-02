@@ -17,8 +17,7 @@ import { FETCH_SETTING, ROW_KEY, PAGE_SIZE } from '../const';
 import { parseRowKeyValue } from '../helper';
 import type { Key } from 'ant-design-vue/lib/table/interface';
 import { array2tree } from '@axolo/tree-array';
-import { clone, isBoolean, isFunction, mergeAll } from 'remeda';
-import { isObject } from '/@/utils/is';
+import { clone, isBoolean, isFunction, mergeAll, isObjectType } from 'remeda';
 import { get } from '/@/utils/object';
 
 interface ActionType {
@@ -216,7 +215,7 @@ export function useDataSource(
   ): Recordable[] | undefined {
     // if (!dataSourceRef.value || dataSourceRef.value.length == 0) return;
     index = index ?? dataSourceRef.value?.length;
-    const _record = isObject(record) ? [record as Recordable] : (record as Recordable[]);
+    const _record = isObjectType(record) ? [record as Recordable] : (record as Recordable[]);
     unref(dataSourceRef).splice(index, 0, ..._record);
     return unref(dataSourceRef);
   }

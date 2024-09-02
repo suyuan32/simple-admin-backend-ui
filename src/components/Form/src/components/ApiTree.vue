@@ -9,10 +9,9 @@
 <script lang="ts" setup>
   import { type Recordable, type AnyFunction } from '@vben/types';
   import { type PropType, computed, watch, ref, onMounted, unref } from 'vue';
-  import { isArray } from '@/utils/is';
+  import { isArray, isFunction } from 'remeda';
   import { propTypes } from '@/utils/propTypes';
   import type { DataNode } from 'ant-design-vue/lib/vc-tree/interface';
-  import { isFunction } from 'remeda';
   import { get } from '/@/utils/object';
   import { Tree } from 'ant-design-vue';
   import { useAttrs } from '@vben/hooks';

@@ -45,7 +45,7 @@
   import { useModal } from '@/components/Modal';
   import { uploadContainerProps } from './props';
   import { useI18n } from '@/hooks/web/useI18n';
-  import { isArray } from '@/utils/is';
+  import { isArray } from 'remeda';
   import UploadModal from './components/UploadModal.vue';
   import UploadPreviewModal from './components/UploadPreviewModal.vue';
 

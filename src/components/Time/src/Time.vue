@@ -6,8 +6,7 @@
   import { useI18n } from '@/hooks/web/useI18n';
   import { useIntervalFn } from '@vueuse/core';
   import { formatToDateTime, formatToDate, dateUtil } from '@/utils/dateUtil';
-  import { isObject } from '@/utils/is';
-  import { isNumber, isString } from 'remeda';
+  import { isNumber, isString, isObjectType } from 'remeda';
   import { propTypes } from '@/utils/propTypes';
 
   const ONE_SECONDS = 1000;
@@ -44,7 +43,7 @@
       time = new Date(timestamp).getTime();
     } else if (isString(value)) {
       time = new Date(value).getTime();
-    } else if (isObject(value)) {
+    } else if (isObjectType(value)) {
       time = value.getTime();
     }
     return time;
