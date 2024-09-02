@@ -85,6 +85,8 @@
   import { uploadApi } from '@/api/fms/cloudFile';
   import { CropperAvatar } from '@/components/Cropper';
 
+  defineOptions({ name: 'Profile' });
+
   const ACard = Card;
   const AForm = Form;
   const AFormItem = FormItem;

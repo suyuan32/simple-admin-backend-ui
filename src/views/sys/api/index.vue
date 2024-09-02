@@ -60,6 +60,8 @@
   const selectedIds = ref<number[] | string[]>();
   const showDeleteButton = ref<boolean>(false);
 
+  defineOptions({ name: 'ApiManagement' });
+
   const [registerDrawer, { openDrawer }] = useDrawer();
   const [registerTable, { reload }] = useTable({
     title: t('sys.apis.apiList'),

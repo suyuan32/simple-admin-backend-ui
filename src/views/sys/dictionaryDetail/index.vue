@@ -57,6 +57,8 @@
   import { getDictionaryDetailList, deleteDictionaryDetail } from '@/api/sys/dictionaryDetail';
   import { useRouter } from 'vue-router';
 
+  defineOptions({ name: 'DictionaryDetail' });
+
   const { t } = useI18n();
   const selectedIds = ref<number[] | string[]>();
   const showDeleteButton = ref<boolean>(false);

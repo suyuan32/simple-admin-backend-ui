@@ -87,6 +87,8 @@
   const [registerDrawer, { openDrawer }] = useDrawer();
   const roleStoreData = useRoleStore();
 
+  defineOptions({ name: 'UserManagement' });
+
   // get role data
   roleStoreData.getRoleInfoFromServer();
 

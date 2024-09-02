@@ -40,6 +40,8 @@
   import { getOauthProviderList, deleteOauthProvider } from '@/api/member/oauthProvider';
   import { PageWrapper } from '@/components/Page';
 
+  defineOptions({ name: 'OauthManagement' });
+
   const { t } = useI18n();
   const [registerDrawer, { openDrawer }] = useDrawer();
   const [registerTable, { reload }] = useTable({

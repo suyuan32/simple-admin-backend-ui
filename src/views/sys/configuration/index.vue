@@ -56,6 +56,8 @@
   import { columns, searchFormSchema } from './configuration.data';
   import { getConfigurationList, deleteConfiguration } from '@/api/sys/configuration';
 
+  defineOptions({ name: 'ConfigurationManagement' });
+
   const { t } = useI18n();
   const selectedIds = ref<number[] | string[]>();
   const showDeleteButton = ref<boolean>(false);

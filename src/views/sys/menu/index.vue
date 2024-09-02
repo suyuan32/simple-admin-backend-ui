@@ -40,6 +40,8 @@
   import { columns } from './menu.data';
   import { PageWrapper } from '@/components/Page';
 
+  defineOptions({ name: 'MenuManagement' });
+
   const { t } = useI18n();
   const [registerDrawer, { openDrawer }] = useDrawer();
   const [registerTable, { reload }] = useTable({

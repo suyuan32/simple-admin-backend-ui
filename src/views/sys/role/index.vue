@@ -41,6 +41,8 @@
   import { useMessage } from '@/hooks/web/useMessage';
   import { PageWrapper } from '@/components/Page';
 
+  defineOptions({ name: 'RoleManagement' });
+
   const { t } = useI18n();
   const { createMessage } = useMessage();
   const [registerDrawer, { openDrawer }] = useDrawer();

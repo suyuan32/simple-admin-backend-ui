@@ -66,6 +66,8 @@
   const showDeleteButton = ref<boolean>(false);
   const go = useGo();
 
+  defineOptions({ name: 'DictionaryManagement' });
+
   const [registerDrawer, { openDrawer }] = useDrawer();
   const [registerTable, { reload }] = useTable({
     title: t('sys.dictionary.dictionaryList'),

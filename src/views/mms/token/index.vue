@@ -44,6 +44,8 @@
   import { columns, searchFormSchema } from './token.data';
   import { getTokenList, deleteToken } from '@/api/member/token';
 
+  defineOptions({ name: 'TokenManagement' });
+
   const { t } = useI18n();
   const selectedIds = ref<number[] | string[]>();
   const showDeleteButton = ref<boolean>(false);

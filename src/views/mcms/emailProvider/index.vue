@@ -79,6 +79,8 @@
   import { sendEmail } from '@/api/mcms/messageSender';
   import { SendEmailReq } from '@/api/mcms/model/messageModel';
 
+  defineOptions({ name: 'EmailProviderManagement' });
+
   const { t } = useI18n();
   const selectedIds = ref<number[] | string[]>();
   const showDeleteButton = ref<boolean>(false);

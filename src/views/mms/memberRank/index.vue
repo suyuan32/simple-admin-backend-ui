@@ -54,7 +54,9 @@
   import { useI18n } from 'vue-i18n';
 
   import { columns, searchFormSchema } from './memberRank.data';
-  import { getMemberRankList, deleteMemberRank } from '../../../api/member/memberRank';
+  import { getMemberRankList, deleteMemberRank } from '@/api/member/memberRank';
+
+  defineOptions({ name: 'MemberRankManagement' });
 
   const { t } = useI18n();
   const selectedIds = ref<number[] | string[]>();
