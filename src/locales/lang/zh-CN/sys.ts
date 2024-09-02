@@ -228,6 +228,7 @@ export default {
     info: '系统信息',
     // notification
     welcome: '欢迎使用 Simple Admin',
+    changeTheme: '切换主题',
   },
   dictionary: {
     // noun

@@ -41,7 +41,7 @@
 
       <FullScreen v-if="getShowFullScreen" :class="`${prefixCls}-action__item fullscreen-item`" />
 
-      <ThemeIcon />
+      <ThemeIcon :class="`${prefixCls}-action__item fullscreen-item`" />
 
       <AppLocalePicker
         v-if="getShowLocalePicker"

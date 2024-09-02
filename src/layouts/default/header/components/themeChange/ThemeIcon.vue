@@ -5,8 +5,11 @@
   import { ThemeEnum } from '@/enums/appEnum';
   import { updateDarkTheme } from '@/logics/theme/dark';
   import { updateHeaderBgColor, updateSidebarBgColor } from '@/logics/theme/updateBackground';
+  import { Tooltip } from 'ant-design-vue';
+  import { useI18n } from '@/hooks/web/useI18n';
 
   const iconName = ref('line-md:moon-loop');
+  const { t } = useI18n();
 
   const { getDarkMode, setDarkMode } = useRootSetting();
 
@@ -31,7 +34,11 @@
 </script>
 
 <template>
-  <Icon :icon="iconName" :width="32" @click="toggleDarkMode()" />
+  <Tooltip :title="t('sys.sys.changeTheme')" placement="bottom" :mouseEnterDelay="0.5">
+    <span @click="toggleDarkMode()">
+      <Icon :icon="iconName" :width="32" />
+    </span>
+  </Tooltip>
 </template>
 
 <style scoped lang="less"></style>
