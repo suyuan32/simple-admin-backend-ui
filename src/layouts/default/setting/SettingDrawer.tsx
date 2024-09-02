@@ -10,8 +10,6 @@ import {
   // InputNumberItem,
 } from './components';
 
-import { AppDarkModeToggle } from '@/components/Application';
-
 // import { MenuTypeEnum, TriggerEnum } from '@/enums/menuEnum';
 
 import { useRootSetting } from '@/hooks/setting/useRootSetting';
@@ -54,7 +52,6 @@ export default defineComponent({
       getColorWeak,
       getGrayMode,
       // getLockTime,
-      getShowDarkModeToggle,
       // getThemeColor,
     } = useRootSetting();
 
@@ -403,8 +400,6 @@ export default defineComponent({
         width={330}
         class="setting-drawer"
       >
-        {unref(getShowDarkModeToggle) && <Divider>{() => t('layout.setting.darkMode')}</Divider>}
-        {unref(getShowDarkModeToggle) && <AppDarkModeToggle class="mx-auto" />}
         <Divider>{() => t('layout.setting.navMode')}</Divider>
         {renderSidebar()}
         {/* <Divider>{() => t('layout.setting.sysTheme')}</Divider>
