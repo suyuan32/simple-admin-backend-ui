@@ -1,7 +1,7 @@
 <script lang="tsx">
   import type { DescriptionProps, DescInstance, DescItem } from './typing';
-  import type { DescriptionsProps } from 'ant-design-vue/es/descriptions/index';
-  import type { CollapseContainerOptions } from '@/components/Container/index';
+  import type { DescriptionsProps } from 'ant-design-vue';
+  import type { CollapseContainerOptions } from '@/components/Container';
   import {
     type CSSProperties,
     type PropType,
@@ -13,7 +13,7 @@
   } from 'vue';
   import { get } from '@/utils/object';
   import { Descriptions } from 'ant-design-vue';
-  import { CollapseContainer } from '@/components/Container/index';
+  import { CollapseContainer } from '@/components/Container';
   import { useDesign } from '@/hooks/web/useDesign';
   import { isFunction } from 'remeda';
   import { getSlot } from '@/utils/helper/tsxHelper';

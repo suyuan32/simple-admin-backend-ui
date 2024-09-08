@@ -75,6 +75,8 @@
   import { BasicModal } from '@/components/Modal';
   import { BasicForm } from '@/components/Form';
 
+  defineOptions({ name: 'SmsProviderManagement' });
+
   const { t } = useI18n();
   const selectedIds = ref<number[] | string[]>();
   const showDeleteButton = ref<boolean>(false);

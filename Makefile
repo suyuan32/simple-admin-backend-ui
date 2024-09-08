@@ -13,7 +13,7 @@ docker-not-build: # Build the docker without compiling | 不编译直接构建�
 .PHONY: publish-docker
 publish-docker: # Publish the docker | 发布镜像
 	echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin https://${REPO}
-	docker push ${DOCKER_USERNAME}/backend-ui-docker:${VERSION}
+	docker push ${DOCKER_USERNAME}/backend-ui:${VERSION}
 
 .PHONY: run-docker
 run-docker: # Run the docker image | 运行 docker 镜像

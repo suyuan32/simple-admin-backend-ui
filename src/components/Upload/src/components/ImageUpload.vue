@@ -30,14 +30,13 @@
   import type { UploadProps, UploadFile } from 'ant-design-vue';
   import { UploadRequestOption } from 'ant-design-vue/lib/vc-upload/interface';
   import { useMessage } from '@/hooks/web/useMessage';
-  import { isArray, isObject } from '@/utils/is';
   import { warn } from '@/utils/log';
   import { useI18n } from '@/hooks/web/useI18n';
   import { useUploadType } from '../hooks/useUpload';
   import { uploadContainerProps } from '../props';
   import { isImgTypeByName } from '../helper';
   import { UploadResultStatus } from '../types/typing';
-  import { isFunction, isString } from 'remeda';
+  import { isFunction, isString, isArray, isObjectType } from 'remeda';
 
   defineOptions({ name: 'ImageUpload' });
 
@@ -85,7 +84,7 @@
               status: 'done',
               url: item,
             };
-          } else if (item && isObject(item)) {
+          } else if (item && isObjectType(item)) {
             return item;
           } else {
             return;

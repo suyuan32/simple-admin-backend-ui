@@ -236,6 +236,7 @@ export default {
     info: 'System Information',
     // notification
     welcome: 'Welcome to use Simple Admin',
+    changeTheme: 'Change Theme',
   },
   dictionary: {
     // noun

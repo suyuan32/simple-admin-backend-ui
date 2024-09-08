@@ -56,6 +56,8 @@
   import { columns, searchFormSchema } from './storageProvider.data';
   import { getStorageProviderList, deleteStorageProvider } from '@/api/fms/storageProvider';
 
+  defineOptions({ name: 'StorageProviderManagement' });
+
   const { t } = useI18n();
   const selectedIds = ref<number[] | string[]>();
   const showDeleteButton = ref<boolean>(false);

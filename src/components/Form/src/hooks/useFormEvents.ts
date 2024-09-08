@@ -2,11 +2,20 @@ import type { ComputedRef, Ref } from 'vue';
 import type { FormProps, FormSchemaInner as FormSchema, FormActionType } from '../types/form';
 import type { NamePath } from 'ant-design-vue/lib/form/interface';
 import { unref, toRaw, nextTick } from 'vue';
-import { isArray, isObject } from '@/utils/is';
 import { deepMerge } from '@/utils';
 import { dateItemType, defaultValueComponents, isIncludeSimpleComponents } from '../helper';
 import { dateUtil } from '@/utils/dateUtil';
-import { clone, pick, keys, uniqueBy, isString, isNullish, isFunction } from 'remeda';
+import {
+  clone,
+  pick,
+  keys,
+  uniqueBy,
+  isString,
+  isNullish,
+  isFunction,
+  isArray,
+  isObjectType,
+} from 'remeda';
 import { error } from '@/utils/log';
 import { get } from '/@/utils/object';
 
@@ -215,7 +224,7 @@ export function useFormEvents({
       return;
     }
     const index = schemaList.findIndex((schema) => schema.field === prefixField);
-    const _schemaList = isObject(schema) ? [schema as FormSchema] : (schema as FormSchema[]);
+    const _schemaList = isObjectType(schema) ? [schema as FormSchema] : (schema as FormSchema[]);
     if (!prefixField || index === -1 || first) {
       first ? schemaList.unshift(..._schemaList) : schemaList.push(..._schemaList);
     } else if (index !== -1) {
@@ -227,7 +236,7 @@ export function useFormEvents({
 
   async function resetSchema(data: Partial<FormSchema> | Partial<FormSchema>[]) {
     let updateData: Partial<FormSchema>[] = [];
-    if (isObject(data)) {
+    if (isObjectType(data)) {
       updateData.push(data as FormSchema);
     }
     if (isArray(data)) {
@@ -250,7 +259,7 @@ export function useFormEvents({
 
   async function updateSchema(data: Partial<FormSchema> | Partial<FormSchema>[]) {
     let updateData: Partial<FormSchema>[] = [];
-    if (isObject(data)) {
+    if (isObjectType(data)) {
       updateData.push(data as FormSchema);
     }
     if (isArray(data)) {
@@ -288,7 +297,7 @@ export function useFormEvents({
 
   function _setDefaultValue(data: FormSchema | FormSchema[]) {
     let schemas: FormSchema[] = [];
-    if (isObject(data)) {
+    if (isObjectType(data)) {
       schemas.push(data as FormSchema);
     }
     if (isArray(data)) {

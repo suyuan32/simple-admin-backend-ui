@@ -72,11 +72,13 @@
   import { useI18n } from 'vue-i18n';
 
   import { columns, searchFormSchema } from './member.data';
-  import { getMemberList, deleteMember } from '../../../api/member/member';
+  import { getMemberList, deleteMember } from '@/api/member/member';
   import { PageWrapper } from '@/components/Page';
   import Row from 'ant-design-vue/es/grid/Row';
   import Col from 'ant-design-vue/es/grid/Col';
   import { logout } from '@/api/member/token';
+
+  defineOptions({ name: 'MemberManagement' });
 
   const { t } = useI18n();
   const selectedIds = ref<number[] | string[]>();

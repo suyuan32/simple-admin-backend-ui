@@ -85,6 +85,8 @@
   import { uploadApi } from '@/api/fms/cloudFile';
   import { CropperAvatar } from '@/components/Cropper';
 
+  defineOptions({ name: 'Profile' });
+
   const ACard = Card;
   const AForm = Form;
   const AFormItem = FormItem;
@@ -134,8 +136,8 @@
 
   function updateAvatar(data) {
     const userinfo = userStore.getUserInfo;
-    userinfo.avatar = data;
-    formdata.avatar = data;
+    userinfo.avatar = data.data;
+    formdata.avatar = data.data;
     userStore.setUserInfo(userinfo);
   }
 

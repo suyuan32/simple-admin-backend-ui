@@ -43,7 +43,7 @@
   </div>
 </template>
 <script lang="ts" setup>
-  import { createVNode, defineComponent, ref } from 'vue';
+  import { createVNode, ref } from 'vue';
   import { Modal } from 'ant-design-vue';
   import { ExclamationCircleOutlined } from '@ant-design/icons-vue/lib/icons';
   import { BasicTable, useTable, TableAction } from '@/components/Table';
@@ -55,6 +55,8 @@
 
   import { columns, searchFormSchema } from './cloudFileTag.data';
   import { getCloudFileTagList, deleteCloudFileTag } from '@/api/fms/cloudFileTag';
+
+  defineOptions({ name: 'CloudFileTagManagement' });
 
   const { t } = useI18n();
   const selectedIds = ref<number[] | string[]>();

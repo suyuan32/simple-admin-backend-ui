@@ -52,12 +52,12 @@
   </Dropdown>
   <LockAction @register="register" />
 </template>
-<script lang="ts">
+<script lang="ts" setup>
   // components
   import { Dropdown, Menu, Tag } from 'ant-design-vue';
   import type { MenuInfo } from 'ant-design-vue/lib/menu/src/interface';
 
-  import { defineComponent, computed } from 'vue';
+  import { computed } from 'vue';
 
   import { DOC_URL } from '@/settings/siteSetting';
 
@@ -77,100 +77,80 @@
 
   type MenuEvent = 'logout' | 'doc' | 'lock' | 'profile' | 'departmentName';
 
-  export default defineComponent({
-    name: 'UserDropdown',
-    components: {
-      Dropdown,
-      Menu,
-      Tag,
-      MenuItem: createAsyncComponent(() => import('./DropMenuItem.vue')),
-      MenuDivider: Menu.Divider,
-      LockAction: createAsyncComponent(() => import('../lock/LockModal.vue')),
-    },
-    props: {
-      theme: propTypes.oneOf(['dark', 'light']),
-    },
-    setup() {
-      const { prefixCls } = useDesign('header-user-dropdown');
-      const { t } = useI18n();
-      const { getShowDoc, getUseLockPage } = useHeaderSetting();
-      const userStore = useUserStore();
-      const go = useGo();
-      const { createMessage } = useMessage();
+  const MenuItem = createAsyncComponent(() => import('./DropMenuItem.vue'));
+  const MenuDivider = Menu.Divider;
+  const LockAction = createAsyncComponent(() => import('../lock/LockModal.vue'));
 
-      const getUserInfo = computed(() => {
-        const { nickname = '', avatar, desc } = userStore.getUserInfo || {};
-        return { nickname, avatar: avatar || headerImg, desc };
-      });
-
-      const roleTag = computed(() => {
-        let roleData = userStore.getRoleName;
-        return roleData.length > 3 ? roleData.slice(0, 3) : roleData;
-      });
-
-      const [register, { openModal }] = useModal();
-
-      function handleLock() {
-        openModal(true);
-      }
-
-      //  login out
-      function handleLoginOut() {
-        userStore.confirmLoginOut();
-      }
-
-      // open doc
-      function openDoc() {
-        openWindow(DOC_URL);
-      }
-
-      // open modal for change self information
-      function handleProfile() {
-        go('/profile');
-      }
-
-      // show department tip
-      function handleDepartmentName() {
-        createMessage.info(
-          userStore.userInfo.departmentName
-            ? t('sys.department.userDepartment') + ' : ' + userStore.userInfo.departmentName
-            : t('sys.department.departmentUndefined'),
-        );
-      }
-
-      function handleMenuClick(e: MenuInfo) {
-        switch (e.key as MenuEvent) {
-          case 'logout':
-            handleLoginOut();
-            break;
-          case 'doc':
-            openDoc();
-            break;
-          case 'lock':
-            handleLock();
-            break;
-          case 'profile':
-            handleProfile();
-            break;
-          case 'departmentName':
-            handleDepartmentName();
-            break;
-        }
-      }
-
-      return {
-        prefixCls,
-        t,
-        getUserInfo,
-        handleMenuClick,
-        getShowDoc,
-        register,
-        getUseLockPage,
-        roleTag,
-        userStore,
-      };
-    },
+  const props = defineProps({
+    theme: propTypes.oneOf(['dark', 'light']),
   });
+
+  const { prefixCls } = useDesign('header-user-dropdown');
+  const { t } = useI18n();
+  const { getShowDoc, getUseLockPage } = useHeaderSetting();
+  const userStore = useUserStore();
+  const go = useGo();
+  const { createMessage } = useMessage();
+
+  const getUserInfo = computed(() => {
+    const { nickname = '', avatar, desc } = userStore.getUserInfo || {};
+    return { nickname, avatar: avatar || headerImg, desc };
+  });
+
+  const roleTag = computed(() => {
+    let roleData = userStore.getRoleName;
+    return roleData.length > 3 ? roleData.slice(0, 3) : roleData;
+  });
+
+  const [register, { openModal }] = useModal();
+
+  function handleLock() {
+    openModal(true);
+  }
+
+  //  login out
+  function handleLoginOut() {
+    userStore.confirmLoginOut();
+  }
+
+  // open doc
+  function openDoc() {
+    openWindow(DOC_URL);
+  }
+
+  // open modal for change self information
+  function handleProfile() {
+    go('/profile');
+  }
+
+  // show department tip
+  function handleDepartmentName() {
+    createMessage.info(
+      userStore.userInfo.departmentName
+        ? t('sys.department.userDepartment') + ' : ' + userStore.userInfo.departmentName
+        : t('sys.department.departmentUndefined'),
+    );
+  }
+
+  function handleMenuClick(e: MenuInfo) {
+    switch (e.key as MenuEvent) {
+      case 'logout':
+        handleLoginOut();
+        break;
+      case 'doc':
+        openDoc();
+        break;
+      case 'lock':
+        handleLock();
+        break;
+      case 'profile':
+        handleProfile();
+        break;
+      case 'departmentName':
+        handleDepartmentName();
+        break;
+    }
+  }
 </script>
 <style lang="less">
   @prefix-cls: ~'@{namespace}-header-user-dropdown';

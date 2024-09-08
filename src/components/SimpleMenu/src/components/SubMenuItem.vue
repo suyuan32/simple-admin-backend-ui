@@ -79,8 +79,7 @@
   import Icon from '@/components/Icon/Icon.vue';
   import { Popover } from 'ant-design-vue';
   import { mitt } from '@/utils/mitt';
-  import { isBoolean } from 'remeda';
-  import { isObject } from '/@/utils/is';
+  import { isArray, isBoolean, isEmpty, isObjectType } from 'remeda';
 
   const DELAY = 200;
   export default defineComponent({
@@ -269,17 +268,17 @@
 
         rootMenuEmitter.on(
           'on-update-opened',
-          (data: boolean | (string | number)[] | Recordable<any>) => {
+          (data: boolean | (string | number)[] | Recordable) => {
             if (unref(getCollapse)) return;
             if (isBoolean(data)) {
               state.opened = data;
               return;
             }
-            if (isObject(data) && rootProps.accordion) {
-              const { opend, parent, uidList } = data as Recordable<any>;
+            if (isObjectType(data) && !isEmpty(data as any) && rootProps.accordion) {
+              const { opend, parent, uidList } = data as Recordable;
               if (parent === instance?.parent) {
                 state.opened = opend;
-              } else if (!uidList.includes(instance?.uid)) {
+              } else if (isArray(uidList) && !uidList.includes(instance?.uid)) {
                 state.opened = false;
               }
               return;

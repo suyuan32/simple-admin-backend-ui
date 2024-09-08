@@ -1,7 +1,8 @@
 import type { Ref } from 'vue';
 
 import { ref, onMounted, watch, onUnmounted } from 'vue';
-import { isWindow, isObject } from '@/utils/is';
+import { isWindow } from '@/utils/is';
+import { isObjectType } from 'remeda';
 import { useThrottleFn } from '@vueuse/core';
 
 export function useScroll(
@@ -24,7 +25,7 @@ export function useScroll(
     }
   };
 
-  if (isObject(options)) {
+  if (isObjectType(options)) {
     let wait = 0;
     if (options.wait && options.wait > 0) {
       wait = options.wait;

@@ -1,8 +1,6 @@
 import type { ExtractPropTypes, Ref } from 'vue';
 import type { TreeDataItem } from 'ant-design-vue/es/tree/Tree';
 
-import { buildProps } from '@/utils/props';
-
 export enum ToolbarEnum {
   SELECT_ALL,
   UN_SELECT_ALL,
@@ -40,74 +38,78 @@ export type CheckKeys =
   | KeyType[]
   | { checked: string[] | number[]; halfChecked: string[] | number[] };
 
-export const treeProps = buildProps({
+export const treeProps = {
   value: {
     type: [Object, Array] as PropType<KeyType[] | CheckKeys>,
   },
-
   renderIcon: {
     type: Function as PropType<(...params: any[]) => string>,
   },
-
   helpMessage: {
     type: [String, Array] as PropType<string | string[]>,
     default: '',
   },
-
   title: {
     type: String,
     default: '',
   },
-  toolbar: Boolean,
-  search: Boolean,
+  toolbar: {
+    type: Boolean,
+    default: false,
+  },
+  search: {
+    type: Boolean,
+    default: false,
+  },
   searchValue: {
     type: String,
     default: '',
   },
-  checkStrictly: Boolean,
+  checkStrictly: {
+    type: Boolean,
+    default: false,
+  },
   clickRowToExpand: {
     type: Boolean,
     default: false,
   },
-  checkable: Boolean,
+  checkable: {
+    type: Boolean,
+    default: false,
+  },
   defaultExpandLevel: {
     type: [String, Number] as PropType<string | number>,
     default: '',
   },
-  defaultExpandAll: Boolean,
-
+  defaultExpandAll: {
+    type: Boolean,
+    default: false,
+  },
   fieldNames: {
     type: Object as PropType<FieldNames>,
   },
-
   treeData: {
     type: Array as PropType<TreeDataItem[]>,
   },
-
   actionList: {
     type: Array as PropType<TreeActionItem[]>,
     default: () => [],
   },
-
   expandedKeys: {
     type: Array as PropType<KeyType[]>,
   },
-
   selectedKeys: {
     type: Array as PropType<KeyType[]>,
     default: () => [],
   },
-
   checkedKeys: {
     type: [Array, Object] as PropType<CheckKeys>,
     default: () => [],
   },
-
   beforeRightClick: {
     type: Function as PropType<(...arg: any) => Promise<ContextMenuItem[] | ContextMenuOptions>>,
     default: undefined,
   },
-
   rightMenuList: {
     type: Array as PropType<ContextMenuItem[]>,
   },
@@ -123,19 +125,29 @@ export const treeProps = buildProps({
     type: [Boolean, String] as PropType<Boolean | String>,
     default: false,
   },
-  // 搜索完成时自动展开结果
-  expandOnSearch: Boolean,
-  // 搜索完成自动选中所有结果,当且仅当 checkable===true 时生效
-  checkOnSearch: Boolean,
-  // 搜索完成自动select所有结果
-  selectedOnSearch: Boolean,
+  expandOnSearch: {
+    type: Boolean,
+    default: true,
+  },
+  checkOnSearch: {
+    type: Boolean,
+  },
+  selectedOnSearch: {
+    type: Boolean,
+    default: false,
+  },
   loading: {
     type: Boolean,
     default: false,
   },
-  treeWrapperClassName: String,
-  noPadding: Boolean,
-});
+  treeWrapperClassName: {
+    type: String,
+  },
+  noPadding: {
+    type: Boolean,
+    default: false,
+  },
+};
 
 export type TreeProps = ExtractPropTypes<typeof treeProps>;
 

@@ -67,6 +67,8 @@
   const selectedIds = ref<number[] | string[]>();
   const showDeleteButton = ref<boolean>(false);
 
+  defineOptions({ name: 'TaskManagement' });
+
   const [registerDrawer, { openDrawer }] = useDrawer();
   const [registerTable, { reload }] = useTable({
     title: t('sys.task.taskList'),

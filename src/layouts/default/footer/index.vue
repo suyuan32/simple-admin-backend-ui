@@ -11,8 +11,8 @@
   </Footer>
 </template>
 
-<script lang="ts">
-  import { computed, defineComponent, unref, ref } from 'vue';
+<script lang="ts" setup>
+  import { computed, unref, ref } from 'vue';
   import { Layout } from 'ant-design-vue';
 
   import { GithubFilled } from '@ant-design/icons-vue';
@@ -26,39 +26,24 @@
   import { useDesign } from '@/hooks/web/useDesign';
   import { useLayoutHeight } from '../content/useContentViewHeight';
 
-  export default defineComponent({
-    name: 'LayoutFooter',
-    components: { Footer: Layout.Footer, GithubFilled },
-    setup() {
-      const { t } = useI18n();
-      const { getShowFooter } = useRootSetting();
-      const { currentRoute } = useRouter();
-      const { prefixCls } = useDesign('layout-footer');
+  const Footer = Layout.Footer;
 
-      const footerRef = ref<ComponentRef>(null);
-      const { setFooterHeight } = useLayoutHeight();
+  const { t } = useI18n();
+  const { getShowFooter } = useRootSetting();
+  const { currentRoute } = useRouter();
+  const { prefixCls } = useDesign('layout-footer');
 
-      const getShowLayoutFooter = computed(() => {
-        if (unref(getShowFooter)) {
-          const footerEl = unref(footerRef)?.$el;
-          setFooterHeight(footerEl?.offsetHeight || 0);
-        } else {
-          setFooterHeight(0);
-        }
-        return unref(getShowFooter) && !unref(currentRoute).meta?.hiddenFooter;
-      });
+  const footerRef = ref<ComponentRef>(null);
+  const { setFooterHeight } = useLayoutHeight();
 
-      return {
-        getShowLayoutFooter,
-        prefixCls,
-        t,
-        DOC_URL,
-        GITHUB_URL,
-        SITE_URL,
-        openWindow,
-        footerRef,
-      };
-    },
+  const getShowLayoutFooter = computed(() => {
+    if (unref(getShowFooter)) {
+      const footerEl = unref(footerRef)?.$el;
+      setFooterHeight(footerEl?.offsetHeight || 0);
+    } else {
+      setFooterHeight(0);
+    }
+    return unref(getShowFooter) && !unref(currentRoute).meta?.hiddenFooter;
   });
 </script>
 <style lang="less" scoped>

@@ -132,6 +132,8 @@
   import { ApiSelect } from '@/components/Form';
   import { getStorageProviderList } from '@/api/fms/storageProvider';
 
+  defineOptions({ name: 'CloudFileManagement' });
+
   const { t } = useI18n();
   const { toClipboard } = useClipboard();
   const { createErrorModal, createMessage } = useMessage();

@@ -113,7 +113,8 @@
   import { columns, searchFormSchema } from './file.data';
   import { deleteFile, downloadFile, getFileList, uploadApi } from '@/api/fms/file';
   import { ExclamationCircleOutlined } from '@ant-design/icons-vue/lib/icons';
-  import { Button } from '@/components/Button';
+
+  defineOptions({ name: 'FileManagement' });
 
   const { t } = useI18n();
   const { toClipboard } = useClipboard();

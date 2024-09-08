@@ -1,5 +1,5 @@
-<script lang="ts">
-  import { defineComponent, computed, unref } from 'vue';
+<script lang="ts" setup>
+  import { computed, unref } from 'vue';
   import { BackTop } from 'ant-design-vue';
 
   import { useRootSetting } from '@/hooks/setting/useRootSetting';
@@ -14,48 +14,32 @@
 
   import { useMultipleTabSetting } from '@/hooks/setting/useMultipleTabSetting';
 
-  export default defineComponent({
-    name: 'LayoutFeatures',
-    components: {
-      BackTop,
-      LayoutLockPage: createAsyncComponent(() => import('@/views/sys/lock/index.vue')),
-      SettingDrawer: createAsyncComponent(() => import('@/layouts/default/setting/index.vue')),
-      SessionTimeoutLogin,
-    },
-    setup() {
-      const { getUseOpenBackTop, getShowSettingButton, getSettingButtonPosition, getFullContent } =
-        useRootSetting();
-      const userStore = useUserStoreWithOut();
-      const { prefixCls } = useDesign('setting-drawer-feature');
-      const { getShowHeader } = useHeaderSetting();
+  const LayoutLockPage = createAsyncComponent(() => import('@/views/sys/lock/index.vue'));
+  const SettingDrawer = createAsyncComponent(() => import('@/layouts/default/setting/index.vue'));
 
-      const getIsSessionTimeout = computed(() => userStore.getSessionTimeout);
+  const { getUseOpenBackTop, getShowSettingButton, getSettingButtonPosition, getFullContent } =
+    useRootSetting();
+  const userStore = useUserStoreWithOut();
+  const { prefixCls } = useDesign('setting-drawer-feature');
+  const { getShowHeader } = useHeaderSetting();
 
-      const getIsFixedSettingDrawer = computed(() => {
-        if (!unref(getShowSettingButton)) {
-          return false;
-        }
-        const settingButtonPosition = unref(getSettingButtonPosition);
+  const getIsSessionTimeout = computed(() => userStore.getSessionTimeout);
 
-        if (settingButtonPosition === SettingButtonPositionEnum.AUTO) {
-          return !unref(getShowHeader) || unref(getFullContent);
-        }
-        return settingButtonPosition === SettingButtonPositionEnum.FIXED;
-      });
+  const getIsFixedSettingDrawer = computed(() => {
+    if (!unref(getShowSettingButton)) {
+      return false;
+    }
+    const settingButtonPosition = unref(getSettingButtonPosition);
 
-      const { getShowMultipleTab } = useMultipleTabSetting();
-
-      return {
-        getTarget: () => document.body,
-        getUseOpenBackTop,
-        getIsFixedSettingDrawer,
-        prefixCls,
-        getIsSessionTimeout,
-        getShowMultipleTab,
-        getFullContent,
-      };
-    },
+    if (settingButtonPosition === SettingButtonPositionEnum.AUTO) {
+      return !unref(getShowHeader) || unref(getFullContent);
+    }
+    return settingButtonPosition === SettingButtonPositionEnum.FIXED;
   });
+
+  const { getShowMultipleTab } = useMultipleTabSetting();
+
+  const getTarget = () => document.body;
 </script>
 
 <template>
