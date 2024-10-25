@@ -17,7 +17,7 @@ import {
   computed,
 } from 'vue';
 import { isProdMode } from '@/utils/env';
-import { isFunction, isDeepEqual } from 'remeda';
+import { isFunction, isDeepEqual, isBoolean } from 'remeda';
 import { tryOnUnmounted } from '@vueuse/core';
 import { error } from '@/utils/log';
 
@@ -75,8 +75,14 @@ export function useModal(): UseModalReturnType {
     },
 
     openModal: <T = any>(open = true, data?: T, openOnSet = true): void => {
+      let openVal: boolean;
+      if (isBoolean(open)) {
+        openVal = open;
+      } else {
+        openVal = true;
+      }
       getInstance()?.setModalProps({
-        open,
+        open: openVal,
       });
 
       if (!data) return;
