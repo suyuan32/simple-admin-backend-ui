@@ -26,6 +26,7 @@ export default {
     tencent: 'Tencent Cloud',
     aliyun: 'Alibaba Cloud',
     uni: 'Uni SMS',
+    smsbao: 'SMS Bao',
   },
   smsLog: {
     phoneNumber: 'Phone Number',
