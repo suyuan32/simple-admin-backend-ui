@@ -41,6 +41,7 @@ export const formSchema: FormSchema[] = [
         { label: t('mcms.smsProvider.tencent'), value: 'tencent' },
         { label: t('mcms.smsProvider.aliyun'), value: 'aliyun' },
         { label: t('mcms.smsProvider.uni'), value: 'uni' },
+        { label: t('mcms.smsProvider.smsbao'), value: 'smsbao' },
       ],
     },
   },

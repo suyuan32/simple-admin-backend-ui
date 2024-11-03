@@ -26,6 +26,7 @@ export default {
     tencent: '腾讯云',
     aliyun: '阿里云',
     uni: '合一短信',
+    smsbao: '短信宝',
   },
   smsLog: {
     phoneNumber: '电话号码',
