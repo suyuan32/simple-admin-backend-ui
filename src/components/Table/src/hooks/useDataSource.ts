@@ -297,9 +297,8 @@ export function useDataSource(
             childrenField !== undefined && childrenField !== '' ? childrenField : 'children',
         });
         rawDataSourceRef.value = tree;
-        isArrayResult = Array.isArray(tree);
-        resultItems = isArrayResult ? tree : get(tree, listField);
-        resultTotal = isArrayResult ? tree.length : get(tree, totalField);
+        resultItems = tree;
+        resultTotal = tree.length;
       } else {
         rawDataSourceRef.value = res;
         isArrayResult = Array.isArray(res);

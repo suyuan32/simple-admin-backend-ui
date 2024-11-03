@@ -92,6 +92,11 @@
         showDeleteButton.value = selectedRowKeys.length > 0;
       },
     },
+    pagination: {
+      showSizeChanger: false,
+      showQuickJumper: false,
+      pageSize: 10000,
+    },
   });
 
   function handleCreate() {
