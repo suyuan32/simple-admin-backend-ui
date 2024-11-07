@@ -154,4 +154,4 @@ Support modern browsers, not IE
 
 ## License
 
-[MIT © Ryan-2022](./LICENSE)
+[Apache2.0 © Ryan-2022](./LICENSE)

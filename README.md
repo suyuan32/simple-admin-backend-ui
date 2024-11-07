@@ -154,4 +154,4 @@ Simple Admin UI 是基于 vue-vben-admin 二次开发的为 Simple Admin 专门�
 
 ## License
 
-[MIT © Ryan-2022](./LICENSE)
+[Apache2.0 © Ryan-2022](./LICENSE)
