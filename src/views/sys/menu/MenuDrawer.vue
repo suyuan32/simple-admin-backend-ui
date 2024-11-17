@@ -13,7 +13,7 @@
 <script lang="ts" setup>
   import { ref, computed, unref } from 'vue';
   import { BasicForm, useForm } from '@/components/Form/index';
-  import { extraParamColumns, formSchema } from './menu.data';
+  import { formSchema } from './menu.data';
   import { BasicDrawer, useDrawerInner } from '@/components/Drawer';
   import { useI18n } from 'vue-i18n';
   import { createMenu, updateMenu } from '@/api/sys/menu';

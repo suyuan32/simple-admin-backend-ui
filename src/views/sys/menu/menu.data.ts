@@ -5,43 +5,9 @@ import Icon from '@/components/Icon/Icon.vue';
 import { useI18n } from '@/hooks/web/useI18n';
 import { formatToDateTime } from '@/utils/dateUtil';
 import { getMenuList } from '@/api/sys/menu';
-import { ColumnType } from 'ant-design-vue/lib/table';
 import { ParentIdEnum } from '@/enums/appEnum';
 
 const { t } = useI18n();
-
-export const extraParamColumns: ColumnType[] = [
-  {
-    title: 'ID',
-    dataIndex: 'id',
-    width: 200,
-    align: 'left',
-  },
-  {
-    title: t('sys.menu.paramType'),
-    dataIndex: 'dataType',
-    width: 200,
-    align: 'left',
-  },
-  {
-    title: t('sys.menu.paramKey'),
-    dataIndex: 'key',
-    width: 200,
-    align: 'left',
-  },
-  {
-    title: t('sys.menu.paramValue'),
-    dataIndex: 'value',
-    width: 200,
-    align: 'left',
-  },
-  {
-    title: t('common.action'),
-    dataIndex: 'action',
-    width: 200,
-    align: 'left',
-  },
-];
 
 export const columns: BasicColumn[] = [
   {
@@ -189,7 +155,7 @@ export const formSchema: FormSchema[] = [
     required: true,
     helpMessage: t('sys.menu.pathHelp'),
     // eslint-disable-next-line no-useless-escape
-    rules: [{ pattern: /^(\/(\:)?[0-9A-Za-z_-]+)*$/gm, message: t('common.wrongFormat') }],
+    rules: [{ pattern: /^(\/?(\:)?[0-9A-Za-z_-]+)*$/gm, message: t('common.wrongFormat') }],
     colProps: { lg: 24, md: 24, sm: 24 },
     ifShow: ({ values }) => !isElement(values.menuType),
   },
